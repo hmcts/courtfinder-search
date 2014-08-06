@@ -61,9 +61,7 @@ class County(models.Model):
 
 
 class Country(models.Model):
-  COUNTRIES = [('ENG','England'), ('NIR', 'Northern Ireland'), ('SCT', 'Scotland'), ('WLS', 'Wales')]
-
-  name = models.CharField(max_length=255, choices=COUNTRIES)
+  name = models.CharField(max_length=255)
 
   def __unicode__(self):
     return self.name
@@ -85,4 +83,20 @@ class CourtAddress(models.Model):
 
   def __unicode__(self):
     return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town.name)
+
+
+class ContactType(models.Model):
+  name = models.CharField(max_length=255)
+
+  def __unicode__(self):
+    return self.name
+
+
+class CourtContact(models.Model):
+  contact_type = models.ForeignKey(ContactType)
+  court = models.ForeignKey(Court)
+  value = models.CharField(max_length=255)
+
+  def __unicode__(self):
+    return "%s for %s is %s" % (contact_type.name, court.name, value)
 
