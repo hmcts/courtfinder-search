@@ -26,9 +26,7 @@ def fake_urlopen(url):
     return open(resource_file_name)
 
 
-class ClientTestCase(unittest.TestCase):
-    """Test case for the client methods."""
-
+class APITestCase(unittest.TestCase):
     def setUp(self):
         self.patcher = patch('search.search_api.urlopen', fake_urlopen)
         self.patcher.start()
@@ -37,9 +35,13 @@ class ClientTestCase(unittest.TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def test_request(self):
-        """Test a simple request."""
+    def test_finding_courts_for_correct_postcode_and_adoption(self):
         postcode = 'SW1H9AJ'
-        response = self.client.request(postcode)
-        self.assertIn('name', response)
-        self.assertEqual(response['name'], 'Test User')
+        area_of_law = 'Adoption'
+
+        response = self.client.request(postcode, area_of_law)
+
+        self.assertIn('name', response[0])
+        self.assertEqual(response[0]['name'], 'Inner London Family Proceedings Court')
+        self.assertIn('name', response[1])
+        self.assertEqual(response[1]['name'], 'Central Family Court')
