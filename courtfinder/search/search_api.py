@@ -3,7 +3,8 @@ from urllib2 import urlopen
 
 class SearchAPI(object):
     def request(self, user):
-        url = "https://api.github.com/users/%s" % user
+        url = "https://courtfinder.is.dsd.io/search/%s" % user
+        print 'SearchAPI: Calling: %s' % url
         response = urlopen(url)
 
         raw_data = response.read().decode('utf-8')

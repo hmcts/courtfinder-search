@@ -16,6 +16,7 @@ def fake_urlopen(url):
     # Map path from url to a file
     parsed_url = urlparse(url)
     resource_file = os.path.normpath('tests/resources%s' % parsed_url.path)
+    print 'Fake ULR: Reading file from: %s' % resource_file
     # Must return a file-like object
     return open(resource_file, mode='rb')
 
