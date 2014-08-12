@@ -2,8 +2,8 @@ import json
 from urllib2 import urlopen
 
 class SearchAPI(object):
-    def request(self, user):
-        url = "https://courtfinder.is.dsd.io/search/%s" % user
+    def request(self, postcode):
+        url = "https://courtfinder.is.dsd.io/search?postcode=%s&area_of_law=Adoption" % postcode
         print 'SearchAPI: Calling: %s' % url
         response = urlopen(url)
 

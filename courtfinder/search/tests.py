@@ -3,7 +3,8 @@ from django.test import TestCase
 # Create your tests here.
 import os.path
 import unittest
-from urlparse import urlparse
+import urlparse
+# from urlparse import urlparse
 
 from search_api import SearchAPI
 from mock import patch
@@ -14,11 +15,15 @@ def fake_urlopen(url):
     the filesystem.
     """
     # Map path from url to a file
-    parsed_url = urlparse(url)
-    resource_file = os.path.normpath('tests/resources%s' % parsed_url.path)
-    print 'Fake ULR: Reading file from: %s' % resource_file
-    # Must return a file-like object
-    return open(resource_file, mode='rb')
+    parsed_url = urlparse.urlparse(url)
+    qs = urlparse.parse_qs(parsed_url.query)
+    postcode = qs['postcode'][0]
+    area_of_law = qs['area_of_law'][0]
+
+    resource_file_name  = 'tests/resources%s/%s' % (parsed_url.path, postcode + '_' + area_of_law)
+    print 'Fake ULR: Reading file from: %s' % resource_file_name
+    # # Must return a file-like object
+    return open(resource_file_name)
 
 
 class ClientTestCase(unittest.TestCase):
@@ -34,7 +39,7 @@ class ClientTestCase(unittest.TestCase):
 
     def test_request(self):
         """Test a simple request."""
-        user = 'test_user'
-        response = self.client.request(user)
+        postcode = 'SW1H9AJ'
+        response = self.client.request(postcode)
         self.assertIn('name', response)
         self.assertEqual(response['name'], 'Test User')
