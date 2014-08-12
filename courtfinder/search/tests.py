@@ -5,7 +5,7 @@ import os.path
 import unittest
 from urlparse import urlparse
 
-from client import ClientAPI
+from search_api import SearchAPI
 from mock import patch
 
 def fake_urlopen(url):
@@ -24,9 +24,9 @@ class ClientTestCase(unittest.TestCase):
     """Test case for the client methods."""
 
     def setUp(self):
-        self.patcher = patch('search.client.urlopen', fake_urlopen)
+        self.patcher = patch('search.search_api.urlopen', fake_urlopen)
         self.patcher.start()
-        self.client = ClientAPI()
+        self.client = SearchAPI()
 
     def tearDown(self):
         self.patcher.stop()
