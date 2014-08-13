@@ -116,17 +116,15 @@ class APITestCase(unittest.TestCase):
         self.assertIn('name', response[1])
         self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
 
-    # TODO: To complete implementation
     def test_finding_courts_for_correct_postcode_and_crime(self):
         postcode = 'SW1H9AJ'
         area_of_law = 'Crime'
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
-
+        self.assertEqual(response[0]['name'], 'Blackfriars Crown Court')
         self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
+        self.assertEqual(response[1]['name'], 'Inner London Crown Court')
 
     def test_finding_courts_for_correct_postcode_and_domestic_violence(self):
         postcode = 'SW1H9AJ'
@@ -134,11 +132,10 @@ class APITestCase(unittest.TestCase):
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
+        self.assertEqual(response[0]['name'], 'Lambeth County Court and Family Court')
 
         self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
-
+        self.assertEqual(response[1]['name'], 'Central Family Court')
 
     def test_finding_courts_for_correct_postcode_and_forced_marriage(self):
         postcode = 'SW1H9AJ'
@@ -146,10 +143,10 @@ class APITestCase(unittest.TestCase):
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
+        self.assertEqual(response[0]['name'], 'Central Family Court')
 
         self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
+        self.assertEqual(response[1]['name'], 'Willesden County Court and Family Court')
 
     def test_finding_courts_for_correct_postcode_and_employment(self):
         postcode = 'SW1H9AJ'
@@ -157,11 +154,10 @@ class APITestCase(unittest.TestCase):
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
+        self.assertEqual(response[0]['name'], 'Central London Employment Tribunal')
 
         self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
-
+        self.assertEqual(response[1]['name'], 'Croydon Employment Tribunal')
 
     def test_finding_courts_for_correct_postcode_and_social_security(self):
         postcode = 'SW1H9AJ'
@@ -169,7 +165,7 @@ class APITestCase(unittest.TestCase):
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
+        self.assertEqual(response[0]['name'], 'Sutton Social Security and Child Support Tribunal')
 
         self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
+        self.assertEqual(response[1]['name'], 'Bexleyheath Social Security and Child Support Tribunal')
