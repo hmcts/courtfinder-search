@@ -169,3 +169,41 @@ class APITestCase(unittest.TestCase):
 
         self.assertIn('name', response[1])
         self.assertEqual(response[1]['name'], 'Bexleyheath Social Security and Child Support Tribunal')
+
+    def test_finding_courts_for_correct_partial_postcode_and_employment(self):
+        postcode = 'SW1H9AJ'
+        area_of_law = 'Social security'
+
+        response = self.client.request(postcode, area_of_law)
+        self.assertIn('name', response[0])
+        self.assertEqual(response[0]['name'], 'Sutton Social Security and Child Support Tribunal')
+
+        self.assertIn('name', response[1])
+        self.assertEqual(response[1]['name'], 'Bexleyheath Social Security and Child Support Tribunal')
+
+    def test_finding_courts_for_correct_partial_postcode_and_employment(self):
+        postcode = 'SW1H'
+        area_of_law = 'Employment'
+
+        response = self.client.request(postcode, area_of_law)
+        self.assertIn('name', response[0])
+        self.assertEqual(response[0]['name'], 'Central London Employment Tribunal')
+
+        self.assertIn('name', response[1])
+        self.assertEqual(response[1]['name'], 'Croydon Employment Tribunal')
+
+    def test_finding_courts_for_incorrect_postcode_and_employment(self):
+        postcode = 'SW1AX'
+        area_of_law = 'Employment'
+
+        response = self.client.request(postcode, area_of_law)
+        self.assertIn('error', response)
+        self.assertEqual(response['error'], 'invalid postcode')
+
+    def test_finding_courts_when_the_area_of_law_is_missing(self):
+        postcode = 'SW1H9AJ'
+        area_of_law = None
+
+        response = self.client.request(postcode, area_of_law)
+        self.assertIn('error', response)
+        self.assertEqual(response['error'], 'missing area of law')
