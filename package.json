@@ -1,5 +1,7 @@
 {
   "name": "courtfinder-search",
+  "description": "Court and Tribunal Finder - Search",
+  "homepage": "https://github.com/ministryofjustice/courtfinder-search",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -10,6 +12,7 @@
     "chai-as-promised": "~4.1.1",
     "colors": "^0.6.2",
     "glob": "^3.2.9",
+    "gulp": "^3.8.7",
     "jshint-stylish": "~0.1.5",
     "mocha": "~1.18.2",
     "nightwatch": "0.5.8",
@@ -17,5 +20,11 @@
     "run-sequence": "~0.3.6",
     "selenium-standalone": "^2.42.0-2.9.0-1",
     "wd": "~0.2.19"
+  },
+  "bugs": {
+    "url": "https://github.com/ministryofjustice/courtfinder-search/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

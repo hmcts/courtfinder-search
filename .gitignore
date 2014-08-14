@@ -55,3 +55,12 @@ docs/_build/
 # NodeJs
 node_modules/
 reports/
+npm-debug.log
+
+# bower packages
+courtfinder/assets-src/vendor/
+.sass-cache/
+generated/
+
+# gulp temp folder
+.gulptmp
