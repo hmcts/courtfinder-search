@@ -72,9 +72,20 @@ ROOT_URLCONF = 'courtfinder.urls'
 WSGI_APPLICATION = 'courtfinder.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# Jinja2
+TEMPLATE_LOADERS = (
+    'django_jinja.loaders.AppLoader',
+    'django_jinja.loaders.FileSystemLoader',
+)
 
+INSTALLED_APPS += ('django_jinja',)
+
+DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.jinja'
+# Intercept all templates except from django admin.
+DEFAULT_JINJA2_TEMPLATE_INTERCEPT_RE = r"^(?!admin/).*"
+
+
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -86,21 +97,13 @@ DATABASES = {
     }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
+# Internationalisation
 LANGUAGE_CODE = 'en-gb'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+# Static files
 STATIC_URL = '/static/'

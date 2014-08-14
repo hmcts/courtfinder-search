@@ -41,10 +41,20 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='ContactType',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=255)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Country',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255, choices=[(b'ENG', b'England'), (b'NIR', b'Northern Ireland'), (b'SCT', b'Scotland'), (b'WLS', b'Wales')])),
+                ('name', models.CharField(max_length=255)),
             ],
             options={
             },
@@ -132,6 +142,18 @@ class Migration(migrations.Migration):
             name='attributes',
             field=models.ManyToManyField(to='search.CourtAttributeType', through='search.CourtAttribute'),
             preserve_default=True,
+        ),
+        migrations.CreateModel(
+            name='CourtContact',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('value', models.CharField(max_length=255)),
+                ('contact_type', models.ForeignKey(to='search.ContactType')),
+                ('court', models.ForeignKey(to='search.Court')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Town',

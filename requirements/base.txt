@@ -1,6 +1,5 @@
-# For Django 1.7 RC2, run the following command
-# $ pip install https://www.djangoproject.com/download/1.7c2/tarball/
-# https://www.djangoproject.com/download/
-
 Django==1.7c2
+Jinja2==2.7.3
+MarkupSafe==0.23
+django-jinja==1.0.3
 psycopg2==2.5.3
