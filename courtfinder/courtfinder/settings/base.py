@@ -110,3 +110,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    SITE_ROOT + '/assets',
+)

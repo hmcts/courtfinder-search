@@ -12,6 +12,15 @@ def initialise_countries(apps, schema_editor):
     c.save()
 
 
+def initialise_areas_of_law(apps, schema_editor):
+  areas_of_law = ['']
+  AreaOfLaw = apps.get_model('search', 'AreaOfLaw')
+
+  for aol in areas_of_law:
+    a = AreaOfLaw(name=aol)
+    a.save()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -19,5 +28,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-      migrations.RunPython(initialise_countries)
+      migrations.RunPython(initialise_countries),
+      migrations.RunPython(initialise_areas_of_law)
     ]
