@@ -98,7 +98,7 @@ class APITestCase(unittest.TestCase):
 
     def test_finding_courts_for_correct_postcode_and_money_claims(self):
         postcode = 'SW1H9AJ'
-        area_of_law = 'Money Claims'
+        area_of_law = 'Money claims'
 
         response = self.client.request(postcode, area_of_law)
 
@@ -128,7 +128,7 @@ class APITestCase(unittest.TestCase):
 
     def test_finding_courts_for_correct_postcode_and_domestic_violence(self):
         postcode = 'SW1H9AJ'
-        area_of_law = 'Domestic Violence'
+        area_of_law = 'Domestic violence'
 
         response = self.client.request(postcode, area_of_law)
         self.assertIn('name', response[0])
