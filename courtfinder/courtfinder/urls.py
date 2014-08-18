@@ -8,4 +8,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search/', include('search.urls')),
+    url(r'^subscriber/', include('subscriber.urls')),
+
 )
