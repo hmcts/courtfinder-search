@@ -14,10 +14,13 @@ class SubscriberTestCase(unittest.TestCase):
 
     # def tearDown(self):
 
-    def test_url_endpoint(self):
-      response = self.client.post('/subscriber/update', {'username': 'john', 'password': 'smith'})
+    def test_post_on_url_endpoint(self):
+      response = self.client.post('/subscriber/update')
       self.assertEqual(response.status_code, 200)
 
+    def test_get_on_url_endpoint(self):
+      response = self.client.get('/subscriber/update')
+      self.assertEqual(response.status_code, 405)
 
 if __name__ == '__main__':
     unittest.main()
