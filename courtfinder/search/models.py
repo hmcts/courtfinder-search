@@ -4,11 +4,13 @@ class Court(models.Model):
   name = models.CharField(max_length=255)
   slug = models.SlugField(max_length=255)
   displayed = models.BooleanField(default=False)
-  lat = models.IntegerField()
-  lon = models.IntegerField()
-  area = models.ForeignKey('Area')
-  attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute')
-  addresses = models.ManyToManyField('AddressType', through='CourtAddress')
+  lat = models.FloatField()
+  lon = models.FloatField()
+  area = models.ForeignKey('Area', null=True)
+  areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreasOfLaw', null=True)
+  attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute', null=True)
+  addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)
+  court_types = models.ManyToManyField('CourtType', through='CourtCourtTypes', null=True)
 
   def __unicode__(self):
     return self.name
@@ -42,6 +44,14 @@ class AreaOfLaw(models.Model):
 
   def __unicode__(self):
     return self.name
+
+
+class CourtAreasOfLaw(models.Model):
+  court = models.ForeignKey(Court)
+  area_of_law = models.ForeignKey(AreaOfLaw)
+
+  def __unicode__(self):
+    return "%s deals with %s" % (court.name, area_of_law.name) 
 
 
 class Town(models.Model):
@@ -100,3 +110,17 @@ class CourtContact(models.Model):
   def __unicode__(self):
     return "%s for %s is %s" % (contact_type.name, court.name, value)
 
+
+class CourtType(models.Model):
+  name = models.CharField(max_length=255)
+
+  def __unicode__(self):
+      return self.name
+
+
+class CourtCourtTypes(models.Model):
+  court = models.ForeignKey(Court)
+  court_type = models.ForeignKey(CourtType)
+
+  def __unicode__(self):
+    return "Court type for %s is %s" % (court.name, court_type.name)
