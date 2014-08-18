@@ -30,12 +30,12 @@ def fake_urlopen(url):
 
 class APITestCase(unittest.TestCase):
     def setUp(self):
-        self.patcher = patch('search.search_api.urlopen', fake_urlopen)
-        self.patcher.start()
+        # self.patcher = patch('search.search_api.urlopen', fake_urlopen)
+        # self.patcher.start()
         self.client = SearchAPI()
 
-    def tearDown(self):
-        self.patcher.stop()
+    # def tearDown(self):
+        # self.patcher.stop()
 
     def test_finding_courts_for_correct_postcode_and_adoption(self):
         postcode = 'SW1H9AJ'
