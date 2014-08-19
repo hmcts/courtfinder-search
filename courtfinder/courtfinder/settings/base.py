@@ -54,7 +54,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'courts',
     'search'
 )
 
@@ -76,6 +75,10 @@ WSGI_APPLICATION = 'courtfinder.wsgi.application'
 TEMPLATE_LOADERS = (
     'django_jinja.loaders.AppLoader',
     'django_jinja.loaders.FileSystemLoader',
+)
+
+TEMPLATE_DIRS = (
+    SITE_ROOT + '/templates',
 )
 
 INSTALLED_APPS += ('django_jinja',)
@@ -107,3 +110,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    SITE_ROOT + '/assets',
+)

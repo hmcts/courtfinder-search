@@ -1,0 +1,22 @@
+{% extends "layout/base.jinja" %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+  <h1>Search</h1>
+
+  <p>
+    Enter postcode: 
+    <input type="text" name="search" />
+  </p>
+  <p>
+    <select name="area_of_law">
+      <option id="0">All</option>
+    {% for aol in areas_of_law %}
+      <option value="{{aol.id}}">{{aol.name}}</option>
+    {% endfor %}
+    </select>
+  </p>
+  <button type="submit">Search</button>
+
+{% endblock %}

@@ -78,9 +78,9 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('slug', models.SlugField(max_length=255)),
                 ('displayed', models.BooleanField(default=False)),
-                ('lat', models.IntegerField()),
-                ('lon', models.IntegerField()),
-                ('area', models.ForeignKey(to='search.Area')),
+                ('lat', models.FloatField()),
+                ('lon', models.FloatField()),
+                ('area', models.ForeignKey(to='search.Area', null=True)),
             ],
             options={
             },
@@ -101,11 +101,33 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='court',
             name='addresses',
-            field=models.ManyToManyField(to='search.AddressType', through='search.CourtAddress'),
+            field=models.ManyToManyField(to='search.AddressType', null=True, through='search.CourtAddress'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtaddress',
+            name='court',
+            field=models.ForeignKey(to='search.Court'),
+            preserve_default=True,
+        ),
+        migrations.CreateModel(
+            name='CourtAreasOfLaw',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='court',
+            name='areas_of_law',
+            field=models.ManyToManyField(to='search.AreaOfLaw', null=True, through='search.CourtAreasOfLaw'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='courtareasoflaw',
             name='court',
             field=models.ForeignKey(to='search.Court'),
             preserve_default=True,
@@ -140,7 +162,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='court',
             name='attributes',
-            field=models.ManyToManyField(to='search.CourtAttributeType', through='search.CourtAttribute'),
+            field=models.ManyToManyField(to='search.CourtAttributeType', null=True, through='search.CourtAttribute'),
             preserve_default=True,
         ),
         migrations.CreateModel(
@@ -154,6 +176,38 @@ class Migration(migrations.Migration):
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CourtCourtTypes',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('court', models.ForeignKey(to='search.Court')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CourtType',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=255)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='courtcourttypes',
+            name='court_type',
+            field=models.ForeignKey(to='search.CourtType'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='court',
+            name='court_types',
+            field=models.ManyToManyField(to='search.CourtType', null=True, through='search.CourtCourtTypes'),
+            preserve_default=True,
         ),
         migrations.CreateModel(
             name='Town',
