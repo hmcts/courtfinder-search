@@ -1,0 +1,18 @@
+{% extends "layout/base.jinja" %}
+
+{% block title %}Postcode search results{% endblock %}
+
+{% block body %}
+  <h1>Search Results</h1>
+
+  <p>
+    Search results for <strong>{{ postcode }}</strong> for {{ area_of_law }}
+  </p>
+
+  <ul>
+    {% for court in search_results %}
+      <li>{{ court.name }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

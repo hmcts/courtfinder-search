@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>{% block title %}{% endblock %} - Court and Tribunal Finder - GOV.UK</title>
-  <link rel="stylesheet" type="text/css" href="{{ static("stylesheets/css/styles.css") }}" />
-</head>
-<body>
+{% extends 'moj_template/base.html' %}
+
+{% block content %}
   {% block body %}{% endblock %}
-</body>
-</html>
+{% endblock %}
