@@ -24,6 +24,12 @@ Install python dependencies:
 
     pip install -r requirements/local.txt
 
+If you get an error about python 1.7 not being found, type:
+
+    pip install https://www.djangoproject.com/download/1.7c2/tarball/
+    pip install -r requirements/local.txt
+
+
 Install node packages:
 
     npm install
