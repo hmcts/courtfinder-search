@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'courtfinder.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^$', include('staticpages.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search/', include('search.urls')),
 )

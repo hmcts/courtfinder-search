@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'moj_template',
     'search',
+    'staticpages',
 )
 
 MIDDLEWARE_CLASSES = (
