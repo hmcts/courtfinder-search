@@ -54,7 +54,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'search'
+    'moj_template',
+    'search',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,12 +74,26 @@ WSGI_APPLICATION = 'courtfinder.wsgi.application'
 
 # Jinja2
 TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
     'django_jinja.loaders.AppLoader',
     'django_jinja.loaders.FileSystemLoader',
 )
 
 TEMPLATE_DIRS = (
     SITE_ROOT + '/templates',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS =  (
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    'django.core.context_processors.request',
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.contrib.auth.context_processors.auth",
+    "courtfinder.context_processors.globals",
 )
 
 INSTALLED_APPS += ('django_jinja',)

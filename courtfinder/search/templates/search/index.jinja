@@ -5,18 +5,21 @@
 {% block body %}
   <h1>Search</h1>
 
-  <p>
-    Enter postcode: 
-    <input type="text" name="search" />
-  </p>
-  <p>
-    <select name="area_of_law">
-      <option id="0">All</option>
-    {% for aol in areas_of_law %}
-      <option value="{{aol.id}}">{{aol.name}}</option>
-    {% endfor %}
-    </select>
-  </p>
-  <button type="submit">Search</button>
+
+  <form action="/search/postcode" method="get">
+    <p>
+      Enter postcode: 
+      <input type="text" name="postcode" />
+    </p>
+    <p>
+      <select name="area_of_law">
+        <option id="0">All</option>
+      {% for aol in areas_of_law %}
+        <option value="{{aol.name}}">{{aol.name}}</option>
+      {% endfor %}
+      </select>
+    </p>
+    <button type="submit">Search</button>
+  </form>
 
 {% endblock %}

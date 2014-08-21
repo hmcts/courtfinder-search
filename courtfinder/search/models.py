@@ -15,6 +15,7 @@ class Court(models.Model):
     return self.name
 
 
+
 class CourtAttributeType(models.Model):
   name = models.CharField(max_length=255)
 
