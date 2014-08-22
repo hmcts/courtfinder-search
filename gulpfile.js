@@ -18,7 +18,7 @@ var paths = {
     'courtfinder/assets-src/javascripts/application.js',
   ],
   vendor_scripts: 'courtfinder/assets-src/javascripts/vendor/*',
-  images: 'courtfinder/assets-src/images/**/*'
+  images: ['courtfinder/assets-src/images/**/*', 'node_modules/govuk_frontend_toolkit/govuk_frontend_toolkit/images/**/*']
 };
 
 // clean out assets folder
@@ -33,7 +33,7 @@ gulp.task('sass', function() {
   gulp
     .src(paths.styles)
     .pipe(rubySass({
-      loadPath: 'node_modules/govuk_frontend_toolkit/' // add node module toolkit path
+      loadPath: 'node_modules/govuk_frontend_toolkit/govuk_frontend_toolkit/stylesheets'
     }))
     .pipe(gulp.dest(paths.dest_dir + 'stylesheets'));
 });
