@@ -58,7 +58,7 @@ reports/
 npm-debug.log
 
 # bower packages
-courtfinder/assets/vendor/
+courtfinder/assets/
 courtfinder/assets-src/vendor/
 .sass-cache/
 generated/

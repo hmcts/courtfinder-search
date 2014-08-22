@@ -34,6 +34,10 @@ Install node packages:
 
     npm install
 
+Compile the static assets:
+
+    gulp
+
 Start the server:
 
     ./courtfinder/manage.py runserver 8001

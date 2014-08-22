@@ -1,34 +1,97 @@
-/*
-  3 stage process
-  gulp is watching asset-src and putting them into assets
-  then when we develop they get sereved from /assets
-  when we deploy we do ./manage.py collectstatic
-  which makes /static
-*/
-
 var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass');
+    rimraf=require('gulp-rimraf'),
+    concat=require('gulp-concat'),
+    jshint=require('gulp-jshint'),
+    imagemin=require('gulp-imagemin'),
+    rubySass=require('gulp-ruby-sass'),
+    stylish = require('jshint-stylish'),
+    runSequence = require('run-sequence');
 
-var src_base = 'courtfinder/assets-src',
-    dest_base = 'courtfinder/assets';
+var paths = {
+  dest_dir: 'courtfinder/assets/',
+  src_dir: 'courtfinder/assets-src/',
+  styles: 'courtfinder/assets-src/stylesheets/**/*.scss',
+  scripts: [
+    // vendor scripts
+    'courtfinder/assets-src/vendor/jquery-details/jquery.details.js',
+    // Application
+    'courtfinder/assets-src/javascripts/application.js',
+  ],
+  vendor_scripts: 'courtfinder/assets-src/javascripts/vendor/*',
+  images: 'courtfinder/assets-src/images/**/*'
+};
 
-var scss_path = src_base + '/stylesheets/**/*.scss';
-
-gulp.task('sass', function (){
-  return gulp.src( scss_path )
-    .pipe(sass({ 
-      style: 'expanded', 
-      lineNumbers: true,
-      noCache: true
-    }))
-    .on('error', function (err) { console.log(err.message); })
-    .pipe(gulp.dest( dest_base + '/stylesheets/css/'));
+// clean out assets folder
+gulp.task('clean', function() {
+  return gulp
+    .src(paths.dest_dir, {read: false})
+    .pipe(rimraf());
 });
 
-gulp.task('default', ['sass']);
+// compile scss
+gulp.task('sass', function() {
+  gulp
+    .src(paths.styles)
+    .pipe(rubySass({
+      loadPath: 'node_modules/govuk_frontend_toolkit/' // add node module toolkit path
+    }))
+    .pipe(gulp.dest(paths.dest_dir + 'stylesheets'));
+});
 
+// default js task
+gulp.task('js', function() {
+  var prod = paths.scripts.slice(0);
 
-gulp.task('watch', ['sass'], function() {
-  // sass
-  gulp.watch(scss_path, ['sass']);
+  // ignore debug files
+  prod.push('!' + paths.src_dir + '**/*debug*');
+  // create concatinated js file
+  gulp
+    .src(prod)
+    .pipe(concat('application.js'))
+    .pipe(gulp.dest(paths.dest_dir + 'javascripts'));
+  // copy static vendor files
+  gulp
+    .src(paths.vendor_scripts)
+    .pipe(gulp.dest(paths.dest_dir + 'javascripts/vendor'));
+  // create debug js file
+  gulp
+    .src(paths.src_dir + 'javascripts/**/*debug*')
+    .pipe(concat('debug.js'))
+    .pipe(gulp.dest(paths.dest_dir + 'javascripts/'));
+});
+
+// jshint js code
+gulp.task('lint', function() {
+  var files = paths.scripts.slice(0);
+
+  // files to ignore from linting
+  files.push('!courtfinder/assets-src/vendor/**');
+  files.push('!courtfinder/assets-src/javascripts/vendor/**');
+
+  gulp
+    .src(files)
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
+});
+
+// optimise images
+gulp.task('images', function() {
+  gulp
+    .src(paths.images)
+    .pipe(imagemin({optimizationLevel: 5}))
+    .pipe(gulp.dest(paths.dest_dir + 'images'));
+});
+
+// setup watches
+gulp.task('watch', function() {
+  gulp.watch(paths.styles, ['sass']);
+  gulp.watch(paths.src_dir + 'javascripts/**/*', ['lint', 'js']);
+  gulp.watch(paths.images, ['images']);
+});
+
+// setup default tasks
+gulp.task('default', ['build']);
+// run build
+gulp.task('build', function() {
+  runSequence('clean', ['lint', 'js', 'images', 'sass']);
 });
