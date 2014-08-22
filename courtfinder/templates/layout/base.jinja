@@ -1,5 +1,9 @@
 {% extends 'moj_template/base.html' %}
-
+{% load staticfiles %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/styles.css" %}">
+{% endblock %}
 {% block content %}
   {% block body %}{% endblock %}
 {% endblock %}
