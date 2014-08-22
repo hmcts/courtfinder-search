@@ -21,16 +21,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Area',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='AreaOfLaw',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -80,7 +70,6 @@ class Migration(migrations.Migration):
                 ('displayed', models.BooleanField(default=False)),
                 ('lat', models.FloatField()),
                 ('lon', models.FloatField()),
-                ('area', models.ForeignKey(to='search.Area', null=True)),
             ],
             options={
             },

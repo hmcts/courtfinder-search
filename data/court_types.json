@@ -1,0 +1,22 @@
+[
+    {
+        "name": "County Court", 
+        "slug": "county-court"
+    }, 
+    {
+        "name": "Magistrates Court", 
+        "slug": "magistrates-court"
+    }, 
+    {
+        "name": "Crown Court", 
+        "slug": "crown-court"
+    }, 
+    {
+        "name": "Tribunal", 
+        "slug": "tribunal"
+    }, 
+    {
+        "name": "Family court", 
+        "slug": "family-court"
+    }
+]
