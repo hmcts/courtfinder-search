@@ -1,18 +1,39 @@
 {% extends "layout/base.jinja" %}
 
-{% block title %}Postcode search results{% endblock %}
+{% block page_title %}Find a court or tribunal{% endblock %}
 
-{% block body %}
-  <h1>Search Results</h1>
-
-  <p>
-    Search results for <strong>{{ postcode }}</strong> for {{ area_of_law }}
-  </p>
-
-  <ul>
-    {% for court in search_results %}
-      <li>{{ court.name }}</li>
-    {% endfor %}
-  </ul>
+{% block content %}
+<div class="content inner cf">
+  <header class="page-header">
+    <h1>Find a court or tribunal</h1>
+  </header>
+</div>
+<form method="get" action="results">
+  <fieldset>
+    <label for="postcode" class="form-block">
+      <div class="form-label-bold">Search by postcode</div>
+      <div class="form-hint">Use full or part postcodes, for example, SW1 8LH or SW1.</div>
+      <input type="text" name="postcode" />
+    </label>
+    <label for="area-of-law" class="form-block">
+      <div class="form-label-bold">Filter by legal problem</div>
+      <div class="form-hint">Not all courts deal with all legal problems. Filtering will help you find the right court more easily.</div>
+      <div class="form-hint">Choose the problem area that is relevant to you.</div>
+      <label for="aol-0" class="block-label form-block">
+        <input id="aol-0" type="radio" name="area_of_law" value="All" checked=checked>
+        <div class="form-label">All courts and tribunals</div>
+      </label>
+      {% for aol in areas_of_law %}
+      <label for="aol-{{forloop.counter1}}" class="block-label form-block">
+        <input id="aol-{{forloop.counter1}}" type="radio" name="area_of_law" value="{{aol.name}}" >
+        <div class="form-label">{{aol.name}}</div>
+      </label>
+      {% endfor %}
+    </label>
+  </fieldset>
+  <div class="actions">
+    <button id="continue" class="button" type="submit">Continue</button>
+  </div>
+  </form>
 
 {% endblock %}

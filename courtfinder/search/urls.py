@@ -3,5 +3,7 @@ from search import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index),
-    url(r'^postcode$', views.postcode_search),
+    url(r'^type', views.search_type),
+    url(r'^postcode$', views.search_by_postcode),
+    url(r'^results$', views.results),
 )
