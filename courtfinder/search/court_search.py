@@ -8,7 +8,7 @@ class CourtSearch:
         try:
             lat, lon = self.postcode_to_latlon( postcode )
         except:
-            return False
+            return []
 
         area_of_law = AreaOfLaw.objects.get(name=area_of_law)
 
