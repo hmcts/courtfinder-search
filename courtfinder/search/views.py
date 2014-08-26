@@ -34,9 +34,19 @@ def results(request):
 
   c = CourtSearch()
   results = c.postcode_search(postcode, area_of_law)
-  
-  return render(request, 'search/results.jinja', { 
+
+  courts=[]
+  for result in results:
+    addresses=[]
+    for address in result.courtaddress_set.all():
+      addresses.append({'type':address.address_type, 'address':address.address.split('\n')})
+    court = { 'name': result.name, 'addresses': addresses }
+    courts.append(court)
+
+
+  return render(request, 'search/results.jinja', {
     'postcode': postcode,
     'area_of_law': area_of_law,
-    'search_results': results
+    'areas_of_law': AreaOfLaw.objects.all(),
+    'search_results': courts
   })
