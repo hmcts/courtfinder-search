@@ -9,6 +9,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, migrations
 
 
+def enable_earthdistance(apps, schema_editor):
+  schema_editor.execute('CREATE EXTENSION cube')
+  schema_editor.execute('CREATE EXTENSION earthdistance')
+
+
 def populate_database(apps, schema_editor):
   Court = apps.get_model('search', 'Court')
   AreaOfLaw = apps.get_model('search', 'AreaOfLaw')
@@ -109,5 +114,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+      migrations.RunPython(enable_earthdistance),
       migrations.RunPython(populate_database)
     ]
