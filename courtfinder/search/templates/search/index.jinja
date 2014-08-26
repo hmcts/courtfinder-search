@@ -9,20 +9,20 @@
     </header>
     <div class="group">
       <p>Choose the type of search you would like to do</p>
-      <form method="POST">
+      <form method="get" action="/search/results">
         <fieldset>
           <label for="postcode-search" class="block-label form-block">
-            <input id="postcode-search" type="radio" name="search-type" value="postcode-search" >
+            <input id="postcode-search" type="radio" name="type" value="postcode" >
             <div class="form-label-bold">Postcode search</div>
             <div class="form-hint">Find courts and tribunals that will serve your postcode.</div>
           </label>
           <label for="name-address-search" class="block-label form-block">
-            <input id="name-address-search" type="radio" name="search-type" value="name-address-search" >
+            <input id="name-address-search" type="radio" name="type" value="address" >
             <div class="form-label-bold">Name or address search</div>
             <div class="form-hint">Find courts or tribunals by entering court name, building name, or street address.</div>
           </label>
           <label for="list-view" class="block-label form-block">
-            <input id="list-view" type="radio" name="search-type" value="list-view" >
+            <input id="list-view" type="radio" name="type" value="list" >
             <div class="form-label-bold">List view</div>
             <div class="form-hint">Browse courts and tribunals by A-Z, by region or by type of court.</div>
           </label>
