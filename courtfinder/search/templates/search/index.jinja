@@ -1,25 +1,36 @@
 {% extends "layout/base.jinja" %}
 
-{% block title %}Search{% endblock %}
+{% block page_title %}Find a court or tribunal{% endblock %}
 
-{% block body %}
-  <h1>Search</h1>
-
-
-  <form action="/search/postcode" method="get">
-    <p>
-      Enter postcode: 
-      <input type="text" name="postcode" />
-    </p>
-    <p>
-      <select name="area_of_law">
-        <option id="0">All</option>
-      {% for aol in areas_of_law %}
-        <option value="{{aol.name}}">{{aol.name}}</option>
-      {% endfor %}
-      </select>
-    </p>
-    <button type="submit">Search</button>
-  </form>
-
+{% block content %}
+  <div class="content inner cf">
+    <header class="page-header">
+      <h1>Find a court or tribunal</h1>
+    </header>
+    <div class="group">
+      <p>Choose the type of search you would like to do</p>
+      <form method="POST">
+        <fieldset>
+          <label for="postcode-search" class="block-label form-block">
+            <input id="postcode-search" type="radio" name="search-type" value="postcode-search" >
+            <div class="form-label-bold">Postcode search</div>
+            <div class="form-hint">Find courts and tribunals that will serve your postcode.</div>
+          </label>
+          <label for="name-address-search" class="block-label form-block">
+            <input id="name-address-search" type="radio" name="search-type" value="name-address-search" >
+            <div class="form-label-bold">Name or address search</div>
+            <div class="form-hint">Find courts or tribunals by entering court name, building name, or street address.</div>
+          </label>
+          <label for="list-view" class="block-label form-block">
+            <input id="list-view" type="radio" name="search-type" value="list-view" >
+            <div class="form-label-bold">List view</div>
+            <div class="form-hint">Browse courts and tribunals by A-Z, by region or by type of court.</div>
+          </label>
+        </fieldset>
+        <div class="actions">
+          <button class="button" type="submit">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
 {% endblock %}
