@@ -46,7 +46,7 @@ class CourtSearch:
             raise
 
 
-    def name_search( self, query ):
+    def address_search( self, query ):
         results = Court.objects.filter(name__icontains=query)
 
-        return results
+        return [r for r in results]
