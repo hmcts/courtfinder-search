@@ -10,9 +10,9 @@ def index(request):
 def search_type(request):
   search_type = request.GET['type'];
 
-  if search_type is 'postcode':
+  if search_type == 'postcode':
     return redirect('/search/postcode')
-  elif search is 'address':
+  elif search_type == 'address':
     return redirect('/search/address')
   else:
     return redirect('/search/list')
