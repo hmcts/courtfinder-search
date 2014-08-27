@@ -43,6 +43,8 @@ def format_results(results):
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
         court = { 'name': result.name,
+                  'lat': result.lat,
+                  'lon': result.lon,
                   'types': [court_type for court_type in result.courtcourttypes_set.all()],
                   'addresses': addresses,
                   'areas_of_law': areas_of_law }

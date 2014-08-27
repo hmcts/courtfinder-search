@@ -1,3 +1,5 @@
+$small-width: 800px;
+
 body {
   font-size: 19px;
 }
@@ -16,18 +18,31 @@ font-size: 24px;
 margin-top: 2em;
 }
 
-.court-result-left {
-float: left;
-width: 30%
+.court-addresses {
+  @media screen and (min-width: $small-width) {
+    float: left;
+    width: 30%;
+  }
 }
 
-.court-result-right {
-float: right;
-width: 70%
+.court-aol {
+  @media screen and (min-width: $small-width) {
+    float: left;
+    width: 30%;
+  }
+}
+
+.court-map {
+  @media screen and (min-width: $small-width) {
+    float: right;
+    width: 30%;
+  }
 }
 
 .clear {
-clear: both
+  @media screen and (min-width: $small-width) {
+    clear: both
+  }
 }
 
 .selected-aol {

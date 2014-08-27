@@ -43,7 +43,7 @@
     {% for court in search_results %}
     <li>
       <div><a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a></div>
-      <div class="court-result-left">
+      <div class="court-addresses">
         {% for address in court.addresses %}
           <h3>{{ address.type }} address</h3>
           <p>
@@ -57,13 +57,16 @@
           </p>
         {% endfor %}
       </div>
-      <div class="court-result-right">
+      <div class="court-aol">
         <p>This court or tribunal deals with the following legal problems:</p>
         <ul>
         {% for aol in court.areas_of_law %}
           <li><span {% if aol.name == area_of_law %}class="selected-aol"{% endif %}>{{ aol.name }}</span></li>
         {% endfor %}
         </ul>
+      </div>
+      <div class="court-map">
+        <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}" alt="location of the court on a map"/>
       </div>
       <hr class="clear"/>
     </li>
