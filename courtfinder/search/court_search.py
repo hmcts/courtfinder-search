@@ -10,38 +10,43 @@ class CourtSearch:
         except:
             return []
 
-        area_of_law = AreaOfLaw.objects.get(name=area_of_law)
-
         results = Court.objects.raw("""
             SELECT *,
                    round((point(c.lon, c.lat) <@> point(%s, %s))::numeric, 3) as distance
-              FROM search_court as c,
-                   search_courtareasoflaw a
-             WHERE c.id = a.court_id
-               AND a.area_of_law_id = %s
+              FROM search_court as c
              ORDER BY (point(c.lon, c.lat) <-> point(%s, %s))
              LIMIT 20
-        """, [lon, lat, area_of_law.id, lon, lat])
+        """, [lon, lat, lon, lat])
 
-        return [r for r in results]
+        if area_of_law.lower() != 'all':
+            aol = AreaOfLaw.objects.get(name=area_of_law)
+            return [r for r in results if aol in r.areas_of_law.all()]
+        else:
+            return [r for r in results]
 
 
     def postcode_to_latlon( self, postcode ):
         """Returns a tuple in the (lat, lon) format"""
 
         p = postcode.lower().replace(' ', '')
-        mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
+        if len(postcode) > 4:
+            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
+        else:
+            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
 
         r = requests.get(mapit_url)
         if r.status_code == 200:
             data = json.loads(r.text)
 
-            return (data['wgs84_lat'], data['wgs84_lon'])
+            if 'wgs84_lat' in data:
+                return (data['wgs84_lat'], data['wgs84_lon'])
+            else:
+                raise
         else:
             raise
 
 
-    def name_search( self, query ):
+    def address_search( self, query ):
         results = Court.objects.filter(name__icontains=query)
 
-        return results
+        return [r for r in results]

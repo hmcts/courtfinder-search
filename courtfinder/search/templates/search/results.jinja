@@ -9,21 +9,29 @@
 </div>
 <form method="get" action="results">
   <fieldset>
-    <label for="postcode" class="form-block">
-      <div class="form-label-bold">Search results for postcode</div>
-      <input type="text" name="postcode" value="{{ postcode }}"/>
-    </label>
-    <label for="area_of_law" class="form-block">
-      <div class="form-label-bold">Filtered by courts or tribunals dealing with</div>
-      <select name="area_of_law" id="area_of_law">
-        {% for aol in areas_of_law %}
-        <option value="{{aol.name}}" class="block-label form-block" {% if aol.name == area_of_law %}selected=selected{% endif %}>{{ aol.name }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <div class="actions">
-      <button id="again" class="button" type="submit">Search again</button>
-    </div>
+    {% if query %}
+        <label for="postcode" class="form-block">
+          <div class="form-label-bold">Search by name or address</div>
+          <div class="form-hint">Enter part of the court or tribunal name or address.</div>
+          <input class="form-control" type="text" name="q" />
+        </label>
+    {% else %}
+        <label for="postcode" class="form-block">
+          <div class="form-label-bold">Search results for postcode</div>
+          <input type="text" name="postcode" value="{{ postcode }}"/>
+        </label>
+        <label for="area_of_law" class="form-block">
+          <div class="form-label-bold">Filtered by courts or tribunals dealing with</div>
+          <select name="area_of_law" id="area_of_law">
+            {% for aol in areas_of_law %}
+            <option value="{{aol.name}}" class="block-label form-block" {% if aol.name == area_of_law %}selected=selected{% endif %}>{{ aol.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      {% endif %}
+      <div class="actions">
+        <button id="again" class="button" type="submit">Search again</button>
+      </div>
   </fieldset>
 </form>
 
