@@ -27,6 +27,9 @@ def search_by_postcode(request):
     'error': error
   })
 
+def list(request):
+  return render(request, 'search/list.jinja')
+
 
 def search_by_address(request):
     return render(request, 'search/address.jinja')
