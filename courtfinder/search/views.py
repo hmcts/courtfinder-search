@@ -37,8 +37,15 @@ def format_results(results):
         addresses=[]
         for address in result.courtaddress_set.all():
             addresses.append({'type':address.address_type,
-                              'address':address.address.split('\n')})
-        court = { 'name': result.name, 'addresses': addresses }
+                              'address':address.address.split('\n'),
+                              'postcode':address.postcode,
+                              'town':address.town.name})
+        areas_of_law=[]
+        areas_of_law = [aol for aol in result.areas_of_law.all()]
+        court = { 'name': result.name,
+                  'types': [court_type for court_type in result.courtcourttypes_set.all()],
+                  'addresses': addresses,
+                  'areas_of_law': areas_of_law }
         courts.append(court)
     return courts
 

@@ -101,7 +101,7 @@ class CourtContact(models.Model):
   value = models.CharField(max_length=255)
 
   def __unicode__(self):
-    return "%s for %s is %s" % (contact_type.name, court.name, value)
+    return "%s for %s is %s" % (self.contact_type.name, self.court.name, self.value)
 
 
 class CourtType(models.Model):
@@ -116,4 +116,4 @@ class CourtCourtTypes(models.Model):
   court_type = models.ForeignKey(CourtType)
 
   def __unicode__(self):
-    return "Court type for %s is %s" % (court.name, court_type.name)
+    return "Court type for %s is %s" % (self.court.name, self.court_type.name)

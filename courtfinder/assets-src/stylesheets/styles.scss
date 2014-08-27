@@ -15,3 +15,22 @@ font-size: 24px;
 .note {
 margin-top: 2em;
 }
+
+.court-result-left {
+float: left;
+width: 30%
+}
+
+.court-result-right {
+float: right;
+width: 70%
+}
+
+.clear {
+clear: both
+}
+
+.selected-aol {
+background-color: #FFBF00;
+font-weight: bold;
+}
