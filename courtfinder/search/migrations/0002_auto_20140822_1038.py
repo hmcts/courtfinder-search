@@ -25,6 +25,8 @@ def populate_database(apps, schema_editor):
   Country = apps.get_model('search', 'Country')
   County = apps.get_model('search', 'County')
   Town = apps.get_model('search', 'Town')
+  ContactType = apps.get_model('search', 'ContactType')
+  CourtContact = apps.get_model('search', 'CourtContact')
 
 
   data_dir = join(settings.PROJECT_ROOT, 'data')
@@ -71,32 +73,27 @@ def populate_database(apps, schema_editor):
       try:
         aol = AreaOfLaw.objects.get(name=aol_name)
       except ObjectDoesNotExist:
-        aol = AreaOfLaw(name=aol_name)
-        aol.save()
+        aol = AreaOfLaw.objects.create(name=aol_name)
 
-      caol = CourtAreasOfLaw(court=court, area_of_law=aol)
-      caol.save()
+      CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
 
     for court_type_name in court_obj['court_types']:
       try:
         ct = CourtType.objects.get(name=court_type_name)
       except ObjectDoesNotExist:
-        ct = CourtType(name=court_type_name)
-        ct.save()
+        ct = CourtType.objects.create(name=court_type_name)
 
-      cct = CourtCourtTypes(court=court, court_type=ct)
-      cct.save()
+      CourtCourtTypes.objects.create(court=court, court_type=ct)
 
     for address in court_obj['addresses']:
       try:
         address_type = AddressType.objects.get(name=address['type'])
       except ObjectDoesNotExist:
-        address_type = AddressType(name=address['type'])
-        address_type.save()
+        address_type = AddressType.objects.create(name=address['type'])
 
       town = Town.objects.get(name=address['town'])
 
-      ca = CourtAddress(
+      CourtAddress.objects.create(
         court=court,
         address_type=address_type,
         address=address['address'],
@@ -104,7 +101,17 @@ def populate_database(apps, schema_editor):
         town=town
       )
 
-      ca.save()
+    for contact in court_obj['contacts']:
+      try:
+        contact_type = ContactType.objects.get(name=contact['type'])
+      except ObjectDoesNotExist:
+        contact_type = ContactType.objects.create(name=contact['type'])
+
+        CourtContact.objects.create(
+          court=court,
+          contact_type=contact_type,
+          value=contact['number']
+        )
 
 
 class Migration(migrations.Migration):
