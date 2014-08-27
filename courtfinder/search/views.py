@@ -19,10 +19,13 @@ def search_type(request):
 
 
 def search_by_postcode(request):
-    areas_of_law = AreaOfLaw.objects.all()
-    return render(request, 'search/postcode.jinja', {
-        'areas_of_law': areas_of_law
-    })
+  error = request.GET.get('error', False)
+
+  areas_of_law = AreaOfLaw.objects.all()
+  return render(request, 'search/postcode.jinja', {
+    'areas_of_law': areas_of_law,
+    'error': error
+  })
 
 
 def search_by_address(request):
@@ -67,7 +70,7 @@ def results(request):
         area_of_law = request.GET['area_of_law']
 
         if postcode == "":
-            return redirect('/search/postcode')
+            return redirect('/search/postcode?error=1')
 
         c = CourtSearch()
         results = c.postcode_search(postcode, area_of_law)

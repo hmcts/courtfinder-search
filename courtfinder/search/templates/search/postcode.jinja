@@ -8,6 +8,9 @@
     <h1>Find a court or tribunal</h1>
   </header>
 </div>
+{% if error %}
+<section class="validation-error">You did not enter a postcode. Please try again.</section>
+{% endif %}
 <form method="get" action="results">
   <fieldset>
     <label for="postcode" class="form-block">
