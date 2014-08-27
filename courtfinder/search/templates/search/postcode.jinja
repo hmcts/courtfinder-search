@@ -24,8 +24,8 @@
         <div class="form-label">All courts and tribunals</div>
       </label>
       {% for aol in areas_of_law %}
-      <label for="aol-{{forloop.counter1}}" class="block-label form-block">
-        <input id="aol-{{forloop.counter1}}" type="radio" name="area_of_law" value="{{aol.name}}" >
+      <label for="aol-{{forloop.counter}}" class="block-label form-block">
+        <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}" >
         <div class="form-label">{{aol.name}}</div>
       </label>
       {% endfor %}

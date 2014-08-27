@@ -1,3 +1,5 @@
+$small-width: 800px;
+
 body {
   font-size: 19px;
 }
@@ -14,4 +16,36 @@ font-size: 24px;
 
 .note {
 margin-top: 2em;
+}
+
+.court-addresses {
+  @media screen and (min-width: $small-width) {
+    float: left;
+    width: 30%;
+  }
+}
+
+.court-aol {
+  @media screen and (min-width: $small-width) {
+    float: left;
+    width: 30%;
+  }
+}
+
+.court-map {
+  @media screen and (min-width: $small-width) {
+    float: right;
+    width: 30%;
+  }
+}
+
+.clear {
+  @media screen and (min-width: $small-width) {
+    clear: both
+  }
+}
+
+.selected-aol {
+background-color: #FFBF00;
+font-weight: bold;
 }

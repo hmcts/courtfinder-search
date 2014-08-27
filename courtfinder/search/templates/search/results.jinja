@@ -23,8 +23,9 @@
         <label for="area_of_law" class="form-block">
           <div class="form-label-bold">Filtered by courts or tribunals dealing with</div>
           <select name="area_of_law" id="area_of_law">
+            <option value="All" {% if aol.name == "All" %}selected=selected{% endif %}>All courts and tribunals</option>
             {% for aol in areas_of_law %}
-            <option value="{{aol.name}}" class="block-label form-block" {% if aol.name == area_of_law %}selected=selected{% endif %}>{{ aol.name }}</option>
+            <option value="{{aol.name}}" {% if aol.name == area_of_law %}selected=selected{% endif %}>{{ aol.name }}</option>
             {% endfor %}
           </select>
         </label>
@@ -42,16 +43,32 @@
     {% for court in search_results %}
     <li>
       <div><a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a></div>
-      <ul>
-      {% for address in court.addresses %}
-        <li>
-          <h3>{{ address.type }}</h3>
+      <div class="court-addresses">
+        {% for address in court.addresses %}
+          <h3>{{ address.type }} address</h3>
+          <p>
           {% for line in address.address %}
-          <p>{{ line }}</p>
+            {% if line != "" %}
+              {{ line }}<br/>
+            {% endif %}
           {% endfor %}
-        </li>
-      {% endfor %}
-      </ul>
+          {{address.town}}<br/>
+          {{address.postcode}}
+          </p>
+        {% endfor %}
+      </div>
+      <div class="court-aol">
+        <p>This court or tribunal deals with the following legal problems:</p>
+        <ul>
+        {% for aol in court.areas_of_law %}
+          <li><span {% if aol.name == area_of_law %}class="selected-aol"{% endif %}>{{ aol.name }}</span></li>
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="court-map">
+        <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}" alt="location of the court on a map"/>
+      </div>
+      <hr class="clear"/>
     </li>
     {% endfor %}
   </ul>
