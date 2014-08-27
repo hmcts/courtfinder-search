@@ -42,7 +42,12 @@
   <ul>
     {% for court in search_results %}
     <li>
-      <div><a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a></div>
+      <div>
+        <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
+        {% if court.distance %}
+          <span class="distance-from-postcode">{{ court.distance }} miles away</span>
+        {% endif %}
+      </div>
       <div class="court-addresses">
         {% for address in court.addresses %}
           <h3>{{ address.type }} address</h3>
@@ -56,6 +61,9 @@
           {{address.postcode}}
           </p>
         {% endfor %}
+        {% if court.dx_number %}
+          <p><strong>DX:</strong> {{ court.dx_number }}</p>
+        {% endif %}
       </div>
       <div class="court-aol">
         <p>This court or tribunal deals with the following legal problems:</p>
@@ -66,7 +74,9 @@
         </ul>
       </div>
       <div class="court-map">
-        <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}" alt="location of the court on a map"/>
+        <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
+          <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
+        </a>
       </div>
       <hr class="clear"/>
     </li>

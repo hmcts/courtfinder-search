@@ -42,12 +42,21 @@ def format_results(results):
                               'town':address.town.name})
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
+
         court = { 'name': result.name,
                   'lat': result.lat,
                   'lon': result.lon,
                   'types': [court_type for court_type in result.courtcourttypes_set.all()],
                   'addresses': addresses,
                   'areas_of_law': areas_of_law }
+
+        dx_contact = result.courtcontact_set.filter(contact_type__name='DX')
+        if dx_contact.count() > 0:
+            court['dx_number'] = dx_contact.first().value
+
+        if hasattr(result, 'distance'):
+            court['distance'] = result.distance
+
         courts.append(court)
     return courts
 
