@@ -1,5 +1,7 @@
 import json
 import requests
+from itertools import chain
+
 from search.models import Court, AreaOfLaw, CourtAddress
 
 class CourtSearch:
@@ -47,6 +49,11 @@ class CourtSearch:
 
 
     def address_search( self, query ):
-        results = Court.objects.filter(name__icontains=query)
+        name_results =  Court.objects.filter(name__icontains=query)
+        address_results = Court.objects.filter(courtaddress__address__icontains=query)
+        town_results = Court.objects.filter(courtaddress__town__name__icontains=query)
+        county_results = Court.objects.filter(courtaddress__town__county__name__icontains=query)
 
-        return [r for r in results]
+        results = list(chain(name_results, address_results, town_results, county_results))
+
+        return results
