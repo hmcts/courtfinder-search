@@ -37,7 +37,7 @@
 </form>
 
 {% if search_results %}
-  <p>{{ search_results|length }} results</p>
+  <p><span id="number-of-results">{{ search_results|length }}</span> results</p>
   <hr/>
   <ul>
     {% for court in search_results %}
