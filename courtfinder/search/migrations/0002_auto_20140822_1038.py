@@ -10,8 +10,8 @@ from django.db import models, migrations
 
 
 def enable_earthdistance(apps, schema_editor):
-  schema_editor.execute('CREATE EXTENSION cube')
-  schema_editor.execute('CREATE EXTENSION earthdistance')
+  schema_editor.execute('CREATE EXTENSION IF NOT EXISTS cube')
+  schema_editor.execute('CREATE EXTENSION IF NOT EXISTS earthdistance')
 
 
 def populate_database(apps, schema_editor):
