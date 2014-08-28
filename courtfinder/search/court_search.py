@@ -17,14 +17,13 @@ class CourtSearch:
                    round((point(c.lon, c.lat) <@> point(%s, %s))::numeric, 3) as distance
               FROM search_court as c
              ORDER BY (point(c.lon, c.lat) <-> point(%s, %s))
-             LIMIT 20
         """, [lon, lat, lon, lat])
 
         if area_of_law.lower() != 'all':
             aol = AreaOfLaw.objects.get(name=area_of_law)
-            return [r for r in results if aol in r.areas_of_law.all()]
+            return [r for r in results if aol in r.areas_of_law.all()][:20]
         else:
-            return [r for r in results]
+            return [r for r in results][:20]
 
 
     def postcode_to_latlon( self, postcode ):

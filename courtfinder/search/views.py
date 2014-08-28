@@ -8,7 +8,7 @@ def index(request):
 
 
 def search_type(request):
-    search_type = request.GET['type'];
+    search_type = request.GET.get('type');
 
     if search_type == 'postcode':
         return redirect('/search/postcode')
@@ -19,20 +19,22 @@ def search_type(request):
 
 
 def search_by_postcode(request):
-  error = request.GET.get('error', False)
+    error = request.GET.get('error', False)
 
-  areas_of_law = AreaOfLaw.objects.all()
-  return render(request, 'search/postcode.jinja', {
-    'areas_of_law': areas_of_law,
-    'error': error
-  })
+    areas_of_law = AreaOfLaw.objects.all()
+    return render(request, 'search/postcode.jinja', {
+      'areas_of_law': areas_of_law,
+      'error': error
+    })
+
 
 def list(request):
-  return render(request, 'search/list.jinja')
+    return render(request, 'search/list.jinja')
 
 
 def search_by_address(request):
     return render(request, 'search/address.jinja')
+
 
 def format_results(results):
     """
@@ -79,8 +81,8 @@ def results(request):
             'search_results': format_results(results)
         })
     else:
-        postcode = request.GET['postcode']
-        area_of_law = request.GET['area_of_law']
+        postcode = request.GET.get('postcode','')
+        area_of_law = request.GET.get('area_of_law','')
 
         if postcode == "":
             return redirect('/search/postcode?error=1')
