@@ -45,25 +45,21 @@
             <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
           </div>
           <div class="court-addresses">
-            <ul>
-            {% for address in court.addresses %}
-              <li>
-                <p>
-                  <span class="court-result-heading">{{ address.type }} address:</span><br/>
-              {% for line in address.address %}
+            <p>
+              <span class="court-result-heading">Write to us:</span><br/>
+              {% with a=court.address %}
+              {% for line in a.address_lines %}
                 {% if line != "" %}
                   {{ line }}<br/>
                 {% endif %}
               {% endfor %}
-              {{address.town}}<br/>
-              {{address.postcode}}
-                </p>
-              </li>
-              {% endfor %}
-            </ul>
-                {% if court.dx_number %}
-  
-                <p><strong>DX:</strong> {{ court.dx_number }}</p>
+              {{a.town}}<br/>
+              {{a.postcode}}
+              {% endwith %}
+            </p>
+
+            {% if court.dx_number %}
+            <p><strong>DX:</strong> {{ court.dx_number }}</p>
             {% endif %}
           </div>
           <div class="court-aol">
