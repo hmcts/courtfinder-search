@@ -6,8 +6,68 @@
   <header class="page-header">
     <h1>Find a court or tribunal</h1>
   </header>
-  
-  <form method="get" action="results">
+
+
+  {% if search_results %}
+  <div class="search-results">
+    {% if query %}
+      <p class="text-secondary">
+        <span id="number-of-results">{{ search_results|length }}</span> results
+      </p>
+      {% else %}
+      <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
+      {% endif %}
+    </p>
+    <hr/>
+    <ul>
+      {% for court in search_results %}
+      <li>
+        <div class="court-link">
+          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
+        </div>
+        <div class="court-addresses">
+          <p>
+            <span class="court-result-heading">Write to us:</span><br/>
+            {% with a=court.address %}
+            {% for line in a.address_lines %}
+              {% if line != "" %}
+                {{ line }}<br/>
+              {% endif %}
+            {% endfor %}
+            {{a.town}}<br/>
+            {{a.postcode}}
+            {% endwith %}
+          </p>
+
+          {% if court.dx_number %}
+          <p><strong>DX:</strong> {{ court.dx_number }}</p>
+          {% endif %}
+        </div>
+        <div class="court-aol">
+          <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
+          <ul>
+          {% for aol in court.areas_of_law %}
+            <li><span {% if aol.name == area_of_law %}class="selected-aol"{% endif %}>{{ aol.name }}</span></li>
+          {% endfor %}
+          </ul>
+        </div>
+        <div class="court-map">
+          {% if court.distance %}
+          <p class="distance-from-postcode">{{ court.distance }} miles away</p>
+          {% endif %}
+          <p>
+            <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
+              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
+            </a>
+          </p>
+        </div>
+        <hr class="clear"/>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+    <form method="get" action="results">
     {% if query %}
     <label for="postcode" class="form-block">
       <div class="form-label-bold">Search by name or address</div>
@@ -33,58 +93,6 @@
       <button id="again" class="button" type="submit">Search again</button>
     </div>
   </form>
-  
-  {% if search_results %}
-    <div class="search-results">
-      <p class="text-secondary"><span id="number-of-results">{{ search_results|length }}</span> results</p>
-      <hr/>
-      <ul>
-        {% for court in search_results %}
-        <li>
-          <div class="court-link">
-            <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
-          </div>
-          <div class="court-addresses">
-            <p>
-              <span class="court-result-heading">Write to us:</span><br/>
-              {% with a=court.address %}
-              {% for line in a.address_lines %}
-                {% if line != "" %}
-                  {{ line }}<br/>
-                {% endif %}
-              {% endfor %}
-              {{a.town}}<br/>
-              {{a.postcode}}
-              {% endwith %}
-            </p>
 
-            {% if court.dx_number %}
-            <p><strong>DX:</strong> {{ court.dx_number }}</p>
-            {% endif %}
-          </div>
-          <div class="court-aol">
-            <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
-            <ul>
-            {% for aol in court.areas_of_law %}
-              <li><span {% if aol.name == area_of_law %}class="selected-aol"{% endif %}>{{ aol.name }}</span></li>
-            {% endfor %}
-            </ul>
-          </div>
-          <div class="court-map">
-            {% if court.distance %}
-              <p class="distance-from-postcode">{{ court.distance }} miles away</p>
-              {% endif %}
-              <p>
-            <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
-              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
-            </a>
-              </p>
-          </div>
-          <hr class="clear"/>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-  </div>
+</div>
 {% endblock %}
