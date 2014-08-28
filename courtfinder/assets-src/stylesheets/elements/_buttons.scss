@@ -24,7 +24,7 @@
 // Start now buttons
 .button-get-started {
   @include bold-24;
-  background-image: url("/static/images/icon-pointer.png");
+  background-image: url("../images/icons/icon-pointer.png");
   background-repeat: no-repeat;
   background-position: 100% 50%;
   padding: em(7) em(41) em(4) em(16);
