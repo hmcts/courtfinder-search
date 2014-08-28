@@ -20,11 +20,12 @@ def search_type(request):
 
 def search_by_postcode(request):
     error = request.GET.get('error', False)
-
+    postcode_requested = request.GET.get('postcode', '')
     areas_of_law = AreaOfLaw.objects.all()
     return render(request, 'search/postcode.jinja', {
       'areas_of_law': areas_of_law,
-      'error': error
+      'error': error,
+      'postcode': postcode_requested
     })
 
 
@@ -42,12 +43,18 @@ def format_results(results):
     """
     courts=[]
     for result in results:
-        addresses=[]
-        for address in result.courtaddress_set.all():
-            addresses.append({'type':address.address_type,
-                              'address':address.address.split('\n'),
-                              'postcode':address.postcode,
-                              'town':address.town.name})
+        addresses = result.courtaddress_set.all()
+        for a in addresses:
+            if a.address_type == 'Postal':
+                address = a
+                break
+        else:
+            address = addresses[0]
+
+        visible_address = {'address_lines':address.address.split('\n'),
+                           'postcode':address.postcode,
+                           'town':address.town.name}
+
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
 
@@ -56,7 +63,7 @@ def format_results(results):
                   'lon': result.lon,
                   'slug': result.slug,
                   'types': [court_type for court_type in result.courtcourttypes_set.all()],
-                  'addresses': addresses,
+                  'address': visible_address,
                   'areas_of_law': areas_of_law }
 
         dx_contact = result.courtcontact_set.filter(contact_type__name='DX')

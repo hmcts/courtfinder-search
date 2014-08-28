@@ -21,9 +21,9 @@ class CourtSearch:
 
         if area_of_law.lower() != 'all':
             aol = AreaOfLaw.objects.get(name=area_of_law)
-            return [r for r in results if aol in r.areas_of_law.all()][:20]
+            return [r for r in results if aol in r.areas_of_law.all()][:10]
         else:
-            return [r for r in results][:20]
+            return [r for r in results][:10]
 
 
     def postcode_to_latlon( self, postcode ):
