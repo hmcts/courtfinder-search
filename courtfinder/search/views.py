@@ -8,7 +8,7 @@ def index(request):
 
 
 def search_type(request):
-    search_type = request.GET['type'];
+    search_type = request.GET.get('type');
 
     if search_type == 'postcode':
         return redirect('/search/postcode')
@@ -81,8 +81,8 @@ def results(request):
             'search_results': format_results(results)
         })
     else:
-        postcode = request.GET['postcode']
-        area_of_law = request.GET['area_of_law']
+        postcode = request.GET.get('postcode','')
+        area_of_law = request.GET.get('area_of_law','')
 
         if postcode == "":
             return redirect('/search/postcode?error=1')
