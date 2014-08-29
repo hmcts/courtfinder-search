@@ -39,9 +39,14 @@
             {% endwith %}
           </p>
 
+          <p>
           {% if court.dx_number %}
-          <p><strong>DX:</strong> {{ court.dx_number }}</p>
+          <span class="court-result-heading">DX:</span> {{ court.dx_number }}
           {% endif %}
+          {% if court.number %}
+          <br/><span class="court-result-heading">Court number:</span> {{ court.number }}
+          {% endif %}
+          </p>
         </div>
         <div class="court-aol">
           <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
