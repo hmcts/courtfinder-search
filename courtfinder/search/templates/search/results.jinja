@@ -11,13 +11,13 @@
   {% if search_results %}
   <div class="search-results">
     {% if query %}
-      <p class="text-secondary">
-        <span id="number-of-results">{{ search_results|length }}</span> results
-      </p>
-      {% else %}
-      <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
-      {% endif %}
+    <p class="text-secondary">
+      <span id="number-of-results">{{ search_results|length }}</span> results
     </p>
+    {% endif %}
+    {% if postcode %}
+    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
+    {% endif %}
     <hr/>
     <ul>
       {% for court in search_results %}
@@ -66,8 +66,10 @@
       {% endfor %}
     </ul>
   </div>
+  {% else %}
+  <p>Sorry, there are no results for {{ query }}. Please check and try another name or addresss.</p>
   {% endif %}
-    <form method="get" action="results">
+  <form method="get" action="results">
     {% if query %}
     <label for="postcode" class="form-block">
       <div class="form-label-bold">Search by name or address</div>

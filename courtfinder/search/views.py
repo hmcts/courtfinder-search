@@ -34,13 +34,16 @@ def list(request):
 
 
 def search_by_address(request):
-    return render(request, 'search/address.jinja')
+    error = request.GET.get('error', False)
+    return render(request, 'search/address.jinja', { 'error': error })
 
 
 def format_results(results):
     """
     create a list of courts from search results that we can send to templates
     """
+    if len(results) == 0:
+        return False
     courts=[]
     for result in results:
         addresses = result.courtaddress_set.all()
@@ -79,6 +82,9 @@ def format_results(results):
 def results(request):
     if 'q' in request.GET:
         query = request.GET['q']
+
+        if query == "":
+            return redirect('/search/address?error=1')
 
         c = CourtSearch()
         results = c.address_search(query)
