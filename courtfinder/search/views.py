@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from search.models import Court, AreaOfLaw, CourtAreasOfLaw
 from search.court_search import CourtSearch
+from search.rules import Rules
 
 def index(request):
     return render(request, 'search/index.jinja')
@@ -19,12 +20,10 @@ def search_type(request):
 
 
 def search_by_postcode(request):
-    error = request.GET.get('error', False)
-    postcode_requested = request.GET.get('postcode', '')
-    areas_of_law = AreaOfLaw.objects.all()
-    return render(request, 'search/postcode.jinja', {
+     postcode_requested = request.GET.get('postcode', None)
+     areas_of_law = AreaOfLaw.objects.all()
+     return render(request, 'search/postcode.jinja', {
       'areas_of_law': areas_of_law,
-      'error': error,
       'postcode': postcode_requested
     })
 
@@ -94,19 +93,23 @@ def results(request):
             'query': query,
             'search_results': format_results(results)
         })
+    elif 'postcode' in request.GET:
+        postcode = request.GET.get('postcode', '')
+        area_of_law = request.GET.get('area_of_law','All')
+        directive = Rules.for_postcode(postcode, area_of_law)
+
+        if directive['action'] == 'redirect':
+            return redirect(directive.target)
+        elif directive['action'] == 'render':
+            results = directive.get('results',None)
+            return render(request, 'search/results.jinja', {
+                    'postcode': postcode,
+                    'area_of_law': area_of_law,
+                    'areas_of_law': AreaOfLaw.objects.all(),
+                    'error': directive.get('error', None),
+                    'search_results': format_results(results) if results else None
+                    })
+        else:
+            return redirect('/search')
     else:
-        postcode = request.GET.get('postcode','')
-        area_of_law = request.GET.get('area_of_law','')
-
-        if postcode == "":
-            return redirect('/search/postcode?error=1')
-
-        c = CourtSearch()
-        results = c.postcode_search(postcode, area_of_law)
-
-        return render(request, 'search/results.jinja', {
-            'postcode': postcode,
-            'area_of_law': area_of_law,
-            'areas_of_law': AreaOfLaw.objects.all(),
-            'search_results': format_results(results)
-        })
+        return redirect('/search')

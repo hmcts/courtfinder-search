@@ -7,6 +7,9 @@
     <h1>Find a court or tribunal</h1>
   </header>
 
+  {% if error %}
+  <p>{{ error }}</p>
+  {% endif %}
 
   {% if search_results %}
   <div class="search-results">
@@ -14,8 +17,7 @@
     <p class="text-secondary">
       <span id="number-of-results">{{ search_results|length }}</span> results
     </p>
-    {% endif %}
-    {% if postcode %}
+    {% else %}
     <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
     {% endif %}
     <hr/>
@@ -39,14 +41,9 @@
             {% endwith %}
           </p>
 
-          <p>
           {% if court.dx_number %}
-          <span class="court-result-heading">DX:</span> <span class="court_dx">{{ court.dx_number }}</span>
+          <p><strong>DX:</strong> {{ court.dx_number }}</p>
           {% endif %}
-          {% if court.number %}
-          <br/><span class="court-result-heading">Court number:</span> <span class="court_number">{{ court.number }}</span>
-          {% endif %}
-          </p>
         </div>
         <div class="court-aol">
           <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
@@ -72,9 +69,11 @@
     </ul>
   </div>
   {% else %}
-  <p>Sorry, there are no results for {{ query }}. Please check and try another name or addresss.</p>
+    {% if query %}
+      <p>Sorry, there are no results for {{ query }}. Please check and try another name or addresss.</p>
+    {% endif %}
   {% endif %}
-  <form method="get" action="results">
+    <form method="get" action="results">
     {% if query %}
     <label for="postcode" class="form-block">
       <div class="form-label-bold">Search by name or address</div>
