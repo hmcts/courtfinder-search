@@ -10,7 +10,7 @@ class Rules:
                 'action': 'redirect',
                 'target': '/search/postcode?postcode='
             }
-        elif postcode[:2] == 'BT':
+        elif postcode[:2].lower() == 'bt':
             if area_of_law == 'Immigration':
                 return {
                     'action': 'render',
