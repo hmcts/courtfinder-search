@@ -41,10 +41,10 @@
 
           <p>
           {% if court.dx_number %}
-          <span class="court-result-heading">DX:</span> {{ court.dx_number }}
+          <span class="court-result-heading">DX:</span> <span class="court_dx">{{ court.dx_number }}</span>
           {% endif %}
           {% if court.number %}
-          <br/><span class="court-result-heading">Court number:</span> {{ court.number }}
+          <br/><span class="court-result-heading">Court number:</span> <span class="court_number">{{ court.number }}</span>
           {% endif %}
           </p>
         </div>
