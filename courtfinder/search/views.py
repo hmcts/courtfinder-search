@@ -64,6 +64,7 @@ def format_results(results):
         court = { 'name': result.name,
                   'lat': result.lat,
                   'lon': result.lon,
+                  'number': result.number,
                   'slug': result.slug,
                   'types': [court_type for court_type in result.courtcourttypes_set.all()],
                   'address': visible_address,

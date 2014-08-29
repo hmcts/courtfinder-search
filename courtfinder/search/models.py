@@ -6,6 +6,7 @@ class Court(models.Model):
     displayed = models.BooleanField(default=False)
     lat = models.FloatField()
     lon = models.FloatField()
+    number = models.IntegerField(null=True)
     areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreasOfLaw', null=True)
     attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute', null=True)
     addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)

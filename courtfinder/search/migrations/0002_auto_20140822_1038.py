@@ -60,13 +60,14 @@ def populate_database(apps, schema_editor):
 
   for court_obj in courts:
     court = Court(
-      name=court_obj['name'], 
-      slug=court_obj['slug'], 
+      name=court_obj['name'],
+      slug=court_obj['slug'],
       displayed=True,
       lat=court_obj['lat'],
-      lon=court_obj['lon']
+      lon=court_obj['lon'],
+      number=court_obj['court_number']
     )
-    
+
     court.save()
 
     for aol_name in court_obj['areas_of_law']:
