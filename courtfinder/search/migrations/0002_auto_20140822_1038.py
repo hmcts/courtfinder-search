@@ -108,11 +108,11 @@ def populate_database(apps, schema_editor):
       except ObjectDoesNotExist:
         contact_type = ContactType.objects.create(name=contact['type'])
 
-        CourtContact.objects.create(
-          court=court,
-          contact_type=contact_type,
-          value=contact['number']
-        )
+      CourtContact.objects.create(
+        court=court,
+        contact_type=contact_type,
+        value=contact['number']
+      )
 
 
 class Migration(migrations.Migration):
