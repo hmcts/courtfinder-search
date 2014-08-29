@@ -91,7 +91,7 @@ def results(request):
         if postcode == '':
             return redirect('/search/postcode?postcode='+str(postcode))
 
-        area_of_law = request.GET.get('area_of_law','')
+        area_of_law = request.GET.get('area_of_law','All')
         c = CourtSearch()
         results = c.postcode_search(postcode, area_of_law)
 

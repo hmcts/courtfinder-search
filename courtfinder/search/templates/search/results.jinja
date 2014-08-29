@@ -7,7 +7,6 @@
     <h1>Find a court or tribunal</h1>
   </header>
 
-
   {% if search_results %}
   <div class="search-results">
     {% if query %}
@@ -66,6 +65,10 @@
       {% endfor %}
     </ul>
   </div>
+  {% else %}
+    {% if query %}
+      <p>Sorry, there are no results for {{ query }}. Please check and try another name or addresss.</p>
+    {% endif %}
   {% endif %}
     <form method="get" action="results">
     {% if query %}
