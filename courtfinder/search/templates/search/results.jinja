@@ -7,16 +7,19 @@
     <h1>Find a court or tribunal</h1>
   </header>
 
+  {% if error %}
+  <p>{{ error }}</p>
+  {% endif %}
+
   {% if search_results %}
   <div class="search-results">
     {% if query %}
-      <p class="text-secondary">
-        <span id="number-of-results">{{ search_results|length }}</span> results
-      </p>
-      {% else %}
-      <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
-      {% endif %}
+    <p class="text-secondary">
+      <span id="number-of-results">{{ search_results|length }}</span> results
     </p>
+    {% else %}
+    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
+    {% endif %}
     <hr/>
     <ul>
       {% for court in search_results %}
