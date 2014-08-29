@@ -8,7 +8,7 @@ class Rules:
         if postcode == '':
             return {
                 'action': 'redirect',
-                'target': 'search/postcode?postcode='
+                'target': '/search/postcode?postcode='
             }
         elif postcode[:2] == 'BT':
             if area_of_law == 'Immigration':
