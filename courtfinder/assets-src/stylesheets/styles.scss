@@ -2,6 +2,7 @@
 
 @import "device-pixels";
 @import "conditionals";
+@import "colours";
 
 body {
   font-size: 19px;
@@ -44,7 +45,11 @@ label {
 
 .form-block {
   width: 90%;
+  margin-top: 1em;
+  clear:both;
 }
+
+
 
 /* -- Application specific ------------- */
 
@@ -110,4 +115,24 @@ $small-width: 800px;
 
 .court-addresses li {
   list-style-type: none;
+}
+
+#aol-hint {
+  display: none;
+  margin-left: 1em;
+}
+
+#aols {
+  margin-top: 0;
+  .js {
+    border-left: 8px solid $grey-3;
+    padding-left: 10px;
+  }
+}
+
+#aol-one-label {
+  display: none;
+  .js {
+    display: block;
+  }
 }

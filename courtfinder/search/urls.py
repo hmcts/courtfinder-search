@@ -3,9 +3,9 @@ from search import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index),
-    url(r'^type', views.search_type),
-    url(r'^postcode$', views.search_by_postcode),
-    url(r'^address$', views.search_by_address),
-    url(r'^results$', views.results),
-    url(r'^list$', views.list),
+    url(r'^type', views.search_type, name='type-view'),
+    url(r'^postcode$', views.search_by_postcode, name='postcode-view'),
+    url(r'^address$', views.search_by_address, name='address-view'),
+    url(r'^results$', views.results, name='result-view'),
+    url(r'^list$', views.list, name='list-view'),
 )
