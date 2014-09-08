@@ -20,7 +20,7 @@
       <label for="postcode">
         <div class="form-label-bold">Search by postcode</div>
         <div class="form-hint">Use full or part postcodes, for example, SW1 8LH or SW1.</div>
-        <input type="text" name="postcode" />
+        <input type="text" name="postcode" value="{{ postcode|default:'' }}" />
       </label>
     </div>
     <div class="form-block">
