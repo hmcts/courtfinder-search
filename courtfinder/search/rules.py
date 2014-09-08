@@ -1,5 +1,6 @@
 from search.models import Court
 from search.court_search import CourtSearch
+from django.core.urlresolvers import reverse
 
 class Rules:
 
@@ -8,7 +9,7 @@ class Rules:
         if postcode == '':
             return {
                 'action': 'redirect',
-                'target': '/search/postcode?postcode='
+                'target': reverse('postcode-view') + '?postcode='
             }
         elif postcode[:2].lower() == 'bt':
             if area_of_law == 'Immigration':
