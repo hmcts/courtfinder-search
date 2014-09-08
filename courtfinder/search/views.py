@@ -87,7 +87,7 @@ def results(request):
         query = request.GET['q']
 
         if query == "":
-            return redirect(reverse('address-view'+'?error=1'))
+            return redirect(reverse('address-view')+'?error=1')
 
         c = CourtSearch()
         results = c.address_search(query)
