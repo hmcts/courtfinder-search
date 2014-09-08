@@ -104,7 +104,7 @@ def results(request):
         if postcode == '':
             return redirect(reverse('postcode-view')+'?postcode=')
         if area_of_law == 'unselected':
-            return redirect(reverse('postcode-view')+'?area_of_law=')
+            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law=')
 
         directive = Rules.for_postcode(postcode, area_of_law)
 
