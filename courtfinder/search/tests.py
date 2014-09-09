@@ -1,209 +1,35 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 
-# Create your tests here.
-import os.path
-import unittest
-import urlparse
-# from urlparse import urlparse
+class SearchTestCase(TestCase):
 
-from search_api import SearchAPI
-from mock import patch
+    def test_top_page_sans_slash_redirects_to_slash(self):
+        c = Client()
+        response = c.get('/search')
+        self.assertRedirects(response, '/search/', 301)
 
-def fake_urlopen(url):
-    """
-    A stub urlopen() implementation that load json responses from
-    the filesystem.
-    """
-    # Map path from url to a file
-    parsed_url = urlparse.urlparse(url)
-    qs = urlparse.parse_qs(parsed_url.query)
-    postcode = qs['postcode'][0]
-    area_of_law = qs['area_of_law'][0]
+    def test_top_page_returns_correct_content(self):
+        c = Client()
+        response = c.get('/search/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/index.jinja')
+        self.assertInHTML('<title>Find a court or tribunal</title>', response.content, count=1)
 
-    resource_file_name  = 'tests/resources%s/%s' % (parsed_url.path, postcode + '_' + area_of_law)
-    resource_file_name = resource_file_name.replace(" ", "+")
+    def test_sample_postcode_all_aols(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
 
-    print 'Fake ULR: Reading file from: %s' % resource_file_name
-    # # Must return a file-like object
-    return open(resource_file_name)
+    def test_sample_postcode_specific_aol(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
+        self.assertEqual(response.status_code, 200)
 
+    def test_partial_postcode(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
 
-class APITestCase(unittest.TestCase):
-    def setUp(self):
-        self.patcher = patch('search.search_api.urlopen', fake_urlopen)
-        self.patcher.start()
-        self.client = SearchAPI()
-
-    def tearDown(self):
-        self.patcher.stop()
-
-    def test_finding_courts_for_correct_postcode_and_adoption(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Adoption'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Inner London Family Proceedings Court')
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Central Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_children(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Children'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_civil_parternship(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Civil partnership'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central Family Court')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Brighton Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_divorce(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Divorce'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_bankruptcy(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Bankruptcy'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Royal Courts of Justice')
-
-    def test_finding_courts_for_correct_postcode_and_housing_possession(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Housing possession'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central London County Court')
-
-    def test_finding_courts_for_correct_postcode_and_money_claims(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Money Claims'
-
-        response = self.client.request(postcode, area_of_law)
-
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central London County Court')
-
-    def test_finding_courts_for_correct_postcode_and_probate(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Probate'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'London Probate Department')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Maidstone Probate Sub-Registry')
-
-    def test_finding_courts_for_correct_postcode_and_crime(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Crime'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Blackfriars Crown Court')
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Inner London Crown Court')
-
-    def test_finding_courts_for_correct_postcode_and_domestic_violence(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Domestic Violence'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Lambeth County Court and Family Court')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Central Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_forced_marriage(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Forced marriage'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central Family Court')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Willesden County Court and Family Court')
-
-    def test_finding_courts_for_correct_postcode_and_employment(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Employment'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central London Employment Tribunal')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Croydon Employment Tribunal')
-
-    def test_finding_courts_for_correct_postcode_and_social_security(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Social security'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Sutton Social Security and Child Support Tribunal')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Bexleyheath Social Security and Child Support Tribunal')
-
-    def test_finding_courts_for_correct_partial_postcode_and_employment(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = 'Social security'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Sutton Social Security and Child Support Tribunal')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Bexleyheath Social Security and Child Support Tribunal')
-
-    def test_finding_courts_for_correct_partial_postcode_and_employment(self):
-        postcode = 'SW1H'
-        area_of_law = 'Employment'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('name', response[0])
-        self.assertEqual(response[0]['name'], 'Central London Employment Tribunal')
-
-        self.assertIn('name', response[1])
-        self.assertEqual(response[1]['name'], 'Croydon Employment Tribunal')
-
-    def test_finding_courts_for_incorrect_postcode_and_employment(self):
-        postcode = 'SW1AX'
-        area_of_law = 'Employment'
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('error', response)
-        self.assertEqual(response['error'], 'invalid postcode')
-
-    def test_finding_courts_when_the_area_of_law_is_missing(self):
-        postcode = 'SW1H9AJ'
-        area_of_law = None
-
-        response = self.client.request(postcode, area_of_law)
-        self.assertIn('error', response)
-        self.assertEqual(response['error'], 'missing area of law')
+    def test_address_search(self):
+        c = Client()
+        response = c.get('/search/results?q=Leeds')
+        self.assertEqual(response.status_code, 200)
