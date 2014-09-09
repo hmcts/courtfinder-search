@@ -1,6 +1,7 @@
 import json
 import requests
 from itertools import chain
+from collections import OrderedDict
 
 from search.models import Court, AreaOfLaw, CourtAddress
 
@@ -48,11 +49,21 @@ class CourtSearch:
 
 
     def address_search( self, query ):
-        name_results =  Court.objects.filter(name__icontains=query)
+        """
+        Retrieve name and address search results, order and remove duplicates
+        """
+
+        # First we get courts whose name contains the query string
+        # (for these courts sorted to show the courts with the highest number of areas of law first)
+        name_results =  sorted(Court.objects.filter(name__icontains=query), key=lambda c: -len(c.areas_of_law.all()))
+        # then we get courts with the query string in their address
         address_results = Court.objects.filter(courtaddress__address__icontains=query)
+        # then in the town name
         town_results = Court.objects.filter(courtaddress__town__name__icontains=query)
+        # then the county name
         county_results = Court.objects.filter(courtaddress__town__county__name__icontains=query)
 
-        results = set(chain(name_results, town_results, address_results, county_results))
+        # put it all together and remove duplicates
+        results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
 
         return results
