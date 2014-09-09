@@ -53,6 +53,6 @@ class CourtSearch:
         town_results = Court.objects.filter(courtaddress__town__name__icontains=query)
         county_results = Court.objects.filter(courtaddress__town__county__name__icontains=query)
 
-        results = set(chain(name_results, address_results, town_results, county_results))
+        results = set(chain(name_results, town_results, address_results, county_results))
 
         return results
