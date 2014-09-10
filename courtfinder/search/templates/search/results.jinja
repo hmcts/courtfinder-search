@@ -21,7 +21,7 @@
     <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
     {% endif %}
     <hr/>
-    <ul>
+    <ul id='court-results'>
       {% for court in search_results %}
       <li>
         <div class="court-link">
