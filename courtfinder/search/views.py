@@ -32,7 +32,8 @@ def search_by_postcode(request):
 
 
 def list(request):
-    return render(request, 'search/list.jinja')
+    #    return render(request, 'search/list.jinja')
+    return redirect('https://courttribunalfinder.service.gov.uk/courts')
 
 
 def search_by_address(request):
