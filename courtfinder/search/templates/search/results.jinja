@@ -28,16 +28,18 @@
           <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
         </div>
         <div class="court-addresses">
-          <p>
+          <p vocab="http://schema.org/" typeof="Courthouse">
             <span class="court-result-heading">Write to us:</span><br/>
             {% with a=court.address %}
+            <span class="court-address">
             {% for line in a.address_lines %}
               {% if line != "" %}
                 {{ line }}<br/>
               {% endif %}
-            {% endfor %}
-            {{a.town}}<br/>
-            {{a.postcode}}
+              {% endfor %}
+            </span>
+            <span class="court-town">{{a.town}}</span><br/>
+            <span class="court-postcode">{{a.postcode}}</span>
             {% endwith %}
           </p>
 
