@@ -15,10 +15,14 @@
   <div class="search-results">
     {% if query %}
     <p class="text-secondary">
-      <span id="number-of-results">{{ search_results|length }}</span> results
+      <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
     </p>
     {% else %}
-    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest the postcode: {{ postcode }}</p>
+      {% if search_results|length == 1 %}
+    <p>This is the court or tribunal nearest {{ postcode }}:</p>
+      {% else %}e
+    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}:</p>
+      {% endif %}
     {% endif %}
     <hr/>
     <ul id='court-results'>
