@@ -7,9 +7,10 @@ from search.models import Court, AreaOfLaw, CourtAddress
 
 class CourtSearch:
 
-    def postcode_search( self, postcode, area_of_law ):
+    @staticmethod
+    def postcode_search( postcode, area_of_law ):
         try:
-            lat, lon = self.postcode_to_latlon( postcode )
+            lat, lon = CourtSearch.postcode_to_latlon( postcode )
         except:
             return []
 
@@ -30,7 +31,8 @@ class CourtSearch:
             return [r for r in results][:10]
 
 
-    def postcode_to_latlon( self, postcode ):
+    @staticmethod
+    def postcode_to_latlon( postcode ):
         """Returns a tuple in the (lat, lon) format"""
 
         p = postcode.lower().replace(' ', '')
@@ -51,7 +53,8 @@ class CourtSearch:
             raise
 
 
-    def address_search( self, query ):
+    @staticmethod
+    def address_search( query ):
         """
         Retrieve name and address search results, order and remove duplicates
         """
