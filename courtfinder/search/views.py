@@ -90,8 +90,7 @@ def results(request):
         if query == "":
             return redirect(reverse('address-view')+'?error=1')
 
-        c = CourtSearch()
-        results = c.address_search(query)
+        results = CourtSearch.address_search(query)
 
         return render(request, 'search/results.jinja', {
             'query': query,
