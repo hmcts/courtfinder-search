@@ -133,8 +133,6 @@ def results_json(request):
             return redirect(directive['target'])
         elif directive['action'] == 'render':
             results = directive.get('results',None)
-            print format_results([])
-#        return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
     else:
         return HttpResponse('{}', content_type="application/json")
