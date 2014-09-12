@@ -24,9 +24,20 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
 
+    def test_sample_postcode_bad_aol(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Sorry, there are no results', response.content)
+
     def test_partial_postcode(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+
+    def test_api_postcode(self):
+        c = Client()
+        response = c.get('/search/results.json?postcode=SE15+4UH&area_of_law=Bankruptcy')
         self.assertEqual(response.status_code, 200)
 
     def test_address_search(self):
