@@ -21,7 +21,10 @@ class CourtSearch:
         """, [lon, lat, lon, lat])
 
         if area_of_law.lower() != 'all':
-            aol = AreaOfLaw.objects.get(name=area_of_law)
+            try:
+                aol = AreaOfLaw.objects.get(name=area_of_law)
+            except AreaOfLaw.DoesNotExist:
+                return []
             return [r for r in results if aol in r.areas_of_law.all()][:10]
         else:
             return [r for r in results][:10]
