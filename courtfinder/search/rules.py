@@ -26,8 +26,7 @@ class Rules:
                              'by the Northern Ireland Courts and Tribunals Service.'
                     }
         else:
-            c = CourtSearch()
             return {
                 'action': 'render',
-                'results': c.postcode_search(postcode, area_of_law)
+                'results': CourtSearch.postcode_search(postcode, area_of_law)
             }
