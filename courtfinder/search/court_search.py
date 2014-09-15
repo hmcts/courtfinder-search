@@ -8,7 +8,42 @@ from search.models import Court, AreaOfLaw, CourtAddress
 class CourtSearch:
 
     @staticmethod
+    def search( postcode=None, area_of_law=None, name=None ):
+        if (area_of_law is not None and postcode is None) or (postcode is not None and area_of_law is None):
+            raise
+
+    # if area_of_law.type_possession? || area_of_law.type_money_claims?
+    #   courts = Court.visible.by_postcode_court_mapping(@query)
+    # elsif area_of_law.type_bankruptcy?
+    #   #For Bankruptcy, we do an additional check that the postcode matched court also has Bankruptcy listed as an area of law
+    #   courts = Court.visible.by_postcode_court_mapping(@query, @options[:area_of_law])
+    # elsif area_of_law.type_children? || area_of_law.type_adoption? || area_of_law.type_divorce?
+    #   courts = Court.by_area_of_law(@options[:area_of_law]).for_council_and_area_of_law(lookup_council_name, area_of_law)
+    # end
+
+        if area_of_law is not None:
+            if area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
+                CourtSearch.postcode_search(postcode, area_of_law)
+            elif area_of_law in ['Children', 'Adoption', 'Divorce' ]:
+                CourtSearch.local_authority_search(postcode, area_of_law) 
+
+
+        if name is not None:
+            CourtSearch.address_search(name)
+
+
+    @staticmethod
+    def local_authority_search( postcode, area_of_law ):
+        pass
+
+
+    @staticmethod
     def postcode_search( postcode, area_of_law ):
+        pass
+
+
+    @staticmethod
+    def proximity_search( postcode, area_of_law ):
         try:
             lat, lon = CourtSearch.postcode_to_latlon( postcode )
         except:
@@ -46,6 +81,26 @@ class CourtSearch:
                 return (data['wgs84_lat'], data['wgs84_lon'])
             else:
                 raise
+        else:
+            raise
+
+    @staticmethod
+    def postcode_to_local_authority( postcode ):
+        p = postcode.lower().replace(' ', '')
+        if len(postcode) > 4:
+            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
+        else:
+            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
+
+        r = requests.get(mapit_url)
+        if r.status_code == 200:
+            data = json.loads(r.text)
+
+            if !('shortcuts' in data) or !('council' in data['shortcuts']):
+                raise
+
+            council_id = data['shortcuts']['council']
+            return data['areas'][council_id]['name']
         else:
             raise
 

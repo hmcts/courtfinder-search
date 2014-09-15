@@ -27,6 +27,9 @@ def populate_database(apps, schema_editor):
   Town = apps.get_model('search', 'Town')
   ContactType = apps.get_model('search', 'ContactType')
   CourtContact = apps.get_model('search', 'CourtContact')
+  CourtPostcodes = apps.get_model('search', 'CourtPostcodes')
+  LocalAuthority = apps.get_model('search', 'LocalAuthority')
+  CourtLocalAuthorityAreaOfLaw = apps.get_model('search', 'CourtLocalAuthorityAreaOfLaw')
 
 
   data_dir = join(settings.PROJECT_ROOT, 'data')
@@ -70,13 +73,28 @@ def populate_database(apps, schema_editor):
 
     court.save()
 
-    for aol_name in court_obj['areas_of_law']:
+    for aol_obj in court_obj['areas_of_law']:
+      aol_name = aol_obj['name']
+      aol_councils = aol_obj['councils']
+
       try:
         aol = AreaOfLaw.objects.get(name=aol_name)
       except ObjectDoesNotExist:
         aol = AreaOfLaw.objects.create(name=aol_name)
 
       CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
+
+      for council_name in aol_councils:
+        try:
+          council = LocalAuthority.objects.get(name=council_name)
+        except ObjectDoesNotExist:
+          council = LocalAuthority.objects.create(name=council_name)
+
+        CourtLocalAuthorityAreaOfLaw.objects.create(
+          court=court,
+          area_of_law=aol,
+          local_authority=council
+        )
 
     for court_type_name in court_obj['court_types']:
       try:
@@ -112,6 +130,12 @@ def populate_database(apps, schema_editor):
         court=court,
         contact_type=contact_type,
         value=contact['number']
+      )
+
+    for postcode in court_obj['postcodes']:
+      CourtPostcodes.objects.create(
+        court=court,
+        postcode=postcode
       )
 
 
