@@ -1,7 +1,7 @@
 import psycopg2
 import json
 
-conn = psycopg2.connect("dbname='courtfinder_development' user='courtfinder' host='localhost'")
+conn = psycopg2.connect("dbname='courtfinder_production' user='courtfinder' host='localhost'")
 
 def courts():
     all_courts = []
@@ -219,7 +219,7 @@ def town_county_country():
 
 def write_to_json( filename, obj ):
     with open('../%s.json' % filename, 'w') as outfile:
-        json.dump(obj, outfile, indent=4)
+        json.dump(obj, outfile, indent=4, separators=(',', ': '))
         print "== ../%s.json written" % filename
         outfile.close()
 
