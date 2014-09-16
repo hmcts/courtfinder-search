@@ -133,3 +133,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     SITE_ROOT + '/assets',
 )
+
+# Postcode lookup
+MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'

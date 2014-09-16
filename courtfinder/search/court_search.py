@@ -2,7 +2,7 @@ import json
 import requests
 from itertools import chain
 from collections import OrderedDict
-
+from django.conf import settings
 from search.models import Court, AreaOfLaw, CourtAddress
 
 class CourtSearch:
@@ -13,14 +13,12 @@ class CourtSearch:
             lat, lon = CourtSearch.postcode_to_latlon( postcode )
         except:
             return []
-
         results = Court.objects.raw("""
             SELECT *,
                    round((point(c.lon, c.lat) <@> point(%s, %s))::numeric, 3) as distance
               FROM search_court as c
              ORDER BY (point(c.lon, c.lat) <-> point(%s, %s))
         """, [lon, lat, lon, lat])
-
         if area_of_law.lower() != 'all':
             try:
                 aol = AreaOfLaw.objects.get(name=area_of_law)
@@ -32,26 +30,27 @@ class CourtSearch:
 
 
     @staticmethod
-    def postcode_to_latlon( postcode ):
-        """Returns a tuple in the (lat, lon) format"""
-
-        p = postcode.lower().replace(' ', '')
-        if len(postcode) > 4:
-            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
-        else:
-            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
-
+    def get_from_mapit(mapit_url):
         r = requests.get(mapit_url)
         if r.status_code == 200:
-            data = json.loads(r.text)
-
-            if 'wgs84_lat' in data:
-                return (data['wgs84_lat'], data['wgs84_lon'])
-            else:
-                raise
+            return r.text
         else:
-            raise
+            raise Exception('Postcode lookup service error')
 
+    @staticmethod
+    def postcode_to_latlon(postcode):
+        """Returns a tuple in the (lat, lon) format"""
+        p = postcode.lower().replace(' ', '')
+        if len(postcode) > 4:
+            mapit_url = settings.MAPIT_BASE_URL + p
+        else:
+            mapit_url = settings.MAPIT_BASE_URL + 'partial/' + p
+        data = CourtSearch.get_from_mapit(mapit_url)
+        if 'wgs84_lat' in data:
+            json_data = json.loads(data)
+            return (json_data['wgs84_lat'], json_data['wgs84_lon'])
+        else:
+            raise Exception('Postcode lookup service didn\'t return wgs84 data')
 
     @staticmethod
     def address_search( query ):

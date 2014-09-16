@@ -1,4 +1,9 @@
 from django.test import TestCase, Client
+import requests
+from mock import MagicMock, patch
+from search.court_search import CourtSearch
+from django.conf import settings
+
 
 class SearchTestCase(TestCase):
 
@@ -44,3 +49,25 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?q=Leeds')
         self.assertEqual(response.status_code, 200)
+
+    def test_broken_postcode_latlon_mapping(self):
+        self.assertEqual(CourtSearch.postcode_search('Z', 'Money'), [])
+
+    def test_broken_mapit(self):
+        saved = settings.MAPIT_BASE_URL
+        settings.MAPIT_BASE_URL = 'http://broken.example.com/'
+        with self.assertRaises(requests.exceptions.ConnectionError):
+            CourtSearch.postcode_to_latlon('SE144UR')
+        settings.MAPIT_BASE_URL = saved
+
+    def test_mapit_doesnt_return_correct_data(self):
+        with patch('search.court_search.CourtSearch.get_from_mapit', MagicMock(return_value="garbage")):
+            with self.assertRaises(Exception):
+                CourtSearch.postcode_to_latlon('SE154UH')
+
+    def test_bad_aol_on_postcode_search(self):
+        self.assertEqual(CourtSearch.postcode_search('SE154UH', 'bad aol'), [])
+
+    def test_working_postcode_search(self):
+        self.assertNotEqual(CourtSearch.postcode_search('SE154UH', 'Money claims'), [])
+
