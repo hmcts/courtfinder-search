@@ -6,12 +6,7 @@ class Rules:
 
     @classmethod
     def for_postcode(self, postcode, area_of_law):
-        if postcode == '':
-            return {
-                'action': 'redirect',
-                'target': reverse('postcode-view') + '?postcode='
-            }
-        elif postcode[:2].lower() == 'bt':
+        if postcode[:2].lower() == 'bt':
             if area_of_law == 'Immigration':
                 return {
                     'action': 'render',

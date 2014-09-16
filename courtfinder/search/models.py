@@ -30,7 +30,7 @@ class CourtAttribute(models.Model):
     value = models.TextField()
 
     def __unicode__(self):
-        return "%s.%s = %s" % (self.court.name, self.attribute_type.name, value)
+        return "%s.%s = %s" % (self.court.name, self.attribute_type.name, self.value)
 
 
 class AreaOfLaw(models.Model):
@@ -45,7 +45,7 @@ class CourtAreasOfLaw(models.Model):
     area_of_law = models.ForeignKey(AreaOfLaw)
 
     def __unicode__(self):
-        return "%s deals with %s" % (court.name, area_of_law.name) 
+        return "%s deals with %s" % (self.court.name, self.area_of_law.name)
 
 
 class Town(models.Model):

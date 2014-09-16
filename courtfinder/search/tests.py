@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 import requests
 from mock import MagicMock, patch
 from search.court_search import CourtSearch
+from search.models import *
 from django.conf import settings
 
 
@@ -71,3 +72,55 @@ class SearchTestCase(TestCase):
     def test_working_postcode_search(self):
         self.assertNotEqual(CourtSearch.postcode_search('SE154UH', 'Money claims'), [])
 
+    def test_empty_postcode(self):
+        c = Client()
+        response = c.get('/search/results?postcode=')
+        self.assertEqual(response.status_code, 302)
+
+    def test_ni_immigration(self):
+        c = Client()
+        response = c.get('/search/results?postcode=bt2&area_of_law=Immigration')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Glasgow Tribunal Hearing Centre", response.content)
+
+    def test_ni(self):
+        c = Client()
+        response = c.get('/search/results?postcode=bt2&area_of_law=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("this tool does not return results for Northern Ireland", response.content)
+
+    def test_models_unicode(self):
+        c = Court.objects.get(name="Accrington Magistrates' Court")
+        self.assertEqual(str(c), "Accrington Magistrates' Court")
+        cat = CourtAttributeType.objects.create(name="cat")
+        self.assertEqual(str(cat), "cat")
+        ca = CourtAttribute.objects.create(court=c, attribute_type=cat, value="cav")
+        self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
+        aol = AreaOfLaw.objects.create(name="some area of law")
+        self.assertEqual(str(aol), "some area of law")
+        caol = CourtAreasOfLaw.objects.create(court=c, area_of_law=aol)
+        self.assertEqual(str(caol), "Accrington Magistrates' Court deals with some area of law")
+        country = Country.objects.get(name="England")
+        self.assertEqual(str(country), "England")
+        county = County.objects.create(name="some county", country=country)
+        self.assertEqual(str(county), "some county")
+        town = Town.objects.create(name="some town", county=county)
+        self.assertEqual(str(town), "some town")
+        address_type = AddressType.objects.create(name="some address type")
+        self.assertEqual(str(address_type), "some address type")
+        court_address = CourtAddress.objects.create(
+            address_type=address_type,
+            court=c,
+            address="some address",
+            postcode="some postcode",
+            town=town
+        )
+        self.assertEqual(str(court_address), "some address type for Accrington Magistrates' Court is some address, some postcode, some town")
+        contact_type = ContactType.objects.create(name="some contact type")
+        self.assertEqual(str(contact_type), "some contact type")
+        court_type = CourtType.objects.get(name="County Court")
+        self.assertEqual(str(court_type), "County Court")
+        court_contact = CourtContact.objects.create(contact_type=contact_type, court=c, value="some value")
+        self.assertEqual(str(court_contact), "some contact type for Accrington Magistrates' Court is some value")
+        court_court_type = CourtCourtTypes.objects.create(court=c, court_type=court_type)
+        self.assertEqual(str(court_court_type), "Court type for Accrington Magistrates' Court is County Court")
