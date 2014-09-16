@@ -51,7 +51,7 @@ def format_results(results):
     for result in results:
         addresses = result.courtaddress_set.all()
         for a in addresses:
-            if a.address_type == 'Postal':
+            if a.address_type.name == 'Postal':
                 address = a
                 break
         else:
@@ -120,9 +120,9 @@ def results_html(request):
                     'search_results': format_results(results) if results else None
                     })
         else:
-            return redirect('/search')
+            return redirect('/search/')
     else:
-        return redirect('/search')
+        return redirect('/search/')
 
 def results_json(request):
     if 'postcode' in request.GET and 'area_of_law' in request.GET:

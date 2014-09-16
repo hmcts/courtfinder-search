@@ -13,6 +13,39 @@ class SearchTestCase(TestCase):
         response = c.get('/search')
         self.assertRedirects(response, '/search/', 301)
 
+    def test_search_type(self):
+        c = Client()
+        response = c.get('/search/type?type=postcode')
+        self.assertRedirects(response, '/search/postcode', 302)
+
+    def test_search_address(self):
+        c = Client()
+        response = c.get('/search/type?type=address')
+        self.assertRedirects(response, '/search/address', 302)
+
+    def test_search_list(self):
+        c = Client()
+        response = c.get('/search/type?type=list', follow=True)
+        self.assertEqual(response.redirect_chain, [
+            ('http://testserver/search/list', 302),
+            ('https://courttribunalfinder.service.gov.uk/courts', 302)
+        ])
+
+    def test_format_results_with_postal_address(self):
+        c = Client()
+        response = c.get('/search/results?q=Accrington')
+        self.assertIn("Northgate", response.content)
+
+    def test_results_no_query(self):
+        c = Client()
+        response = c.get('/search/results?q=')
+        self.assertRedirects(response, '/search/address?error=1', 302)
+
+    def test_results_postcode_aol_not_selected(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE144EE&area_of_law=unselected')
+        self.assertRedirects(response, '/search/postcode?postcode=SE144EE&area_of_law=', 302)
+
     def test_top_page_returns_correct_content(self):
         c = Client()
         response = c.get('/search/')
@@ -40,6 +73,35 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE15&area_of_law=All')
         self.assertEqual(response.status_code, 200)
+
+    def test_unknown_directive_action(self):
+        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'blah2389'})):
+            c = Client()
+            response = c.get('/search/results?postcode=SE15')
+            self.assertRedirects(response, '/search/', 302)
+
+    def test_redirect_directive_action(self):
+        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
+            c = Client()
+            response = c.get('/search/results?postcode=SE15')
+            self.assertRedirects(response, 'http://www.example.org', 302)
+
+    def test_redirect_directive_action_json(self):
+        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
+            c = Client()
+            response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
+            self.assertRedirects(response, 'http://www.example.org', 302)
+
+    def test_no_aol_json(self):
+        c = Client()
+        response = c.get('/search/results.json?postcode=SE15')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('{}', response.content)
+
+    def test_search_no_postcode_nor_q(self):
+        c = Client()
+        response = c.get('/search/results')
+        self.assertRedirects(response, '/search/', 302)
 
     def test_api_postcode(self):
         c = Client()
