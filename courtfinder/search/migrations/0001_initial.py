@@ -66,11 +66,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
-                ('number', models.IntegerField(null=True)),
                 ('slug', models.SlugField(max_length=255)),
                 ('displayed', models.BooleanField(default=False)),
                 ('lat', models.FloatField()),
                 ('lon', models.FloatField()),
+                ('number', models.IntegerField(null=True)),
             ],
             options={
             },
@@ -178,6 +178,28 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='CourtLocalAuthorityAreaOfLaw',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw')),
+                ('court', models.ForeignKey(to='search.Court')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CourtPostcodes',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('postcode', models.CharField(max_length=250)),
+                ('court', models.ForeignKey(to='search.Court')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='CourtType',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -197,6 +219,22 @@ class Migration(migrations.Migration):
             model_name='court',
             name='court_types',
             field=models.ManyToManyField(to='search.CourtType', null=True, through='search.CourtCourtTypes'),
+            preserve_default=True,
+        ),
+        migrations.CreateModel(
+            name='LocalAuthority',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.TextField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='courtlocalauthorityareaoflaw',
+            name='local_authority',
+            field=models.ForeignKey(to='search.LocalAuthority'),
             preserve_default=True,
         ),
         migrations.CreateModel(

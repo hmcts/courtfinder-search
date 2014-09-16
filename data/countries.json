@@ -647,15 +647,15 @@
             },
             {
                 "towns": [
-                    "Glasgow"
-                ],
-                "name": "Glasgow"
-            },
-            {
-                "towns": [
                     "Dundee"
                 ],
                 "name": "Angus"
+            },
+            {
+                "towns": [
+                    "Glasgow"
+                ],
+                "name": "Glasgow"
             }
         ]
     },
