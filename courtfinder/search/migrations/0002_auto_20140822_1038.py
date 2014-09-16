@@ -77,18 +77,12 @@ def populate_database(apps, schema_editor):
       aol_name = aol_obj['name']
       aol_councils = aol_obj['councils']
 
-      try:
-        aol = AreaOfLaw.objects.get(name=aol_name)
-      except ObjectDoesNotExist:
-        aol = AreaOfLaw.objects.create(name=aol_name)
+      aol, created = AreaOfLaw.objects.get_or_create(name=aol_name)
 
       CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
 
       for council_name in aol_councils:
-        try:
-          council = LocalAuthority.objects.get(name=council_name)
-        except ObjectDoesNotExist:
-          council = LocalAuthority.objects.create(name=council_name)
+        council, created = LocalAuthority.objects.get_or_create(name=council_name)
 
         CourtLocalAuthorityAreaOfLaw.objects.create(
           court=court,
@@ -97,18 +91,12 @@ def populate_database(apps, schema_editor):
         )
 
     for court_type_name in court_obj['court_types']:
-      try:
-        ct = CourtType.objects.get(name=court_type_name)
-      except ObjectDoesNotExist:
-        ct = CourtType.objects.create(name=court_type_name)
+      ct, created = CourtType.objects.get_or_create(name=court_type_name)
 
       CourtCourtTypes.objects.create(court=court, court_type=ct)
 
     for address in court_obj['addresses']:
-      try:
-        address_type = AddressType.objects.get(name=address['type'])
-      except ObjectDoesNotExist:
-        address_type = AddressType.objects.create(name=address['type'])
+      address_type, created = AddressType.objects.get_or_create(name=address['type'])
 
       town = Town.objects.get(name=address['town'])
 
@@ -121,10 +109,7 @@ def populate_database(apps, schema_editor):
       )
 
     for contact in court_obj['contacts']:
-      try:
-        contact_type = ContactType.objects.get(name=contact['type'])
-      except ObjectDoesNotExist:
-        contact_type = ContactType.objects.create(name=contact['type'])
+      contact_type, created = ContactType.objects.get_or_create(name=contact['type'])
 
       CourtContact.objects.create(
         court=court,
