@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 import requests
-from mock import MagicMock, patch
+from mock import Mock, patch
 from search.court_search import CourtSearch
 from search.models import *
 from django.conf import settings
@@ -75,19 +75,19 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_unknown_directive_action(self):
-        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'blah2389'})):
+        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
             c = Client()
             response = c.get('/search/results?postcode=SE15')
             self.assertRedirects(response, '/search/', 302)
 
     def test_redirect_directive_action(self):
-        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
+        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
             c = Client()
             response = c.get('/search/results?postcode=SE15')
             self.assertRedirects(response, 'http://www.example.org', 302)
 
     def test_redirect_directive_action_json(self):
-        with patch('search.rules.Rules.for_postcode', MagicMock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
+        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
             c = Client()
             response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
             self.assertRedirects(response, 'http://www.example.org', 302)
@@ -108,13 +108,32 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results.json?postcode=SE15+4UH&area_of_law=Bankruptcy')
         self.assertEqual(response.status_code, 200)
 
+    def test_postcode_to_local_authority_short_postcode(self):
+        self.assertEqual(CourtSearch.local_authority_search('SE15', 'Divorce'), [])
+
+    def test_mapit_returns_county_in_councils(self):
+        with patch('search.court_search.CourtSearch.get_from_mapit',
+                   Mock(return_value='{"shortcuts":{"council":{"county":"meh"}},"areas":{"meh":{"name":"some name"}}}')):
+            self.assertEqual(CourtSearch.postcode_to_local_authority('SE154EE', 'all'), "some name")
+
+    def test_bad_local_authority(self):
+        with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
+            self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
+
+    def test_broken_postcode_to_latlon(self):
+        with patch('search.court_search.CourtSearch.postcode_to_latlon', Mock(side_effect=Exception('something went wrong'))):
+            self.assertEqual(CourtSearch.proximity_search('SE154UH', 'Money claims'), [])
+
+    def test_proximity_search(self):
+        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Money claims'), [])
+
     def test_address_search(self):
         c = Client()
         response = c.get('/search/results?q=Leeds')
         self.assertEqual(response.status_code, 200)
 
     def test_broken_postcode_latlon_mapping(self):
-        self.assertEqual(CourtSearch.postcode_search('Z', 'Money'), [])
+        self.assertEqual(CourtSearch.postcode_search('Z'), [])
 
     def test_broken_mapit(self):
         saved = settings.MAPIT_BASE_URL
@@ -123,16 +142,17 @@ class SearchTestCase(TestCase):
             CourtSearch.postcode_to_latlon('SE144UR')
         settings.MAPIT_BASE_URL = saved
 
+    def test_broken_mapit_2(self):
+        with self.assertRaises(Exception):
+            CourtSearch.get_from_mapit("http://localhost/this_should_always_return_404")
+
     def test_mapit_doesnt_return_correct_data(self):
-        with patch('search.court_search.CourtSearch.get_from_mapit', MagicMock(return_value="garbage")):
+        with patch('search.court_search.CourtSearch.get_from_mapit', Mock(return_value="garbage")):
             with self.assertRaises(Exception):
                 CourtSearch.postcode_to_latlon('SE154UH')
 
-    def test_bad_aol_on_postcode_search(self):
-        self.assertEqual(CourtSearch.postcode_search('SE154UH', 'bad aol'), [])
-
-    def test_working_postcode_search(self):
-        self.assertNotEqual(CourtSearch.postcode_search('SE154UH', 'Money claims'), [])
+    def test_postcode_search(self):
+        self.assertNotEqual(CourtSearch.postcode_search('SE154UH'), [])
 
     def test_empty_postcode(self):
         c = Client()
@@ -150,6 +170,16 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=bt2&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
+
+    def test_court_postcodes(self):
+        c = Court.objects.get(name="Bedford County Court and Family Court")
+        self.assertEqual(len(c.postcodes_covered()), 97)
+
+    def test_court_local_authority_aol_covered(self):
+        c = Court.objects.get(name='Barnet Civil and Family Courts Centre')
+        aol = AreaOfLaw.objects.get(name='Children')
+        ca = CourtAreasOfLaw.objects.create(court=c, area_of_law=aol)
+        self.assertEqual(len(ca.local_authorities_covered()), 4)
 
     def test_models_unicode(self):
         c = Court.objects.get(name="Accrington Magistrates' Court")
@@ -186,3 +216,11 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(court_contact), "some contact type for Accrington Magistrates' Court is some value")
         court_court_type = CourtCourtTypes.objects.create(court=c, court_type=court_type)
         self.assertEqual(str(court_court_type), "Court type for Accrington Magistrates' Court is County Court")
+        court_postcodes = CourtPostcodes.objects.create(court=c, postcode='SW11AA')
+        self.assertEqual(str(court_postcodes), "Accrington Magistrates' Court covers SW11AA")
+        la = LocalAuthority.objects.create(name="some local authority")
+        self.assertEqual(str(la), "some local authority")
+        claaol = CourtLocalAuthorityAreaOfLaw.objects.create(
+            court=c, area_of_law=aol, local_authority=la
+        )
+        self.assertEqual(str(claaol), "Accrington Magistrates' Court covers some local authority for some area of law")
