@@ -3,12 +3,58 @@ import requests
 from itertools import chain
 from collections import OrderedDict
 from django.conf import settings
-from search.models import Court, AreaOfLaw, CourtAddress
+from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcodes
 
 class CourtSearch:
 
     @staticmethod
+    def search( postcode=None, area_of_law=None, name=None ):
+        if (area_of_law is not None and postcode is None) or (postcode is not None and area_of_law is None):
+            raise
+
+        if area_of_law is not None:
+            if area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
+                results = CourtSearch.postcode_search(postcode, area_of_law)
+                if len(results) > 0:
+                    return results
+                else:
+                    return CourtSearch.proximity_search(postcode, area_of_law)
+            elif area_of_law in ['Children', 'Adoption', 'Divorce' ]:
+                results = CourtSearch.local_authority_search(postcode, area_of_law) 
+                if len(results) > 0:
+                    return results
+                else:
+                    return CourtSearch.proximity_search(postcode, area_of_law)
+
+
+        if name is not None:
+            return CourtSearch.address_search(name)
+
+
+    @staticmethod
+    def local_authority_search( postcode, area_of_law ):
+        la_name = postcode_to_local_authority(postcode)
+        try:
+            la = LocalAuthority.objects.get(name=la_name)
+        except LocalAuthority.DoesNotExist:
+            return []
+
+        aol = AreaOfLaw.objects.get(name=area_of_law)
+        covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=aol, local_authority=la)
+
+        return [c.court for c in covered]
+
+
+    @staticmethod
     def postcode_search( postcode, area_of_law ):
+        p = postcode.lower().replace(' ', '')
+        results = CourtPostcodes.objects.filter(postcode__iexact=p)
+
+        return [c.court for c in results]
+
+
+    @staticmethod
+    def proximity_search( postcode, area_of_law ):
         try:
             lat, lon = CourtSearch.postcode_to_latlon( postcode )
         except:
@@ -51,6 +97,30 @@ class CourtSearch:
             return (json_data['wgs84_lat'], json_data['wgs84_lon'])
         else:
             raise Exception('Postcode lookup service didn\'t return wgs84 data')
+
+    @staticmethod
+    def postcode_to_local_authority( postcode ):
+        p = postcode.lower().replace(' ', '')
+        if len(postcode) > 4:
+            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
+        else:
+            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
+
+        r = requests.get(mapit_url)
+        if r.status_code == 200:
+            data = json.loads(r.text)
+
+            if ('shortcuts' not in data) or ('council' not in data['shortcuts']):
+                raise
+
+            if type(data['shortcuts']['council']) == type({}):
+                council_id = str(data['shortcuts']['council']['county'])
+            else:
+                council_id = str(data['shortcuts']['council'])
+
+            return data['areas'][council_id]['name']
+        else:
+            raise
 
     @staticmethod
     def address_search( query ):

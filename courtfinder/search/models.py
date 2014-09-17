@@ -12,6 +12,9 @@ class Court(models.Model):
     addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)
     court_types = models.ManyToManyField('CourtType', through='CourtCourtTypes', null=True)
 
+    def postcodes_covered(self):
+        return CourtPostcodes.objects.filter(court=self)
+
     def __unicode__(self):
         return self.name
 
@@ -33,6 +36,14 @@ class CourtAttribute(models.Model):
         return "%s.%s = %s" % (self.court.name, self.attribute_type.name, self.value)
 
 
+class CourtPostcodes(models.Model):
+    court = models.ForeignKey(Court)
+    postcode = models.CharField(max_length=250)
+
+    def __unicode__(self):
+        return "%s covers %s" % (self.court.name, self.postcode)
+
+
 class AreaOfLaw(models.Model):
     name = models.CharField(max_length=255)
 
@@ -40,9 +51,31 @@ class AreaOfLaw(models.Model):
         return self.name
 
 
+class LocalAuthority(models.Model):
+    name = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class CourtLocalAuthorityAreaOfLaw(models.Model):
+    court = models.ForeignKey(Court)
+    area_of_law = models.ForeignKey(AreaOfLaw)
+    local_authority = models.ForeignKey(LocalAuthority)
+
+    def __unicode__(self):
+        return "%s covers %s for %s" % (self.court.name, self.local_authority.name, self.area_of_law.name)
+
+
 class CourtAreasOfLaw(models.Model):
     court = models.ForeignKey(Court)
     area_of_law = models.ForeignKey(AreaOfLaw)
+
+    def local_authorities_covered(self):
+        return CourtLocalAuthorityAreaOfLaw.objects.filter(
+            court=self.court,
+            area_of_law=self.area_of_law
+        )
 
     def __unicode__(self):
         return "%s deals with %s" % (self.court.name, self.area_of_law.name)
