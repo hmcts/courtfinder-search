@@ -10,7 +10,7 @@ class Rules:
             if area_of_law == 'Immigration':
                 return {
                     'action': 'render',
-                    'results': Court.objects.filter(name='Glasgow Tribunal Hearing Centre')
+                    'results': Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
                 }
             else:
                 return {
@@ -20,8 +20,18 @@ class Rules:
                              'Other courts and tribunals in Northern Ireland are handled'
                              'by the Northern Ireland Courts and Tribunals Service.'
                     }
-        else:
+        elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
             return {
                 'action': 'render',
                 'results': CourtSearch.postcode_search(postcode, area_of_law)
+            }
+        elif area_of_law in ['Children', 'Adoption', 'Divorce']:
+            return {
+                'action': 'render',
+                'results': CourtSearch.local_authority_search(postcode, area_of_law)
+            }
+        else:
+            return {
+                'action': 'render',
+                'results': CourtSearch.proximity_search(postcode, area_of_law)
             }

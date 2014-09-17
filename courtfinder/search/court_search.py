@@ -8,32 +8,8 @@ from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtL
 class CourtSearch:
 
     @staticmethod
-    def search( postcode=None, area_of_law=None, name=None ):
-        if (area_of_law is not None and postcode is None) or (postcode is not None and area_of_law is None):
-            raise
-
-        if area_of_law is not None:
-            if area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-                results = CourtSearch.postcode_search(postcode, area_of_law)
-                if len(results) > 0:
-                    return results
-                else:
-                    return CourtSearch.proximity_search(postcode, area_of_law)
-            elif area_of_law in ['Children', 'Adoption', 'Divorce' ]:
-                results = CourtSearch.local_authority_search(postcode, area_of_law) 
-                if len(results) > 0:
-                    return results
-                else:
-                    return CourtSearch.proximity_search(postcode, area_of_law)
-
-
-        if name is not None:
-            return CourtSearch.address_search(name)
-
-
-    @staticmethod
     def local_authority_search( postcode, area_of_law ):
-        la_name = postcode_to_local_authority(postcode)
+        la_name = CourtSearch.postcode_to_local_authority(postcode)
         try:
             la = LocalAuthority.objects.get(name=la_name)
         except LocalAuthority.DoesNotExist:
@@ -48,7 +24,7 @@ class CourtSearch:
     @staticmethod
     def postcode_search( postcode, area_of_law ):
         p = postcode.lower().replace(' ', '')
-        results = CourtPostcodes.objects.filter(postcode__iexact=p)
+        results = CourtPostcodes.objects.filter(postcode__icontains=p)
 
         return [c.court for c in results]
 
