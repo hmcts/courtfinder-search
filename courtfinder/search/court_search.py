@@ -24,8 +24,7 @@ class CourtSearch:
     @staticmethod
     def postcode_search( postcode, area_of_law ):
         p = postcode.lower().replace(' ', '')
-        print "SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL AND 'se154pe' LIKE lower(postcode) || '%')"
-        results = CourtPostcodes.objects.raw("SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL and '%s' like lower(postcode) || '%%')" % p)
+        results = CourtPostcodes.objects.raw("SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%')", [p])
         return [c.court for c in results]
 
 
