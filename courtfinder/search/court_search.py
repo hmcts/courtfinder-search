@@ -15,7 +15,11 @@ class CourtSearch:
         except Exception:
             return []
 
-        aol = AreaOfLaw.objects.get(name=area_of_law)
+        try:
+            aol = AreaOfLaw.objects.get(name=area_of_law)
+        except AreaOfLaw.DoesNotExist:
+            return []
+
         covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=aol, local_authority=la)
 
         return [c.court for c in covered]
