@@ -49,7 +49,9 @@ def format_results(results):
     """
     courts=[]
     for result in results:
+        print result.name
         addresses = result.courtaddress_set.all()
+        print result.courtaddress_set.all()
         for a in addresses:
             if a.address_type.name == 'Postal':
                 address = a
