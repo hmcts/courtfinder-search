@@ -25,13 +25,13 @@ class SearchTestCase(TestCase):
             postcode='CF34RR',
             town=self.town,
         )
-        self.area_of_law = AreaOfLaw.objects.create(name="crimes")
+        self.area_of_law = AreaOfLaw.objects.create(name="Divorce")
         self.court_areas_of_law = CourtAreasOfLaw.objects.create(
             court=self.court,
             area_of_law=self.area_of_law,
         )
         self.court_postcodes = CourtPostcodes.objects.create(court=self.court, postcode='CF335EE')
-        self.local_authority = LocalAuthority.objects.create(name='Meh council')
+        self.local_authority = LocalAuthority.objects.create(name='Southwark Borough Council')
         self.court_local_authority_area_of_law = CourtLocalAuthorityAreaOfLaw(
             court=self.court,
             area_of_law=self.area_of_law,
@@ -172,7 +172,7 @@ class SearchTestCase(TestCase):
             self.assertEqual(CourtSearch.proximity_search('SE154UH', 'Money claims'), [])
 
     def test_proximity_search(self):
-        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'crimes'), [])
+        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Divorce'), [])
 
     def test_address_search(self):
         c = Client()
@@ -233,8 +233,8 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(self.court), "Example Court")
         self.assertEqual(str(self.court_attribute_type), "cat")
         self.assertEqual(str(self.court_attribute), "Example Court.cat = cav")
-        self.assertEqual(str(self.area_of_law), "crimes")
-        self.assertEqual(str(self.court_areas_of_law), "Example Court deals with crimes")
+        self.assertEqual(str(self.area_of_law), "Divorce")
+        self.assertEqual(str(self.court_areas_of_law), "Example Court deals with Divorce")
         self.assertEqual(str(self.country), "Wales")
         self.assertEqual(str(self.county), "Shire")
         self.assertEqual(str(self.town), "Hobbittown")
@@ -245,5 +245,5 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(self.court_contact), "email for Example Court is a@b.com")
         self.assertEqual(str(self.court_court_type), "Court type for Example Court is crown court")
         self.assertEqual(str(self.court_postcodes), "Example Court covers CF335EE")
-        self.assertEqual(str(self.local_authority), "Meh council")
-        self.assertEqual(str(self.court_local_authority_area_of_law), "Example Court covers Meh council for crimes")
+        self.assertEqual(str(self.local_authority), "Southwark Borough Council")
+        self.assertEqual(str(self.court_local_authority_area_of_law), "Example Court covers Southwark Borough Council for Divorce")
