@@ -1,7 +1,7 @@
 import psycopg2
 import json
 
-conn = psycopg2.connect("dbname='courtfinder_production' user='courtfinder' host='localhost'")
+conn = psycopg2.connect("dbname='courtfinder_development' user='courtfinder' host='localhost'")
 
 def courts():
     all_courts = []
@@ -157,7 +157,6 @@ def addresses_for_court( slug ):
         "postcode": row[6],
         "town": row[0],
     } for row in cur.fetchall()]
-
     return addresses
 
 

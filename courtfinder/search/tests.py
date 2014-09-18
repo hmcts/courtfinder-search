@@ -8,6 +8,53 @@ from django.conf import settings
 
 class SearchTestCase(TestCase):
 
+    def setUp(self):
+        self.court = Court.objects.create(
+            name="Example Court",
+            lat=0.0,
+            lon=0.0,
+        )
+        self.address_type = AddressType.objects.create(name='Postal')
+        self.country = Country.objects.create(name='Wales')
+        self.county = County.objects.create(name='Shire', country=self.country)
+        self.town = Town.objects.create(name='Hobbittown', county=self.county)
+        self.court_address = CourtAddress.objects.create(
+            address_type=self.address_type,
+            court=self.court,
+            address='The court address',
+            postcode='CF34RR',
+            town=self.town,
+        )
+        self.area_of_law = AreaOfLaw.objects.create(name="crimes")
+        self.court_areas_of_law = CourtAreasOfLaw.objects.create(
+            court=self.court,
+            area_of_law=self.area_of_law,
+        )
+        self.court_postcodes = CourtPostcodes.objects.create(court=self.court, postcode='CF335EE')
+        self.local_authority = LocalAuthority.objects.create(name='Meh council')
+        self.court_local_authority_area_of_law = CourtLocalAuthorityAreaOfLaw(
+            court=self.court,
+            area_of_law=self.area_of_law,
+            local_authority=self.local_authority,
+        )
+        self.court_attribute_type = CourtAttributeType.objects.create(name="cat")
+        self.court_attribute = CourtAttribute.objects.create(
+            court=self.court,
+            attribute_type=self.court_attribute_type,
+            value="cav"
+        )
+        self.contact_type = ContactType.objects.create(name="email")
+        self.court_type = CourtType.objects.create(name="crown court")
+        self.court_court_type = CourtCourtTypes(
+            court=self.court,
+            court_type=self.court_type,
+        )
+        self.court_contact = CourtContact.objects.create(
+            contact_type=self.contact_type,
+            court=self.court,
+            value="a@b.com"
+        )
+
     def test_top_page_sans_slash_redirects_to_slash(self):
         c = Client()
         response = c.get('/search')
@@ -33,8 +80,8 @@ class SearchTestCase(TestCase):
 
     def test_format_results_with_postal_address(self):
         c = Client()
-        response = c.get('/search/results?q=Accrington')
-        self.assertIn("Northgate", response.content)
+        response = c.get('/search/results?q=Example')
+        self.assertIn("Hobbittown", response.content)
 
     def test_results_no_query(self):
         c = Client()
@@ -125,7 +172,7 @@ class SearchTestCase(TestCase):
             self.assertEqual(CourtSearch.proximity_search('SE154UH', 'Money claims'), [])
 
     def test_proximity_search(self):
-        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Money claims'), [])
+        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'crimes'), [])
 
     def test_address_search(self):
         c = Client()
@@ -152,7 +199,7 @@ class SearchTestCase(TestCase):
                 CourtSearch.postcode_to_latlon('SE154UH')
 
     def test_postcode_search(self):
-        self.assertNotEqual(CourtSearch.postcode_search('SE154UH', 'all'), [])
+        self.assertNotEqual(CourtSearch.postcode_search('CF335EE', 'all'), [])
 
     def test_empty_postcode(self):
         c = Client()
@@ -160,6 +207,11 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_ni_immigration(self):
+        glasgow = Court.objects.create(
+            name="Glasgow Tribunal Hearing Centre",
+            lat=0.0,
+            lon=0.0,
+        )
         c = Client()
         response = c.get('/search/results?postcode=bt2&area_of_law=Immigration')
         self.assertEqual(response.status_code, 200)
@@ -172,55 +224,26 @@ class SearchTestCase(TestCase):
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
-        c = Court.objects.get(name="Bedford County Court and Family Court")
-        self.assertEqual(len(c.postcodes_covered()), 97)
+        self.assertEqual(len(self.court.postcodes_covered()), 1)
 
     def test_court_local_authority_aol_covered(self):
-        c = Court.objects.get(name='Barnet Civil and Family Courts Centre')
-        aol = AreaOfLaw.objects.get(name='Children')
-        ca = CourtAreasOfLaw.objects.create(court=c, area_of_law=aol)
-        self.assertEqual(len(ca.local_authorities_covered()), 4)
+        self.assertEqual(len(self.court_areas_of_law.local_authorities_covered()), 0)
 
     def test_models_unicode(self):
-        c = Court.objects.get(name="Accrington Magistrates' Court")
-        self.assertEqual(str(c), "Accrington Magistrates' Court")
-        cat = CourtAttributeType.objects.create(name="cat")
-        self.assertEqual(str(cat), "cat")
-        ca = CourtAttribute.objects.create(court=c, attribute_type=cat, value="cav")
-        self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
-        aol = AreaOfLaw.objects.create(name="some area of law")
-        self.assertEqual(str(aol), "some area of law")
-        caol = CourtAreasOfLaw.objects.create(court=c, area_of_law=aol)
-        self.assertEqual(str(caol), "Accrington Magistrates' Court deals with some area of law")
-        country = Country.objects.get(name="England")
-        self.assertEqual(str(country), "England")
-        county = County.objects.create(name="some county", country=country)
-        self.assertEqual(str(county), "some county")
-        town = Town.objects.create(name="some town", county=county)
-        self.assertEqual(str(town), "some town")
-        address_type = AddressType.objects.create(name="some address type")
-        self.assertEqual(str(address_type), "some address type")
-        court_address = CourtAddress.objects.create(
-            address_type=address_type,
-            court=c,
-            address="some address",
-            postcode="some postcode",
-            town=town
-        )
-        self.assertEqual(str(court_address), "some address type for Accrington Magistrates' Court is some address, some postcode, some town")
-        contact_type = ContactType.objects.create(name="some contact type")
-        self.assertEqual(str(contact_type), "some contact type")
-        court_type = CourtType.objects.get(name="County Court")
-        self.assertEqual(str(court_type), "County Court")
-        court_contact = CourtContact.objects.create(contact_type=contact_type, court=c, value="some value")
-        self.assertEqual(str(court_contact), "some contact type for Accrington Magistrates' Court is some value")
-        court_court_type = CourtCourtTypes.objects.create(court=c, court_type=court_type)
-        self.assertEqual(str(court_court_type), "Court type for Accrington Magistrates' Court is County Court")
-        court_postcodes = CourtPostcodes.objects.create(court=c, postcode='SW11AA')
-        self.assertEqual(str(court_postcodes), "Accrington Magistrates' Court covers SW11AA")
-        la = LocalAuthority.objects.create(name="some local authority")
-        self.assertEqual(str(la), "some local authority")
-        claaol = CourtLocalAuthorityAreaOfLaw.objects.create(
-            court=c, area_of_law=aol, local_authority=la
-        )
-        self.assertEqual(str(claaol), "Accrington Magistrates' Court covers some local authority for some area of law")
+        self.assertEqual(str(self.court), "Example Court")
+        self.assertEqual(str(self.court_attribute_type), "cat")
+        self.assertEqual(str(self.court_attribute), "Example Court.cat = cav")
+        self.assertEqual(str(self.area_of_law), "crimes")
+        self.assertEqual(str(self.court_areas_of_law), "Example Court deals with crimes")
+        self.assertEqual(str(self.country), "Wales")
+        self.assertEqual(str(self.county), "Shire")
+        self.assertEqual(str(self.town), "Hobbittown")
+        self.assertEqual(str(self.address_type), "Postal")
+        self.assertEqual(str(self.court_address), "Postal for Example Court is The court address, CF34RR, Hobbittown")
+        self.assertEqual(str(self.contact_type), "email")
+        self.assertEqual(str(self.court_type), "crown court")
+        self.assertEqual(str(self.court_contact), "email for Example Court is a@b.com")
+        self.assertEqual(str(self.court_court_type), "Court type for Example Court is crown court")
+        self.assertEqual(str(self.court_postcodes), "Example Court covers CF335EE")
+        self.assertEqual(str(self.local_authority), "Meh council")
+        self.assertEqual(str(self.court_local_authority_area_of_law), "Example Court covers Meh council for crimes")
