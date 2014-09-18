@@ -50,10 +50,10 @@ class CourtSearch:
             return []
         results = Court.objects.raw("""
             SELECT *,
-                   round((point(c.lon, c.lat) <@> point(%s, %s))::numeric, 3) as distance
+                   (point(c.lon, c.lat) <@> point(%s, %s)) as distance
               FROM search_court as c
-             ORDER BY (point(c.lon, c.lat) <-> point(%s, %s))
-        """, [lon, lat, lon, lat])
+             ORDER BY distance
+        """, [lon, lat])
         if area_of_law.lower() != 'all':
             try:
                 aol = AreaOfLaw.objects.get(name=area_of_law)

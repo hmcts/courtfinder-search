@@ -81,7 +81,7 @@ def format_results(results):
             court['dx_number'] = dx_contact.first().value
 
         if hasattr(result, 'distance'):
-            court['distance'] = result.distance
+            court['distance'] = round(result.distance, 2)
 
         courts.append(court)
     return courts
