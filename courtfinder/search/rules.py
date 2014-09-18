@@ -6,16 +6,11 @@ class Rules:
 
     @classmethod
     def for_postcode(self, postcode, area_of_law):
-        if postcode == '':
-            return {
-                'action': 'redirect',
-                'target': reverse('postcode-view') + '?postcode='
-            }
-        elif postcode[:2].lower() == 'bt':
+        if postcode[:2].lower() == 'bt':
             if area_of_law == 'Immigration':
                 return {
                     'action': 'render',
-                    'results': Court.objects.filter(name='Glasgow Tribunal Hearing Centre')
+                    'results': Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
                 }
             else:
                 return {
@@ -38,7 +33,7 @@ class Rules:
         elif area_of_law in ['Children', 'Adoption', 'Divorce']:
             return {
                 'action': 'render',
-                'results': CourtSearch.postcode_search(postcode, area_of_law)
+                'results': CourtSearch.local_authority_search(postcode, area_of_law)
             }
         else:
             return {

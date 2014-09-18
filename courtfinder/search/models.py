@@ -78,7 +78,7 @@ class CourtAreasOfLaw(models.Model):
         )
 
     def __unicode__(self):
-        return "%s deals with %s" % (self.court.name, self.area_of_law.name) 
+        return "%s deals with %s" % (self.court.name, self.area_of_law.name)
 
 
 class Town(models.Model):
