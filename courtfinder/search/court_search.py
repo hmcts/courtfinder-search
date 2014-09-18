@@ -36,7 +36,7 @@ class CourtSearch:
         return result
 
     @staticmethod
-    def postcode_search(postcode):
+    def postcode_search(postcode, area_of_law):
         p = postcode.lower().replace(' ', '')
         results = CourtPostcodes.objects.raw("SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
         return CourtSearch.dedupe([c.court for c in results])

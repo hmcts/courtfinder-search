@@ -133,7 +133,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_broken_postcode_latlon_mapping(self):
-        self.assertEqual(CourtSearch.postcode_search('Z'), [])
+        self.assertEqual(CourtSearch.postcode_search('Z', 'all'), [])
 
     def test_broken_mapit(self):
         saved = settings.MAPIT_BASE_URL
@@ -152,7 +152,7 @@ class SearchTestCase(TestCase):
                 CourtSearch.postcode_to_latlon('SE154UH')
 
     def test_postcode_search(self):
-        self.assertNotEqual(CourtSearch.postcode_search('SE154UH'), [])
+        self.assertNotEqual(CourtSearch.postcode_search('SE154UH', 'all'), [])
 
     def test_empty_postcode(self):
         c = Client()
