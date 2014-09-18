@@ -2,41 +2,17 @@ import json
 import requests
 from itertools import chain
 from collections import OrderedDict
-
+from django.conf import settings
 from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcodes
 
 class CourtSearch:
 
     @staticmethod
-    def search( postcode=None, area_of_law=None, name=None ):
-        if (area_of_law is not None and postcode is None) or (postcode is not None and area_of_law is None):
-            raise
-
-        if area_of_law is not None:
-            if area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-                results = CourtSearch.postcode_search(postcode, area_of_law)
-                if len(results) > 0:
-                    return results
-                else:
-                    return CourtSearch.proximity_search(postcode, area_of_law)
-            elif area_of_law in ['Children', 'Adoption', 'Divorce' ]:
-                results = CourtSearch.local_authority_search(postcode, area_of_law) 
-                if len(results) > 0:
-                    return results
-                else:
-                    return CourtSearch.proximity_search(postcode, area_of_law)
-
-
-        if name is not None:
-            return CourtSearch.address_search(name)
-
-
-    @staticmethod
     def local_authority_search( postcode, area_of_law ):
-        la_name = postcode_to_local_authority(postcode)
         try:
+            la_name = CourtSearch.postcode_to_local_authority(postcode, area_of_law)
             la = LocalAuthority.objects.get(name=la_name)
-        except LocalAuthority.DoesNotExist:
+        except Exception:
             return []
 
         aol = AreaOfLaw.objects.get(name=area_of_law)
@@ -44,13 +20,26 @@ class CourtSearch:
 
         return [c.court for c in covered]
 
+    @staticmethod
+    def dedupe(seq):
+        """
+        remove duplicates from a sequence. Used below for removing dupes in result sets
+        From: http://www.peterbe.com/plog/uniqifiers-benchmark
+        """
+        seen = {}
+        result = []
+        for item in seq:
+            marker = item
+            if marker in seen: continue
+            seen[marker] = 1
+            result.append(item)
+        return result
 
     @staticmethod
-    def postcode_search( postcode, area_of_law ):
+    def postcode_search(postcode):
         p = postcode.lower().replace(' ', '')
-        results = CourtPostcodes.objects.filter(postcode__iexact=p)
-
-        return [c.court for c in results]
+        results = CourtPostcodes.objects.raw("SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
+        return CourtSearch.dedupe([c.court for c in results])
 
 
     @staticmethod
@@ -59,66 +48,61 @@ class CourtSearch:
             lat, lon = CourtSearch.postcode_to_latlon( postcode )
         except:
             return []
-
         results = Court.objects.raw("""
             SELECT *,
                    round((point(c.lon, c.lat) <@> point(%s, %s))::numeric, 3) as distance
               FROM search_court as c
              ORDER BY (point(c.lon, c.lat) <-> point(%s, %s))
         """, [lon, lat, lon, lat])
-
         if area_of_law.lower() != 'all':
-            aol = AreaOfLaw.objects.get(name=area_of_law)
+            try:
+                aol = AreaOfLaw.objects.get(name=area_of_law)
+            except AreaOfLaw.DoesNotExist:
+                return []
             return [r for r in results if aol in r.areas_of_law.all()][:10]
         else:
             return [r for r in results][:10]
 
 
     @staticmethod
-    def postcode_to_latlon( postcode ):
-        """Returns a tuple in the (lat, lon) format"""
-
-        p = postcode.lower().replace(' ', '')
-        if len(postcode) > 4:
-            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
-        else:
-            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
-
+    def get_from_mapit(mapit_url):
         r = requests.get(mapit_url)
         if r.status_code == 200:
-            data = json.loads(r.text)
-
-            if 'wgs84_lat' in data:
-                return (data['wgs84_lat'], data['wgs84_lon'])
-            else:
-                raise
+            return r.text
         else:
-            raise
+            raise Exception('Postcode lookup service error')
 
     @staticmethod
-    def postcode_to_local_authority( postcode ):
+    def postcode_to_latlon(postcode):
+        """Returns a tuple in the (lat, lon) format"""
         p = postcode.lower().replace(' ', '')
         if len(postcode) > 4:
-            mapit_url = 'http://mapit.mysociety.org/postcode/%s' % p
+            mapit_url = settings.MAPIT_BASE_URL + p
         else:
-            mapit_url = 'http://mapit.mysociety.org/postcode/partial/%s' % p
-
-        r = requests.get(mapit_url)
-        if r.status_code == 200:
-            data = json.loads(r.text)
-
-            if ('shortcuts' not in data) or ('council' not in data['shortcuts']):
-                raise
-
-            if type(data['shortcuts']['council']) == type({}):
-                council_id = str(data['shortcuts']['council']['county'])
-            else:
-                council_id = str(data['shortcuts']['council'])
-
-            return data['areas'][council_id]['name']
+            mapit_url = settings.MAPIT_BASE_URL + 'partial/' + p
+        data = CourtSearch.get_from_mapit(mapit_url)
+        if 'wgs84_lat' in data:
+            json_data = json.loads(data)
+            return (json_data['wgs84_lat'], json_data['wgs84_lon'])
         else:
-            raise
+            raise Exception('Postcode lookup service didn\'t return wgs84 data')
 
+    @staticmethod
+    def postcode_to_local_authority(postcode, area_of_law):
+        p = postcode.lower().replace(' ', '')
+        if len(postcode) <= 4:
+            # A partial postcode is not sufficient information to determine the local authority
+            return CourtSearch.proximity_search(postcode, area_of_law)
+
+        response = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + p)
+        data = json.loads(response)
+
+        if type(data['shortcuts']['council']) == type({}):
+            council_id = str(data['shortcuts']['council']['county'])
+        else:
+            council_id = str(data['shortcuts']['council'])
+
+        return data['areas'][council_id]['name']
 
     @staticmethod
     def address_search( query ):

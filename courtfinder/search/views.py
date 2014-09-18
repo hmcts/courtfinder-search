@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from search.models import Court, AreaOfLaw, CourtAreasOfLaw
 from search.court_search import CourtSearch
 from search.rules import Rules
+import json
+import decimal
 
 def index(request):
     return render(request, 'search/index.jinja')
@@ -28,7 +30,7 @@ def search_by_postcode(request):
      'areas_of_law': areas_of_law,
      'area_of_law': area_of_law_requested,
      'postcode': postcode_requested
-   })
+    })
 
 
 def list(request):
@@ -45,21 +47,22 @@ def format_results(results):
     """
     create a list of courts from search results that we can send to templates
     """
-    if len(results) == 0:
-        return False
     courts=[]
     for result in results:
         addresses = result.courtaddress_set.all()
         for a in addresses:
-            if a.address_type == 'Postal':
+            if a.address_type.name == 'Postal':
                 address = a
                 break
         else:
             address = addresses[0]
 
-        visible_address = {'address_lines':address.address.split('\n'),
-                           'postcode':address.postcode,
-                           'town':address.town.name}
+        visible_address = {
+            'address_lines': [line for line in address.address.split('\n') if line != ''],
+            'postcode':address.postcode,
+            'town':address.town.name,
+            'type':address.address_type,
+        }
 
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
@@ -83,7 +86,7 @@ def format_results(results):
         courts.append(court)
     return courts
 
-def results(request):
+def results_html(request):
     if 'q' in request.GET:
         query = request.GET['q']
 
@@ -120,6 +123,19 @@ def results(request):
                     'search_results': format_results(results) if results else None
                     })
         else:
-            return redirect('/search')
+            return redirect('/search/')
     else:
-        return redirect('/search')
+        return redirect('/search/')
+
+def results_json(request):
+    if 'postcode' in request.GET and 'area_of_law' in request.GET:
+        postcode = request.GET.get('postcode', '')
+        area_of_law = request.GET.get('area_of_law','All')
+        directive = Rules.for_postcode(postcode, area_of_law)
+        if directive['action'] == 'redirect':
+            return redirect(directive['target'])
+        elif directive['action'] == 'render':
+            results = directive.get('results',None)
+        return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
+    else:
+        return HttpResponse('{}', content_type="application/json")
