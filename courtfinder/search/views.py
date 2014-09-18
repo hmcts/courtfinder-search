@@ -49,22 +49,25 @@ def format_results(results):
     """
     courts=[]
     for result in results:
-        print result.name
         addresses = result.courtaddress_set.all()
-        print result.courtaddress_set.all()
-        for a in addresses:
-            if a.address_type.name == 'Postal':
-                address = a
-                break
-        else:
-            address = addresses[0]
+        address = False
+        if addresses != []:
+            for a in addresses:
+                if a.address_type.name == 'Postal':
+                    address = a
+                    break
+                else:
+                    address = addresses[0]
 
-        visible_address = {
-            'address_lines': [line for line in address.address.split('\n') if line != ''],
-            'postcode':address.postcode,
-            'town':address.town.name,
-            'type':address.address_type,
-        }
+        if address:
+            visible_address = {
+                'address_lines': [line for line in address.address.split('\n') if line != ''],
+                'postcode':address.postcode,
+                'town':address.town.name,
+                'type':address.address_type,
+            }
+        else:
+            visible_address = {}
 
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
