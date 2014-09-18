@@ -57,9 +57,12 @@ def format_results(results):
         else:
             address = addresses[0]
 
-        visible_address = {'address_lines':address.address.split('\n'),
-                           'postcode':address.postcode,
-                           'town':address.town.name}
+        visible_address = {
+            'address_lines': [line for line in address.address.split('\n') if line != ''],
+            'postcode':address.postcode,
+            'town':address.town.name,
+            'type':address.address_type,
+        }
 
         areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
