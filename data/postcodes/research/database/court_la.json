@@ -1,0 +1,170 @@
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecef" }, "court" : "Canterbury Combined Court Centre", "local_authorities" : [ "Hertfordshire", "Kent" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf0" }, "court" : "Chippenham and Trowbridge Law Courts", "local_authorities" : [ "Somerset", "Wiltshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf1" }, "court" : "Warrington County Court and Family Court", "local_authorities" : [ "Halton", "Warrington", "St. Helens", "Wigan", "Cheshire West and Chester", "Trafford" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf2" }, "court" : "Kendal County Court and Family Court", "local_authorities" : [ "Cumbria" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf3" }, "court" : "Newport (Gwent) Civil and Family Court", "local_authorities" : [ "Caerphilly", "Torfaen", "Rhondda Cynon Taf", "Monmouthshire", "Blaenau Gwent", "Herefordshire, County of", "Newport", "Gloucestershire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf4" }, "court" : "Kingston-upon-Thames County Court and Family Court", "local_authorities" : [ "Surrey", "Kingston upon Thames", "Sutton", "Merton", "Wandsworth", "Richmond upon Thames" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf5" }, "court" : "Hereford County Court and Family Court", "local_authorities" : [ "Herefordshire, County of" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf6" }, "court" : "Lambeth County Court and Family Court", "local_authorities" : [ "Bromley", "Lambeth", "Southwark", "Greenwich", "Sutton", "Lewisham", "Merton", "Westminster", "Croydon", "Kent", "Bexley", "Hertfordshire", "Wandsworth" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf7" }, "court" : "Woolwich County Court and Family Court", "local_authorities" : [ "Bromley", "Islington", "Southwark", "Kensington and Chelsea", "Greenwich", "Croydon", "Milton Keynes", "Lewisham", "Redbridge", "Essex", "Wandsworth", "Newham", "Kent", "Bexley" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf8" }, "court" : "Truro County Court and Family Court", "local_authorities" : [ "Isles of Scilly", "Cornwall" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecf9" }, "court" : "Reigate County Court and Family Court", "local_authorities" : [ "Surrey", "Sutton", "West Sussex" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecfa" }, "court" : "Derby Combined Court Centre", "local_authorities" : [ "Leicestershire", "Derby", "Nottinghamshire", "Derbyshire", "Staffordshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecfb" }, "court" : "Plymouth Combined Court", "local_authorities" : [ "Plymouth", "Devon", "Cornwall" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecfc" }, "court" : "Wrexham County Court  and Family Court", "local_authorities" : [ "Wrexham", "Flintshire", "Gwynedd", "Denbighshire", "Cheshire West and Chester", "Wirral" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecfd" }, "court" : "Neath and Port Talbot County Court and Family Court", "local_authorities" : [ "Surrey", "Pembrokeshire", "Carmarthenshire", "Neath Port Talbot", "Powys", "Swansea" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecfe" }, "court" : "Staines County Court and Family Court", "local_authorities" : [ "Surrey", "Richmond upon Thames", "Windsor and Maidenhead", "Slough", "Hounslow", "Hillingdon", "Kent" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ecff" }, "court" : "Weston-Super-Mare County Court and Family Court", "local_authorities" : [ "Somerset", "North Somerset" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed00" }, "court" : "St Helens County Court and Family Court", "local_authorities" : [ "St. Helens", "Knowsley", "Halton" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed01" }, "court" : "Barnet Civil and Family Courts Centre", "local_authorities" : [ "Enfield", "Haringey", "Hertfordshire", "Harrow", "Barnet" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed02" }, "court" : "Burnley Combined Court Centre", "local_authorities" : [ "Rochdale", "Blackburn with Darwen", "Lancashire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed03" }, "court" : "Bath County Court and Family Court", "local_authorities" : [ "South Gloucestershire", "Somerset", "Wiltshire", "Bath and North East Somerset" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed04" }, "court" : "Boston County Court and Family Court", "local_authorities" : [ "Leicestershire", "Lincolnshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed05" }, "court" : "Barrow-in-Furness County Court and Family Court", "local_authorities" : [ "Cumbria" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed06" }, "court" : "Accrington County Court", "local_authorities" : [ "Lancashire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed07" }, "court" : "Morpeth and Berwick County Court and Family Court", "local_authorities" : [ "Scottish Borders", "Northumberland" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed08" }, "court" : "Leicester County Court and Family Court", "local_authorities" : [ "Derbyshire", "Leicester", "Staffordshire", "East Sussex", "Rutland", "Leicestershire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed09" }, "court" : "York County Court and Family Court", "local_authorities" : [ "East Riding of Yorkshire", "North Yorkshire", "York" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0a" }, "court" : "Reading County Court and Family Court", "local_authorities" : [ "Wokingham", "Buckinghamshire", "Bracknell Forest", "Oxfordshire", "Hampshire", "Reading", "West Berkshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0b" }, "court" : "Chichester Combined Court Centre", "local_authorities" : [ "West Sussex", "Portsmouth" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0c" }, "court" : "Stockport County Court and Family Court", "local_authorities" : [ "Stockport", "Falkirk", "Derbyshire", "Tameside", "Cheshire East" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0d" }, "court" : "Portsmouth Combined Court Centre", "local_authorities" : [ "West Sussex", "Portsmouth", "Isle of Wight", "Hampshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0e" }, "court" : "Chelmsford County and Family Court", "local_authorities" : [ "Hertfordshire", "Essex" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed0f" }, "court" : "Nottingham County Court and Family Court", "local_authorities" : [ "Nottingham", "Nottinghamshire", "Leicestershire", "Lincolnshire", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e77096af1fc034ab6ed10" }, "court" : "Salisbury Law Courts", "local_authorities" : [ "Dorset", "Wiltshire", "Hampshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed11" }, "court" : "Carlisle Combined Court", "local_authorities" : [ "Cumbria", "Northumberland" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed12" }, "court" : "Willesden County Court and Family Court", "local_authorities" : [ "Kensington and Chelsea", "Hertfordshire", "Barnet", "Hammersmith and Fulham", "Westminster", "Camden", "Ealing", "Harrow", "Brent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed13" }, "court" : "Stafford Combined Court Centre", "local_authorities" : [ "Staffordshire", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed14" }, "court" : "Worcester Combined Court", "local_authorities" : [ "Warwickshire", "Herefordshire, County of", "Shropshire", "Birmingham", "Gloucestershire", "Worcestershire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed15" }, "court" : "West Cumbria Court House", "local_authorities" : [ "Cumbria" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed16" }, "court" : "Bristol Civil and Family Justice Centre", "local_authorities" : [ "Bath and North East Somerset", "South Gloucestershire", "Bristol, City of", "Gloucestershire", "North Somerset", "Somerset", "Dorset" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed17" }, "court" : "Tunbridge Wells County Court and Family Court", "local_authorities" : [ "Surrey", "West Sussex", "Bromley", "Kent", "East Sussex" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed18" }, "court" : "Barnsley Law Courts", "local_authorities" : [ "Barnsley", "Wakefield" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed19" }, "court" : "Guildford County Court and Family Court", "local_authorities" : [ "Surrey", "West Sussex", "Hampshire", "Bracknell Forest" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1a" }, "court" : "Aldershot and Farnham County Court and Family Court", "local_authorities" : [ "Surrey", "Hampshire", "Bracknell Forest" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1b" }, "court" : "Coventry Combined Court Centre", "local_authorities" : [ "Coventry", "Leicestershire", "Warwickshire", "Solihull", "Walsall" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1c" }, "court" : "Darlington County Court and Family Court", "local_authorities" : [ "North Yorkshire", "Darlington", "County Durham" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1d" }, "court" : "Worthing County Court and Family Court", "local_authorities" : [ "West Sussex" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1e" }, "court" : "Great Grimsby Combined Court Centre", "local_authorities" : [ "North Lincolnshire", "East Riding of Yorkshire", "North East Lincolnshire", "Lincolnshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed1f" }, "court" : "Uxbridge County Court and Family Court", "local_authorities" : [ "Hounslow", "Hertfordshire", "Barnet", "Hillingdon", "Slough", "Buckinghamshire", "Ealing", "Harrow" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed20" }, "court" : "St Albans County Court", "local_authorities" : [ "Hertfordshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed21" }, "court" : "North Shields County Court and Family Court", "local_authorities" : [ "Northumberland", "North Tyneside" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed22" }, "court" : "Bury County Court", "local_authorities" : [ "Lancashire", "Rochdale", "Bury" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed23" }, "court" : "Bradford Combined Court Centre", "local_authorities" : [ "Bradford", "North Yorkshire", "Leeds", "Kirklees" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed24" }, "court" : "Mold County Court and Family Court", "local_authorities" : [ "Denbighshire", "Flintshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed25" }, "court" : "Scarborough Justice Centre", "local_authorities" : [ "Redcar and Cleveland", "East Riding of Yorkshire", "North Yorkshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed26" }, "court" : "Croydon County Court and Family Court", "local_authorities" : [ "Surrey", "Bromley", "Lambeth", "Southwark", "Kingston upon Thames", "Croydon", "Lewisham", "Merton", "Wandsworth", "Bexley", "Swindon", "Sutton" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed27" }, "court" : "Llanelli County Court and Family Court", "local_authorities" : [ "Neath Port Talbot", "Carmarthenshire", "Pembrokeshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed28" }, "court" : "Sunderland County Court and Family Court", "local_authorities" : [ "South Tyneside", "Sunderland", "County Durham" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed29" }, "court" : "Leeds Combined Court Centre", "local_authorities" : [ "Bradford", "North Yorkshire", "Leeds" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2a" }, "court" : "Milton Keynes County Court and Family Court", "local_authorities" : [ "Buckinghamshire", "Milton Keynes", "Central Bedfordshire", "Powys" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2b" }, "court" : "Colchester County Court and Family Court", "local_authorities" : [ "West Sussex", "Essex", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2c" }, "court" : "Bedford County Court and Family Court", "local_authorities" : [ "Cambridgeshire", "Central Bedfordshire", "Bedford" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2d" }, "court" : "Telford County Court and Family Court", "local_authorities" : [ "Powys", "Wrexham", "Herefordshire, County of", "Ceredigion", "Wigan", "Telford and Wrekin", "Shropshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2e" }, "court" : "Isle of Wight Combined Court", "local_authorities" : [ "Isle of Wight" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed2f" }, "court" : "Manchester County Court and Family Court", "local_authorities" : [ "Salford", "Tameside", "Rochdale", "Bury", "Wigan", "Manchester", "Oldham", "Trafford" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed30" }, "court" : "Torquay and Newton Abbot County Court and Family Court", "local_authorities" : [ "Devon", "Torbay" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed31" }, "court" : "Winchester Combined Court Centre", "local_authorities" : [ "Hampshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed32" }, "court" : "Ipswich County Court and Family Court", "local_authorities" : [ "Norfolk", "Essex", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed33" }, "court" : "Maidstone Combined Court Centre", "local_authorities" : [ "Kent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed34" }, "court" : "King's Lynn County Court and Family Court", "local_authorities" : [ "Cambridgeshire", "Norfolk", "Lincolnshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed35" }, "court" : "Slough County Court and Family Court", "local_authorities" : [ "Buckinghamshire", "Windsor and Maidenhead", "Slough" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed36" }, "court" : "High Wycombe County Court and Family Court", "local_authorities" : [ "Oxfordshire", "Buckinghamshire", "Hertfordshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed37" }, "court" : "Northampton Crown Court, County Court and Family Court", "local_authorities" : [ "Northamptonshire", "Milton Keynes" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed38" }, "court" : "Hartlepool County Court and Family Court", "local_authorities" : [ "Hartlepool", "County Durham" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed39" }, "court" : "Yeovil County Court and Family Court", "local_authorities" : [ "Somerset", "Dorset", "Wiltshire", "Devon" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3a" }, "court" : "Kettering County Court", "local_authorities" : [ "Northamptonshire", "Leicestershire", "Rutland", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3b" }, "court" : "Merthyr Tydfil Combined Court Centre", "local_authorities" : [ "Southwark", "Dundee City", "Redbridge", "Rhondda Cynon Taf", "Camden", "Merthyr Tydfil" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3c" }, "court" : "Macclesfield County Court and Family Court", "local_authorities" : [ "Cheshire East" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3d" }, "court" : "Medway County Court and Family Court", "local_authorities" : [ "Medway", "Kent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3e" }, "court" : "Wigan County Court and Family Court", "local_authorities" : [ "Lancashire", "Halton", "Wigan", "Bolton" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed3f" }, "court" : "Central London County Court", "local_authorities" : [ "Islington", "Kensington and Chelsea", "Greenwich", "Merton", "Barnet", "Hammersmith and Fulham", "Westminster", "Wandsworth", "Newham", "Camden", "Hackney", "Ealing", "Brent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed40" }, "court" : "Carmarthen County Court and Family Court", "local_authorities" : [ "Carmarthenshire", "Pembrokeshire", "Ceredigion" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed41" }, "court" : "Southend County Court and Family Court", "local_authorities" : [ "Southend-on-Sea", "Fife", "Essex" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed42" }, "court" : "Harrogate County Court and Family Court", "local_authorities" : [ "Leeds", "North Yorkshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed43" }, "court" : "Basingstoke County Court and Family Court", "local_authorities" : [ "Reading", "Wiltshire", "Hampshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed44" }, "court" : "Llangefni County Court and Family Court", "local_authorities" : [ "Isle of Anglesey", "Carmarthenshire", "Conwy" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed45" }, "court" : "Middlesbrough County Court at Teesside Combined Court", "local_authorities" : [ "Redcar and Cleveland", "Middlesbrough", "North Yorkshire", "County Durham", "Stockton-on-Tees" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed46" }, "court" : "Altrincham County Court and Family Court", "local_authorities" : [ "Trafford", "Warrington", "Cheshire East" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed47" }, "court" : "West London County Court", "local_authorities" : [ "Hounslow", "Lambeth", "Kensington and Chelsea", "Islington", "Hammersmith and Fulham", "Westminster", "Wandsworth", "Enfield", "Ealing", "Brent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed48" }, "court" : "Mayor's and City of London Court", "local_authorities" : [ "Islington", "Hammersmith and Fulham", "Wandsworth", "Tower Hamlets", "Camden", "City of London", "Brent" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed49" }, "court" : "South Shields County Court and Family Court", "local_authorities" : [ "South Tyneside" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4a" }, "court" : "Scunthorpe County Court and Family Court", "local_authorities" : [ "North Lincolnshire", "Lincolnshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4b" }, "court" : "Clerkenwell and Shoreditch County Court and Family Court", "local_authorities" : [ "Islington", "Redbridge", "Newham", "Barnet", "Waltham Forest", "Tower Hamlets", "Camden", "Enfield", "Haringey", "Hackney" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4c" }, "court" : "Sheffield Combined Court Centre", "local_authorities" : [ "Barnsley", "Nottinghamshire", "Sheffield", "Doncaster", "Rotherham", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4d" }, "court" : "Romford County Court and Family Court", "local_authorities" : [ "Redbridge", "Havering", "Essex", "Suffolk", "Barking and Dagenham", null, "Enfield", "Thurrock" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4e" }, "court" : "Weymouth and Dorchester Combined Court Centre", "local_authorities" : [ "Dorset" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed4f" }, "court" : "Eastbourne County Court and Family Court", "local_authorities" : [ "East Sussex" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed50" }, "court" : "Newcastle upon Tyne Combined Court Centre", "local_authorities" : [ "South Tyneside", "Gateshead", "Northumberland", "Newcastle upon Tyne", "North Tyneside" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed51" }, "court" : "Swansea Civil and Family Justice Centre", "local_authorities" : [ "Neath Port Talbot", "Wiltshire", "Carmarthenshire", "Swansea", "Pembrokeshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed52" }, "court" : "Dudley County Court and Family Court", "local_authorities" : [ "Sandwell", "Wolverhampton", "Walsall", "Dudley", "Shropshire", "Staffordshire", "Worcestershire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed53" }, "court" : "Mansfield Magistrates' Court, County Court and Family Court", "local_authorities" : [ "Sheffield", "Rotherham", "Nottinghamshire", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed54" }, "court" : "Oldham County Court and Family Court", "local_authorities" : [ "Lancashire", "Oldham", "Calderdale", "Rochdale" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed55" }, "court" : "Tameside County Court and Family Court", "local_authorities" : [ "Derbyshire", "Tameside" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed56" }, "court" : "Southampton Combined Court Centre", "local_authorities" : [ "Southampton", "Hampshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed57" }, "court" : "Gateshead County Court and Family Court", "local_authorities" : [ "Sunderland", "Gateshead", "Newcastle upon Tyne", "County Durham" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed58" }, "court" : "Stoke-on-Trent Combined Court", "local_authorities" : [ "Stoke-on-Trent", "Staffordshire", "Shropshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed59" }, "court" : "Brecon Law Courts", "local_authorities" : [ "Powys" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5a" }, "court" : "Chesterfield County Court and Family Court", "local_authorities" : [ "Nottinghamshire", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5b" }, "court" : "Hertford County Court and Family Court", "local_authorities" : [ "Hertfordshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5c" }, "court" : "Skipton County Court and Family Court", "local_authorities" : [ "Bradford", "Lancashire", "North Yorkshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5d" }, "court" : "Taunton County Court and Family Court", "local_authorities" : [ "Somerset", "Devon" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5e" }, "court" : "Durham County Court and Family Court", "local_authorities" : [ "Sunderland", "County Durham" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed5f" }, "court" : "Pontypridd County Court and Family Court", "local_authorities" : [ "Rhondda Cynon Taf" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed60" }, "court" : "Dartford County Court and Family Court", "local_authorities" : [ "Greenwich", "Kent", "Bexley" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed61" }, "court" : "Hastings County Court and Family Court", "local_authorities" : [ "Kent", "East Sussex" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed62" }, "court" : "Haverfordwest County Court and Family Court", "local_authorities" : [ "Carmarthenshire", "Pembrokeshire", "Swansea" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed63" }, "court" : "Conwy and Colwyn County Court and Family Court", "local_authorities" : [ "Conwy" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed64" }, "court" : "Bodmin County Court and Family Court", "local_authorities" : [ "Devon", "Cornwall" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed65" }, "court" : "Lincoln County Court and Family Court", "local_authorities" : [ "Doncaster", "North Lincolnshire", "Lincolnshire", "Nottinghamshire" ] }
+{ "_id" : { "$oid" : "542e770a6af1fc034ab6ed66" }, "court" : "Wandsworth County Court and Family Court", "local_authorities" : [ "Kingston upon Thames", "Lambeth", "Southwark", "Croydon", "Merton", "Hammersmith and Fulham", "Westminster", "Wandsworth", "Richmond upon Thames", "Brent" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed67" }, "court" : "Exeter Combined Court Centre", "local_authorities" : [ "Somerset", "Devon" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed68" }, "court" : "Edmonton County Court and Family Court", "local_authorities" : [ "Islington", "Essex", "Waltham Forest", "Brent", "Enfield", "Haringey", "Hertfordshire", "Hackney" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed69" }, "court" : "Cardiff Civil and Family Justice Centre", "local_authorities" : [ "Cardiff", "Caerphilly", "Rhondda Cynon Taf", "Merthyr Tydfil", "Vale of Glamorgan" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6a" }, "court" : "Bury St Edmunds County Court and Family Court", "local_authorities" : [ "Norfolk", "Essex", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6b" }, "court" : "Norwich Combined Court Centre", "local_authorities" : [ "Norfolk", "Kent", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6c" }, "court" : "Lancaster County Court and Family Court", "local_authorities" : [ "Cumbria", "North Yorkshire", "Lancashire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6d" }, "court" : "Rotherham County Court and Family Court", "local_authorities" : [ "Barnsley", "Doncaster", "Rotherham" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6e" }, "court" : "Aberystwyth Justice Centre", "local_authorities" : [ "Gwynedd", "Powys", "Ceredigion" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed6f" }, "court" : "Kingston-upon-Hull Combined Court Centre", "local_authorities" : [ "East Riding of Yorkshire", "Kingston upon Hull, City of" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed70" }, "court" : "Horsham County Court and Family Court", "local_authorities" : [ "West Sussex" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed71" }, "court" : "Caernarfon County Court and Family Court", "local_authorities" : [ "Gwynedd" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed72" }, "court" : "Gloucester and Cheltenham County Court and Family Court", "local_authorities" : [ "Worcestershire", "Gloucestershire", "Hampshire", "Herefordshire, County of" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed73" }, "court" : "Bow County Court and Family Court", "local_authorities" : [ "Essex", "City of London", "Barking and Dagenham", "Redbridge", "Tower Hamlets", "Waltham Forest", "Newham", "Thurrock", "Haringey", "West Berkshire", "Hackney" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed74" }, "court" : "Birmingham Civil and Family Justice Centre", "local_authorities" : [ "Sandwell", "Walsall", "Warwickshire", "Solihull", "Staffordshire", "Birmingham", "Worcestershire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed75" }, "court" : "Bromley County Court and Family Court", "local_authorities" : [ "Bromley", "Southwark", "Greenwich", "Lewisham", "Birmingham", "Kent", "Bexley" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed76" }, "court" : "Thanet County Court and Family Court", "local_authorities" : [ "Hackney", "Kent" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed77" }, "court" : "Bournemouth and Poole County Court and Family Court", "local_authorities" : [ "Dorset", "Dudley", "Poole", "Hampshire", "Bournemouth" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed78" }, "court" : "Liverpool Civil and Family Court", "local_authorities" : [ "Liverpool", "Knowsley", "Sefton", "South Ayrshire", "St. Helens", "Wirral", "Lancashire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed79" }, "court" : "Barnstaple County Court and Family Court", "local_authorities" : [ "Somerset", "Devon", "Cornwall" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7a" }, "court" : "Lewes Combined Court Centre", "local_authorities" : [ "West Sussex", "Kent", "East Sussex" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7b" }, "court" : "Aylesbury County Court and Family Court", "local_authorities" : [ "Oxfordshire", "Buckinghamshire", "Hertfordshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7c" }, "court" : "Huddersfield County Court and Family Court", "local_authorities" : [ "Kirklees", "Leeds" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7d" }, "court" : "Wolverhampton Combined Court Centre", "local_authorities" : [ "Shropshire", "Wolverhampton", "Dudley", "Staffordshire", "Walsall" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7e" }, "court" : "Watford County Court and Family Court", "local_authorities" : [ "Hillingdon", "Buckinghamshire", "Hertfordshire", "Harrow" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed7f" }, "court" : "Cambridge County Court and Family Court", "local_authorities" : [ "Cambridgeshire", "Hertfordshire", "Essex", "Suffolk" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed80" }, "court" : "Warwick Combined Court", "local_authorities" : [ "Worcestershire", "Warwickshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed81" }, "court" : "Buxton County Court", "local_authorities" : [ "Stockport", "Derbyshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed82" }, "court" : "Halifax County Court and Family Court", "local_authorities" : [ "Bradford", "Kirklees", "Calderdale" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed83" }, "court" : "Wakefield Civil and Family Justice Centre", "local_authorities" : [ "Walsall", "Kirklees", "Wakefield", "North Yorkshire", "Leeds", "East Riding of Yorkshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed84" }, "court" : "Crewe County Court and Family Court", "local_authorities" : [ "Cheshire West and Chester", "Staffordshire", "Cheshire East" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed85" }, "court" : "Basildon Combined Court", "local_authorities" : [ "Essex", "Thurrock" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed86" }, "court" : "Bridgend Law Courts", "local_authorities" : [ "Neath Port Talbot", "Cardiff", "Rhondda Cynon Taf", "Bridgend", "Vale of Glamorgan" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed87" }, "court" : "Banbury County Court", "local_authorities" : [ "Oxfordshire", "Northamptonshire", "Buckinghamshire", "Gloucestershire", "Warwickshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed88" }, "court" : "Welshpool and Newtown County Court and Family Court", "local_authorities" : [ "Powys", "Shropshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed89" }, "court" : "Swindon Combined Court", "local_authorities" : [ "Oxfordshire", "Wiltshire", "Swindon", "Gloucestershire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8a" }, "court" : "Preston Combined Court Centre", "local_authorities" : [ "Scottish Borders", "Lancashire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8b" }, "court" : "Blackpool County Court and Family Court", "local_authorities" : [ "Blackpool", "Lancashire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8c" }, "court" : "Nuneaton County Court", "local_authorities" : [ "Northamptonshire", "Staffordshire", "Warwickshire", "Leicestershire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8d" }, "court" : "Birkenhead County Court and Family Court", "local_authorities" : [ "Cheshire West and Chester", "Wirral", "Bexley" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8e" }, "court" : "Walsall County and Family Court", "local_authorities" : [ "East Ayrshire", "Sandwell", "Wolverhampton", "Walsall", "Staffordshire", "Birmingham" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed8f" }, "court" : "Rhyl County Court and Family Court", "local_authorities" : [ "Cheshire West and Chester", "Flintshire", "Denbighshire", "Conwy" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed90" }, "court" : "Bolton County Court and Family Court", "local_authorities" : [ "Blackburn with Darwen", "Bolton" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed91" }, "court" : "Brighton County Court", "local_authorities" : [ "West Sussex", "Brighton and Hove", "East Sussex" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed92" }, "court" : "Peterborough Combined Court Centre", "local_authorities" : [ "Northamptonshire", "Norfolk", "Peterborough", "Lincolnshire", "Cambridgeshire", "Rutland" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed93" }, "court" : "Blackwood Civil and Family Court", "local_authorities" : [ "Caerphilly", "Torfaen", "Powys", "Monmouthshire", "Blaenau Gwent", "Newport", "Merthyr Tydfil" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed94" }, "court" : "Oxford Combined Court Centre", "local_authorities" : [ "Oxfordshire", "Buckinghamshire", "Gloucestershire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed95" }, "court" : "Luton County Court and Family Court", "local_authorities" : [ "Buckinghamshire", "Hertfordshire", "Luton", "Central Bedfordshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed96" }, "court" : "Doncaster County Court and Family Court", "local_authorities" : [ "Barnsley", "Nottinghamshire", "North Lincolnshire", "North Yorkshire", "Doncaster", "East Riding of Yorkshire", "North East Lincolnshire" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed97" }, "court" : "Brentford County Court and Family Court", "local_authorities" : [ "Hounslow", "Islington", "Windsor and Maidenhead", "Northamptonshire", "Hillingdon", "Westminster", "Richmond upon Thames", "Ealing", "Harrow" ] }
+{ "_id" : { "$oid" : "542e770b6af1fc034ab6ed98" }, "court" : "Chester Civil and Family Justice Centre", "local_authorities" : [ "Cheshire West and Chester", "Wirral", "Flintshire", "Cheshire East" ] }
