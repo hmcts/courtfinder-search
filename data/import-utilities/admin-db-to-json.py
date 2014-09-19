@@ -7,11 +7,11 @@ def courts():
     all_courts = []
 
     cur = conn.cursor()
-    cur.execute("SELECT name, court_number, slug, latitude, longitude FROM courts")
+    cur.execute("SELECT id, name, court_number, slug, latitude, longitude FROM courts")
     rows = cur.fetchall()
 
     for row in rows:
-        name, court_number, slug, lat, lon = row
+        admin_id, name, court_number, slug, lat, lon = row
 
         if name == None or slug == None or lat == None or lon == None:
             print "- %s" % name
@@ -26,6 +26,7 @@ def courts():
 
         # bring it all together
         all_courts.append({
+            "admin_id": admin_id,
             "name": name,
             "court_number": court_number,
             "slug": slug,

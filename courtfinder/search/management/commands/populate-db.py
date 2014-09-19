@@ -43,6 +43,7 @@ class Command(BaseCommand):
 
         for court_obj in courts:
             court = Court(
+                admin_id=court_obj['admin_id'],
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=True,
