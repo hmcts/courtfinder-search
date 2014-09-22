@@ -11,20 +11,20 @@
       <h2>Choose the type of search you would like to do</h2>
       <form method="get" action="/search/type">
         <fieldset>
-          <label for="postcode-search" class="block-label form-block">
-            <input id="postcode-search" type="radio" name="type" value="postcode" >
-            <div class="form-label-bold">Postcode search</div>
-            <div class="form-hint">Find courts and tribunals that will serve your postcode.</div>
-          </label>
           <label for="name-address-search" class="block-label form-block">
             <input id="name-address-search" type="radio" name="type" value="address" >
-            <div class="form-label-bold">Name or address search</div>
+            <div class="form-label-bold">Name or address</div>
             <div class="form-hint">Find courts or tribunals by entering court name, building name, or street address.</div>
+          </label>
+          <label for="postcode-search" class="block-label form-block">
+            <input id="postcode-search" type="radio" name="type" value="postcode" >
+            <div class="form-label-bold">Nearest to your postcode</div>
+            <div class="form-hint">Find courts and tribunals in your postcode area.</div>
           </label>
           <label for="list-view" class="block-label form-block">
             <input id="list-view" type="radio" name="type" value="list" checked>
-            <div class="form-label-bold">List view</div>
-            <div class="form-hint">Browse courts and tribunals by A-Z.</div>
+            <div class="form-label-bold">A-Z list</div>
+            <div class="form-hint">Browse courts and tribunals by name.</div>
           </label>
         </fieldset>
         <div class="actions">
