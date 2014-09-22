@@ -48,4 +48,3 @@ class Rules:
                 'action': 'render',
                 'results': CourtSearch.proximity_search(postcode, area_of_law)
             }
-
