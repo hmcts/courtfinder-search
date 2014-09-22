@@ -46,6 +46,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.content, 'OK')
         new_court = Court.objects.get(name="New Name")
         self.assertEqual(new_court.admin_id, 23)
+        self.assertEqual(len(Court.objects.all()), 2)
 
     courts_json = """[
     {
