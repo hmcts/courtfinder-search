@@ -19,7 +19,7 @@ areas_of_law_description = {
     "Domestic violence": "Violence in the home.",
     "Employment": "Workplace disputes including pay, redundancy and discrimination.",
     "Forced marriage": "Being made to marry against your will.",
-    "Housing possession": "Evinctions and rental disputes.",
+    "Housing possession": "Evictions and rental disputes.",
     "High court": "",
     "Immigration": "Seeking asylum, establishing right to live in the UK and appealing deportation.",
     "Money claims": "Small claims, consumer claims, negligence and personal injury claims.",
