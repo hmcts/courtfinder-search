@@ -60,7 +60,7 @@
           <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
           <ul>
           {% for aol in court.areas_of_law %}
-            <li><span {% if aol.name == area_of_law %}class="selected-aol"{% endif %}>{{ aol.name }}</span></li>
+            <li>{{ aol.name }}</li>
           {% endfor %}
           </ul>
         </div>
