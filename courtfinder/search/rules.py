@@ -26,17 +26,26 @@ class Rules:
                 'results': CourtSearch.proximity_search(postcode, area_of_law)
             }
         elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
+            results = CourtSearch.postcode_search(postcode, area_of_law)
+            if len(results) == 0:
+                results = CourtSearch.proximity_search(postcode, area_of_law)
+
             return {
                 'action': 'render',
-                'results': CourtSearch.postcode_search(postcode, area_of_law)
+                'results': results
             }
         elif area_of_law in ['Children', 'Adoption', 'Divorce']:
+            results = CourtSearch.local_authority_search(postcode, area_of_law)
+            if len(results) == 0:
+                results = CourtSearch.proximity_search(postcode, area_of_law)
+
             return {
                 'action': 'render',
-                'results': CourtSearch.local_authority_search(postcode, area_of_law)
+                'results': results
             }
         else:
             return {
                 'action': 'render',
                 'results': CourtSearch.proximity_search(postcode, area_of_law)
             }
+
