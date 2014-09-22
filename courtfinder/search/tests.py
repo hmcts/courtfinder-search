@@ -120,6 +120,19 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE15&area_of_law=All')
         self.assertEqual(response.status_code, 200)
+        self.assertIn('<div class="search-results">', response.content)
+
+    def test_partial_postcode_whitespace(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15++&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<div class="search-results">', response.content)
+
+    def test_postcode_whitespace(self):
+        c = Client()
+        response = c.get('/search/results?postcode=++SE154UH++&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<div class="search-results">', response.content)
 
     def test_unknown_directive_action(self):
         with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):

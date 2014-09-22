@@ -93,7 +93,7 @@ def format_results(results):
 
 def results_html(request):
     if 'q' in request.GET:
-        query = request.GET['q']
+        query = request.GET['q'].strip()
 
         if query == "":
             return redirect(reverse('address-view')+'?error=1')
@@ -105,8 +105,8 @@ def results_html(request):
             'search_results': format_results(results)
         })
     elif 'postcode' in request.GET:
-        postcode = request.GET.get('postcode', '')
-        area_of_law = request.GET.get('area_of_law','All')
+        postcode = request.GET.get('postcode', '').strip()
+        area_of_law = request.GET.get('area_of_law','All').strip()
 
         # error handling
         if postcode == '':
@@ -134,8 +134,8 @@ def results_html(request):
 
 def results_json(request):
     if 'postcode' in request.GET and 'area_of_law' in request.GET:
-        postcode = request.GET.get('postcode', '')
-        area_of_law = request.GET.get('area_of_law','All')
+        postcode = request.GET.get('postcode', '').strip()
+        area_of_law = request.GET.get('area_of_law','All').strip()
         directive = Rules.for_postcode(postcode, area_of_law)
         if directive['action'] == 'redirect':
             return redirect(directive['target'])
