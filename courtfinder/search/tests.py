@@ -114,7 +114,7 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Sorry, there are no results', response.content)
+        self.assertIn('Sorry, your postcode', response.content)
 
     def test_partial_postcode(self):
         c = Client()

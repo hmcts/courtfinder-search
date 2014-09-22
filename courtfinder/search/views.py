@@ -27,6 +27,8 @@ areas_of_law_description = {
     "Social security": "Problems with benefits, entitlement, assessment and decisions."
 }
 
+whitespace_regex = re.compile(r'\s+')
+
 def index(request):
     return render(request, 'search/index.jinja')
 
@@ -117,8 +119,6 @@ def format_results(results):
     return courts
 
 def results_html(request):
-    whitespace_regex = re.compile(r'\s+')
-
     if 'q' in request.GET:
         query = re.sub(whitespace_regex, '', request.GET['q'])
 
