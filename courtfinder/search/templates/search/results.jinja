@@ -84,7 +84,15 @@
       <p>Sorry, there are no results for {{ query }}. Please check and try another name or addresss.</p>
     {% endif %}
     {% if postcode %}
-      <p>Sorry, there are no results for {{ postcode }}. Please check and try another postcode.</p>
+      <p class="postcode-error">
+        Sorry your postcode <strong>{{ postcode }}</strong> has not been found.<br />
+        Please check if any letters or numbers are missing.
+      </p>
+
+      <p>
+        Postcodes can be entered as part: <strong>EC1R</strong> or full postcodes: <strong>EC1R 4SQ</strong>.
+      </p>
+      <!-- <p>Sorry, there are no results for {{ postcode }}. Please check and try another postcode.</p> -->
     {% endif %}
   {% endif %}
   {% endif %}
