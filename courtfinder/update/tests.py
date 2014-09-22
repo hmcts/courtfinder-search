@@ -3,36 +3,64 @@ import requests
 from mock import Mock, patch
 from search.models import *
 from django.conf import settings
-from update import court_import
+from court_importer import CourtImporter
+import json
 
 class SearchTestCase(TestCase):
 
     def setUp(self):
-        self.court1 = court_import(self.court1_json)
+        self.courts = CourtImporter.import_courts(json.loads(SearchTestCase.courts_json))
 
-    def test_modify_court_name(self):
+    def test_modify_court(self):
         c = Client()
-        new_court_json='{"admin_id":23,"name":"New Name"}'
+        modified_court_json="""
+        {
+        "admin_id":2800,
+        "name":"New Name",
+        "slug":"the-slug",
+        "lat":0.0,
+        "lon":0.0,
+        "court_number":null
+        }
+        """
+        response = c.post('/update/court',
+                          {'court_data':modified_court_json})
+        self.assertEqual(response.content, 'OK')
+        new_court = Court.objects.get(name="New Name")
+        self.assertEqual(new_court.admin_id, 2800)
+
+    def test_create_court(self):
+        c = Client()
+        new_court_json="""
+        {
+        "admin_id":23,
+        "name":"New Name",
+        "slug":"the-slug",
+        "lat":0.0,
+        "lon":0.0,
+        "court_number":null
+        }
+        """
         response = c.post('/update/court',
                           {'court_data':new_court_json})
         self.assertEqual(response.content, 'OK')
         new_court = Court.objects.get(name="New Name")
         self.assertEqual(new_court.admin_id, 23)
 
-    self.court1_json = """
+    courts_json = """[
     {
         "addresses": [
             {
                 "town": "Accrington",
                 "type": "Visiting",
                 "postcode": "BB5 2BH",
-                "address": "East Lancashire Magistrates' Court\nThe Law Courts\nManchester Road\n"
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
             },
             {
                 "town": "Blackburn",
                 "type": "Postal",
                 "postcode": "BB2 1AA",
-                "address": "Accrington Magistrates' Court\nThe Court House \nNorthgate\t\n"
+                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate\\t\\n"
             }
         ],
         "admin_id": 2800,
@@ -78,6 +106,5 @@ class SearchTestCase(TestCase):
                 "name": "Crime"
             }
         ]
-    },
+    }]
 """
-    self.countries
