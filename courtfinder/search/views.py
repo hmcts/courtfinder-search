@@ -1,11 +1,13 @@
+import json
+import decimal
+import re
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from search.models import Court, AreaOfLaw, CourtAreasOfLaw
 from search.court_search import CourtSearch
 from search.rules import Rules
-import json
-import decimal
 
 def index(request):
     return render(request, 'search/index.jinja')
@@ -92,8 +94,10 @@ def format_results(results):
     return courts
 
 def results_html(request):
+    whitespace_regex = re.compile(r'\s+')
+
     if 'q' in request.GET:
-        query = request.GET['q'].strip()
+        query = re.sub(whitespace_regex, '', request.GET['q'])
 
         if query == "":
             return redirect(reverse('address-view')+'?error=1')
@@ -105,8 +109,8 @@ def results_html(request):
             'search_results': format_results(results)
         })
     elif 'postcode' in request.GET:
-        postcode = request.GET.get('postcode', '').strip()
-        area_of_law = request.GET.get('area_of_law','All').strip()
+        postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
+        area_of_law = re.sub(whitespace_regex, '', request.GET.get('area_of_law','All'))
 
         # error handling
         if postcode == '':
@@ -134,8 +138,8 @@ def results_html(request):
 
 def results_json(request):
     if 'postcode' in request.GET and 'area_of_law' in request.GET:
-        postcode = request.GET.get('postcode', '').strip()
-        area_of_law = request.GET.get('area_of_law','All').strip()
+        postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
+        area_of_law = re.sub(whitespace_regex, '', request.GET.get('area_of_law','All'))
         directive = Rules.for_postcode(postcode, area_of_law)
         if directive['action'] == 'redirect':
             return redirect(directive['target'])
