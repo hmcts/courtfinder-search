@@ -1,7 +1,7 @@
 from django.db import models
 
 class Court(models.Model):
-    admin_id = models.IntegerField()
+    admin_id = models.IntegerField(null=True, default=None)
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     displayed = models.BooleanField(default=False)
