@@ -13,6 +13,7 @@ class SearchTestCase(TestCase):
             name="Example Court",
             lat=0.0,
             lon=0.0,
+            displayed=True,
         )
         self.address_type = AddressType.objects.create(name='Postal')
         self.country = Country.objects.create(name='Wales')
@@ -120,6 +121,18 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Sorry, your postcode', response.content)
+
+    def test_inactive_court(self):
+        court = Court.objects.create(
+            name="Example2 Court",
+            lat=0.0,
+            lon=0.0,
+            displayed=False,
+        )
+        c = Client()
+        response = c.get('/search/results?q=Example2+Court')
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('<div class="search-results">', response.content)
 
     def test_partial_postcode(self):
         c = Client()

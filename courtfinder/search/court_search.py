@@ -56,6 +56,7 @@ class CourtSearch:
             SELECT *,
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
               FROM search_court as c
+              WHERE c.displayed
              ORDER BY distance
         """, [lon, lat])
         if area_of_law.lower() != 'all':
@@ -127,4 +128,5 @@ class CourtSearch:
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
 
-        return results
+        return [result for result in results if result.displayed]
+
