@@ -83,6 +83,11 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Example')
         self.assertIn("Hobbittown", response.content)
 
+    def test_search_space_in_name(self):
+        c = Client()
+        response = c.get('/search/results?q=Example+Court')
+        self.assertIn("Hobbittown", response.content)
+
     def test_results_no_query(self):
         c = Client()
         response = c.get('/search/results?q=')
