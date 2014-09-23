@@ -120,7 +120,7 @@ def format_results(results):
 
 def results_html(request):
     if 'q' in request.GET:
-        query = re.sub(whitespace_regex, '', request.GET['q'])
+        query = request.GET.get('q','').strip()
 
         if query == "":
             return redirect(reverse('address-view')+'?error=1')
