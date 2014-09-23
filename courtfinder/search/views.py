@@ -133,7 +133,7 @@ def results_html(request):
         })
     elif 'postcode' in request.GET:
         postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
-        area_of_law = re.sub(whitespace_regex, '', request.GET.get('area_of_law','All'))
+        area_of_law = request.GET.get('area_of_law','All').strip()
 
         # error handling
         if postcode == '':
