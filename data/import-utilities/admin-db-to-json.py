@@ -7,11 +7,11 @@ def courts():
     all_courts = []
 
     cur = conn.cursor()
-    cur.execute("SELECT name, court_number, slug, latitude, longitude FROM courts")
+    cur.execute("SELECT name, display, court_number, slug, latitude, longitude FROM courts")
     rows = cur.fetchall()
 
     for row in rows:
-        name, court_number, slug, lat, lon = row
+        name, display, court_number, slug, lat, lon = row
 
         if name == None or slug == None or lat == None or lon == None:
             print "- %s" % name
@@ -27,6 +27,7 @@ def courts():
         # bring it all together
         all_courts.append({
             "name": name,
+            "display": display,
             "court_number": court_number,
             "slug": slug,
             "lat": str(lat),
@@ -65,7 +66,7 @@ def contacts_for_court( slug ):
     return contacts
 
 
-def court_types_for_court( slug ):    
+def court_types_for_court( slug ):
     # court types for court
     cur = conn.cursor()
     sql = """SELECT ct.name as court_type
@@ -121,11 +122,11 @@ def areas_of_law_for_court( slug ):
 
 def postcodes_for_court( slug ):
     cur = conn.cursor()
-    sql = """SELECT pc.postcode 
+    sql = """SELECT pc.postcode
                FROM postcode_courts pc,
                     courts c
               WHERE pc.court_id = c.id
-                AND c.slug = '%s'""" % slug       
+                AND c.slug = '%s'""" % slug
 
     cur.execute(sql)
     postcodes = [p[0] for p in cur.fetchall()]
@@ -135,13 +136,13 @@ def addresses_for_court( slug ):
     # addresses for court
     cur = conn.cursor()
     sql = """SELECT t.name as town,
-                    at.name as address_type, 
+                    at.name as address_type,
                     a.address_line_1,
                     a.address_line_2,
                     a.address_line_3,
                     a.address_line_4,
-                    a.postcode 
-               FROM courts as c, 
+                    a.postcode
+               FROM courts as c,
                     address_types as at,
                     addresses as a,
                     towns as t
@@ -187,7 +188,7 @@ def town_county_country():
     country_names = cur.fetchall()
 
     for country_id, country_name in country_names:
-        cur.execute("""SELECT co.id, co.name 
+        cur.execute("""SELECT co.id, co.name
                          FROM countries as c,
                               counties as co
                         WHERE co.country_id = c.id
@@ -196,7 +197,7 @@ def town_county_country():
         counties = []
         county_names = cur.fetchall()
         for county_id, county_name in county_names:
-            cur.execute("""SELECT t.name 
+            cur.execute("""SELECT t.name
                              FROM counties as c,
                                   towns as t
                             WHERE t.county_id = c.id
@@ -210,7 +211,7 @@ def town_county_country():
 
         countries.append({
             "name": country_name,
-            "counties": counties 
+            "counties": counties
         })
 
     write_to_json("countries", countries)
