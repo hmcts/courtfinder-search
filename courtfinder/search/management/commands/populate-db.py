@@ -46,7 +46,7 @@ class Command(BaseCommand):
                 admin_id=court_obj['admin_id'],
                 name=court_obj['name'],
                 slug=court_obj['slug'],
-                displayed=True,
+                displayed=court_obj['display'],
                 lat=court_obj['lat'],
                 lon=court_obj['lon'],
                 number=court_obj['court_number']
@@ -102,4 +102,3 @@ class Command(BaseCommand):
                     court=court,
                     postcode=postcode
                 )
-

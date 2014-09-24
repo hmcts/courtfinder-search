@@ -1,11 +1,33 @@
+import json
+import decimal
+import re
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from search.models import Court, AreaOfLaw, CourtAreasOfLaw
 from search.court_search import CourtSearch
 from search.rules import Rules
-import json
-import decimal
+
+areas_of_law_description = {
+    "Adoption": "Applying to adopt a child.",
+    "Bankruptcy": "Declaring bankruptcy or being made bankrupt.",
+    "Civil partnership": "Ending a civil partnership.",
+    "Children": "Child contact issues and disputes over maintenance payments.",
+    "Crime": "Being accused of a crime, being a victim or witness.",
+    "Divorce": "Ending a marriage.",
+    "Domestic violence": "Violence in the home.",
+    "Employment": "Workplace disputes including pay, redundancy and discrimination.",
+    "Forced marriage": "Being made to marry against your will.",
+    "Housing possession": "Evictions and rental disputes.",
+    "High court": "",
+    "Immigration": "Seeking asylum, establishing right to live in the UK and appealing deportation.",
+    "Money claims": "Small claims, consumer claims, negligence and personal injury claims.",
+    "Probate": "Will settlement and disputes.",
+    "Social security": "Problems with benefits, entitlement, assessment and decisions."
+}
+
+whitespace_regex = re.compile(r'\s+')
 
 def index(request):
     return render(request, 'search/index.jinja')
@@ -25,7 +47,12 @@ def search_type(request):
 def search_by_postcode(request):
     postcode_requested = request.GET.get('postcode', None)
     area_of_law_requested = request.GET.get('area_of_law', None)
-    areas_of_law = AreaOfLaw.objects.all()
+    areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
+
+    aol_with_copy = []
+    for aol in areas_of_law:
+        aol.description = areas_of_law_description[aol.name]
+
     return render(request, 'search/postcode.jinja', {
      'areas_of_law': areas_of_law,
      'area_of_law': area_of_law_requested,
@@ -93,7 +120,7 @@ def format_results(results):
 
 def results_html(request):
     if 'q' in request.GET:
-        query = request.GET['q'].strip()
+        query = request.GET.get('q','').strip()
 
         if query == "":
             return redirect(reverse('address-view')+'?error=1')
@@ -105,7 +132,7 @@ def results_html(request):
             'search_results': format_results(results)
         })
     elif 'postcode' in request.GET:
-        postcode = request.GET.get('postcode', '').strip()
+        postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
         area_of_law = request.GET.get('area_of_law','All').strip()
 
         # error handling
@@ -134,8 +161,8 @@ def results_html(request):
 
 def results_json(request):
     if 'postcode' in request.GET and 'area_of_law' in request.GET:
-        postcode = request.GET.get('postcode', '').strip()
-        area_of_law = request.GET.get('area_of_law','All').strip()
+        postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
+        area_of_law = re.sub(whitespace_regex, '', request.GET.get('area_of_law','All'))
         directive = Rules.for_postcode(postcode, area_of_law)
         if directive['action'] == 'redirect':
             return redirect(directive['target'])

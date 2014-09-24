@@ -56,7 +56,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -104,7 +104,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -163,7 +163,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -211,7 +211,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -255,7 +255,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -309,7 +309,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -352,7 +352,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -396,7 +396,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -677,7 +677,7 @@
                 "councils": [],
                 "name": "Housing possession"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -740,7 +740,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -784,7 +784,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -827,7 +827,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -886,7 +886,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -924,7 +924,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -970,7 +970,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1014,7 +1014,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1057,7 +1057,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1121,7 +1121,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1169,7 +1169,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1218,7 +1218,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1276,7 +1276,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -1330,7 +1330,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -1419,7 +1424,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2217,7 +2222,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2270,7 +2275,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2314,7 +2319,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2362,7 +2367,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2400,7 +2405,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2444,7 +2449,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2514,7 +2519,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2566,7 +2571,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2645,7 +2650,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2683,7 +2688,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2736,7 +2741,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2779,7 +2784,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2840,7 +2845,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2878,7 +2883,12 @@
         "court_number": null,
         "lon": "-0.1298714803233022",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -2927,7 +2937,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -2965,7 +2975,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3055,7 +3065,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3145,7 +3155,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3582,6 +3592,7 @@
             "SM13LA"
         ],
         "areas_of_law": [
+<<<<<<< HEAD
             {
                 "councils": [
                     "Merton Borough Council",
@@ -3610,6 +3621,8 @@
                 ],
                 "name": "Adoption"
             },
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
             {
                 "councils": [
                     "Merton Borough Council",
@@ -3687,6 +3700,69 @@
                 "number": "702615 Bury 2"
             }
         ],
+<<<<<<< HEAD
+=======
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Bury",
+                "type": "Visiting",
+                "postcode": "BL9 0HX",
+                "address": "Tenters Street\n\n\n"
+            },
+            {
+                "town": "Bury",
+                "type": "Postal",
+                "postcode": "BL9 0HX",
+                "address": "Bury County Court\nTenters Street\n\n"
+            }
+        ],
+        "lat": "53.59303476577875",
+        "slug": "bury-county-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Bury County Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0161  447 8699"
+            },
+            {
+                "sort": 5,
+                "type": "Fax",
+                "number": "01264 347898"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 4,
+                "type": "Bailiffs",
+                "number": "07771 942 527"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 6,
+                "type": "DX",
+                "number": "702615 Bury 2"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 156,
         "lon": "-2.305435310889716",
         "postcodes": [
@@ -3767,7 +3843,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3820,7 +3896,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3878,7 +3954,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -3921,7 +3997,14 @@
                 "councils": [],
                 "name": "Employment"
             }
+<<<<<<< HEAD
         ]
+    },
+    {
+        "addresses": [
+=======
+        ],
+        "display": true
     },
     {
         "addresses": [
@@ -3932,6 +4015,22 @@
                 "address": "Kings Court\n5A New Walk\n\n"
             }
         ],
+        "lat": "52.62965666076453",
+        "slug": "leicester-employment-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Leicester Employment Tribunal",
+        "contacts": [
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "town": "Leicester",
+                "type": "Visiting",
+                "postcode": "LE1 6TE",
+                "address": "Kings Court\n5A New Walk\n\n"
+            }
+        ],
+<<<<<<< HEAD
         "admin_id": 3390,
         "lat": "52.62965666076453",
         "slug": "leicester-employment-tribunal",
@@ -3940,12 +4039,19 @@
         ],
         "name": "Leicester Employment Tribunal",
         "contacts": [
+=======
+        "court_number": null,
+        "lon": "-1.129506738274209",
+        "postcodes": [],
+        "areas_of_law": [
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
             {
                 "sort": 0,
                 "type": "Enquiries",
                 "number": "0116 255 0099"
             }
         ],
+<<<<<<< HEAD
         "court_number": null,
         "lon": "-1.129506738274209",
         "postcodes": [],
@@ -3972,6 +4078,25 @@
             }
         ],
         "admin_id": 2826,
+=======
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "London",
+                "type": "Visiting",
+                "postcode": "",
+                "address": "4 Belmarsh Road\nThamesmead\n\n"
+            },
+            {
+                "town": "London",
+                "type": "Postal",
+                "postcode": "SE10 8PE",
+                "address": "Belmarsh Magistrates' Court\n9 Blackheath Road\n\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "51.496",
         "slug": "belmarsh-magistrates-court",
         "court_types": [
@@ -4003,7 +4128,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4044,6 +4169,7 @@
         "court_number": null,
         "lon": "-1.895528937739964",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": [
             {
                 "councils": [],
@@ -4088,12 +4214,14 @@
         "court_number": null,
         "lon": "1.300104393779784",
         "postcodes": [],
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "areas_of_law": [
             {
                 "councils": [],
-                "name": "Employment"
+                "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4110,7 +4238,60 @@
                 "address": "HMCTS Sutton\nCopthall House\n9 The Pavement\nGrove Road"
             }
         ],
+<<<<<<< HEAD
         "admin_id": 3387,
+        "lat": "51.46281920524684",
+        "slug": "bexleyheath-social-security-and-child-support-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Bexleyheath Social Security and Child Support Tribunal",
+=======
+        "lat": "52.62196207289519",
+        "slug": "norwich-employment-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Norwich Employment Tribunal",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01284 762171"
+            },
+            {
+                "sort": 1,
+                "type": "Fax",
+                "number": "01284 706064"
+            }
+        ],
+        "court_number": null,
+<<<<<<< HEAD
+        "lon": "0.1325520326102995",
+=======
+        "lon": "1.300104393779784",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Employment"
+            }
+        "display": true,
+    },
+    {
+        "addresses": [
+            {
+                "town": "Bradford",
+                "type": "Visiting",
+                "postcode": "BD1 1LA",
+                "address": "Bradford and Keighley Magistrates' Court and Family Court Hearing Centre\nThe Tyrls\n\n"
+            }
+        ],
+<<<<<<< HEAD
+        "admin_id": 2856,
+=======
         "lat": "51.46281920524684",
         "slug": "bexleyheath-social-security-and-child-support-tribunal",
         "court_types": [
@@ -4137,7 +4318,8 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        ],
+        "display": true
     },
     {
         "addresses": [
@@ -4148,7 +4330,7 @@
                 "address": "Bradford and Keighley Magistrates' Court and Family Court Hearing Centre\nThe Tyrls\n\n"
             }
         ],
-        "admin_id": 2856,
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "53.79176751580426",
         "slug": "bradford-and-keighley-magistrates-court-and-family-court",
         "court_types": [
@@ -4200,7 +4382,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4231,7 +4413,12 @@
         "court_number": 6922,
         "lon": "-1.894965386736062",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -4305,7 +4492,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4364,7 +4551,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4418,7 +4605,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -4471,7 +4663,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4529,7 +4721,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4555,7 +4747,12 @@
         "court_number": null,
         "lon": "-1.599255970794555",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -4596,7 +4793,12 @@
         "court_number": null,
         "lon": "-0.5823175221210912",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -4661,7 +4863,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4705,7 +4907,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4753,7 +4955,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4812,7 +5014,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4859,7 +5061,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -4912,7 +5114,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5002,7 +5204,11 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": true
     },
     {
         "addresses": [
@@ -5019,6 +5225,52 @@
                 "address": "PO Box 14620\n\n\n"
             }
         ],
+        "lat": "52.92126131589967",
+        "slug": "derby-social-security-and-child-support-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Derby Social Security and Child Support Tribunal",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0300 123 0736"
+            },
+            {
+                "sort": 1,
+                "type": "Fax",
+                "number": "0121 450 6392"
+            }
+        ],
+        "court_number": null,
+        "lon": "-1.482408711422688",
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Social security"
+            }
+        ],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+    },
+    {
+        "addresses": [
+            {
+                "town": "Brecon",
+                "type": "Visiting",
+                "postcode": "LD3 7HR",
+                "address": "Brecon Law Courts\nCambrian Way\n\n"
+            },
+            {
+                "town": "Merthyr Tydfil",
+                "type": "Postal",
+                "postcode": "CF47 8BH",
+                "address": "Merthyr Tydfil Combined Courts\nThe Law Courts\nGlebeland Place\n"
+            }
+        ],
+<<<<<<< HEAD
         "admin_id": 3366,
         "lat": "52.92126131589967",
         "slug": "derby-social-security-and-child-support-tribunal",
@@ -5064,6 +5316,8 @@
             }
         ],
         "admin_id": 2857,
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "51.94481593363385",
         "slug": "brecon-law-courts",
         "court_types": [],
@@ -5160,7 +5414,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5248,7 +5502,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5307,7 +5561,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5360,7 +5614,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5418,7 +5672,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5504,7 +5758,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5673,7 +5927,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5726,7 +5980,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5768,7 +6022,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5816,7 +6070,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5859,7 +6113,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -5903,7 +6157,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6054,7 +6308,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6107,7 +6361,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6160,7 +6414,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6201,7 +6455,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6244,7 +6498,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6302,7 +6556,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6340,7 +6594,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6632,7 +6886,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6690,7 +6944,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6930,7 +7184,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -6987,7 +7241,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7243,7 +7497,7 @@
                 ],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7314,7 +7568,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7378,7 +7632,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7422,7 +7676,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7476,7 +7730,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7539,7 +7793,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7577,7 +7831,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7631,7 +7885,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7694,7 +7948,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7752,7 +8006,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7799,7 +8053,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7847,7 +8101,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7891,7 +8145,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -7944,7 +8198,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8044,7 +8298,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8093,7 +8347,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8172,7 +8426,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8231,7 +8485,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8274,7 +8528,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8349,7 +8603,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8393,7 +8647,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8431,7 +8685,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8495,7 +8749,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8548,7 +8802,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8575,7 +8829,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8634,7 +8888,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8723,7 +8977,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8782,7 +9036,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8828,7 +9082,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8912,7 +9166,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -8971,7 +9225,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9469,7 +9723,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9528,7 +9782,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9586,7 +9840,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9635,6 +9889,7 @@
         "lon": "0.4759906569327328",
         "postcodes": [],
         "areas_of_law": [
+<<<<<<< HEAD
             {
                 "councils": [],
                 "name": "Crime"
@@ -9657,6 +9912,30 @@
             }
         ],
         "admin_id": 2917,
+=======
+            {
+                "councils": [],
+                "name": "Crime"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Chichester",
+                "type": "Visiting",
+                "postcode": "PO19 1YE",
+                "address": "6 Market Avenue\n\n\n"
+            },
+            {
+                "town": "Brighton",
+                "type": "Postal",
+                "postcode": "BN2 0LG",
+                "address": "Brighton Magistrates' Court\nThe Law Courts\nEdwards Street\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "50.83325142382718",
         "slug": "chichester-magistrates-court",
         "court_types": [
@@ -9708,7 +9987,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9766,7 +10045,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -9997,7 +10276,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10071,7 +10350,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10177,7 +10456,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10241,7 +10520,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10310,7 +10589,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -10384,7 +10668,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10447,7 +10731,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10591,7 +10875,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10644,7 +10928,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10723,7 +11007,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10771,7 +11055,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10829,7 +11113,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -10918,7 +11202,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11003,7 +11287,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11081,7 +11365,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11145,7 +11429,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11193,7 +11477,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11229,7 +11513,12 @@
         "court_number": null,
         "lon": "-4.105463543393149",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -11323,7 +11612,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11380,7 +11669,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11433,7 +11722,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11542,7 +11831,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11605,7 +11894,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11657,7 +11946,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11728,7 +12017,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11788,7 +12077,12 @@
                 "councils": [],
                 "name": "Children"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -11863,7 +12157,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -11933,7 +12227,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12013,7 +12307,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12058,7 +12352,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12122,7 +12416,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12166,7 +12460,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12245,7 +12539,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12308,12 +12602,15 @@
         "court_number": 2578,
         "lon": "-0.4058790072113536",
         "postcodes": [],
+<<<<<<< HEAD
+=======
         "areas_of_law": [
             {
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        ],
+        "display": true
     },
     {
         "addresses": [
@@ -12324,7 +12621,6 @@
                 "address": " Abbey Road\n\n\n"
             }
         ],
-        "admin_id": 2964,
         "lat": "54.11652236284811",
         "slug": "furness-magistrates-court",
         "court_types": [
@@ -12350,6 +12646,87 @@
             {
                 "sort": null,
                 "type": "DX",
+                "number": "63909 Barrow-in-Furness 2"
+            }
+        ],
+        "court_number": 1398,
+        "lon": "-3.227577428813617",
+        "postcodes": [],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Crime"
+            }
+        "display": true,
+    },
+    {
+        "addresses": [
+            {
+<<<<<<< HEAD
+                "town": "Barrow in Furness",
+                "type": "Visiting",
+                "postcode": "LA14 5QX",
+                "address": " Abbey Road\n\n\n"
+            }
+        ],
+        "admin_id": 2964,
+        "lat": "54.11652236284811",
+        "slug": "furness-magistrates-court",
+        "court_types": [
+            "Magistrates Court"
+        ],
+        "name": "Furness Magistrates' Court",
+=======
+                "town": "Barnstaple",
+                "type": "Visiting",
+                "postcode": "EX31 1DX",
+                "address": "Barnstaple County Court and Family Court hearing centre\n8th Floor\nThe Law Courts\nCivic Centre"
+            }
+        ],
+        "lat": "51.08134299066393",
+        "slug": "barnstaple-county-court-and-family-court",
+        "court_types": [
+            "County Court",
+            "Family court"
+        ],
+        "name": "Barnstaple County Court and Family Court",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01271 340 410"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 4,
+                "type": "Civil fax",
+                "number": "0870 324 0129"
+            },
+            {
+                "sort": 5,
+                "type": "Family fax",
+                "number": "0870 324 0130"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+<<<<<<< HEAD
                 "number": "63909 Barrow-in-Furness 2"
             }
         ],
@@ -12416,6 +12793,10 @@
                 "type": "DX",
                 "number": "98560 Barnstaple 2"
             }
+=======
+                "number": "98560 Barnstaple 2"
+            }
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         ],
         "court_number": 119,
         "lon": "-4.065658583070042",
@@ -12494,7 +12875,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12553,7 +12934,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12617,7 +12998,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12671,7 +13052,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12744,7 +13125,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12828,7 +13209,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12871,7 +13252,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12939,7 +13320,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -12982,7 +13363,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13026,7 +13407,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13087,7 +13468,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13405,7 +13786,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13448,7 +13829,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13527,7 +13908,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13593,7 +13974,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13674,7 +14055,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13733,7 +14114,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -13862,7 +14243,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14267,7 +14648,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14313,7 +14694,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14366,7 +14747,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14424,7 +14805,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14559,7 +14940,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14618,7 +14999,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14662,7 +15043,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14716,7 +15097,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14773,7 +15154,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14821,7 +15202,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -14874,7 +15255,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15449,7 +15830,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15503,7 +15884,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15551,7 +15932,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15604,7 +15985,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15699,7 +16080,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15794,7 +16175,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15832,7 +16213,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15886,7 +16267,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15950,7 +16331,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -15997,7 +16378,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16041,7 +16422,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16104,7 +16485,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16151,7 +16532,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16198,7 +16579,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16246,7 +16627,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16475,7 +16856,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16533,7 +16914,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16596,7 +16977,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16654,7 +17035,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16717,6 +17098,7 @@
             {
                 "councils": [],
                 "name": "Crime"
+<<<<<<< HEAD
             }
         ]
     },
@@ -16730,6 +17112,21 @@
             }
         ],
         "admin_id": 3057,
+=======
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Luton",
+                "type": "Visiting",
+                "postcode": "LU1 2AA",
+                "address": "7 George Street\n\n\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "51.87796790462835",
         "slug": "luton-crown-court",
         "court_types": [
@@ -16781,7 +17178,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16937,7 +17334,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -16995,7 +17392,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17090,7 +17487,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17233,7 +17630,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17302,7 +17699,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17387,7 +17784,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17451,7 +17848,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17494,7 +17891,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17552,7 +17949,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17598,6 +17995,7 @@
             {
                 "councils": [],
                 "name": "Probate"
+<<<<<<< HEAD
             }
         ]
     },
@@ -17611,6 +18009,21 @@
             }
         ],
         "admin_id": 3064,
+=======
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Manchester",
+                "type": "Visiting",
+                "postcode": "M60 1PR",
+                "address": "Crown Square\n\n\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "53.48012232694553",
         "slug": "manchester-and-salford-magistrates-court",
         "court_types": [
@@ -17637,7 +18050,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17680,7 +18093,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17728,7 +18141,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17781,7 +18194,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17861,7 +18274,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -17946,7 +18359,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18000,7 +18413,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18049,7 +18462,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18169,7 +18582,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18245,7 +18658,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18324,7 +18737,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18382,7 +18795,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18420,7 +18833,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18488,7 +18901,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18547,7 +18960,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18684,7 +19097,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -18961,7 +19374,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19025,7 +19438,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19089,7 +19502,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19247,7 +19660,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19290,7 +19703,12 @@
         "court_number": 442,
         "lon": "-0.873713796762021",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -19338,7 +19756,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19397,7 +19815,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19542,7 +19960,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19589,7 +20007,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19636,7 +20054,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19695,7 +20113,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19758,7 +20176,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19839,7 +20257,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -19911,7 +20329,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20147,7 +20565,7 @@
                 ],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20242,7 +20660,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20285,7 +20703,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20354,7 +20772,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20441,7 +20859,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20504,7 +20922,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20567,7 +20985,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20620,7 +21038,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20678,7 +21096,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20735,7 +21153,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20809,7 +21227,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20855,7 +21273,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20932,7 +21350,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -20983,7 +21401,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21080,7 +21498,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21133,7 +21551,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21351,7 +21769,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21404,7 +21822,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21457,7 +21875,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21510,7 +21928,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21734,7 +22152,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21782,7 +22200,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21846,7 +22264,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -21990,7 +22408,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22078,7 +22496,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22126,7 +22544,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22184,7 +22602,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22329,7 +22747,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22382,7 +22800,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22441,7 +22859,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22500,7 +22918,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22584,7 +23002,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22632,7 +23050,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22685,7 +23103,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22738,7 +23156,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22791,7 +23209,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -22866,7 +23289,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22897,7 +23320,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -22945,7 +23368,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23014,7 +23437,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23057,7 +23480,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23105,7 +23528,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23179,7 +23602,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23220,7 +23643,12 @@
         "court_number": null,
         "lon": "-0.1096764407820697",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -23273,7 +23701,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23319,7 +23747,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23385,7 +23813,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23438,7 +23866,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23486,7 +23914,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23534,7 +23962,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23602,7 +24030,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23617,6 +24045,7 @@
                 "type": "Postal",
                 "postcode": "S3 8YR",
                 "address": "PO Box 832\nThe Law Courts\n50 West Bar\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3149,
@@ -23669,6 +24098,79 @@
             "County Court"
         ],
         "name": "Weston-Super-Mare County Court and Family Court",
+=======
+            }
+        ],
+        "lat": "53.38555692960198",
+        "slug": "sheffield-probate-sub-registry",
+        "court_types": [],
+        "name": "Sheffield Probate Sub-Registry",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 5,
+                "type": "Fax",
+                "number": "0870 739 5826"
+            },
+            {
+                "sort": 0,
+                "type": "Appointments",
+                "number": "01934 528700"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+<<<<<<< HEAD
+                "number": "152361 Weston-super-Mare 5"
+            }
+        ],
+=======
+                "number": "742916 Sheffield 6"
+            }
+        ],
+        "court_number": null,
+        "lon": "-1.468738846717915",
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Probate"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Weston-Super-Mare",
+                "type": "Visiting",
+                "postcode": "BS22 7BB",
+                "address": "Weston Super Mare County Court and Family Court hearing centre\nNorth Somerset Courthouse\nThe Hedges\nSt Georges"
+            }
+        ],
+        "lat": "51.3608031593535",
+        "slug": "weston-super-mare-county-court-and-family-court",
+        "court_types": [
+            "Magistrates Court",
+            "Family court",
+            "County Court"
+        ],
+        "name": "Weston-Super-Mare County Court and Family Court",
         "contacts": [
             {
                 "sort": 5,
@@ -23701,6 +24203,7 @@
                 "number": "152361 Weston-super-Mare 5"
             }
         ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 370,
         "lon": "-2.90509473272019",
         "postcodes": [
@@ -23814,7 +24317,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23857,7 +24360,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23904,7 +24407,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -23952,7 +24455,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24005,7 +24508,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24067,7 +24570,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24152,7 +24655,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24232,7 +24735,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24313,7 +24816,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24449,7 +24952,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24502,7 +25005,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24570,7 +25073,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24623,7 +25126,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24666,7 +25169,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24714,7 +25217,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24778,7 +25281,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24862,7 +25365,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -24941,7 +25449,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -24994,7 +25502,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25047,7 +25555,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25106,7 +25614,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25159,7 +25667,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25365,7 +25873,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25852,7 +26360,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25916,7 +26424,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -25973,7 +26481,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26036,7 +26544,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26196,7 +26704,7 @@
                 "councils": [],
                 "name": "Adoption"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26285,7 +26793,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26326,7 +26834,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26523,7 +27031,7 @@
                 ],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26571,7 +27079,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26624,7 +27132,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26682,7 +27190,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26735,7 +27243,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26801,7 +27309,7 @@
                 "councils": [],
                 "name": "Bankruptcy"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26859,7 +27367,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -26890,7 +27398,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -26936,7 +27449,12 @@
         "court_number": null,
         "lon": "-0.1096764407820697",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27007,7 +27525,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27071,7 +27594,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27117,7 +27640,12 @@
         "court_number": null,
         "lon": "-0.1096764407820697",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27183,7 +27711,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27219,7 +27752,12 @@
         "court_number": null,
         "lon": "-0.8999651365094131",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27277,7 +27815,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27340,7 +27878,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27404,7 +27942,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27447,7 +27985,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27501,7 +28039,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27572,7 +28110,12 @@
         "court_number": null,
         "lon": "-0.1096764407820697",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27643,7 +28186,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27694,7 +28242,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27741,7 +28294,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27799,7 +28352,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27845,7 +28398,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -27891,7 +28444,12 @@
         "court_number": null,
         "lon": "-0.1137411619116455",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27922,7 +28480,12 @@
         "court_number": null,
         "lon": "-1.297302390194685",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -27988,7 +28551,7 @@
                 "councils": [],
                 "name": "Bankruptcy"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28050,7 +28613,12 @@
         "court_number": null,
         "lon": "-2.989778078189362",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28081,7 +28649,12 @@
         "court_number": null,
         "lon": "-0.5823175221210912",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28117,7 +28690,12 @@
         "court_number": null,
         "lon": "-2.957008545504219",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28225,7 +28803,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28319,7 +28897,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28382,7 +28960,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28441,7 +29019,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28482,7 +29060,12 @@
         "court_number": null,
         "lon": "-0.8999654576044167",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28523,7 +29106,12 @@
         "court_number": null,
         "lon": "-0.8999654576044167",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28582,7 +29170,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28625,7 +29213,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28651,7 +29239,12 @@
         "court_number": null,
         "lon": "-1.341316714558609",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28715,7 +29308,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28746,7 +29339,12 @@
         "court_number": null,
         "lon": "-0.1408178801553836",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28860,7 +29458,7 @@
                 "councils": [],
                 "name": "Housing possession"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -28916,7 +29514,12 @@
         "court_number": null,
         "lon": "-3.785143661768767",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -28968,7 +29571,12 @@
         "court_number": null,
         "lon": "-2.252201156281677",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29011,7 +29619,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29057,7 +29665,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29088,7 +29696,12 @@
         "court_number": 5,
         "lon": "-0.114516",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29137,7 +29750,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29215,7 +29828,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29286,7 +29899,12 @@
         "court_number": null,
         "lon": "-1.895659677415415",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29317,7 +29935,12 @@
         "court_number": null,
         "lon": "0.1857399595076986",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29376,7 +29999,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29654,7 +30277,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29725,7 +30348,12 @@
         "court_number": null,
         "lon": "-2.252672912883409",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29761,7 +30389,12 @@
         "court_number": null,
         "lon": "0.719564129610343",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29792,7 +30425,12 @@
         "court_number": null,
         "lon": "0.0002911951288142492",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -29835,7 +30473,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29888,7 +30526,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29924,7 +30562,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -29961,7 +30599,12 @@
         "court_number": null,
         "lon": "-2.694466472478073",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -30149,7 +30792,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -30347,7 +30990,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -30564,6 +31207,7 @@
                     "Hillingdon Borough Council"
                 ],
                 "name": "Divorce"
+<<<<<<< HEAD
             },
             {
                 "councils": [],
@@ -30659,6 +31303,8 @@
                 "sort": 2,
                 "type": "Pay a fine",
                 "number": "0300 790 9901"
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
             },
             {
                 "sort": 7,
@@ -30681,6 +31327,106 @@
                 "number": "702080 Barnsley 3"
             }
         ],
+<<<<<<< HEAD
+=======
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Barnsley",
+                "type": "Postal",
+                "postcode": "S70 2DW",
+                "address": "The Court House\nWestgate\n\n"
+            },
+            {
+                "town": "Barnsley",
+                "type": "Visiting",
+                "postcode": "S70  2HW",
+                "address": "The Court House\nWestgate\n\n"
+            }
+        ],
+        "lat": "53.55468225843697",
+        "slug": "barnsley-law-courts",
+        "court_types": [
+            "County Court",
+            "Magistrates Court",
+            "Family court"
+        ],
+        "name": "Barnsley Law Courts",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01226 320 000"
+            },
+            {
+                "sort": 13,
+                "type": "Fax",
+                "number": "01226 320 044"
+            },
+            {
+                "sort": 3,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 10,
+                "type": "Fine queries",
+                "number": "01226 320 001"
+            },
+            {
+                "sort": 8,
+                "type": "Magistrates' court",
+                "number": "01226 320 013"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 12,
+                "type": "Bailiffs",
+                "number": "07769 725 565"
+            },
+            {
+                "sort": 9,
+                "type": "Child maintenance",
+                "number": "01226 320 005"
+            },
+            {
+                "sort": 2,
+                "type": "Pay a fine",
+                "number": "0300 790 9901"
+            },
+            {
+                "sort": 7,
+                "type": "Civil and enforcement fax",
+                "number": "01226 320 044"
+            },
+            {
+                "sort": 11,
+                "type": "Magistrates' court fax",
+                "number": "01226 320 043"
+            },
+            {
+                "sort": 1,
+                "type": "Fine queries",
+                "number": "0114 252 1833"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "702080 Barnsley 3"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 2770,
         "lon": "-1.484375132259967",
         "postcodes": [
@@ -30805,7 +31551,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -30898,7 +31644,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31044,7 +31790,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31108,7 +31854,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31252,7 +31998,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31304,7 +32050,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31409,7 +32155,7 @@
                 "councils": [],
                 "name": "High court"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31887,7 +32633,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -31956,7 +32702,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -32080,7 +32826,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -32705,7 +33451,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -32874,7 +33620,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -33272,7 +34018,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -33399,6 +34145,7 @@
             "BN14"
         ],
         "areas_of_law": [
+<<<<<<< HEAD
             {
                 "councils": [],
                 "name": "High court"
@@ -33482,6 +34229,91 @@
                 "number": "97860 Guildford 5"
             },
             {
+=======
+            {
+                "councils": [],
+                "name": "High court"
+            },
+            {
+                "councils": [],
+                "name": "Bankruptcy"
+            },
+            {
+                "councils": [],
+                "name": "Housing possession"
+            },
+            {
+                "councils": [],
+                "name": "Money claims"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Staines",
+                "type": "Visiting",
+                "postcode": "TW18 1XH",
+                "address": "The Law Courts\nKnowle Green\n\n"
+            },
+            {
+                "town": "Guildford",
+                "type": "Postal",
+                "postcode": "GU1 4PS",
+                "address": "Guildford County Court and Family Court Hearing Centre\nThe Law Courts\nMary Road\n"
+            }
+        ],
+        "lat": "51.42909771827333",
+        "slug": "staines-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Staines County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01483 405 300"
+            },
+            {
+                "sort": 3,
+                "type": "Civil fax",
+                "number": "01264 347933"
+            },
+            {
+                "sort": 4,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 2,
+                "type": "Bailiffs",
+                "number": "01483 405 305"
+            },
+            {
+                "sort": 6,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+                "sort": 7,
+                "type": "DX",
+                "number": "98040 Staines 2"
+            },
+            {
+                "sort": 8,
+                "type": "DX",
+                "number": "97860 Guildford 5"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": 9,
                 "type": "Family fax",
                 "number": "01264 347934"
@@ -33583,7 +34415,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -33879,7 +34711,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -33888,6 +34720,7 @@
                 "type": "Visiting",
                 "postcode": "CV1 2SN",
                 "address": "140 Much Park Street\n\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 2926,
@@ -33991,6 +34824,110 @@
             "CV48",
             "CV22"
         ],
+=======
+            }
+        ],
+        "lat": "52.40558457792165",
+        "slug": "coventry-combined-court-centre",
+        "court_types": [
+            "Crown Court"
+        ],
+        "name": "Coventry Combined Court Centre",
+        "contacts": [
+            {
+                "sort": 7,
+                "type": "Fax",
+                "number": "0247 652 0443"
+            },
+            {
+                "sort": 0,
+                "type": "Civil and family",
+                "number": "0300 123 5577"
+            },
+            {
+                "sort": 4,
+                "type": "Criminal queries",
+                "number": "01926  682 411"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795 511"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 5,
+                "type": "Criminal queries",
+                "number": "01926 429 133"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "701580 Coventry 5"
+            }
+        ],
+        "court_number": 417,
+        "lon": "-1.506439493584936",
+        "postcodes": [
+            "CV11",
+            "CV14",
+            "CV15",
+            "CV13",
+            "CV12",
+            "CV21",
+            "CV23",
+            "CV78JP",
+            "CV78NA",
+            "CV83AS",
+            "CV78DF",
+            "CV81NR",
+            "CV83AF",
+            "CV83FG",
+            "CV212LQ",
+            "CV47",
+            "CV36",
+            "CV35",
+            "CV34",
+            "CV33",
+            "CV32",
+            "CV31",
+            "CV25",
+            "CV24",
+            "CV78ER",
+            "CV79HZ",
+            "CV81PG",
+            "CV78EW",
+            "CV79LB",
+            "WV133",
+            "WV132",
+            "WV131",
+            "CV77",
+            "CV67",
+            "CV66",
+            "CV65",
+            "CV64",
+            "CV63",
+            "CV78DA",
+            "CV62",
+            "CV61",
+            "CV59",
+            "CV58",
+            "CV57",
+            "CV56",
+            "CV49",
+            "CV48",
+            "CV22"
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "areas_of_law": [
             {
                 "councils": [],
@@ -34037,7 +34974,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34229,7 +35166,7 @@
                 "councils": [],
                 "name": "High court"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34351,7 +35288,7 @@
                 ],
                 "name": "Adoption"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34508,7 +35445,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34587,7 +35524,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34723,7 +35660,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -34891,7 +35828,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35056,7 +35993,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35136,7 +36073,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35274,7 +36211,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35450,7 +36387,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35496,7 +36433,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35538,7 +36475,12 @@
         "court_number": null,
         "lon": "-4.139575100611581",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -35666,7 +36608,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -35829,7 +36771,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -36350,7 +37292,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -36610,7 +37552,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -36855,7 +37797,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37025,7 +37967,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37046,6 +37988,7 @@
                 "sort": 0,
                 "type": "Enquiries",
                 "number": "01495 238 200"
+<<<<<<< HEAD
             },
             {
                 "sort": 5,
@@ -37068,6 +38011,30 @@
                 "number": "01604 795511"
             },
             {
+=======
+            },
+            {
+                "sort": 5,
+                "type": "Fax",
+                "number": "0870 324 0167"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims",
+                "number": "0300 123 1372"
+            },
+            {
+                "sort": 4,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 2,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "DX",
                 "number": "99470 Blackwood 2"
@@ -37289,7 +38256,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37304,6 +38271,7 @@
                 "type": "Postal",
                 "postcode": "AL1 3JW",
                 "address": "St Albans County Court\nThe Court Building\nBricket Road\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3174,
@@ -37345,6 +38313,48 @@
                 "number": "97770 St Albans 2"
             }
         ],
+=======
+            }
+        ],
+        "lat": "51.75161888605037",
+        "slug": "st-albans-county-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "St Albans County Court",
+        "contacts": [
+            {
+                "sort": 1,
+                "type": "Fax",
+                "number": "0870 324 0127"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0300 123 5577"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "97770 St Albans 2"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 313,
         "lon": "-0.3355219865033228",
         "postcodes": [
@@ -37406,7 +38416,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37647,7 +38657,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37792,7 +38802,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -37807,6 +38817,7 @@
                 "type": "Postal",
                 "postcode": "GL1 2XG",
                 "address": "HMCTS Gloucestershire\nPO Box 9051\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3190,
@@ -37863,6 +38874,102 @@
             }
         ],
         "admin_id": 2860,
+        "lat": "51.50425554277229",
+        "slug": "bridgend-law-courts",
+        "court_types": [],
+        "name": "Bridgend Law Courts",
+=======
+            }
+        ],
+        "lat": "51.74558351094947",
+        "slug": "stroud-magistrates-court",
+        "court_types": [
+            "Magistrates Court"
+        ],
+        "name": "Stroud Magistrates' Court",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 8,
+                "type": "Magistrates' court",
+                "number": "01656 673 800"
+            },
+            {
+                "sort": 9,
+                "type": "Magistrates' court fax",
+                "number": "01656 668 981"
+            },
+            {
+                "sort": 7,
+                "type": "County Court fax",
+                "number": "0870 739 5940"
+            },
+            {
+                "sort": 1,
+                "type": "County Court",
+                "number": "01656 673 833"
+            },
+            {
+                "sort": 3,
+                "type": "Fixed penalties",
+                "number": "01745 812 683"
+            },
+            {
+                "sort": 0,
+                "type": "Pay a fine",
+                "number": "0300  790 9980"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 2,
+                "type": "Fine queries",
+                "number": "01633 645 112"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+<<<<<<< HEAD
+                "number": "99750 Bridgend 2"
+            }
+        ],
+=======
+                "number": "7598 Gloucester 3"
+            }
+        ],
+        "court_number": 1684,
+        "lon": "-2.214158632997737",
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Crime"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Bridgend",
+                "type": "Visiting",
+                "postcode": "CF31 4AJ",
+                "address": "The Law Courts\nSunnyside\n\n"
+            }
+        ],
         "lat": "51.50425554277229",
         "slug": "bridgend-law-courts",
         "court_types": [],
@@ -37924,6 +39031,7 @@
                 "number": "99750 Bridgend 2"
             }
         ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 146,
         "lon": "-3.58271812998101",
         "postcodes": [
@@ -38149,6 +39257,62 @@
                 "councils": [],
                 "name": "Children"
             }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Telford",
+                "type": "Visiting",
+                "postcode": "TF3 4JP",
+                "address": "Telford County Court and Family Court hearing centre\nTelford Square\nMalinsgate\nTown Centre"
+            }
+        ],
+        "lat": "52.67822371117691",
+        "slug": "telford-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Telford County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01952 238 280"
+            },
+            {
+                "sort": 5,
+                "type": "Fax",
+                "number": "01952 291 601"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 4,
+                "type": "Bailiffs",
+                "number": "01952 238 320"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795 511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "701976 Telford 3"
+            }
+<<<<<<< HEAD
         ]
     },
     {
@@ -38204,6 +39368,8 @@
                 "type": "DX",
                 "number": "701976 Telford 3"
             }
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         ],
         "court_number": 364,
         "lon": "-2.452256956866567",
@@ -38381,7 +39547,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -38546,7 +39712,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -38604,7 +39770,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -38737,7 +39903,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -38746,6 +39912,7 @@
                 "type": "Visiting",
                 "postcode": "WR1 1EQ",
                 "address": "The Shirehall\nForegate Street\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3249,
@@ -38807,6 +39974,68 @@
                 "number": "01264 347927"
             }
         ],
+=======
+            }
+        ],
+        "lat": "52.19694923858398",
+        "slug": "worcester-combined-court",
+        "court_types": [
+            "Crown Court"
+        ],
+        "name": "Worcester Combined Court",
+        "contacts": [
+            {
+                "sort": 3,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 2,
+                "type": "Small claims mediation",
+                "number": "01604 795 511"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01905 730 800"
+            },
+            {
+                "sort": 4,
+                "type": "Money claims fax",
+                "number": "0161  743 4026"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "721120 Worcester 11"
+            },
+            {
+                "sort": null,
+                "type": "County Court fax",
+                "number": "01264 347912 "
+            },
+            {
+                "sort": null,
+                "type": "Enforcement fax",
+                "number": "01264 347910 "
+            },
+            {
+                "sort": null,
+                "type": "Family fax",
+                "number": "01264 347911 "
+            },
+            {
+                "sort": null,
+                "type": "Crown Court fax",
+                "number": "0870 324 0277"
+            },
+            {
+                "sort": null,
+                "type": "Bailiffs fax",
+                "number": "01264 347927"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 380,
         "lon": "-2.221883334570114",
         "postcodes": [
@@ -39044,6 +40273,92 @@
                 "councils": [],
                 "name": "Money claims"
             }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Bournemouth",
+                "type": "Visiting",
+                "postcode": "BH7 7DS",
+                "address": "Bournemouth and Poole County Court and Family Court hearing centre\nCourts of Justice\nDeansleigh Road\n"
+            }
+        ],
+        "lat": "50.74795173073077",
+        "slug": "bournemouth-and-poole-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Bournemouth and Poole County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01202  502800"
+            },
+            {
+                "sort": 8,
+                "type": "Fax",
+                "number": "01202  502 801"
+            },
+            {
+                "sort": 11,
+                "type": "Crown Court fax",
+                "number": "01202  502 859"
+            },
+            {
+                "sort": 9,
+                "type": "Civil fax",
+                "number": "01202 502 835"
+            },
+            {
+                "sort": 10,
+                "type": "Family fax",
+                "number": "01202 502 838"
+            },
+            {
+                "sort": 4,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Phone conferencing",
+                "number": "01202 502 834"
+            },
+            {
+                "sort": 7,
+                "type": "Jury service",
+                "number": "01202 502 879"
+            },
+            {
+                "sort": 6,
+                "type": "Witness service",
+                "number": "01202 502 872"
+            },
+            {
+                "sort": 2,
+                "type": "Phone conferencing",
+                "number": "01202 502 837"
+            },
+            {
+                "sort": 3,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "98420 Bournemouth 4"
+            }
+<<<<<<< HEAD
         ]
     },
     {
@@ -39129,6 +40444,8 @@
                 "type": "DX",
                 "number": "98420 Bournemouth 4"
             }
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         ],
         "court_number": 139,
         "lon": "-1.816265545447414",
@@ -39329,7 +40646,7 @@
                 "councils": [],
                 "name": "Bankruptcy"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -39463,7 +40780,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -39570,7 +40887,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -39841,7 +41158,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -40091,7 +41408,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -40402,7 +41719,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -40555,7 +41872,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -40851,7 +42168,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -41135,7 +42452,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -41299,7 +42616,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -41519,7 +42836,7 @@
                 ],
                 "name": "Adoption"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -41812,7 +43129,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -41822,6 +43139,7 @@
                 "postcode": "LL55 2DF",
                 "address": "Caernarfon County Court and Family Court Hearing Centre\nLlanberis Road\n\n"
             }
+<<<<<<< HEAD
         ],
         "admin_id": 2880,
         "lat": "53.14042912271542",
@@ -41912,6 +43230,97 @@
             "LL360",
             "LL350"
         ],
+=======
+        ],
+        "lat": "53.14042912271542",
+        "slug": "caernarfon-county-court-and-family-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Caernarfon County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01286  684 600"
+            },
+            {
+                "sort": 4,
+                "type": "Fax",
+                "number": "01264 347958"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "702483 Caernarfon 2"
+            }
+        ],
+        "court_number": 159,
+        "lon": "-4.264334943933475",
+        "postcodes": [
+            "LL237",
+            "LL577TF",
+            "LL350LS",
+            "LL573",
+            "LL574",
+            "LL57",
+            "LL40",
+            "LL571",
+            "SY209",
+            "LL554",
+            "LL553",
+            "LL552",
+            "LL551",
+            "LL547",
+            "LL546",
+            "LL545",
+            "LL538",
+            "SA1470S",
+            "LL56",
+            "LL564JY",
+            "LL564TZ",
+            "LL537",
+            "LL536",
+            "LL535",
+            "LL520",
+            "LL519",
+            "LL499",
+            "LL486",
+            "LL476",
+            "LL538HN",
+            "FA334AR",
+            "LL462",
+            "LL452",
+            "LL442",
+            "LL432",
+            "LL421",
+            "LL414",
+            "LL413",
+            "LL402",
+            "LL369",
+            "LL372",
+            "LL382",
+            "LL401",
+            "LL391",
+            "LL360",
+            "LL350"
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "areas_of_law": [
             {
                 "councils": [
@@ -41969,7 +43378,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -42239,7 +43648,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -42331,7 +43740,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -42536,7 +43945,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -42775,6 +44184,7 @@
                 "number": "01604 795511 "
             },
             {
+<<<<<<< HEAD
                 "sort": 4,
                 "type": "Money claims fax",
                 "number": "0161  743 4023"
@@ -42790,6 +44200,83 @@
                 "number": "97820 Aylesbury 10"
             }
         ],
+=======
+                "councils": [],
+                "name": "Money claims"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Aylesbury",
+                "type": "Visiting",
+                "postcode": "HP21 7QZ",
+                "address": "Walton Street\n\n\n"
+            },
+            {
+                "town": "Aylesbury",
+                "type": "Postal",
+                "postcode": "HP21 7QZ",
+                "address": "Aylesbury County Court and Family Court Hearing Centre\nWalton Street\n\n"
+            }
+        ],
+        "lat": "51.81078059044155",
+        "slug": "aylesbury-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Aylesbury County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Appointments",
+                "number": "01296 554 326"
+            },
+            {
+                "sort": 1,
+                "type": "Enquiries",
+                "number": "01296 554 327"
+            },
+            {
+                "sort": 6,
+                "type": "Fax",
+                "number": "01296 554 320"
+            },
+            {
+                "sort": 5,
+                "type": "Bailiffs",
+                "number": "01296 554 328"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims",
+                "number": "0300 123 1372"
+            },
+            {
+                "sort": 2,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+                "sort": 4,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "97820 Aylesbury 10"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "97820 Aylesbury 10"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 113,
         "lon": "-0.8081708594220313",
         "postcodes": [
@@ -42883,7 +44370,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -43116,7 +44603,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -43352,7 +44839,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -43557,7 +45044,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -43791,7 +45278,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -44327,7 +45814,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -44534,7 +46021,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -44662,7 +46149,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45164,7 +46651,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45484,7 +46971,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45574,7 +47061,7 @@
                 "councils": [],
                 "name": "High court"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45765,7 +47252,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45844,7 +47331,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -45898,7 +47385,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -46024,7 +47516,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46109,7 +47601,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46199,7 +47691,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46240,7 +47732,12 @@
         "court_number": null,
         "lon": "-0.1096764407820697",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -46411,7 +47908,7 @@
                 "councils": [],
                 "name": "Bankruptcy"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46447,7 +47944,12 @@
         "court_number": null,
         "lon": "-3.02300290465086",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -46637,7 +48139,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46673,7 +48175,12 @@
         "court_number": null,
         "lon": "-3.109703548008371",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -46740,7 +48247,12 @@
         "court_number": null,
         "lon": "-3.785143661768767",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -46803,7 +48315,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -46850,7 +48362,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47103,7 +48615,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47150,7 +48662,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47213,7 +48725,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47260,7 +48772,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47368,7 +48880,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47475,6 +48987,8 @@
             "M345"
         ],
         "areas_of_law": [
+<<<<<<< HEAD
+=======
             {
                 "councils": [
                     "Bolton Borough Council",
@@ -47495,6 +49009,76 @@
                 "name": "Bankruptcy"
             },
             {
+                "councils": [],
+                "name": "Housing possession"
+            },
+            {
+                "councils": [],
+                "name": "Domestic violence"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Middlesbrough",
+                "type": "Visiting",
+                "postcode": "TS1 2AE",
+                "address": "The Law Courts\nRussell Street\n\n"
+            }
+        ],
+        "lat": "54.57521043220022",
+        "slug": "middlesbrough-county-court-at-teesside-combined-court",
+        "court_types": [
+            "County Court",
+            "Crown Court"
+        ],
+        "name": "Middlesbrough County Court at Teesside Combined Court",
+        "contacts": [
+            {
+                "sort": 12,
+                "type": "Fax",
+                "number": "01642 340 002"
+            },
+            {
+                "sort": 3,
+                "type": "Small claims mediation",
+                "number": "0191  201 2069"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation fax",
+                "number": "0191  201 2051"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01642 340 000"
+            },
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "sort": 10,
+                "type": "Witness service",
+                "number": "01642 343 018"
+            },
+            {
+                "sort": 9,
+                "type": "Jury service",
+                "number": "01642 340 005"
+            },
+            {
+<<<<<<< HEAD
                 "councils": [],
                 "name": "Housing possession"
             },
@@ -47583,6 +49167,28 @@
                 "number": "01642 343 047"
             },
             {
+=======
+                "sort": 2,
+                "type": "Enquiries",
+                "number": "01642 343 067"
+            },
+            {
+                "sort": 7,
+                "type": "Civil listing",
+                "number": "01642 340 003"
+            },
+            {
+                "sort": 8,
+                "type": "Criminal listing",
+                "number": "01642 343 042"
+            },
+            {
+                "sort": 11,
+                "type": "Disabled access",
+                "number": "01642 343 047"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "DX",
                 "number": "65152 Middlesbrough 2"
@@ -47706,7 +49312,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47846,7 +49452,7 @@
                 "councils": [],
                 "name": "Housing possession"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47904,7 +49510,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -47945,7 +49551,12 @@
         "court_number": null,
         "lon": "-0.8999654576044167",
         "postcodes": [],
+<<<<<<< HEAD
         "areas_of_law": []
+=======
+        "areas_of_law": [],
+        "display": true
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -48142,7 +49753,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -48789,7 +50400,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -48973,7 +50584,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -49047,7 +50658,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -49085,6 +50696,7 @@
                 "sort": null,
                 "type": "DX",
                 "number": "701889 Stourbridge 2"
+<<<<<<< HEAD
             }
         ],
         "court_number": 339,
@@ -49107,6 +50719,30 @@
             }
         ],
         "admin_id": 2863,
+=======
+            }
+        ],
+        "court_number": 339,
+        "lon": "-2.14296073675072",
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Bankruptcy"
+            }
+        ],
+        "display": false
+    },
+    {
+        "addresses": [
+            {
+                "town": "Brighton",
+                "type": "Visiting",
+                "postcode": "BN2 0RF",
+                "address": "William Street\n\n\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "50.82301624689145",
         "slug": "brighton-district-probate-registry",
         "court_types": [],
@@ -49141,7 +50777,14 @@
                 "councils": [],
                 "name": "Probate"
             }
+<<<<<<< HEAD
         ]
+    },
+    {
+        "addresses": [
+=======
+        ],
+        "display": true
     },
     {
         "addresses": [
@@ -49152,6 +50795,22 @@
                 "address": "Byron House\n3rd Floor\nMaid Marion Way\n"
             }
         ],
+        "lat": "52.95317454449913",
+        "slug": "nottingham-employment-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Nottingham Employment Tribunal",
+        "contacts": [
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "town": "Nottingham",
+                "type": "Visiting",
+                "postcode": "NG1 6HS",
+                "address": "Byron House\n3rd Floor\nMaid Marion Way\n"
+            }
+        ],
+<<<<<<< HEAD
         "admin_id": 3350,
         "lat": "52.95317454449913",
         "slug": "nottingham-employment-tribunal",
@@ -49160,12 +50819,19 @@
         ],
         "name": "Nottingham Employment Tribunal",
         "contacts": [
+=======
+        "court_number": null,
+        "lon": "-1.154745731496555",
+        "postcodes": [],
+        "areas_of_law": [
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
             {
                 "sort": 0,
                 "type": "Enquiries",
                 "number": "0115 947 5701"
             }
         ],
+<<<<<<< HEAD
         "court_number": null,
         "lon": "-1.154745731496555",
         "postcodes": [],
@@ -49186,6 +50852,19 @@
             }
         ],
         "admin_id": 3288,
+=======
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Aberystwyth",
+                "type": "Visiting",
+                "postcode": "SY23 1AS",
+                "address": "Aberystwyth Justice Centre \nY Lanfa\nTrefechan\n"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "lat": "52.40906995738605",
         "slug": "aberystwyth-justice-centre",
         "court_types": [],
@@ -49398,7 +51077,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -49545,7 +51224,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -49599,7 +51278,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -49750,6 +51429,58 @@
                 "councils": [],
                 "name": "Money claims"
             }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Bath",
+                "type": "Visiting",
+                "postcode": "BA1 5AF",
+                "address": "Bath County Court and Family Court hearing centre\nThe Law Courts\nNorth Parade Road\n"
+            },
+            {
+                "town": "Bath",
+                "type": "Postal",
+                "postcode": "BA1 0LF",
+                "address": "Bath County Court and Family Court\nP.O. Box 4302\nNorth Parade Road\n"
+            }
+        ],
+        "lat": "51.38081360237712",
+        "slug": "bath-county-court-and-family-court",
+        "court_types": [
+            "County Court",
+            "Family court"
+        ],
+        "name": "Bath County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01225 476 730"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "98580 Bath 2"
+            }
+<<<<<<< HEAD
         ]
     },
     {
@@ -49801,6 +51532,8 @@
                 "type": "DX",
                 "number": "98580 Bath 2"
             }
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         ],
         "court_number": 123,
         "lon": "-2.354283800295112",
@@ -49917,7 +51650,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -50095,7 +51828,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -50490,7 +52223,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -50499,6 +52232,7 @@
                 "type": "Visiting",
                 "postcode": "CF10 3BE",
                 "address": "Caradog House\n1-6 St Andrew's Place\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3351,
@@ -50551,6 +52285,84 @@
             "County Court"
         ],
         "name": "Llanelli County Court and Family Court",
+=======
+            }
+        ],
+        "lat": "51.48532678070784",
+        "slug": "wales-employment-tribunal",
+        "court_types": [
+            "Tribunal"
+        ],
+        "name": "Wales Employment Tribunal",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01554 757 171"
+            },
+            {
+                "sort": 5,
+                "type": "Fax",
+                "number": "01554 758 079"
+            },
+            {
+                "sort": 4,
+                "type": "Bailiffs",
+                "number": "01554 776 282"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+<<<<<<< HEAD
+                "number": "99510 Llanelli 2"
+            }
+        ],
+=======
+                "number": "33027 Cardiff"
+            }
+        ],
+        "court_number": null,
+        "lon": "-3.175177879806764",
+        "postcodes": [],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Employment"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Llanelli",
+                "type": "Visiting",
+                "postcode": "SA15 3AL",
+                "address": "Llanelli County Court and Family Court Hearing Centre\n2nd Floor\nCourt Buildings\nTown Hall Square"
+            }
+        ],
+        "lat": "51.6821143393409",
+        "slug": "llanelli-county-court-and-family-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Llanelli County Court and Family Court",
         "contacts": [
             {
                 "sort": 0,
@@ -50588,6 +52400,7 @@
                 "number": "99510 Llanelli 2"
             }
         ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 253,
         "lon": "-4.163129126755416",
         "postcodes": [
@@ -50703,7 +52516,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -50844,7 +52657,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -51025,7 +52838,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -51261,7 +53074,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -51421,6 +53234,7 @@
                 "councils": [],
                 "name": "Housing possession"
             }
+<<<<<<< HEAD
         ]
     },
     {
@@ -51448,6 +53262,35 @@
         "name": "Dartford County Court and Family Court",
         "contacts": [
             {
+=======
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Dartford",
+                "type": "Visiting",
+                "postcode": "DA1 1DX",
+                "address": "Home Gardens\n\n\n"
+            },
+            {
+                "town": "Dartford",
+                "type": "Postal",
+                "postcode": "DA1 1DX",
+                "address": "Dartford County Court and Family Court Hearing Centre\nHome Gardens\n\n"
+            }
+        ],
+        "lat": "51.44540756801454",
+        "slug": "dartford-county-court-and-family-court",
+        "court_types": [
+            "County Court",
+            "Family court"
+        ],
+        "name": "Dartford County Court and Family Court",
+        "contacts": [
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": 0,
                 "type": "Enquiries",
                 "number": "01322 627 600"
@@ -51655,7 +53498,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -52004,7 +53847,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -52184,7 +54027,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -52225,7 +54068,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53049,7 +54892,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53097,7 +54940,7 @@
                 "councils": [],
                 "name": "Employment"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53315,7 +55158,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53324,6 +55167,7 @@
                 "type": "Visiting",
                 "postcode": "M33 7NR",
                 "address": "Trafford Courthouse\nAshton Lane\n\n"
+<<<<<<< HEAD
             },
             {
                 "town": "Sale",
@@ -53419,6 +55263,102 @@
             "M333",
             "M334"
         ],
+=======
+            },
+            {
+                "town": "Sale",
+                "type": "Postal",
+                "postcode": "M33 7WX",
+                "address": "Altrincham County Court and Family Court Hearing Centre\nTrafford Courthouse\nAshton Lane\n"
+            }
+        ],
+        "lat": "53.42631111886911",
+        "slug": "altrincham-county-court-and-family-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Altrincham County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0161 975 4760 "
+            },
+            {
+                "sort": 6,
+                "type": "Fax",
+                "number": "0161 975 4761"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "708292 Sale 6"
+            }
+        ],
+        "court_number": 106,
+        "lon": "-2.325276670211602",
+        "postcodes": [
+            "M332",
+            "WA143PD",
+            "M314",
+            "M317LN",
+            "M314BF",
+            "WA168",
+            "WA167",
+            "WA166",
+            "WA159",
+            "WA158",
+            "WA157",
+            "WA156",
+            "WA160NX",
+            "WA160QB",
+            "WA160TX",
+            "M313RH",
+            "WA160AL",
+            "M337WX",
+            "M314JE",
+            "M314HX",
+            "M314EP",
+            "M314NA",
+            "M314LN",
+            "WA160DH",
+            "M338DN",
+            "WA160QD",
+            "WA160PX",
+            "WA160EB",
+            "WA160NH",
+            "WA160TB",
+            "WA160QJ",
+            "WA150",
+            "WA145",
+            "WA144",
+            "WA143",
+            "WA142",
+            "WA141",
+            "WA139",
+            "WA130",
+            "M335",
+            "M336",
+            "M337",
+            "M333",
+            "M334"
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "areas_of_law": [
             {
                 "councils": [
@@ -53444,6 +55384,46 @@
                 "name": "Domestic violence"
             },
             {
+                "councils": [],
+                "name": "Money claims"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Stourbridge",
+                "type": "Visiting",
+                "postcode": "DY8 1QL",
+                "address": "This Address is for Admin Work only (All Hearings are at Dudley Magistrates)\nDudley County Court and Family Court hearing centre\n7 Hagley Road\n"
+            }
+        ],
+        "lat": "52.45402036520227",
+        "slug": "dudley-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Dudley County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 4,
+                "type": "Fax",
+                "number": "01384 397802"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+<<<<<<< HEAD
                 "councils": [],
                 "name": "Money claims"
             }
@@ -53493,6 +55473,18 @@
                 "number": "01384 397800"
             },
             {
+=======
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795 511"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01384 397800"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "Bailiffs",
                 "number": "01384 397818"
@@ -53736,7 +55728,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53913,7 +55905,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -53966,7 +55958,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -54137,7 +56129,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -54291,7 +56283,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -54369,7 +56361,7 @@
                 "councils": [],
                 "name": "Domestic violence"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -54938,7 +56930,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -54992,7 +56984,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55040,7 +57032,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -55056,6 +57053,7 @@
                 "postcode": "FY1 5RJ",
                 "address": "Blackpool County Court and Family Court Hearing Centre\nThe Law Courts\nChapel Street\n"
             }
+<<<<<<< HEAD
         ],
         "admin_id": 2840,
         "lat": "53.8117328271917",
@@ -55136,6 +57134,87 @@
             "FY15",
             "FY14"
         ],
+=======
+        ],
+        "lat": "53.8117328271917",
+        "slug": "blackpool-county-court-and-family-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Blackpool County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 5,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01253 754 020"
+            },
+            {
+                "sort": 3,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 7,
+                "type": "Fax",
+                "number": "01253 295 255"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "724900 Blackpool 10"
+            }
+        ],
+        "court_number": 131,
+        "lon": "-3.052984211510597",
+        "postcodes": [
+            "FY11",
+            "FY12",
+            "FY13",
+            "FY20",
+            "FY30",
+            "FY38",
+            "FY41",
+            "FY43",
+            "FY67",
+            "FY60",
+            "FY55",
+            "FY54",
+            "FY53",
+            "FY52",
+            "FY51",
+            "FY45",
+            "FY44",
+            "FY4",
+            "FY85",
+            "FY84",
+            "FY83",
+            "FY82",
+            "FY81",
+            "FY78",
+            "FY77",
+            "FY76",
+            "FY69",
+            "FY68",
+            "PR36",
+            "FY42",
+            "FY39",
+            "FY37",
+            "FY29",
+            "FY16",
+            "FY15",
+            "FY14"
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "areas_of_law": [
             {
                 "councils": [],
@@ -55169,7 +57248,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55213,7 +57292,7 @@
                 "councils": [],
                 "name": "Immigration"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55222,9 +57301,19 @@
                 "type": "Visiting",
                 "postcode": "SA11 3BN",
                 "address": "Neath and Port Talbot County Court and Family Court Hearing Centre\nForster Road\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3080,
+        "lat": "51.66159731566931",
+        "slug": "neath-and-port-talbot-county-court-and-family-court",
+        "court_types": [
+            "County Court"
+        ],
+        "name": "Neath and Port Talbot County Court and Family Court",
+=======
+            }
+        ],
         "lat": "51.66159731566931",
         "slug": "neath-and-port-talbot-county-court-and-family-court",
         "court_types": [
@@ -55336,6 +57425,159 @@
                 "name": "Children"
             },
             {
+                "councils": [],
+                "name": "Money claims"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Wolverhampton",
+                "type": "Visiting",
+                "postcode": "WV1 3LQ",
+                "address": "Pipers Row\n\n\n"
+            }
+        ],
+        "lat": "52.58436138762136",
+        "slug": "wolverhampton-combined-court-centre",
+        "court_types": [
+            "Crown Court"
+        ],
+        "name": "Wolverhampton Combined Court Centre",
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+        "contacts": [
+            {
+                "sort": 1,
+                "type": "Enquiries",
+                "number": "01902 481 000"
+            },
+            {
+                "sort": 3,
+                "type": "Fax",
+                "number": "01902 481 001"
+            },
+            {
+                "sort": 6,
+                "type": "Criminal queries fax",
+                "number": "01902 481 145"
+            },
+            {
+                "sort": 7,
+                "type": "Family fax",
+                "number": "01902 481 127"
+            },
+            {
+                "sort": 4,
+                "type": "County Court fax",
+                "number": "01902 481 076"
+            },
+            {
+                "sort": 0,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 0,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1004,
+                "type": "Criminal listing",
+                "number": "01902 481 004"
+            },
+            {
+                "sort": 1008,
+                "type": "Jury service",
+                "number": "01902 481 024"
+            },
+            {
+                "sort": 1011,
+                "type": "Care cases",
+                "number": "01902 481 143"
+            },
+            {
+<<<<<<< HEAD
+                "sort": null,
+                "type": "DX",
+                "number": "99550 Neath 2"
+            }
+        ],
+        "court_number": 274,
+        "lon": "-3.799453026202654",
+        "postcodes": [
+            "RH42",
+            "SA132LY",
+            "SA11",
+            "SA92",
+            "SA91",
+            "SA84",
+            "SA83",
+            "SA65",
+            "SA133",
+            "SA132",
+            "SA131",
+            "SA129",
+            "SA128",
+            "SA127",
+            "SA126",
+            "SA115",
+            "SA114",
+            "SA133ED",
+            "SA65ED",
+            "SA85QQ",
+            "SA108",
+            "SA109",
+            "SA111",
+            "SA113",
+            "SA112",
+            "SA107",
+            "SA106",
+            "SA13",
+            "SA92WJ",
+            "SA12"
+        ],
+        "areas_of_law": [
+=======
+                "sort": 1009,
+                "type": "Divorce",
+                "number": "01902 481 085"
+            },
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "sort": 1010,
+                "type": "Children cases",
+                "number": "01902 481 048"
+            },
+            {
+                "sort": 1013,
+                "type": "Civil queries",
+                "number": "01902 481 031"
+            },
+            {
+                "sort": 1012,
+                "type": "Family queries",
+                "number": "01902 481 022"
+            },
+            {
+                "sort": 1017,
+                "type": "Small claims mediation",
+                "number": "01604 795 511"
+            },
+            {
+                "sort": 1006,
+                "type": "Witness service",
+                "number": "01902 481 112"
+            },
+            {
+                "sort": 1007,
+                "type": "Bailiffs",
+                "number": "01902 481 034"
+            },
+            {
+<<<<<<< HEAD
                 "councils": [],
                 "name": "Money claims"
             }
@@ -55454,6 +57696,18 @@
                 "number": "702019 Wolverhampton 4"
             }
         ],
+=======
+                "sort": 1014,
+                "type": "Crown Court",
+                "number": "01902 481 140"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "702019 Wolverhampton 4"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 378,
         "lon": "-2.122132134901778",
         "postcodes": [
@@ -55623,7 +57877,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55671,7 +57925,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55741,7 +57995,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55800,7 +58054,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -55816,6 +58070,7 @@
                 "postcode": "BB11 1XD",
                 "address": "Burnley County Court\nThe Law Courts\nHammerton Street\n"
             }
+<<<<<<< HEAD
         ],
         "admin_id": 2799,
         "lat": "53.7514654974962",
@@ -55823,6 +58078,14 @@
         "court_types": [
             "County Court"
         ],
+=======
+        ],
+        "lat": "53.7514654974962",
+        "slug": "accrington-county-court",
+        "court_types": [
+            "County Court"
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "name": "Accrington County Court",
         "contacts": [
             {
@@ -55890,7 +58153,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -56204,7 +58467,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -56213,6 +58476,7 @@
                 "type": "Visiting",
                 "postcode": "SO23 9EL",
                 "address": "Winchester Combined Court\nThe Law Courts\n\n"
+<<<<<<< HEAD
             }
         ],
         "admin_id": 3241,
@@ -56276,6 +58540,70 @@
                 "number": "98520 Winchester 3"
             }
         ],
+=======
+            }
+        ],
+        "lat": "51.06254899810587",
+        "slug": "winchester-combined-court-centre",
+        "court_types": [
+            "County Court",
+            "Family court",
+            "Crown Court"
+        ],
+        "name": "Winchester Combined Court Centre",
+        "contacts": [
+            {
+                "sort": 8,
+                "type": "Witness service",
+                "number": "01962 814 166"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01962  814 100"
+            },
+            {
+                "sort": 5,
+                "type": "County Court fax",
+                "number": "01962  814 260"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 4,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 6,
+                "type": "Crown Court fax",
+                "number": "0870 324 0125"
+            },
+            {
+                "sort": 2,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 7,
+                "type": "Witness service",
+                "number": "01962 814 165"
+            },
+            {
+                "sort": 1,
+                "type": "Fixed penalties",
+                "number": "01702 283 860   "
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "98520 Winchester 3"
+            }
+        ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 376,
         "lon": "-1.319368671610841",
         "postcodes": [
@@ -56397,7 +58725,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -56469,7 +58797,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -56651,7 +58979,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -56822,7 +59150,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57183,6 +59511,8 @@
                 ],
                 "name": "Adoption"
             },
+<<<<<<< HEAD
+=======
             {
                 "councils": [],
                 "name": "Housing possession"
@@ -57202,6 +59532,58 @@
                 "name": "Crime"
             },
             {
+                "councils": [],
+                "name": "Money claims"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Ipswich",
+                "type": "Visiting",
+                "postcode": "IP1 1EJ",
+                "address": "8 Arcade Street\n\n\n"
+            },
+            {
+                "town": "Ipswich",
+                "type": "Postal",
+                "postcode": "IP1 1EJ",
+                "address": "Ipswich County Court and Family Court Hearing Centre\n8 Arcade Street\n\n"
+            }
+        ],
+        "lat": "52.05779415946595",
+        "slug": "ipswich-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Ipswich County Court and Family Court",
+        "contacts": [
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0344 892 4000"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 1,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+<<<<<<< HEAD
                 "councils": [],
                 "name": "Money claims"
             }
@@ -57257,6 +59639,13 @@
                 "number": "97730 Ipswich 3"
             },
             {
+=======
+                "sort": null,
+                "type": "DX",
+                "number": "97730 Ipswich 3"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "DX",
                 "number": "97730 Ipswich 3"
@@ -57480,7 +59869,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57533,7 +59922,7 @@
                 "councils": [],
                 "name": "Children"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57592,7 +59981,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57638,7 +60027,7 @@
                 "councils": [],
                 "name": "Probate"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57842,7 +60231,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -57895,7 +60284,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -58132,7 +60521,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -58322,7 +60711,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -58533,6 +60922,7 @@
             "SP11"
         ],
         "areas_of_law": [
+<<<<<<< HEAD
             {
                 "councils": [],
                 "name": "Bankruptcy"
@@ -58590,6 +60980,80 @@
         ],
         "name": "Horsham County Court and Family Court",
         "contacts": [
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "sort": 0,
+                "type": "Civil queries",
+                "number": " 01273 674421"
+            },
+            {
+                "sort": 3,
+                "type": "Fax",
+                "number": "0870 761 7760"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+                "sort": 2,
+                "type": "Appointments",
+                "number": "01403 280805"
+            },
+            {
+                "sort": 5,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 7,
+                "type": "DX",
+                "number": "98170 Horsham 2"
+            },
+            {
+<<<<<<< HEAD
+                "sort": 1,
+                "type": "Family queries",
+                "number": "01273 811333"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            }
+        ],
+=======
+                "councils": [],
+                "name": "Children"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Horsham",
+                "type": "Visiting",
+                "postcode": "RH12 2ET",
+                "address": "The Law Courts\nHurst Road\n\n"
+            },
+            {
+                "town": "Horsham",
+                "type": "Postal",
+                "postcode": "RH12 2ET",
+                "address": "Horsham County Court and Family Court Hearing Centre\nThe Law Courts\nHurst Road\n"
+            }
+        ],
+        "lat": "51.06857461590473",
+        "slug": "horsham-county-court-and-family-court",
+        "court_types": [
+            "County Court",
+            "Family court"
+        ],
+        "name": "Horsham County Court and Family Court",
+        "contacts": [
             {
                 "sort": 0,
                 "type": "Civil queries",
@@ -58631,6 +61095,7 @@
                 "number": "0161  743 4023"
             }
         ],
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
         "court_number": 227,
         "lon": "-0.3225612528190948",
         "postcodes": [
@@ -58730,7 +61195,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -58961,7 +61426,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59051,7 +61516,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59130,7 +61595,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59212,7 +61677,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59400,7 +61865,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59458,7 +61923,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59543,7 +62008,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -59910,7 +62375,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60011,7 +62476,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60059,7 +62524,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60206,7 +62671,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60286,6 +62751,68 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Canterbury",
+                "type": "Postal",
+                "postcode": "CT1 1ZA",
+                "address": "Canterbury Combined Court and Family Court Hearing Centre\nThe Law Courts\nChaucer Road\n"
+            },
+            {
+                "town": "Canterbury",
+                "type": "Visiting",
+                "postcode": "CT1 1ZA",
+                "address": "Canterbury Combined Court\nThe Law Courts\nChaucer Road\n"
+            }
+        ],
+        "lat": "51.28197737709792",
+        "slug": "canterbury-combined-court-centre",
+        "court_types": [
+            "Crown Court",
+            "County Court",
+            "Family court"
+        ],
+        "name": "Canterbury Combined Court Centre",
+        "contacts": [
+            {
+                "sort": 3,
+                "type": "County Court fax",
+                "number": "01264 347904"
+            },
+            {
+                "sort": 2,
+                "type": "Crown Court fax",
+                "number": "01227 819329"
+            },
+            {
+                "sort": 6,
+                "type": "Money claims",
+                "number": "0300  123 1057"
+            },
+            {
+                "sort": 5,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+                "sort": 1,
+                "type": "Appointments",
+                "number": "01227 819267"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01227 819200"
+            },
+            {
+<<<<<<< HEAD
+                "councils": [],
+                "name": "Forced marriage"
+            }
         ]
     },
     {
@@ -60349,6 +62876,13 @@
                 "number": "99710 Canterbury 3"
             },
             {
+=======
+                "sort": 7,
+                "type": "DX",
+                "number": "99710 Canterbury 3"
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": 4,
                 "type": "Family fax",
                 "number": "01264 347893"
@@ -60543,7 +63077,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60673,7 +63207,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -60864,7 +63398,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -61118,7 +63652,7 @@
                 "councils": [],
                 "name": "Civil partnership"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -61526,7 +64060,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -61729,6 +64263,7 @@
             "TN86DN"
         ],
         "areas_of_law": [
+<<<<<<< HEAD
             {
                 "councils": [],
                 "name": "High court"
@@ -61820,6 +64355,115 @@
                 "type": "Jury service",
                 "number": "02392 893038"
             },
+=======
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
+            {
+                "sort": 11,
+                "type": "Crown Court",
+                "number": "02392 893 033"
+            },
+            {
+                "sort": 12,
+                "type": "Criminal listing",
+                "number": "02392 893 060"
+            },
+            {
+                "sort": 9,
+                "type": "Small claims mediation",
+                "number": "01604 795511"
+            },
+            {
+                "sort": 6,
+                "type": "Adoption",
+                "number": "02392 893 016"
+            },
+            {
+                "sort": 10,
+                "type": "Fixed penalties",
+                "number": "01702 283 860"
+            },
+            {
+                "sort": 13,
+                "type": "Witness service",
+                "number": "02392 294 684"
+            },
+            {
+                "sort": 7,
+                "type": "Children cases",
+                "number": "02392 893 014"
+            },
+            {
+<<<<<<< HEAD
+                "sort": 15,
+                "type": "Crown Court fax",
+                "number": "0870 739 4357  "
+            },
+            {
+                "sort": 14,
+                "type": "Crown Court fax",
+                "number": "0870 739 4345"
+            },
+            {
+=======
+                "councils": [],
+                "name": "Forced marriage"
+            }
+        ],
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Portsmouth",
+                "type": "Visiting",
+                "postcode": "PO1 2EB",
+                "address": "The Courts of Justice\nWinston Churchill Avenue\n\n"
+            }
+        ],
+        "lat": "50.79577978014757",
+        "slug": "portsmouth-combined-court-centre",
+        "court_types": [
+            "Crown Court",
+            "County Court",
+            "Family court"
+        ],
+        "name": "Portsmouth Combined Court Centre",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "02392 893 000"
+            },
+            {
+                "sort": 16,
+                "type": "County Court fax",
+                "number": "02392 826 385"
+            },
+            {
+                "sort": 4,
+                "type": "County Court listing",
+                "number": "02392 893 031"
+            },
+            {
+                "sort": 2,
+                "type": "Civil queries",
+                "number": "02392 893 010"
+            },
+            {
+                "sort": 3,
+                "type": "Civil queries",
+                "number": "02392 893 012"
+            },
+            {
+                "sort": 8,
+                "type": "Children cases",
+                "number": "02392 893 015"
+            },
+            {
+                "sort": 17,
+                "type": "Jury service",
+                "number": "02392 893038"
+            },
             {
                 "sort": 11,
                 "type": "Crown Court",
@@ -61866,6 +64510,7 @@
                 "number": "0870 739 4345"
             },
             {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "DX",
                 "number": "98490 Portsmouth 5"
@@ -62059,7 +64704,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -62440,7 +65085,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -62508,7 +65153,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -62567,7 +65212,7 @@
                 "councils": [],
                 "name": "Crime"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -62576,6 +65221,7 @@
                 "type": "Visiting",
                 "postcode": "WD17 1EZ",
                 "address": "3rd Floor\nCassiobury House\n11-19 Station Road\n"
+<<<<<<< HEAD
             },
             {
                 "town": "Watford",
@@ -62619,6 +65265,50 @@
                 "number": "01604 795511 "
             },
             {
+=======
+            },
+            {
+                "town": "Watford",
+                "type": "Postal",
+                "postcode": "WD17 1EZ",
+                "address": "Watford County Court and Family Court Hearing Centre\n3rd Floor\nCassiobury House\n11-19 Station Road"
+            }
+        ],
+        "lat": "51.66367540049799",
+        "slug": "watford-county-court-and-family-court",
+        "court_types": [
+            "Family court",
+            "County Court"
+        ],
+        "name": "Watford County Court and Family Court",
+        "contacts": [
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "0300 123 5577"
+            },
+            {
+                "sort": 1,
+                "type": "Fax",
+                "number": "0870 739 4015"
+            },
+            {
+                "sort": 2,
+                "type": "Money claims",
+                "number": "0300  123 1372"
+            },
+            {
+                "sort": 3,
+                "type": "Money claims fax",
+                "number": "0161  743 4023"
+            },
+            {
+                "sort": 4,
+                "type": "Small claims mediation",
+                "number": "01604 795511 "
+            },
+            {
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
                 "sort": null,
                 "type": "DX",
                 "number": "122740 Watford 5 "
@@ -62871,7 +65561,7 @@
                 "councils": [],
                 "name": "Forced marriage"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -63059,7 +65749,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -63345,7 +66035,7 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -63398,7 +66088,12 @@
                 "councils": [],
                 "name": "Crime"
             }
+<<<<<<< HEAD
         ]
+=======
+        ],
+        "display": false
+>>>>>>> 34b2d0ac3b1398219dbe6d9674163e39836acf02
     },
     {
         "addresses": [
@@ -63534,7 +66229,7 @@
                 "councils": [],
                 "name": "Money claims"
             }
-        ]
+        "display": true,
     },
     {
         "addresses": [
@@ -63592,6 +66287,6 @@
                 "councils": [],
                 "name": "Social security"
             }
-        ]
+        "display": true,
     }
 ]

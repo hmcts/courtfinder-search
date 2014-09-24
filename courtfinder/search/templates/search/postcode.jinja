@@ -39,7 +39,10 @@
         {% for aol in areas_of_law %}
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
           <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}" >
-          <div class="form-label">{{aol.name}}</div>
+          <div class="form-label">
+            {{aol.name}}
+            <span class="aol-description">{{ aol.description }}</span>
+          </div>
         </label>
         {% endfor %}
       </div>
