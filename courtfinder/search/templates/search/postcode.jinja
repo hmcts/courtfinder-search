@@ -27,7 +27,13 @@
     Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
     Please check if any letters or numbers are missing.
   </section>
+{% elif error == 'ni' %}
+  <section class="postcode-error validation-error">
+    Aside from immigration tribunals, this tool does not return results for Northern Ireland.
+    Other courts and tribunals in Northern Ireland are handled by the Northern Ireland Courts and Tribunals Service.
+  </section>
 {% endif %}
+
   <form method="get" action="results">
     <div class="form-block">
       <label for="postcode">

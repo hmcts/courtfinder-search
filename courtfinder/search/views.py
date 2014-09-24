@@ -149,7 +149,7 @@ def results_html(request):
         directive = Rules.for_postcode(postcode, area_of_law)
 
         if directive['action'] == 'redirect':
-            return redirect(reverse(directive['target'])+directive['params'])
+            return redirect(reverse(directive['target'])+directive.get('params',''))
         elif directive['action'] == 'render':
             results = directive.get('results',None)
             return render(request, 'search/results.jinja', {
