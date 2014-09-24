@@ -4,14 +4,22 @@
 {% block page_title %}Find a court or tribunal{% endblock %}
 
 {% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="https://www.gov.uk">Home</a></li>
+    <li><a href="https://www.gov.uk/browse/justice">Crime, justice and the law</a></li>
+    <li><a href="/search">Find a court or tribunal</a></li>
+    {% if query %}
+    <li><a href="/search/address">Name or address search</a></li>
+    {% else %}
+    <li><a href="/search/postcode">Nearest to your postcode search</a></li>
+    {% endif %}
+  </ol>
+</div>
 <div class="content inner cf">
   <header class="page-header">
     <h1>Find a court or tribunal</h1>
   </header>
-
-  {% if error %}
-  <p>{{ error }}</p>
-  {% else %}
 
   {% if search_results %}
   <div class="search-results">
@@ -59,7 +67,7 @@
           </p>
         </div>
         <div class="court-aol">
-          <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
+          <p class="court-result-heading">Legal problems dealt with here:</p>
           <ul>
           {% for aol in court.areas_of_law %}
             <li>{{ aol.name }}</li>
@@ -81,64 +89,7 @@
       {% endfor %}
     </ul>
   </div>
-  {% else %}
-    {% if query %}
-  <section class="validation-error">
-    Sorry, there are no results for {{ query }}. Please check and try another name or addresss.
-  </section>
-    {% endif %}
-    {% if postcode %}
-  <section class="postcode-error validation-error">
-    Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
-    Please check if any letters or numbers are missing.
-  </section>
-    {% endif %}
   {% endif %}
-  {% endif %}
-    <form method="get" action="results">
-    {% if query %}
-    <label for="postcode" class="form-block">
-      <div class="form-label-bold">Search by name or address</div>
-      <div class="form-hint">Enter part of the court or tribunal name or address.</div>
-      <input class="form-control" type="text" name="q" />
-    </label>
-    {% else %}
-    <div class="form-block">
-      <label for="postcode">
-        <div class="form-label-bold">Search by postcode</div>
-        <div class="form-hint">Use full or part postcodes, for example, SW1 8LH or SW1.</div>
-        <input type="text" name="postcode" value="{{ postcode|default:'' }}" />
-      </label>
-    </div>
-    <div class="form-block">
-      <div class="form-label-bold">Filter by legal problem</div>
-      <div class="form-hint">Not all courts deal with all legal problems. Filtering will help you find the right court more easily.</div>
-      <label for="aol-0" class="block-label form-block">
-        <input id="aol-0" type="radio" name="area_of_law" value="All" checked=checked>
-        <div class="form-label">All courts and tribunals</div>
-      </label>
-      <label for="aol-one" class="block-label form-block" id="aol-one-label">
-        <input id="aol-one" type="radio" name="area_of_law" value="unselected">
-        <div class="form-label">Only those dealing with your legal problem</div>
-      </label>
-      <div id="aols" class="form-block">
-        <div id="aol-hint" class="form-hint">Choose the problem area that is relevant to you.</div>
-        {% for aol in areas_of_law %}
-        <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
-          <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}" >
-          <div class="form-label">
-            {{aol.name}}
-            <span class="aol-description">{{ aol.description }}</span>
-          </div>
-        </label>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-    <div class="actions">
-      <button id="again" class="button" type="submit">Search again</button>
-    </div>
-  </form>
 </div>
 {% endblock %}
 {% block javascripts %}

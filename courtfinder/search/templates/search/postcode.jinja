@@ -4,6 +4,13 @@
 {% block page_title %}Find a court or tribunal{% endblock %}
 
 {% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="https://www.gov.uk">Home</a></li>
+    <li><a href="https://www.gov.uk/browse/justice">Crime, justice and the law</a></li>
+    <li><a href="/search">Find a court or tribunal</a></li>
+  </ol>
+</div>
 <div class="content inner cf">
   <header class="page-header">
     <h1>Find a court or tribunal</h1>
@@ -14,6 +21,12 @@
 {% endif %}
 {% if area_of_law == '' %}
   <section class="validation-error">You did not enter a type of legal problem. Please try again.</section>
+{% endif %}
+{% if error == 'noresults' %}
+  <section class="postcode-error validation-error">
+    Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
+    Please check if any letters or numbers are missing.
+  </section>
 {% endif %}
   <form method="get" action="results">
     <div class="form-block">
@@ -56,4 +69,3 @@
 {% block javascripts %}
     <script src='{% static "javascripts/application.js" %}'></script>
 {% endblock %}
-
