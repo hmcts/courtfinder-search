@@ -4,6 +4,17 @@
 {% block page_title %}Find a court or tribunal{% endblock %}
 
 {% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="https://www.gov.uk">Home</a></li>
+    <li><a href="/search">Find a court or tribunal</a></li>
+    {% if query %}
+    <li><a href="/search/address">Name or address search</a></li>
+    {% else %}
+    <li><a href="/search/postcode">Nearest to your postcode search</a></li>
+    {% endif %}
+  </ol>
+</div>
 <div class="content inner cf">
   <header class="page-header">
     <h1>Find a court or tribunal</h1>
@@ -59,7 +70,7 @@
           </p>
         </div>
         <div class="court-aol">
-          <p class="court-result-heading">This court or tribunal deals with the following legal problems:</p>
+          <p class="court-result-heading">Legal problems dealt with here:</p>
           <ul>
           {% for aol in court.areas_of_law %}
             <li>{{ aol.name }}</li>

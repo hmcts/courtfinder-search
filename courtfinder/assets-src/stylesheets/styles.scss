@@ -63,7 +63,8 @@ $small-width: 800px;
 }
 
 .court-aol {
-  @media screen and (min-width: $small-width) {
+@media screen and (min-width: $small-width) {
+    font-size: 80%;
     float: left;
     width: 30%;
   }
