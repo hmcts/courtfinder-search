@@ -63,15 +63,16 @@ $small-width: 800px;
 }
 
 .court-aol {
-@media screen and (min-width: $small-width) {
-    font-size: 80%;
+  @media screen and (min-width: $small-width) {
     float: left;
     width: 30%;
+  }
+  ul {
+    font-size: 80%;
   }
 }
 
 .court-map {
-  text-align: right;
   @media screen and (min-width: $small-width) {
     float: right;
     width: 30%;

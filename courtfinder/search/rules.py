@@ -28,11 +28,9 @@ class Rules:
                 }
             else:
                 return {
-                    'action': 'render',
-                    'error': 'Aside from immigration tribunals, '
-                             'this tool does not return results for Northern Ireland.'
-                             'Other courts and tribunals in Northern Ireland are handled'
-                             'by the Northern Ireland Courts and Tribunals Service.'
+                    'action': 'redirect',
+                    'target': 'postcode-view',
+                    'params': '?error=ni',
                     }
         elif area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
             results = CourtSearch.proximity_search(postcode, area_of_law)

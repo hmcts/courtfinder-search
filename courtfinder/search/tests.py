@@ -92,7 +92,7 @@ class SearchTestCase(TestCase):
     def test_results_no_query(self):
         c = Client()
         response = c.get('/search/results?q=')
-        self.assertRedirects(response, '/search/address?error=1', 302)
+        self.assertRedirects(response, '/search/address?error=noquery', 302)
 
     def test_results_postcode_aol_not_selected(self):
         c = Client()
@@ -118,8 +118,7 @@ class SearchTestCase(TestCase):
 
     def test_sample_postcode_bad_aol(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist')
-        self.assertEqual(response.status_code, 200)
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist', follow=True)
         self.assertIn('Sorry, your postcode', response.content)
 
     def test_inactive_court(self):
@@ -130,9 +129,8 @@ class SearchTestCase(TestCase):
             displayed=False,
         )
         c = Client()
-        response = c.get('/search/results?q=Example2+Court')
-        self.assertEqual(response.status_code, 200)
-        self.assertNotIn('<div class="search-results">', response.content)
+        response = c.get('/search/results?q=Example2+Court', follow=True)
+        self.assertIn('validation-error', response.content)
 
     def test_partial_postcode(self):
         c = Client()
@@ -159,10 +157,10 @@ class SearchTestCase(TestCase):
             self.assertRedirects(response, '/search/', 302)
 
     def test_redirect_directive_action(self):
-        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
+        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'postcode-view'})):
             c = Client()
-            response = c.get('/search/results?postcode=SE15')
-            self.assertRedirects(response, 'http://www.example.org', 302)
+            response = c.get('/search/results?postcode=BLARGH')
+            self.assertRedirects(response, '/search/postcode', 302)
 
     def test_redirect_directive_action_json(self):
         with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
@@ -183,7 +181,7 @@ class SearchTestCase(TestCase):
 
     def test_api_postcode(self):
         c = Client()
-        response = c.get('/search/results.json?postcode=SE15+4UH&area_of_law=Bankruptcy')
+        response = c.get('/search/results.json?postcode=SE15+4UH&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
 
     def test_postcode_to_local_authority_short_postcode(self):
@@ -207,7 +205,7 @@ class SearchTestCase(TestCase):
 
     def test_address_search(self):
         c = Client()
-        response = c.get('/search/results?q=Leeds')
+        response = c.get('/search/results?q=Hobbittown')
         self.assertEqual(response.status_code, 200)
 
     def test_broken_postcode_latlon_mapping(self):
@@ -250,8 +248,7 @@ class SearchTestCase(TestCase):
 
     def test_ni(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&area_of_law=Divorce')
-        self.assertEqual(response.status_code, 200)
+        response = c.get('/search/results?postcode=bt2&area_of_law=Divorce', follow=True)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):

@@ -75,6 +75,7 @@
           </ul>
         </div>
         <div class="court-map">
+          <p class="court-result-heading">Find us here:</p>
           {% if court.distance %}
           <p class="distance-from-postcode">{{ court.distance }} miles away</p>
           {% endif %}
@@ -82,7 +83,8 @@
             <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
               <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
             </a>
-          </p>
+          <br/>
+          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">Visitor information</a></p>
         </div>
         <hr class="clear"/>
       </li>
