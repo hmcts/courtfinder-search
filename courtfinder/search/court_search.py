@@ -78,14 +78,21 @@ class CourtSearch:
             raise Exception('Postcode lookup service error')
 
     @staticmethod
+    def get_full_postcode(postcode):
+        data = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + postcode)
+
+    @staticmethod
+    def get_partial_postcode(postcode):
+        data = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + 'partial/' + postcode)
+
+    @staticmethod
     def postcode_to_latlon(postcode):
         """Returns a tuple in the (lat, lon) format"""
         p = postcode.lower().replace(' ', '')
         if len(postcode) > 4:
-            mapit_url = settings.MAPIT_BASE_URL + p
+            data = CourtSearch.get_full_postcode(p)
         else:
-            mapit_url = settings.MAPIT_BASE_URL + 'partial/' + p
-        data = CourtSearch.get_from_mapit(mapit_url)
+            data = CourtSearch.get_partial_postcode(p)
         if 'wgs84_lat' in data:
             json_data = json.loads(data)
             return (json_data['wgs84_lat'], json_data['wgs84_lon'])
