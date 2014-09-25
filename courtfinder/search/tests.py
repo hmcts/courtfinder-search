@@ -180,7 +180,7 @@ class SearchTestCase(TestCase):
         with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
             c = Client()
             response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
-            self.assertRedirects(response, 'http://www.example.org', 302)
+            self.assertIn('{}',response.content)
 
     def test_no_aol_json(self):
         c = Client()
