@@ -47,9 +47,9 @@ class Command(BaseCommand):
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=court_obj['display'],
-                lat=court_obj['lat'],
-                lon=court_obj['lon'],
-                number=court_obj['court_number']
+                lat=court_obj.get('lat',None),
+                lon=court_obj.get('lon',None),
+                number=court_obj['court_number'],
             )
             court.save()
 

@@ -13,9 +13,8 @@ def courts():
     for row in rows:
         admin_id, name, display, court_number, slug, lat, lon = row
 
-        if name == None or slug == None or lat == None or lon == None:
-            print "- %s" % name
-            # print "- %s\n\tslug: %s, lat: %s, lon: %s" % (name, slug, lat, lon)
+        if name == None or slug == None:
+            print "- %s\n\tslug: %s, lat: %s, lon: %s" % (name, slug, lat, lon)
             continue
 
         aols = areas_of_law_for_court(slug)
@@ -24,22 +23,23 @@ def courts():
         contacts = contacts_for_court(slug)
         postcodes = postcodes_for_court(slug)
 
-        # bring it all together
-        all_courts.append({
+        court_object = {
             "admin_id": admin_id,
             "name": name,
             "display": display,
             "court_number": court_number,
             "slug": slug,
-            "lat": str(lat),
-            "lon": str(lon),
             "areas_of_law": aols,
             "addresses": addresses,
             "court_types": court_types,
             "contacts": contacts,
             "postcodes": postcodes
-        })
-
+        }
+        if lat is not None:
+            court_object['lat'] = str(lat)
+        if lon is not None:
+            court_object['lon'] = str(lon)
+        all_courts.append(court_object)
         print "+ %s" % name
 
 
