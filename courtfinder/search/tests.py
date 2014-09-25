@@ -296,8 +296,8 @@ class SearchTestCase(TestCase):
         self.patcher1.stop()
         self.patcher2.stop()
         saved = settings.MAPIT_BASE_URL
-        settings.MAPIT_BASE_URL = 'http://broken.example.com/'
-        with self.assertRaises(requests.exceptions.ConnectionError):
+        settings.MAPIT_BASE_URL = 'http://example.com/'
+        with self.assertRaises(Exception):
             CourtSearch.postcode_to_latlon('SE144UR')
         settings.MAPIT_BASE_URL = saved
         # and start them again for the tearDown
@@ -315,6 +315,8 @@ class SearchTestCase(TestCase):
         self.patcher1.start()
         self.patcher2.start()
 
+    def test_local_authority_search_bad_aol(self):
+        self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'non-existent-aol'), [])
 
 
     mock_mapit_partial = '{"wgs84_lat": 51.47263752259685, "coordsyst": "G", "wgs84_lon": -0.06603088421009512, "postcode": "SE15", "easting": 534416, "northing": 176632}'

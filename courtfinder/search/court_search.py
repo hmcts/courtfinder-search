@@ -79,11 +79,11 @@ class CourtSearch:
 
     @staticmethod
     def get_full_postcode(postcode):
-        data = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + postcode)
+        return CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + postcode)
 
     @staticmethod
     def get_partial_postcode(postcode):
-        data = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + 'partial/' + postcode)
+        return CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + 'partial/' + postcode)
 
     @staticmethod
     def postcode_to_latlon(postcode):
