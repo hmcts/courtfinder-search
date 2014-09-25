@@ -166,10 +166,10 @@ def results_html(request):
 def results_json(request):
     if 'postcode' in request.GET and 'area_of_law' in request.GET:
         postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
-        area_of_law = re.sub(whitespace_regex, '', request.GET.get('area_of_law','All'))
+        area_of_law = request.GET.get('area_of_law','All').strip()
         directive = Rules.for_postcode(postcode, area_of_law)
         if directive['action'] == 'redirect':
-            return redirect(directive['target'])
+            return HttpResponse('{}', content_type="application/json")
         elif directive['action'] == 'render':
             results = directive.get('results',None)
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
