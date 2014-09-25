@@ -174,5 +174,13 @@ def results_json(request):
         elif directive['action'] == 'render':
             results = directive.get('results',None)
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
+    elif 'q' in request.GET:
+        query = request.GET.get('q','').strip()
+
+        if query == "":
+            return HttpResponse('{}', content_type="application/json")
+
+        results = CourtSearch.address_search(query)
+        return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
     else:
         return HttpResponse('{}', content_type="application/json")

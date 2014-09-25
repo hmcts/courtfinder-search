@@ -129,4 +129,3 @@ class CourtSearch:
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
 
         return [result for result in results if result.displayed]
-

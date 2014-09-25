@@ -174,6 +174,19 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('{}', response.content)
 
+    def test_json_postcode_search(self):
+        c = Client()
+        response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual('[{"distance": 3556.41, "name": "Example Court", "address": {"town": "Hobbittown", "address_lines": ["The court address"], "type": "Postal", "postcode": "CF34RR"}, "lat": 0.0, "areas_of_law": ["Divorce"], "lon": 0.0, "number": null, "types": [], "slug": ""}]', response.content)
+
+    def test_json_name_search(self):
+        c = Client()
+        response = c.get('/search/results.json?q=Example')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual('[{"name": "Example Court", "address": {"town": "Hobbittown", "address_lines": ["The court address"], "type": "Postal", "postcode": "CF34RR"}, "lat": 0.0, "areas_of_law": ["Divorce"], "lon": 0.0, "number": null, "types": [], "slug": ""}]', response.content)
+
+
     def test_search_no_postcode_nor_q(self):
         c = Client()
         response = c.get('/search/results')
