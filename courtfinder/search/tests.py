@@ -89,6 +89,11 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Example+Court')
         self.assertIn("Hobbittown", response.content)
 
+    def test_postcode_civil_partnership(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE154UH&area_of_law=Civil+partnership', follow=True)
+        self.assertIn("validation-error", response.content)
+
     def test_results_no_query(self):
         c = Client()
         response = c.get('/search/results?q=')

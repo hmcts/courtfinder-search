@@ -34,10 +34,7 @@ class Rules:
                     }
         elif area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
             results = CourtSearch.proximity_search(postcode, area_of_law)
-            return {
-                'action': 'render',
-                'results': Rules.__results_or_back(postcode, results)
-            }
+            return Rules.__results_or_back(postcode, results)
         elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
             results = CourtSearch.postcode_search(postcode, area_of_law)
             if len(results) == 0:
