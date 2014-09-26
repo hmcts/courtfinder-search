@@ -51,7 +51,7 @@ class SearchTestCase(TestCase):
         )
         self.contact_type = ContactType.objects.create(name="email")
         self.court_type = CourtType.objects.create(name="crown court")
-        self.court_court_type = CourtCourtTypes(
+        self.court_court_type = CourtCourtTypes.objects.create(
             court=self.court,
             court_type=self.court_type,
         )
@@ -192,6 +192,16 @@ class SearchTestCase(TestCase):
             response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
             self.assertIn('[]',response.content)
 
+    def test_county_in_json(self):
+        c = Client()
+        response = c.get('/search/results.json?q=Example')
+        self.assertIn('"county": "Shire"', response.content)
+
+    def test_court_type_in_json(self):
+        c = Client()
+        response = c.get('/search/results.json?q=Example')
+        self.assertIn('crown court', response.content)
+
     def test_no_aol_json(self):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15')
@@ -202,14 +212,13 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual('[{"distance": 3556.41, "name": "Example Court", "address": {"town": "Hobbittown", "address_lines": ["The court address"], "type": "Postal", "postcode": "CF34RR"}, "lat": 0.0, "areas_of_law": ["Divorce"], "lon": 0.0, "number": null, "types": [], "slug": ""}]', response.content)
+        self.assertIn('"name": "Example Court"', response.content)
 
     def test_json_name_search(self):
         c = Client()
         response = c.get('/search/results.json?q=Example')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual('[{"name": "Example Court", "address": {"town": "Hobbittown", "address_lines": ["The court address"], "type": "Postal", "postcode": "CF34RR"}, "lat": 0.0, "areas_of_law": ["Divorce"], "lon": 0.0, "number": null, "types": [], "slug": ""}]', response.content)
-
+        self.assertIn('"name": "Example Court"', response.content)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()

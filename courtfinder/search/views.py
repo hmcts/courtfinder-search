@@ -93,6 +93,7 @@ def format_results(results):
                 'address_lines': [line for line in address.address.split('\n') if line != ''],
                 'postcode':address.postcode,
                 'town':address.town.name,
+                'county': address.town.county.name,
                 'type':address.address_type,
             }
         else:
@@ -106,7 +107,7 @@ def format_results(results):
                   'lon': result.lon,
                   'number': result.number,
                   'slug': result.slug,
-                  'types': [court_type for court_type in result.courtcourttypes_set.all()],
+                  'types': [court_type.court_type.name for court_type in result.courtcourttypes_set.all()],
                   'address': visible_address,
                   'areas_of_law': areas_of_law }
         dx_contact = result.courtcontact_set.filter(contact_type__name='DX')
