@@ -146,6 +146,12 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Example2+Court', follow=True)
         self.assertIn('validation-error', response.content)
 
+    def test_substring_should_not_match(self):
+        c = Client()
+        response = c.get('/search/results?q=ample2', follow=True)
+        self.assertIn('validation-error', response.content)
+
+
     def test_partial_postcode(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15&area_of_law=All')

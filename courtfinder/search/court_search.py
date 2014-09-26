@@ -124,13 +124,14 @@ class CourtSearch:
 
         # First we get courts whose name contains the query string
         # (for these courts sorted to show the courts with the highest number of areas of law first)
-        name_results =  sorted(Court.objects.filter(name__icontains=query), key=lambda c: -len(c.areas_of_law.all()))
+
+        name_results =  sorted(Court.objects.filter(name__iregex=r'\y%s\y'%query), key=lambda c: -len(c.areas_of_law.all()))
         # then we get courts with the query string in their address
-        address_results = Court.objects.filter(courtaddress__address__icontains=query)
+        address_results = Court.objects.filter(courtaddress__address__regex=r'\y%s\y'%query)
         # then in the town name
-        town_results = Court.objects.filter(courtaddress__town__name__icontains=query)
+        town_results = Court.objects.filter(courtaddress__town__name__regex=r'\y%s\y'%query)
         # then the county name
-        county_results = Court.objects.filter(courtaddress__town__county__name__icontains=query)
+        county_results = Court.objects.filter(courtaddress__town__county__name__regex=r'\y%s\y'%query)
 
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
