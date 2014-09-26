@@ -169,7 +169,7 @@ def results_json(request):
         area_of_law = request.GET.get('area_of_law','All').strip()
         directive = Rules.for_postcode(postcode, area_of_law)
         if directive['action'] == 'redirect':
-            return HttpResponse('{}', content_type="application/json")
+            return HttpResponse('[]', content_type="application/json")
         elif directive['action'] == 'render':
             results = directive.get('results',None)
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
@@ -177,9 +177,9 @@ def results_json(request):
         query = request.GET.get('q','').strip()
 
         if query == "":
-            return HttpResponse('{}', content_type="application/json")
+            return HttpResponse('[]', content_type="application/json")
 
         results = CourtSearch.address_search(query)
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
     else:
-        return HttpResponse('{}', content_type="application/json")
+        return HttpResponse('[]', content_type="application/json")
