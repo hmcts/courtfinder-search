@@ -127,11 +127,11 @@ class CourtSearch:
 
         name_results =  sorted(Court.objects.filter(name__iregex=r'\y%s\y'%query), key=lambda c: -len(c.areas_of_law.all()))
         # then we get courts with the query string in their address
-        address_results = Court.objects.filter(courtaddress__address__regex=r'\y%s\y'%query)
+        address_results = Court.objects.filter(courtaddress__address__iregex=r'\y%s\y'%query)
         # then in the town name
-        town_results = Court.objects.filter(courtaddress__town__name__regex=r'\y%s\y'%query)
+        town_results = Court.objects.filter(courtaddress__town__name__iregex=r'\y%s\y'%query)
         # then the county name
-        county_results = Court.objects.filter(courtaddress__town__county__name__regex=r'\y%s\y'%query)
+        county_results = Court.objects.filter(courtaddress__town__county__name__iregex=r'\y%s\y'%query)
 
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))

@@ -151,6 +151,10 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=ample2', follow=True)
         self.assertIn('validation-error', response.content)
 
+    def test_regexp_city_should_match(self):
+        c = Client()
+        response = c.get('/search/results?q=hobbittown', follow=True)
+        self.assertNotIn('validation-error', response.content)
 
     def test_partial_postcode(self):
         c = Client()
