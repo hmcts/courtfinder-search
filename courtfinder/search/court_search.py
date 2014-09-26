@@ -106,7 +106,7 @@ class CourtSearch:
             # A partial postcode is not sufficient information to determine the local authority
             return CourtSearch.proximity_search(postcode, area_of_law)
 
-        response = CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + p)
+        response = CourtSearch.get_full_postcode(p)
         data = json.loads(response)
 
         if type(data['shortcuts']['council']) == type({}):

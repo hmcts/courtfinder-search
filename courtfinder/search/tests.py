@@ -31,16 +31,21 @@ class SearchTestCase(TestCase):
             postcode='CF34RR',
             town=self.town,
         )
-        self.area_of_law = AreaOfLaw.objects.create(name="Divorce")
-        self.court_areas_of_law = CourtAreasOfLaw.objects.create(
+        self.aol_divorce = AreaOfLaw.objects.create(name="Divorce")
+        self.aol_money =  AreaOfLaw.objects.create(name="Money claims")
+        self.court_areas_of_law1 = CourtAreasOfLaw.objects.create(
             court=self.court,
-            area_of_law=self.area_of_law,
+            area_of_law=self.aol_divorce
+        )
+        self.court_areas_of_law2 = CourtAreasOfLaw.objects.create(
+            court=self.court,
+            area_of_law=self.aol_money
         )
         self.court_postcodes = CourtPostcodes.objects.create(court=self.court, postcode='CF335EE')
         self.local_authority = LocalAuthority.objects.create(name='Southwark Borough Council')
         self.court_local_authority_area_of_law = CourtLocalAuthorityAreaOfLaw(
             court=self.court,
-            area_of_law=self.area_of_law,
+            area_of_law=self.aol_divorce,
             local_authority=self.local_authority,
         )
         self.court_attribute_type = CourtAttributeType.objects.create(name="cat")
@@ -128,6 +133,11 @@ class SearchTestCase(TestCase):
     def test_sample_postcode_specific_aol(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
+        self.assertEqual(response.status_code, 200)
+
+    def test_sample_postcode_specific_aol2(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Money+claims')
         self.assertEqual(response.status_code, 200)
 
     def test_sample_postcode_bad_aol(self):
@@ -233,11 +243,6 @@ class SearchTestCase(TestCase):
     def test_postcode_to_local_authority_short_postcode(self):
         self.assertEqual(CourtSearch.local_authority_search('SE15', 'Divorce'), [])
 
-    def test_mapit_returns_county_in_councils(self):
-        with patch('search.court_search.CourtSearch.get_from_mapit',
-                   Mock(return_value='{"shortcuts":{"council":{"county":"meh"}},"areas":{"meh":{"name":"some name"}}}')):
-            self.assertEqual(CourtSearch.postcode_to_local_authority('SE154EE', 'all'), "some name")
-
     def test_bad_local_authority(self):
         with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
             self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
@@ -289,14 +294,14 @@ class SearchTestCase(TestCase):
         self.assertEqual(len(self.court.postcodes_covered()), 1)
 
     def test_court_local_authority_aol_covered(self):
-        self.assertEqual(len(self.court_areas_of_law.local_authorities_covered()), 0)
+        self.assertEqual(len(self.court_areas_of_law1.local_authorities_covered()), 0)
 
     def test_models_unicode(self):
         self.assertEqual(str(self.court), "Example Court")
         self.assertEqual(str(self.court_attribute_type), "cat")
         self.assertEqual(str(self.court_attribute), "Example Court.cat = cav")
-        self.assertEqual(str(self.area_of_law), "Divorce")
-        self.assertEqual(str(self.court_areas_of_law), "Example Court deals with Divorce")
+        self.assertEqual(str(self.aol_divorce), "Divorce")
+        self.assertEqual(str(self.court_areas_of_law1), "Example Court deals with Divorce")
         self.assertEqual(str(self.country), "Wales")
         self.assertEqual(str(self.county), "Shire")
         self.assertEqual(str(self.town), "Hobbittown")
@@ -319,6 +324,16 @@ class SearchTestCase(TestCase):
         with self.assertRaises(Exception):
             CourtSearch.postcode_to_latlon('SE144UR')
         settings.MAPIT_BASE_URL = saved
+        # and start them again for the tearDown
+        self.patcher1.start()
+        self.patcher2.start()
+
+    def test_if_mapit_works(self):
+        # we need to stop the patched mapit method to run the original version
+        self.patcher1.stop()
+        self.patcher2.stop()
+        CourtSearch.get_full_postcode('SE154UH')
+        CourtSearch.get_partial_postcode('SE15')
         # and start them again for the tearDown
         self.patcher1.start()
         self.patcher2.start()
