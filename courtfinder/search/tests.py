@@ -1,70 +1,96 @@
-from django.test import TestCase, Client
 import requests
+import json
+
+from django.test import TestCase, Client
 from mock import Mock, patch
 from search.court_search import CourtSearch
 from search.models import *
 from django.conf import settings
+from search.ingest import Ingest
 
 class SearchTestCase(TestCase):
 
     def setUp(self):
+
+        self.countries_json_1 = """[
+    {
+        "name": "England",
+        "counties": [
+            {
+                "towns": [ "Accrington", "Blackburn" ],
+                "name": "Lancashire"
+            },
+            {
+                "towns": [ "Bedford", "Luton" ],
+                "name": "Bedfordshire"
+            }]}]
+        """
+
+        self.courts_json_1 = """[{
+        "addresses": [
+            {
+                "town": "Accrington",
+                "type": "Visiting",
+                "postcode": "BB5 2BH",
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
+            },
+            {
+                "town": "Blackburn",
+                "type": "Postal",
+                "postcode": "BB2 1AA",
+                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate"
+            }
+        ],
+        "admin_id": 2800,
+        "lat": "53.7491281247251",
+        "slug": "accrington-magistrates-court",
+        "court_types": [
+            "Magistrates Court"
+        ],
+        "name": "Accrington Magistrates' Court",
+        "contacts": [
+            {
+                "sort": 2,
+                "type": "Fax",
+                "number": "0870 739 4254"
+            },
+            {
+                "sort": 0,
+                "type": "Enquiries",
+                "number": "01254  687500"
+            },
+            {
+                "sort": 1,
+                "type": "Fine queries",
+                "number": "01282  610000"
+            },
+            {
+                "sort": 3,
+                "type": "Witness service",
+                "number": "01254 265 305"
+            },
+            {
+                "sort": null,
+                "type": "DX",
+                "number": "742020 Blackburn 10"
+            }
+        ],
+        "court_number": 1725,
+        "lon": "-2.359323760375266",
+        "postcodes": [ "CF335EE" ],
+        "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
+        "display": true
+    }]"""
+
+        Ingest.countries(json.loads(self.countries_json_1))
+        Ingest.courts(json.loads(self.courts_json_1))
+
         self.patcher1 = patch('search.court_search.CourtSearch.get_full_postcode',
                               Mock(return_value=SearchTestCase.mock_mapit_postcode))
         self.patcher2 = patch('search.court_search.CourtSearch.get_partial_postcode',
                               Mock(return_value=SearchTestCase.mock_mapit_partial))
         self.mock_get_full_postcode = self.patcher1.start()
         self.mock_get_partial_postcode = self.patcher2.start()
-        self.court = Court.objects.create(
-            name="Example Court",
-            lat=0.0,
-            lon=0.0,
-            displayed=True,
-        )
-        self.address_type = AddressType.objects.create(name='Postal')
-        self.country = Country.objects.create(name='Wales')
-        self.county = County.objects.create(name='Shire', country=self.country)
-        self.town = Town.objects.create(name='Hobbittown', county=self.county)
-        self.court_address = CourtAddress.objects.create(
-            address_type=self.address_type,
-            court=self.court,
-            address='The court address',
-            postcode='CF34RR',
-            town=self.town,
-        )
-        self.aol_divorce = AreaOfLaw.objects.create(name="Divorce")
-        self.aol_money =  AreaOfLaw.objects.create(name="Money claims")
-        self.court_areas_of_law1 = CourtAreasOfLaw.objects.create(
-            court=self.court,
-            area_of_law=self.aol_divorce
-        )
-        self.court_areas_of_law2 = CourtAreasOfLaw.objects.create(
-            court=self.court,
-            area_of_law=self.aol_money
-        )
-        self.court_postcodes = CourtPostcodes.objects.create(court=self.court, postcode='CF335EE')
-        self.local_authority = LocalAuthority.objects.create(name='Southwark Borough Council')
-        self.court_local_authority_area_of_law = CourtLocalAuthorityAreaOfLaw(
-            court=self.court,
-            area_of_law=self.aol_divorce,
-            local_authority=self.local_authority,
-        )
-        self.court_attribute_type = CourtAttributeType.objects.create(name="cat")
-        self.court_attribute = CourtAttribute.objects.create(
-            court=self.court,
-            attribute_type=self.court_attribute_type,
-            value="cav"
-        )
-        self.contact_type = ContactType.objects.create(name="email")
-        self.court_type = CourtType.objects.create(name="crown court")
-        self.court_court_type = CourtCourtTypes.objects.create(
-            court=self.court,
-            court_type=self.court_type,
-        )
-        self.court_contact = CourtContact.objects.create(
-            contact_type=self.contact_type,
-            court=self.court,
-            value="a@b.com"
-        )
 
     def tearDown(self):
         self.patcher1.stop()
@@ -95,13 +121,13 @@ class SearchTestCase(TestCase):
 
     def test_format_results_with_postal_address(self):
         c = Client()
-        response = c.get('/search/results?q=Example')
-        self.assertIn("Hobbittown", response.content)
+        response = c.get('/search/results?q=Accrington')
+        self.assertIn("Blackburn", response.content)
 
     def test_search_space_in_name(self):
         c = Client()
-        response = c.get('/search/results?q=Example+Court')
-        self.assertIn("Hobbittown", response.content)
+        response = c.get('/search/results?q=Accrington+Magistrates')
+        self.assertIn("Accrington", response.content)
 
     def test_postcode_civil_partnership(self):
         c = Client()
@@ -163,7 +189,7 @@ class SearchTestCase(TestCase):
 
     def test_regexp_city_should_match(self):
         c = Client()
-        response = c.get('/search/results?q=hobbittown', follow=True)
+        response = c.get('/search/results?q=accrington', follow=True)
         self.assertNotIn('validation-error', response.content)
 
     def test_partial_postcode(self):
@@ -204,13 +230,18 @@ class SearchTestCase(TestCase):
 
     def test_county_in_json(self):
         c = Client()
-        response = c.get('/search/results.json?q=Example')
-        self.assertIn('"county": "Shire"', response.content)
+        response = c.get('/search/results.json?q=Accrington')
+        self.assertIn('"county": "Lancashire"', response.content)
+
+    def test_empty_query_json(self):
+        c = Client()
+        response = c.get('/search/results.json?q=')
+        self.assertEquals('[]', response.content)
 
     def test_court_type_in_json(self):
         c = Client()
-        response = c.get('/search/results.json?q=Example')
-        self.assertIn('crown court', response.content)
+        response = c.get('/search/results.json?q=Accrington')
+        self.assertIn('Magistrates Court', response.content)
 
     def test_no_aol_json(self):
         c = Client()
@@ -222,13 +253,13 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Example Court"', response.content)
+        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_json_name_search(self):
         c = Client()
-        response = c.get('/search/results.json?q=Example')
+        response = c.get('/search/results.json?q=Accrington')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Example Court"', response.content)
+        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()
@@ -256,7 +287,7 @@ class SearchTestCase(TestCase):
 
     def test_address_search(self):
         c = Client()
-        response = c.get('/search/results?q=Hobbittown')
+        response = c.get('/search/results?q=Road')
         self.assertEqual(response.status_code, 200)
 
     def test_broken_postcode_latlon_mapping(self):
@@ -291,29 +322,62 @@ class SearchTestCase(TestCase):
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
-        self.assertEqual(len(self.court.postcodes_covered()), 1)
+        court = Court.objects.get(name="Accrington Magistrates' Court")
+        self.assertEqual(len(court.postcodes_covered()), 1)
 
     def test_court_local_authority_aol_covered(self):
-        self.assertEqual(len(self.court_areas_of_law1.local_authorities_covered()), 0)
+        court = Court.objects.get(name="Accrington Magistrates' Court")
+        aol = AreaOfLaw.objects.get(name="Divorce")
+        court_aol = CourtAreasOfLaw.objects.get(court=court, area_of_law=aol)
+        self.assertEqual(len(court_aol.local_authorities_covered()), 1)
+        self.assertEqual(str(court_aol.local_authorities_covered()[0]),
+                         "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
 
     def test_models_unicode(self):
-        self.assertEqual(str(self.court), "Example Court")
-        self.assertEqual(str(self.court_attribute_type), "cat")
-        self.assertEqual(str(self.court_attribute), "Example Court.cat = cav")
-        self.assertEqual(str(self.aol_divorce), "Divorce")
-        self.assertEqual(str(self.court_areas_of_law1), "Example Court deals with Divorce")
-        self.assertEqual(str(self.country), "Wales")
-        self.assertEqual(str(self.county), "Shire")
-        self.assertEqual(str(self.town), "Hobbittown")
-        self.assertEqual(str(self.address_type), "Postal")
-        self.assertEqual(str(self.court_address), "Postal for Example Court is The court address, CF34RR, Hobbittown")
-        self.assertEqual(str(self.contact_type), "email")
-        self.assertEqual(str(self.court_type), "crown court")
-        self.assertEqual(str(self.court_contact), "email for Example Court is a@b.com")
-        self.assertEqual(str(self.court_court_type), "Court type for Example Court is crown court")
-        self.assertEqual(str(self.court_postcodes), "Example Court covers CF335EE")
-        self.assertEqual(str(self.local_authority), "Southwark Borough Council")
-        self.assertEqual(str(self.court_local_authority_area_of_law), "Example Court covers Southwark Borough Council for Divorce")
+        court = Court.objects.get(name="Accrington Magistrates' Court")
+        self.assertEqual(str(court), "Accrington Magistrates' Court")
+        cat = CourtAttributeType.objects.create(name="cat")
+        self.assertEqual(str(cat), "cat")
+        ca = CourtAttribute.objects.create(court=court, attribute_type=cat, value="cav")
+        self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
+        aol = AreaOfLaw.objects.create(name="Divorce")
+        self.assertEqual(str(aol), "Divorce")
+        aols = CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
+        self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce")
+        country = Country.objects.create(name="Wales")
+        self.assertEqual(str(country), "Wales")
+        county = County.objects.create(name="Shire", country=country)
+        self.assertEqual(str(county), "Shire")
+        town = Town.objects.create(name="Hobbittown", county=county)
+        self.assertEqual(str(town), "Hobbittown")
+        address_type = AddressType.objects.create(name="Postal")
+        self.assertEqual(str(address_type), "Postal")
+        court_address = CourtAddress.objects.create(address_type=address_type,
+                                                    court=court,
+                                                    address="The court address",
+                                                    postcode="CF34RR",
+                                                    town=town)
+        self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
+        contact_type = ContactType.objects.create(name="email")
+        self.assertEqual(str(contact_type), "email")
+        court_type = CourtType.objects.create(name="crown court")
+        self.assertEqual(str(court_type), "crown court")
+        court_contact = CourtContact.objects.create(contact_type=contact_type,
+                                                    court=court,
+                                                    value="a@b.com")
+        self.assertEqual(str(court_contact), "email for Accrington Magistrates' Court is a@b.com")
+        court_court_types=CourtCourtTypes.objects.create(court=court,
+                                                        court_type=court_type)
+        self.assertEqual(str(court_court_types), "Court type for Accrington Magistrates' Court is crown court")
+        court_postcodes=CourtPostcodes.objects.create(court=court,
+                                                      postcode="BR27AY")
+        self.assertEqual(str(court_postcodes), "Accrington Magistrates' Court covers BR27AY")
+        local_authority=LocalAuthority.objects.create(name="Southwark Borough Council")
+        self.assertEqual(str(local_authority), "Southwark Borough Council")
+        court_local_authority_aol=CourtLocalAuthorityAreaOfLaw(court=court,
+                                                               area_of_law=aol,
+                                                               local_authority=local_authority)
+        self.assertEqual(str(court_local_authority_aol), "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
 
     def test_broken_mapit(self):
         # we need to stop the patched mapit method to run the original version
