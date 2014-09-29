@@ -3,6 +3,9 @@ from search.models import *
 class Ingest:
     @classmethod
     def countries(self, countries):
+        Country.objects.all().delete()
+        County.objects.all().delete()
+        Town.objects.all().delete()
         for country in countries:
             c = Country(name=country['name'])
             c.save()
@@ -16,6 +19,20 @@ class Ingest:
 
     @classmethod
     def courts(self, courts):
+        Court.objects.all().delete()
+        LocalAuthority.objects.all().delete()
+        AreaOfLaw.objects.all().delete()
+        CourtAreasOfLaw.objects.all().delete()
+        CourtLocalAuthorityAreaOfLaw.objects.all().delete()
+        CourtType.objects.all().delete()
+        CourtCourtTypes.objects.all().delete()
+        CourtAddress.objects.all().delete()
+        CourtContact.objects.all().delete()
+        ContactType.objects.all().delete()
+        CourtPostcodes.objects.all().delete()
+        AddressType.objects.all().delete()
+        CourtAttributeType.objects.all().delete()
+        CourtAttribute.objects.all().delete()
         for court_obj in courts:
             court = Court(
                 admin_id=court_obj['admin_id'],
