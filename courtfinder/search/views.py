@@ -155,6 +155,7 @@ def results_html(request):
             return render(request, 'search/results.jinja', {
                     'postcode': postcode,
                     'area_of_law': area_of_law,
+                    'in_scotland': directive.get('in_scotland',False),
                     'areas_of_law': AreaOfLaw.objects.all(),
                     'error': directive.get('error', None),
                     'search_results': format_results(results) if results else None

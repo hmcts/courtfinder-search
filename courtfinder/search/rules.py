@@ -1,8 +1,12 @@
+import re
 from search.models import Court
 from search.court_search import CourtSearch
 from django.core.urlresolvers import reverse
 
 class Rules:
+
+    scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
+                          'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
     @classmethod
     def __results_or_back(self, postcode, results):
@@ -13,8 +17,10 @@ class Rules:
                 'params': '?error=noresults&postcode='+postcode,
             }
         else:
+            in_scotland = True if re.match('^G\d+',postcode) or postcode[:2] in Rules.scottish_postcodes else False
             return {
                 'action': 'render',
+                'in_scotland': in_scotland,
                 'results': results
             }
 
