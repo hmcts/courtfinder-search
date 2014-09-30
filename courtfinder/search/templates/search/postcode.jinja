@@ -17,15 +17,15 @@
   </header>
 
 {% if postcode == '' %}
-  <section class="validation-error">You did not enter a postcode. Please try again.</section>
+  <section class="validation-error"><span>You did not enter a postcode. Please try again.</span></section>
 {% endif %}
 {% if area_of_law == '' %}
-  <section class="validation-error">You did not enter a type of legal problem. Please try again.</section>
+  <section class="validation-error"><span>You did not enter a type of legal problem. Please try again.</span></section>
 {% endif %}
 {% if error == 'noresults' %}
   <section class="postcode-error validation-error">
-    Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
-    Please check if any letters or numbers are missing.
+    <span>Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
+      Please check if any letters or numbers are missing.</span>
   </section>
 {% elif error == 'ni' %}
   <section class="postcode-error validation-error">
