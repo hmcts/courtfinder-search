@@ -28,9 +28,12 @@
     </p>
     {% else %}
       {% if search_results|length == 1 %}
-    <p>This is the court or tribunal nearest {{ postcode }}:</p>
+    <p>This is the court or tribunal nearest {{ postcode }}.</p>
       {% else %}
-    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}:</p>
+    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
+      {% endif %}
+      {% if in_scotland %}
+    <p id="scotland"><em>Please note that this tool does not show courts in Scotland.</em></p>
       {% endif %}
     {% endif %}
     <hr/>

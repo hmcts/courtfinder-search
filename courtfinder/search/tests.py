@@ -192,6 +192,24 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=accrington', follow=True)
         self.assertNotIn('validation-error', response.content)
 
+    def test_scottish_postcodes(self):
+        c = Client()
+        response = c.get('/search/results?postcode=G24PP&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p id="scotland">', response.content)
+        response = c.get('/search/results?postcode=G2&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p id="scotland">', response.content)
+        response = c.get('/search/results?postcode=AB10&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p id="scotland">', response.content)
+        response = c.get('/search/results?postcode=AB10+7LY&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p id="scotland">', response.content)
+        response = c.get('/search/results?postcode=BA27AY&area_of_law=All')
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('<p id="scotland">', response.content)
+
     def test_partial_postcode(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15&area_of_law=All')
