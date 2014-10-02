@@ -6,13 +6,12 @@
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="https://www.gov.uk">Home</a></li>
-    <li><a href="https://www.gov.uk/browse/justice">Crime, justice and the law</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="/search">Find a court or tribunal</a></li>
     {% if query %}
-    <li><a href="/search/address">Name or address search</a></li>
+    <li><a href="/search/address">Search by name or address</a></li>
     {% else %}
-    <li><a href="/search/postcode">Nearest to your postcode search</a></li>
+    <li><a href="/search/postcode">Search by postcode</a></li>
     {% endif %}
   </ol>
 </div>
@@ -67,7 +66,7 @@
           </p>
         </div>
         <div class="court-aol">
-          <p class="court-result-heading">Legal problems dealt with here:</p>
+          <p class="court-result-heading">Areas of law covered:</p>
           <ul>
           {% for aol in court.areas_of_law %}
             <li>{{ aol.name }}</li>
@@ -90,7 +89,7 @@
             </a>
             <br/>
           {% endif %}
-          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">Visitor information</a></p>
+          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">More contact details and visitor information</a></p>
         </div>
         <hr class="clear"/>
       </li>

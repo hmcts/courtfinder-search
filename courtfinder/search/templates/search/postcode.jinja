@@ -1,19 +1,18 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
 
-{% block page_title %}Find a court or tribunal{% endblock %}
+{% block page_title %}Search by postcode{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="https://www.gov.uk">Home</a></li>
-    <li><a href="https://www.gov.uk/browse/justice">Crime, justice and the law</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="/search">Find a court or tribunal</a></li>
   </ol>
 </div>
 <div class="content inner cf">
   <header class="page-header">
-    <h1>Find a court or tribunal</h1>
+    <h1>Search by postcode</h1>
   </header>
 
 {% if postcode == '' %}
@@ -37,9 +36,7 @@
   <form method="get" action="results">
     <div class="form-block">
       <label for="postcode">
-        <div class="form-label-bold">Search by postcode</div>
-        <div class="form-hint">Use full or part postcodes, for example, BN17 5DF or BN17.</div>
-        <input type="text" name="postcode" value="{{ postcode|default:'' }}" />
+        <input type="text" name="postcode" value="{{ postcode|default:'' }}" placeholder="eg, BN17 5DF, BN17"/>
       </label>
     </div>
     <div class="form-block">
