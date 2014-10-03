@@ -5,5 +5,4 @@ urlpatterns = patterns('',
     url(r'^$', include('staticpages.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search/', include('search.urls')),
-    url(r'^update/', include('update.urls')),
 )
