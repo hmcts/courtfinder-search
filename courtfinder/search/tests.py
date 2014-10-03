@@ -440,7 +440,7 @@ class SearchTestCase(TestCase):
     def test_invalid_postcode(self):
         c = Client()
         response = c.get('/search/results?postcode=INVALID&area_of_law=All')
-        self.assertRedirects(response, '/search/postcode?error=badpc')
+        self.assertRedirects(response, '/search/postcode?error=badpc&postcode=INVALID')
 
     def test_mapit_doesnt_return_correct_data(self):
         # we need to stop the patched mapit method to run a mock returning bad content

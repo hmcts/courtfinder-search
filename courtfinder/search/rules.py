@@ -60,5 +60,5 @@ class Rules:
                 return {
                     'action': 'redirect',
                     'target': 'postcode-view',
-                    'params': '?error=badpc'
+                    'params': '?error=badpc&postcode='+postcode
                 }
