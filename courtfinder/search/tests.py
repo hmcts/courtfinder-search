@@ -1,9 +1,9 @@
 import requests
 import json
-
+import re
 from django.test import TestCase, Client
 from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError
+from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
 from search.models import *
 from django.conf import settings
 from search.ingest import Ingest
@@ -86,11 +86,16 @@ class SearchTestCase(TestCase):
         Ingest.countries(json.loads(self.countries_json_1))
         Ingest.courts(json.loads(self.courts_json_1))
 
-        def get_from_mapit_mock(postcode):
-            if len(postcode) < 4:
+        def get_from_mapit_mock(url):
+            matches = re.search('([^/]+)$', url)
+            postcode = matches.group(0)
+            if postcode == 'invalid':
+                raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+url)
+            elif len(postcode) < 4:
                 return SearchTestCase.mock_mapit_partial
             else:
                 return SearchTestCase.mock_mapit_full
+
         self.patcher =  patch('search.court_search.CourtSearch.get_from_mapit',
                               Mock(side_effect=get_from_mapit_mock))
         self.patcher.start()
@@ -432,6 +437,11 @@ class SearchTestCase(TestCase):
         CourtSearch.get_partial_postcode('SE15')
         self.patcher.start()
 
+    def test_invalid_postcode(self):
+        c = Client()
+        response = c.get('/search/results?postcode=INVALID&area_of_law=All')
+        self.assertRedirects(response, '/search/postcode?error=badpc')
+
     def test_mapit_doesnt_return_correct_data(self):
         # we need to stop the patched mapit method to run a mock returning bad content
         self.patcher.stop()
@@ -443,7 +453,6 @@ class SearchTestCase(TestCase):
 
     def test_local_authority_search_bad_aol(self):
         self.assertEquals(CourtSearch.local_authority_search('SE154UH', 'non-existent-aol'), [])
-
 
     mock_mapit_partial = '{"wgs84_lat": 51.47263752259685, "coordsyst": "G", "wgs84_lon": -0.06603088421009512, "postcode": "SE15", "easting": 534416, "northing": 176632}'
 

@@ -21,7 +21,7 @@
 {% if area_of_law == '' %}
   <section class="validation-error"><span>You did not enter a type of legal problem. Please try again.</span></section>
 {% endif %}
-{% if error == 'noresults' %}
+{% if error == 'noresults' or error == 'badpc' %}
   <section class="postcode-error validation-error">
     <span>Sorry, your postcode <strong>{{ postcode }}</strong> has not been found.<br />
       Please check if any letters or numbers are missing.</span>

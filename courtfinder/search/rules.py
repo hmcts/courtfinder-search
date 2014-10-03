@@ -1,6 +1,6 @@
 import re
 from search.models import Court
-from search.court_search import CourtSearch
+from search.court_search import CourtSearch, CourtSearchInvalidPostcode
 from django.core.urlresolvers import reverse
 
 class Rules:
@@ -38,20 +38,27 @@ class Rules:
                     'target': 'postcode-view',
                     'params': '?error=ni',
                     }
-        elif area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
-            results = CourtSearch.proximity_search(postcode, area_of_law)
-            return Rules.__results_or_back(postcode, results)
-        elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-            results = CourtSearch.postcode_search(postcode, area_of_law)
-            if len(results) == 0:
-                results = CourtSearch.proximity_search(postcode, area_of_law)
-            return Rules.__results_or_back(postcode, results)
-        elif area_of_law in ['Children', 'Adoption', 'Divorce']:
-            results = CourtSearch.local_authority_search(postcode, area_of_law)
-            if len(results) == 0:
-                results = CourtSearch.proximity_search(postcode, area_of_law)
-
-            return Rules.__results_or_back(postcode, results)
         else:
-            results = CourtSearch.proximity_search(postcode, area_of_law)
-            return Rules.__results_or_back(postcode, results)
+            try:
+                if area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
+                    results = CourtSearch.proximity_search(postcode, area_of_law)
+                    return Rules.__results_or_back(postcode, results)
+                elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
+                    results = CourtSearch.postcode_search(postcode, area_of_law)
+                    if len(results) == 0:
+                        results = CourtSearch.proximity_search(postcode, area_of_law)
+                    return Rules.__results_or_back(postcode, results)
+                elif area_of_law in ['Children', 'Adoption', 'Divorce']:
+                    results = CourtSearch.local_authority_search(postcode, area_of_law)
+                    if len(results) == 0:
+                        results = CourtSearch.proximity_search(postcode, area_of_law)
+                    return Rules.__results_or_back(postcode, results)
+                else:
+                    results = CourtSearch.proximity_search(postcode, area_of_law)
+                return Rules.__results_or_back(postcode, results)
+            except CourtSearchInvalidPostcode:
+                return {
+                    'action': 'redirect',
+                    'target': 'postcode-view',
+                    'params': '?error=badpc'
+                }

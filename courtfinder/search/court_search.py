@@ -11,6 +11,9 @@ class CourtSearchError(Exception):
     def __str__(self):
         return repr(self.value)
 
+class CourtSearchInvalidPostcode(CourtSearchError):
+    pass
+
 class CourtSearch:
 
     @staticmethod
@@ -79,6 +82,8 @@ class CourtSearch:
         r = requests.get(mapit_url)
         if r.status_code == 200:
             return r.text
+        elif r.status_code == 400:
+            raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+mapit_url)
         else:
             raise CourtSearchError('Mapit service error')
 
