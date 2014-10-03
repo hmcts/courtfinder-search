@@ -5,16 +5,24 @@ from collections import OrderedDict
 from django.conf import settings
 from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcodes
 
+class CourtSearchError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 class CourtSearch:
 
     @staticmethod
     def local_authority_search( postcode, area_of_law ):
         try:
             la_name = CourtSearch.postcode_to_local_authority(postcode, area_of_law)
+        except CourtSearchError:
+            return CourtSearch.proximity_search(postcode, area_of_law)
+        try:
             la = LocalAuthority.objects.get(name=la_name)
-        except Exception:
+        except LocalAuthority.DoesNotExist:
             return []
-
         try:
             aol = AreaOfLaw.objects.get(name=area_of_law)
         except AreaOfLaw.DoesNotExist:
@@ -48,10 +56,7 @@ class CourtSearch:
 
     @staticmethod
     def proximity_search( postcode, area_of_law ):
-        try:
-            lat, lon = CourtSearch.postcode_to_latlon( postcode )
-        except:
-            return []
+        lat, lon = CourtSearch.postcode_to_latlon( postcode )
         results = Court.objects.raw("""
             SELECT *,
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
@@ -75,7 +80,7 @@ class CourtSearch:
         if r.status_code == 200:
             return r.text
         else:
-            raise Exception('Postcode lookup service error')
+            raise CourtSearchError('Mapit service error')
 
     @staticmethod
     def get_full_postcode(postcode):
@@ -97,14 +102,13 @@ class CourtSearch:
             json_data = json.loads(data)
             return (json_data['wgs84_lat'], json_data['wgs84_lon'])
         else:
-            raise Exception('Postcode lookup service didn\'t return wgs84 data')
+            raise CourtSearchError('Mapit service didn\'t return wgs84 data')
 
     @staticmethod
     def postcode_to_local_authority(postcode, area_of_law):
         p = postcode.lower().replace(' ', '')
         if len(postcode) <= 4:
-            # A partial postcode is not sufficient information to determine the local authority
-            return CourtSearch.proximity_search(postcode, area_of_law)
+            raise CourtSearchError('Mapit doesn\'t return local authority information for partial postcodes')
 
         response = CourtSearch.get_full_postcode(p)
         data = json.loads(response)
