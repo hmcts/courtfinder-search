@@ -17,7 +17,7 @@
 </div>
 <div class="content inner cf">
   <header class="page-header">
-    <h1>Find a court or tribunal</h1>
+    <h1>Search results</h1>
   </header>
 
   {% if search_results %}
@@ -33,7 +33,7 @@
     <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
       {% endif %}
       {% if in_scotland %}
-    <p id="scotland"><em>Please note that this tool does not show courts in Scotland.</em></p>
+    <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
       {% endif %}
     {% endif %}
     <hr/>
