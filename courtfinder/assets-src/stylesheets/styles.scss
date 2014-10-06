@@ -56,14 +56,14 @@ label {
 $small-width: 800px;
 
 .court-addresses {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: left;
     width: 40%;
   }
 }
 
 .court-aol {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: left;
     width: 30%;
     box-sizing: border-box;
@@ -76,7 +76,7 @@ $small-width: 800px;
 }
 
 .court-map {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: right;
     width: 30%;
   }
@@ -93,7 +93,7 @@ $small-width: 800px;
 }
 
 .clear {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     clear: both
   }
 }

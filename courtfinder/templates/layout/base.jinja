@@ -1,8 +1,10 @@
 {% extends 'moj_template/base.html' %}
 {% load staticfiles %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/main.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "stylesheets/styles.css" %}">
+<!--[if IE 6]><link href="{% static "stylesheets/main-ie6.css" %}" media="all" rel="stylesheet" /><![endif]-->
+<!--[if IE 7]><link href="{% static "stylesheets/main-ie7.css" %}" media="all" rel="stylesheet" /><![endif]-->
+<!--[if IE 8]><link href="{% static "stylesheets/main-ie8.css" %}" media="all" rel="stylesheet" /><![endif]-->
+<!--[if gt IE 8]><!--><link rel="stylesheet" type="text/css" href="{% static "stylesheets/main.css" %}" /><![endif]-->
 {% endblock %}
 {% block content %}
   {% block body %}{% endblock %}
