@@ -11,5 +11,5 @@ before_script:
   - mkdir -p shippable/codecoverage
 
 script:
-  - python manage.py test
+  - python courtfinder/manage.py test
 
