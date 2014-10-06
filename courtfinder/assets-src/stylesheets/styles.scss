@@ -49,7 +49,9 @@ label {
   clear:both;
 }
 
-
+.form-hint {
+  color: #555;
+}
 
 /* -- Application specific ------------- */
 
@@ -136,6 +138,14 @@ $small-width: 800px;
     border-left: 8px solid $grey-3;
     padding-left: 10px;
   }
+  label {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .form-label {
+    margin-bottom: 0;
+  }
 }
 
 #aol-one-label {
@@ -145,8 +155,10 @@ $small-width: 800px;
   }
 }
 
+.aol-name {
+  font-weight: 600;
+}
 .aol-description {
   display: block;
-  color: #6f777b;
-  margin-top: 0.3em;
+  color: black;
 }
