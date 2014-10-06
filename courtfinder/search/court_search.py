@@ -82,7 +82,7 @@ class CourtSearch:
         r = requests.get(mapit_url)
         if r.status_code == 200:
             return r.text
-        elif r.status_code == 404:
+        elif r.status_code in [400, 404]:
             raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+mapit_url)
         else:
             raise CourtSearchError('Mapit service error: '+str(r.status_code))
