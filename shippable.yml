@@ -9,6 +9,7 @@ install:
 before_script: 
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
+  - psql -c 'create database "courtfinder-search";' -U courtfinder
 
 script:
   - python courtfinder/manage.py test
