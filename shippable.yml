@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 2.7
+
+install:
+  - pip install -r requirements.txt
+
+before_script: 
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+  - psql -c 'CREATE USER courtfinder'
+  - psql -c 'CREATE DATABASE "courtfinder-search";' -U courtfinder
+
+script:
+  - python courtfinder/manage.py test
+
