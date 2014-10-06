@@ -75,11 +75,11 @@
           </ul>
         </div>
         <div class="court-map">
-          <div>
-          <p class="court-result-heading">Find us here:</p>
-          {% if court.distance %}
-          <p class="distance-from-postcode">{{ court.distance }} miles away</p>
-          {% endif %}
+          <div class="court-map-top">
+            <p class="court-result-heading">Find us here:</p>
+            {% if court.distance %}
+            <p class="distance-from-postcode">{{ court.distance }} miles away</p>
+            {% endif %}
           </div>
           <p>
             {% if court.lat != None and court.lon != None %}
