@@ -58,7 +58,7 @@ $small-width: 800px;
 .court-addresses {
   @media screen and (min-width: $small-width) {
     float: left;
-    width: 30%;
+    width: 40%;
   }
 }
 
@@ -76,6 +76,13 @@ $small-width: 800px;
   @media screen and (min-width: $small-width) {
     float: right;
     width: 30%;
+  }
+  .court-result-heading {
+    float: left
+  }
+  .distance-from-postcode {
+    text-align: right;
+    padding-top: .75em;
   }
 }
 
