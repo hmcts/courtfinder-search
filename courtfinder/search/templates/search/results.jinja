@@ -40,9 +40,7 @@
     <ul id='court-results'>
       {% for court in search_results %}
       <li>
-        <div class="court-link">
-          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a>
-        </div>
+        <h2>{{ court.name }}</h2>
         <div class="court-addresses">
           <p>
             <span class="court-result-heading">Write to us:</span><br/>
@@ -77,10 +75,12 @@
           </ul>
         </div>
         <div class="court-map">
-          <p class="court-result-heading">Find us here:</p>
-          {% if court.distance %}
-          <p class="distance-from-postcode">{{ court.distance }} miles away</p>
-          {% endif %}
+          <div class="court-map-top">
+            <p class="court-result-heading">Find us here:</p>
+            {% if court.distance %}
+            <p class="distance-from-postcode">{{ court.distance }} miles away</p>
+            {% endif %}
+          </div>
           <p>
             {% if court.lat != None and court.lon != None %}
             <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
@@ -92,8 +92,10 @@
             </a>
             <br/>
           {% endif %}
-          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">More contact details and visitor information</a></p>
         </div>
+        <p class="clear">
+          <a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">More details about {{ court.name }}</a></p>
+        </p>
         <hr class="clear"/>
       </li>
       {% endfor %}
