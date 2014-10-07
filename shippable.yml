@@ -8,7 +8,8 @@ node_js:
 
 env:
   global:
-    - PROJECT=courtfinder HIPCHAT_ROOM=147294
+    - PROJECT=courtfinder
+    - CF_HIPCHAT_ROOM=147294
     - APP_NAME=courtfinder_search
     - DJANGO_SETTINGS_MODULE=courtfinder.settings.test
     - secure: AilDTDdphOGoqoXo8qyDEMA7SqK+uUTplkxUd74YoLKjxvhskN15RyLGZpDMIQB9gbKY2/S3WbNbcs0EnMA3bsafx6V8thoVSek5mZak9umppjrt0AzphfMzm2df9sCHhxF8uVGRp+ufJwvYnjBDugatPg54eMDpud9uUWhITpcFysQSvda8NGwwKsuRSTf917puEDy4qKscwut/6rksZKo0ZpHyyGuNti4JUl/PmgDsIIN96XO8/F0rRet9gSeIHaYg4l+y+EoVtq7BjsXbcV2W/tdifZMU5N80+HpK8bEX+ds3pzEMhYFj+qJf4eVGjbK23v1YVrSBI+iFpOQ1GQ==
