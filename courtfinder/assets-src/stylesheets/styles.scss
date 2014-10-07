@@ -49,21 +49,25 @@ label {
   clear:both;
 }
 
-
+.form-hint {
+  color: #555;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
 
 /* -- Application specific ------------- */
 
 $small-width: 800px;
 
 .court-addresses {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: left;
     width: 40%;
   }
 }
 
 .court-aol {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: left;
     width: 30%;
     box-sizing: border-box;
@@ -76,7 +80,7 @@ $small-width: 800px;
 }
 
 .court-map {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     float: right;
     width: 30%;
   }
@@ -93,7 +97,7 @@ $small-width: 800px;
 }
 
 .clear {
-  @media screen and (min-width: $small-width) {
+  @include media($min-width: $small-width) {
     clear: both
   }
 }
@@ -130,23 +134,33 @@ $small-width: 800px;
   margin-left: 1em;
 }
 
+.form-line {
+  clear: both;
+  padding-top: 1em;
+  padding-bottom: .5em;
+}
+
 #aols {
   margin-top: 0;
   .js {
     border-left: 8px solid $grey-3;
     padding-left: 10px;
   }
-}
-
-#aol-one-label {
-  display: none;
-  .js {
-    display: block;
+  label {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+  }
+  .form-label {
+    margin-bottom: 0;
+    padding: 8px;
+  }
+  input {
+    top: 10px;
   }
 }
 
 .aol-description {
-  display: block;
-  color: #6f777b;
-  margin-top: 0.3em;
+  color: #666;
 }

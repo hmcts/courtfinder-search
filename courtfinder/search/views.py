@@ -10,21 +10,21 @@ from search.court_search import CourtSearch
 from search.rules import Rules
 
 areas_of_law_description = {
-    "Adoption": "Applying to adopt a child.",
-    "Bankruptcy": "Declaring bankruptcy or being made bankrupt.",
-    "Civil partnership": "Ending a civil partnership.",
-    "Children": "Child contact issues and disputes over maintenance payments.",
-    "Crime": "Being accused of a crime, being a victim or witness.",
-    "Divorce": "Ending a marriage.",
-    "Domestic violence": "Violence in the home.",
-    "Employment": "Workplace disputes including pay, redundancy and discrimination.",
-    "Forced marriage": "Being made to marry against your will.",
+    "Adoption": "applying to adopt a child.",
+    "Bankruptcy": "declaring bankruptcy or being made bankrupt.",
+    "Civil partnership": "ending a civil partnership.",
+    "Children": "child contact issues and disputes over maintenance payments.",
+    "Crime": "being accused of a crime, being a victim or witness.",
+    "Divorce": "ending a marriage.",
+    "Domestic violence": "violence in the home.",
+    "Employment": "workplace disputes including pay, redundancy and discrimination.",
+    "Forced marriage": "being made to marry against your will.",
     "Housing possession": "Evictions and rental disputes.",
     "High court": "",
-    "Immigration": "Seeking asylum, establishing right to live in the UK and appealing deportation.",
-    "Money claims": "Small claims, consumer claims, negligence and personal injury claims.",
-    "Probate": "Will settlement and disputes.",
-    "Social security": "Problems with benefits, entitlement, assessment and decisions."
+    "Immigration": "seeking asylum, right to live in the UK and appealing deportation.",
+    "Money claims": "small claims, consumer, negligence and personal injury claims.",
+    "Probate": "will settlement and disputes.",
+    "Social security": "problems with benefits, entitlement, assessment and decisions."
 }
 
 whitespace_regex = re.compile(r'\s+')

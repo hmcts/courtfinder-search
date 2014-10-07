@@ -1,13 +1,14 @@
-$(function() {
+(function ($) {
   'use strict';
+    $(function () {
+        if (!supportsInputAttribute('autofocus')) {
+            $('[autofocus]').focus();
+        }
+    });
+    // detect support for input attirbute
+    function supportsInputAttribute (attr) {
+        var input = document.createElement('input');
+        return attr in input;
+    }
 
-  $('#aols').css('display', $('#aol-one').prop('checked') ? 'block' : 'none');
-  $('#aols, #aol-one-label').addClass('js');
-
-  $('#aol-one-label').css('display', 'block');
-  $('#aol-hint').css('display', 'block');
-  $('.aol-label').css('margin-left', '1em');
-
-  $('#aol-0').on('change', function() { $('#aols').css('display', 'none'); });
-  $('#aol-one').on('change', function() { $('#aols').css('display', 'block'); });
-});
+})(jQuery);

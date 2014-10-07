@@ -14,7 +14,6 @@
   <header class="page-header">
     <h1>Search by postcode</h1>
   </header>
-
 {% if postcode == '' %}
   <section class="validation-error"><span>You did not enter a postcode. Please try again.</span></section>
 {% endif %}
@@ -36,27 +35,23 @@
   <form method="get" action="results">
     <div class="form-block">
       <label for="postcode">
-        <input type="text" name="postcode" value="{{ postcode|default:'' }}" placeholder="eg HR5, BN17 5DF" autofocus/>
+        <div class="form-hint">Use full or part postcodes, for example, HR5 or BN17 5DF.</div>
+        <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
       </label>
     </div>
     <div class="form-block">
-      <div class="form-label-bold">Filter by legal problem</div>
-      <div class="form-hint">Not all courts deal with all legal problems. Filtering will help you find the right court more easily.</div>
       <label for="aol-0" class="block-label form-block">
         <input id="aol-0" type="radio" name="area_of_law" value="All" checked=checked>
         <div class="form-label">All courts and tribunals</div>
       </label>
-      <label for="aol-one" class="block-label form-block" id="aol-one-label">
-        <input id="aol-one" type="radio" name="area_of_law" value="unselected">
-        <div class="form-label">Only those dealing with your legal problem</div>
-      </label>
+      <div class="form-line">Only courts and tribunals that deal with:</div>
+
       <div id="aols" class="form-block">
-        <div id="aol-hint" class="form-hint">Choose the problem area that is relevant to you.</div>
         {% for aol in areas_of_law %}
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
-          <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}" >
+          <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}">
           <div class="form-label">
-            {{aol.name}}
+            <span class="aol-name">{{aol.name}}: </span>
             <span class="aol-description">{{ aol.description }}</span>
           </div>
         </label>
@@ -66,9 +61,6 @@
     <div class="actions">
     <button id="continue" class="button" type="submit">Continue</button>
   </div>
-</form>
+  </form>
 </div>
-{% endblock %}
-{% block javascripts %}
-    <script src='{% static "javascripts/application.js" %}'></script>
 {% endblock %}
