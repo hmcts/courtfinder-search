@@ -97,9 +97,7 @@ $small-width: 800px;
 }
 
 .clear {
-  @include media($min-width: $small-width) {
-    clear: both
-  }
+  clear: both;
 }
 
 .distance-from-postcode {
