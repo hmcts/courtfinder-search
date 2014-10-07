@@ -1,6 +1,7 @@
 import json
 import decimal
 import re
+import string
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
@@ -61,9 +62,12 @@ def search_by_postcode(request):
     })
 
 
-def list(request):
-    #    return render(request, 'search/list.jinja')
-    return redirect('https://courttribunalfinder.service.gov.uk/courts')
+def list_view(request, first_letter='A'):
+    return render(request, 'search/list.jinja', {
+        'letter': first_letter,
+        'letters': string.ascii_uppercase,
+        'courts': Court.objects.filter(name__iregex=r'^'+first_letter)
+    })
 
 
 def search_by_address(request):
@@ -122,7 +126,7 @@ def format_results(results):
 
 def results_html(request):
     if 'q' in request.GET:
-        query = request.GET.get('q','').strip()
+        query = re.sub(r'\s+',' ',request.GET.get('q','').strip())
 
         if query == "":
             return redirect(reverse('address-view')+'?error=noquery')

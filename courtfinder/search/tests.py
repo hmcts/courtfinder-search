@@ -18,7 +18,7 @@ class SearchTestCase(TestCase):
         "name": "England",
         "counties": [
             {
-                "towns": [ "Accrington", "Blackburn" ],
+                "towns": [ "Accrington", "Blackburn", "Double Name" ],
                 "name": "Lancashire"
             },
             {
@@ -81,6 +81,34 @@ class SearchTestCase(TestCase):
         "postcodes": [ "CF335EE" ],
         "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
         "display": true
+    },
+        {
+        "addresses": [
+            {
+                "town": "Double Name",
+                "type": "Visiting",
+                "postcode": "BB5 2BH",
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
+            }
+        ],
+        "admin_id": 2801,
+        "lat": "53.7491281247251",
+        "slug": "accrington-magistrates-court-2",
+        "court_types": [
+            "Magistrates Court"
+        ],
+        "name": "Accrington Magistrates' Court II",
+        "court_number": 1725,
+        "lon": "-2.359323760375266",
+        "postcodes": [ "CF335EE" ],
+        "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
+        "display": true,
+        "contacts": [
+            {
+                "sort": 2,
+                "type": "Fax",
+                "number": "0870 739 4254"
+            }]
     }]"""
 
         Ingest.countries(json.loads(self.countries_json_1))
@@ -125,7 +153,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/type?type=list', follow=True)
         self.assertEqual(response.redirect_chain, [
             ('http://testserver/search/list', 302),
-            ('https://courttribunalfinder.service.gov.uk/courts', 302)
         ])
 
     def test_format_results_with_postal_address(self):
@@ -159,6 +186,22 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
         self.assertInHTML('<title>Find a court or tribunal</title>', response.content, count=1)
+
+    def test_list_page_returns_correct_content(self):
+        c = Client()
+        response = c.get('/search/list')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/list.jinja')
+        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
+        self.assertInHTML('<h2 class="clear letterheader">A</h2>', response.content, count=1)
+
+    def test_list_page_letter_returns_correct_content(self):
+        c = Client()
+        response = c.get('/search/list/C')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/list.jinja')
+        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
+        self.assertInHTML('<h2 class="clear letterheader">C</h2>', response.content, count=1)
 
     def test_sample_postcode_all_aols(self):
         c = Client()
@@ -195,6 +238,11 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?q=ample2', follow=True)
         self.assertIn('validation-error', response.content)
+
+    def test_too_much_whitespace_in_address_search(self):
+        c = Client()
+        response = c.get('/search/results?q=Double++++Name', follow=True)
+        self.assertNotIn('validation-error', response.content)
 
     def test_regexp_city_should_match(self):
         c = Client()
@@ -308,7 +356,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
+        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 2)
 
     def test_bad_local_authority(self):
         with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):

@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^address$', views.search_by_address, name='address-view'),
     url(r'^results$', views.results_html, name='result-view'),
     url(r'^results.json$', views.results_json, name='api-result-view'),
-    url(r'^list$', views.list, name='list-view'),
+    url(r'^list$', views.list_view, name='list-view'),
+    url(r'^list/(?P<first_letter>[A-Z])$', views.list_view, name='list-view'),
 )
