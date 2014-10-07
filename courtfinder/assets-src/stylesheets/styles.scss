@@ -51,6 +51,8 @@ label {
 
 .form-hint {
   color: #555;
+  padding-bottom: 5px;
+  margin-top: 5px;
 }
 
 /* -- Application specific ------------- */
@@ -132,6 +134,12 @@ $small-width: 800px;
   margin-left: 1em;
 }
 
+.form-line {
+  clear: both;
+  padding-top: 1em;
+  padding-bottom: .5em;
+}
+
 #aols {
   margin-top: 0;
   .js {
@@ -142,23 +150,17 @@ $small-width: 800px;
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;
+    vertical-align: middle;
   }
   .form-label {
     margin-bottom: 0;
+    padding: 8px;
+  }
+  input {
+    top: 10px;
   }
 }
 
-#aol-one-label {
-  display: none;
-  .js {
-    display: block;
-  }
-}
-
-.aol-name {
-  font-weight: 600;
-}
 .aol-description {
-  display: block;
-  color: black;
+  color: #666;
 }
