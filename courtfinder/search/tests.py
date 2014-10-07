@@ -18,7 +18,7 @@ class SearchTestCase(TestCase):
         "name": "England",
         "counties": [
             {
-                "towns": [ "Accrington", "Blackburn" ],
+                "towns": [ "Accrington", "Blackburn", "Double Name" ],
                 "name": "Lancashire"
             },
             {
@@ -85,7 +85,7 @@ class SearchTestCase(TestCase):
         {
         "addresses": [
             {
-                "town": "Accrington",
+                "town": "Double Name",
                 "type": "Visiting",
                 "postcode": "BB5 2BH",
                 "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
@@ -238,6 +238,11 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?q=ample2', follow=True)
         self.assertIn('validation-error', response.content)
+
+    def test_too_much_whitespace_in_address_search(self):
+        c = Client()
+        response = c.get('/search/results?q=Double++++Name', follow=True)
+        self.assertNotIn('validation-error', response.content)
 
     def test_regexp_city_should_match(self):
         c = Client()
