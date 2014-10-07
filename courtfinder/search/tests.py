@@ -125,7 +125,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/type?type=list', follow=True)
         self.assertEqual(response.redirect_chain, [
             ('http://testserver/search/list', 302),
-            ('https://courttribunalfinder.service.gov.uk/courts', 302)
         ])
 
     def test_format_results_with_postal_address(self):
@@ -159,6 +158,22 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
         self.assertInHTML('<title>Find a court or tribunal</title>', response.content, count=1)
+
+    def test_list_page_returns_correct_content(self):
+        c = Client()
+        response = c.get('/search/list')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/list.jinja')
+        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
+        self.assertInHTML('<h2 class="clear letterheader">A</h2>', response.content, count=1)
+
+    def test_list_page_letter_returns_correct_content(self):
+        c = Client()
+        response = c.get('/search/list/C')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/list.jinja')
+        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
+        self.assertInHTML('<h2 class="clear letterheader">C</h2>', response.content, count=1)
 
     def test_sample_postcode_all_aols(self):
         c = Client()
