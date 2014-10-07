@@ -81,6 +81,34 @@ class SearchTestCase(TestCase):
         "postcodes": [ "CF335EE" ],
         "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
         "display": true
+    },
+        {
+        "addresses": [
+            {
+                "town": "Accrington",
+                "type": "Visiting",
+                "postcode": "BB5 2BH",
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
+            }
+        ],
+        "admin_id": 2801,
+        "lat": "53.7491281247251",
+        "slug": "accrington-magistrates-court-2",
+        "court_types": [
+            "Magistrates Court"
+        ],
+        "name": "Accrington Magistrates' Court II",
+        "court_number": 1725,
+        "lon": "-2.359323760375266",
+        "postcodes": [ "CF335EE" ],
+        "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
+        "display": true,
+        "contacts": [
+            {
+                "sort": 2,
+                "type": "Fax",
+                "number": "0870 739 4254"
+            }]
     }]"""
 
         Ingest.countries(json.loads(self.countries_json_1))
@@ -323,7 +351,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
+        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 2)
 
     def test_bad_local_authority(self):
         with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
