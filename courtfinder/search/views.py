@@ -66,7 +66,7 @@ def list_view(request, first_letter='A'):
     return render(request, 'search/list.jinja', {
         'letter': first_letter,
         'letters': string.ascii_uppercase,
-        'courts': Court.objects.filter(name__iregex=r'^'+first_letter)
+        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
     })
 
 
