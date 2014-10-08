@@ -50,7 +50,6 @@ def search_by_postcode(request):
     area_of_law_requested = request.GET.get('area_of_law', None)
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
     error = request.GET.get('error', False)
-    aol_with_copy = []
     for aol in areas_of_law:
         aol.description = areas_of_law_description[aol.name]
 
