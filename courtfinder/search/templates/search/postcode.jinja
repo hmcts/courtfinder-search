@@ -6,13 +6,12 @@
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="/">Home</a></li>
-    <li><a href="/search">Find a court or tribunal</a></li>
+    <li><a href="/search">Home</a></li>
   </ol>
 </div>
 <div class="content inner cf">
   <header class="page-header">
-    <h1>Search by postcode</h1>
+    <h1>Search using your postcode</h1>
   </header>
 {% if postcode == '' %}
   <section class="validation-error"><span>You did not enter a postcode. Please try again.</span></section>
@@ -35,7 +34,7 @@
   <form method="get" action="results">
     <div class="form-block">
       <label for="postcode">
-        <div class="form-hint">Use full or part postcodes, for example, HR5 or BN17 5DF.</div>
+        <div class="form-hint">Use your full or part postcode, for example, HR5 or BN17 5DF.</div>
         <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
       </label>
     </div>
