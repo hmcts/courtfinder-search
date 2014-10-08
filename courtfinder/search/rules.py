@@ -44,7 +44,7 @@ class Rules:
                     results = CourtSearch.proximity_search(postcode, area_of_law)
                     return Rules.__results_or_back(postcode, results)
                 elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-                    results = CourtSearch.postcode_search(postcode, area_of_law)
+                    results = CourtSearch.local_authority_search(postcode, area_of_law)
                     if len(results) == 0:
                         results = CourtSearch.proximity_search(postcode, area_of_law)
                     return Rules.__results_or_back(postcode, results)
