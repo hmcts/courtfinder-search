@@ -37,4 +37,14 @@
   <p>There are no courts starting with that letter.</p>
   {% endif %}
 </div>
+
+  <nav role='navigation' class="a-z-navigation">
+    <ul>
+      {% for letter in letters %}
+      <a href="/search/list/{{letter}}"><li>{{ letter }}</li></a>
+      {% endfor %}
+    </ul>
+  </nav>
+
+
 {% endblock %}
