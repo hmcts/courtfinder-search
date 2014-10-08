@@ -187,3 +187,15 @@ $small-width: 800px;
 .letterheader {
   font-size: 200%;
 }
+
+// User texting fix
+
+#search-index-page {
+    header.page-header h1 {
+    padding-top: 10px;
+  }
+
+  h2 {
+    margin: 0.6em 0 0.6em 0;
+  }
+}
