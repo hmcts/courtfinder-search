@@ -144,10 +144,9 @@ def results_html(request):
         area_of_law = request.GET.get('area_of_law','All').strip()
 
         # error handling
-        if postcode == '':
-            return redirect(reverse('postcode-view')+'?postcode=')
-        if area_of_law == 'unselected':
-            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law=')
+        if postcode == '' or area_of_law == '':
+            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
+
         directive = Rules.for_postcode(postcode, area_of_law)
 
         if directive['action'] == 'redirect':

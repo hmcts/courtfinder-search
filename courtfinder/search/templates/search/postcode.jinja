@@ -49,7 +49,7 @@
       <div id="aols" class="form-block">
         {% for aol in areas_of_law %}
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
-          <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}">
+          <input id="aol-{{forloop.counter}}" type="radio" name="area_of_law" value="{{aol.name}}" {% if aol.name == area_of_law %}checked{% endif %}>
           <div class="form-label">
             <span class="aol-name">{{aol.name}}: </span>
             <span class="aol-description">{{ aol.description }}</span>
