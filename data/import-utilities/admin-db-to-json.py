@@ -3,15 +3,23 @@ import json
 
 conn = psycopg2.connect("dbname='courtfinder_development' user='courtfinder' host='localhost'")
 
+# these descriptions are found in the admin app's locale files, not in the database
+parking_types = {"parking_onsite_free": "Free, on site parking is available, provided by the court.",
+                 "parking_onsite_paid": "Paid, on site parking is available, provided by the court.",
+                 "parking_offsite_free": "Free parking is available within a 5 minute walk.",
+                 "parking_offsite_paid": "Paid parking is available within a 5 minute walk.",
+                 "parking_none": "No parking facilities are available at or near the court.",
+                 "parking_onsite_none": "No parking facilities are available at or near the court."}
+
 def courts():
     all_courts = []
 
     cur = conn.cursor()
-    cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude FROM courts")
+    cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude, image_file, alert, parking_onsite, parking_offsite FROM courts")
     rows = cur.fetchall()
 
     for row in rows:
-        admin_id, name, display, court_number, slug, lat, lon = row
+        admin_id, name, display, court_number, slug, lat, lon, image_file, alert, parking_onsite, parking_offsite = row
 
         if name == None or slug == None:
             print "- %s\n\tslug: %s, lat: %s, lon: %s" % (name, slug, lat, lon)
@@ -22,6 +30,14 @@ def courts():
         court_types = court_types_for_court(slug)
         contacts = contacts_for_court(slug)
         postcodes = postcodes_for_court(slug)
+        facilities = facilities_for_court(slug)
+        opening_times = opening_times_for_court(slug)
+        parking = {}
+        if parking_onsite is not None:
+            parking["onsite"] =  parking_types[parking_onsite]
+        if parking_offsite is not None:
+            parking["offsite"] =  parking_types[parking_offsite]
+
 
         court_object = {
             "admin_id": admin_id,
@@ -33,12 +49,23 @@ def courts():
             "addresses": addresses,
             "court_types": court_types,
             "contacts": contacts,
-            "postcodes": postcodes
+            "facilities": facilities,
+            "postcodes": postcodes,
+
         }
         if lat is not None:
             court_object['lat'] = str(lat)
         if lon is not None:
             court_object['lon'] = str(lon)
+        if image_file is not None:
+            court_object['image_file'] = image_file
+        if opening_times is not None:
+            court_object['opening_times'] = opening_times
+        if alert is not None:
+            court_object['alert'] = alert
+        if len(parking) > 0:
+            court_object['parking'] = parking
+
         all_courts.append(court_object)
         print "+ %s" % name
 
@@ -66,6 +93,35 @@ def contacts_for_court( slug ):
 
     return contacts
 
+
+def facilities_for_court( slug ):
+    cur = conn.cursor()
+    sql = """SELECT c.slug, cf.description, f.name, f.image, f.image_description
+               FROM courts as c,
+                    facilities f,
+                    court_facilities cf
+              WHERE cf.court_id = c.id
+                AND cf.facility_id = f.id
+                AND c.slug = '%s'""" % slug
+    cur.execute(sql)
+    facilities = [{
+        "description": r[1],
+        "name": r[2],
+        "image": r[3],
+        "image_description": r[4]
+    } for r in cur.fetchall()]
+    return facilities
+
+def opening_times_for_court( slug ):
+    cur = conn.cursor()
+    sql = """SELECT ot.name, ott.name
+               FROM opening_times as ot, courts as c, opening_types as ott
+              WHERE ot.court_id = c.id
+                AND ott.id = ot.opening_type_id
+                AND c.slug = '%s'""" % slug
+    cur.execute(sql)
+    opening_times = [ r[1]+': '+r[0] for r in cur.fetchall()]
+    return opening_times
 
 def court_types_for_court( slug ):
     # court types for court
