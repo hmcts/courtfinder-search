@@ -50,7 +50,6 @@ def search_by_postcode(request):
     area_of_law_requested = request.GET.get('area_of_law', None)
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
     error = request.GET.get('error', False)
-    aol_with_copy = []
     for aol in areas_of_law:
         aol.description = areas_of_law_description[aol.name]
 
@@ -66,7 +65,7 @@ def list_view(request, first_letter='A'):
     return render(request, 'search/list.jinja', {
         'letter': first_letter,
         'letters': string.ascii_uppercase,
-        'courts': Court.objects.filter(name__iregex=r'^'+first_letter)
+        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
     })
 
 
@@ -145,10 +144,9 @@ def results_html(request):
         area_of_law = request.GET.get('area_of_law','All').strip()
 
         # error handling
-        if postcode == '':
-            return redirect(reverse('postcode-view')+'?postcode=')
-        if area_of_law == 'unselected':
-            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law=')
+        if postcode == '' or area_of_law == '':
+            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
+
         directive = Rules.for_postcode(postcode, area_of_law)
 
         if directive['action'] == 'redirect':

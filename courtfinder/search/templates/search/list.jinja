@@ -10,12 +10,12 @@
   </ol>
 </div>
 
-<div class="content inner cf">
+<div id="search-index-page" class="content inner cf">
   <header class="page-header">
     <h1>Courts and Tribunals</h1>
   </header>
 
-  <p>A-Z list of all courts and tribunals</p>
+  <p>Browse by name of court or tribunal</p>
 
   <nav role='navigation' class="a-z-navigation">
     <ul>
@@ -37,4 +37,14 @@
   <p>There are no courts starting with that letter.</p>
   {% endif %}
 </div>
+
+  <nav role='navigation' class="a-z-navigation">
+    <ul>
+      {% for letter in letters %}
+      <a href="/search/list/{{letter}}"><li>{{ letter }}</li></a>
+      {% endfor %}
+    </ul>
+  </nav>
+
+
 {% endblock %}

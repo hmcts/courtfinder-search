@@ -152,11 +152,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=')
         self.assertRedirects(response, '/search/address?error=noquery', 302)
 
-    def test_results_postcode_aol_not_selected(self):
-        c = Client()
-        response = c.get('/search/results?postcode=SE144EE&area_of_law=unselected')
-        self.assertRedirects(response, '/search/postcode?postcode=SE144EE&area_of_law=', 302)
-
     def test_sample_postcode_all_aols(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&area_of_law=All')
