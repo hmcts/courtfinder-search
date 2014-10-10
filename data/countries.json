@@ -220,7 +220,8 @@
                     "Camberwell Green",
                     "Greenwich",
                     "Hammersmith",
-                    "Sutton"
+                    "Sutton",
+                    "London"
                 ],
                 "name": "London"
             },
@@ -232,7 +233,8 @@
                     "Manchester",
                     "Oldham",
                     "Salford",
-                    "Wigan"
+                    "Wigan",
+                    "Stockport"
                 ],
                 "name": "Greater Manchester"
             },

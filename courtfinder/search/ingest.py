@@ -33,6 +33,11 @@ class Ingest:
         AddressType.objects.all().delete()
         CourtAttributeType.objects.all().delete()
         CourtAttribute.objects.all().delete()
+        Facility.objects.all().delete()
+        CourtFacilities.objects.all().delete()
+        OpeningTime.objects.all().delete()
+        CourtOpeningTimes.objects.all().delete()
+
         for court_obj in courts:
             court = Court(
                 admin_id=court_obj['admin_id'],
@@ -42,6 +47,8 @@ class Ingest:
                 lat=court_obj.get('lat',None),
                 lon=court_obj.get('lon',None),
                 number=court_obj['court_number'],
+                alert=court_obj.get('image_file', None),
+                image_file=court_obj.get('image_file', None),
             )
             court.save()
 
@@ -62,6 +69,21 @@ class Ingest:
                         local_authority=council
                     )
 
+            for facility_obj in court_obj['facilities']:
+                facility_name = facility_obj['name']
+                facility_description = facility_obj['description']
+                facility_image = facility_obj['image']
+                facility_image_description = facility_obj['image_description']
+                facility, created = Facility.objects.get_or_create(name=facility_name,
+                                                                   description=facility_description,
+                                                                   image=facility_image,
+                                                                   image_description=facility_image_description)
+                CourtFacilities.objects.create(court=court, facility=facility)
+
+            for opening_time in court_obj['opening_times']:
+                opening_time, created = OpeningTime.objects.get_or_create(description=opening_time)
+                CourtOpeningTimes.objects.create(court=court, opening_time=opening_time)
+
             for court_type_name in court_obj['court_types']:
                 ct, created = CourtType.objects.get_or_create(name=court_type_name)
 
@@ -70,7 +92,7 @@ class Ingest:
 
             for address in court_obj['addresses']:
                 address_type, created = AddressType.objects.get_or_create(name=address['type'])
-                town = Town.objects.get(name=address['town'])
+                town, created = Town.objects.get_or_create(name=address['town'])
 
                 CourtAddress.objects.create(
                     court=court,

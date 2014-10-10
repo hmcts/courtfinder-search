@@ -8,10 +8,14 @@ class Court(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True)
+    alert = models.CharField(max_length=4096, null=True, default=None)
+    image_file = models.CharField(max_length=255, null=True, default=None)
     areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreasOfLaw', null=True)
     attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute', null=True)
     addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)
     court_types = models.ManyToManyField('CourtType', through='CourtCourtTypes', null=True)
+    facilities = models.ManyToManyField('Facility', through='CourtFacilities', null=True)
+    opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTimes', null=True)
 
     def postcodes_covered(self):
         return CourtPostcodes.objects.filter(court=self)
@@ -51,6 +55,21 @@ class AreaOfLaw(models.Model):
     def __unicode__(self):
         return self.name
 
+class Facility(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=4096)
+    image = models.CharField(max_length=255)
+    image_description = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "%s: %s" % (self.name, self.description)
+
+class OpeningTime(models.Model):
+    description = models.CharField(max_length=1024)
+
+    def __unicode__(self):
+        return self.description
+
 
 class LocalAuthority(models.Model):
     name = models.TextField()
@@ -67,6 +86,19 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
     def __unicode__(self):
         return "%s covers %s for %s" % (self.court.name, self.local_authority.name, self.area_of_law.name)
 
+class CourtFacilities(models.Model):
+    court = models.ForeignKey(Court)
+    facility = models.ForeignKey(Facility)
+
+    def __unicode__(self):
+        return "%s has facility %s" % (self.court.name, self.facility)
+
+class CourtOpeningTimes(models.Model):
+    court = models.ForeignKey(Court)
+    opening_time = models.ForeignKey(OpeningTime)
+
+    def __unicode__(self):
+        return "%s has facility %s" % (self.court.name, self.opening_time)
 
 class CourtAreasOfLaw(models.Model):
     court = models.ForeignKey(Court)
