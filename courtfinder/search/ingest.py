@@ -22,21 +22,21 @@ class Ingest:
         Court.objects.all().delete()
         LocalAuthority.objects.all().delete()
         AreaOfLaw.objects.all().delete()
-        CourtAreasOfLaw.objects.all().delete()
+        CourtAreaOfLaw.objects.all().delete()
         CourtLocalAuthorityAreaOfLaw.objects.all().delete()
         CourtType.objects.all().delete()
-        CourtCourtTypes.objects.all().delete()
+        CourtCourtType.objects.all().delete()
         CourtAddress.objects.all().delete()
         CourtContact.objects.all().delete()
-        ContactType.objects.all().delete()
-        CourtPostcodes.objects.all().delete()
+        Contact.objects.all().delete()
+        CourtPostcode.objects.all().delete()
         AddressType.objects.all().delete()
         CourtAttributeType.objects.all().delete()
         CourtAttribute.objects.all().delete()
         Facility.objects.all().delete()
-        CourtFacilities.objects.all().delete()
+        CourtFacility.objects.all().delete()
         OpeningTime.objects.all().delete()
-        CourtOpeningTimes.objects.all().delete()
+        CourtOpeningTime.objects.all().delete()
 
         for court_obj in courts:
             court = Court(
@@ -47,7 +47,8 @@ class Ingest:
                 lat=court_obj.get('lat',None),
                 lon=court_obj.get('lon',None),
                 number=court_obj['court_number'],
-                alert=court_obj.get('image_file', None),
+                alert=court_obj.get('alert', None),
+                directions=court_obj.get('directions', None),
                 image_file=court_obj.get('image_file', None),
             )
             court.save()
@@ -58,7 +59,7 @@ class Ingest:
 
                 aol, created = AreaOfLaw.objects.get_or_create(name=aol_name)
 
-                CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
+                CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
 
                 for council_name in aol_councils:
                     council, created = LocalAuthority.objects.get_or_create(name=council_name)
@@ -78,16 +79,20 @@ class Ingest:
                                                                    description=facility_description,
                                                                    image=facility_image,
                                                                    image_description=facility_image_description)
-                CourtFacilities.objects.create(court=court, facility=facility)
+                CourtFacility.objects.create(court=court, facility=facility)
 
             for opening_time in court_obj['opening_times']:
                 opening_time, created = OpeningTime.objects.get_or_create(description=opening_time)
-                CourtOpeningTimes.objects.create(court=court, opening_time=opening_time)
+                CourtOpeningTime.objects.create(court=court, opening_time=opening_time)
+
+            for email in court_obj['emails']:
+                email, created = Email.objects.get_or_create(description=email['description'], address=email['address'])
+                CourtEmail.objects.create(court=court, email=email)
 
             for court_type_name in court_obj['court_types']:
                 ct, created = CourtType.objects.get_or_create(name=court_type_name)
 
-                CourtCourtTypes.objects.create(court=court, court_type=ct)
+                CourtCourtType.objects.create(court=court, court_type=ct)
 
 
             for address in court_obj['addresses']:
@@ -102,17 +107,17 @@ class Ingest:
                     town=town
                 )
 
-            for contact in court_obj['contacts']:
-                contact_type, created = ContactType.objects.get_or_create(name=contact['type'])
+            for contact_obj in court_obj['contacts']:
+                contact, created = Contact.objects.get_or_create(name=contact_obj['name'],
+                                                                 number=contact_obj['number'])
 
                 CourtContact.objects.create(
                     court=court,
-                    contact_type=contact_type,
-                    value=contact['number']
+                    contact=contact,
                 )
 
             for postcode in court_obj['postcodes']:
-                CourtPostcodes.objects.create(
+                CourtPostcode.objects.create(
                     court=court,
                     postcode=postcode
                 )

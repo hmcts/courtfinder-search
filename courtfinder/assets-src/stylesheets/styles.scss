@@ -199,3 +199,100 @@ $small-width: 800px;
     margin: 0.6em 0 0.6em 0;
   }
 }
+
+/* court pages */
+
+.court {
+
+  h2 {
+    padding-top: 1em;
+    clear: left;
+  }
+
+  li {
+    list-style-type: none;
+    margin: 0;
+  }
+
+  #addresses {
+    background-color: #e6e6e6;
+    max-height: 250px;
+    padding: 1em;
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  #right-column {
+    @include media($min-width: $small-width) {
+      float: right;
+      width: 30%;
+    }
+  }
+
+  #left-column {
+    @include media($min-width: $small-width) {
+      float: left;
+      width: 67%;
+    }
+  }
+
+  #court-photo {
+    width: 100%;
+    img {
+      max-height: 250px;
+    }
+  }
+
+  .facilities {
+    .icon {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      display: block;
+      float: left;
+      clear: left;
+      margin-bottom: 5px;
+      margin-right: 10px;
+      img {
+        position: absolute;
+      }
+    }
+    .facility {
+      height: 55px;
+    }
+  }
+  .icon-firstaid {top:-10px;left:-250px}
+  .icon-interview {top:-10px;left:-130px}
+  .icon-waiting {top:-10px;left:-310px}
+  .icon-hotspot {top:-10px;left:-370px}
+  .icon-children {top:-10px;left:-430px}
+  .icon-no-parking {top:-10px;left:-490px}
+  .icon-disabled {top:-70px}
+  .icon-guide_dogs {top:-70px;left:-70px}
+  .icon-phone {top:-70px;left:-130px}
+  .icon-disabledwc {top:-70px;left:-190px}
+  .icon-public_toilets {top:-70px;left:-250px}
+  .icon-baby {top:-70px;left:-310px}
+  .icon-prayer {top:-70px;left:-370px}
+  .icon-hot_vending {top:-70px;left:-430px}
+  .icon-parking {top:-70px;left:-490px}
+  .icon-loop_hearing {top: -10px;left: -10px}
+
+  #alert {
+    margin-top: 2em;
+    #alert-icon {
+      float: left;
+      padding: 0 20px 50px 0;
+    }
+  }
+
+  #pros {
+    dt {
+      float: left;
+      padding-right: .3em;
+    }
+  }
+
+}

@@ -33,10 +33,10 @@ class Data:
     def courts(self):
         all_courts = []
         cur = self.conn.cursor()
-        cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude, image_file, alert, parking_onsite, parking_offsite FROM courts")
+        cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude, image_file, alert, parking_onsite, parking_offsite, directions FROM courts")
         rows = cur.fetchall()
         for row in rows:
-            admin_id, name, display, court_number, slug, lat, lon, image_file, alert, parking_onsite, parking_offsite = row
+            admin_id, name, display, court_number, slug, lat, lon, image_file, alert, parking_onsite, parking_offsite, directions = row
             if name == None or slug == None:
                 print "- %s\n\tslug: %s, lat: %s, lon: %s" % (name, slug, lat, lon)
                 continue
@@ -44,6 +44,7 @@ class Data:
             addresses = self.addresses_for_court(slug)
             court_types = self.court_types_for_court(slug)
             contacts = self.contacts_for_court(slug)
+            emails = self.emails_for_court(slug)
             postcodes = self.postcodes_for_court(slug)
             facilities = self.facilities_for_court(slug)
             opening_times = self.opening_times_for_court(slug)
@@ -62,6 +63,7 @@ class Data:
                 "addresses": addresses,
                 "court_types": court_types,
                 "contacts": contacts,
+                "emails": emails,
                 "facilities": facilities,
                 "postcodes": postcodes,
             }
@@ -73,10 +75,12 @@ class Data:
                 court_object['image_file'] = image_file
             if opening_times is not None:
                 court_object['opening_times'] = opening_times
-            if alert is not None:
+            if alert not in (None, ""):
                 court_object['alert'] = alert
             if len(parking) > 0:
                 court_object['parking'] = parking
+            if directions not in (None, ""):
+                court_object['directions'] = directions
             all_courts.append(court_object)
             print "+ %s" % name
         self.write_to_json( 'courts', all_courts )
@@ -93,11 +97,24 @@ class Data:
                     AND c.slug = '%s'""" % slug
         cur.execute(sql)
         contacts = [{
-            "type": r[1],
+            "name": r[1],
             "number": r[2],
             "sort": r[3]
         } for r in cur.fetchall()]
         return contacts
+
+    def emails_for_court(self, slug):
+        cur = self.conn.cursor()
+        sql = """SELECT e.address, ct.name
+                   FROM courts as c,
+                        contact_types ct,
+                        emails e
+                  WHERE e.court_id = c.id
+                    AND e.contact_type_id = ct.id
+                    AND c.slug = '%s'""" % slug
+        cur.execute(sql)
+        emails = [{ "description": r[1], "address": r[0] } for r in cur.fetchall()]
+        return emails
 
     def facilities_for_court(self, slug):
         cur = self.conn.cursor()

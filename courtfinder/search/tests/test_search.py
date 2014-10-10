@@ -366,7 +366,7 @@ class SearchTestCase(TestCase):
     def test_court_local_authority_aol_covered(self):
         court = Court.objects.get(name="Accrington Magistrates' Court")
         aol = AreaOfLaw.objects.get(name="Divorce")
-        court_aol = CourtAreasOfLaw.objects.get(court=court, area_of_law=aol)
+        court_aol = CourtAreaOfLaw.objects.get(court=court, area_of_law=aol)
         self.assertEqual(len(court_aol.local_authorities_covered()), 1)
         self.assertEqual(str(court_aol.local_authorities_covered()[0]),
                          "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
@@ -380,7 +380,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
         aol = AreaOfLaw.objects.create(name="Divorce")
         self.assertEqual(str(aol), "Divorce")
-        aols = CourtAreasOfLaw.objects.create(court=court, area_of_law=aol)
+        aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
         self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce")
         country = Country.objects.create(name="Wales")
         self.assertEqual(str(country), "Wales")
@@ -396,7 +396,7 @@ class SearchTestCase(TestCase):
                                                     postcode="CF34RR",
                                                     town=town)
         self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
-        contact_type = ContactType.objects.create(name="email")
+        contact_type = Contact.objects.create(name="email")
         self.assertEqual(str(contact_type), "email")
         court_type = CourtType.objects.create(name="crown court")
         self.assertEqual(str(court_type), "crown court")
@@ -404,10 +404,10 @@ class SearchTestCase(TestCase):
                                                     court=court,
                                                     value="a@b.com")
         self.assertEqual(str(court_contact), "email for Accrington Magistrates' Court is a@b.com")
-        court_court_types=CourtCourtTypes.objects.create(court=court,
+        court_court_types=CourtCourtType.objects.create(court=court,
                                                         court_type=court_type)
         self.assertEqual(str(court_court_types), "Court type for Accrington Magistrates' Court is crown court")
-        court_postcodes=CourtPostcodes.objects.create(court=court,
+        court_postcodes=CourtPostcode.objects.create(court=court,
                                                       postcode="BR27AY")
         self.assertEqual(str(court_postcodes), "Accrington Magistrates' Court covers BR27AY")
         local_authority=LocalAuthority.objects.create(name="Southwark Borough Council")

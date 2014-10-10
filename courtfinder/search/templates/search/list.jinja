@@ -30,7 +30,7 @@
   {% if courts %}
   <ul>
     {% for court in courts %}
-      <li><a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a></li>
+      <li><a href="/courts/{{ court.slug }}">{{ court.name }}</a></li>
     {% endfor %}
   </ul>
   {% else %}

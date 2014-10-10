@@ -6,7 +6,7 @@ import string
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
-from search.models import Court, AreaOfLaw, CourtAreasOfLaw
+from search.models import Court, AreaOfLaw
 from search.court_search import CourtSearch
 from search.rules import Rules
 
@@ -110,7 +110,7 @@ def format_results(results):
                   'lon': result.lon,
                   'number': result.number,
                   'slug': result.slug,
-                  'types': [court_type.court_type.name for court_type in result.courtcourttypes_set.all()],
+                  'types': [court_type.court_type.name for court_type in result.courtcourttype_set.all()],
                   'address': visible_address,
                   'areas_of_law': areas_of_law }
         dx_contact = result.courtcontact_set.filter(contact_type__name='DX')
