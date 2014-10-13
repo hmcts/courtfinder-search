@@ -18,7 +18,7 @@ class SearchTestCase(TestCase):
         "name": "England",
         "counties": [
             {
-                "towns": [ "Accrington", "Blackburn", "Double Name" ],
+                "towns": [ "Accrington", "Blackburn", "Double Name", "Ashton-Under-Lyne" ],
                 "name": "Lancashire"
             },
             {
@@ -27,24 +27,71 @@ class SearchTestCase(TestCase):
             }]}]
         """
 
-        self.courts_json_1 = """[{
+        self.courts_json_1 = """[    {
         "addresses": [
             {
                 "town": "Accrington",
                 "type": "Visiting",
                 "postcode": "BB5 2BH",
-                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road"
             },
             {
                 "town": "Blackburn",
                 "type": "Postal",
                 "postcode": "BB2 1AA",
-                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate"
+                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate\\t\\n"
             }
         ],
         "admin_id": 2800,
+        "facilities": [
+            {
+                "image_description": "Guide dogs icon.",
+                "image": "guide_dogs",
+                "description": "<p>Guide Dogs are welcome at this court.</p>\\r\\n",
+                "name": "Guide dogs"
+            },
+            {
+                "image_description": "Interview room icon.",
+                "image": "interview",
+                "description": "<p>Two interview rooms are available at this court.</p>\\r\\n",
+                "name": "Interview room"
+            },
+            {
+                "image_description": "Parking icon",
+                "image": "parking",
+                "description": "<p>There is free public parking at or nearby this court.</p>\\r\\n",
+                "name": "Parking"
+            },
+            {
+                "image_description": "Refreshments icon",
+                "image": "hot_vending",
+                "description": "<p>Refreshments are available.</p>\\r\\n",
+                "name": "Refreshments"
+            },
+            {
+                "image_description": "Disabled access icon",
+                "image": "disabled",
+                "description": "<p>This court has disabled toilet facilities, wheelchair access (assistance may be required from our staff) and a stairlift.</p>\\r\\n",
+                "name": "Disabled access"
+            },
+            {
+                "image_description": "Loop Hearing icon",
+                "image": "loop_hearing",
+                "description": "<p>This court has hearing enhancement facilities.</p>\\r\\n",
+                "name": "Loop Hearing"
+            },
+            {
+                "image_description": "Video facilities icon",
+                "image": "video_conf",
+                "description": "<p>Video conference and Prison Video Link facilities</p>\\r\\n",
+                "name": "Video facilities"
+            }
+        ],
         "lat": "53.7491281247251",
         "slug": "accrington-magistrates-court",
+        "opening_times": [
+            "Court building open: Monday to Friday 9:15am to close of business"
+        ],
         "court_types": [
             "Magistrates Court"
         ],
@@ -52,64 +99,164 @@ class SearchTestCase(TestCase):
         "contacts": [
             {
                 "sort": 2,
-                "type": "Fax",
+                "name": "Fax",
                 "number": "0870 739 4254"
             },
             {
                 "sort": 0,
-                "type": "Enquiries",
+                "name": "Enquiries",
                 "number": "01254  687500"
             },
             {
                 "sort": 1,
-                "type": "Fine queries",
+                "name": "Fine queries",
                 "number": "01282  610000"
             },
             {
                 "sort": 3,
-                "type": "Witness service",
+                "name": "Witness service",
                 "number": "01254 265 305"
             },
             {
                 "sort": null,
-                "type": "DX",
+                "name": "DX",
                 "number": "742020 Blackburn 10"
             }
         ],
         "court_number": 1725,
         "lon": "-2.359323760375266",
-        "postcodes": [ "CF335EE" ],
-        "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
-        "display": true
-    },
-        {
-        "addresses": [
+        "postcodes": ["SW1H9AJ"],
+        "emails": [
             {
-                "town": "Double Name",
-                "type": "Visiting",
-                "postcode": "BB5 2BH",
-                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road\\n"
+                "description": "Enquiries",
+                "address": "ln-blackburnmcenq@hmcts.gsi.gov.uk"
             }
         ],
-        "admin_id": 2801,
-        "lat": "53.7491281247251",
-        "slug": "accrington-magistrates-court-2",
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Crime"
+            },
+            {
+                "councils": [ "Southwark Borough Council" ],
+                "name": "Divorce"
+            }
+        ],
+        "image_file": "accrington_magistrates_court.jpg",
+        "display": true
+    },
+    {
+        "addresses": [
+            {
+                "town": "Ashton-Under-Lyne",
+                "type": "Visiting",
+                "postcode": "OL6 7TP",
+                "address": "Henry Square\\n\\n\\n"
+            }
+        ],
+        "admin_id": 2806,
+        "facilities": [
+            {
+                "image_description": "Baby changing facility icon.",
+                "image": "baby",
+                "description": "<p>This Court has baby changing facilities.</p>\\r\\n",
+                "name": "Baby changing facility"
+            },
+            {
+                "image_description": "Guide dogs icon.",
+                "image": "guide_dogs",
+                "description": "<p>Guide Dogs are welcome at this Court.</p>\\r\\n",
+                "name": "Guide dogs"
+            },
+            {
+                "image_description": "Interview room icon.",
+                "image": "interview",
+                "description": "<p>This Court has interview room facilities.</p>\\r\\n",
+                "name": "Interview room"
+            },
+            {
+                "image_description": "Loop Hearing icon",
+                "image": "loop_hearing",
+                "description": "<p>This Court has hearing enhancement facilities.</p>\\r\\n",
+                "name": "Loop Hearing"
+            },
+            {
+                "image_description": "Parking icon",
+                "image": "parking",
+                "description": "<p>There is free public parking at or nearby this Court.</p>\\r\\n",
+                "name": "Parking"
+            },
+            {
+                "image_description": "Video facilities icon",
+                "image": "video_conf",
+                "description": "<p>Video conference and Prison Video Link facilities</p>\\r\\n",
+                "name": "Video facilities"
+            },
+            {
+                "image_description": "Refreshments icon",
+                "image": "hot_vending",
+                "description": "<p>Refreshments are available.</p>\\r\\n",
+                "name": "Refreshments"
+            },
+            {
+                "image_description": "Disabled access icon",
+                "image": "disabled",
+                "description": "<p>Disabled access, toilet and parking facilities.</p>\\r\\n",
+                "name": "Disabled access"
+            }
+        ],
+        "lat": "53.48557639318307",
+        "slug": "tameside-magistrates-court",
+        "opening_times": [
+            "Court building open: 9.00 am to 5.00 pm",
+            "Court counter open: 9.00 am to 4.00 pm",
+            "Telephone Enquiries from: 9.00 am to 5.00 pm"
+        ],
         "court_types": [
             "Magistrates Court"
         ],
-        "name": "Accrington Magistrates' Court II",
-        "court_number": 1725,
-        "lon": "-2.359323760375266",
-        "postcodes": [ "CF335EE" ],
-        "areas_of_law": [ { "councils": [], "name": "Money claims" }, { "councils": [ "Southwark Borough Council" ], "name": "Divorce" } ],
-        "display": true,
+        "name": "Tameside Magistrates' Court",
         "contacts": [
             {
-                "sort": 2,
-                "type": "Fax",
-                "number": "0870 739 4254"
-            }]
-    }]"""
+                "sort": 0,
+                "name": "Enquiries",
+                "number": "0161  330 2023"
+            },
+            {
+                "sort": 1,
+                "name": "Enquiries",
+                "number": "0161 331 5645"
+            },
+            {
+                "sort": 3,
+                "name": "Witness service",
+                "number": "0161 339 9362"
+            },
+            {
+                "sort": null,
+                "name": "DX",
+                "number": "702625 Ashton-under-Lyne 2"
+            }
+        ],
+        "court_number": 1748,
+        "lon": "-2.102120972524918",
+        "postcodes": [],
+        "emails": [
+            {
+                "description": "Enquiries",
+                "address": "gm-tamesidemcadmin@hmcts.gsi.gov.uk"
+            }
+        ],
+        "areas_of_law": [
+            {
+                "councils": [],
+                "name": "Crime"
+            }
+        ],
+        "image_file": "tameside_magistrates_court.jpg",
+        "display": true
+    }
+]"""
 
         Ingest.countries(json.loads(self.countries_json_1))
         Ingest.courts(json.loads(self.courts_json_1))
@@ -164,7 +311,7 @@ class SearchTestCase(TestCase):
 
     def test_sample_postcode_specific_aol2(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Money+claims')
+        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
         self.assertEqual(response.status_code, 200)
 
     def test_sample_postcode_bad_aol(self):
@@ -190,7 +337,7 @@ class SearchTestCase(TestCase):
 
     def test_too_much_whitespace_in_address_search(self):
         c = Client()
-        response = c.get('/search/results?q=Double++++Name', follow=True)
+        response = c.get('/search/results?q=Accrington++++Magistrates', follow=True)
         self.assertNotIn('validation-error', response.content)
 
     def test_regexp_city_should_match(self):
@@ -305,7 +452,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 2)
+        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
 
     def test_bad_local_authority(self):
         with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
@@ -336,7 +483,7 @@ class SearchTestCase(TestCase):
                 self.assertEqual(response.status_code, 500)
 
     def test_postcode_search(self):
-        self.assertNotEqual(CourtSearch.postcode_search('CF335EE', 'all'), [])
+        self.assertNotEqual(CourtSearch.postcode_search('SW1H9AJ', 'all'), [])
 
     def test_empty_postcode(self):
         c = Client()
@@ -396,14 +543,12 @@ class SearchTestCase(TestCase):
                                                     postcode="CF34RR",
                                                     town=town)
         self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
-        contact_type = Contact.objects.create(name="email")
-        self.assertEqual(str(contact_type), "email")
+        contact = Contact.objects.create(name="Enquiries", number="0123456789")
+        self.assertEqual(str(contact), "Enquiries: 0123456789")
         court_type = CourtType.objects.create(name="crown court")
         self.assertEqual(str(court_type), "crown court")
-        court_contact = CourtContact.objects.create(contact_type=contact_type,
-                                                    court=court,
-                                                    value="a@b.com")
-        self.assertEqual(str(court_contact), "email for Accrington Magistrates' Court is a@b.com")
+        court_contact = CourtContact.objects.create(contact=contact, court=court)
+        self.assertEqual(str(court_contact), "Enquiries for Accrington Magistrates' Court is 0123456789")
         court_court_types=CourtCourtType.objects.create(court=court,
                                                         court_type=court_type)
         self.assertEqual(str(court_court_types), "Court type for Accrington Magistrates' Court is crown court")
