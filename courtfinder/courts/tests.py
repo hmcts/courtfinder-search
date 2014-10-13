@@ -267,3 +267,14 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/tameside-magistrates-court')
         self.assertEqual(response.status_code, 200)
         self.assertIn("Tameside", response.content)
+
+    def test_sample_court_page(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Accrington", response.content)
+
+    def test_court_list_redirect(self):
+        c = Client()
+        response = c.get('/courts/')
+        self.assertRedirects(response, '/courts/A', 302)
