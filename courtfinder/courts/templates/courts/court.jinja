@@ -10,22 +10,24 @@
     <li><a href="/search">Find a court or tribunal</a></li>
   </ol>
 </div>
-<div class="content inner cf court">
+<div class="content inner cf court" vocab="http://schema.org" typeof="Courthouse">
   <header class="page-header">
     <h1>{{ court.name }}</h1>
   </header>
 
   <div id="addresses">
     {% if court.visiting_address %}
-    <div id="visiting">
+    <div id="visiting" property='address' typeof='http://schema.org/PostalAddress'>
       <h2>Visit us:</h2>
+      <span property="streetAddress">
       {% for line in court.visiting_address.address_lines %}
       {{ line }}<br/>
-      {% endfor %}
-      {{ court.visiting_address.postcode }}<br/>
-      {{ court.visiting_address.town }}<br/>
+        {% endfor %}
+      </span>
+      <span property="postalCode">{{ court.visiting_address.postcode }}<br/></span>
+      <span property="addressLocality">{{ court.visiting_address.town }}<br/></span>
       {% if court.visiting_address.county != court.visiting_address.town %}
-      {{ court.visiting_address.county }}
+      <span property="addressRegion">{{ court.visiting_address.county }}</span>
       {% endif %}
       <p id="map-link">
         <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" rel="external" target="_blank">Maps and directions</a>
@@ -47,7 +49,7 @@
     {% endif %}
   </div>
   <div id="photo">
-    <img src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+    <img property="image" src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
   </div>
 
   <div id="left">
@@ -63,7 +65,7 @@
       <h2>Opening hours</h2>
       <ul>
       {% for opening_time in court.opening_times %}
-        <li>{{ opening_time.description }}</li>
+        <li><time property="openingHours">{{ opening_time.description }}</time></li>
       {% endfor %}
       </ul>
       {% endif %}
@@ -74,7 +76,7 @@
       <h2>Email</h2>
       <ul>
         {% for email in court.emails %}
-        <li>{{ email.description }}: <a href="mailto:{{ email.address }}">{{ email.address }}</a></li>
+        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ email.description }}</span>: <a property="email" href="mailto:{{ email.address }}">{{ email.address }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -82,7 +84,7 @@
       <h2>Phone numbers</h2>
       <ul>
         {% for contact in court.contacts %}
-        <li>{{ contact.name }}: <a href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
+        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ contact.name }}</span>: <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}
