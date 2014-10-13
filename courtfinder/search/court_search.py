@@ -33,7 +33,27 @@ class CourtSearch:
 
         covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=aol, local_authority=la)
 
-        return [c.court for c in covered]
+        return CourtSearch.order_by_distance([c.court for c in covered], postcode)
+
+
+    @staticmethod
+    def order_by_distance( courts, postcode ):
+        if len(courts) == 0:
+            return courts
+
+        lat, lon = CourtSearch.postcode_to_latlon( postcode )
+        court_ids = "(%s)" % ", ".join([str(c.id) for c in courts])
+
+        results = Court.objects.raw("""
+                SELECT *, 
+                       (point(c.lon, c.lat) <@> point(%s, %s)) as distance
+                  FROM search_court as c
+                 WHERE id in %s
+                 ORDER BY distance
+        """ % (lon, lat, court_ids))
+
+        return [r for r in results]
+
 
     @staticmethod
     def dedupe(seq):
