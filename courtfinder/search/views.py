@@ -1,7 +1,6 @@
 import json
 import decimal
 import re
-import string
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
@@ -42,7 +41,7 @@ def search_type(request):
     elif search_type == 'address':
         return redirect(reverse('address-view'))
     else:
-        return redirect(reverse('list-view'))
+        return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
 
 
 def search_by_postcode(request):
@@ -60,13 +59,6 @@ def search_by_postcode(request):
       'error': error,
     })
 
-
-def list_view(request, first_letter='A'):
-    return render(request, 'search/list.jinja', {
-        'letter': first_letter,
-        'letters': string.ascii_uppercase,
-        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
-    })
 
 
 def search_by_address(request):

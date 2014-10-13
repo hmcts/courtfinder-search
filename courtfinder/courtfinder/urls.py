@@ -4,5 +4,5 @@ urlpatterns = patterns('',
     url(r'^$', include('staticpages.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^search/', include('search.urls')),
-    url(r'^courts/', include('courts.urls')),
+    url(r'^courts/', include('courts.urls', namespace='courts')),
 )

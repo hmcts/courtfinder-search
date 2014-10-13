@@ -1,4 +1,6 @@
-from django.shortcuts import render
+import string
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from search.models import Court, AreaOfLaw
 
@@ -52,4 +54,14 @@ def format_court(court):
 def court_view(request, slug):
     return render(request, 'courts/court.jinja', {
         'court': format_court(Court.objects.get(slug=slug))
+    })
+
+def courts_view(request):
+    return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
+
+def list_view(request, first_letter='A'):
+    return render(request, 'courts/list.jinja', {
+        'letter': first_letter,
+        'letters': string.ascii_uppercase,
+        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
     })
