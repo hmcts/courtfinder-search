@@ -203,9 +203,13 @@ $small-width: 800px;
 /* court pages */
 
 .court {
+  #map-link {
+    padding-top: 1em;
+  }
+
 
   h2 {
-    padding-top: 1em;
+    padding-top: .5em;
     clear: left;
   }
 
@@ -215,52 +219,77 @@ $small-width: 800px;
   }
 
   #addresses {
+    h2 {
+      padding-top: 0;
+    }
     background-color: #e6e6e6;
-    max-height: 250px;
-    padding: 1em;
+    padding: 1em 1em 0 1em;
+    margin-bottom: 1em;
+    @include media($min-width: $small-width) {
+      min-height: 226px;
+      display: inline-block;
+      float: left;
+      width: 60%;
+      #visiting {
+        float: left;
+        width: 48%;
+      }
+      #postal {
+        float: right;
+        width: 48%;
+      }
+    }
     h2 {
       margin-top: 0;
     }
   }
 
-  #right-column {
+  #photo {
+    overflow: hidden;
+    img {
+      width: 100%;
+      max-width: 400px;
+    }
     @include media($min-width: $small-width) {
       float: right;
-      width: 30%;
+      width: 33%;
     }
   }
 
-  #left-column {
+  #left {
     @include media($min-width: $small-width) {
       float: left;
-      width: 67%;
+      width: 60%;
     }
   }
 
-  #court-photo {
-    width: 100%;
-    img {
-      max-height: 250px;
+  #areas_of_law {
+    h2 {
+      border-top: 10px solid #005EA5;
+    }
+    @include media($min-width: $small-width) {
+      float: right;
+      width: 33%;
+      margin-top: 1em;
     }
   }
 
-  .facilities {
+  #facilities {
+    li {
+      clear: both;
+    }
     .icon {
       position: relative;
       width: 50px;
       height: 50px;
       overflow: hidden;
-      display: block;
+      display: inline-block;
       float: left;
-      clear: left;
-      margin-bottom: 5px;
       margin-right: 10px;
+      margin-bottom: 10px;
       img {
         position: absolute;
       }
-    }
-    .facility {
-      height: 55px;
     }
   }
   .icon-firstaid {top:-10px;left:-250px}
@@ -269,7 +298,7 @@ $small-width: 800px;
   .icon-hotspot {top:-10px;left:-370px}
   .icon-children {top:-10px;left:-430px}
   .icon-no-parking {top:-10px;left:-490px}
-  .icon-disabled {top:-70px}
+  .icon-disabled {top:-70px; left: -10px}
   .icon-guide_dogs {top:-70px;left:-70px}
   .icon-phone {top:-70px;left:-130px}
   .icon-disabledwc {top:-70px;left:-190px}
@@ -279,6 +308,7 @@ $small-width: 800px;
   .icon-hot_vending {top:-70px;left:-430px}
   .icon-parking {top:-70px;left:-490px}
   .icon-loop_hearing {top: -10px;left: -10px}
+  .icon-video_conf {top: -10px;left: -70px}
 
   #alert {
     margin-top: 2em;

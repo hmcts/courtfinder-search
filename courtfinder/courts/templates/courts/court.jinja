@@ -15,100 +15,97 @@
     <h1>{{ court.name }}</h1>
   </header>
 
-  <div id="right-column">
-    <div id="court-photo">
-      <img src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
-    </div>
-    {% if court.areas_of_law %}
-    <h2>Areas of law covered</h2>
-    <ul>
-      {% for aol in court.areas_of_law %}
-      <li>{{ aol }}</li>
+  <div id="addresses">
+    {% if court.visiting_address %}
+    <div id="visiting">
+      <h2>Visit us:</h2>
+      {% for line in court.visiting_address.address_lines %}
+      {{ line }}<br/>
       {% endfor %}
-    </ul>
+      {{ court.visiting_address.postcode }}<br/>
+      {{ court.visiting_address.town }}<br/>
+      {% if court.visiting_address.county != court.visiting_address.town %}
+      {{ court.visiting_address.county }}
+      {% endif %}
+      <p id="map-link">
+        <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" rel="external" target="_blank">Maps and directions</a>
+      </p>
+    </div>
+    {% endif %}
+    {% if court.postal_address %}
+    <div id="postal">
+      <h2>Write to us:</h2>
+      {% for line in court.postal_address.address_lines %}
+      {{ line }}<br/>
+      {% endfor %}
+      {{ court.postal_address.postcode }}<br/>
+      {{ court.postal_address.town }}<br/>
+      {% if court.postal_address.county != court.postal_address.town %}
+      {{ court.postal_address.county }}
+      {% endif %}
+    </div>
     {% endif %}
   </div>
-  <div id="left-column">
-    <div id="addresses">
-      {% if court.visiting_address %}
-      <div class="visiting-address">
-        <h2>Visit us:</h2>
-        {% for line in court.visiting_address.address_lines %}
-        {{ line }}<br/>
-        {% endfor %}
-        {{ court.visiting_address.postcode }}<br/>
-        {{ court.visiting_address.town }}<br/>
-        {% if court.visiting_address.county != court.visiting_address.town %}
-        {{ court.visiting_address.county }}
-        {% endif %}
-      </div>
-      {% endif %}
-      {% if court.postal_address %}
-      <div class="postal-address">
-        <h2>Write to us:</h2>
-        {% for line in court.postal_address.address_lines %}
-        {{ line }}<br/>
-        {% endfor %}
-        {{ court.postal_address.postcode }}<br/>
-        {{ court.postal_address.town }}<br/>
-        {% if court.postal_address.county != court.postal_address.town %}
-        {{ court.postal_address.county }}
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
+  <div id="photo">
+    <img src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+  </div>
 
+  <div id="left">
     {% if court.alert %}
     <div id="alert">
       <p id="alert-icon"><img src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="Important information"/></p>
       <p>{{ court.alert|striptags }}</p>
+      </div>
+    {% endif %}
+
+    <div id="opening-times">
+      {% if court.opening_times %}
+      <h2>Opening hours</h2>
+      <ul>
+      {% for opening_time in court.opening_times %}
+        <li>{{ opening_time.description }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
     </div>
-    {% endif %}
 
-
-    {% if court.opening_times %}
-    <h2>Opening hours</h2>
-    <ul>
-    {% for opening_time in court.opening_times %}
-      <li>{{ opening_time.description }}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% if court.emails %}
-    <h2>Emails</h2>
-    <ul>
-      {% for email in court.emails %}
-      <li>{{ email.description }}: <a href="mailto:{{ email.address }}">{{ email.address }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% if court.contacts %}
-    <h2>Phone numbers</h2>
-    <ul>
-      {% for contact in court.contacts %}
-      <li>{{ contact.name }}: <a href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+    <div id="contacts">
+      {% if court.emails %}
+      <h2>Email</h2>
+      <ul>
+        {% for email in court.emails %}
+        <li>{{ email.description }}: <a href="mailto:{{ email.address }}">{{ email.address }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if court.contacts %}
+      <h2>Phone numbers</h2>
+      <ul>
+        {% for contact in court.contacts %}
+        <li>{{ contact.name }}: <a href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
 
     {% if court.directions %}
-    <h2>Local information</h2>
-    <p>{{ court.directions|striptags }}</p>
-    {% endif %}
+    <div id="directions">
+      <h2>Local information</h2>
+      <p>{{ court.directions|striptags }}</p>
+    </div>
+      {% endif %}
 
-    <h2>Building facilities</h2>
-    <p>If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need.</p>
-
-    {% if court.facilities %}
-    <dl class="facilities">
-    {% for facility in court.facilities %}
-      <dt class="icon"><img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}"></dt>
-      <dd class="facility"><span>{{ facility.description|striptags }}<span></dd>
-    {% endfor %}
-    </dl>
-    {% endif %}
+    <div id="facilities">
+      <h2>Building facilities</h2>
+      <p>If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need.</p>
+      {% if court.facilities %}
+      <ul>
+      {% for facility in court.facilities %}
+        <li><span class="icon"><img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}"></span><span class="facility">{{ facility.description|striptags }}</span></li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
 
     {% if court.number or court.dx_number %}
     <div id="pros">
@@ -126,6 +123,20 @@
       </dl>
     </div>
   </div>
+
+  <div id="areas_of_law">
+    {% if court.areas_of_law %}
+    <h2>Areas of law covered</h2>
+    <ul>
+      {% for aol in court.areas_of_law %}
+      <li>{{ aol }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+
+</div>
 
 
 
