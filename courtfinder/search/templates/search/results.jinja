@@ -97,7 +97,7 @@
           {% if query %}
           <a href="{% url 'courts:court-view' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
           {% else %}
-          <a href="{% url 'courts:court-view' court.slug %}?aol={{ area_of_law }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
+          <a href="{% url 'courts:court-view' court.slug %}?area_of_law={{ area_of_law }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
           {% endif %}
         </p>
         <hr class="clear"/>

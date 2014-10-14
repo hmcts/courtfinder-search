@@ -493,6 +493,7 @@ class SearchTestCase(TestCase):
     def test_ni_immigration(self):
         glasgow = Court.objects.create(
             name="Glasgow Tribunal Hearing Centre",
+            slug="something",
             lat=0.0,
             lon=0.0,
         )
