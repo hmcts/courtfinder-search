@@ -8,13 +8,20 @@ class Court(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True)
-    areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreasOfLaw', null=True)
+    alert = models.CharField(max_length=4096, null=True, default=None)
+    directions = models.CharField(max_length=4096, null=True, default=None)
+    image_file = models.CharField(max_length=255, null=True, default=None)
+    areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw', null=True)
+    emails = models.ManyToManyField('Email', through='CourtEmail', null=True)
     attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute', null=True)
     addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)
-    court_types = models.ManyToManyField('CourtType', through='CourtCourtTypes', null=True)
+    court_types = models.ManyToManyField('CourtType', through='CourtCourtType', null=True)
+    facilities = models.ManyToManyField('Facility', through='CourtFacility', null=True)
+    opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime', null=True)
+    contacts = models.ManyToManyField('Contact', through='CourtContact', null=True)
 
     def postcodes_covered(self):
-        return CourtPostcodes.objects.filter(court=self)
+        return CourtPostcode.objects.filter(court=self)
 
     def __unicode__(self):
         return self.name
@@ -37,7 +44,7 @@ class CourtAttribute(models.Model):
         return "%s.%s = %s" % (self.court.name, self.attribute_type.name, self.value)
 
 
-class CourtPostcodes(models.Model):
+class CourtPostcode(models.Model):
     court = models.ForeignKey(Court)
     postcode = models.CharField(max_length=250)
 
@@ -50,6 +57,21 @@ class AreaOfLaw(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Facility(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=4096)
+    image = models.CharField(max_length=255)
+    image_description = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "%s: %s" % (self.name, self.description)
+
+class OpeningTime(models.Model):
+    description = models.CharField(max_length=1024)
+
+    def __unicode__(self):
+        return self.description
 
 
 class LocalAuthority(models.Model):
@@ -67,8 +89,21 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
     def __unicode__(self):
         return "%s covers %s for %s" % (self.court.name, self.local_authority.name, self.area_of_law.name)
 
+class CourtFacility(models.Model):
+    court = models.ForeignKey(Court)
+    facility = models.ForeignKey(Facility)
 
-class CourtAreasOfLaw(models.Model):
+    def __unicode__(self):
+        return "%s has facility %s" % (self.court.name, self.facility)
+
+class CourtOpeningTime(models.Model):
+    court = models.ForeignKey(Court)
+    opening_time = models.ForeignKey(OpeningTime)
+
+    def __unicode__(self):
+        return "%s has facility %s" % (self.court.name, self.opening_time)
+
+class CourtAreaOfLaw(models.Model):
     court = models.ForeignKey(Court)
     area_of_law = models.ForeignKey(AreaOfLaw)
 
@@ -123,20 +158,36 @@ class CourtAddress(models.Model):
         return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town.name)
 
 
-class ContactType(models.Model):
+class Contact(models.Model):
     name = models.CharField(max_length=255)
+    number = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.name
+        return "%s: %s" % (self.name, self.number)
 
 
 class CourtContact(models.Model):
-    contact_type = models.ForeignKey(ContactType)
+    contact = models.ForeignKey(Contact)
     court = models.ForeignKey(Court)
-    value = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return "%s for %s is %s" % (self.contact_type.name, self.court.name, self.value)
+        return "%s for %s is %s" % (self.contact.name, self.court.name, self.contact.number)
+
+
+class Email(models.Model):
+    description = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.description
+
+
+class CourtEmail(models.Model):
+    court = models.ForeignKey(Court)
+    email = models.ForeignKey(Email)
+
+    def __unicode__(self):
+        return "%s has email: %s" % (self.court.name, self.email.description)
 
 
 class CourtType(models.Model):
@@ -146,7 +197,7 @@ class CourtType(models.Model):
         return self.name
 
 
-class CourtCourtTypes(models.Model):
+class CourtCourtType(models.Model):
     court = models.ForeignKey(Court)
     court_type = models.ForeignKey(CourtType)
 

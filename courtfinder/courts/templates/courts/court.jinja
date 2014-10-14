@@ -1,0 +1,156 @@
+{% extends "layout/base.jinja" %}
+{% load static %}
+
+{% block page_title %}{{ court.name }}{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    {% if query %}
+    <li><a href="{% url 'search:result-view' %}">Search by name of address</a></li>
+    <li><a href="{% url 'search:result-view' %}?q={{ query }}">Search results</a></li>
+    {% elif postcode %}
+    <li><a href="{% url 'search:postcode-view' %}">Search by name of address</a></li>
+    <li><a href="{% url 'search:result-view' %}?postcode={{ postcode }}&area_of_law={{ area_of_law }}">Search results</a></li>
+    {% else %}
+    <li><a href="{% url 'courts:courts-view' %}">Courts list</a></li>
+    {% endif %}
+  </ol>
+</div>
+<div class="content inner cf court" vocab="http://schema.org" typeof="Courthouse">
+  <header class="page-header">
+    <h1>{{ court.name }}</h1>
+  </header>
+
+  <div id="addresses">
+    {% if court.visiting_address %}
+    <div id="visiting" property='address' typeof='http://schema.org/PostalAddress'>
+      <h2>Visit us:</h2>
+      <span property="streetAddress">
+      {% for line in court.visiting_address.address_lines %}
+      {{ line }}<br/>
+        {% endfor %}
+      </span>
+      <span property="postalCode">{{ court.visiting_address.postcode }}<br/></span>
+      <span property="addressLocality">{{ court.visiting_address.town }}<br/></span>
+      {% if court.visiting_address.county != court.visiting_address.town %}
+      <span property="addressRegion">{{ court.visiting_address.county }}</span>
+      {% endif %}
+      <p id="map-link">
+        <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" rel="external" target="_blank">Maps and directions</a>
+      </p>
+    </div>
+    {% endif %}
+    {% if court.postal_address %}
+    <div id="postal">
+      <h2>Write to us:</h2>
+      {% for line in court.postal_address.address_lines %}
+      {{ line }}<br/>
+      {% endfor %}
+      {{ court.postal_address.postcode }}<br/>
+      {{ court.postal_address.town }}<br/>
+      {% if court.postal_address.county != court.postal_address.town %}
+      {{ court.postal_address.county }}
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div id="photo">
+    <img property="image" src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+  </div>
+
+  <div id="left">
+    {% if court.alert %}
+    <div id="alert">
+      <p id="alert-icon"><img src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="Important information"/></p>
+      <p>{{ court.alert|striptags }}</p>
+      </div>
+    {% endif %}
+
+    <div id="opening-times">
+      {% if court.opening_times %}
+      <h2>Opening hours</h2>
+      <ul>
+      {% for opening_time in court.opening_times %}
+        <li><time property="openingHours">{{ opening_time.description }}</time></li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div id="contacts">
+      {% if court.emails %}
+      <h2>Email</h2>
+      <ul>
+        {% for email in court.emails %}
+        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ email.description }}</span>: <a property="email" href="mailto:{{ email.address }}">{{ email.address }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if court.contacts %}
+      <h2>Phone numbers</h2>
+      <ul>
+        {% for contact in court.contacts %}
+        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ contact.name }}</span>: <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    {% if court.directions %}
+    <div id="directions">
+      <h2>Local information</h2>
+      <p>{{ court.directions|striptags }}</p>
+    </div>
+      {% endif %}
+
+    <div id="facilities">
+      <h2>Building facilities</h2>
+      <p>If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need.</p>
+      {% if court.facilities %}
+      <ul>
+      {% for facility in court.facilities %}
+        <li><span class="icon"><img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}"></span><span class="facility">{{ facility.description|striptags }}</span></li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    {% if court.number or court.dx_number %}
+    <div id="pros">
+      <h2>Legal professionals</h2>
+      <dl>
+      {% if court.number %}
+        <dt>Court/tribunal no.</dt>
+        <dd>{{ court.number }}</dd>
+      {% endif %}
+      {% if court.dx_number %}
+        <dt>DX:</dt>
+        <dd>{{ court.dx_number }}</dd>
+      {% endif %}
+      {% endif %}
+      </dl>
+    </div>
+  </div>
+
+  <div id="areas_of_law">
+    {% if court.areas_of_law %}
+    <h2>Areas of law covered</h2>
+    <ul>
+      {% for aol in court.areas_of_law %}
+      <li>{{ aol }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

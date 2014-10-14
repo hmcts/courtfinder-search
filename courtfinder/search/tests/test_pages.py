@@ -20,7 +20,7 @@ class SearchPageTestCase(TestCase):
         c = Client()
         response = c.get('/search/type?type=list', follow=True)
         self.assertEqual(response.redirect_chain, [
-            ('http://testserver/search/list', 302),
+            ('http://testserver/courts/A', 302),
         ])
 
     def test_top_page_returns_correct_content(self):
@@ -29,19 +29,3 @@ class SearchPageTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
         self.assertInHTML('<title>Find a court or tribunal</title>', response.content, count=1)
-
-    def test_list_page_returns_correct_content(self):
-        c = Client()
-        response = c.get('/search/list')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/list.jinja')
-        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
-        self.assertInHTML('<h2 class="clear letterheader">A</h2>', response.content, count=1)
-
-    def test_list_page_letter_returns_correct_content(self):
-        c = Client()
-        response = c.get('/search/list/C')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/list.jinja')
-        self.assertInHTML('<title>Courts and Tribunals</title>', response.content, count=1)
-        self.assertInHTML('<h2 class="clear letterheader">C</h2>', response.content, count=1)

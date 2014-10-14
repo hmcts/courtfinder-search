@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'moj_template',
     'search',
     'staticpages',
+    'courts',
 )
 
 MIDDLEWARE_CLASSES = (

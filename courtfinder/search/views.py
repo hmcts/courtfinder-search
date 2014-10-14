@@ -1,12 +1,11 @@
 import json
 import decimal
 import re
-import string
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
-from search.models import Court, AreaOfLaw, CourtAreasOfLaw
+from search.models import Court, AreaOfLaw
 from search.court_search import CourtSearch
 from search.rules import Rules
 
@@ -38,11 +37,11 @@ def search_type(request):
     search_type = request.GET.get('type');
 
     if search_type == 'postcode':
-        return redirect(reverse('postcode-view'))
+        return redirect(reverse('search:postcode-view'))
     elif search_type == 'address':
-        return redirect(reverse('address-view'))
+        return redirect(reverse('search:address-view'))
     else:
-        return redirect(reverse('list-view'))
+        return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
 
 
 def search_by_postcode(request):
@@ -60,13 +59,6 @@ def search_by_postcode(request):
       'error': error,
     })
 
-
-def list_view(request, first_letter='A'):
-    return render(request, 'search/list.jinja', {
-        'letter': first_letter,
-        'letters': string.ascii_uppercase,
-        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
-    })
 
 
 def search_by_address(request):
@@ -110,12 +102,12 @@ def format_results(results):
                   'lon': result.lon,
                   'number': result.number,
                   'slug': result.slug,
-                  'types': [court_type.court_type.name for court_type in result.courtcourttypes_set.all()],
+                  'types': [court_type.court_type.name for court_type in result.courtcourttype_set.all()],
                   'address': visible_address,
                   'areas_of_law': areas_of_law }
-        dx_contact = result.courtcontact_set.filter(contact_type__name='DX')
-        if dx_contact.count() > 0:
-            court['dx_number'] = dx_contact.first().value
+        dx_contacts = result.courtcontact_set.filter(contact__name='DX')
+        if dx_contacts.count() > 0:
+            court['dx_number'] = dx_contacts.first().contact.number
 
         if hasattr(result, 'distance'):
             court['distance'] = round(result.distance, 2)
@@ -128,7 +120,7 @@ def results_html(request):
         query = re.sub(r'\s+',' ',request.GET.get('q','').strip())
 
         if query == "":
-            return redirect(reverse('address-view')+'?error=noquery')
+            return redirect(reverse('search:address-view')+'?error=noquery')
 
         results = CourtSearch.address_search(query)
         if len(results) > 0:
@@ -137,7 +129,7 @@ def results_html(request):
                 'search_results': format_results(results)
             })
         else:
-            return redirect(reverse('address-view')+'?error=noresults&q='+query)
+            return redirect(reverse('search:address-view')+'?error=noresults&q='+query)
 
     elif 'postcode' in request.GET:
         postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
@@ -145,7 +137,7 @@ def results_html(request):
 
         # error handling
         if postcode == '' or area_of_law == '':
-            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
+            return redirect(reverse('search:postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
 
         directive = Rules.for_postcode(postcode, area_of_law)
 

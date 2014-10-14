@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
 
 urlpatterns = patterns('',
-    url(r'^$', include('staticpages.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^search/', include('search.urls')),
+    url(r'^$', include('staticpages.urls', namespace='staticpages')),
+    url(r'^search/', include('search.urls', namespace='search')),
+    url(r'^courts/', include('courts.urls', namespace='courts')),
 )

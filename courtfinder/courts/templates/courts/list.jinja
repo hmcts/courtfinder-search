@@ -5,8 +5,8 @@
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="/">Home</a></li>
-    <li><a href="/search">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
   </ol>
 </div>
 
@@ -20,7 +20,7 @@
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
-      <a href="/search/list/{{letter}}"><li>{{ letter }}</li></a>
+      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
       {% endfor %}
     </ul>
   </nav>
@@ -30,21 +30,23 @@
   {% if courts %}
   <ul>
     {% for court in courts %}
-      <li><a href="https://courttribunalfinder.service.gov.uk/courts/{{ court.slug }}">{{ court.name }}</a></li>
+      <li><a href="{% url 'courts:court-view' court.slug %}">{{ court.name }}</a></li>
     {% endfor %}
   </ul>
   {% else %}
   <p>There are no courts starting with that letter.</p>
   {% endif %}
-</div>
 
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
-      <a href="/search/list/{{letter}}"><li>{{ letter }}</li></a>
+      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
       {% endfor %}
     </ul>
   </nav>
+
+</div>
+
 
 
 {% endblock %}

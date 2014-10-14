@@ -3,7 +3,7 @@ import requests
 from itertools import chain
 from collections import OrderedDict
 from django.conf import settings
-from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcodes
+from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
 
 class CourtSearchError(Exception):
     def __init__(self, value):
@@ -73,7 +73,7 @@ class CourtSearch:
     @staticmethod
     def postcode_search(postcode, area_of_law):
         p = postcode.lower().replace(' ', '')
-        results = CourtPostcodes.objects.raw("SELECT * FROM search_courtpostcodes WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
+        results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
         return CourtSearch.dedupe([c.court for c in results])
 
 

@@ -13,7 +13,7 @@ class Rules:
         if len(results) == 0:
             return {
                 'action': 'redirect',
-                'target': 'postcode-view',
+                'target': 'search:postcode-view',
                 'params': '?error=noresults&postcode='+postcode,
             }
         else:
@@ -35,7 +35,7 @@ class Rules:
             else:
                 return {
                     'action': 'redirect',
-                    'target': 'postcode-view',
+                    'target': 'search:postcode-view',
                     'params': '?error=ni',
                     }
         else:
@@ -59,6 +59,6 @@ class Rules:
             except CourtSearchInvalidPostcode:
                 return {
                     'action': 'redirect',
-                    'target': 'postcode-view',
+                    'target': 'search:postcode-view',
                     'params': '?error=badpc&postcode='+postcode
                 }

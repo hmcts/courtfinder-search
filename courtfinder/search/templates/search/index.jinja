@@ -5,7 +5,7 @@
 {% block content %}
   <div id="global-breadcrumb" class="header-context">
     <ol role="breadcrumbs" class="group">
-      <li><a href="/">Home</a></li>
+      <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     </ol>
   </div>
   <div id="search-index-page" class="content inner cf">
@@ -14,7 +14,7 @@
     </header>
     <div class="group">
       <h2>Choose the type of search you would like to do</h2>
-      <form method="get" action="/search/type">
+      <form method="get" action="{% url 'search:type-view' %}">
         <fieldset>
           <label for="name-address-search" class="block-label form-block">
             <input id="name-address-search" type="radio" name="type" value="address" checked>
