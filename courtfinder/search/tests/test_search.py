@@ -307,6 +307,9 @@ class SearchTestCase(TestCase):
     def test_postcode_to_local_authority_short_postcode(self):
         self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 2)
 
+    def test_local_authority_search_ordered(self):
+        self.assertEqual(CourtSearch.local_authority_search('SE15 4UH', 'Divorce')[0].name, "Accrington Magistrates' Court")
+
     def test_bad_local_authority(self):
         with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
             self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
