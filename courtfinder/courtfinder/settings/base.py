@@ -51,11 +51,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
     'moj_template',
     'search',
@@ -64,11 +60,8 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -105,7 +98,7 @@ INSTALLED_APPS += ('django_jinja',)
 
 DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.jinja'
 # Intercept all templates except from django admin.
-DEFAULT_JINJA2_TEMPLATE_INTERCEPT_RE = r"^(?!admin/).*"
+DEFAULT_JINJA2_TEMPLATE_INTERCEPT_RE = r"^.*"
 
 
 # Database
