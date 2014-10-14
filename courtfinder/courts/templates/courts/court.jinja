@@ -6,8 +6,17 @@
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="/">Home</a></li>
-    <li><a href="/search">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    {% if query %}
+    <li><a href="{% url 'search:result-view' %}">Search by name of address</a></li>
+    <li><a href="{% url 'search:result-view' %}?q={{ query }}">Search results</a></li>
+    {% elif postcode %}
+    <li><a href="{% url 'search:postcode-view' %}">Search by name of address</a></li>
+    <li><a href="{% url 'search:result-view' %}?postcode={{ postcode }}&area_of_law={{ area_of_law }}">Search results</a></li>
+    {% else %}
+    <li><a href="{% url 'courts:courts-view' %}">Courts list</a></li>
+    {% endif %}
   </ol>
 </div>
 <div class="content inner cf court" vocab="http://schema.org" typeof="Courthouse">

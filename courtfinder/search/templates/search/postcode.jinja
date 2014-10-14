@@ -6,8 +6,8 @@
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="/">Home</a></li>
-    <li><a href="/search">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">

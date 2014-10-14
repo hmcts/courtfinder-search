@@ -37,9 +37,9 @@ def search_type(request):
     search_type = request.GET.get('type');
 
     if search_type == 'postcode':
-        return redirect(reverse('postcode-view'))
+        return redirect(reverse('search:postcode-view'))
     elif search_type == 'address':
-        return redirect(reverse('address-view'))
+        return redirect(reverse('search:address-view'))
     else:
         return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
 
@@ -120,7 +120,7 @@ def results_html(request):
         query = re.sub(r'\s+',' ',request.GET.get('q','').strip())
 
         if query == "":
-            return redirect(reverse('address-view')+'?error=noquery')
+            return redirect(reverse('search:address-view')+'?error=noquery')
 
         results = CourtSearch.address_search(query)
         if len(results) > 0:
@@ -129,7 +129,7 @@ def results_html(request):
                 'search_results': format_results(results)
             })
         else:
-            return redirect(reverse('address-view')+'?error=noresults&q='+query)
+            return redirect(reverse('search:address-view')+'?error=noresults&q='+query)
 
     elif 'postcode' in request.GET:
         postcode = re.sub(whitespace_regex, '', request.GET.get('postcode', ''))
@@ -137,7 +137,7 @@ def results_html(request):
 
         # error handling
         if postcode == '' or area_of_law == '':
-            return redirect(reverse('postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
+            return redirect(reverse('search:postcode-view')+'?postcode='+postcode+'&area_of_law='+area_of_law)
 
         directive = Rules.for_postcode(postcode, area_of_law)
 

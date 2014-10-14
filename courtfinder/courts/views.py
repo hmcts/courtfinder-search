@@ -53,7 +53,10 @@ def format_court(court):
 
 def court_view(request, slug):
     return render(request, 'courts/court.jinja', {
-        'court': format_court(Court.objects.get(slug=slug))
+        'court': format_court(Court.objects.get(slug=slug)),
+        'query': request.GET.get('q',''),
+        'area_of_law': request.GET.get('area_of_law','All'),
+        'postcode': request.GET.get('postcode',''),
     })
 
 def courts_view(request):
