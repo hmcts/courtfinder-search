@@ -1,3 +1,4 @@
+import re
 import json
 import requests
 from itertools import chain
@@ -45,7 +46,7 @@ class CourtSearch:
         court_ids = "(%s)" % ", ".join([str(c.id) for c in courts])
 
         results = Court.objects.raw("""
-                SELECT *, 
+                SELECT *,
                        (point(c.lon, c.lat) <@> point(%s, %s)) as distance
                   FROM search_court as c
                  WHERE id in %s
@@ -154,13 +155,16 @@ class CourtSearch:
         # First we get courts whose name contains the query string
         # (for these courts sorted to show the courts with the highest number of areas of law first)
 
-        name_results =  sorted(Court.objects.filter(name__iregex=r'\y%s\y'%query), key=lambda c: -len(c.areas_of_law.all()))
+        word_separator = re.compile(r'[^\w]+', re.UNICODE)
+        query_regex = ''.join(map(lambda word: "(?=.*\y"+word+"\y)", re.split(word_separator, query)))
+
+        name_results =  sorted(Court.objects.filter(name__iregex=query_regex), key=lambda c: -len(c.areas_of_law.all()))
         # then we get courts with the query string in their address
-        address_results = Court.objects.filter(courtaddress__address__iregex=r'\y%s\y'%query)
+        address_results = Court.objects.filter(courtaddress__address__iregex=query_regex)
         # then in the town name
-        town_results = Court.objects.filter(courtaddress__town__name__iregex=r'\y%s\y'%query)
+        town_results = Court.objects.filter(courtaddress__town__name__iregex=query_regex)
         # then the county name
-        county_results = Court.objects.filter(courtaddress__town__county__name__iregex=r'\y%s\y'%query)
+        county_results = Court.objects.filter(courtaddress__town__county__name__iregex=query_regex)
 
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
