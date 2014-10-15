@@ -77,12 +77,9 @@ ROOT_URLCONF = 'courtfinder.urls'
 WSGI_APPLICATION = 'courtfinder.wsgi.application'
 
 
-# Jinja2
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    'django_jinja.loaders.AppLoader',
-    'django_jinja.loaders.FileSystemLoader',
 )
 
 TEMPLATE_DIRS = (
@@ -100,13 +97,6 @@ TEMPLATE_CONTEXT_PROCESSORS =  (
     "django.contrib.auth.context_processors.auth",
     "courtfinder.context_processors.globals",
 )
-
-INSTALLED_APPS += ('django_jinja',)
-
-DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.jinja'
-# Intercept all templates except from django admin.
-DEFAULT_JINJA2_TEMPLATE_INTERCEPT_RE = r"^(?!admin/).*"
-
 
 # Database
 DATABASES = {
