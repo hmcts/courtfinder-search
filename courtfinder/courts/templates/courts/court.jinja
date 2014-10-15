@@ -89,7 +89,9 @@
           {% if email.description != '' %}
           <span property="contactType">{{ email.description }}</span>:&nbsp;
           {% endif %}
-          <a property="email" href="mailto:{{ email.address }}">{{ email.address }}</a>
+          {% for address in email.addresses %}
+            <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+          {% endfor %}
         </li>
         {% endfor %}
       </ul>
@@ -103,7 +105,9 @@
             {% if contact.name != '' %}
             <span property="contactType">{{ contact.name }}</span>:&nbsp;
             {% endif %}
-            <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a>
+            {% for number in contact.numbers %}
+              <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+            {% endfor %}
           </li>
         {% endif %}
         {% endfor %}
