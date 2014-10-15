@@ -1,0 +1,15 @@
+{% extends "layout/base.jinja" %}
+
+{% block page_title %}Page not found - 404 - GOV.UK{% endblock %}
+
+{% block content %}
+<div class="content inner cf">
+  <header class="page-header">
+    <h1>This page cannot be found</h1>
+  </header>
+  <div class="group">
+    <p>If you entered a web address please check it was correct.</p>
+    <p>Otherwise you can go to the <a href="{% url 'staticpages:home' %}">Court and tribunal finder start page</a>.</p>
+  </div>
+</div>
+{% endblock %}
