@@ -130,6 +130,10 @@ class SearchTestCase(TestCase):
             {
                 "description": "Enquiries",
                 "address": "ln-blackburnmcenq@hmcts.gsi.gov.uk"
+            },
+            {
+                "description": "",
+                "address": "email-no-description@hmcts.gsi.gov.uk"
             }
         ],
         "areas_of_law": [
@@ -278,3 +282,8 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/')
         self.assertRedirects(response, '/courts/A', 302)
+
+    def test_court_with_email_without_description(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        self.assertNotIn('<span property="contactType"></span>', response.content)
