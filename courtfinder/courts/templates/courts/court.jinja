@@ -98,11 +98,14 @@
       <h2>Phone numbers</h2>
       <ul>
         {% for contact in court.contacts %}
-        <li property="contactPoint" typeof="ContactPoint">
-          {% if contact.name != '' %}
-          <span property="contactType">{{ contact.name }}</span>:&nbsp;
-          {% endif %}
-          <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
+        {% if contact.name != 'DX' %}
+          <li property="contactPoint" typeof="ContactPoint">
+            {% if contact.name != '' %}
+            <span property="contactType">{{ contact.name }}</span>:&nbsp;
+            {% endif %}
+            <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a>
+          </li>
+        {% endif %}
         {% endfor %}
       </ul>
       {% endif %}
