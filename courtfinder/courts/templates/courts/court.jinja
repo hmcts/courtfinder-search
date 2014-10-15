@@ -85,7 +85,12 @@
       <h2>Email</h2>
       <ul>
         {% for email in court.emails %}
-        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ email.description }}</span>: <a property="email" href="mailto:{{ email.address }}">{{ email.address }}</a></li>
+        <li property="contactPoint" typeof="ContactPoint">
+          {% if email.description != '' %}
+          <span property="contactType">{{ email.description }}</span>:&nbsp;
+          {% endif %}
+          <a property="email" href="mailto:{{ email.address }}">{{ email.address }}</a>
+        </li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -93,7 +98,11 @@
       <h2>Phone numbers</h2>
       <ul>
         {% for contact in court.contacts %}
-        <li property="contactPoint" typeof="ContactPoint"><span property="contactType">{{ contact.name }}</span>: <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
+        <li property="contactPoint" typeof="ContactPoint">
+          {% if contact.name != '' %}
+          <span property="contactType">{{ contact.name }}</span>:&nbsp;
+          {% endif %}
+          <a property="telephone" href="tel:{{ contact.number }}">{{ contact.number }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}

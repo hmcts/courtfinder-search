@@ -474,6 +474,18 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Road')
         self.assertEqual(response.status_code, 200)
 
+    def test_partial_word_match(self):
+        c = Client()
+        response = c.get('/search/results?q=accrington+court')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Accrington Magistrates', response.content)
+
+    def test_unordered_word_match(self):
+        c = Client()
+        response = c.get('/search/results?q=magistrates+court+accrington')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Accrington Magistrates', response.content)
+
     def test_broken_postcode_latlon_mapping(self):
         self.assertEqual(CourtSearch.postcode_search('Z', 'all'), [])
 
