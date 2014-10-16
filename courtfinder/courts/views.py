@@ -5,6 +5,23 @@ from django.http import HttpResponse
 from search.models import Court, AreaOfLaw
 
 
+def collapse(source, key, key2):
+    """
+    Groups objects's key2 by similar key1:
+
+    [{'foo': [1]}, {'bar':[2]}, {'bar':[3]}] => [{'foo': [1], {'bar': [2,3]}}]
+    [{'bailiff': [0800383727]}, {'bailiff':[018746]}, {'enquiries':[012874]}] =>
+      [{'bailiff': [0800383727, 018746]}, {'enquiries': [012874]}}]
+    """
+    result=[]
+    for item in source:
+        if len(result) > 0 and item[key] == result[0][key]:
+            result[0][key2].append(item[key2][0])
+        else:
+            result.insert(0,item)
+    return result
+
+
 def format_court(court):
     """
     create a courts object that we can send to templates
@@ -25,8 +42,10 @@ def format_court(court):
         else:
             visiting_address = address_obj
 
-    emails = [{'description':email.description, 'address': email.address} for email in court.emails.all()]
-    contacts = [{'name':contact.name, 'number': contact.number} for contact in court.contacts.all()]
+    emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
+    emails.sort(key=lambda x: x['description'])
+    contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all()]
+    contacts.sort(key=lambda x: x['name'])
     court_obj = { 'name': court.name,
               'lat': court.lat,
               'lon': court.lon,
@@ -36,11 +55,11 @@ def format_court(court):
               'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
               'postal_address': postal_address,
               'visiting_address': visiting_address,
-              'opening_times': [opening_time for opening_time in court.opening_times.all()],
-              'areas_of_law': [aol for aol in court.areas_of_law.all()],
-              'facilities': [facility for facility in court.facilities.all()],
-              'emails': emails,
-              'contacts': contacts,
+              'opening_times': sorted([opening_time for opening_time in court.opening_times.all()], key=lambda x: x.description),
+              'areas_of_law': sorted([aol for aol in court.areas_of_law.all()]),
+              'facilities': sorted([facility for facility in court.facilities.all()], key=lambda x: x.name),
+              'emails': collapse(emails, 'description', 'addresses'),
+              'contacts': collapse(contacts, 'name', 'numbers'),
               'directions': court.directions if court.directions else None,
               'alert': court.alert if court.alert else None,
     }
