@@ -203,3 +203,11 @@ class CourtCourtType(models.Model):
 
     def __unicode__(self):
         return "Court type for %s is %s" % (self.court.name, self.court_type.name)
+
+
+class DataStatus(models.Model):
+    data_hash = models.CharField(max_length=255)
+    last_ingestion_date = models.DateTimeField(auto_now=True, auto_now_add=True)
+
+    def __unicode__(self):
+        return "Current data hash: %s, last update: %s" % (self.data_hash, self.last_ingestion_date)

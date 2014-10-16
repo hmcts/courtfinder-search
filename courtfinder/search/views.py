@@ -5,7 +5,9 @@ import re
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest
-from search.models import Court, AreaOfLaw
+from django.core.serializers.json import DjangoJSONEncoder
+
+from search.models import Court, AreaOfLaw, DataStatus
 from search.court_search import CourtSearch
 from search.rules import Rules
 
@@ -178,3 +180,10 @@ def results_json(request):
         return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
     else:
         return HttpResponseBadRequest('request needs one of postcode or q parameters', content_type="application/json")
+
+def data_status(request):
+    last_change = DataStatus.objects.all().order_by('-last_ingestion_date')[0]
+    last_change_object = {
+        'last_ingestion_date': last_change.last_ingestion_date,
+        'data_hash': last_change.data_hash }
+    return HttpResponse(json.dumps(last_change_object, cls=DjangoJSONEncoder), content_type="application/json")

@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^address$', views.search_by_address, name='address-view'),
     url(r'^results$', views.results_html, name='result-view'),
     url(r'^results.json$', views.results_json, name='api-result-view'),
+    url(r'^datastatus$', views.data_status, name='data-status-view'),
 )

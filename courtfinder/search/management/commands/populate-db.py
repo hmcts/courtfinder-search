@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, migrations
 
+from search.models import DataStatus
 from search.ingest import Ingest
 
 
@@ -95,5 +96,10 @@ class Command(BaseCommand):
         else:
             print "Importing from local files..."
             self.import_files(data_dir)
+            new_hashes = self.hashes(data_dir, ['courts.json', 'countries.json'])
 
-        print "Done"
+        print "Success"
+        print "Storing data state...",
+        DataStatus.objects.create(data_hash=''.join(new_hashes))
+        print "OK"
+        print "All done"
