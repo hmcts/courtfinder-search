@@ -1,0 +1,43 @@
+{% extends "layout/base.jinja" %}
+
+{% block page_title %}Find a court or tribunal - API - GOV.UK{% endblock %}
+
+{% block content %}
+<div class="content inner cf">
+  <header class="page-header">
+    <h1>Alternate Formats, API and Linked Data</h1>
+  </header>
+  <div class="group">
+
+    <p>This page describes Courtfinder's alternate access methods, including its API. It also provides information about the machine-readable HTML markup used. Please note that these site features are experimental and may be modified, depending on data consumer requirements. We'll do our best to make all changes backwards compatible.</p>
+
+    <h2>The Search API</h2>
+
+    <p>Any search result is available as HTML or JSON</p>
+
+    <ul>
+      <li>HTML: <a href="/search/results?q=old+bailey"><code>/search/results?q=old+bailey</code></a></li>
+      <li>JSON: <a href="/search/result.json?q=old+bailey"><code>/search/result.json?q=old+bailey</code></a></li>
+    </ul>
+
+    <ul>
+      <li>HTML: <a href="/search/results?postcode=SW1H9AJ&area_of_law=Civil+partnership"><code>/search/results?postcode=SW1H9AJ&area_of_law=Civil+partnership</code></a></li>
+      <li>JSON: <a href="/search/results.json?postcode=SW1H9AJ&area_of_law=Civil+partnership"><code>/search/results.json?postcode=SW1H9AJ&area_of_law=Civil+partnership</code></a></li>
+    </ul>
+
+    <p>The format of the JSON version is self explanatory.</p>
+
+    
+    <h2>Court and Tribunal data as JSON files</h2>
+
+    <p>A complete JSON dump of the court data is available at: <a href="@@">[URL of the JSON files]</a>.</p>
+    
+    <h2>Semantic Markup</h2>
+
+    <p>The HTML version of court pages is augmented with metadata contained within tags in the HTML markup. Those tags aren't visible on the page, but can be used by scrapers to extract the data.</p>
+
+    <p>More information is available at MOJ Digital's blog entry on Open Data Markup. Or just look at the markup of any court page and look for the <code>vocab</code>, <code>typeof</code> and <code>property</code> attributes. Those attributes are part of the <a href="http://rdfa.info/">RDFa</a> markup, and the attribute values use the <a href="http://schema.org/">schema.org</a> vocabulary (in particular the <a href="http://schema.org/Courthouse">Courthouse</a> type).</p>
+
+  </div>
+</div>
+{% endblock %}
