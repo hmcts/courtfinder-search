@@ -1,6 +1,7 @@
 import psycopg2
 import json
 import zlib
+from django.core.serializers.json import DjangoJSONEncoder
 from optparse import OptionParser
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
@@ -33,10 +34,10 @@ class Data:
     def courts(self):
         all_courts = []
         cur = self.conn.cursor()
-        cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude, image_file, alert, parking_onsite, parking_offsite, directions FROM courts")
+        cur.execute("SELECT id, name, display, court_number, slug, latitude, longitude, image_file, alert, parking_onsite, parking_offsite, directions, cci_code, created_at, updated_at FROM courts")
         rows = cur.fetchall()
         for row in rows:
-            admin_id, name, display, court_number, slug, lat, lon, image_file, alert, parking_onsite, parking_offsite, directions = row
+            admin_id, name, display, court_number, slug, lat, lon, image_file, alert, parking_onsite, parking_offsite, directions, cci_code, created_at, updated_at = row
             if name == None or slug == None:
                 print "- %s\n\tslug: %s, lat: %s, lon: %s" % (name, slug, lat, lon)
                 continue
@@ -81,6 +82,12 @@ class Data:
                 court_object['parking'] = parking
             if directions not in (None, ""):
                 court_object['directions'] = directions
+            if cci_code not in (None, ""):
+                court_object['cci_code'] = cci_code
+            if created_at not in (None, ""):
+                court_object['created_at'] = created_at
+            if updated_at not in (None, ""):
+                court_object['updated_at'] = updated_at
             all_courts.append(court_object)
             print "+ %s" % name
         self.write_to_json( 'courts', all_courts )
@@ -273,7 +280,7 @@ class Data:
         self.write_to_json("countries", countries)
 
     def write_to_json(self, filename, data):
-        js = json.dumps(data, indent=4, separators=(',', ': '))
+        js = json.dumps(data, indent=4, separators=(',', ': '), cls=DjangoJSONEncoder)
         if hasattr(self, 'output_dir') and not hasattr(self, 'bucket'):
             with open('%s/%s.json' % (self.output_dir, filename), 'w') as f:
                 f.write(js)
