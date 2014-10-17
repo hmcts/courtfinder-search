@@ -32,9 +32,7 @@
     {% for court in courts %}
     <li>
       <a href="{% url 'courts:court-view' court.slug %}">{{ court.name }}</a>
-      {% if court.number %}
-      (# {{ court.number }})
-      {% endif %}
+      {% if court.numbers != '' %}({{ court.numbers }}){% endif %}
     </li>
     {% endfor %}
   </ul>

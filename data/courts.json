@@ -2333,7 +2333,7 @@
             }
         ],
         "lat": "53.79274521811999",
-        "cci_code": 141,
+        "cci_code": "141",
         "slug": "bradford-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 5pm",
@@ -2937,7 +2937,7 @@
             }
         ],
         "lat": "53.39137808560015",
-        "cci_code": 126,
+        "cci_code": "126",
         "slug": "birkenhead-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -4073,7 +4073,7 @@
             }
         ],
         "lat": "53.17700279051488",
-        "cci_code": 384,
+        "cci_code": "384",
         "slug": "wrexham-magistrates-court-and-family-court--2",
         "opening_times": [
             "Court building open: 9:30am to 4:30pm (4pm Friday)"
@@ -5213,7 +5213,7 @@
             }
         ],
         "lat": "51.373337535123",
-        "cci_code": 182,
+        "cci_code": "182",
         "slug": "croydon-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to friday 8am to 6pm",
@@ -5877,7 +5877,7 @@
             }
         ],
         "lat": "53.59303476577875",
-        "cci_code": 156,
+        "cci_code": "156",
         "slug": "bury-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -6910,7 +6910,7 @@
             }
         ],
         "lat": "53.57820433663913",
-        "cci_code": 137,
+        "cci_code": "137",
         "slug": "bolton-county-court-and-family-court",
         "opening_times": [
             "Telephone Enquiries from: 9am to 5pm",
@@ -9128,7 +9128,7 @@
             }
         ],
         "lat": "51.94481593363385",
-        "cci_code": 143,
+        "cci_code": "143",
         "slug": "brecon-law-courts",
         "opening_times": [
             "Court building open: 9am to 5pm",
@@ -10532,7 +10532,7 @@
             }
         ],
         "lat": "53.25679285511808",
-        "cci_code": 158,
+        "cci_code": "158",
         "slug": "buxton-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 10am to 4pm"
@@ -11444,7 +11444,7 @@
             }
         ],
         "lat": "52.98305915224784",
-        "cci_code": 138,
+        "cci_code": "138",
         "slug": "boston-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -12048,7 +12048,7 @@
             }
         ],
         "lat": "53.76239428021956",
-        "cci_code": 303,
+        "cci_code": "303",
         "slug": "preston-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8.30am to 5pm",
@@ -13718,7 +13718,7 @@
             }
         ],
         "lat": "51.40880115771121",
-        "cci_code": 152,
+        "cci_code": "152",
         "slug": "bromley-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -17260,7 +17260,7 @@
             }
         ],
         "lat": "52.92245050115016",
-        "cci_code": 185,
+        "cci_code": "185",
         "slug": "derby-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -17971,7 +17971,7 @@
             }
         ],
         "lat": "50.94055229504551",
-        "cci_code": 385,
+        "cci_code": "385",
         "slug": "yeovil-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:00am to 4pm",
@@ -18395,7 +18395,7 @@
             }
         ],
         "lat": "54.68578352802808",
-        "cci_code": 215,
+        "cci_code": "215",
         "slug": "hartlepool-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -20053,7 +20053,7 @@
             }
         ],
         "lat": "51.45272554310827",
-        "cci_code": 353,
+        "cci_code": "353",
         "alert": "Divorce - CHIPPENHAM & TROWBRIDGE issued pre January 2013 contact Chippenham & Trowbridge Law Courts.  SWINDON CASES issued pre  August 13 contact Swindon Combined Court.  Cases issued AFTER  August 13 contact Salisbury Law Courts.",
         "slug": "chippenham-and-trowbridge-law-courts",
         "opening_times": [
@@ -22613,7 +22613,7 @@
             }
         ],
         "lat": "51.08134299066393",
-        "cci_code": 119,
+        "cci_code": "119",
         "slug": "barnstaple-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am until close of business",
@@ -23650,7 +23650,7 @@
             }
         ],
         "lat": "51.61073797249588",
-        "cci_code": 194,
+        "cci_code": "194",
         "slug": "edmonton-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -24621,7 +24621,7 @@
             }
         ],
         "lat": "54.95902830652008",
-        "cci_code": 202,
+        "cci_code": "202",
         "slug": "gateshead-county-court-and-family-court",
         "opening_times": [
             "Court counter open: By appointment only"
@@ -24826,7 +24826,7 @@
             }
         ],
         "lat": "51.48836266228357",
-        "cci_code": 241,
+        "cci_code": "241",
         "slug": "lambeth-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -25620,7 +25620,7 @@
             }
         ],
         "lat": "53.71927846526278",
-        "cci_code": 212,
+        "cci_code": "212",
         "slug": "halifax-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -27570,7 +27570,7 @@
             }
         ],
         "lat": "53.69046522108116",
-        "cci_code": 303,
+        "cci_code": "303",
         "slug": "leyland-magistrates-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm"
@@ -27902,7 +27902,7 @@
             }
         ],
         "lat": "53.22446609322916",
-        "cci_code": 249,
+        "cci_code": "249",
         "slug": "lincoln-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4:45pm"
@@ -28699,7 +28699,7 @@
             }
         ],
         "lat": "51.74777749758063",
-        "cci_code": 269,
+        "cci_code": "269",
         "slug": "merthyr-tydfil-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -29575,7 +29575,7 @@
             }
         ],
         "lat": "51.79608955242698",
-        "cci_code": 221,
+        "cci_code": "221",
         "slug": "hertford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -31413,7 +31413,7 @@
             }
         ],
         "lat": "55.16678786018197",
-        "cci_code": 273,
+        "cci_code": "273",
         "slug": "morpeth-and-berwick-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4pm",
@@ -32220,7 +32220,7 @@
             }
         ],
         "lat": "54.99761841326092",
-        "cci_code": 283,
+        "cci_code": "283",
         "slug": "north-shields-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 4pm",
@@ -32416,7 +32416,7 @@
             }
         ],
         "lat": "52.94854105243607",
-        "cci_code": 286,
+        "cci_code": "286",
         "slug": "nottingham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -33044,7 +33044,7 @@
             }
         ],
         "lat": "51.50742637401229",
-        "cci_code": 327,
+        "cci_code": "327",
         "slug": "slough-county-court-and-family-court",
         "opening_times": [
             "Court counter open: By prior appointment only. See Further Information for details.",
@@ -33569,7 +33569,7 @@
             }
         ],
         "lat": "53.09766648683986",
-        "cci_code": 181,
+        "cci_code": "181",
         "slug": "crewe-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4pm",
@@ -34303,7 +34303,7 @@
             }
         ],
         "lat": "51.58265006258033",
-        "cci_code": 387,
+        "cci_code": "387",
         "slug": "romford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -35948,7 +35948,7 @@
             }
         ],
         "lat": "53.23620378670869",
-        "cci_code": 171,
+        "cci_code": "171",
         "slug": "chesterfield-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -36437,7 +36437,7 @@
             }
         ],
         "lat": "53.32019914685782",
-        "cci_code": 308,
+        "cci_code": "308",
         "slug": "rhyl-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -36740,7 +36740,7 @@
             }
         ],
         "lat": "53.25498983337953",
-        "cci_code": 254,
+        "cci_code": "254",
         "slug": "llangefni-county-court-and-family-court",
         "opening_times": [
             "Court building open: Open for Court Hearings only",
@@ -38014,7 +38014,7 @@
             }
         ],
         "lat": "53.5877",
-        "cci_code": 319,
+        "cci_code": "319",
         "slug": "scunthorpe-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm (4:30pm Friday)",
@@ -40699,7 +40699,7 @@
             }
         ],
         "lat": "51.3608031593535",
-        "cci_code": 370,
+        "cci_code": "370",
         "slug": "weston-super-mare-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -42196,7 +42196,7 @@
             }
         ],
         "lat": "53.96132208881506",
-        "cci_code": 325,
+        "cci_code": "325",
         "slug": "skipton-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -43389,7 +43389,7 @@
             }
         ],
         "lat": "52.58476421718164",
-        "cci_code": 358,
+        "cci_code": "358",
         "slug": "walsall-county-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -44318,7 +44318,7 @@
             }
         ],
         "lat": "54.77377020614679",
-        "cci_code": 190,
+        "cci_code": "190",
         "slug": "durham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -44627,7 +44627,7 @@
             }
         ],
         "lat": "51.49076088942117",
-        "cci_code": 368,
+        "cci_code": "368",
         "alert": "From 1 October 2014 the County Court at West London will be known as the County Court at Hammersmith. The Court's correspondence address and contact numbers will remain the same.",
         "slug": "hammersmith-county-court",
         "opening_times": [
@@ -45389,7 +45389,7 @@
             }
         ],
         "lat": "51.62025760045066",
-        "cci_code": 344,
+        "cci_code": "344",
         "slug": "swansea-civil-and-family-justice-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -46620,7 +46620,7 @@
             }
         ],
         "lat": "54.52373123511079",
-        "cci_code": 183,
+        "cci_code": "183",
         "slug": "darlington-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 4pm",
@@ -49875,7 +49875,7 @@
             }
         ],
         "lat": "54.11652236284811",
-        "cci_code": 235,
+        "cci_code": "235",
         "alert": "If you have any urgent Civil or Enforcement applications please contact Carlisle County Court.     If you have any urgent Family or Divorce applications please contact Barrow County Court",
         "slug": "kendal-county-court-and-family-court",
         "opening_times": [
@@ -50254,7 +50254,7 @@
         "admin_id": 3310,
         "facilities": [],
         "lat": "51.518436",
-        "cci_code": 5,
+        "cci_code": "5",
         "slug": "court-of-protection",
         "opening_times": [
             "Telephone Enquiries from: 9am to 5pm",
@@ -50806,7 +50806,7 @@
             }
         ],
         "lat": "53.74409906146547",
-        "cci_code": 239,
+        "cci_code": "239",
         "slug": "kingston-upon-hull-combined-court-centre",
         "opening_times": [
             "Crown Court enquiries: 10am to 4pm",
@@ -51583,7 +51583,7 @@
             }
         ],
         "lat": "51.62765044506195",
-        "cci_code": 223,
+        "cci_code": "223",
         "slug": "high-wycombe-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 10am to 4pm",
@@ -51831,7 +51831,7 @@
             }
         ],
         "lat": "51.52224969431735",
-        "cci_code": 356,
+        "cci_code": "356",
         "slug": "uxbridge-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -52269,7 +52269,7 @@
             }
         ],
         "lat": "51.53753510447811",
-        "cci_code": 329,
+        "cci_code": "329",
         "slug": "southend-county-court-and-family-court",
         "opening_times": [
             "Court counter open: By prior appointment only",
@@ -52678,7 +52678,7 @@
             }
         ],
         "lat": "53.45494411598528",
-        "cci_code": 315,
+        "cci_code": "315",
         "slug": "st-helens-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -53048,7 +53048,7 @@
             }
         ],
         "lat": "53.74989980458098",
-        "cci_code": 130,
+        "cci_code": "130",
         "alert": "Blackburn County Court Civil matters should be directed to Burnley County Court ",
         "slug": "blackburn-county-court-and-family-court",
         "opening_times": [
@@ -53215,7 +53215,7 @@
             }
         ],
         "lat": "51.45914878957377",
-        "cci_code": 359,
+        "cci_code": "359",
         "slug": "wandsworth-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm - From 31 March 2014 the counter will run an appointments only trial for six months during which the counter will be closed. Please telephone for an appointment.",
@@ -53757,7 +53757,7 @@
             }
         ],
         "lat": "54.05084985269013",
-        "cci_code": 242,
+        "cci_code": "242",
         "slug": "lancaster-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4pm",
@@ -53912,7 +53912,7 @@
             }
         ],
         "lat": "53.40933017167894",
-        "cci_code": 251,
+        "cci_code": "251",
         "slug": "liverpool-civil-and-family-court",
         "opening_times": [
             "Bailiffs Office: 8:30am to 10:30am",
@@ -54603,7 +54603,7 @@
             }
         ],
         "lat": "53.25662529293213",
-        "cci_code": 260,
+        "cci_code": "260",
         "slug": "macclesfield-county-court-and-family-court",
         "opening_times": [
             "Court counter open: 10am to 2pm"
@@ -54838,7 +54838,7 @@
             }
         ],
         "lat": "52.20371259268288",
-        "cci_code": 162,
+        "cci_code": "162",
         "slug": "cambridge-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 6pm",
@@ -55415,7 +55415,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "50.82301575598645",
-        "cci_code": 150,
+        "cci_code": "150",
         "slug": "brighton-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -55652,7 +55652,7 @@
             }
         ],
         "lat": "51.42909771827333",
-        "cci_code": 334,
+        "cci_code": "334",
         "slug": "staines-county-court-and-family-court",
         "opening_times": [
             "Court counter open: 10am to 2pm",
@@ -55902,7 +55902,7 @@
             }
         ],
         "lat": "51.74817045048391",
-        "cci_code": 291,
+        "cci_code": "291",
         "slug": "oxford-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 6pm",
@@ -56258,7 +56258,7 @@
             }
         ],
         "lat": "53.51904208791115",
-        "cci_code": 187,
+        "cci_code": "187",
         "slug": "doncaster-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -56542,7 +56542,7 @@
             }
         ],
         "lat": "54.11652236284811",
-        "cci_code": 120,
+        "cci_code": "120",
         "slug": "barrow-in-furness-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -56825,7 +56825,7 @@
             }
         ],
         "lat": "50.76754682024053",
-        "cci_code": 191,
+        "cci_code": "191",
         "slug": "eastbourne-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4:30pm",
@@ -57022,7 +57022,7 @@
             }
         ],
         "lat": "50.85939294453843",
-        "cci_code": 216,
+        "cci_code": "216",
         "slug": "hastings-county-court-and-family-court",
         "opening_times": [
             "Court counter open: For urgent appointments only",
@@ -57245,7 +57245,7 @@
             }
         ],
         "lat": "51.38403500149893",
-        "cci_code": 267,
+        "cci_code": "267",
         "slug": "medway-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -57602,7 +57602,7 @@
             }
         ],
         "lat": "52.05616975171077",
-        "cci_code": 220,
+        "cci_code": "220",
         "slug": "hereford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -57816,7 +57816,7 @@
             }
         ],
         "lat": "52.2408030271539",
-        "cci_code": 282,
+        "cci_code": "282",
         "slug": "northampton-crown-court-county-court-and-family-court",
         "opening_times": [
             "Crown Court enquiries: 10am to 4pm",
@@ -58074,7 +58074,7 @@
             }
         ],
         "lat": "52.40558365305145",
-        "cci_code": 180,
+        "cci_code": "180",
         "slug": "coventry-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 7:30am to 6:30pm",
@@ -58346,7 +58346,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "53.99032493312922",
-        "cci_code": 214,
+        "cci_code": "214",
         "slug": "harrogate-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -58699,7 +58699,7 @@
             }
         ],
         "lat": "51.38761933649624",
-        "cci_code": 348,
+        "cci_code": "348",
         "slug": "thanet-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -58887,7 +58887,7 @@
             }
         ],
         "lat": "51.49263660915904",
-        "cci_code": 379,
+        "cci_code": "379",
         "slug": "woolwich-county-court-and-family-court",
         "opening_times": [
             "Telephone Enquiries from: 9am to 5pm",
@@ -59489,7 +59489,7 @@
             }
         ],
         "lat": "51.59101422862023",
-        "cci_code": 280,
+        "cci_code": "280",
         "slug": "newport-gwent-civil-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 6pm",
@@ -59824,7 +59824,7 @@
             }
         ],
         "lat": "54.96987660253082",
-        "cci_code": 278,
+        "cci_code": "278",
         "slug": "newcastle-upon-tyne-combined-court-centre",
         "opening_times": [
             "Court counter open: 10am to 4pm",
@@ -60160,7 +60160,7 @@
             }
         ],
         "lat": "53.54373571774141",
-        "cci_code": 288,
+        "cci_code": "288",
         "slug": "oldham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4:30pm",
@@ -60410,7 +60410,7 @@
             }
         ],
         "lat": "51.66653054944502",
-        "cci_code": 132,
+        "cci_code": "132",
         "slug": "blackwood-civil-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -60726,7 +60726,7 @@
             }
         ],
         "lat": "51.75161888605037",
-        "cci_code": 313,
+        "cci_code": "313",
         "slug": "st-albans-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -60897,7 +60897,7 @@
             }
         ],
         "lat": "53.54308334450705",
-        "cci_code": 374,
+        "cci_code": "374",
         "slug": "wigan-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -61147,7 +61147,7 @@
             }
         ],
         "lat": "53.38555692960198",
-        "cci_code": 320,
+        "cci_code": "320",
         "slug": "sheffield-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -61495,7 +61495,7 @@
             }
         ],
         "lat": "52.80542928949429",
-        "cci_code": 333,
+        "cci_code": "333",
         "slug": "stafford-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30 am 6pm",
@@ -61835,7 +61835,7 @@
             }
         ],
         "lat": "53.78772809430154",
-        "cci_code": 154,
+        "cci_code": "154",
         "alert": "Please see further information at the bottom of this page for changes made from 7 April 2014",
         "slug": "burnley-combined-court-centre",
         "opening_times": [
@@ -62074,7 +62074,7 @@
             }
         ],
         "lat": "51.59984885006039",
-        "cci_code": 299,
+        "cci_code": "299",
         "slug": "pontypridd-county-court-and-family-court",
         "opening_times": [
             "Bailiff counter open: 8am to 10am",
@@ -62283,7 +62283,7 @@
             }
         ],
         "lat": "52.19694923858398",
-        "cci_code": 380,
+        "cci_code": "380",
         "slug": "worcester-combined-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5:30pm",
@@ -62663,7 +62663,7 @@
             }
         ],
         "lat": "52.67822271219396",
-        "cci_code": 364,
+        "cci_code": "364",
         "slug": "telford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am until close of business",
@@ -62984,7 +62984,7 @@
             }
         ],
         "lat": "50.74795173073077",
-        "cci_code": 139,
+        "cci_code": "139",
         "slug": "bournemouth-and-poole-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 5pm",
@@ -63342,7 +63342,7 @@
             }
         ],
         "lat": "54.90487886148372",
-        "cci_code": 343,
+        "cci_code": "343",
         "slug": "sunderland-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -63532,7 +63532,7 @@
                 "name": "Disabled access"
             }
         ],
-        "cci_code": 366,
+        "cci_code": "366",
         "slug": "welshpool-and-newtown-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -63743,7 +63743,7 @@
             }
         ],
         "lat": "53.17700165748074",
-        "cci_code": 271,
+        "cci_code": "271",
         "slug": "mold-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4:30pm (4pm Friday) ",
@@ -63905,7 +63905,7 @@
             }
         ],
         "lat": "52.06393067136082",
-        "cci_code": 114,
+        "cci_code": "114",
         "slug": "banbury-county-court",
         "opening_times": [
             "Court counter open: By appointment only",
@@ -64111,7 +64111,7 @@
             }
         ],
         "lat": "51.54291861713723",
-        "cci_code": 140,
+        "cci_code": "140",
         "slug": "bow-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -64477,7 +64477,7 @@
             }
         ],
         "lat": "52.63005352315573",
-        "cci_code": 244,
+        "cci_code": "244",
         "slug": "leicester-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -64834,7 +64834,7 @@
             }
         ],
         "lat": "54.89355895227781",
-        "cci_code": 165,
+        "cci_code": "165",
         "slug": "carlisle-combined-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -65105,7 +65105,7 @@
             }
         ],
         "lat": "54.64397921486945",
-        "cci_code": 373,
+        "cci_code": "373",
         "slug": "west-cumbria-court-house",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -65389,7 +65389,7 @@
             }
         ],
         "lat": "53.18859317018731",
-        "cci_code": 170,
+        "cci_code": "170",
         "slug": "chester-civil-and-family-justice-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -65774,7 +65774,7 @@
             }
         ],
         "lat": "53.14042912271542",
-        "cci_code": 159,
+        "cci_code": "159",
         "slug": "caernarfon-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4:30pm",
@@ -65992,7 +65992,7 @@
             }
         ],
         "lat": "53.32020769329147",
-        "cci_code": 178,
+        "cci_code": "178",
         "slug": "conwy-and-colwyn-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -66139,7 +66139,7 @@
             }
         ],
         "lat": "53.642143817099",
-        "cci_code": 228,
+        "cci_code": "228",
         "slug": "huddersfield-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -66429,7 +66429,7 @@
             }
         ],
         "lat": "52.28883110129277",
-        "cci_code": 361,
+        "cci_code": "361",
         "slug": "warwick-combined-court",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 6pm",
@@ -66799,7 +66799,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "53.68280357312614",
-        "cci_code": 357,
+        "cci_code": "357",
         "directions": "Wakefield Free City bus stop is approximately 100m from the front entrance to the building",
         "slug": "wakefield-civil-and-family-justice-centre",
         "opening_times": [
@@ -67131,7 +67131,7 @@
             }
         ],
         "lat": "51.73018922408512",
-        "cci_code": 167,
+        "cci_code": "167",
         "slug": "chelmsford-county-and-family-court",
         "opening_times": [
             "Court counter open: By prior appointment only",
@@ -67500,7 +67500,7 @@
             }
         ],
         "lat": "53.40630269837385",
-        "cci_code": 336,
+        "cci_code": "336",
         "slug": "stockport-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm ",
@@ -67762,7 +67762,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "53.48090210856427",
-        "cci_code": 262,
+        "cci_code": "262",
         "slug": "manchester-county-court-and-family-court",
         "opening_times": [
             "Family counter open: By prior appointment only - Please contact the relevant team to book an appointment",
@@ -68509,7 +68509,7 @@
             }
         ],
         "lat": "51.81078059044155",
-        "cci_code": 113,
+        "cci_code": "113",
         "slug": "aylesbury-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:45am to 4.45pm",
@@ -68748,7 +68748,7 @@
             }
         ],
         "lat": "53.02207231001854",
-        "cci_code": 338,
+        "cci_code": "338",
         "slug": "stoke-on-trent-combined-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 6pm",
@@ -69068,7 +69068,7 @@
             }
         ],
         "lat": "51.88726848029201",
-        "cci_code": 176,
+        "cci_code": "176",
         "slug": "colchester-county-court-and-family-court",
         "opening_times": [
             "Court counter open: By prior appointment only",
@@ -69376,7 +69376,7 @@
             }
         ],
         "lat": "53.95468144139429",
-        "cci_code": 386,
+        "cci_code": "386",
         "slug": "york-county-court-and-family-court",
         "opening_times": [
             "Building open: Monday to Friday 8:30am to 4:30pm",
@@ -69680,7 +69680,7 @@
             }
         ],
         "lat": "52.04120790443842",
-        "cci_code": 388,
+        "cci_code": "388",
         "slug": "milton-keynes-county-court-and-family-court",
         "opening_times": [
             "Bailiff telephone service: for payments only, T: 01908 302838 (available 24 hrs)",
@@ -69977,7 +69977,7 @@
             }
         ],
         "lat": "51.53539114480269",
-        "cci_code": 375,
+        "cci_code": "375",
         "slug": "willesden-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -70587,7 +70587,7 @@
             }
         ],
         "lat": "53.39061775486813",
-        "cci_code": 360,
+        "cci_code": "360",
         "slug": "warrington-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -70851,7 +70851,7 @@
             }
         ],
         "lat": "50.81405224541676",
-        "cci_code": 383,
+        "cci_code": "383",
         "slug": "worthing-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:45am to 4:30pm",
@@ -71033,7 +71033,7 @@
             }
         ],
         "lat": "51.60043679042746",
-        "cci_code": 117,
+        "cci_code": "117",
         "slug": "barnet-civil-and-family-courts-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -71837,7 +71837,7 @@
             }
         ],
         "lat": "52.48166041292815",
-        "cci_code": 127,
+        "cci_code": "127",
         "slug": "birmingham-civil-and-family-justice-centre",
         "opening_times": [
             "Court counter open: By prior appointment only (except High Court and Administrative Court 10am to 4pm)",
@@ -72297,7 +72297,7 @@
             }
         ],
         "lat": "51.85497770950421",
-        "cci_code": 166,
+        "cci_code": "166",
         "slug": "carmarthen-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 10am to 4pm",
@@ -72740,7 +72740,7 @@
             }
         ],
         "lat": "50.48676764508546",
-        "cci_code": 352,
+        "cci_code": "352",
         "slug": "torquay-and-newton-abbot-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -73322,7 +73322,7 @@
             }
         ],
         "lat": "50.36919435296687",
-        "cci_code": 296,
+        "cci_code": "296",
         "slug": "plymouth-combined-court",
         "opening_times": [
             "County Court enquiries counter: By prior appointment only"
@@ -73651,7 +73651,7 @@
             }
         ],
         "lat": "51.48428614838842",
-        "cci_code": 144,
+        "cci_code": "144",
         "slug": "brentford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -73999,7 +73999,7 @@
             }
         ],
         "lat": "53.55468225843697",
-        "cci_code": 118,
+        "cci_code": "118",
         "slug": "barnsley-law-courts",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -74907,7 +74907,7 @@
         "admin_id": 3027,
         "facilities": [],
         "lat": "51.40797037023754",
-        "cci_code": 240,
+        "cci_code": "240",
         "slug": "kingston-upon-thames-county-court-and-family-court",
         "opening_times": [
             "Telephone Enquiries from: 9am to 5pm",
@@ -75528,7 +75528,7 @@
             }
         ],
         "lat": "54.99302547863772",
-        "cci_code": 331,
+        "cci_code": "331",
         "slug": "south-shields-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm am General Office.",
@@ -75706,7 +75706,7 @@
             }
         ],
         "lat": "53.48557639318307",
-        "cci_code": 112,
+        "cci_code": "112",
         "slug": "tameside-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -75922,7 +75922,7 @@
             }
         ],
         "lat": "54.57521043220022",
-        "cci_code": 270,
+        "cci_code": "270",
         "slug": "middlesbrough-county-court-at-teesside-combined-court",
         "opening_times": [
             "Court counter open: 10am to 2pm",
@@ -76634,7 +76634,7 @@
             }
         ],
         "lat": "51.27080803828242",
-        "cci_code": 261,
+        "cci_code": "261",
         "slug": "maidstone-combined-court-centre",
         "opening_times": [
             "Court building open: 7:45am to 5pm",
@@ -76919,7 +76919,7 @@
             }
         ],
         "lat": "51.2389615999798",
-        "cci_code": 211,
+        "cci_code": "211",
         "slug": "guildford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -77278,7 +77278,7 @@
             }
         ],
         "lat": "52.4540213035203",
-        "cci_code": 339,
+        "cci_code": "339",
         "slug": "stourbridge-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:15am to 4pm",
@@ -77633,7 +77633,7 @@
             }
         ],
         "lat": "52.40906995738605",
-        "cci_code": 102,
+        "cci_code": "102",
         "slug": "aberystwyth-justice-centre",
         "opening_times": [
             "Court enquiries open: 10am to 2pm",
@@ -78039,7 +78039,7 @@
             }
         ],
         "lat": "51.26331532818237",
-        "cci_code": 122,
+        "cci_code": "122",
         "slug": "basingstoke-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -78259,7 +78259,7 @@
             }
         ],
         "lat": "51.38081360237712",
-        "cci_code": 123,
+        "cci_code": "123",
         "slug": "bath-county-court-and-family-court",
         "opening_times": [
             "Telephone Enquiries from: 8:30am to 5pm",
@@ -78484,7 +78484,7 @@
             }
         ],
         "lat": "51.57257094213568",
-        "cci_code": 153,
+        "cci_code": "153",
         "slug": "basildon-combined-court",
         "opening_times": [
             "Enquiry Office open: For Crown Court enquiries, from 10am to 2pm",
@@ -78740,7 +78740,7 @@
             }
         ],
         "lat": "53.80043988015357",
-        "cci_code": 243,
+        "cci_code": "243",
         "slug": "leeds-combined-court-centre",
         "opening_times": [
             "Court counter open: 10am to 2pm (High Court and Administrative Court 4pm)",
@@ -79312,7 +79312,7 @@
             }
         ],
         "lat": "51.01277807674551",
-        "cci_code": 347,
+        "cci_code": "347",
         "slug": "taunton-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -79508,7 +79508,7 @@
             }
         ],
         "lat": "52.52295610950066",
-        "cci_code": 287,
+        "cci_code": "287",
         "slug": "nuneaton-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -79755,7 +79755,7 @@
             }
         ],
         "lat": "50.83255373103525",
-        "cci_code": 172,
+        "cci_code": "172",
         "slug": "chichester-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -80042,7 +80042,7 @@
             }
         ],
         "lat": "51.51529145343864",
-        "cci_code": 266,
+        "cci_code": "266",
         "slug": "mayor-s-and-city-of-london-court",
         "opening_times": [
             "Court building open: Monday to Friday 9:30am to 4pm",
@@ -80263,7 +80263,7 @@
             }
         ],
         "lat": "51.44540756801454",
-        "cci_code": 184,
+        "cci_code": "184",
         "slug": "dartford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -80563,7 +80563,7 @@
             }
         ],
         "lat": "53.14863829636502",
-        "cci_code": 263,
+        "cci_code": "263",
         "slug": "mansfield-magistrates-court-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm (4:30pm Friday)",
@@ -80969,7 +80969,7 @@
             }
         ],
         "lat": "51.68211361662362",
-        "cci_code": 253,
+        "cci_code": "253",
         "slug": "llanelli-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -81360,7 +81360,7 @@
             }
         ],
         "lat": "51.52460541822825",
-        "cci_code": 321,
+        "cci_code": "321",
         "slug": "clerkenwell-and-shoreditch-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday from 9am"
@@ -82405,7 +82405,7 @@
             }
         ],
         "lat": "53.43034093233501",
-        "cci_code": 310,
+        "cci_code": "310",
         "slug": "rotherham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -82762,7 +82762,7 @@
             }
         ],
         "lat": "53.42631111886911",
-        "cci_code": 106,
+        "cci_code": "106",
         "slug": "altrincham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -82955,7 +82955,7 @@
             }
         ],
         "lat": "52.45402036520227",
-        "cci_code": 189,
+        "cci_code": "189",
         "alert": "THE ADDRESS FOR HEARINGS IS DUDLEY MAGISTRATES COURT, THE COURT HOUSE, THE INHEDGE, DUDLEY DY1 1RY",
         "slug": "dudley-county-court-and-family-court",
         "opening_times": [
@@ -83285,7 +83285,7 @@
             }
         ],
         "lat": "53.04845954089615",
-        "cci_code": 384,
+        "cci_code": "384",
         "slug": "wrexham-county-court-and-family-court",
         "opening_times": [
             "County Court enquiries counter: 10am to 2pm",
@@ -83535,7 +83535,7 @@
             }
         ],
         "lat": "50.60840159258562",
-        "cci_code": 371,
+        "cci_code": "371",
         "slug": "weymouth-and-dorchester-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -83783,7 +83783,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "54.28146434507936",
-        "cci_code": 318,
+        "cci_code": "318",
         "slug": "scarborough-justice-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9:15am to 4pm",
@@ -84038,7 +84038,7 @@
             }
         ],
         "lat": "51.80099955979597",
-        "cci_code": 217,
+        "cci_code": "217",
         "slug": "haverfordwest-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -84375,7 +84375,7 @@
             }
         ],
         "lat": "51.5141431141754",
-        "cci_code": 372,
+        "cci_code": "372",
         "slug": "central-london-county-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -85223,7 +85223,7 @@
             }
         ],
         "lat": "53.8117328271917",
-        "cci_code": 131,
+        "cci_code": "131",
         "slug": "blackpool-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -85513,7 +85513,7 @@
             }
         ],
         "lat": "51.66159731566931",
-        "cci_code": 274,
+        "cci_code": "274",
         "slug": "neath-and-port-talbot-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 10am to 4pm",
@@ -85728,7 +85728,7 @@
             }
         ],
         "lat": "52.58436138762136",
-        "cci_code": 378,
+        "cci_code": "378",
         "slug": "wolverhampton-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 5pm",
@@ -86437,7 +86437,7 @@
             }
         ],
         "lat": "53.7514654974962",
-        "cci_code": 103,
+        "cci_code": "103",
         "slug": "accrington-county-court",
         "opening_times": [
             "Court building open: Mon, Wed & Fri from 9am-4:30pm",
@@ -86578,7 +86578,7 @@
             }
         ],
         "lat": "51.86340338190962",
-        "cci_code": 203,
+        "cci_code": "203",
         "slug": "gloucester-and-cheltenham-county-court-and-family-court",
         "opening_times": [
             "Telephone Enquiries from: 8:30am to 5pm",
@@ -86984,7 +86984,7 @@
             }
         ],
         "lat": "51.06254899810587",
-        "cci_code": 376,
+        "cci_code": "376",
         "slug": "winchester-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -87402,7 +87402,7 @@
             }
         ],
         "lat": "51.2483647182953",
-        "cci_code": 104,
+        "cci_code": "104",
         "slug": "aldershot-and-farnham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -87641,7 +87641,7 @@
             }
         ],
         "lat": "52.75510889457187",
-        "cci_code": 238,
+        "cci_code": "238",
         "slug": "king-s-lynn-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 10am to 4pm",
@@ -87884,7 +87884,7 @@
             }
         ],
         "lat": "52.63454931279601",
-        "cci_code": 285,
+        "cci_code": "285",
         "slug": "norwich-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -88345,7 +88345,7 @@
             }
         ],
         "lat": "52.05779415946595",
-        "cci_code": 233,
+        "cci_code": "233",
         "slug": "ipswich-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 4pm",
@@ -89125,7 +89125,7 @@
             }
         ],
         "lat": "51.23853554769896",
-        "cci_code": 307,
+        "cci_code": "307",
         "slug": "reigate-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -89479,7 +89479,7 @@
             }
         ],
         "lat": "53.56484310012786",
-        "cci_code": 208,
+        "cci_code": "208",
         "slug": "great-grimsby-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -89745,7 +89745,7 @@
             }
         ],
         "lat": "51.56110319672413",
-        "cci_code": 345,
+        "cci_code": "345",
         "alert": "Divorce - CHIPPENHAM & TROWBRIDGE issued pre January 2013 contact Chippenham & Trowbridge Law Courts.  SWINDON CASES issued pre  August 13 contact Swindon Combined Court.  Cases issued AFTER  August 13 contact Salisbury Law Courts.",
         "slug": "swindon-combined-court",
         "opening_times": [
@@ -90025,7 +90025,7 @@
             }
         ],
         "lat": "51.06857461590473",
-        "cci_code": 227,
+        "cci_code": "227",
         "slug": "horsham-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4:30pm",
@@ -90257,7 +90257,7 @@
             }
         ],
         "lat": "51.88112798720145",
-        "cci_code": 258,
+        "cci_code": "258",
         "slug": "luton-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -90671,7 +90671,7 @@
             "offsite": "Paid parking is available within a 5 minute walk."
         },
         "lat": "50.82298320689868",
-        "cci_code": 554,
+        "cci_code": "554",
         "slug": "sussex-family-centre-at-brighton",
         "opening_times": [
             "Court building open: 9.00 am to 4.00pm",
@@ -90788,7 +90788,7 @@
             }
         ],
         "lat": "52.23764868776728",
-        "cci_code": 157,
+        "cci_code": "157",
         "alert": "From 21/07/14, Bury St Edmunds County and Family Courts are temporarily relocated to 100 Southgate Street, Bury St Edmunds, Suffolk IP33 2AQ.  This is so refurbishment work can take place at Triton House.",
         "slug": "bury-st-edmunds-county-court-and-family-court",
         "opening_times": [
@@ -91169,7 +91169,7 @@
             }
         ],
         "lat": "51.45643046573603",
-        "cci_code": 305,
+        "cci_code": "305",
         "slug": "reading-county-court-and-family-court",
         "opening_times": [
             "Court counter open: By prior appointment only",
@@ -91814,7 +91814,7 @@
             }
         ],
         "lat": "52.39894568483992",
-        "cci_code": 236,
+        "cci_code": "236",
         "slug": "kettering-county-court",
         "opening_times": [
             "Court building open: 10am to 4pm (9:30am on hearing days)",
@@ -92180,7 +92180,7 @@
             }
         ],
         "lat": "51.28197737709792",
-        "cci_code": 163,
+        "cci_code": "163",
         "slug": "canterbury-combined-court-centre",
         "opening_times": [
             "Court building open: 8am to 6pm",
@@ -92813,7 +92813,7 @@
             }
         ],
         "lat": "50.87298195727173",
-        "cci_code": 247,
+        "cci_code": "247",
         "slug": "lewes-combined-court-centre",
         "opening_times": [
             "Court building open: 8.30am to 5pm",
@@ -93020,7 +93020,7 @@
             }
         ],
         "lat": "52.13502903387062",
-        "cci_code": 124,
+        "cci_code": "124",
         "slug": "bedford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday, 9am to 4pm",
@@ -93265,7 +93265,7 @@
             }
         ],
         "lat": "50.7213199688823",
-        "cci_code": 198,
+        "cci_code": "198",
         "slug": "exeter-combined-court-centre",
         "opening_times": [
             "Court counter open: 10am to 2pm"
@@ -93633,7 +93633,7 @@
             }
         ],
         "lat": "51.45239588358307",
-        "cci_code": 151,
+        "cci_code": "151",
         "slug": "bristol-civil-and-family-justice-centre",
         "opening_times": [
             "Court building open: 8:30am to 4pm (9am to 4pm Thursday)",
@@ -94129,7 +94129,7 @@
             }
         ],
         "lat": "51.12991384348785",
-        "cci_code": 355,
+        "cci_code": "355",
         "slug": "tunbridge-wells-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm ",
@@ -94395,7 +94395,7 @@
             }
         ],
         "lat": "50.79577978014757",
-        "cci_code": 302,
+        "cci_code": "302",
         "slug": "portsmouth-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8am to 5pm",
@@ -94799,7 +94799,7 @@
             }
         ],
         "lat": "52.57006593393442",
-        "cci_code": 294,
+        "cci_code": "294",
         "slug": "peterborough-combined-court-centre",
         "opening_times": [
             "Court building open: Monday to Friday 8:30am to 5pm",
@@ -95353,7 +95353,7 @@
             }
         ],
         "lat": "51.66367540049799",
-        "cci_code": 362,
+        "cci_code": "362",
         "slug": "watford-county-court-and-family-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 4pm",
@@ -95711,7 +95711,7 @@
             }
         ],
         "lat": "50.26554787935058",
-        "cci_code": 354,
+        "cci_code": "354",
         "alert": "Please note that with effect from 8 November 2013 all new divorce issue has been centralised to the Court at Bodmin - please see Bodmin County Court and Family Court for contact information",
         "slug": "truro-county-court-and-family-court",
         "opening_times": [
@@ -95979,7 +95979,7 @@
             }
         ],
         "lat": "50.91370565726297",
-        "cci_code": 328,
+        "cci_code": "328",
         "alert": "PLEASE NOTE:  For Fines Queries for West Hampshire Magistrates\u2019 Court (formerly Southampton Magistrates\u2019 Court)  please contact 01202 711880.",
         "slug": "southampton-combined-court-centre",
         "opening_times": [
@@ -96428,7 +96428,7 @@
             }
         ],
         "lat": "51.5042548656082",
-        "cci_code": 146,
+        "cci_code": "146",
         "slug": "bridgend-law-courts",
         "opening_times": [
             "Court building open: 9am to 5pm",
@@ -96794,7 +96794,7 @@
             }
         ],
         "lat": "50.46952713166196",
-        "cci_code": 136,
+        "cci_code": "136",
         "alert": "Please note that the Truro Family Court is the administrative centre for all Children Act matters.  Please see Truro County Court and Family Court for contact information",
         "slug": "bodmin-county-court-and-family-court",
         "opening_times": [
@@ -97193,7 +97193,7 @@
             }
         ],
         "lat": "51.47824079427627",
-        "cci_code": 164,
+        "cci_code": "164",
         "slug": "cardiff-civil-and-family-justice-centre",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -97514,7 +97514,7 @@
             }
         ],
         "lat": "50.70120848081491",
-        "cci_code": 279,
+        "cci_code": "279",
         "slug": "isle-of-wight-combined-court",
         "opening_times": [
             "Court building open: Monday to Friday 9am to 5pm",
@@ -97744,7 +97744,7 @@
             }
         ],
         "lat": "51.07340383179328",
-        "cci_code": 317,
+        "cci_code": "317",
         "alert": "Divorce - CHIPPENHAM & TROWBRIDGE issued pre January 2013 contact Chippenham & Trowbridge Law Courts.  SWINDON CASES issued pre  August 13 contact Swindon Combined Court.  Cases relating to CHILDREN contact Swindon Combined Court.",
         "slug": "salisbury-law-courts",
         "opening_times": [

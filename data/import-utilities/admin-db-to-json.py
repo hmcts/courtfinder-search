@@ -83,7 +83,7 @@ class Data:
             if directions not in (None, ""):
                 court_object['directions'] = directions
             if cci_code not in (None, ""):
-                court_object['cci_code'] = cci_code
+                court_object['cci_code'] = str(cci_code)
             if created_at not in (None, ""):
                 court_object['created_at'] = created_at
             if updated_at not in (None, ""):
