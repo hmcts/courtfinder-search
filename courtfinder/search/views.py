@@ -4,7 +4,7 @@ import re
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.core.serializers.json import DjangoJSONEncoder
 
 from search.models import Court, AreaOfLaw, DataStatus
@@ -168,18 +168,31 @@ def results_json(request):
         if directive['action'] == 'redirect':
             return HttpResponseBadRequest(content_type="application/json")
         elif directive['action'] == 'render':
-            results = directive.get('results',None)
-        return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
+            try:
+              results = directive.get('results', None)
+            except Exception:
+                HttpResponseServerError('{"error":"service is unable to fulfill your request"}',
+                                        content_type="application/json")
+        return HttpResponse(json.dumps(format_results(results),
+                                       default=str),
+                            content_type="application/json")
     elif 'q' in request.GET:
         query = request.GET.get('q','').strip()
 
         if query == "":
-            return HttpResponseBadRequest('Empty search query', content_type="application/json")
+            return HttpResponseBadRequest('{"error":"Empty search query"}',
+                                          content_type="application/json")
 
-        results = CourtSearch.address_search(query)
-        return HttpResponse(json.dumps(format_results(results), default=str), content_type="application/json")
+        try:
+            results = CourtSearch.address_search(query)
+        except Exception:
+            return HttpResponseServerError('{"error":"service is unable to fulfill your request"}',
+                                           content_type="application/json")
+        return HttpResponse(json.dumps(format_results(results), default=str),
+                            content_type="application/json")
     else:
-        return HttpResponseBadRequest('request needs one of postcode or q parameters', content_type="application/json")
+        return HttpResponseBadRequest('{"error":"request needs one of postcode or q parameters"}',
+                                      content_type="application/json")
 
 def data_status(request):
     last_change = DataStatus.objects.all().order_by('-last_ingestion_date')[0]

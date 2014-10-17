@@ -432,14 +432,18 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
+    def test_api_broken_mapit_with_name_search(self):
+        with patch('search.court_search.CourtSearch.address_search', Mock(side_effect=CourtSearchError('Service Error'))):
+            c = Client()
+            response = c.get('/search/results.json?q=old+bailey')
+            self.assertEqual(response.status_code, 500)
 
-    def test_api_broken_mapit(self):
+    def test_api_broken_mapit_with_postcode_search(self):
         with patch('search.court_search.CourtSearch.get_from_mapit', Mock(side_effect=CourtSearchError('Mapit error'))):
             with self.assertRaises(CourtSearchError):
                 c = Client()
                 response = c.get('/search/results.json?postcode=SE154UH&area_of_law=Crime')
                 self.assertEqual(response.status_code, 500)
-
 
     def test_search_no_postcode_nor_q(self):
         c = Client()

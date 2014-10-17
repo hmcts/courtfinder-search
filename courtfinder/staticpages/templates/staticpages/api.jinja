@@ -27,6 +27,12 @@
 
     <p>The format of the JSON version is self explanatory.</p>
 
+    <p>The API uses the usual HTTP response codes in case of errors:</p>
+    <ul>
+      <li>If there are no results, the API returns a 200 response with an empty JSON array (<code>[ ]</code>)</li>
+      <li>If the service is unable to fulfill the request (eg if the third-party postcode service isn't responding), it will return a 500 response, with explanations in the response body.</li>
+      <li>If the query is mal-formed (eg <code>/search/results.json?postcode=</code>), a 400 HTTP response is returned also with some explanations in the body.</li>
+    </ul>
     
     <h2>Court and Tribunal data as JSON files</h2>
 
