@@ -124,6 +124,8 @@ class SearchTestCase(TestCase):
             }
         ],
         "court_number": 1725,
+        "cci_code": "242",
+        "updated_at": "2014-04-16T13:04:44.642",
         "lon": "-2.359323760375266",
         "postcodes": ["SW1H9AJ"],
         "emails": [
@@ -287,3 +289,13 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
         self.assertNotIn('<span property="contactType"></span>', response.content)
+
+    def test_court_numbers_in_list(self):
+        c = Client()
+        response = c.get('/courts/A')
+        self.assertIn('(#1725, CCI: 242)', response.content)
+
+    def test_updated_in_court_page(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        self.assertIn('Last updated: 16 April 2014', response.content)

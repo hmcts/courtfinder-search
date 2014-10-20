@@ -19,13 +19,15 @@ class Court(models.Model):
     facilities = models.ManyToManyField('Facility', through='CourtFacility', null=True)
     opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime', null=True)
     contacts = models.ManyToManyField('Contact', through='CourtContact', null=True)
+    cci_code = models.CharField(max_length=255, null=True, default=None)
+    updated_at = models.DateTimeField(null=True, default=None)
+    created_at = models.DateTimeField(null=True, default=None)
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
 
     def __unicode__(self):
         return self.name
-
 
 
 class CourtAttributeType(models.Model):
