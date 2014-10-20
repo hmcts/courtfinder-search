@@ -1,4 +1,5 @@
 from search.models import *
+from dateutil import parser
 
 class Ingest:
     @classmethod
@@ -39,8 +40,14 @@ class Ingest:
         CourtOpeningTime.objects.all().delete()
 
         for court_obj in courts:
+
+            court_created_at = court_obj.get('created_at', None)
+            created_at = parser.parse(court_created_at+'UTC') if court_created_at else None
+            court_updated_at = court_obj.get('updated_at', None)
+            updated_at = parser.parse(court_updated_at+'UTC') if court_updated_at else None
             court = Court(
                 admin_id=court_obj['admin_id'],
+                cci_code=court_obj.get('cci_code', None),
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=court_obj['display'],
@@ -50,6 +57,8 @@ class Ingest:
                 alert=court_obj.get('alert', None),
                 directions=court_obj.get('directions', None),
                 image_file=court_obj.get('image_file', None),
+                created_at=created_at,
+                updated_at=updated_at,
             )
             court.save()
 
