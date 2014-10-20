@@ -15,9 +15,15 @@
   </header>
   <div class="group">
     {% if error == 'noquery' %}
-    <section class="validation-error"><span>You did not enter a search term. Please try again.</span></section>
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>You did not enter a search term. Please try again.</p>
+    </section>
     {% elif error == 'noresults' %}
-    <section class="validation-error"><span>Sorry, there are no results for {{ query }}. Please check and try another name or address.</span></section>
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>Sorry, there are no results for {{ query }}. Please check and try another name or address.</p>
+    </section>
     {% endif %}
     <form method="get" action="results">
       <fieldset class="form-group">
