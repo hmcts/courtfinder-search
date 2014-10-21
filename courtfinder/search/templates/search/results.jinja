@@ -67,12 +67,14 @@
           </p>
         </div>
         <div class="court-aol">
+          {% if court.areas_of_law %}
           <p class="court-result-heading">Areas of law covered:</p>
           <ul>
           {% for aol in court.areas_of_law %}
             <li>{{ aol.name }}</li>
           {% endfor %}
           </ul>
+          {% endif %}
         </div>
         <div class="court-map">
           <div class="court-map-top">
