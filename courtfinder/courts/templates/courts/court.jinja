@@ -144,7 +144,7 @@
           <dd>{{ court.number }}</dd>
         {% endif %}
         {% if court.dx_number %}
-          <dt>DX:</dt>
+          <dt><abbr title="document exchange">DX</abbr>:</dt>
           <dd>{{ court.dx_number }}</dd>
         {% endif %}
         </dl>
@@ -168,9 +168,5 @@
     Last updated: {{ court.updated_at }}
   </div>
 </div>
-
-
-
-
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
 
-{% block page_title %}Find a court or tribunal{% endblock %}
+{% block page_title %}Search results{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
@@ -59,7 +59,7 @@
 
           <p>
             {% if court.dx_number %}
-              <span class="court-result-heading">DX:</span> <span>{{ court.dx_number }}</span><br/>
+            <span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span><br/>
             {% endif %}
             {% if court.number %}
               <span class="court-result-heading">Court number:</span> <span>{{ court.number }}</span>
@@ -84,11 +84,11 @@
           <p>
             {% if court.lat != None and court.lon != None %}
             <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
-              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
+              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
             </a>
           {% else %}
             <a target="_blank" href="https://maps.google.com/maps?q={{ court.address.postcode }}+{{ court.address.town }}+UK">
-              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{ court.address.postcode }}+{{ court.address.town }}+UK&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
+              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{ court.address.postcode }}+{{ court.address.town }}+UK&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
             </a>
             <br/>
           {% endif %}
