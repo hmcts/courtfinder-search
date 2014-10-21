@@ -28,4 +28,4 @@ class SearchPageTestCase(TestCase):
         response = c.get('/search/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
-        self.assertInHTML('<title>Find a court or tribunal</title>', response.content, count=1)
+        self.assertInHTML('<title>Choose the type of search - Court and tribunal finder</title>', response.content, count=1)
