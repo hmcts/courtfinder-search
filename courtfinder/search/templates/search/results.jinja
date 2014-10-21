@@ -84,7 +84,7 @@
           <p>
             {% if court.lat != None and court.lon != None %}
             <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
-              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="location of the court on a map"/>
+              <img src="http://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }}"/>
             </a>
           {% else %}
             <a target="_blank" href="https://maps.google.com/maps?q={{ court.address.postcode }}+{{ court.address.town }}+UK">
