@@ -9,6 +9,13 @@
 {% endblock %}
 {% block content %}
   {% block body %}{% endblock %}
+{% block footer_support_links %}
+<li><a href="http://www.gov.uk/help">Help</a></li>
+<li><a href="http://www.gov.uk/help/cookies">Cookies</a></li>
+<li><a href="http://www.gov.uk/contact">Contact</a></li>
+<li><a href="http://www.gov.uk/cymraeg">Cymraeg</a></li>
+<li><a href="/api.html">API</a></li>
+  {% endblock %}
 {% endblock %}
 {%block body_end %}
 <script type="text/javascript" src="{% static "javascripts/application.js" %}"></script>
