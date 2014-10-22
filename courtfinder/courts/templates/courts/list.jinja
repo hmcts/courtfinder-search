@@ -17,15 +17,13 @@
 
   <p>Browse by name of court or tribunal</p>
 
-  <nav role='navigation' class="a-z-navigation">
-    <ul>
-      {% for letter in letters %}
-      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
-      {% endfor %}
-    </ul>
-  </nav>
+  {% if not courts %}
+  <p>Select the first letter of the court's name</p>
+  {% else %}
+  <h2 class="clear letterheader">Court names starting with {{ letter }}</h2>
+  {% endif %}
 
-  <h2 class="clear letterheader">{{ letter }}</h2>
+  {% if letter %}
 
   {% if courts %}
   <ul>
@@ -39,7 +37,7 @@
   {% else %}
   <p>There are no courts starting with that letter.</p>
   {% endif %}
-
+  {% endif %}
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
@@ -47,7 +45,6 @@
       {% endfor %}
     </ul>
   </nav>
-
 </div>
 
 

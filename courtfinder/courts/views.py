@@ -80,9 +80,6 @@ def court_view(request, slug):
         'postcode': request.GET.get('postcode',''),
     })
 
-def courts_view(request):
-    return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
-
 def list_format_courts(courts):
     return [{'name':court.name,
              'slug':court.slug,
@@ -93,5 +90,5 @@ def list_view(request, first_letter='A'):
     return render(request, 'courts/list.jinja', {
         'letter': first_letter,
         'letters': string.ascii_uppercase,
-        'courts': list_format_courts(Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name'))
+        'courts': list_format_courts(Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')) if first_letter else None
     })
