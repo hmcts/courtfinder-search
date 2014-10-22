@@ -615,7 +615,7 @@ class SearchTestCase(TestCase):
     def test_redirect_directive_action(self):
         c = Client()
         response = c.get('/search/type?type=list')
-        self.assertRedirects(response, '/courts/A', 302)
+        self.assertRedirects(response, '/courts/', 302)
 
     def test_local_authority_search_bad_aol(self):
         self.assertEquals(CourtSearch.local_authority_search('SE154UH', 'non-existent-aol'), [])
