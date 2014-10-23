@@ -62,7 +62,7 @@ $small-width: 800px;
 .court-addresses {
   @include media($min-width: $small-width) {
     float: left;
-    width: 40%;
+    width: 30%;
   }
 }
 
@@ -80,22 +80,19 @@ $small-width: 800px;
 }
 
 .court-map {
+  width: 290px;
   > p a {
     display: block;
   }
   @include media($min-width: $small-width) {
     float: right;
-    width: 290px;
-  }
-  .court-map-top {
-    width: 290px;
   }
   .court-result-heading {
     float: left
   }
   .distance-from-postcode {
     text-align: right;
-    padding-top: .75em;
+    padding-top: .5em;
   }
 }
 

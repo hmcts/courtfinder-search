@@ -77,12 +77,10 @@
           {% endif %}
         </div>
         <div class="court-map">
-          <div class="court-map-top">
-            <p class="court-result-heading">Find us here:</p>
-            {% if court.distance %}
-            <p class="distance-from-postcode">{{ court.distance }} miles away</p>
-            {% endif %}
-          </div>
+          <p class="court-result-heading">Find us here:</p>
+          {% if court.distance %}
+          <p class="distance-from-postcode">{{ court.distance }} miles away</p>
+          {% endif %}
           <p>
             {% if court.lat != None and court.lon != None %}
             <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
