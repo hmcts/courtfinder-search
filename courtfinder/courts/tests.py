@@ -280,10 +280,15 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("Accrington", response.content)
 
-    def test_court_list_redirect(self):
+    def test_court_list_a(self):
+        c = Client()
+        response = c.get('/courts/A')
+        self.assertIn("Names starting with A", response.content)
+
+    def test_court_list_index(self):
         c = Client()
         response = c.get('/courts/')
-        self.assertRedirects(response, '/courts/A', 302)
+        self.assertIn("Select the first letter of the court's name", response.content)
 
     def test_court_with_email_without_description(self):
         c = Client()

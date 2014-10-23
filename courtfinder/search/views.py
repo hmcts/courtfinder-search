@@ -43,7 +43,7 @@ def search_type(request):
     elif search_type == 'address':
         return redirect(reverse('search:address-view'))
     else:
-        return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
+        return redirect(reverse('courts:list-view'))
 
 
 def search_by_postcode(request):

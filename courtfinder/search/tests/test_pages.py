@@ -20,7 +20,7 @@ class SearchPageTestCase(TestCase):
         c = Client()
         response = c.get('/search/type?type=list', follow=True)
         self.assertEqual(response.redirect_chain, [
-            ('http://testserver/courts/A', 302),
+            ('http://testserver/courts/', 302),
         ])
 
     def test_top_page_returns_correct_content(self):

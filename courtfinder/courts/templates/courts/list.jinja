@@ -1,6 +1,13 @@
 {% extends "layout/base.jinja" %}
 
-{% block page_title %}List of courts and tribunals{% endblock %}
+
+{% block page_title %}
+{% if letter %}
+List of courts and tribunals starting with {{ letter }} - GOV.UK
+{% else %}
+Index of all courts and tribunals - GOV.UK
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
@@ -17,15 +24,13 @@
 
   <p>Browse by name of court or tribunal</p>
 
-  <nav role='navigation' class="a-z-navigation">
-    <ul>
-      {% for letter in letters %}
-      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
-      {% endfor %}
-    </ul>
-  </nav>
+  {% if not courts %}
+  <p>Select the first letter of the court's name</p>
+  {% else %}
+  <h2 class="clear letterheader">Names starting with {{ letter }}</h2>
+  {% endif %}
 
-  <h2 class="clear letterheader">{{ letter }}</h2>
+  {% if letter %}
 
   {% if courts %}
   <ul>
@@ -37,9 +42,9 @@
     {% endfor %}
   </ul>
   {% else %}
-  <p>There are no courts starting with that letter.</p>
+  <p>There are no courts or tribunals starting with {{ letter }}</p>
   {% endif %}
-
+  {% endif %}
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
@@ -47,7 +52,6 @@
       {% endfor %}
     </ul>
   </nav>
-
 </div>
 
 

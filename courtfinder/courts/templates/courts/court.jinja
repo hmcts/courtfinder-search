@@ -15,7 +15,7 @@
     <li><a href="{% url 'search:postcode-view' %}">Search by name of address</a></li>
     <li><a href="{% url 'search:result-view' %}?postcode={{ postcode }}&area_of_law={{ area_of_law }}">Search results</a></li>
     {% else %}
-    <li><a href="{% url 'courts:courts-view' %}">Courts list</a></li>
+    <li><a href="{% url 'courts:list-view' %}">Courts list</a></li>
     {% endif %}
   </ol>
 </div>
@@ -39,7 +39,7 @@
         <span property="addressRegion">{{ court.visiting_address.county }}</span>
         {% endif %}
         <p id="map-link">
-          <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" rel="external" target="_blank">Maps and directions</a>
+          <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
         </p>
       </div>
       {% endif %}
