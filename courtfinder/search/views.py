@@ -34,23 +34,27 @@ def index(request):
 
 def aol(request):
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
-    for aol in areas_of_law:
-        aol.description = areas_of_law_description[aol.name]
-
+    aol = request.GET.get('aol', 'All')
+    for area in areas_of_law:
+        area.description = areas_of_law_description[area.name]
     return render(request, 'search/aol.jinja', {
-        'areas_of_law': areas_of_law,
+        'areas_of_law': areas_of_law, 'aol': aol,
     })
 
 def spoe(request):
     aol = request.GET.get('aol', 'All')
-    return render(request, 'search/spoe.jinja', { 'aol': aol })
+    spoe = request.GET.get('spoe', 'start')
+    return render(request, 'search/spoe.jinja', {
+        'aol': aol, 'spoe': spoe,
+    })
 
 def postcode(request):
     aol = request.GET.get('aol', 'All')
     spoe = request.GET.get('spoe', 'start')
+    postcode = request.GET.get('postcode', None)
     error = request.GET.get('error', None)
     return render(request, 'search/postcode.jinja', {
-        'aol': aol, 'spoe': spoe, 'error': error
+        'aol': aol, 'spoe': spoe, 'postcode': postcode, 'error': error
     })
 
 def address(request):
@@ -60,6 +64,7 @@ def address(request):
 
 def results(request):
     query = request.GET.get('q', None)
+
     if query is not None:
         query = re.sub(r'\s+',' ',query.strip())
         if query == '':
@@ -84,7 +89,9 @@ def results(request):
             else:
 #            courts = new CourtSearch(aol, spoe, postcode)
 #            return render(request, 'search/results.jinja', { 'courts': courts.get() })
-                return render(request, 'search/results.jinja')
+                return render(request, 'search/results.jinja', {
+                    'aol': aol, 'spoe': spoe, 'postcode': postcode, 'courts': None
+                })
         else:
             return redirect(reverse('search:search'))
 

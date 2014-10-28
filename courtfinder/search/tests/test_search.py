@@ -581,6 +581,22 @@ class SearchTestCase(TestCase):
                                                                area_of_law=aol,
                                                                local_authority=local_authority)
         self.assertEqual(str(court_local_authority_aol), "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
+        facility=Facility.objects.create(name="sofa", description="comfy leather")
+        self.assertEqual(str(facility), "sofa: comfy leather")
+        court_facility = CourtFacility.objects.create(court=court, facility=facility)
+        self.assertEqual(str(court_facility), "%s has facility %s" % (court.name, facility))
+        opening_time = OpeningTime.objects.create(description="open 7/7")
+        self.assertEqual(str(opening_time), "open 7/7")
+        court_opening_time = CourtOpeningTime.objects.create(court=court, opening_time=opening_time)
+        self.assertEqual(str(court_opening_time), "%s has facility %s" % (court.name, opening_time))
+        email = Email.objects.create(description="enquiries", address="a@b.com")
+        self.assertEqual(str(email), "enquiries: a@b.com")
+        court_email = CourtEmail.objects.create(court=court, email=email)
+        self.assertEqual(str(court_email), "%s has email: %s" % (court.name, email.description))
+        now = datetime.now()
+        data_status = DataStatus.objects.create(data_hash="wer38hr3hr37hr")
+        self.assertEqual(str(data_status), "Current data hash: %s, last update: %s" %
+                         (data_status.data_hash, data_status.last_ingestion_date))
 
     def test_broken_mapit(self):
         # we need to stop the patched mapit method to run the original version, but with a borken URL

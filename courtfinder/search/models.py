@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Court(models.Model):
     admin_id = models.IntegerField(null=True, default=None)
@@ -181,7 +182,7 @@ class Email(models.Model):
     address = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.description
+        return "%s: %s" % (self.description, self.address)
 
 
 class CourtEmail(models.Model):

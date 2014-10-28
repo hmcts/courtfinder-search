@@ -8,8 +8,8 @@
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
-    <li><a href="{% url 'search:aol' %}">About your issue</a></li>
-    <li><a href="{% url 'search:spoe' %}">Additional info</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">
@@ -29,7 +29,15 @@
     <input type="hidden" name="spoe" value="{{ spoe }}"/>
     <div class="form-block">
       <label for="postcode">
-        <div class="form-hint">Enter the postcode where the child (or children) lives.</div>
+        <div class="form-hint">
+          {% if aol == 'Children' %}
+          Enter the postcode where the child (or children) lives.
+          {% elif aol == 'Housing possession' %}
+          Enter the postcode of the property.
+          {% else %}
+          Enter your postcode.
+          {% endif %}
+        </div>
         <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
       </label>
     </div>

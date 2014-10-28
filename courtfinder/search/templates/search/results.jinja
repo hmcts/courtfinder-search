@@ -11,7 +11,9 @@
     {% if query %}
     <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
     {% else %}
-    <li><a href="{% url 'search:postcode' %}">Search by postcode</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
     {% endif %}
   </ol>
 </div>

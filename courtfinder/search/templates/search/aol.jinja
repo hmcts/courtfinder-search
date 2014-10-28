@@ -14,7 +14,7 @@
   <header class="page-header">
     <h1>About your issue</h1>
   </header>
-{% if area_of_law == '' %}
+{% if aol == '' %}
   <section class="validation-error">
     <h2>Error</h2>
     <p>You did not enter a type of legal problem. Please try again.</p>
@@ -25,17 +25,17 @@
     <div class="form-block">
 
       <div id="aols" class="form-block">
-        {% for aol in areas_of_law %}
+        {% for area in areas_of_law %}
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
-          <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{aol.name}}" {% if aol.name == area_of_law %}checked{% endif %}>
+          <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.name}}" {% if area.name == aol %}checked{% endif %}>
           <div class="form-label">
-            <span class="aol-name">{{aol.name}}: </span>
-            <span class="aol-description">{{ aol.description }}</span>
+            <span class="aol-name">{{area.name}}: </span>
+            <span class="aol-description">{{ area.description }}</span>
           </div>
         </label>
         {% endfor %}
         <label id="last-choice" for="aol-0" class="block-label form-block">
-          <input id="aol-0" type="radio" name="aol" value="All" checked=checked>
+          <input id="aol-0" type="radio" name="aol" value="All" {% if aol == 'All' %}checked{% endif %}>
           <div class="form-label">All courts and tribunals</div>
         </label>
       </div>

@@ -8,7 +8,7 @@
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find the right court or tribunal</a></li>
-    <li><a href="{% url 'search:aol' %}">About your issue</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">
@@ -19,11 +19,11 @@
     <div class="form-block">
       <input type="hidden" name="aol" value="{{ aol }}"/>
       <label for="spoe-start" class="block-label form-block">
-        <input id="spoe-start" type="radio" name="spoe" value="start"/>
+        <input id="spoe-start" type="radio" name="spoe" value="start" {% if spoe == 'start' %}checked{% endif %}/>
         <div class="form-label">about to start a new claim</div>
       </label>
       <label for="spoe-continue" class="block-label form-block">
-        <input id="spoe-continue" type="radio" name="spoe" value="continue"/>
+        <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
         <div class="form-label">already in contact with a court or tribunal</div>
       </label>
     </div>
