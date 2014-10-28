@@ -1,0 +1,29 @@
+{% extends "layout/base.jinja" %}
+
+{% block page_title %}Feedback for Court and Tribunal Finder{% endblock %}
+
+{% block content %}
+<div class="content inner cf">
+  <header class="page-header">
+    <h1>Send feedback</h1>
+  </header>
+  <p>Please do not use this feedback form for complaints about HM Courts & Tribunals Service. Complaints should be sent to the office where the problem arose to help us sort out the issue quickly and accurately</p>
+  <div class="group">
+    <form id="feedback-form" method="post" action="{% url 'staticpages:feedback_sent' %}">
+      {% csrf_token %}
+      <label for="feedback_text" class="form-block">
+        <div class="form-label">Comments (Please don't leave sensitive personal details, like your phone number)</div>
+        <textarea cols="50" id="feedback_text" name="feedback_text" rows="5" autofocus></textarea>
+        <div class="form-hint">2000 characters max</div>
+      </label>
+      <label for="feedback_email" class="form-block">
+        <div class="form-label">Your email address (optional) - if you'd like us to contact you for more feedback</div>
+        <input name="feedback_email" type="email"/>
+      </label>
+      <div class="actions">
+        <button id="continue" class="button" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

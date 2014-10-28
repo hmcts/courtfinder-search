@@ -341,3 +341,20 @@ $small-width: 800px;
   padding-top: 2em;
   clear: both;
 }
+
+#feedback-form {
+  background-color: #e6e6e6;
+  padding-left: 1em;
+  .form-hint {
+    font-size: 80%;
+  }
+}
+
+#feedback-banner {
+  font-size: 85%;
+  margin: .5em auto;
+  width: auto;
+  max-width: 960px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
