@@ -2,11 +2,14 @@ from django.conf.urls import patterns, url
 from search import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='search-view'),
-    url(r'^type', views.search_type, name='type-view'),
-    url(r'^postcode$', views.search_by_postcode, name='postcode-view'),
-    url(r'^address$', views.search_by_address, name='address-view'),
-    url(r'^results$', views.results_html, name='result-view'),
-    url(r'^results.json$', views.results_json, name='api-result-view'),
-    url(r'^datastatus$', views.data_status, name='data-status-view'),
+    url(r'^$', views.index, name='search'),
+    url(r'^aol$', views.aol, name='aol'),
+    url(r'^spoe$', views.spoe, name='spoe'),
+    url(r'^postcode$', views.postcode, name='postcode'),
+    url(r'^results$', views.results, name='results'),
+
+    url(r'^address$', views.address, name='address'),
+
+    url(r'^results.json$', views.results_json, name='api-results'),
+    url(r'^datastatus$', views.data_status, name='data-status'),
 )

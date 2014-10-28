@@ -72,7 +72,7 @@ def format_court(court):
     return court_obj
 
 
-def court_view(request, slug):
+def court(request, slug):
     return render(request, 'courts/court.jinja', {
         'court': format_court(Court.objects.get(slug=slug)),
         'query': request.GET.get('q',''),
@@ -86,7 +86,7 @@ def list_format_courts(courts):
              'numbers': ', '.join(filter(None,('#'+str(court.number) if court.number else None, 'CCI: '+str(court.cci_code) if court.cci_code else None)))
             } for court in courts]
 
-def list_view(request, first_letter='A'):
+def list(request, first_letter='A'):
     return render(request, 'courts/list.jinja', {
         'letter': first_letter,
         'letters': string.ascii_uppercase,

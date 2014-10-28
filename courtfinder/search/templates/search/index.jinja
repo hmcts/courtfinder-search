@@ -1,6 +1,6 @@
 {% extends "layout/base.jinja" %}
 
-{% block page_title %}Choose the type of search - Court and tribunal finder{% endblock %}
+{% block page_title %}Find the right court or tribunal{% endblock %}
 
 {% block content %}
   <div id="global-breadcrumb" class="header-context">
@@ -10,32 +10,16 @@
   </div>
   <div id="search-index-page" class="content inner cf">
     <header class="page-header">
-      <h1>Find a court or tribunal</h1>
+      <h1>Find the right court of tribunal</h1>
     </header>
-    <div class="group">
-      <h2>Choose the type of search you would like to do</h2>
-      <form method="get" action="{% url 'search:type-view' %}">
-        <fieldset>
-          <label for="name-address-search" class="block-label form-block">
-            <input id="name-address-search" type="radio" name="type" value="address" checked>
-            <div class="form-label-bold">Name or address</div>
-            <div class="form-hint">Find courts or tribunals by entering court name of the venue, building name, or street.</div>
-          </label>
-          <label for="postcode-search" class="block-label form-block">
-            <input id="postcode-search" type="radio" name="type" value="postcode" >
-            <div class="form-label-bold">Nearest to your postcode</div>
-            <div class="form-hint">Find courts and tribunals in your local area. Use for new claims.</div>
-          </label>
-          <label for="list-view" class="block-label form-block">
-            <input id="list-view" type="radio" name="type" value="list">
-            <div class="form-label-bold">A-Z list</div>
-            <div class="form-hint">Browse courts and tribunals by name.</div>
-          </label>
-        </fieldset>
-        <div class="actions">
-          <button id="continue" class="button" type="submit">Continue</button>
-        </div>
-      </form>
-    </div>
+    <p class="group">
+      <p>This service will guide you to the most suitable court or tribunal</p>
+      <a id="start-button" href="{% url 'search:aol' %}" class="button-get-started button">Next</a>
+    </p>
+    <h2>You can also search for a court or tribunal by:</h2>
+    <ul>
+      <li><a href="{% url 'search:address' %}">Name or address</a></li>
+      <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
+    </ul>
   </div>
 {% endblock %}

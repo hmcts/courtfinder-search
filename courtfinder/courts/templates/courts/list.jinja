@@ -13,7 +13,7 @@ Index of all courts and tribunals - GOV.UK
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
   </ol>
 </div>
 
@@ -36,7 +36,7 @@ Index of all courts and tribunals - GOV.UK
   <ul>
     {% for court in courts %}
     <li>
-      <a href="{% url 'courts:court-view' court.slug %}">{{ court.name }}</a>
+      <a href="{% url 'courts:court' court.slug %}">{{ court.name }}</a>
       {% if court.numbers != '' %}({{ court.numbers }}){% endif %}
     </li>
     {% endfor %}
@@ -48,7 +48,7 @@ Index of all courts and tribunals - GOV.UK
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
-      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
+      <a href="{% url 'courts:list' letter %}"><li>{{ letter }}</li></a>
       {% endfor %}
     </ul>
   </nav>

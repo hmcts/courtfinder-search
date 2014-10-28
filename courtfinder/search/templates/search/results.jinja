@@ -7,11 +7,11 @@
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
     {% if query %}
-    <li><a href="{% url 'search:address-view' %}">Search by name or address</a></li>
+    <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
     {% else %}
-    <li><a href="{% url 'search:postcode-view' %}">Search by postcode</a></li>
+    <li><a href="{% url 'search:postcode' %}">Search by postcode</a></li>
     {% endif %}
   </ol>
 </div>
@@ -95,9 +95,9 @@
         </div>
         <p class="clear">
           {% if query %}
-          <a href="{% url 'courts:court-view' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
+          <a href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
           {% else %}
-          <a href="{% url 'courts:court-view' court.slug %}?area_of_law={{ area_of_law }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
+          <a href="{% url 'courts:court' court.slug %}?area_of_law={{ area_of_law }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
           {% endif %}
         </p>
         <hr class="clear"/>
