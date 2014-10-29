@@ -8,6 +8,12 @@ class Rules:
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
                           'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
+
+    by_proximity = ['Bankruptcy', 'Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
+    by_local_authority = ['Adoption', 'Children', 'Divorce', 'Housing possession']
+    by_postcode = ['Money claims']
+    has_spoe = ['Children', 'Divorce', 'Adoption' ,'Money claims']
+
     @classmethod
     def __results_or_back(self, postcode, results):
         if len(results) == 0:
@@ -40,22 +46,8 @@ class Rules:
                     }
         else:
             try:
-                if area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
-                    results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-                    results = CourtSearch.local_authority_search(postcode, area_of_law)
-                    if len(results) == 0:
-                        results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                elif area_of_law in ['Children', 'Adoption', 'Divorce']:
-                    results = CourtSearch.local_authority_search(postcode, area_of_law)
-                    if len(results) == 0:
-                        results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                else:
-                    results = CourtSearch.proximity_search(postcode, area_of_law)
-                return Rules.__results_or_back(postcode, results)
+                c = CourtSearch(postcode, area_of_law)
+                return Rules.__results_or_back(postcode, c.get_courts())
             except CourtSearchInvalidPostcode:
                 return {
                     'action': 'redirect',

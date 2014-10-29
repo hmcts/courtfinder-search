@@ -261,20 +261,6 @@ class SearchTestCase(TestCase):
         Ingest.countries(json.loads(self.countries_json_1))
         Ingest.courts(json.loads(self.courts_json_1))
 
-        def get_from_mapit_mock(url):
-            matches = re.search('([^/]+)$', url)
-            postcode = matches.group(0)
-            if postcode == 'invalid':
-                raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+url)
-            elif len(postcode) < 4:
-                return SearchTestCase.mock_mapit_partial
-            else:
-                return SearchTestCase.mock_mapit_full
-
-        self.patcher =  patch('search.court_search.CourtSearch.get_from_mapit',
-                              Mock(side_effect=get_from_mapit_mock))
-        self.patcher.start()
-
 
     def tearDown(self):
         self.patcher.stop()
@@ -631,6 +617,3 @@ class SearchTestCase(TestCase):
     def test_local_authority_search_bad_aol(self):
         self.assertEquals(CourtSearch.local_authority_search('SE154UH', 'non-existent-aol'), [])
 
-    mock_mapit_partial = '{"wgs84_lat": 51.47263752259685, "coordsyst": "G", "wgs84_lon": -0.06603088421009512, "postcode": "SE15", "easting": 534416, "northing": 176632}'
-
-    mock_mapit_full = '{"wgs84_lat": 51.468945906164286, "coordsyst": "G", "shortcuts": {"WMC": 65913, "ward": 8328, "council": 2491}, "wgs84_lon": -0.06623508303668792, "postcode": "SE15 4UH", "easting": 534412, "areas": {"900000": {"parent_area": null, "generation_high": 19, "all_names": {}, "id": 900000, "codes": {}, "name": "House of Commons", "country": "", "type_name": "UK Parliament", "generation_low": 1, "country_name": "-", "type": "WMP"}, "900001": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 900001, "codes": {}, "name": "European Parliament", "country": "", "type_name": "European Parliament", "generation_low": 1, "country_name": "-", "type": "EUP"}, "900002": {"parent_area": 900006, "generation_high": 22, "all_names": {}, "id": 900002, "codes": {}, "name": "London Assembly", "country": "E", "type_name": "London Assembly area (shared)", "generation_low": 1, "country_name": "England", "type": "LAE"}, "2491": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 2491, "codes": {"ons": "00BE", "gss": "E09000028", "unit_id": "11013"}, "name": "Southwark Borough Council", "country": "E", "type_name": "London borough", "generation_low": 1, "country_name": "England", "type": "LBO"}, "104581": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 104581, "codes": {"ons": "E01004062"}, "name": "Southwark 025B", "country": "E", "type_name": "Lower Layer Super Output Area (Generalised)", "generation_low": 13, "country_name": "England", "type": "OLG"}, "900006": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 900006, "codes": {}, "name": "London Assembly", "country": "E", "type_name": "London Assembly area", "generation_low": 1, "country_name": "England", "type": "LAS"}, "2247": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 2247, "codes": {"unit_id": "41441"}, "name": "Greater London Authority", "country": "E", "type_name": "Greater London Authority", "generation_low": 1, "country_name": "England", "type": "GLA"}, "8328": {"parent_area": 2491, "generation_high": 22, "all_names": {}, "id": 8328, "codes": {"ons": "00BEGY", "gss": "E05000553", "unit_id": "11051"}, "name": "The Lane", "country": "E", "type_name": "London borough ward", "generation_low": 1, "country_name": "England", "type": "LBW"}, "11822": {"parent_area": 2247, "generation_high": 22, "all_names": {}, "id": 11822, "codes": {"gss": "E32000010", "unit_id": "41446"}, "name": "Lambeth and Southwark", "country": "E", "type_name": "London Assembly constituency", "generation_low": 1, "country_name": "England", "type": "LAC"}, "41904": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 41904, "codes": {"ons": "E02000831"}, "name": "Southwark 025", "country": "E", "type_name": "Middle Layer Super Output Area (Generalised)", "generation_low": 13, "country_name": "England", "type": "OMG"}, "34710": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 34710, "codes": {"ons": "E02000831"}, "name": "Southwark 025", "country": "E", "type_name": "Middle Layer Super Output Area (Full)", "generation_low": 13, "country_name": "England", "type": "OMF"}, "65913": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 65913, "codes": {"gss": "E14000615", "unit_id": "25066"}, "name": "Camberwell and Peckham", "country": "E", "type_name": "UK Parliament constituency", "generation_low": 13, "country_name": "England", "type": "WMC"}, "70203": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 70203, "codes": {"ons": "E01004062"}, "name": "Southwark 025B", "country": "E", "type_name": "Lower Layer Super Output Area (Full)", "generation_low": 13, "country_name": "England", "type": "OLF"}, "11806": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 11806, "codes": {"ons": "07", "gss": "E15000007", "unit_id": "41428"}, "name": "London", "country": "E", "type_name": "European region", "generation_low": 1, "country_name": "England", "type": "EUR"}}, "northing": 176221}'

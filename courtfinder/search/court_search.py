@@ -17,32 +17,68 @@ class CourtSearchInvalidPostcode(CourtSearchError):
 
 class CourtSearch:
 
-    @staticmethod
+    def __init__( self, postcode, area_of_law, single_point_of_entry = False ):
+        self.postcode = Postcode(postcode)
+        self.area_of_law = area_of_law
+        self.spoe = single_point_of_entry
+
+
+    def get_courts():
+
+
+
+
+
+        if area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
+            return self.proximity_search(postcode, area_of_law)
+
+        elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
+            return self.local_authority_search(postcode, area_of_law)
+
+            if len(results) == 0:
+                return self.proximity_search(postcode, area_of_law)
+
+
+        elif area_of_law in ['Children', 'Adoption', 'Divorce']:
+            return self.local_authority_search(postcode, area_of_law)
+
+            if len(results) == 0:
+                return self.proximity_search(postcode, area_of_law)
+
+        else:
+            return self.proximity_search(postcode, area_of_law)
+
+
+
     def local_authority_search( postcode, area_of_law ):
-        try:
-            la_name = CourtSearch.postcode_to_local_authority(postcode, area_of_law)
-        except CourtSearchError:
-            return CourtSearch.proximity_search(postcode, area_of_law)
+        la_name = self.postcode.local_authority
+        if la_name is None:
+            return self.proximity_search(postcode, area_of_law)
+
         try:
             la = LocalAuthority.objects.get(name=la_name)
         except LocalAuthority.DoesNotExist:
+            # TODO: log this case
             return []
+
         try:
             aol = AreaOfLaw.objects.get(name=area_of_law)
         except AreaOfLaw.DoesNotExist:
+            # TODO: log this case
             return []
 
         covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=aol, local_authority=la)
 
-        return CourtSearch.order_by_distance([c.court for c in covered], postcode)
+        return self.order_by_distance([c.court for c in covered], postcode)
 
 
-    @staticmethod
     def order_by_distance( courts, postcode ):
         if len(courts) == 0:
             return courts
 
-        lat, lon = CourtSearch.postcode_to_latlon( postcode )
+        lat = self.postcode.latitude
+        lon = self.postcode.longitude
+
         court_ids = "(%s)" % ", ".join([str(c.id) for c in courts])
 
         results = Court.objects.raw("""
@@ -56,7 +92,6 @@ class CourtSearch:
         return [r for r in results]
 
 
-    @staticmethod
     def dedupe(seq):
         """
         remove duplicates from a sequence. Used below for removing dupes in result sets
@@ -71,16 +106,14 @@ class CourtSearch:
             result.append(item)
         return result
 
-    @staticmethod
     def postcode_search(postcode, area_of_law):
         p = postcode.lower().replace(' ', '')
         results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
-        return CourtSearch.dedupe([c.court for c in results])
+        return self.dedupe([c.court for c in results])
 
 
-    @staticmethod
     def proximity_search( postcode, area_of_law ):
-        lat, lon = CourtSearch.postcode_to_latlon( postcode )
+        lat, lon = self.postcode_to_latlon( postcode )
         results = Court.objects.raw("""
             SELECT *,
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
@@ -98,55 +131,6 @@ class CourtSearch:
             return [r for r in results][:10]
 
 
-    @staticmethod
-    def get_from_mapit(mapit_url):
-        r = requests.get(mapit_url)
-        if r.status_code == 200:
-            return r.text
-        elif r.status_code in [400, 404]:
-            raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+mapit_url)
-        else:
-            raise CourtSearchError('Mapit service error: '+str(r.status_code))
-
-    @staticmethod
-    def get_full_postcode(postcode):
-        return CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + postcode)
-
-    @staticmethod
-    def get_partial_postcode(postcode):
-        return CourtSearch.get_from_mapit(settings.MAPIT_BASE_URL + 'partial/' + postcode)
-
-    @staticmethod
-    def postcode_to_latlon(postcode):
-        """Returns a tuple in the (lat, lon) format"""
-        p = postcode.lower().replace(' ', '')
-        if len(postcode) > 4:
-            data = CourtSearch.get_full_postcode(p)
-        else:
-            data = CourtSearch.get_partial_postcode(p)
-        if 'wgs84_lat' in data:
-            json_data = json.loads(data)
-            return (json_data['wgs84_lat'], json_data['wgs84_lon'])
-        else:
-            raise CourtSearchError('Mapit service didn\'t return wgs84 data')
-
-    @staticmethod
-    def postcode_to_local_authority(postcode, area_of_law):
-        p = postcode.lower().replace(' ', '')
-        if len(postcode) <= 4:
-            raise CourtSearchError('Mapit doesn\'t return local authority information for partial postcodes')
-
-        response = CourtSearch.get_full_postcode(p)
-        data = json.loads(response)
-
-        if type(data['shortcuts']['council']) == type({}):
-            council_id = str(data['shortcuts']['council']['county'])
-        else:
-            council_id = str(data['shortcuts']['council'])
-
-        return data['areas'][council_id]['name']
-
-    @staticmethod
     def address_search( query ):
         """
         Retrieve name and address search results, order and remove duplicates
@@ -170,3 +154,62 @@ class CourtSearch:
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
 
         return [result for result in results if result.displayed]
+
+
+
+class Postcode():
+
+    def __init__( self, postcode ):
+        self.postcode = postcode
+
+        self.full_postcode = self.is_full_postcode( postcode )
+        self.partial_postcode = not self.full_postcode
+
+        self.lookup_postcode()
+
+    def lookup_postcode( self ):
+        response = self.mapit( self.postcode )
+
+        if 'wgs84_lat' in response:
+            self.latitude = response['wgs84_lat']
+            self.longitude = response['wgs84_lon']
+        else:
+            raise CourtSearchError('MapIt service didn\'t return wgs84 data')
+
+        if self.full_postcode:
+            if isinstance(response['shortcuts']['council'], dict):
+                council_id = str(response['shortcuts']['council']['county'])
+            else:
+                council_id = str(response['shortcuts']['council'])
+
+            local_authority_name = response['areas'][council_id]['name']
+
+            self.local_authority = local_authority_name
+        else:
+            self.local_authority = None
+
+    def mapit( self, postcode ):
+        if self.full_postcode:
+            mapit_url = settings.MAPIT_BASE_URL + postcode
+        else:
+            mapit_url = settings.MAPIT_BASE_URL + 'partial/' + postcode
+
+        r = self._debug = requests.get(mapit_url)
+        if r.status_code == 200:
+            try:
+                return json.loads(r.text)
+            except:
+                raise CourtSearchError('MapIt: cannot parse response JSON')
+        elif r.status_code in [400, 404]:
+            raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
+        else:
+            raise CourtSearchError('MapIt service error: ' + str(r.status_code))
+
+
+    def is_full_postcode( self, postcode ):
+        # Regex from: https://gist.github.com/simonwhitaker/5748515
+        return bool(re.match(r'[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}', postcode))
+
+    def __unicode__( self ):
+        return self.postcode
+
