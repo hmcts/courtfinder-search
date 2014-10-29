@@ -1,5 +1,6 @@
 {% extends 'moj_template/base.html' %}
 {% load staticfiles %}
+
 {% block stylesheets %}
 <!--[if gt IE 8]><!--><link href="{% static 'stylesheets/main.css' %}" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
@@ -7,6 +8,14 @@
 <!--[if IE 7]><link href="{% static "stylesheets/main-ie7.css" %}" media="all" rel="stylesheet" /><![endif]-->
 <!--[if IE 8]><link href="{% static "stylesheets/main-ie8.css" %}" media="all" rel="stylesheet" /><![endif]-->
 {% endblock %}
+
+{% block before_content %}
+<div id="feedback-banner">
+  This is a new service - <a href="{% url 'staticpages:feedback' %}">your feedback</a> will help us to improve it.
+  <hr/>
+</div>
+{% endblock %}
+
 {% block content %}
   {% block body %}{% endblock %}
 {% block footer_support_links %}

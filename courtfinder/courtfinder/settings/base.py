@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
+from os import environ
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -119,3 +120,13 @@ STATICFILES_DIRS = (
 
 # Postcode lookup
 MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'
+
+# Email for feedback
+FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
+FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
+
+EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
+EMAIL_PORT = os.environ.get('SMTP_PORT', None)
+EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
+EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
+EMAIL_USE_TLS = False

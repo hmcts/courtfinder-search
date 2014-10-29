@@ -1,0 +1,17 @@
+{% extends "layout/base.jinja" %}
+
+{% block page_title %}Feedback sent{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+  </ol>
+</div>
+<div class="content inner cf">
+  <header class="page-header">
+    <h1>Thank you for your feedback</h1>
+  </header>
+</div>
+{% endblock %}
