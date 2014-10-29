@@ -548,7 +548,7 @@ class SearchTestCase(TestCase):
         aol = AreaOfLaw.objects.create(name="Divorce")
         self.assertEqual(str(aol), "Divorce")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
-        self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce")
+        self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
         country = Country.objects.create(name="Wales")
         self.assertEqual(str(country), "Wales")
         county = County.objects.create(name="Shire", country=country)

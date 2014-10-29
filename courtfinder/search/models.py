@@ -90,7 +90,9 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
     local_authority = models.ForeignKey(LocalAuthority)
 
     def __unicode__(self):
-        return "%s covers %s for %s" % (self.court.name, self.local_authority.name, self.area_of_law.name)
+        return "%s covers %s for %s" % (self.court.name,
+                                        self.local_authority.name,
+                                        self.area_of_law.name)
 
 class CourtFacility(models.Model):
     court = models.ForeignKey(Court)
@@ -109,6 +111,7 @@ class CourtOpeningTime(models.Model):
 class CourtAreaOfLaw(models.Model):
     court = models.ForeignKey(Court)
     area_of_law = models.ForeignKey(AreaOfLaw)
+    single_point_of_entry = models.BooleanField(default=False)
 
     def local_authorities_covered(self):
         return CourtLocalAuthorityAreaOfLaw.objects.filter(
@@ -117,7 +120,9 @@ class CourtAreaOfLaw(models.Model):
         )
 
     def __unicode__(self):
-        return "%s deals with %s" % (self.court.name, self.area_of_law.name)
+        return "%s deals with %s (spoe: %s)" % (self.court.name,
+                                                self.area_of_law.name,
+                                                self.single_point_of_entry)
 
 
 class Town(models.Model):

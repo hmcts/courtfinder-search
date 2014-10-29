@@ -65,10 +65,12 @@ class Ingest:
             for aol_obj in court_obj['areas_of_law']:
                 aol_name = aol_obj['name']
                 aol_councils = aol_obj['councils']
-
+                aol_spoe = aol_obj.get('single_point_of_entry',False)
                 aol, created = AreaOfLaw.objects.get_or_create(name=aol_name)
 
-                CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
+                CourtAreaOfLaw.objects.create(court=court,
+                                              area_of_law=aol,
+                                              single_point_of_entry=aol_spoe)
 
                 for council_name in aol_councils:
                     council, created = LocalAuthority.objects.get_or_create(name=council_name)
