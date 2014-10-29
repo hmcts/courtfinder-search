@@ -1,5 +1,6 @@
 Django==1.7
 MarkupSafe==0.23
+newrelic==2.34.0.29
 django-moj-template==0.18.0
 psycopg2==2.5.3
 requests==2.3.0
