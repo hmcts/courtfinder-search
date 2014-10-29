@@ -35,8 +35,8 @@ Sender: %s
 Message: %s""" % (form.cleaned_data['feedback_email'],
                   form.cleaned_data['feedback_text'])
 
-
-            send_mail('Feedback for courtfinder', message, from_address,
-                      to_addresses, fail_silently=False)
+            nb_emails_sent = send_mail('Feedback for courtfinder',
+                                       message, from_address,
+                                       to_addresses, fail_silently=False)
 
     return render(request, 'staticpages/feedback_sent.jinja')

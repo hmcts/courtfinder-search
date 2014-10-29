@@ -126,6 +126,7 @@ FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courtt
 FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
 
 EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
-EMAIL_PORT = 25
+EMAIL_PORT = os.environ.get('SMTP_PORT', None)
 EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
+EMAIL_USE_TLS = False
