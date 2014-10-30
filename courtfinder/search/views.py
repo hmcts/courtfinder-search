@@ -77,7 +77,7 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
-            results = CourtSearch.address_search(query)
+            results = CourtSearch(query=query).get_courts()
             if len(results) > 0:
                 return render(request, 'search/results.jinja', {
                     'query': query,
@@ -99,7 +99,7 @@ def results(request):
                 rules = Rules.for_view(postcode, aol)
 
                 view_obj = {
-                    'aol': aol, 'spoe': spoe, 'postcode': postcode, 'search_results': courts
+                    'aol': aol, 'spoe': spoe, 'postcode': postcode, 'search_results': __format_results(courts)
                 }
 
                 if rules:
@@ -200,74 +200,8 @@ def __format_results(results):
         if dx_contacts.count() > 0:
             court['dx_number'] = dx_contacts.first().contact.number
 
-        if hasattr(result, 'distance'):
+        if hasattr(result, 'distance') and result.distance:
             court['distance'] = round(result.distance, 2)
 
         courts.append(court)
     return courts
-
-
-################################################################################
-# old stuff
-
-#def search_by_postcode(request):
-#    postcode_requested = request.GET.get('postcode', None)
-#    area_of_law_requested = request.GET.get('area_of_law', None)
-#    areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
-#    error = request.GET.get('error', False)
-#    for aol in areas_of_law:
-#        aol.description = areas_of_law_description[aol.name]
-#
-#    return render(request, 'search/postcode.jinja', {
-#      'areas_of_law': areas_of_law,
-#      'area_of_law': area_of_law_requested,
-#      'postcode': postcode_requested,
-#      'error': error,
-#    })
-#
-
-
-
-
-#def results(request):
-#    if 'q' in request.GET:
-#        query = re.sub(r'\s+',' ',request.GET.get('q','').strip())
-#
-#        if query == "":
-#            return redirect(reverse('search:address')+'?error=noquery')
-#
-#        results = CourtSearch.address_search(query)
-#        if len(results) > 0:
-#            return render(request, 'search/results.jinja', {
-#                'query': query,
-#                'search_results': __format_results(results)
-#            })
-#        else:
-#            return redirect(reverse('search:address')+'?error=noresults&q='+query)
-#
-#    elif 'postcode' in request.GET:
-#        postcode = re.sub(r'\s+', '', request.GET.get('postcode', ''))
-#        area_of_law = request.GET.get('area_of_law','All').strip()
-#
-#        # error handling
-#        if postcode == '' or area_of_law == '':
-#            return redirect(reverse('search:postcode')+'?postcode='+postcode+'&area_of_law='+area_of_law)
-#
-#        directive = Rules.for_postcode(postcode, area_of_law)
-#
-#        if directive['action'] == 'redirect':
-#            return redirect(reverse(directive['target'])+directive.get('params',''))
-#        elif directive['action'] == 'render':
-#            results = directive.get('results',None)
-#            return render(request, 'search/results.jinja', {
-#                    'postcode': postcode,
-#                    'area_of_law': area_of_law,
-#                    'in_scotland': directive.get('in_scotland',False),
-#                    'areas_of_law': AreaOfLaw.objects.all(),
-#                    'error': directive.get('error', None),
-#                    'search_results': __format_results(results) if results else None
-#                    })
-#        else:
-#            return redirect('/search/')
-#    else:
-#        return redirect('/search/')

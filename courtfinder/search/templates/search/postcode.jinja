@@ -9,7 +9,9 @@
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
     <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    {% if spoe %}
     <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+    {% endif %}
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">

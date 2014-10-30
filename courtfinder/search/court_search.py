@@ -18,51 +18,55 @@ class CourtSearchInvalidPostcode(CourtSearchError):
 
 class CourtSearch:
 
-    def __init__( self, postcode, area_of_law, single_point_of_entry = False ):
-        self.postcode = Postcode(postcode)
-        try:
-            if area_of_law.lower() != 'all':
-                self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
-            else:
-                self.area_of_law = area_of_law
-        except AreaOfLaw.DoesNotExist:
-            # TODO: log this case
-            raise AreaOfLaw.DoesNotExist
+    def __init__( self, postcode=None, area_of_law=None, single_point_of_entry=False, query=None ):
+        if query is not None:
+            self.query = query
+        else:
+            self.postcode = Postcode(postcode)
+            try:
+                if area_of_law.lower() != 'all':
+                    self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
+                else:
+                    self.area_of_law = area_of_law
+            except AreaOfLaw.DoesNotExist:
+                # TODO: log this case
+                raise AreaOfLaw.DoesNotExist
 
-        self.spoe = single_point_of_entry
-
+            self.spoe = single_point_of_entry
 
     def get_courts( self ):
-        rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name)
+        if self.query is not None:
+            return self.__address_search(self.query)
+        else:
+            rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name)
 
-        if rule_results is not None:
-            return rule_results
+            if rule_results is not None:
+                return rule_results
 
-        if self.spoe == True and self.area_of_law.name in Rules.has_spoe:
-            spoes_for_aol = CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True)
-            spoe_courts = [value['court'] for value in spoes_for_aol.values('court')]
-            results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
+            if self.spoe == 'start' and self.area_of_law.name in Rules.has_spoe:
+                spoes_for_aol = CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True)
+                spoe_courts = [value['court'] for value in spoes_for_aol.values('court')]
+                results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
+
+                if len(results) > 0:
+                    return self.__order_by_distance(results)
+
+
+            results = []
+
+
+            if self.area_of_law in Rules.by_local_authority:
+                results = self.__local_authority_search()
+            elif self.area_of_law in Rules.by_postcode:
+                results = self.__postcode_search()
 
             if len(results) > 0:
-                return self.order_by_distance(results)
+                return results
+
+            return self.__proximity_search()
 
 
-        results = []
-
-
-        if self.area_of_law in Rules.by_local_authority:
-            results = self.local_authority_search()
-        elif self.area_of_law in Rules.by_postcode:
-            results = self.postcode_search()
-
-        if len(results) > 0:
-            return results
-
-        return self.proximity_search()
-
-
-
-    def local_authority_search( self ):
+    def __local_authority_search( self ):
         if self.postcode.local_authority is None or self.area_of_law is None:
             return []
 
@@ -71,7 +75,7 @@ class CourtSearch:
         return [c.court for c in covered]
 
 
-    def order_by_distance( self, courts ):
+    def __order_by_distance( self, courts ):
         if len(courts) == 0:
             return courts
 
@@ -91,7 +95,7 @@ class CourtSearch:
         return [r for r in results]
 
 
-    def dedupe(self, seq):
+    def __dedupe(self, seq):
         """
         remove duplicates from a sequence. Used below for removing dupes in result sets
         From: http://www.peterbe.com/plog/uniqifiers-benchmark
@@ -105,13 +109,13 @@ class CourtSearch:
             result.append(item)
         return result
 
-    def postcode_search( self ):
+    def __postcode_search( self ):
         p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
-        return self.dedupe([c.court for c in results])
+        return self.__dedupe([c.court for c in results])
 
 
-    def proximity_search( self ):
+    def __proximity_search( self ):
         lat = self.postcode.latitude
         lon = self.postcode.longitude
 
@@ -129,7 +133,7 @@ class CourtSearch:
             return [r for r in results][:10]
 
 
-    def address_search( query ):
+    def __address_search( self, query ):
         """
         Retrieve name and address search results, order and remove duplicates
         """
@@ -216,4 +220,3 @@ class Postcode():
 
     def __unicode__( self ):
         return self.postcode
-

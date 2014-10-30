@@ -12,7 +12,9 @@
     <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
     {% else %}
     <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    {% if spoe %}
     <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+    {% endif %}
     <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
     {% endif %}
   </ol>
@@ -29,7 +31,9 @@
       <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
     </p>
     {% else %}
-      {% if search_results|length == 1 %}
+      {% if spoe == 'start' %}
+    <p>This is the court that deals with your problem.</p>
+      {% elif search_results|length == 1 %}
     <p>This is the court or tribunal nearest {{ postcode }}.</p>
       {% else %}
     <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
