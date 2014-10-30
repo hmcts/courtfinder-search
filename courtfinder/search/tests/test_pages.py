@@ -14,7 +14,7 @@ class SearchPageTestCase(TestCase):
         response = c.get('/search/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
-        self.assertIn('Find the right court of tribunal', response.content)
+        self.assertIn('Find the right court or tribunal', response.content)
 
     def test_aol_page(self):
         c = Client()
