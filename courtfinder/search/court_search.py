@@ -4,7 +4,8 @@ import requests
 from itertools import chain
 from collections import OrderedDict
 from django.conf import settings
-from search.models import Court, AreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
+from search.models import Court, AreaOfLaw, CourtAreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
+from search.rules import Rules
 
 class CourtSearchError(Exception):
     def __init__(self, value):
@@ -19,48 +20,58 @@ class CourtSearch:
 
     def __init__( self, postcode, area_of_law, single_point_of_entry = False ):
         self.postcode = Postcode(postcode)
-        self.area_of_law = area_of_law
+        try:
+            if area_of_law.lower() != 'all':
+                self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
+            else:
+                self.area_of_law = area_of_law
+        except AreaOfLaw.DoesNotExist:
+            # TODO: log this case
+            raise AreaOfLaw.DoesNotExist
+
         self.spoe = single_point_of_entry
 
 
-    def get_courts():
+    def get_courts( self ):
+        rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name, self.spoe)
+
+        if rule_results is not None:
+            return rule_results
+
+        if self.spoe == True and self.area_of_law.name in Rules.has_spoe:
+            spoes_for_aol = CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True)
+            spoe_courts = [value['court'] for value in spoes_for_aol.values('court')]
+            results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
+
+            if len(results) > 0:
+                return self.order_by_distance(results)
+
+
         results = []
 
+
         if self.area_of_law in Rules.by_local_authority:
-            results = self.local_authority_search(postcode, area_of_law)
+            results = self.local_authority_search()
         elif self.area_of_law in Rules.by_postcode:
-            results = self.postcode_search(postcode, area_of_law)
+            results = self.postcode_search()
 
         if len(results) > 0:
             return results
 
-        return self.proximity_search(postcode, area_of_law)
+        return self.proximity_search()
 
 
 
-    def local_authority_search( postcode, area_of_law ):
-        la_name = self.postcode.local_authority
-        if la_name is None:
-            return self.proximity_search(postcode, area_of_law)
-
-        try:
-            la = LocalAuthority.objects.get(name=la_name)
-        except LocalAuthority.DoesNotExist:
-            # TODO: log this case
+    def local_authority_search( self ):
+        if self.postcode.local_authority is None or self.area_of_law is None:
             return []
 
-        try:
-            aol = AreaOfLaw.objects.get(name=area_of_law)
-        except AreaOfLaw.DoesNotExist:
-            # TODO: log this case
-            return []
+        covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)
 
-        covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=aol, local_authority=la)
-
-        return self.order_by_distance([c.court for c in covered], postcode)
+        return [c.court for c in covered]
 
 
-    def order_by_distance( courts, postcode ):
+    def order_by_distance( self, courts ):
         if len(courts) == 0:
             return courts
 
@@ -80,7 +91,7 @@ class CourtSearch:
         return [r for r in results]
 
 
-    def dedupe(seq):
+    def dedupe(self, seq):
         """
         remove duplicates from a sequence. Used below for removing dupes in result sets
         From: http://www.peterbe.com/plog/uniqifiers-benchmark
@@ -94,14 +105,16 @@ class CourtSearch:
             result.append(item)
         return result
 
-    def postcode_search(postcode, area_of_law):
-        p = postcode.lower().replace(' ', '')
+    def postcode_search( self ):
+        p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
         return self.dedupe([c.court for c in results])
 
 
-    def proximity_search( postcode, area_of_law ):
-        lat, lon = self.postcode_to_latlon( postcode )
+    def proximity_search( self ):
+        lat = self.postcode.latitude
+        lon = self.postcode.longitude
+
         results = Court.objects.raw("""
             SELECT *,
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
@@ -109,12 +122,9 @@ class CourtSearch:
               WHERE c.displayed
              ORDER BY distance
         """, [lon, lat])
-        if area_of_law.lower() != 'all':
-            try:
-                aol = AreaOfLaw.objects.get(name=area_of_law)
-            except AreaOfLaw.DoesNotExist:
-                return []
-            return [r for r in results if aol in r.areas_of_law.all()][:10]
+
+        if isinstance(self.area_of_law, AreaOfLaw):
+            return [r for r in results if self.area_of_law in r.areas_of_law.all()][:10]
         else:
             return [r for r in results][:10]
 
@@ -172,7 +182,13 @@ class Postcode():
 
             local_authority_name = response['areas'][council_id]['name']
 
-            self.local_authority = local_authority_name
+            try:
+                LocalAuthority.objects.get(name=local_authority_name)
+                self.local_authority = local_authority_name
+            except LocalAuthority.DoesNotExist:
+                # TODO: log it
+                self.local_authority = None
+
         else:
             self.local_authority = None
 

@@ -87,6 +87,9 @@ def results(request):
             if postcode == '':
                 return redirect(reverse('search:postcode')+'?error=nopostcode&aol='+aol+'&spoe'+spoe)
             else:
+                courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
+                rules = Rules.for_view(postcode, area_of_law, spoe)
+
 #            courts = new CourtSearch(aol, spoe, postcode)
 #            return render(request, 'search/results.jinja', { 'courts': courts.get() })
                 return render(request, 'search/results.jinja', {
