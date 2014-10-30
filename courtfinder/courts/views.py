@@ -64,6 +64,7 @@ def format_court(court):
                   'contacts': collapse(contacts, 'name', 'numbers'),
                   'directions': court.directions if court.directions else None,
                   'alert': court.alert if court.alert else None,
+                  'parking': court.parking if court.parking else None,
               }
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:

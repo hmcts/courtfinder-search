@@ -38,6 +38,7 @@ class Ingest:
         CourtFacility.objects.all().delete()
         OpeningTime.objects.all().delete()
         CourtOpeningTime.objects.all().delete()
+        ParkingInfo.objects.all().delete()
 
         for court_obj in courts:
 
@@ -45,6 +46,13 @@ class Ingest:
             created_at = parser.parse(court_created_at+'UTC') if court_created_at else None
             court_updated_at = court_obj.get('updated_at', None)
             updated_at = parser.parse(court_updated_at+'UTC') if court_updated_at else None
+            parking = court_obj.get('parking', None)
+            if parking:
+                parking_info = ParkingInfo.objects.create(onsite=parking.get('onsite', None),
+                                                          offsite=parking.get('offsite', None))
+            else:
+                parking_info = None
+
             court = Court(
                 admin_id=court_obj['admin_id'],
                 cci_code=court_obj.get('cci_code', None),
@@ -59,6 +67,7 @@ class Ingest:
                 image_file=court_obj.get('image_file', None),
                 created_at=created_at,
                 updated_at=updated_at,
+                parking=parking_info if parking_info else None,
             )
             court.save()
 
