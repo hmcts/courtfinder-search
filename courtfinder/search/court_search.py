@@ -24,29 +24,17 @@ class CourtSearch:
 
 
     def get_courts():
+        results = []
 
+        if self.area_of_law in Rules.by_local_authority:
+            results = self.local_authority_search(postcode, area_of_law)
+        elif self.area_of_law in Rules.by_postcode:
+            results = self.postcode_search(postcode, area_of_law)
 
+        if len(results) > 0:
+            return results
 
-
-
-        if area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
-            return self.proximity_search(postcode, area_of_law)
-
-        elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-            return self.local_authority_search(postcode, area_of_law)
-
-            if len(results) == 0:
-                return self.proximity_search(postcode, area_of_law)
-
-
-        elif area_of_law in ['Children', 'Adoption', 'Divorce']:
-            return self.local_authority_search(postcode, area_of_law)
-
-            if len(results) == 0:
-                return self.proximity_search(postcode, area_of_law)
-
-        else:
-            return self.proximity_search(postcode, area_of_law)
+        return self.proximity_search(postcode, area_of_law)
 
 
 

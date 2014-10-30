@@ -8,11 +8,10 @@ class Rules:
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
                           'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
-
-    by_proximity = ['Bankruptcy', 'Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
-    by_local_authority = ['Adoption', 'Children', 'Divorce', 'Housing possession']
-    by_postcode = ['Money claims']
-    has_spoe = ['Children', 'Divorce', 'Adoption' ,'Money claims']
+    by_proximity = ['Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
+    by_local_authority = ['Adoption', 'Children', 'Divorce']
+    by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
+    has_spoe_or_bulk_centre = ['Children', 'Divorce', 'Money claims']
 
     @classmethod
     def __results_or_back(self, postcode, results):
