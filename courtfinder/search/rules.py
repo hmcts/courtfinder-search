@@ -14,7 +14,7 @@ class Rules:
 
 
     @staticmethod
-    def for_view(postcode, area_of_law, spoe):
+    def for_view(postcode, area_of_law):
         if Rules.postcode_in_scotland(postcode):
             return {
                 'action': 'render',
@@ -37,7 +37,7 @@ class Rules:
 
 
     @staticmethod
-    def for_search(postcode, area_of_law, spoe):
+    def for_search(postcode, area_of_law):
         if Rules.postcode_in_NI(postcode):
             if area_of_law == 'Immigration':
                 return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')

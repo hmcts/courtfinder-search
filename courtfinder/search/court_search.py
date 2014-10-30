@@ -33,7 +33,7 @@ class CourtSearch:
 
 
     def get_courts( self ):
-        rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name, self.spoe)
+        rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name)
 
         if rule_results is not None:
             return rule_results
