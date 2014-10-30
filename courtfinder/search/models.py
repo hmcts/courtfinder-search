@@ -9,6 +9,7 @@ class Court(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True)
+    parking = models.ForeignKey('ParkingInfo', null=True, default=None)
     alert = models.CharField(max_length=4096, null=True, default=None)
     directions = models.CharField(max_length=4096, null=True, default=None)
     image_file = models.CharField(max_length=255, null=True, default=None)
@@ -219,3 +220,11 @@ class DataStatus(models.Model):
 
     def __unicode__(self):
         return "Current data hash: %s, last update: %s" % (self.data_hash, self.last_ingestion_date)
+
+
+class ParkingInfo(models.Model):
+    onsite = models.CharField(max_length=1024, null=True, default=None)
+    offsite = models.CharField(max_length=1024, null=True, default=None)
+
+    def __unicode__(self):
+        return "Parking onsite: %s, Parking offsite: %s" % (onsite, offsite)
