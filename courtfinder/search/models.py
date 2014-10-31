@@ -227,4 +227,4 @@ class ParkingInfo(models.Model):
     offsite = models.CharField(max_length=1024, null=True, default=None)
 
     def __unicode__(self):
-        return "Parking onsite: %s, Parking offsite: %s" % (onsite, offsite)
+        return "Parking onsite: %s, Parking offsite: %s" % (self.onsite, self.offsite)
