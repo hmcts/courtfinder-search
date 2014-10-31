@@ -43,7 +43,11 @@ class PostcodeTestCase(TestCase):
     broken_postcode = 'SE15 4'
 
     def setUp(self):
-        mock.patch('requests.get', mock.Mock(side_effect=self._get_from_mapit_mock)).start()
+        self.patcher = mock.patch('requests.get', mock.Mock(side_effect=self._get_from_mapit_mock))
+        self.patcher.start()
+
+    def tearDown(self):
+        self.patcher.stop()
 
     def _get_from_mapit_mock( self, url ):
         mock_response = MockResponse()
