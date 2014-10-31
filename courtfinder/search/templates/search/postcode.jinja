@@ -25,6 +25,12 @@
       <p>You did not enter a postcode. Please try again.</p>
     </section>
   </div>
+  {% elif error == 'ni' %}
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>Aside from immigration tribunals, this tool does not return results for Northern Ireland.</p>
+    </section>
+  </div>
   {% endif %}
   <form method="get" action="results">
     <input type="hidden" name="aol" value="{{ aol }}"/>

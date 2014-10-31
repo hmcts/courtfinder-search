@@ -138,6 +138,10 @@ class SearchTestCase(TestCase):
                 "name": "Crime"
             },
             {
+                "councils": [],
+                "name": "Immigration"
+            },
+            {
                 "councils": [ "Southwark Borough Council" ],
                 "name": "Divorce"
             }
@@ -507,10 +511,15 @@ class SearchTestCase(TestCase):
 #        self.assertEqual(response.status_code, 200)
 #        self.assertIn("Glasgow Tribunal Hearing Centre", response.content)
 
-#    def test_ni(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
-#        self.assertIn("this tool does not return results for Northern Ireland", response.content)
+    def test_ni(self):
+        c = Client()
+        response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
+        self.assertIn("this tool does not return results for Northern Ireland", response.content)
+
+    def test_ni_immigration(self):
+        c = Client()
+        response = c.get('/search/results?postcode=bt2&aol=Immigration', follow=True)
+        self.assertNotIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
         court = Court.objects.get(name="Accrington Magistrates' Court")
