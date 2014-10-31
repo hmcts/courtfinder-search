@@ -642,8 +642,8 @@ class SearchTestCase(TestCase):
         data_status = DataStatus.objects.create(data_hash="wer38hr3hr37hr")
         self.assertEqual(str(data_status), "Current data hash: %s, last update: %s" %
                          (data_status.data_hash, data_status.last_ingestion_date))
-        parking_info = ParkingInfo.objects.create(onsite="foo", offsite="bar")
-        self.assertEqual(str(parking_info), "Parking onsite: foo, Parking offsite: bar")
+        parking_info = ParkingInfo.objects.create(onsite="foo", offsite="bar", blue_badge="baz")
+        self.assertEqual(str(parking_info), "Parking onsite: foo, Parking offsite: bar, Parking blue-badge: baz")
 
 #    def test_broken_mapit(self):
 #        # we need to stop the patched mapit method to run the original version, but with a borken URL

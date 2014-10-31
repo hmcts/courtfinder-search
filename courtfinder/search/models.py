@@ -225,6 +225,9 @@ class DataStatus(models.Model):
 class ParkingInfo(models.Model):
     onsite = models.CharField(max_length=1024, null=True, default=None)
     offsite = models.CharField(max_length=1024, null=True, default=None)
+    blue_badge = models.CharField(max_length=1024, null=True, default=None)
 
     def __unicode__(self):
-        return "Parking onsite: %s, Parking offsite: %s" % (self.onsite, self.offsite)
+        return "Parking onsite: %s, Parking offsite: %s, Parking blue-badge: %s" % (self.onsite,
+                                                                                    self.offsite,
+                                                                                    self.blue_badge)

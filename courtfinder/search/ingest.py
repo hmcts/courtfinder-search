@@ -49,7 +49,8 @@ class Ingest:
             parking = court_obj.get('parking', None)
             if parking:
                 parking_info = ParkingInfo.objects.create(onsite=parking.get('onsite', None),
-                                                          offsite=parking.get('offsite', None))
+                                                          offsite=parking.get('offsite', None),
+                                                          blue_badge=parking.get('blue_badge', None))
             else:
                 parking_info = None
 
