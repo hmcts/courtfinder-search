@@ -35,7 +35,7 @@ class CourtSearch:
             self.spoe = single_point_of_entry
 
     def get_courts( self ):
-        if self.query is not None:
+        if hasattr(self, 'query'):
             return self.__address_search(self.query)
         else:
             rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name)
