@@ -1,11 +1,24 @@
-import re
-import json
-import requests
-from itertools import chain
 from collections import OrderedDict
+from itertools import chain
+import json
+import logging
+import re
+
+import requests
+
 from django.conf import settings
+
 from search.models import Court, AreaOfLaw, CourtAreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
 from search.rules import Rules
+
+
+loggers = {
+    'error': logging.getLogger('search.error'),
+    'mapit': logging.getLogger('search.mapit'),
+    'la': logging.getLogger('search.la'),
+    'aol': logging.getLogger('search.aol'),
+    'method': logging.getLogger('search.method'),
+}
 
 class CourtSearchError(Exception):
     def __init__(self, value):
@@ -36,12 +49,14 @@ class CourtSearch:
                 else:
                     self.area_of_law = AreaOfLaw(name=area_of_law)
             except AreaOfLaw.DoesNotExist:
-                # TODO: log this case
+                loggers['aol'].error(area_of_law)
                 raise CourtSearchClientError('bad area of law')
 
             self.single_point_of_entry = single_point_of_entry
         else:
             raise CourtSearchClientError('bad request')
+
+
 
     def get_courts( self ):
         if hasattr(self, 'query'):
@@ -201,7 +216,7 @@ class Postcode():
                 LocalAuthority.objects.get(name=local_authority_name)
                 self.local_authority = local_authority_name
             except LocalAuthority.DoesNotExist:
-                # TODO: log it
+                loggers['la'].error(local_authority_name)
                 self.local_authority = None
 
         else:
@@ -220,8 +235,13 @@ class Postcode():
             except:
                 raise CourtSearchError('MapIt: cannot parse response JSON')
         elif r.status_code in [400, 404]:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
+        elif r.status_code == 403:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
+            raise CourtSearchError('MapIt rate limit exceeded: ' + str(r.status_code))
         else:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
 
 
