@@ -145,6 +145,9 @@
         {% if court.parking.offsite %}
           <li>{{ court.parking.offsite }}</li>
         {% endif %}
+        {% if court.parking.blue_badge %}
+          <li>{{ court.parking.blue_badge }}</li>
+        {% endif %}
         </ul>
       </div>
       {% endif %}
