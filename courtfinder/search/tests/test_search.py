@@ -259,6 +259,24 @@ class SearchTestCase(TestCase):
         ],
         "image_file": "tameside_magistrates_court.jpg",
         "display": true
+    },
+    {
+        "name": "County Court Money Claims Centre (CCMCC)",
+        "slug": "county-court-money-claims-centre-ccmcc",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "3456543",
+        "display": true,
+        "court_number": "123456",
+        "areas_of_law": [ { "councils": [], "name": "Money claims" } ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": []
     }
 ]"""
 
@@ -515,6 +533,11 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
+
+    def test_money_claims(self):
+        c = Client()
+        response = c.get('/search/results?postcode=sw1h9aj&aol=Money+claims')
+        self.assertIn("CCMCC", response.content)
 
     def test_ni_immigration(self):
         c = Client()
