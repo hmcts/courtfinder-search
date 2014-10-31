@@ -140,11 +140,11 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             },
             {
-                "councils": [ "Southwark Borough Council" ],
+                "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Divorce"
             }
         ],
@@ -255,7 +255,7 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             }
         ],

@@ -134,15 +134,15 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             },
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Immigration"
             },
             {
-                "councils": [ "Southwark Borough Council" ],
+                "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Divorce"
             }
         ],
@@ -253,7 +253,7 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             }
         ],
@@ -268,7 +268,7 @@ class SearchTestCase(TestCase):
         "admin_id": "3456543",
         "display": true,
         "court_number": "123456",
-        "areas_of_law": [ { "councils": [], "name": "Money claims" } ],
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
         "addresses": [],
