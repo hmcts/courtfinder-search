@@ -27,7 +27,7 @@ class CourtSearch:
                 if area_of_law.lower() != 'all':
                     self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
                 else:
-                    self.area_of_law = AreaOfLaw.objects.create(name=area_of_law)
+                    self.area_of_law = AreaOfLaw(name=area_of_law)
             except AreaOfLaw.DoesNotExist:
                 # TODO: log this case
                 raise AreaOfLaw.DoesNotExist
