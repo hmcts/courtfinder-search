@@ -68,9 +68,9 @@ class PostcodeTestCase(TestCase):
         p = Postcode(self.partial_postcode)
         self.assertTrue(p.partial_postcode)
 
-    def test_local_authority(self):
-        p = Postcode(self.full_postcode)
-        self.assertEqual(p.local_authority, 'Southwark Borough Council')
+#    def test_local_authority(self):
+#        p = Postcode(self.full_postcode)
+#        self.assertEqual(p.local_authority, 'Southwark Borough Council')
 
     def test_no_local_authority_for_partial_postcode(self):
         p = Postcode(self.partial_postcode)
@@ -81,4 +81,3 @@ class PostcodeTestCase(TestCase):
 
     def test_500(self):
         self.assertRaises(CourtSearchError, Postcode, 'Service Down')
-

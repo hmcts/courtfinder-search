@@ -285,6 +285,11 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/A')
         self.assertIn("Names starting with A", response.content)
 
+    def test_court_list_x_no_courts(self):
+        c = Client()
+        response = c.get('/courts/X')
+        self.assertIn("There are no courts or tribunals starting with X", response.content)
+
     def test_court_list_index(self):
         c = Client()
         response = c.get('/courts/')
