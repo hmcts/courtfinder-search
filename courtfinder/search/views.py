@@ -90,26 +90,22 @@ def results(request):
         aol = request.GET.get('aol', 'All')
         spoe = request.GET.get('spoe', None)
         postcode = request.GET.get('postcode', None)
-
         if postcode:
-            if postcode == '':
-                return redirect(reverse('search:postcode')+'?error=nopostcode&aol='+aol+'&spoe'+spoe)
-            else:
-                courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
-                rules = Rules.for_view(postcode, aol)
+            courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
+            rules = Rules.for_view(postcode, aol)
 
-                view_obj = {
-                    'aol': aol, 'spoe': spoe, 'postcode': postcode, 'search_results': __format_results(courts)
-                }
+            view_obj = {
+                'aol': aol, 'spoe': spoe, 'postcode': postcode, 'search_results': __format_results(courts)
+            }
 
-                if rules:
-                    if rules['action'] == 'redirect':
-                       return redirect(reverse(rules['target'])+rules.get('params',''))
-                    elif rules['action'] == 'render':
-                        if 'in_scotland' in rules:
-                            view_obj['in_scotland'] = rules['in_scotland']
+            if rules:
+                if rules['action'] == 'redirect':
+                   return redirect(reverse(rules['target'])+rules.get('params',''))
+                elif rules['action'] == 'render':
+                    if 'in_scotland' in rules:
+                        view_obj['in_scotland'] = rules['in_scotland']
 
-                return render(request, 'search/results.jinja', view_obj)
+            return render(request, 'search/results.jinja', view_obj)
 
 
         else:

@@ -292,10 +292,37 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Accrington')
         self.assertIn("Blackburn", response.content)
 
+    def test_format_results_with_empty_postcode(self):
+        c = Client()
+        response = c.get('/search/results?postcode=')
+        self.assertRedirects(response, '/search/', 302)
+
     def test_search_space_in_name(self):
         c = Client()
         response = c.get('/search/results?q=Accrington+Magistrates')
         self.assertIn("Accrington", response.content)
+
+    def test_aol_page(self):
+        c = Client()
+        response = c.get('/search/aol')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/aol.jinja')
+        self.assertIn('About your issue', response.content)
+
+    def test_spoe_page_with_has_spoe(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Children')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('About your issue', response.content)
+
+    def test_spoe_page_without_spoe(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Crime')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+        self.assertInHTML('<h1>Enter postcode</h1>', response.content)
+
 
 #    def test_postcode_civil_partnership(self):
 #        c = Client()

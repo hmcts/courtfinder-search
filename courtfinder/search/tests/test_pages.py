@@ -16,19 +16,6 @@ class SearchPageTestCase(TestCase):
         self.assertTemplateUsed(response, 'search/index.jinja')
         self.assertIn('Find the right court or tribunal', response.content)
 
-    def test_aol_page(self):
-        c = Client()
-        response = c.get('/search/aol')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/aol.jinja')
-        self.assertIn('About your issue', response.content)
-
-    def test_spoe_page(self):
-        c = Client()
-        response = c.get('/search/spoe?aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('About your issue', response.content)
 
     def test_postcode_page(self):
         c = Client()
