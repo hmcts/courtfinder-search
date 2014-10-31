@@ -18,7 +18,7 @@ class Rules:
         if Rules.postcode_in_scotland(postcode):
             return {
                 'action': 'render',
-                'in_scotland': in_scotland
+                'in_scotland': True
             }
 
         if Rules.postcode_in_NI(postcode):
