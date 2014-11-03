@@ -31,13 +31,19 @@
       <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
     </p>
     {% else %}
-      {% if spoe == 'start' %}
+    {%   if spoe %}
+    {%     if search_results|length == 1 %}
     <p>This is the court that deals with your problem.</p>
-      {% elif search_results|length == 1 %}
+    {%     else %}
+    <p>The following courts deal with your problem.</p>
+    {%     endif %}
+    {%   else %}
+    {%     if search_results|length == 1 %}
     <p>This is the court or tribunal nearest {{ postcode }}.</p>
-      {% else %}
+    {%     else %}
     <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
-      {% endif %}
+    {%     endif %}
+    {%   endif %}
       {% if in_scotland %}
     <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
       {% endif %}
