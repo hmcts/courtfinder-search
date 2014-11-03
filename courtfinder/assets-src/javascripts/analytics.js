@@ -22,9 +22,9 @@
   if( $('#aol-page').length > 0 ){
     $('#aol-page form[action^="/search/"]').submit(function (e){
       var val = $('#aol-page label input:checked').val();
-      val = val.replace(' ', '-');
-      console.log(val);
-      e.preventDefault();
+      var name = val.toLowerCase().replace(' ', '-');
+
+      ga('send', 'event', 'aol-page', 'aol-' + name + '-selected', 'Area of Law selected: ' + val);
     });
   }
 })(jQuery);

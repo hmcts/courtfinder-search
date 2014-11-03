@@ -73,6 +73,7 @@ class CourtSearch:
                 results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
 
                 if len(results) > 0:
+                    loggers['method'].debug('Postcode: %-10s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.area_of_law))
                     return self.__order_by_distance(results)
 
 
@@ -80,13 +81,16 @@ class CourtSearch:
 
 
             if self.area_of_law.name in Rules.by_local_authority:
+                loggers['method'].debug('Postcode: %-10s AOL: %-20s Method: Local authority search' % (self.postcode.postcode, self.area_of_law))
                 results = self.__local_authority_search()
             elif self.area_of_law.name in Rules.by_postcode:
+                loggers['method'].debug('Postcode: %-10s AOL: %-20s Method: Postcode search' % (self.postcode.postcode, self.area_of_law))
                 results = self.__postcode_search()
 
             if len(results) > 0:
                 return results
 
+            loggers['method'].debug('Postcode: %-10s AOL: %-20s Method: Proximity search' % (self.postcode.postcode, self.area_of_law))
             return self.__proximity_search()
 
 
