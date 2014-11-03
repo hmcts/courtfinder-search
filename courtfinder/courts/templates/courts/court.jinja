@@ -9,11 +9,15 @@
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
     {% if query %}
-    <li><a href="{% url 'search:result' %}">Search by name of address</a></li>
-    <li><a href="{% url 'search:result' %}?q={{ query }}">Search results</a></li>
+    <li><a href="{% url 'search:results' %}">Search by name of address</a></li>
+    <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
     {% elif postcode %}
-    <li><a href="{% url 'search:postcode' %}">Search by name of address</a></li>
-    <li><a href="{% url 'search:result' %}?postcode={{ postcode }}&area_of_law={{ area_of_law }}">Search results</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    {% if spoe %}
+    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+    {% endif %}
+    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
+    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
     {% else %}
     <li><a href="{% url 'courts:list' %}">Courts list</a></li>
     {% endif %}

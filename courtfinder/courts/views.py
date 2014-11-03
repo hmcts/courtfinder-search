@@ -77,7 +77,8 @@ def court(request, slug):
     return render(request, 'courts/court.jinja', {
         'court': format_court(Court.objects.get(slug=slug)),
         'query': request.GET.get('q',''),
-        'area_of_law': request.GET.get('area_of_law','All'),
+        'aol': request.GET.get('aol','All'),
+        'spoe': request.GET.get('spoe', None),
         'postcode': request.GET.get('postcode',''),
     })
 
