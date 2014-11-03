@@ -325,3 +325,10 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
         self.assertIn('Magistrates Court', response.content)
+
+    def test_internal_error(self):
+        c = Client()
+        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
+            response = c.get('/search/results.json?q=Accrington')
+            self.assertEquals(500, response.status_code)
+            self.assertIn("something went wrong", response.content)

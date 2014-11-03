@@ -75,7 +75,10 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
-            results = CourtSearch(query=query).get_courts()
+            try:
+                results = CourtSearch(query=query).get_courts()
+            except CourtSearchError as e:
+                return HttpResponseServerError(e)
             if len(results) > 0:
                 return render(request, 'search/results.jinja', {
                     'query': query,
@@ -89,7 +92,12 @@ def results(request):
         spoe = request.GET.get('spoe', None)
         postcode = request.GET.get('postcode', None)
         if postcode:
-            courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
+            try:
+                courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
+            except CourtSearchError as e:
+                return HttpResponseServerError(e)
+            except CourtSearchClientError as e:
+                return HttpResponseBadRequest(e)
             rules = Rules.for_view(postcode, aol)
 
             view_obj = {

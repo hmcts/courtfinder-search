@@ -37,9 +37,9 @@ class CourtSearch:
                     self.area_of_law = AreaOfLaw(name=area_of_law)
             except AreaOfLaw.DoesNotExist:
                 # TODO: log this case
-                raise AreaOfLaw.DoesNotExist
+                raise CourtSearchClientError('bad area of law')
 
-            self.spoe = single_point_of_entry
+            self.single_point_of_entry = single_point_of_entry
         else:
             raise CourtSearchClientError('bad request')
 
@@ -52,7 +52,7 @@ class CourtSearch:
             if rule_results is not None:
                 return rule_results
 
-            if self.spoe == 'start' and self.area_of_law.name in Rules.has_spoe:
+            if self.single_point_of_entry == 'start' and self.area_of_law.name in Rules.has_spoe:
                 spoes_for_aol = CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True)
                 spoe_courts = [value['court'] for value in spoes_for_aol.values('court')]
                 results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
@@ -64,9 +64,9 @@ class CourtSearch:
             results = []
 
 
-            if self.area_of_law in Rules.by_local_authority:
+            if self.area_of_law.name in Rules.by_local_authority:
                 results = self.__local_authority_search()
-            elif self.area_of_law in Rules.by_postcode:
+            elif self.area_of_law.name in Rules.by_postcode:
                 results = self.__postcode_search()
 
             if len(results) > 0:
@@ -79,7 +79,9 @@ class CourtSearch:
         if self.postcode.local_authority is None or self.area_of_law is None:
             return []
 
-        covered = CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)
+        covered = CourtLocalAuthorityAreaOfLaw.objects.filter(
+            area_of_law=self.area_of_law,
+            local_authority__name=self.postcode.local_authority)
 
         return [c.court for c in covered]
 
