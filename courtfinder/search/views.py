@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServer
 from django.core.serializers.json import DjangoJSONEncoder
 
 from search.models import Court, AreaOfLaw, DataStatus
-from search.court_search import CourtSearch
+from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError
 from search.rules import Rules
 
 areas_of_law_description = {
@@ -110,36 +110,25 @@ def results(request):
             return redirect(reverse('search:search'))
 
 def results_json(request):
-    if 'postcode' in request.GET and 'aol' in request.GET:
-        postcode = re.sub(r'\s+', '', request.GET.get('postcode', ''))
-        area_of_law = request.GET.get('aol','All').strip()
-        directive = Rules.for_view(postcode, area_of_law)
-        if directive['action'] == 'redirect':
-            return HttpResponseBadRequest(content_type="application/json")
-        elif directive['action'] == 'render':
-            try:
-              results = directive.get('results', None)
-            except Exception:
-                HttpResponseServerError('{"error":"service is unable to fulfill your request"}',
-                                        content_type="application/json")
-        return HttpResponse(json.dumps(__format_results(results),
-                                       default=str),
-                            content_type="application/json")
-    elif 'q' in request.GET:
-        query = request.GET.get('q','').strip()
-        if query == "":
-            return HttpResponseBadRequest('{"error":"Empty search query"}',
-                                          content_type="application/json")
-        try:
-            results = CourtSearch.address_search(query)
-        except Exception:
-            return HttpResponseServerError('{"error":"service is unable to fulfill your request"}',
-                                           content_type="application/json")
+    aol = request.GET.get('aol', 'All')
+    spoe = request.GET.get('spoe', 'start')
+    postcode = request.GET.get('postcode', None)
+    query = request.GET.get('q', None)
+
+    try:
+        results = CourtSearch(postcode, aol, spoe, query).get_courts()
         return HttpResponse(json.dumps(__format_results(results), default=str),
                             content_type="application/json")
-    else:
-        return HttpResponseBadRequest('{"error":"request needs one of postcode or q parameters"}',
-                                      content_type="application/json")
+    except CourtSearchError as e:
+        return HttpResponseServerError(
+                '{"error":"%s"}' % e,
+                content_type="application/json")
+    except CourtSearchClientError as e:
+        return HttpResponseBadRequest(
+                '{"error":"%s"}' % e,
+                content_type="application/json")
+
+
 
 def data_status(request):
     last_change = DataStatus.objects.all().order_by('-last_ingestion_date')[0]

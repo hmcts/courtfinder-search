@@ -15,13 +15,17 @@ class Rules:
 
     @staticmethod
     def for_view(postcode, area_of_law):
-        if Rules.postcode_in_scotland(postcode):
+        """
+        Returns rules that tell what to render on the screen,
+        irrespective of the search. Eg, warnings on some geographical areas
+        """
+        if Rules.__postcode_in_scotland(postcode):
             return {
                 'action': 'render',
                 'in_scotland': True
             }
 
-        if Rules.postcode_in_NI(postcode):
+        if Rules.__postcode_in_NI(postcode):
             if area_of_law == 'Immigration':
                 return {
                     'action': 'render'
@@ -38,7 +42,10 @@ class Rules:
 
     @staticmethod
     def for_search(postcode, area_of_law):
-        if Rules.postcode_in_NI(postcode):
+        """
+        Does the search and returns a list of courts
+        """
+        if Rules.__postcode_in_NI(postcode):
             if area_of_law == 'Immigration':
                 return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
             else:
@@ -49,12 +56,14 @@ class Rules:
 
         return None
 
+################################################################################
+# Private
 
     @staticmethod
-    def postcode_in_scotland(postcode):
+    def __postcode_in_scotland(postcode):
         p = postcode.upper()
         return True if re.match('^G\d+',p) or p[:2] in Rules.scottish_postcodes else False
 
     @staticmethod
-    def postcode_in_NI(postcode):
+    def __postcode_in_NI(postcode):
         return postcode[:2].lower() == 'bt'

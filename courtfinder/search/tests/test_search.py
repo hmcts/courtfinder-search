@@ -426,67 +426,11 @@ class SearchTestCase(TestCase):
 #            response = c.get('/search/results?postcode=BLARGH')
 #            self.assertRedirects(response, '/search/postcode', 302)
 
-#    def test_redirect_directive_action_json(self):
-#        with patch('search.rules.Rules.for_postcode',
-#                   Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
-#            c = Client()
-#            response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
-#            self.assertEquals(400, response.status_code)
-
-#    def test_county_in_json(self):
-#        c = Client()
-#        response = c.get('/search/results.json?q=Accrington')
-#        self.assertIn('"county": "Lancashire"', response.content)
-
-    def test_empty_query_json(self):
-        c = Client()
-        response = c.get('/search/results.json?q=')
-        self.assertEquals(400, response.status_code)
-
-#    def test_court_type_in_json(self):
-#        c = Client()
-#        response = c.get('/search/results.json?q=Accrington')
-#        self.assertIn('Magistrates Court', response.content)
-
-    def test_no_aol_json(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15')
-        self.assertEqual(response.status_code, 400)
-
-#    def test_json_postcode_search(self):
-#        c = Client()
-#        response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
-#    def test_json_name_search(self):
-#        c = Client()
-#        response = c.get('/search/results.json?q=Accrington')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
-#    def test_api_broken_mapit_with_name_search(self):
-#        with patch('search.court_search.CourtSearch.address_search', Mock(side_effect=CourtSearchError('Service Error'))):
-#            c = Client()
-#            response = c.get('/search/results.json?q=old+bailey')
-#            self.assertEqual(response.status_code, 500)
-
-#    def test_api_broken_mapit_with_postcode_search(self):
-#        with patch('search.court_search.CourtSearch.get_from_mapit', Mock(side_effect=CourtSearchError('Mapit error'))):
-#            with self.assertRaises(CourtSearchError):
-#                c = Client()
-#                response = c.get('/search/results.json?postcode=SE154UH&aol=Crime')
-#                self.assertEqual(response.status_code, 500)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()
         response = c.get('/search/results')
         self.assertRedirects(response, '/search/', 302)
-
-#    def test_api_postcode(self):
-#        c = Client()
-#        response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
-#        self.assertEqual(response.status_code, 200)
 
 #    def test_postcode_to_local_authority_short_postcode(self):
 #        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)

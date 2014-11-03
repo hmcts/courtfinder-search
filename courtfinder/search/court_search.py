@@ -11,7 +11,14 @@ class CourtSearchError(Exception):
     def __init__(self, value):
         self.value = value
     def __str__(self):
-        return repr(self.value)
+        return self.value
+
+class CourtSearchClientError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return self.value
+
 
 class CourtSearchInvalidPostcode(CourtSearchError):
     pass
@@ -19,9 +26,9 @@ class CourtSearchInvalidPostcode(CourtSearchError):
 class CourtSearch:
 
     def __init__( self, postcode=None, area_of_law=None, single_point_of_entry=False, query=None ):
-        if query is not None:
+        if query:
             self.query = query
-        else:
+        elif postcode:
             self.postcode = Postcode(postcode)
             try:
                 if area_of_law.lower() != 'all':
@@ -33,6 +40,8 @@ class CourtSearch:
                 raise AreaOfLaw.DoesNotExist
 
             self.spoe = single_point_of_entry
+        else:
+            raise CourtSearchClientError('bad request')
 
     def get_courts( self ):
         if hasattr(self, 'query'):
