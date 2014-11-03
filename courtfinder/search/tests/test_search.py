@@ -318,9 +318,7 @@ class SearchTestCase(TestCase):
 
     def test_spoe_page_without_spoe(self):
         c = Client()
-        response = c.get('/search/spoe?aol=Crime')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/postcode.jinja')
+        response = c.get('/search/spoe?aol=Crime', follow=True)
         self.assertInHTML('<h1>Enter postcode</h1>', response.content)
 
 

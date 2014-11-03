@@ -50,9 +50,7 @@ def spoe(request):
             'aol': aol, 'spoe': spoe,
         })
     else:
-        return render(request, 'search/postcode.jinja', {
-            'aol': aol
-        })
+        return redirect(reverse('search:postcode')+'?aol='+aol)
 
 
 def postcode(request):
@@ -112,9 +110,9 @@ def results(request):
             return redirect(reverse('search:search'))
 
 def results_json(request):
-    if 'postcode' in request.GET and 'area_of_law' in request.GET:
+    if 'postcode' in request.GET and 'aol' in request.GET:
         postcode = re.sub(r'\s+', '', request.GET.get('postcode', ''))
-        area_of_law = request.GET.get('area_of_law','All').strip()
+        area_of_law = request.GET.get('aol','All').strip()
         directive = Rules.for_view(postcode, area_of_law)
         if directive['action'] == 'redirect':
             return HttpResponseBadRequest(content_type="application/json")
