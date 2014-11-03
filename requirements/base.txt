@@ -7,3 +7,4 @@ requests==2.3.0
 boto==2.29.1
 python-dateutil==2.2
 raven==5.1.1
+LogentriesLogger==0.2.1

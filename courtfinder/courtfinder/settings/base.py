@@ -14,6 +14,9 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 from os import environ
 
+# Log handler for LogEntries
+from logentries import LogentriesHandler
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 ########## PATH CONFIGURATION
@@ -170,7 +173,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'formatter': 'simple',
             'filename': PROJECT_ROOT + '/logs/search-method.log',
-        }
+        },
     },
     'loggers': {
         'search.error': {
