@@ -41,7 +41,17 @@
           {% if aol == 'Children' %}
           Enter the postcode where the child (or children) lives.
           {% elif aol == 'Housing possession' %}
+          <p>
+            You may be able to
+            <a href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">start a possession claim online</a>.
+          </p>
+
           Enter the postcode of the property.
+          {% elif aol == 'Money claims' %}
+          <p>
+            You may be able to
+            <a href="https://www.gov.uk/make-money-claim-online" target="_blank">make a money claim online</a>.
+          </p>
           {% else %}
           Enter your postcode.
           {% endif %}
