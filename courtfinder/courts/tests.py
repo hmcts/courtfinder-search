@@ -260,7 +260,12 @@ class SearchTestCase(TestCase):
             }
         ],
         "image_file": "tameside_magistrates_court.jpg",
-        "display": true
+        "display": true,
+        "parking": {
+          "onsite": "On site parking is not available at this venue.",
+          "offsite": "Paid off site parking is available.",
+          "blue_badge": "Blue badge parking is available on site."
+        }
     }
 ]"""
 
@@ -309,3 +314,13 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
         self.assertIn('Last updated: 16 April 2014', response.content)
+
+    def test_blue_badge_displayed(self):
+        c = Client()
+        response = c.get('/courts/tameside-magistrates-court')
+        self.assertIn('On site parking is not available at this venue.',
+                      response.content)
+        self.assertIn('Paid off site parking is available.',
+                      response.content)
+        self.assertIn('Blue badge parking is available on site.',
+                      response.content)
