@@ -21,6 +21,7 @@ def feedback(request):
 
 class FeedbackForm(forms.Form):
     feedback_text = forms.CharField(label='feedback_text', max_length=200)
+    feedback_referer = forms.CharField(label='feedback_referer', max_length=512)
     feedback_email = forms.CharField(label='feedback_email', max_length=2000, required=False)
 
 def feedback_sent(request):
@@ -29,13 +30,22 @@ def feedback_sent(request):
         from_address = settings.FEEDBACK_EMAIL_SENDER
         to_addresses = [address.strip() for address in settings.FEEDBACK_EMAIL_RECEIVER.split(',')]
         if from_address and to_addresses:
-            message = """New feedback has arrived for courtfinder.
-Sender: %s
+            feedback_email = form.cleaned_data['feedback_email']
+            if not feedback_email:
+                feedback_email = '(not provided)'
+            message = """
+New feedback has arrived for courtfinder (https://courttribunalfinder.service.gov.uk/).
+The user left feedback after seeing: %s
+User's browser: %s
+User's email: %s
 
-Message: %s""" % (form.cleaned_data['feedback_email'],
-                  form.cleaned_data['feedback_text'])
+Message: %s
+""" % (form.cleaned_data['feedback_referer'],
+       request.META.get('HTTP_USER_AGENT','(unknown)'),
+       form.cleaned_data['feedback_email'],
+       form.cleaned_data['feedback_text'])
 
-            nb_emails_sent = send_mail('Feedback for courtfinder',
+            nb_emails_sent = send_mail('Feedback received for Court and Tribunal Finder',
                                        message, from_address,
                                        to_addresses, fail_silently=False)
 
