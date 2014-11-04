@@ -76,6 +76,9 @@ class Migration(migrations.Migration):
                 ('alert', models.CharField(default=None, max_length=4096, null=True)),
                 ('directions', models.CharField(default=None, max_length=4096, null=True)),
                 ('image_file', models.CharField(default=None, max_length=255, null=True)),
+                ('cci_code', models.CharField(default=None, max_length=255, null=True)),
+                ('updated_at', models.DateTimeField(default=None, null=True)),
+                ('created_at', models.DateTimeField(default=None, null=True)),
             ],
             options={
             },
@@ -209,6 +212,17 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='DataStatus',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('data_hash', models.CharField(max_length=255)),
+                ('last_ingestion_date', models.DateTimeField(auto_now=True, auto_now_add=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Email',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -247,6 +261,17 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('description', models.CharField(max_length=1024)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ParkingInfo',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('onsite', models.CharField(default=None, max_length=1024, null=True)),
+                ('offsite', models.CharField(default=None, max_length=1024, null=True)),
             ],
             options={
             },
@@ -357,6 +382,12 @@ class Migration(migrations.Migration):
             model_name='court',
             name='opening_times',
             field=models.ManyToManyField(to='search.OpeningTime', null=True, through='search.CourtOpeningTime'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='court',
+            name='parking',
+            field=models.ForeignKey(default=None, to='search.ParkingInfo', null=True),
             preserve_default=True,
         ),
     ]

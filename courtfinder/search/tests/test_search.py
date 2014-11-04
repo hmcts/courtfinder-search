@@ -134,11 +134,15 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             },
             {
-                "councils": [ "Southwark Borough Council" ],
+                "local_authorities": [],
+                "name": "Immigration"
+            },
+            {
+                "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Divorce"
             }
         ],
@@ -249,50 +253,85 @@ class SearchTestCase(TestCase):
         ],
         "areas_of_law": [
             {
-                "councils": [],
+                "local_authorities": [],
                 "name": "Crime"
             }
         ],
         "image_file": "tameside_magistrates_court.jpg",
         "display": true
+    },
+    {
+        "name": "County Court Money Claims Centre (CCMCC)",
+        "slug": "county-court-money-claims-centre-ccmcc",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "3456543",
+        "display": true,
+        "court_number": "123456",
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": []
     }
 ]"""
 
         Ingest.countries(json.loads(self.countries_json_1))
         Ingest.courts(json.loads(self.courts_json_1))
-
-        def get_from_mapit_mock(url):
-            matches = re.search('([^/]+)$', url)
-            postcode = matches.group(0)
-            if postcode == 'invalid':
-                raise CourtSearchInvalidPostcode('Mapit doesn\'t know this postcode: '+url)
-            elif len(postcode) < 4:
-                return SearchTestCase.mock_mapit_partial
-            else:
-                return SearchTestCase.mock_mapit_full
-
-        self.patcher =  patch('search.court_search.CourtSearch.get_from_mapit',
-                              Mock(side_effect=get_from_mapit_mock))
-        self.patcher.start()
+        DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
 
     def tearDown(self):
-        self.patcher.stop()
+        pass
 
     def test_format_results_with_postal_address(self):
         c = Client()
         response = c.get('/search/results?q=Accrington')
         self.assertIn("Blackburn", response.content)
 
+    def test_format_results_with_empty_postcode(self):
+        c = Client()
+        response = c.get('/search/results?postcode=')
+        self.assertRedirects(response, '/search/', 302)
+
     def test_search_space_in_name(self):
         c = Client()
         response = c.get('/search/results?q=Accrington+Magistrates')
         self.assertIn("Accrington", response.content)
 
-    def test_postcode_civil_partnership(self):
+    def test_aol_page(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE154UH&area_of_law=Civil+partnership', follow=True)
-        self.assertIn("validation-error", response.content)
+        response = c.get('/search/aol')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/aol.jinja')
+        self.assertIn('About your issue', response.content)
+
+    def test_spoe_page_with_has_spoe(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Children')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('About your issue', response.content)
+
+    def test_spoe_page_without_spoe(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Crime', follow=True)
+        self.assertInHTML('<h1>Enter postcode</h1>', response.content)
+
+    def test_distance_search(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE154UH&aol=Crime')
+        self.assertEqual(response.status_code, 200)
+
+    def test_local_authority_search(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE154UH&aol=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Accrington',response.content)
 
     def test_results_no_query(self):
         c = Client()
@@ -301,23 +340,21 @@ class SearchTestCase(TestCase):
 
     def test_sample_postcode_all_aols(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=All')
+        response = c.get('/search/results?postcode=SE15+4UH&aol=All')
         self.assertEqual(response.status_code, 200)
 
     def test_sample_postcode_specific_aol(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
+        response = c.get('/search/results?postcode=SE15+4UH&aol=Divorce')
         self.assertEqual(response.status_code, 200)
 
-    def test_sample_postcode_specific_aol2(self):
+    def test_bad_aol(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=Divorce')
-        self.assertEqual(response.status_code, 200)
+        response = c.get('/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('bad area of law', response.content)
 
-    def test_sample_postcode_bad_aol(self):
-        c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&area_of_law=doesntexist', follow=True)
-        self.assertIn('Sorry, your postcode', response.content)
+
 
     def test_inactive_court(self):
         court = Court.objects.create(
@@ -347,131 +384,91 @@ class SearchTestCase(TestCase):
 
     def test_scottish_postcodes(self):
         c = Client()
-        response = c.get('/search/results?postcode=G24PP&area_of_law=All')
+        response = c.get('/search/results?postcode=G24PP&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=G2&area_of_law=All')
+        response = c.get('/search/results?postcode=G2&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=AB10&area_of_law=All')
+        response = c.get('/search/results?postcode=AB10&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=AB10+7LY&area_of_law=All')
+        response = c.get('/search/results?postcode=AB10+7LY&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=BA27AY&area_of_law=All')
+        response = c.get('/search/results?postcode=BA27AY&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
-    def test_partial_postcode(self):
-        c = Client()
-        response = c.get('/search/results?postcode=SE15&area_of_law=All')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('<div class="search-results">', response.content)
+#    def test_partial_postcode(self):
+#        c = Client()
+#        response = c.get('/search/results?postcode=SE15&aol=All')
+#        self.assertEqual(response.status_code, 200)
+#        self.assertIn('<div class="search-results">', response.content)
 
-    def test_partial_postcode_whitespace(self):
-        c = Client()
-        response = c.get('/search/results?postcode=SE15++&area_of_law=All')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('<div class="search-results">', response.content)
+#    def test_partial_postcode_whitespace(self):
+#        c = Client()
+#        response = c.get('/search/results?postcode=SE15++&aol=All')
+#        self.assertEqual(response.status_code, 200)
+#        self.assertIn('<div class="search-results">', response.content)
 
-    def test_postcode_whitespace(self):
-        c = Client()
-        response = c.get('/search/results?postcode=++SE154UH++&area_of_law=All')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('<div class="search-results">', response.content)
+#    def test_postcode_whitespace(self):
+#        c = Client()
+#        response = c.get('/search/results?postcode=++SE154UH++&aol=All')
+#        self.assertEqual(response.status_code, 200)
+#        self.assertIn('<div class="search-results">', response.content)
 
-    def test_unknown_directive_action(self):
-        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
-            c = Client()
-            response = c.get('/search/results?postcode=SE15')
-            self.assertRedirects(response, '/search/', 302)
+#    def test_unknown_directive_action(self):
+#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
+#            c = Client()
+#            response = c.get('/search/results?postcode=SE15')
+#            self.assertRedirects(response, '/search/', 302)
 
-    def test_redirect_directive_action(self):
-        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'postcode-view'})):
-            c = Client()
-            response = c.get('/search/results?postcode=BLARGH')
-            self.assertRedirects(response, '/search/postcode', 302)
+#    def test_redirect_directive_action(self):
+#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'postcode-view'})):
+#            c = Client()
+#            response = c.get('/search/results?postcode=BLARGH')
+#            self.assertRedirects(response, '/search/postcode', 302)
 
-    def test_redirect_directive_action_json(self):
-        with patch('search.rules.Rules.for_postcode',
-                   Mock(return_value={'action':'redirect', 'target':'http://www.example.org'})):
-            c = Client()
-            response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
-            self.assertEquals(400, response.status_code)
-
-    def test_county_in_json(self):
-        c = Client()
-        response = c.get('/search/results.json?q=Accrington')
-        self.assertIn('"county": "Lancashire"', response.content)
-
-    def test_empty_query_json(self):
-        c = Client()
-        response = c.get('/search/results.json?q=')
-        self.assertEquals(400, response.status_code)
-
-    def test_court_type_in_json(self):
-        c = Client()
-        response = c.get('/search/results.json?q=Accrington')
-        self.assertIn('Magistrates Court', response.content)
-
-    def test_no_aol_json(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15')
-        self.assertEqual(response.status_code, 400)
-
-    def test_json_postcode_search(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15&area_of_law=Divorce')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
-    def test_json_name_search(self):
-        c = Client()
-        response = c.get('/search/results.json?q=Accrington')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
-    def test_api_broken_mapit_with_name_search(self):
-        with patch('search.court_search.CourtSearch.address_search', Mock(side_effect=CourtSearchError('Service Error'))):
-            c = Client()
-            response = c.get('/search/results.json?q=old+bailey')
-            self.assertEqual(response.status_code, 500)
-
-    def test_api_broken_mapit_with_postcode_search(self):
-        with patch('search.court_search.CourtSearch.get_from_mapit', Mock(side_effect=CourtSearchError('Mapit error'))):
-            with self.assertRaises(CourtSearchError):
-                c = Client()
-                response = c.get('/search/results.json?postcode=SE154UH&area_of_law=Crime')
-                self.assertEqual(response.status_code, 500)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()
         response = c.get('/search/results')
         self.assertRedirects(response, '/search/', 302)
 
-    def test_api_postcode(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15+4UH&area_of_law=Divorce')
-        self.assertEqual(response.status_code, 200)
+#    def test_postcode_to_local_authority_short_postcode(self):
+#        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
 
-    def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
+#    def test_local_authority_search_ordered(self):
+#        self.assertEqual(CourtSearch.local_authority_search('SE15 4UH', 'Divorce')[0].name, "Accrington Magistrates' Court")
 
-    def test_local_authority_search_ordered(self):
-        self.assertEqual(CourtSearch.local_authority_search('SE15 4UH', 'Divorce')[0].name, "Accrington Magistrates' Court")
+#    def test_bad_local_authority(self):
+#        with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
+#            self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
 
-    def test_bad_local_authority(self):
-        with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
-            self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
+#    def test_broken_postcode_to_latlon(self):
+#        with patch('search.court_search.CourtSearch.postcode_to_latlon', Mock(side_effect=Exception('something went wrong'))):
+#            with self.assertRaises(Exception):
+#                CourtSearch.proximity_search('SE154UH', 'Money claims')
 
-    def test_broken_postcode_to_latlon(self):
-        with patch('search.court_search.CourtSearch.postcode_to_latlon', Mock(side_effect=Exception('something went wrong'))):
-            with self.assertRaises(Exception):
-                CourtSearch.proximity_search('SE154UH', 'Money claims')
+#    def test_proximity_search(self):
+#        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Divorce'), [])
 
-    def test_proximity_search(self):
-        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Divorce'), [])
+    def test_court_address_search_error(self):
+        with patch('search.court_search.CourtSearch.get_courts',
+                   Mock(side_effect=CourtSearchError('something went wrong'))):
+            c = Client()
+            response = c.get('/search/results?q=Accrington')
+            self.assertEquals(500, response.status_code)
+            self.assertIn("something went wrong", response.content)
+
+    def test_court_postcode_search_error(self):
+        with patch('search.court_search.CourtSearch.get_courts',
+                   Mock(side_effect=CourtSearchError('something went wrong'))):
+            c = Client()
+            response = c.get('/search/results?postcode=SE15+4PE')
+            self.assertEquals(500, response.status_code)
+            self.assertIn("something went wrong", response.content)
 
     def test_address_search(self):
         c = Client()
@@ -490,41 +487,25 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('Accrington Magistrates', response.content)
 
-    def test_broken_postcode_latlon_mapping(self):
-        self.assertEqual(CourtSearch.postcode_search('Z', 'all'), [])
-
-
-    def test_broken_mapit(self):
-        with patch('search.court_search.CourtSearch.get_from_mapit', Mock(side_effect=CourtSearchError('Mapit error'))):
-            with self.assertRaises(CourtSearchError):
-                c = Client()
-                response = c.get('/search/results?postcode=SE154UH')
-                self.assertEqual(response.status_code, 500)
-
-    def test_postcode_search(self):
-        self.assertNotEqual(CourtSearch.postcode_search('SW1H9AJ', 'all'), [])
-
     def test_empty_postcode(self):
         c = Client()
         response = c.get('/search/results?postcode=')
         self.assertEqual(response.status_code, 302)
 
-    def test_ni_immigration(self):
-        glasgow = Court.objects.create(
-            name="Glasgow Tribunal Hearing Centre",
-            slug="something",
-            lat=0.0,
-            lon=0.0,
-        )
-        c = Client()
-        response = c.get('/search/results?postcode=bt2&area_of_law=Immigration')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("Glasgow Tribunal Hearing Centre", response.content)
-
     def test_ni(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&area_of_law=Divorce', follow=True)
+        response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
+
+    def test_money_claims(self):
+        c = Client()
+        response = c.get('/search/results?postcode=sw1h9aj&aol=Money+claims')
+        self.assertIn("CCMCC", response.content)
+
+    def test_ni_immigration(self):
+        c = Client()
+        response = c.get('/search/results?postcode=bt2&aol=Immigration', follow=True)
+        self.assertNotIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
         court = Court.objects.get(name="Accrington Magistrates' Court")
@@ -548,7 +529,7 @@ class SearchTestCase(TestCase):
         aol = AreaOfLaw.objects.create(name="Divorce")
         self.assertEqual(str(aol), "Divorce")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
-        self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce")
+        self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
         country = Country.objects.create(name="Wales")
         self.assertEqual(str(country), "Wales")
         county = County.objects.create(name="Shire", country=country)
@@ -581,45 +562,27 @@ class SearchTestCase(TestCase):
                                                                area_of_law=aol,
                                                                local_authority=local_authority)
         self.assertEqual(str(court_local_authority_aol), "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
+        facility=Facility.objects.create(name="sofa", description="comfy leather")
+        self.assertEqual(str(facility), "sofa: comfy leather")
+        court_facility = CourtFacility.objects.create(court=court, facility=facility)
+        self.assertEqual(str(court_facility), "%s has facility %s" % (court.name, facility))
+        opening_time = OpeningTime.objects.create(description="open 7/7")
+        self.assertEqual(str(opening_time), "open 7/7")
+        court_opening_time = CourtOpeningTime.objects.create(court=court, opening_time=opening_time)
+        self.assertEqual(str(court_opening_time), "%s has facility %s" % (court.name, opening_time))
+        email = Email.objects.create(description="enquiries", address="a@b.com")
+        self.assertEqual(str(email), "enquiries: a@b.com")
+        court_email = CourtEmail.objects.create(court=court, email=email)
+        self.assertEqual(str(court_email), "%s has email: %s" % (court.name, email.description))
+        now = datetime.now()
+        data_status = DataStatus.objects.create(data_hash="wer38hr3hr37hr")
+        self.assertEqual(str(data_status), "Current data hash: %s, last update: %s" %
+                         (data_status.data_hash, data_status.last_ingestion_date))
+        parking_info = ParkingInfo.objects.create(onsite="foo", offsite="bar", blue_badge="baz")
+        self.assertEqual(str(parking_info), "Parking onsite: foo, Parking offsite: bar, Parking blue-badge: baz")
 
-    def test_broken_mapit(self):
-        # we need to stop the patched mapit method to run the original version, but with a borken URL
-        self.patcher.stop()
-        saved = settings.MAPIT_BASE_URL
-        settings.MAPIT_BASE_URL = 'http://example.com/'
-        with self.assertRaises(Exception):
-            CourtSearch.postcode_to_latlon('SE144UR')
-        settings.MAPIT_BASE_URL = saved
-        self.patcher.start()
-
-    def test_if_mapit_works(self):
-        # we need to stop the patched mapit method to run the real mapit service
-        self.patcher.stop()
-        CourtSearch.get_full_postcode('SE154UH')
-        CourtSearch.get_partial_postcode('SE15')
-        self.patcher.start()
-
-    def test_invalid_postcode(self):
+    def test_data_status(self):
         c = Client()
-        response = c.get('/search/results?postcode=INVALID&area_of_law=All')
-        self.assertRedirects(response, '/search/postcode?error=badpc&postcode=INVALID')
-
-    def test_mapit_doesnt_return_correct_data(self):
-        # we need to stop the patched mapit method to run a mock returning bad content
-        self.patcher.stop()
-        with patch('search.court_search.CourtSearch.get_from_mapit', Mock(return_value="garbage")):
-            with self.assertRaises(Exception):
-                CourtSearch.postcode_to_latlon('SE154UH')
-        self.patcher.start()
-
-    def test_redirect_directive_action(self):
-        c = Client()
-        response = c.get('/search/type?type=list')
-        self.assertRedirects(response, '/courts/A', 302)
-
-    def test_local_authority_search_bad_aol(self):
-        self.assertEquals(CourtSearch.local_authority_search('SE154UH', 'non-existent-aol'), [])
-
-    mock_mapit_partial = '{"wgs84_lat": 51.47263752259685, "coordsyst": "G", "wgs84_lon": -0.06603088421009512, "postcode": "SE15", "easting": 534416, "northing": 176632}'
-
-    mock_mapit_full = '{"wgs84_lat": 51.468945906164286, "coordsyst": "G", "shortcuts": {"WMC": 65913, "ward": 8328, "council": 2491}, "wgs84_lon": -0.06623508303668792, "postcode": "SE15 4UH", "easting": 534412, "areas": {"900000": {"parent_area": null, "generation_high": 19, "all_names": {}, "id": 900000, "codes": {}, "name": "House of Commons", "country": "", "type_name": "UK Parliament", "generation_low": 1, "country_name": "-", "type": "WMP"}, "900001": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 900001, "codes": {}, "name": "European Parliament", "country": "", "type_name": "European Parliament", "generation_low": 1, "country_name": "-", "type": "EUP"}, "900002": {"parent_area": 900006, "generation_high": 22, "all_names": {}, "id": 900002, "codes": {}, "name": "London Assembly", "country": "E", "type_name": "London Assembly area (shared)", "generation_low": 1, "country_name": "England", "type": "LAE"}, "2491": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 2491, "codes": {"ons": "00BE", "gss": "E09000028", "unit_id": "11013"}, "name": "Southwark Borough Council", "country": "E", "type_name": "London borough", "generation_low": 1, "country_name": "England", "type": "LBO"}, "104581": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 104581, "codes": {"ons": "E01004062"}, "name": "Southwark 025B", "country": "E", "type_name": "Lower Layer Super Output Area (Generalised)", "generation_low": 13, "country_name": "England", "type": "OLG"}, "900006": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 900006, "codes": {}, "name": "London Assembly", "country": "E", "type_name": "London Assembly area", "generation_low": 1, "country_name": "England", "type": "LAS"}, "2247": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 2247, "codes": {"unit_id": "41441"}, "name": "Greater London Authority", "country": "E", "type_name": "Greater London Authority", "generation_low": 1, "country_name": "England", "type": "GLA"}, "8328": {"parent_area": 2491, "generation_high": 22, "all_names": {}, "id": 8328, "codes": {"ons": "00BEGY", "gss": "E05000553", "unit_id": "11051"}, "name": "The Lane", "country": "E", "type_name": "London borough ward", "generation_low": 1, "country_name": "England", "type": "LBW"}, "11822": {"parent_area": 2247, "generation_high": 22, "all_names": {}, "id": 11822, "codes": {"gss": "E32000010", "unit_id": "41446"}, "name": "Lambeth and Southwark", "country": "E", "type_name": "London Assembly constituency", "generation_low": 1, "country_name": "England", "type": "LAC"}, "41904": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 41904, "codes": {"ons": "E02000831"}, "name": "Southwark 025", "country": "E", "type_name": "Middle Layer Super Output Area (Generalised)", "generation_low": 13, "country_name": "England", "type": "OMG"}, "34710": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 34710, "codes": {"ons": "E02000831"}, "name": "Southwark 025", "country": "E", "type_name": "Middle Layer Super Output Area (Full)", "generation_low": 13, "country_name": "England", "type": "OMF"}, "65913": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 65913, "codes": {"gss": "E14000615", "unit_id": "25066"}, "name": "Camberwell and Peckham", "country": "E", "type_name": "UK Parliament constituency", "generation_low": 13, "country_name": "England", "type": "WMC"}, "70203": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 70203, "codes": {"ons": "E01004062"}, "name": "Southwark 025B", "country": "E", "type_name": "Lower Layer Super Output Area (Full)", "generation_low": 13, "country_name": "England", "type": "OLF"}, "11806": {"parent_area": null, "generation_high": 22, "all_names": {}, "id": 11806, "codes": {"ons": "07", "gss": "E15000007", "unit_id": "41428"}, "name": "London", "country": "E", "type_name": "European region", "generation_low": 1, "country_name": "England", "type": "EUR"}}, "northing": 176221}'
+        response = c.get('/search/datastatus')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a', response.content)

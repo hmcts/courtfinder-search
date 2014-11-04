@@ -1,0 +1,34 @@
+{% extends "layout/base.jinja" %}
+{% load static %}
+
+{% block page_title %}Additional info{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search' %}">Find the right court or tribunal</a></li>
+  </ol>
+</div>
+<div id="search-index-page" class="content inner cf">
+  <header class="page-header">
+    <h1>About your issue</h1>
+  </header>
+  <form method="get" action="{% url 'search:postcode' %}">
+    <div class="form-block">
+      <input type="hidden" name="aol" value="{{ aol }}"/>
+      <label for="spoe-start" class="block-label form-block">
+        <input id="spoe-start" type="radio" name="spoe" value="start" {% if spoe == 'start' %}checked{% endif %}/>
+        <div class="form-label">about to start a new claim</div>
+      </label>
+      <label for="spoe-continue" class="block-label form-block">
+        <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
+        <div class="form-label">already in contact with a court or tribunal</div>
+      </label>
+    </div>
+    <div class="actions">
+    <button id="continue" class="button" type="submit">Continue</button>
+  </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from search.models import *
+from dateutil import parser
 
 class Ingest:
     @classmethod
@@ -20,27 +21,45 @@ class Ingest:
     @classmethod
     def courts(self, courts):
         Court.objects.all().delete()
-        LocalAuthority.objects.all().delete()
-        AreaOfLaw.objects.all().delete()
-        CourtAreaOfLaw.objects.all().delete()
-        CourtLocalAuthorityAreaOfLaw.objects.all().delete()
-        CourtType.objects.all().delete()
-        CourtCourtType.objects.all().delete()
-        CourtAddress.objects.all().delete()
-        CourtContact.objects.all().delete()
-        Contact.objects.all().delete()
-        CourtPostcode.objects.all().delete()
-        AddressType.objects.all().delete()
         CourtAttributeType.objects.all().delete()
         CourtAttribute.objects.all().delete()
+        CourtPostcode.objects.all().delete()
+        AreaOfLaw.objects.all().delete()
         Facility.objects.all().delete()
-        CourtFacility.objects.all().delete()
         OpeningTime.objects.all().delete()
+        LocalAuthority.objects.all().delete()
+        CourtLocalAuthorityAreaOfLaw.objects.all().delete()
+        CourtFacility.objects.all().delete()
         CourtOpeningTime.objects.all().delete()
+        CourtAreaOfLaw.objects.all().delete()
+        AddressType.objects.all().delete()
+        CourtAddress.objects.all().delete()
+        Contact.objects.all().delete()
+        CourtContact.objects.all().delete()
+        Email.objects.all().delete()
+        CourtEmail.objects.all().delete()
+        CourtType.objects.all().delete()
+        CourtCourtType.objects.all().delete()
+        DataStatus.objects.all().delete()
+        ParkingInfo.objects.all().delete()
 
         for court_obj in courts:
+
+            court_created_at = court_obj.get('created_at', None)
+            created_at = parser.parse(court_created_at+'UTC') if court_created_at else None
+            court_updated_at = court_obj.get('updated_at', None)
+            updated_at = parser.parse(court_updated_at+'UTC') if court_updated_at else None
+            parking = court_obj.get('parking', None)
+            if parking:
+                parking_info = ParkingInfo.objects.create(onsite=parking.get('onsite', None),
+                                                          offsite=parking.get('offsite', None),
+                                                          blue_badge=parking.get('blue_badge', None))
+            else:
+                parking_info = None
+
             court = Court(
                 admin_id=court_obj['admin_id'],
+                cci_code=court_obj.get('cci_code', None),
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=court_obj['display'],
@@ -50,24 +69,29 @@ class Ingest:
                 alert=court_obj.get('alert', None),
                 directions=court_obj.get('directions', None),
                 image_file=court_obj.get('image_file', None),
+                created_at=created_at,
+                updated_at=updated_at,
+                parking=parking_info if parking_info else None,
             )
             court.save()
 
             for aol_obj in court_obj['areas_of_law']:
                 aol_name = aol_obj['name']
-                aol_councils = aol_obj['councils']
-
+                aol_las = aol_obj['local_authorities']
+                aol_spoe = aol_obj.get('single_point_of_entry',False)
                 aol, created = AreaOfLaw.objects.get_or_create(name=aol_name)
 
-                CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
+                CourtAreaOfLaw.objects.create(court=court,
+                                              area_of_law=aol,
+                                              single_point_of_entry=aol_spoe)
 
-                for council_name in aol_councils:
-                    council, created = LocalAuthority.objects.get_or_create(name=council_name)
+                for local_authority_name in aol_las:
+                    local_authority, created = LocalAuthority.objects.get_or_create(name=local_authority_name)
 
                     CourtLocalAuthorityAreaOfLaw.objects.create(
                         court=court,
                         area_of_law=aol,
-                        local_authority=council
+                        local_authority=local_authority
                     )
 
             for facility_obj in court_obj['facilities']:

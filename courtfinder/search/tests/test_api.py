@@ -124,24 +124,22 @@ class SearchTestCase(TestCase):
             }
         ],
         "court_number": 1725,
-        "cci_code": "242",
-        "updated_at": "2014-04-16T13:04:44.642",
         "lon": "-2.359323760375266",
         "postcodes": ["SW1H9AJ"],
         "emails": [
             {
                 "description": "Enquiries",
                 "address": "ln-blackburnmcenq@hmcts.gsi.gov.uk"
-            },
-            {
-                "description": "",
-                "address": "email-no-description@hmcts.gsi.gov.uk"
             }
         ],
         "areas_of_law": [
             {
                 "local_authorities": [],
                 "name": "Crime"
+            },
+            {
+                "local_authorities": [],
+                "name": "Immigration"
             },
             {
                 "local_authorities": [ "Southwark Borough Council" ],
@@ -260,12 +258,25 @@ class SearchTestCase(TestCase):
             }
         ],
         "image_file": "tameside_magistrates_court.jpg",
+        "display": true
+    },
+    {
+        "name": "County Court Money Claims Centre (CCMCC)",
+        "slug": "county-court-money-claims-centre-ccmcc",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "3456543",
         "display": true,
-        "parking": {
-          "onsite": "On site parking is not available at this venue.",
-          "offsite": "Paid off site parking is available.",
-          "blue_badge": "Blue badge parking is available on site."
-        }
+        "court_number": "123456",
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": []
     }
 ]"""
 
@@ -273,54 +284,51 @@ class SearchTestCase(TestCase):
         Ingest.courts(json.loads(self.courts_json_1))
 
 
-    def test_sample_court_page(self):
+    def tearDown(self):
+        pass
+
+
+    def test_county(self):
         c = Client()
-        response = c.get('/courts/tameside-magistrates-court')
+        response = c.get('/search/results.json?q=Accrington')
+        self.assertIn('"county": "Lancashire"', response.content)
+
+    def test_postcode(self):
+        c = Client()
+        response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Tameside", response.content)
 
-    def test_sample_court_page(self):
+    def test_postcode_search(self):
         c = Client()
-        response = c.get('/courts/accrington-magistrates-court')
+        response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Accrington", response.content)
+        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
-    def test_court_list_a(self):
+    def test_address_search(self):
         c = Client()
-        response = c.get('/courts/A')
-        self.assertIn("Names starting with A", response.content)
+        response = c.get('/search/results.json?q=Accrington')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
-    def test_court_list_x_no_courts(self):
+    def test_no_aol(self):
         c = Client()
-        response = c.get('/courts/X')
-        self.assertIn("There are no courts or tribunals starting with X", response.content)
+        response = c.get('/search/results.json?postcode=SE15')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
-    def test_court_list_index(self):
+    def test_empty_query(self):
         c = Client()
-        response = c.get('/courts/')
-        self.assertIn("Select the first letter of the court's name", response.content)
+        response = c.get('/search/results.json?q=')
+        self.assertEquals(400, response.status_code)
 
-    def test_court_with_email_without_description(self):
+    def test_court_type(self):
         c = Client()
-        response = c.get('/courts/accrington-magistrates-court')
-        self.assertNotIn('<span property="contactType"></span>', response.content)
+        response = c.get('/search/results.json?q=Accrington')
+        self.assertIn('Magistrates Court', response.content)
 
-    def test_court_numbers_in_list(self):
+    def test_internal_error(self):
         c = Client()
-        response = c.get('/courts/A')
-        self.assertIn('(#1725, CCI: 242)', response.content)
-
-    def test_updated_in_court_page(self):
-        c = Client()
-        response = c.get('/courts/accrington-magistrates-court')
-        self.assertIn('Last updated: 16 April 2014', response.content)
-
-    def test_blue_badge_displayed(self):
-        c = Client()
-        response = c.get('/courts/tameside-magistrates-court')
-        self.assertIn('On site parking is not available at this venue.',
-                      response.content)
-        self.assertIn('Paid off site parking is available.',
-                      response.content)
-        self.assertIn('Blue badge parking is available on site.',
-                      response.content)
+        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
+            response = c.get('/search/results.json?q=Accrington')
+            self.assertEquals(500, response.status_code)
+            self.assertIn("something went wrong", response.content)

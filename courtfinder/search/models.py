@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Court(models.Model):
     admin_id = models.IntegerField(null=True, default=None)
@@ -8,6 +9,7 @@ class Court(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True)
+    parking = models.ForeignKey('ParkingInfo', null=True, default=None)
     alert = models.CharField(max_length=4096, null=True, default=None)
     directions = models.CharField(max_length=4096, null=True, default=None)
     image_file = models.CharField(max_length=255, null=True, default=None)
@@ -19,13 +21,15 @@ class Court(models.Model):
     facilities = models.ManyToManyField('Facility', through='CourtFacility', null=True)
     opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime', null=True)
     contacts = models.ManyToManyField('Contact', through='CourtContact', null=True)
+    cci_code = models.CharField(max_length=255, null=True, default=None)
+    updated_at = models.DateTimeField(null=True, default=None)
+    created_at = models.DateTimeField(null=True, default=None)
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
 
     def __unicode__(self):
         return self.name
-
 
 
 class CourtAttributeType(models.Model):
@@ -87,7 +91,9 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
     local_authority = models.ForeignKey(LocalAuthority)
 
     def __unicode__(self):
-        return "%s covers %s for %s" % (self.court.name, self.local_authority.name, self.area_of_law.name)
+        return "%s covers %s for %s" % (self.court.name,
+                                        self.local_authority.name,
+                                        self.area_of_law.name)
 
 class CourtFacility(models.Model):
     court = models.ForeignKey(Court)
@@ -106,6 +112,7 @@ class CourtOpeningTime(models.Model):
 class CourtAreaOfLaw(models.Model):
     court = models.ForeignKey(Court)
     area_of_law = models.ForeignKey(AreaOfLaw)
+    single_point_of_entry = models.BooleanField(default=False)
 
     def local_authorities_covered(self):
         return CourtLocalAuthorityAreaOfLaw.objects.filter(
@@ -114,7 +121,9 @@ class CourtAreaOfLaw(models.Model):
         )
 
     def __unicode__(self):
-        return "%s deals with %s" % (self.court.name, self.area_of_law.name)
+        return "%s deals with %s (spoe: %s)" % (self.court.name,
+                                                self.area_of_law.name,
+                                                self.single_point_of_entry)
 
 
 class Town(models.Model):
@@ -179,7 +188,7 @@ class Email(models.Model):
     address = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.description
+        return "%s: %s" % (self.description, self.address)
 
 
 class CourtEmail(models.Model):
@@ -211,3 +220,14 @@ class DataStatus(models.Model):
 
     def __unicode__(self):
         return "Current data hash: %s, last update: %s" % (self.data_hash, self.last_ingestion_date)
+
+
+class ParkingInfo(models.Model):
+    onsite = models.CharField(max_length=1024, null=True, default=None)
+    offsite = models.CharField(max_length=1024, null=True, default=None)
+    blue_badge = models.CharField(max_length=1024, null=True, default=None)
+
+    def __unicode__(self):
+        return "Parking onsite: %s, Parking offsite: %s, Parking blue-badge: %s" % (self.onsite,
+                                                                                    self.offsite,
+                                                                                    self.blue_badge)

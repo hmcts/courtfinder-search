@@ -6,7 +6,7 @@
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">
@@ -15,13 +15,19 @@
   </header>
   <div class="group">
     {% if error == 'noquery' %}
-    <section class="validation-error"><span>You did not enter a search term. Please try again.</span></section>
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>You did not enter a search term. Please try again.</p>
+    </section>
     {% elif error == 'noresults' %}
-    <section class="validation-error"><span>Sorry, there are no results for {{ query }}. Please check and try another name or address.</span></section>
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>Sorry, there are no results for {{ query }}. Please check and try another name or address.</p>
+    </section>
     {% endif %}
     <form method="get" action="results">
       <fieldset class="form-group">
-        <label for="postcode" class="form-block">
+        <label for="address" class="form-block">
           <div class="form-hint">Enter one of the following</div>
           <ul class="form-hint">
             <li>court or tribunal name</li>

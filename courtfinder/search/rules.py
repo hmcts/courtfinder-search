@@ -1,6 +1,5 @@
 import re
 from search.models import Court
-from search.court_search import CourtSearch, CourtSearchInvalidPostcode
 from django.core.urlresolvers import reverse
 
 class Rules:
@@ -8,57 +7,63 @@ class Rules:
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
                           'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
-    @classmethod
-    def __results_or_back(self, postcode, results):
-        if len(results) == 0:
-            return {
-                'action': 'redirect',
-                'target': 'search:postcode-view',
-                'params': '?error=noresults&postcode='+postcode,
-            }
-        else:
-            in_scotland = True if re.match('^G\d+',postcode) or postcode[:2] in Rules.scottish_postcodes else False
+    by_proximity = ['Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
+    by_local_authority = ['Adoption', 'Children', 'Divorce']
+    by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
+    has_spoe = ['Children', 'Divorce']
+
+
+    @staticmethod
+    def for_view(postcode, area_of_law):
+        """
+        Returns rules that tell what to render on the screen,
+        irrespective of the search. Eg, warnings on some geographical areas
+        """
+        if Rules.__postcode_in_scotland(postcode):
             return {
                 'action': 'render',
-                'in_scotland': in_scotland,
-                'results': results
+                'in_scotland': True
             }
 
-    @classmethod
-    def for_postcode(self, postcode, area_of_law):
-        if postcode[:2].lower() == 'bt':
+        if Rules.__postcode_in_NI(postcode):
             if area_of_law == 'Immigration':
                 return {
-                    'action': 'render',
-                    'results': Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
+                    'action': 'render'
                 }
             else:
                 return {
                     'action': 'redirect',
-                    'target': 'search:postcode-view',
-                    'params': '?error=ni',
-                    }
-        else:
-            try:
-                if area_of_law in ['Crime', 'Domestic violence', 'Forced marriage', 'Civil partnership', 'Probate']:
-                    results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                elif area_of_law in ['Money claims', 'Housing possession', 'Bankruptcy']:
-                    results = CourtSearch.local_authority_search(postcode, area_of_law)
-                    if len(results) == 0:
-                        results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                elif area_of_law in ['Children', 'Adoption', 'Divorce']:
-                    results = CourtSearch.local_authority_search(postcode, area_of_law)
-                    if len(results) == 0:
-                        results = CourtSearch.proximity_search(postcode, area_of_law)
-                    return Rules.__results_or_back(postcode, results)
-                else:
-                    results = CourtSearch.proximity_search(postcode, area_of_law)
-                return Rules.__results_or_back(postcode, results)
-            except CourtSearchInvalidPostcode:
-                return {
-                    'action': 'redirect',
-                    'target': 'search:postcode-view',
-                    'params': '?error=badpc&postcode='+postcode
+                    'target': 'search:postcode',
+                    'params': '?error=ni'
                 }
+
+        return None
+
+
+    @staticmethod
+    def for_search(postcode, area_of_law):
+        """
+        Does the search and returns a list of courts
+        """
+        if Rules.__postcode_in_NI(postcode):
+            if area_of_law == 'Immigration':
+                return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
+            else:
+                return []
+
+        if area_of_law == 'Money claims':
+            return Court.objects.filter(name__icontains='CCMCC')
+
+        return None
+
+################################################################################
+# Private
+
+    @staticmethod
+    def __postcode_in_scotland(postcode):
+        p = postcode.upper()
+        return True if re.match('^G\d+',p) or p[:2] in Rules.scottish_postcodes else False
+
+    @staticmethod
+    def __postcode_in_NI(postcode):
+        return postcode[:2].lower() == 'bt'

@@ -1,12 +1,19 @@
 {% extends "layout/base.jinja" %}
 
-{% block page_title %}Courts and Tribunals{% endblock %}
+
+{% block page_title %}
+{% if letter %}
+List of courts and tribunals starting with {{ letter }} - GOV.UK
+{% else %}
+Index of all courts and tribunals - GOV.UK
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search-view' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
   </ol>
 </div>
 
@@ -17,39 +24,34 @@
 
   <p>Browse by name of court or tribunal</p>
 
-  <nav role='navigation' class="a-z-navigation">
-    <ul>
-      {% for letter in letters %}
-      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
-      {% endfor %}
-    </ul>
-  </nav>
+  {% if not courts %}
+  <p>Select the first letter of the court's name</p>
+  {% else %}
+  <h2 class="clear letterheader">Names starting with {{ letter }}</h2>
+  {% endif %}
 
-  <h2 class="clear letterheader">{{ letter }}</h2>
+  {% if letter %}
 
   {% if courts %}
   <ul>
     {% for court in courts %}
     <li>
-      <a href="{% url 'courts:court-view' court.slug %}">{{ court.name }}</a>
-      {% if court.number %}
-      (# {{ court.number }})
-      {% endif %}
+      <a href="{% url 'courts:court' court.slug %}">{{ court.name }}</a>
+      {% if court.numbers != '' %}({{ court.numbers }}){% endif %}
     </li>
     {% endfor %}
   </ul>
   {% else %}
-  <p>There are no courts starting with that letter.</p>
+  <p>There are no courts or tribunals starting with {{ letter }}</p>
   {% endif %}
-
+  {% endif %}
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
-      <a href="{% url 'courts:list-view' letter %}"><li>{{ letter }}</li></a>
+      <a href="{% url 'courts:list' letter %}"><li>{{ letter }}</li></a>
       {% endfor %}
     </ul>
   </nav>
-
 </div>
 
 

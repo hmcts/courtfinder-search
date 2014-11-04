@@ -62,7 +62,7 @@ $small-width: 800px;
 .court-addresses {
   @include media($min-width: $small-width) {
     float: left;
-    width: 40%;
+    width: 30%;
   }
 }
 
@@ -80,19 +80,19 @@ $small-width: 800px;
 }
 
 .court-map {
+  width: 290px;
+  > p a {
+    display: block;
+  }
   @include media($min-width: $small-width) {
     float: right;
-    width: 30%;
-  }
-  .court-map-top {
-    width: 290px;
   }
   .court-result-heading {
     float: left
   }
   .distance-from-postcode {
     text-align: right;
-    padding-top: .75em;
+    padding-top: .5em;
   }
 }
 
@@ -156,6 +156,10 @@ $small-width: 800px;
   }
   input {
     top: 10px;
+  }
+
+  #last-choice {
+    margin-top: 2em;
   }
 }
 
@@ -325,4 +329,37 @@ $small-width: 800px;
     }
   }
 
+  #map-link a img {
+    height: 15px;
+  }
+
+}
+
+#last_update {
+  font-size: 80%;
+  color: #555;
+  padding-top: 2em;
+  clear: both;
+}
+
+#feedback-form {
+  background-color: #e6e6e6;
+  padding-left: 1em;
+  .form-hint {
+    font-size: 80%;
+  }
+}
+
+p.warning {
+  font-weight: bold;
+}
+
+
+#feedback-banner {
+  font-size: 85%;
+  margin: .5em auto;
+  width: auto;
+  max-width: 960px;
+  padding-left: 100px;
+  padding-right: 100px;
 }

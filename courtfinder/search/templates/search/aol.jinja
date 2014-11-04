@@ -1,0 +1,53 @@
+{% extends "layout/base.jinja" %}
+{% load static %}
+
+{% block page_title %}About your issue{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search' %}">Find the right court or tribunal</a></li>
+  </ol>
+</div>
+<div id="search-index-page" class="content inner cf">
+  <header class="page-header">
+    <h1>About your issue</h1>
+  </header>
+{% if aol == '' %}
+  <section class="validation-error">
+    <h2>Error</h2>
+    <p>You did not enter a type of legal problem. Please try again.</p>
+  </section>
+{% endif %}
+
+  <form method="get" action="{% url 'search:spoe' %}">
+    <div class="form-block">
+
+      <div id="aols" class="form-block">
+        {% for area in areas_of_law %}
+        <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
+          <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.name}}" {% if area.name == aol %}checked{% endif %}>
+          <div class="form-label">
+            <span class="aol-name">{{area.name}}: </span>
+            <span class="aol-description">{{ area.description }}</span>
+          </div>
+        </label>
+        {% endfor %}
+        <label id="last-choice" for="aol-0" class="block-label form-block">
+          <input id="aol-0" type="radio" name="aol" value="All" {% if aol == 'All' %}checked{% endif %}>
+          <div class="form-label">
+            <span class="aol-name">None of the above or not sure: </span>
+            <span class="aol-description">will display a list of the nearest courts to the postcode</span>
+
+
+
+        </label>
+      </div>
+    </div>
+    <div class="actions">
+    <button id="continue" class="button" type="submit">Continue</button>
+  </div>
+  </form>
+</div>
+{% endblock %}

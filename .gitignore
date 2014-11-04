@@ -65,3 +65,6 @@ generated/
 
 # gulp temp folder
 .gulptmp
+
+# Tern is a stand-alone code-analysis engine for JavaScript http://ternjs.net
+.tern-port

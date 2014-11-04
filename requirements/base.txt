@@ -1,7 +1,9 @@
 Django==1.7
 MarkupSafe==0.23
-django-moj-template==0.15.0
+newrelic==2.34.0.29
+django-moj-template==0.18.0
 psycopg2==2.5.3
 requests==2.3.0
 boto==2.29.1
-
+python-dateutil==2.2
+raven==5.1.1

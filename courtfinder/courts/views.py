@@ -47,22 +47,25 @@ def format_court(court):
     contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all()]
     contacts.sort(key=lambda x: x['name'])
     court_obj = { 'name': court.name,
-              'lat': court.lat,
-              'lon': court.lon,
-              'number': court.number,
-              'slug': court.slug,
-              'image_file': court.image_file,
-              'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
-              'postal_address': postal_address,
-              'visiting_address': visiting_address,
-              'opening_times': sorted([opening_time for opening_time in court.opening_times.all()], key=lambda x: x.description),
-              'areas_of_law': sorted([aol for aol in court.areas_of_law.all()]),
-              'facilities': sorted([facility for facility in court.facilities.all()], key=lambda x: x.name),
-              'emails': collapse(emails, 'description', 'addresses'),
-              'contacts': collapse(contacts, 'name', 'numbers'),
-              'directions': court.directions if court.directions else None,
-              'alert': court.alert if court.alert else None,
-    }
+                  'lat': court.lat,
+                  'lon': court.lon,
+                  'number': court.number,
+                  'cci_code': court.cci_code,
+                  'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
+                  'slug': court.slug,
+                  'image_file': court.image_file,
+                  'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
+                  'postal_address': postal_address,
+                  'visiting_address': visiting_address,
+                  'opening_times': sorted([opening_time for opening_time in court.opening_times.all()], key=lambda x: x.description),
+                  'areas_of_law': sorted([aol for aol in court.areas_of_law.all()]),
+                  'facilities': sorted([facility for facility in court.facilities.all()], key=lambda x: x.name),
+                  'emails': collapse(emails, 'description', 'addresses'),
+                  'contacts': collapse(contacts, 'name', 'numbers'),
+                  'directions': court.directions if court.directions else None,
+                  'alert': court.alert if court.alert else None,
+                  'parking': court.parking if court.parking else None,
+              }
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
         court_obj['dx_number'] = dx_contact.first().number
@@ -70,20 +73,24 @@ def format_court(court):
     return court_obj
 
 
-def court_view(request, slug):
+def court(request, slug):
     return render(request, 'courts/court.jinja', {
         'court': format_court(Court.objects.get(slug=slug)),
         'query': request.GET.get('q',''),
-        'area_of_law': request.GET.get('area_of_law','All'),
+        'aol': request.GET.get('aol','All'),
+        'spoe': request.GET.get('spoe', None),
         'postcode': request.GET.get('postcode',''),
     })
 
-def courts_view(request):
-    return redirect(reverse('courts:list-view', kwargs={'first_letter':'A'}))
+def list_format_courts(courts):
+    return [{'name':court.name,
+             'slug':court.slug,
+             'numbers': ', '.join(filter(None,('#'+str(court.number) if court.number else None, 'CCI: '+str(court.cci_code) if court.cci_code else None)))
+            } for court in courts]
 
-def list_view(request, first_letter='A'):
+def list(request, first_letter='A'):
     return render(request, 'courts/list.jinja', {
         'letter': first_letter,
         'letters': string.ascii_uppercase,
-        'courts': Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')
+        'courts': list_format_courts(Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')) if first_letter else None
     })
