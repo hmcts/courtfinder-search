@@ -25,7 +25,7 @@ ALLOWED_HOSTS = '*'
 
 # Set your DSN value
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_URL', None),
+    'dsn': os.environ['SENTRY_URL'],
 }
 
 # Add raven to the list of installed apps
