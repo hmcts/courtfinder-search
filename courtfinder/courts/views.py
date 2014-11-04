@@ -44,8 +44,8 @@ def format_court(court):
 
     emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
     emails.sort(key=lambda x: x['description'])
-    contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all()]
-    contacts.sort(key=lambda x: x['name'])
+    contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all().order_by('sort_order')]
+    # contacts.sort(key=lambda x: x['sort_order'])
     court_obj = { 'name': court.name,
                   'lat': court.lat,
                   'lon': court.lon,

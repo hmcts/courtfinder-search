@@ -170,6 +170,7 @@ class CourtAddress(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=255)
     number = models.CharField(max_length=255)
+    sort_order = models.IntegerField(null=True, default=None)
 
     def __unicode__(self):
         return "%s: %s" % (self.name, self.number)
