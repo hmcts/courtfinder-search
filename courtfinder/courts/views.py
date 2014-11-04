@@ -15,10 +15,10 @@ def collapse(source, key, key2):
     """
     result=[]
     for item in source:
-        if len(result) > 0 and item[key] == result[0][key]:
-            result[0][key2].append(item[key2][0])
+        if len(result) > 0 and item[key] == result[-1][key]:
+            result[-1][key2].append(item[key2][0])
         else:
-            result.insert(0,item)
+            result.append(item)
     return result
 
 
