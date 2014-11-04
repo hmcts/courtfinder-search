@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from os import environ
 
@@ -134,6 +134,12 @@ EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
+
+# Ensure logging directory is created
+LOGPATH = abspath(PROJECT_ROOT + '/logs')
+if not os.path.exists(LOGPATH):
+    os.makedirs(LOGPATH)
+
 # Logging
 LOGGING = {
     'version': 1,
@@ -148,31 +154,31 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': PROJECT_ROOT + '/logs/errors.log',
+            'filename':  LOGPATH + '/errors.log',
         },
         'missed-las-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': PROJECT_ROOT + '/logs/missed-las.log',
+            'filename': LOGPATH + '/missed-las.log',
         },
         'missed-aols-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': PROJECT_ROOT + '/logs/missed-aols.log',
+            'filename': LOGPATH + '/missed-aols.log',
         },
         'mapit-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': PROJECT_ROOT + '/logs/mapit.log',
+            'filename': LOGPATH + '/mapit.log',
         },
         'search-method-file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': PROJECT_ROOT + '/logs/search-method.log',
+            'filename': LOGPATH + '/search-method.log',
         },
     },
     'loggers': {
