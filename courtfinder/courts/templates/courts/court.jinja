@@ -13,11 +13,14 @@
     <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
     {% elif postcode %}
     <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
-    {% if spoe %}
+    {%   if spoe %}
     <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
-    {% endif %}
     <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
+    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
+    {%   else %}
+    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
     <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
+    {%   endif %}
     {% else %}
     <li><a href="{% url 'courts:list' %}">Courts list</a></li>
     {% endif %}

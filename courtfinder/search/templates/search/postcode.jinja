@@ -39,7 +39,9 @@
   {% endif %}
   <form method="get" action="results">
     <input type="hidden" name="aol" value="{{ aol }}"/>
+    {% if spoe %}
     <input type="hidden" name="spoe" value="{{ spoe }}"/>
+    {% endif %}
     <div class="form-block">
       <label for="postcode">
         <div class="form-hint">
