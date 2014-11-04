@@ -58,9 +58,12 @@ def postcode(request):
     spoe = request.GET.get('spoe', None)
     postcode = request.GET.get('postcode', None)
     error = request.GET.get('error', None)
-    return render(request, 'search/postcode.jinja', {
-        'aol': aol, 'spoe': spoe, 'postcode': postcode, 'error': error
-    })
+    params = {
+        'aol': aol, 'postcode': postcode, 'error': error
+    }
+    if spoe:
+        params['spoe'] = spoe
+    return render(request, 'search/postcode.jinja', params)
 
 def address(request):
     error = request.GET.get('error', None)
