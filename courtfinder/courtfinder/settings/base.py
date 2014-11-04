@@ -134,6 +134,15 @@ EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_URL', None),
+}
+
+# Add raven to the list of installed apps
+INSTALLED_APPS = INSTALLED_APPS + (
+    'raven.contrib.django.raven_compat',
+)
 
 # Ensure logging directory is created
 LOGPATH = abspath(PROJECT_ROOT + '/logs')
