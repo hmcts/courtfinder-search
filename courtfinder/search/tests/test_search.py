@@ -424,11 +424,11 @@ class SearchTestCase(TestCase):
 #            response = c.get('/search/results?postcode=SE15')
 #            self.assertRedirects(response, '/search/', 302)
 
-#    def test_redirect_directive_action(self):
-#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'redirect', 'target':'postcode-view'})):
-#            c = Client()
-#            response = c.get('/search/results?postcode=BLARGH')
-#            self.assertRedirects(response, '/search/postcode', 302)
+    def test_redirect_directive_action(self):
+        with patch('search.rules.Rules.for_view', Mock(return_value={'action':'redirect', 'target':'search:postcode'})):
+            c = Client()
+            response = c.get('/search/results?postcode=BLARGH')
+            self.assertRedirects(response, '/search/postcode?postcode=BLARGH&error=badpostcode', 302)
 
 
     def test_search_no_postcode_nor_q(self):
@@ -436,23 +436,17 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results')
         self.assertRedirects(response, '/search/', 302)
 
-#    def test_postcode_to_local_authority_short_postcode(self):
-#        self.assertEqual(len(CourtSearch.local_authority_search('SE15', 'Divorce')), 1)
+    def test_postcode_to_local_authority_short_postcode(self):
+        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='Divorce')
+                             .get_courts()), 1)
 
-#    def test_local_authority_search_ordered(self):
-#        self.assertEqual(CourtSearch.local_authority_search('SE15 4UH', 'Divorce')[0].name, "Accrington Magistrates' Court")
+    def test_local_authority_search_ordered(self):
+        self.assertEqual(CourtSearch(postcode='SE154UH', area_of_law='Divorce')
+                         .get_courts()[0].name, "Accrington Magistrates' Court")
 
-#    def test_bad_local_authority(self):
-#        with patch('search.court_search.CourtSearch.postcode_to_local_authority', Mock(return_value="local authority name that does not exist")):
-#            self.assertEqual(CourtSearch.local_authority_search('SE154UH', 'Money claims'), [])
-
-#    def test_broken_postcode_to_latlon(self):
-#        with patch('search.court_search.CourtSearch.postcode_to_latlon', Mock(side_effect=Exception('something went wrong'))):
-#            with self.assertRaises(Exception):
-#                CourtSearch.proximity_search('SE154UH', 'Money claims')
-
-#    def test_proximity_search(self):
-#        self.assertNotEqual(CourtSearch.proximity_search('SE154UH', 'Divorce'), [])
+    def test_proximity_search(self):
+        self.assertNotEqual(CourtSearch(postcode='SE154UH',
+                                        area_of_law='Divorce').get_courts(), [])
 
     def test_court_address_search_error(self):
         with patch('search.court_search.CourtSearch.get_courts',

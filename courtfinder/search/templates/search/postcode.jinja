@@ -25,6 +25,11 @@
       <p>You did not enter a postcode. Please try again.</p>
     </section>
   </div>
+  {% elif error == 'badpostcode' %}
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>You did not enter a valid postcode. Please try again.</p>
+    </section>
   {% elif error == 'ni' %}
     <section class="validation-error">
       <h2>Error</h2>
