@@ -67549,6 +67549,16 @@
         ],
         "areas_of_law": [
             {
+                "single_point_of_entry": true,
+                "name": "Children",
+                "local_authorities": [
+                    "Newham Borough Council",
+                    "Redbridge Borough Council",
+                    "Tower Hamlets Borough Council",
+                    "Waltham Forest Borough Council"
+                ]
+            },
+            {
                 "name": "Divorce",
                 "local_authorities": [
                     "Newham Borough Council",
@@ -67564,15 +67574,6 @@
             {
                 "name": "Domestic violence",
                 "local_authorities": []
-            },
-            {
-                "name": "Children",
-                "local_authorities": [
-                    "Newham Borough Council",
-                    "Redbridge Borough Council",
-                    "Tower Hamlets Borough Council",
-                    "Waltham Forest Borough Council"
-                ]
             },
             {
                 "name": "Money claims",
@@ -72954,6 +72955,7 @@
                 "local_authorities": []
             },
             {
+                "single_point_of_entry": true,
                 "name": "Children",
                 "local_authorities": [
                     "Devon County Council",
@@ -77905,6 +77907,7 @@
                 "local_authorities": []
             },
             {
+                "single_point_of_entry": true,
                 "name": "Children",
                 "local_authorities": [
                     "Hampshire County Council",
@@ -79279,6 +79282,7 @@
                 ]
             },
             {
+                "single_point_of_entry": true,
                 "name": "Children",
                 "local_authorities": [
                     "Somerset County Council"
@@ -89752,6 +89756,7 @@
                 "local_authorities": []
             },
             {
+                "single_point_of_entry": true,
                 "name": "Children",
                 "local_authorities": [
                     "Swindon Borough Council",
@@ -93534,6 +93539,7 @@
                 "local_authorities": []
             },
             {
+                "single_point_of_entry": true,
                 "name": "Children",
                 "local_authorities": [
                     "Devon County Council"
@@ -94014,6 +94020,17 @@
         ],
         "areas_of_law": [
             {
+                "single_point_of_entry": true,
+                "name": "Children",
+                "local_authorities": [
+                    "Bath and North East Somerset Council",
+                    "Bristol City Council",
+                    "Gloucestershire County Council",
+                    "North Somerset Council",
+                    "South Gloucestershire Council"
+                ]
+            },
+            {
                 "name": "Divorce",
                 "local_authorities": [
                     "Bath and North East Somerset Council",
@@ -94052,16 +94069,6 @@
             {
                 "name": "Forced marriage",
                 "local_authorities": []
-            },
-            {
-                "name": "Children",
-                "local_authorities": [
-                    "Bath and North East Somerset Council",
-                    "Bristol City Council",
-                    "Gloucestershire County Council",
-                    "North Somerset Council",
-                    "South Gloucestershire Council"
-                ]
             },
             {
                 "name": "Domestic violence",
@@ -94674,6 +94681,15 @@
         ],
         "areas_of_law": [
             {
+                "single_point_of_entry": true,
+                "name": "Children",
+                "local_authorities": [
+                    "Isle of Wight Council",
+                    "Portsmouth City Council",
+                    "Southampton City Council"
+                ]
+            },
+            {
                 "name": "Crime",
                 "local_authorities": []
             },
@@ -94702,14 +94718,6 @@
                 "name": "Adoption",
                 "local_authorities": [
                     "Hampshire County Council",
-                    "Isle of Wight Council",
-                    "Portsmouth City Council",
-                    "Southampton City Council"
-                ]
-            },
-            {
-                "name": "Children",
-                "local_authorities": [
                     "Isle of Wight Council",
                     "Portsmouth City Council",
                     "Southampton City Council"
@@ -95868,6 +95876,13 @@
         ],
         "areas_of_law": [
             {
+                "single_point_of_entry": true,
+                "name": "Children",
+                "local_authorities": [
+                    "Cornwall Council"
+                ]
+            },
+            {
                 "name": "Bankruptcy",
                 "local_authorities": []
             },
@@ -95894,12 +95909,6 @@
             {
                 "name": "Domestic violence",
                 "local_authorities": []
-            },
-            {
-                "name": "Children",
-                "local_authorities": [
-                    "Cornwall Council"
-                ]
             },
             {
                 "name": "Money claims",

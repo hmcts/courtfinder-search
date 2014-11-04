@@ -16,6 +16,7 @@ var paths = {
     'courtfinder/assets-src/vendor/jquery-details/jquery.details.js',
     // Application
     'courtfinder/assets-src/javascripts/application.js',
+    'courtfinder/assets-src/javascripts/analytics.js',
   ],
   vendor_scripts: 'courtfinder/assets-src/javascripts/vendor/*',
   images: ['courtfinder/assets-src/images/**/*', 'node_modules/govuk_frontend_toolkit/govuk_frontend_toolkit/images/**/*']
