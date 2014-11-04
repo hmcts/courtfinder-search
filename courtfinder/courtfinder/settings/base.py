@@ -10,9 +10,12 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from os import environ
+
+# Log handler for LogEntries
+from logentries import LogentriesHandler
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -130,3 +133,80 @@ EMAIL_PORT = os.environ.get('SMTP_PORT', None)
 EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
+
+
+# Ensure logging directory is created
+LOGPATH = abspath(PROJECT_ROOT + '/logs')
+if not os.path.exists(LOGPATH):
+    os.makedirs(LOGPATH)
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s %(message)s'
+        },
+    },
+    'handlers': {
+        'error-file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename':  LOGPATH + '/errors.log',
+        },
+        'missed-las-file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': LOGPATH + '/missed-las.log',
+        },
+        'missed-aols-file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': LOGPATH + '/missed-aols.log',
+        },
+        'mapit-file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': LOGPATH + '/mapit.log',
+        },
+        'search-method-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': LOGPATH + '/search-method.log',
+        },
+    },
+    'loggers': {
+        'search.error': {
+            'handlers': ['error-file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'search.mapit': {
+            'handlers': ['mapit-file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'search.la': {
+            'handlers': ['missed-las-file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'search.aol': {
+            'handlers': ['missed-aols-file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'search.method': {
+            'handlers': ['search-method-file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    },
+}
+

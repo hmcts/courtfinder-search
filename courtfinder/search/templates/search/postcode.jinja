@@ -14,7 +14,7 @@
     {% endif %}
   </ol>
 </div>
-<div id="search-index-page" class="content inner cf">
+<div id="postcode-page" class="content inner cf">
   <header class="page-header">
     <h1>Enter postcode</h1>
   </header>
@@ -25,6 +25,11 @@
       <p>You did not enter a postcode. Please try again.</p>
     </section>
   </div>
+  {% elif error == 'badpostcode' %}
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>You did not enter a valid postcode. Please try again.</p>
+    </section>
   {% elif error == 'ni' %}
     <section class="validation-error">
       <h2>Error</h2>
@@ -41,7 +46,17 @@
           {% if aol == 'Children' %}
           Enter the postcode where the child (or children) lives.
           {% elif aol == 'Housing possession' %}
+          <p>
+            You may be able to
+            <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">start a possession claim online</a>.
+          </p>
+
           Enter the postcode of the property.
+          {% elif aol == 'Money claims' %}
+          <p>
+            You may be able to
+            <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">make a money claim online</a>.
+          </p>
           {% else %}
           Enter your postcode.
           {% endif %}

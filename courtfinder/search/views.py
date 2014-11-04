@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServer
 from django.core.serializers.json import DjangoJSONEncoder
 
 from search.models import Court, AreaOfLaw, DataStatus
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError
+from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 
 areas_of_law_description = {
@@ -94,10 +94,14 @@ def results(request):
         if postcode:
             try:
                 courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
-            except CourtSearchError as e:
-                return HttpResponseServerError(e)
+            except CourtSearchInvalidPostcode as e:
+                return redirect(reverse('search:postcode')+'?postcode='+
+                                postcode+'&error=badpostcode')
             except CourtSearchClientError as e:
                 return HttpResponseBadRequest(e)
+            except CourtSearchError as e:
+                return HttpResponseServerError(e)
+
             rules = Rules.for_view(postcode, aol)
 
             view_obj = {
