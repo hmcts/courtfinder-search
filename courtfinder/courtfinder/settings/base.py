@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'moj_template',
+    'core',
     'search',
     'staticpages',
     'courts',
@@ -67,6 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.RequestLoggingMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
@@ -157,6 +159,9 @@ LOGGING = {
         'simple': {
             'format': '%(asctime)s %(message)s'
         },
+        'no-format': {
+            'format': '%(message)s'
+        }
     },
     'handlers': {
         'error-file': {
@@ -189,6 +194,12 @@ LOGGING = {
             'formatter': 'simple',
             'filename': LOGPATH + '/search-method.log',
         },
+        'courtfinder-requests-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'no-format',
+            'filename': LOGPATH + '/requests.log',
+        }
     },
     'loggers': {
         'search.error': {
@@ -213,6 +224,11 @@ LOGGING = {
         },
         'search.method': {
             'handlers': ['search-method-file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'courtfinder.requests': {
+            'handlers': ['courtfinder-requests-file'],
             'level': 'DEBUG',
             'propagate': True,
         }
