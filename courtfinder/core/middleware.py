@@ -1,22 +1,22 @@
 import json
 import logging
 from syslog import syslog
-from time import gmtime, strftime
-
-from django.http import Http404
+from time import gmtime, strftime, time
 
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
 
 class RequestLoggingMiddleware(object):
-
-    def __init__(self):
-        self.logger = logging.getLogger('courtfinder.requests')
-
     def process_request(self, request):
+        self.logger = logging.getLogger('courtfinder.requests')
+        self.request_time = time()
+
+    def process_response(self, request, response):
         try:
             self.logger.debug(json.dumps({
+                'responseCode': getattr(response, 'status_code', 0),
+                'responseTime': time() - self.request_time,
                 'time': strftime("%Y-%m-%d %H:%M:%S", gmtime()),
                 'fullPath': request.get_full_path(),
                 'path': request.path,
@@ -28,3 +28,6 @@ class RequestLoggingMiddleware(object):
             }))
         except:
             pass
+
+        return response
+
