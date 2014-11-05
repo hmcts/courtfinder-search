@@ -348,6 +348,9 @@ $small-width: 800px;
   .form-hint {
     font-size: 80%;
   }
+  textarea {
+    width: 100%;
+  }
 }
 
 p.warning {

@@ -40,11 +40,11 @@
         {{ line }}<br/>
           {% endfor %}
         </span>
-        <span property="addressLocality">{{ court.visiting_address.town }}<br/></span>
+        <span property="addressLocality">{{ court.visiting_address.town }}</span><br/>
         {% if court.visiting_address.county != court.visiting_address.town %}
-        <span property="addressRegion">{{ court.visiting_address.county }}</span>
+        <span property="addressRegion">{{ court.visiting_address.county }}</span><br/>
         {% endif %}
-        <span property="postalCode">{{ court.visiting_address.postcode }}<br/></span>
+        <span property="postalCode">{{ court.visiting_address.postcode }}</span>
         <p id="map-link">
           <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
         </p>
@@ -56,11 +56,12 @@
         {% for line in court.postal_address.address_lines %}
         {{ line }}<br/>
         {% endfor %}
-        {{ court.postal_address.postcode }}<br/>
         {{ court.postal_address.town }}<br/>
         {% if court.postal_address.county != court.postal_address.town %}
-        {{ court.postal_address.county }}
+        {{ court.postal_address.county }}<br/>
         {% endif %}
+        {{ court.postal_address.postcode }}
+
       </div>
       {% endif %}
     </div>
