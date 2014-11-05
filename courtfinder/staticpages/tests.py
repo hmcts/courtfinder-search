@@ -22,24 +22,6 @@ class SearchTestCase(TestCase):
         self.assertTemplateUsed(response, 'staticpages/api.jinja')
         self.assertInHTML('<title>Find a court or tribunal - API - GOV.UK</title>', response.content, count=1)
 
-    def test_error_pages_return_correct_content(self):
-        c = Client()
-        response = c.get('/errors/500')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/error.jinja')
-        self.assertInHTML('<p>We\'re sorry, but something went wrong.</p>', response.content, count=1)
-        response = c.get('/errors/404')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/notfound.jinja')
-        self.assertInHTML('<p>Page not found.</p>', response.content, count=1)
-
-    def test_feedback_page_returns_correct_content(self):
-        c = Client()
-        response = c.get('/feedback')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/feedback.jinja')
-        self.assertInHTML('<h1>Send feedback</h1>', response.content, count=1)
-
     def test_feedback_sent_page_returns_correct_content(self):
         with patch('django.core.mail.send_mail', Mock(return_value=2)):
             c = Client()

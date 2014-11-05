@@ -3,7 +3,7 @@ import json
 import re
 from django.test import TestCase, Client
 from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
+from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.models import *
 from django.conf import settings
 from search.ingest import Ingest
@@ -352,8 +352,7 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
         self.assertEqual(response.status_code, 400)
-        self.assertIn('bad area of law', response.content)
-
+        self.assertIn('your browser sent a request',response.content)
 
 
     def test_inactive_court(self):
@@ -430,6 +429,12 @@ class SearchTestCase(TestCase):
             response = c.get('/search/results?postcode=BLARGH')
             self.assertRedirects(response, '/search/postcode?postcode=BLARGH&error=badpostcode', 302)
 
+    def test_internal_error(self):
+        c = Client()
+        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
+            response = c.get('/search/results.json?q=Accrington')
+            self.assertEquals(500, response.status_code)
+            self.assertIn("something went wrong", response.content)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()
@@ -452,17 +457,19 @@ class SearchTestCase(TestCase):
         with patch('search.court_search.CourtSearch.get_courts',
                    Mock(side_effect=CourtSearchError('something went wrong'))):
             c = Client()
-            response = c.get('/search/results?q=Accrington')
-            self.assertEquals(500, response.status_code)
-            self.assertIn("something went wrong", response.content)
+            with self.assertRaises(CourtSearchError):
+                response = c.get('/search/results?q=Accrington')
+                self.assertEquals(500, response.status_code)
+                self.assertIn("something went wrong", response.content)
 
     def test_court_postcode_search_error(self):
         with patch('search.court_search.CourtSearch.get_courts',
                    Mock(side_effect=CourtSearchError('something went wrong'))):
             c = Client()
-            response = c.get('/search/results?postcode=SE15+4PE')
-            self.assertEquals(500, response.status_code)
-            self.assertIn("something went wrong", response.content)
+            with self.assertRaises(CourtSearchError):
+                response = c.get('/search/results?postcode=SE15+4PE')
+                self.assertEquals(500, response.status_code)
+                self.assertIn("something went wrong", response.content)
 
     def test_address_search(self):
         c = Client()
