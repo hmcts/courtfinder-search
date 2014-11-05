@@ -459,8 +459,6 @@ class SearchTestCase(TestCase):
             c = Client()
             with self.assertRaises(CourtSearchError):
                 response = c.get('/search/results?q=Accrington')
-                self.assertEquals(500, response.status_code)
-                self.assertIn("something went wrong", response.content)
 
     def test_court_postcode_search_error(self):
         with patch('search.court_search.CourtSearch.get_courts',
@@ -468,8 +466,6 @@ class SearchTestCase(TestCase):
             c = Client()
             with self.assertRaises(CourtSearchError):
                 response = c.get('/search/results?postcode=SE15+4PE')
-                self.assertEquals(500, response.status_code)
-                self.assertIn("something went wrong", response.content)
 
     def test_address_search(self):
         c = Client()

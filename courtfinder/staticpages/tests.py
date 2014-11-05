@@ -11,6 +11,13 @@ class SearchTestCase(TestCase):
         self.assertTemplateUsed(response, 'staticpages/index.jinja')
         self.assertInHTML('<title>Find a court or tribunal - GOV.UK</title>', response.content, count=1)
 
+    def test_feedback_page_returns_correct_content(self):
+        c = Client()
+        response = c.get('/feedback')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'staticpages/feedback.jinja')
+        self.assertInHTML('<title>Feedback for Court and Tribunal Finder</title>', response.content, count=1)
+
     def test_api_doc_returns_correct_content(self):
         c = Client()
         response = c.get('/api')
@@ -30,7 +37,17 @@ class SearchTestCase(TestCase):
             response = c.post('/feedback_submit',
                               {
                                   'feedback_text': 'I like it',
-                                  'feedback_email': 'a@b.com'
+                                  'feedback_email': 'a@b.com',
+                                  'feedback_referer': 'http://example.org',
+                              },
+                              follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
+            self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
+            response = c.post('/feedback_submit',
+                              {
+                                  'feedback_text': 'I like it',
+                                  'feedback_referer': 'http://example.org',
                               },
                               follow=True)
             self.assertEqual(response.status_code, 200)
