@@ -1,12 +1,19 @@
+import os
+import json
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from django import forms
+from django.http import HttpResponseRedirect, Http404
 from raven.contrib.django.raven_compat.models import client
 
+
 def index(request):
-    return render(request, 'staticpages/index.jinja')
+    if "court_id" not in request.GET:
+        return render(request, 'staticpages/index.jinja')
+    else:
+        return redirect_old_id_to_slug(request.GET['court_id'])
 
 def api(request, extension=None):
     return render(request, 'staticpages/api.jinja')
@@ -60,3 +67,14 @@ Message: %s
 
 def feedback_sent(request):
     return render(request, 'staticpages/feedback_sent.jinja')
+
+def redirect_old_id_to_slug(old_id):
+    ids_file = '%s/../../data/old_id/ids.json' % settings.DJANGO_ROOT
+    if os.path.isfile(ids_file):
+        try:
+            old_ids = json.loads(open(ids_file).read())
+            return HttpResponseRedirect('/courts/%s' % old_ids[old_id])
+        except KeyError:
+            raise Http404()
+    else:
+        raise Exception('No Old data file: ids.json')
