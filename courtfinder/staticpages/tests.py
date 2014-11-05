@@ -27,8 +27,12 @@ class SearchTestCase(TestCase):
             c = Client()
             settings.FEEDBACK_EMAIL_SENDER="sender@b.com"
             settings.FEEDBACK_EMAIL_RECEIVER="receiver@b.com"
-            response = c.post('/feedback-sent', { 'feedback_text': 'I like it',
-                                                  'feedback_email': 'a@b.com' })
+            response = c.post('/feedback_submit',
+                              {
+                                  'feedback_text': 'I like it',
+                                  'feedback_email': 'a@b.com'
+                              },
+                              follow=True)
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
             self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
