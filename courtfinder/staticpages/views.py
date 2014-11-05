@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from django import forms
+from raven.contrib.django.raven_compat.models import client
 
 def index(request):
     return render(request, 'staticpages/index.jinja')
@@ -46,9 +47,14 @@ Message: %s
        form.cleaned_data['feedback_email'],
        form.cleaned_data['feedback_text'])
 
+        try:
             nb_emails_sent = send_mail('Feedback received for Court and Tribunal Finder',
                                        message, from_address,
                                        to_addresses, fail_silently=False)
+        except smtplib.SMTPException:
+            client.captureException()
+            # do nothing else in case of error. User doesn't need to see.
+
 
     return redirect(reverse('staticpages:feedback_sent'))
 
