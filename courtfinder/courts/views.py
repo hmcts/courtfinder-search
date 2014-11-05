@@ -1,6 +1,6 @@
 import string
 from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from search.models import Court, AreaOfLaw
 
@@ -74,8 +74,9 @@ def format_court(court):
 
 
 def court(request, slug):
+    the_court = get_object_or_404(Court, slug=slug)
     return render(request, 'courts/court.jinja', {
-        'court': format_court(Court.objects.get(slug=slug)),
+        'court': format_court(the_court),
         'query': request.GET.get('q',''),
         'aol': request.GET.get('aol','All'),
         'spoe': request.GET.get('spoe', None),
