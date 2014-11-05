@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from django import forms
@@ -24,7 +25,7 @@ class FeedbackForm(forms.Form):
     feedback_referer = forms.CharField(label='feedback_referer', max_length=512)
     feedback_email = forms.CharField(label='feedback_email', max_length=2000, required=False)
 
-def feedback_sent(request):
+def feedback_submit(request):
     form = FeedbackForm(request.POST)
     if form.is_valid():
         from_address = settings.FEEDBACK_EMAIL_SENDER
@@ -49,4 +50,7 @@ Message: %s
                                        message, from_address,
                                        to_addresses, fail_silently=False)
 
+    return redirect(reverse('staticpages:feedback_sent'))
+
+def feedback_sent(request):
     return render(request, 'staticpages/feedback_sent.jinja')
