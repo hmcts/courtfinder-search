@@ -10,12 +10,6 @@ def index(request):
 def api(request, extension=None):
     return render(request, 'staticpages/api.jinja')
 
-def error(request):
-    return render(request, 'staticpages/error.jinja')
-
-def notfound(request):
-    return render(request, 'staticpages/notfound.jinja')
-
 def feedback(request):
     return render(request, 'staticpages/feedback.jinja')
 
