@@ -147,7 +147,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
 )
 
 # Ensure logging directory is created
-LOGPATH = abspath(PROJECT_ROOT + '/logs')
+LOGPATH = abspath(PROJECT_ROOT + '/../logs')
 if not os.path.exists(LOGPATH):
     os.makedirs(LOGPATH)
 
