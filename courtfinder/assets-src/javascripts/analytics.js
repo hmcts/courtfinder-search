@@ -48,8 +48,9 @@
   }
 
   if( $('#search-results-page').length > 0 ){
-    ga('send', 'event', 'search-results-page', 'looking-at-search-results', 'User is looking at search results');
-
+    $(function (){
+      ga('send', 'event', 'search-results-page', 'looking-at-search-results', 'User is looking at search results');
+    });
 
     $('#search-results-page .court-map a').click(function (){
       ga('send', 'event', 'search-results-page', 'map-link-clicked', 'A map link clicked on search results');
@@ -61,7 +62,9 @@
   }
 
   if( $('#court-detail-page').length > 0 ){
-    ga('send', 'event', 'court-detail-page', 'looking-at-court-page', 'User is looking at a court page');
+    $(function (){
+      ga('send', 'event', 'court-detail-page', 'looking-at-court-page', 'User is looking at a court page');
+    });
   }
 
 })(jQuery);
