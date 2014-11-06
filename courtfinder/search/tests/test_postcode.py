@@ -37,10 +37,12 @@ class PostcodeTestCase(TestCase):
             }
         }
     """
+    mock_mapit_no_location = '{"postcode": "GY1 1AJ", "areas": {}}'
 
     full_postcode = 'SE15 4UH'
     partial_postcode = 'SE15'
     broken_postcode = 'SE15 4'
+    nowhere_postcode = 'GY1 1AJ'
 
     def setUp(self):
         self.patcher = mock.patch('requests.get', mock.Mock(side_effect=self._get_from_mapit_mock))
@@ -56,6 +58,8 @@ class PostcodeTestCase(TestCase):
             mock_response.text =  PostcodeTestCase.mock_mapit_partial
         elif url.endswith('SE15 4UH'):
             mock_response.text =  PostcodeTestCase.mock_mapit_full
+        elif url.endswith('GY1 1AJ'):
+            mock_response.text = PostcodeTestCase.mock_mapit_no_location
         elif url.endswith('Service Down'):
             mock_response.status_code = 500
         else:
@@ -85,3 +89,7 @@ class PostcodeTestCase(TestCase):
 
     def test_500(self):
         self.assertRaises(CourtSearchError, Postcode, 'Service Down')
+
+    def test_nowhere_postcode(self):
+        with self.assertRaises(CourtSearchInvalidPostcode):
+            p = Postcode(self.nowhere_postcode)

@@ -207,7 +207,7 @@ class Postcode():
             self.latitude = response['wgs84_lat']
             self.longitude = response['wgs84_lon']
         else:
-            raise CourtSearchError('MapIt service didn\'t return wgs84 data')
+            raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
 
         if self.full_postcode:
             if isinstance(response['shortcuts']['council'], dict):
