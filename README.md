@@ -54,3 +54,8 @@ The line above runs the unit tests, so it can replace the first command mentione
 
     coverage report -m
 
+py.test can also be used to run tests faster:
+
+    py.test -n 3 --cov .
+
+will run the tests using 3 processes and will show the coverage report
