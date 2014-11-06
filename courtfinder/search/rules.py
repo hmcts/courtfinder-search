@@ -10,7 +10,7 @@ class Rules:
     by_proximity = ['Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
     by_local_authority = ['Adoption', 'Children', 'Divorce']
     by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
-    has_spoe = ['Children', 'Divorce']
+    has_spoe = ['Children', 'Divorce', 'Money claims']
 
 
     @staticmethod
@@ -50,9 +50,6 @@ class Rules:
                 return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
             else:
                 return []
-
-        if area_of_law == 'Money claims':
-            return Court.objects.filter(name__icontains='CCMCC')
 
         return None
 

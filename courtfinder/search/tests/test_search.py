@@ -496,7 +496,7 @@ class SearchTestCase(TestCase):
 
     def test_money_claims(self):
         c = Client()
-        response = c.get('/search/results?postcode=sw1h9aj&aol=Money+claims')
+        response = c.get('/search/results?postcode=sw1h9aj&spoe=start&aol=Money+claims')
         self.assertIn("CCMCC", response.content)
 
     def test_ni_immigration(self):

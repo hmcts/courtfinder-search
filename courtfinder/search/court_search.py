@@ -67,13 +67,16 @@ class CourtSearch:
             if rule_results is not None:
                 return rule_results
 
-            if self.single_point_of_entry == 'start' and self.area_of_law.name in Rules.has_spoe:
-                results = [c.court for c in CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)]
-                results = [c.court for c in CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
+            if self.single_point_of_entry == 'start':
+                if self.area_of_law.name == 'Money claims':
+                    return Court.objects.filter(name__icontains='CCMCC')
+                elif self.area_of_law.name in Rules.has_spoe:
+                    results = [c.court for c in CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)]
+                    results = [c.court for c in CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
 
-                if len(results) > 0:
-                    loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
-                    return self.__order_by_distance(results)
+                    if len(results) > 0:
+                        loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                        return self.__order_by_distance(results)
 
 
             results = []
