@@ -75,7 +75,7 @@ class CourtSearch:
                     results = [c.court for c in CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
 
                     if len(results) > 0:
-                        loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                        loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
                         return self.__order_by_distance(results)
 
             results = []
