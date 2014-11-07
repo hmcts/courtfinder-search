@@ -53,3 +53,18 @@ class SearchTestCase(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
             self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
+
+    def test_error_pages(self):
+        c = Client()
+        response = c.get('/403')
+        self.assertEqual(response.status_code, 403)
+        self.assertIn('Access denied', response.content)
+        response = c.get('/404')
+        self.assertEqual(response.status_code, 404)
+        self.assertIn('Page not found', response.content)
+        response = c.get('/400')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('your browser sent a request that this server could not understand', response.content)
+        response = c.get('/500')
+        self.assertEqual(response.status_code, 500)
+        self.assertIn('something went wrong', response.content)
