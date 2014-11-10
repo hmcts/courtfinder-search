@@ -1,0 +1,15 @@
+[
+    {
+        "name": "England",
+        "counties": [
+            {
+                "towns": [ "Accrington", "Blackburn", "Double Name", "Ashton-Under-Lyne" ],
+                "name": "Lancashire"
+            },
+            {
+                "towns": [ "Bedford", "Luton" ],
+                "name": "Bedfordshire"
+            }
+        ]
+    }
+]

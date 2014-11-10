@@ -57,7 +57,7 @@ Message: %s
             # do nothing else in case of error. User doesn't need to see.
 
 
-    return redirect(reverse('staticpages:feedback_sent'))
+    return redirect('staticpages:feedback_sent')
 
 def feedback_sent(request):
     return render(request, 'staticpages/feedback_sent.jinja')
@@ -67,7 +67,7 @@ def redirect_old_id_to_slug(old_id):
     if os.path.isfile(ids_file):
         try:
             old_ids = json.loads(open(ids_file).read())
-            return HttpResponseRedirect('/courts/%s' % old_ids[old_id])
+            return redirect('courts:court', slug=old_ids[old_id])
         except KeyError:
             raise Http404()
     else:
