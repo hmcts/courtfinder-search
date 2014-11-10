@@ -11,7 +11,8 @@ from search.ingest import Ingest
 
 class SearchTestCase(TestCase):
 
-    def setUp(self):
+    @staticmethod
+    def setUpClass():
 
         countries_filename = settings.DJANGO_ROOT +  '/../../data/test_data/countries.json'
         courts_filename = settings.DJANGO_ROOT + '/../../data/test_data/courts.json'
@@ -23,6 +24,8 @@ class SearchTestCase(TestCase):
         Ingest.courts(json.loads(courts_json_1))
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
+    def setUp(self):
+        pass
 
     def tearDown(self):
         pass
