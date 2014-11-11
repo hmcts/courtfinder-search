@@ -63,12 +63,9 @@ def feedback_sent(request):
     return render(request, 'staticpages/feedback_sent.jinja')
 
 def redirect_old_id_to_slug(old_id):
-    ids_file = '%s/../../data/old_id/ids.json' % settings.DJANGO_ROOT
-    if os.path.isfile(ids_file):
-        try:
-            old_ids = json.loads(open(ids_file).read())
-            return redirect('courts:court', slug=old_ids[old_id])
-        except KeyError:
-            raise Http404()
-    else:
-        raise Exception('No Old data file: ids.json')
+    ids_file = settings.PROJECT_ROOT + '/data/old_id/ids.json'
+    old_ids = json.loads(open(ids_file).read())
+    try:
+        return redirect('courts:court', slug=old_ids[old_id])
+    except KeyError:
+        raise Http404()
