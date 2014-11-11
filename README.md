@@ -29,7 +29,7 @@ Compile the static assets:
 
 Setup postgres: create a user courtfinder with no password and create a database called courtfinder_search, which user courtfinder has owner rights.
 
-Create the database and put data in it:
+Create the database and put sample data in it:
 
     cd courtfinder
     ./manage.py runmigrations
@@ -56,6 +56,21 @@ The line above runs the unit tests, so it can replace the first command mentione
 
 py.test can also be used to run tests faster:
 
-    py.test -n 3 --cov .
+    py.test -n 3
 
-will run the tests using 3 processes and will show the coverage report
+will run the tests using 3 processes. To show the coverage report:
+
+    py.test -n 3 --cov . --cov-report term-missing
+
+## Environment variables
+
+The application uses the following environment variables.
+
+* `FEEDBACK_EMAIL_SENDER`: the from address of the feedback emails sent by the application
+* `FEEDBACK_EMAIL_RECEIVER`: the email addresses of the recipients of the feedback emails (comma separated)
+* `SMTP_HOSTNAME`
+* `SMTP_PASSWORD`
+* `SMTP_PORT`
+* `SMTP_USERNAME`
+* `SENTRY_URL`: for monitoring. See <https://getsentry.com/>
+* `S3_KEY`, `S3_BUCKET`, `S3_SECRET`: the `populate-db` command above either reads the court data from local files or, if those variables are set, from an S3 bucket.

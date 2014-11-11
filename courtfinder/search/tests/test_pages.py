@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 
 class SearchPageTestCase(TestCase):
 
-
     def test_top_page_sans_slash_redirects_to_slash(self):
         c = Client()
         response = c.get('/search')

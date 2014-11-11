@@ -1,15 +1,31 @@
+import json
+from mock import Mock, patch
 from django.test import TestCase
 from django.test import TestCase, Client
 from django.conf import settings
-from mock import Mock, patch
+from search.ingest import Ingest
+
+
+
 
 class SearchTestCase(TestCase):
+
+    def setUp(self):
+        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
+        countries_json_1 = open(test_data_dir + 'countries.json').read()
+        courts_json_1 = open(test_data_dir + 'courts.json').read()
+        Ingest.countries(json.loads(countries_json_1))
+        Ingest.courts(json.loads(courts_json_1))
+
+    def tearDown(self):
+        pass
+
     def test_top_page_returns_correct_content(self):
         c = Client()
-        response = c.get('/')
+        response = c.get('/', follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/index.jinja')
-        self.assertInHTML('<title>Find a court or tribunal - GOV.UK</title>', response.content, count=1)
+        self.assertTemplateUsed(response, 'search/index.jinja')
+        self.assertInHTML('<title>Find the right court or tribunal</title>', response.content, count=1)
 
     def test_feedback_page_returns_correct_content(self):
         c = Client()
@@ -53,3 +69,9 @@ class SearchTestCase(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
             self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
+
+    def test_court_id_redirect(self):
+        c = Client()
+        r = c.get('/courts/accrington-magistrates-court')
+        r = c.get('/?court_id=7')
+        self.assertRedirects(r, '/courts/accrington-magistrates-court', 302)

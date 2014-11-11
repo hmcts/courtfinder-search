@@ -12,14 +12,19 @@
     <header class="page-header">
       <h1>Find the right court or tribunal</h1>
     </header>
-    <p class="group">
-      <p>This service will guide you to the most suitable court or tribunal</p>
-      <a id="start-button" href="{% url 'search:aol' %}" class="button-get-started button">Next</a>
-    </p>
-    <h2>You can also search for a court or tribunal by:</h2>
-    <ul>
-      <li><a href="{% url 'search:address' %}">Name or address</a></li>
-      <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
-    </ul>
+
+    <div class="options">
+      <div class="main-option">
+        <p>This service will guide you to the most suitable court or tribunal</p>
+        <p><a id="start-button" href="{% url 'search:aol' %}" class="button-get-started button">Next</a></p>
+      </div>
+      <div class="other-options">
+        <p>You can also search for a court or tribunal by:</p>
+        <ul>
+          <li><a href="{% url 'search:address' %}">Name or address</a></li>
+          <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 {% endblock %}
