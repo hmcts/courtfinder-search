@@ -64,14 +64,18 @@ $small-width: 800px;
   margin-top: 2em;
 
   .main-option {
-    float: left;
-    width: 40%;
+    @include media($min-width: $small-width) {
+      float: left;
+      width: 40%;
+    }
   }
 
   .other-options {
-    float: right;
-    width: 50%;
-    padding-left: 2em;
+    @include media($min-width: $small-width) {
+      float: right;
+      width: 50%;
+      padding-left: 2em;
+    }
   }
 
   #start-button {
