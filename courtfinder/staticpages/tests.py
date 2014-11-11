@@ -22,10 +22,10 @@ class SearchTestCase(TestCase):
 
     def test_top_page_returns_correct_content(self):
         c = Client()
-        response = c.get('/')
+        response = c.get('/', follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/index.jinja')
-        self.assertInHTML('<title>Find a court or tribunal - GOV.UK</title>', response.content, count=1)
+        self.assertTemplateUsed(response, 'search/index.jinja')
+        self.assertInHTML('<title>Find the right court or tribunal</title>', response.content, count=1)
 
     def test_feedback_page_returns_correct_content(self):
         c = Client()

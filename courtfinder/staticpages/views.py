@@ -11,7 +11,7 @@ from raven.contrib.django.raven_compat.models import client
 
 def index(request):
     if "court_id" not in request.GET:
-        return render(request, 'staticpages/index.jinja')
+        return redirect('search:search')
     else:
         return redirect_old_id_to_slug(request.GET['court_id'])
 
