@@ -7,10 +7,11 @@ from search.ingest import Ingest
 
 
 
+
 class SearchTestCase(TestCase):
 
     def setUp(self):
-        test_data_dir = settings.DJANGO_ROOT +  '/../../data/test_data/'
+        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         countries_json_1 = open(test_data_dir + 'countries.json').read()
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         Ingest.countries(json.loads(countries_json_1))
