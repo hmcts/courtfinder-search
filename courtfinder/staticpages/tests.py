@@ -9,14 +9,10 @@ from search.ingest import Ingest
 
 class SearchTestCase(TestCase):
 
-    @staticmethod
-    def setUpClass():
-        countries_filename = settings.DJANGO_ROOT +  '/../../data/test_data/countries.json'
-        courts_filename = settings.DJANGO_ROOT + '/../../data/test_data/courts.json'
-
-        countries_json_1 = open(countries_filename).read()
-        courts_json_1 = open(courts_filename).read()
-
+    def setUp(self):
+        test_data_dir = settings.DJANGO_ROOT +  '/../../data/test_data/'
+        countries_json_1 = open(test_data_dir + 'countries.json').read()
+        courts_json_1 = open(test_data_dir + 'courts.json').read()
         Ingest.countries(json.loads(countries_json_1))
         Ingest.courts(json.loads(courts_json_1))
 

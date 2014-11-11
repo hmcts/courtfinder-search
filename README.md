@@ -54,6 +54,14 @@ The line above runs the unit tests, so it can replace the first command mentione
 
     coverage report -m
 
+py.test can also be used to run tests faster:
+
+    py.test -n 3
+
+will run the tests using 3 processes. To show the coverage report:
+
+    py.test -n 3 --cov . --cov-report term-missing
+
 ## Environment variables
 
 The application uses the following environment variables.
