@@ -133,7 +133,8 @@ class Ingest:
 
             for contact_obj in court_obj['contacts']:
                 contact, created = Contact.objects.get_or_create(name=contact_obj['name'],
-                                                                 number=contact_obj['number'])
+                                                                 number=contact_obj['number'],
+                                                                 sort_order=contact_obj['sort'])
 
                 CourtContact.objects.create(
                     court=court,

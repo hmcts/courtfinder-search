@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'moj_template',
+    'core',
     'search',
     'staticpages',
     'courts',
@@ -67,6 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.RequestLoggingMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
@@ -134,9 +136,18 @@ EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_URL', None),
+}
+
+# Add raven to the list of installed apps
+INSTALLED_APPS = INSTALLED_APPS + (
+    'raven.contrib.django.raven_compat',
+)
 
 # Ensure logging directory is created
-LOGPATH = abspath(PROJECT_ROOT + '/logs')
+LOGPATH = abspath(PROJECT_ROOT + '/../logs')
 if not os.path.exists(LOGPATH):
     os.makedirs(LOGPATH)
 
@@ -148,6 +159,9 @@ LOGGING = {
         'simple': {
             'format': '%(asctime)s %(message)s'
         },
+        'no-format': {
+            'format': '%(message)s'
+        }
     },
     'handlers': {
         'error-file': {
@@ -180,6 +194,12 @@ LOGGING = {
             'formatter': 'simple',
             'filename': LOGPATH + '/search-method.log',
         },
+        'courtfinder-requests-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'no-format',
+            'filename': LOGPATH + '/requests.log',
+        }
     },
     'loggers': {
         'search.error': {
@@ -204,6 +224,11 @@ LOGGING = {
         },
         'search.method': {
             'handlers': ['search-method-file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'courtfinder.requests': {
+            'handlers': ['courtfinder-requests-file'],
             'level': 'DEBUG',
             'propagate': True,
         }

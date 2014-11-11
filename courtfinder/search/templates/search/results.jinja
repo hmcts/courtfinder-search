@@ -107,9 +107,9 @@
         </div>
         <p class="clear">
           {% if query %}
-          <a href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
+          <a class="more-details-link" href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
           {% else %}
-          <a href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
+          <a class="more-details-link" href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
           {% endif %}
         </p>
         <hr class="clear"/>

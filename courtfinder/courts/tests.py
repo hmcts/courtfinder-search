@@ -336,3 +336,9 @@ class SearchTestCase(TestCase):
                       response.content)
         self.assertIn('Blue badge parking is available on site.',
                       response.content)
+
+    def test_court_404(self):
+        c = Client()
+        response = c.get('/courts/tameside-magistrates-c0urt')
+        self.assertEquals(404, response.status_code)
+        self.assertIn('Page not found.',response.content)

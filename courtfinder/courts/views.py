@@ -1,7 +1,7 @@
 import string
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from search.models import Court, AreaOfLaw
 
 
@@ -15,10 +15,10 @@ def collapse(source, key, key2):
     """
     result=[]
     for item in source:
-        if len(result) > 0 and item[key] == result[0][key]:
-            result[0][key2].append(item[key2][0])
+        if len(result) > 0 and item[key] == result[-1][key]:
+            result[-1][key2].append(item[key2][0])
         else:
-            result.insert(0,item)
+            result.append(item)
     return result
 
 
@@ -44,8 +44,8 @@ def format_court(court):
 
     emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
     emails.sort(key=lambda x: x['description'])
-    contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all()]
-    contacts.sort(key=lambda x: x['name'])
+    contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all().order_by('sort_order')]
+    # contacts.sort(key=lambda x: x['sort_order'])
     court_obj = { 'name': court.name,
                   'lat': court.lat,
                   'lon': court.lon,
@@ -74,8 +74,13 @@ def format_court(court):
 
 
 def court(request, slug):
+    try:
+        the_court = Court.objects.get(slug=slug)
+    except Court.DoesNotExist:
+        raise Http404
+
     return render(request, 'courts/court.jinja', {
-        'court': format_court(Court.objects.get(slug=slug)),
+        'court': format_court(the_court),
         'query': request.GET.get('q',''),
         'aol': request.GET.get('aol','All'),
         'spoe': request.GET.get('spoe', None),

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.core.serializers.json import DjangoJSONEncoder
+from django.views.defaults import bad_request
 
 from search.models import Court, AreaOfLaw, DataStatus
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
@@ -78,10 +79,8 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
-            try:
-                results = CourtSearch(query=query).get_courts()
-            except CourtSearchError as e:
-                return HttpResponseServerError(e)
+            results = CourtSearch(query=query).get_courts()
+
             if len(results) > 0:
                 return render(request, 'search/results.jinja', {
                     'query': query,
@@ -101,9 +100,7 @@ def results(request):
                 return redirect(reverse('search:postcode')+'?postcode='+
                                 postcode+'&error=badpostcode')
             except CourtSearchClientError as e:
-                return HttpResponseBadRequest(e)
-            except CourtSearchError as e:
-                return HttpResponseServerError(e)
+                return bad_request(request)
 
             rules = Rules.for_view(postcode, aol)
 

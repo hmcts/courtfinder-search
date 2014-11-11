@@ -67,30 +67,31 @@ class CourtSearch:
             if rule_results is not None:
                 return rule_results
 
-            if self.single_point_of_entry == 'start' and self.area_of_law.name in Rules.has_spoe:
-                spoes_for_aol = CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True)
-                spoe_courts = [value['court'] for value in spoes_for_aol.values('court')]
-                results = list(set([value.court for value in CourtLocalAuthorityAreaOfLaw.objects.filter(court__in=spoe_courts)]))
+            if self.single_point_of_entry == 'start':
+                if self.area_of_law.name == 'Money claims':
+                    return Court.objects.filter(name__icontains='CCMCC')
+                elif self.area_of_law.name in Rules.has_spoe:
+                    results = [c.court for c in CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)]
+                    results = [c.court for c in CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
 
-                if len(results) > 0:
-                    loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
-                    return self.__order_by_distance(results)
-
+                    if len(results) > 0:
+                        loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: SPOE' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                        return self.__order_by_distance(results)
 
             results = []
 
             if isinstance(self.area_of_law, AreaOfLaw):
                 if self.area_of_law.name in Rules.by_local_authority:
-                    loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: Local authority search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                    loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Local authority search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
                     results = self.__local_authority_search()
                 elif self.area_of_law.name in Rules.by_postcode:
-                    loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: Postcode search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                    loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Postcode search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
                     results = self.__postcode_search()
 
             if len(results) > 0:
                 return results
 
-            loggers['method'].debug('Postcode: %-10s LA: %-20s AOL: %-20s Method: Proximity search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+            loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Proximity search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
             return self.__proximity_search()
 
 
@@ -206,7 +207,7 @@ class Postcode():
             self.latitude = response['wgs84_lat']
             self.longitude = response['wgs84_lon']
         else:
-            raise CourtSearchError('MapIt service didn\'t return wgs84 data')
+            raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
 
         if self.full_postcode:
             if isinstance(response['shortcuts']['council'], dict):
@@ -217,8 +218,7 @@ class Postcode():
             local_authority_name = response['areas'][council_id]['name']
 
             try:
-                LocalAuthority.objects.get(name=local_authority_name)
-                self.local_authority = local_authority_name
+                self.local_authority = LocalAuthority.objects.get(name=local_authority_name)
             except LocalAuthority.DoesNotExist:
                 loggers['la'].error(local_authority_name)
                 self.local_authority = None
@@ -251,7 +251,7 @@ class Postcode():
 
     def is_full_postcode( self, postcode ):
         # Regex from: https://gist.github.com/simonwhitaker/5748515
-        return bool(re.match(r'[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}', postcode))
+        return bool(re.match(r'[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}', postcode.upper().replace(' ', '')))
 
     def __unicode__( self ):
         return self.postcode
