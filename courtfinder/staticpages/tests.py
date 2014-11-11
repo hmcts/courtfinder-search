@@ -1,4 +1,5 @@
 import json
+import os
 from mock import Mock, patch
 from django.test import TestCase
 from django.test import TestCase, Client
@@ -75,3 +76,9 @@ class SearchTestCase(TestCase):
         r = c.get('/courts/accrington-magistrates-court')
         r = c.get('/?court_id=7')
         self.assertRedirects(r, '/courts/accrington-magistrates-court', 302)
+        r = c.get('/?court_id=2038')
+        self.assertEqual(r.status_code, 404)
+        with patch('json.loads', Mock(side_effect=IOError('meh'))):
+            with self.assertRaises(IOError):
+                r = c.get('/?court_id=7')
+                self.assertEquals(r.status_code, 500)
