@@ -24,7 +24,7 @@ install:
   - sudo gem install sass
   - npm install
 
-before_script: 
+before_script:
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
   - psql -c 'CREATE ROLE courtfinder LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;' -U postgres
@@ -34,7 +34,7 @@ before_script:
 script:
   - ./node_modules/.bin/gulp
   - python courtfinder/manage.py migrate
-  - coverage run --source='.' courtfinder/manage.py test search staticpages courts
+  - coverage run --omit='courtfinder/courtfinder/*,*__init__*' --source='courtfinder' courtfinder/manage.py test staticpages courts search
   - coverage report -m
   - coverage xml -o shippable/codecoverage/coverage.xml
 

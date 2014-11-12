@@ -48,9 +48,10 @@ Testing uses Django's standard unit testing library. In order to run the tests, 
 
 Code coverage is measured using 'coverage', speficied in the requirements file for the testing environment. In order to run coverage, use:
 
-    coverage run --source='.' manage.py test search staticpages courts
+    coverage run --omit='courtfinder/*,*__init__*' --source='.' manage.py test staticpages courts search
+    coverage run --append --omit='courtfinder/*,*__init__*' --source='.' manage.py populate-db
 
-The line above runs the unit tests, so it can replace the first command mentioned above. The coverage report is then available by using:
+The two lines above runs the unit tests, so it can replace the first command mentioned above. The coverage report is then available by using:
 
     coverage report -m
 
