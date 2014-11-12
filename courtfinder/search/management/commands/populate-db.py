@@ -65,9 +65,12 @@ class Command(BaseCommand):
         except:
             print "I didn't find the environment variables: S3_KEY, S3_SECRET, S3_BUCKET."
             print "Trying to find files locally instead"
-            data_dir = join(settings.PROJECT_ROOT, 'data')
+            if len(args) == 1:
+                data_dir = join(settings.PROJECT_ROOT, args[0])
+            else:
+                data_dir = join(settings.PROJECT_ROOT, 'data')
+            print "looking for json data in "+data_dir
             environment = 'local'
-
 
         if environment == 'S3':
             print "Importing from S3...",
