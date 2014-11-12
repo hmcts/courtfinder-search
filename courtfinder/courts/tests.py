@@ -24,7 +24,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("Tameside", response.content)
 
-    def test_sample_court_page(self):
+    def test_sample_court_page_2(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
         self.assertEqual(response.status_code, 200)
