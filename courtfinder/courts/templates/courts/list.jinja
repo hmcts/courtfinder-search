@@ -24,15 +24,16 @@ Index of all courts and tribunals - GOV.UK
 
   <p>Browse by name of court or tribunal</p>
 
-  {% if not courts %}
-  <p>Select the first letter of the court's name</p>
-  {% else %}
-  <h2 class="clear letterheader">Names starting with {{ letter }}</h2>
+  {% if letter and not courts %}
+  <p>There are no courts or tribunals starting with {{ letter }}. Please select another letter.</p>
   {% endif %}
 
-  {% if letter %}
+  {% if not letter  %}
+  <p>Select the first letter of the court's name</p>
+  {% endif %}
 
-  {% if courts %}
+  {% if letter and courts %}
+  <h2 class="clear letterheader">Names starting with {{ letter }}</h2>
   <ul>
     {% for court in courts %}
     <li>
@@ -41,10 +42,8 @@ Index of all courts and tribunals - GOV.UK
     </li>
     {% endfor %}
   </ul>
-  {% else %}
-  <p>There are no courts or tribunals starting with {{ letter }}</p>
   {% endif %}
-  {% endif %}
+
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
