@@ -13,7 +13,7 @@ node_js:
 
 env:
   global:
-    - PROJECT=courtfinder
+    - PROJECT=courtfinder-search
     - CF_HIPCHAT_ROOM=147294
     - APP_NAME=courtfinder_search
     - DJANGO_SETTINGS_MODULE=courtfinder.settings.test
