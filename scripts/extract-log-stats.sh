@@ -15,12 +15,12 @@ DATE_SHORT=`date -u +"%Y%m%d"`
 HOST=`uname -n`
 HITS=`wc -l < $LOGFILE`
 PAGE_HITS=`egrep -cv "GET /static" $LOGFILE`
-SEARCH_API_HITS=`grep -c "GET /search/results.json" ssl.access.log.1`
+SEARCH_API_HITS=`grep -c "GET /search/results.json" ${LOGFILE}`
 START_DATE=`head -1 $LOGFILE | grep -o "\[.*\]"`
 END_DATE=`tail -1 $LOGFILE | grep -o "\[.*\]"`
-HTTP_404=`grep -c "HTTP/...\" 404 " ssl.access.log.1`
-HTTP_500=`grep -c "HTTP/...\" 500 " ssl.access.log.1`
-RESULT="$DATE,$HOST,$START_DATE,$END_DATE,$HITS,$SEARCH_API_HITS,$HTTP_404,$HTTP_500,$PAGE_HITS"
+HTTP_404=`grep -c "HTTP/...\" 404 " ${LOGFILE}`
+HTTP_500=`grep -c "HTTP/...\" 500 " ${LOGFILE}`
+RESULT="$START_DATE,$END_DATE,$PAGE_HITS,$HITS,$SEARCH_API_HITS,$HTTP_404,$HTTP_500,$HOST"
 FILE=stats-${DATE_SHORT}-${HOST}.csv
 echo $RESULT > $FILE
 ./aws put $BUCKET/ $FILE
