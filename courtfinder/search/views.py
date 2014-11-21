@@ -117,9 +117,15 @@ def results(request):
 
             return render(request, 'search/results.jinja', view_obj)
 
-
         else:
-            return redirect(reverse('search:search'))
+            if postcode is not None:
+                return redirect(reverse('search:postcode')+
+                                '?error=nopostcode'+
+                                '&aol='+aol+
+                                ('&spoe='+spoe if spoe is not None else ''))
+            else:
+                return redirect('search:search')
+
 
 def results_json(request):
     aol = request.GET.get('aol', 'All')

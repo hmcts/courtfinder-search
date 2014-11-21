@@ -27,11 +27,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Accrington')
         self.assertIn("Blackburn", response.content)
 
-    def test_format_results_with_empty_postcode(self):
-        c = Client()
-        response = c.get('/search/results?postcode=')
-        self.assertRedirects(response, '/search/', 302)
-
     def test_search_space_in_name(self):
         c = Client()
         response = c.get('/search/results?q=Accrington+Magistrates')
@@ -71,6 +66,11 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?q=')
         self.assertRedirects(response, '/search/address?error=noquery', 302)
+
+    def test_results_no_postcode(self):
+        c = Client()
+        response = c.get('/search/results?aol=Crime&postcode=')
+        self.assertRedirects(response, '/search/postcode?error=nopostcode&aol=Crime', 302)
 
     def test_sample_postcode_all_aols(self):
         c = Client()
