@@ -2,21 +2,6 @@ from search.models import *
 from dateutil import parser
 
 class Ingest:
-    @classmethod
-    def countries(self, countries):
-        Country.objects.all().delete()
-        County.objects.all().delete()
-        Town.objects.all().delete()
-        for country in countries:
-            c = Country(name=country['name'])
-            c.save()
-            for county in country['counties']:
-                co = County(name=county['name'], country=c)
-                co.save()
-                for town in county['towns']:
-                    if not Town.objects.filter(name=town).exists():
-                        t = Town(name=town, county=co)
-                        t.save()
 
     @classmethod
     def courts(self, courts):
@@ -42,9 +27,9 @@ class Ingest:
         CourtCourtType.objects.all().delete()
         DataStatus.objects.all().delete()
         ParkingInfo.objects.all().delete()
+        Town.objects.all().delete()
 
         for court_obj in courts:
-
             court_created_at = court_obj.get('created_at', None)
             created_at = parser.parse(court_created_at+'UTC') if court_created_at else None
             court_updated_at = court_obj.get('updated_at', None)
@@ -121,7 +106,7 @@ class Ingest:
 
             for address in court_obj['addresses']:
                 address_type, created = AddressType.objects.get_or_create(name=address['type'])
-                town, created = Town.objects.get_or_create(name=address['town'])
+                town, created = Town.objects.get_or_create(name=address['town'], county=address['county'])
 
                 CourtAddress.objects.create(
                     court=court,

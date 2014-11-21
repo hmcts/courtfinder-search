@@ -2,12 +2,14 @@
         "addresses": [
             {
                 "town": "Accrington",
+                "county": "Lancashire",
                 "type": "Visiting",
                 "postcode": "BB5 2BH",
                 "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road"
             },
             {
                 "town": "Blackburn",
+                "county": "Lancashire",
                 "type": "Postal",
                 "postcode": "BB2 1AA",
                 "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate\\t\\n"
@@ -128,6 +130,7 @@
         "addresses": [
             {
                 "town": "Ashton-Under-Lyne",
+                "county": "Lancashire",
                 "type": "Visiting",
                 "postcode": "OL6 7TP",
                 "address": "Henry Square\\n\\n\\n"

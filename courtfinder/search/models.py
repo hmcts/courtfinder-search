@@ -128,25 +128,10 @@ class CourtAreaOfLaw(models.Model):
 
 class Town(models.Model):
     name = models.CharField(max_length=255)
-    county = models.ForeignKey('County')
+    county = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.name
-
-
-class County(models.Model):
-    name = models.CharField(max_length=255)
-    country = models.ForeignKey('Country')
-
-    def __unicode__(self):
-        return self.name
-
-
-class Country(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.name
+        return "%s (%s)" % (self.name, self.county)
 
 
 class AddressType(models.Model):

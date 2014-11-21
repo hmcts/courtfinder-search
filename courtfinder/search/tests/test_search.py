@@ -13,9 +13,7 @@ class SearchTestCase(TestCase):
 
     def setUp(self):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
-        countries_json_1 = open(test_data_dir + 'countries.json').read()
         courts_json_1 = open(test_data_dir + 'courts.json').read()
-        Ingest.countries(json.loads(countries_json_1))
         Ingest.courts(json.loads(courts_json_1))
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
@@ -261,12 +259,8 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(aol), "Divorce")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
         self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
-        country = Country.objects.create(name="Wales")
-        self.assertEqual(str(country), "Wales")
-        county = County.objects.create(name="Shire", country=country)
-        self.assertEqual(str(county), "Shire")
-        town = Town.objects.create(name="Hobbittown", county=county)
-        self.assertEqual(str(town), "Hobbittown")
+        town = Town.objects.create(name="Hobbittown", county="Shire")
+        self.assertEqual(str(town), "Hobbittown (Shire)")
         address_type = AddressType.objects.create(name="Postal")
         self.assertEqual(str(address_type), "Postal")
         court_address = CourtAddress.objects.create(address_type=address_type,
