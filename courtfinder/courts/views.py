@@ -2,6 +2,7 @@ import string
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
+from django.utils.html import strip_entities, strip_tags
 from search.models import Court, AreaOfLaw
 
 
@@ -46,6 +47,12 @@ def format_court(court):
     emails.sort(key=lambda x: x['description'])
     contacts = [{'name':contact.name, 'numbers': [contact.number]} for contact in court.contacts.all().order_by('sort_order')]
     # contacts.sort(key=lambda x: x['sort_order'])
+
+    facilities = [{'name': facility.name,
+                   'description': strip_entities(strip_tags(facility.description)),
+                   'image': facility.image,
+                   'image_description': facility.image_description} for facility in court.facilities.all()]
+
     court_obj = { 'name': court.name,
                   'lat': court.lat,
                   'lon': court.lon,
@@ -59,7 +66,7 @@ def format_court(court):
                   'visiting_address': visiting_address,
                   'opening_times': sorted([opening_time for opening_time in court.opening_times.all()], key=lambda x: x.description),
                   'areas_of_law': sorted([aol for aol in court.areas_of_law.all()]),
-                  'facilities': sorted([facility for facility in court.facilities.all()], key=lambda x: x.name),
+                  'facilities': sorted(facilities, key=lambda x: x['name']),
                   'emails': collapse(emails, 'description', 'addresses'),
                   'contacts': collapse(contacts, 'name', 'numbers'),
                   'directions': court.directions if court.directions else None,
