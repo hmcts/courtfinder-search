@@ -94,6 +94,7 @@ def results(request):
         spoe = request.GET.get('spoe', None)
         postcode = request.GET.get('postcode', None)
         if postcode:
+            postcode = re.sub(r'[^A-Za-z0-9 ]','',postcode)
             try:
                 courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
             except CourtSearchInvalidPostcode as e:
