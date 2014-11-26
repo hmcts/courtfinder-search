@@ -194,7 +194,7 @@ class CourtSearch:
 class Postcode():
 
     def __init__( self, postcode ):
-        self.postcode = postcode
+        self.postcode = re.sub(r'[^A-Za-z0-9 ]','', postcode)
 
         self.full_postcode = self.is_full_postcode( postcode )
         self.partial_postcode = not self.full_postcode

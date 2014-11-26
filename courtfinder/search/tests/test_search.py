@@ -221,6 +221,12 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=')
         self.assertEqual(response.status_code, 302)
 
+    def test_broken_postcode(self):
+        c = Client()
+        response = c.get('/search/results?aol=Divorce&spoe=continue&postcode=NW3+%25+au', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('NW3  au', response.content)
+
     def test_ni(self):
         c = Client()
         response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
