@@ -341,9 +341,10 @@ $small-width: 800px;
   .icon-loop_hearing {top: -10px;left: -10px}
   .icon-video_conf {top: -10px;left: -70px}
 
-  #alert {
+  .alert {
     margin-top: 2em;
-    #alert-icon {
+    min-height: 50px;
+    .alert-icon {
       float: left;
       padding: 0 20px 50px 0;
     }

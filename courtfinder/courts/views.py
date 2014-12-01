@@ -54,6 +54,7 @@ def format_court(court):
                    'image_description': facility.image_description} for facility in court.facilities.all()]
 
     court_obj = { 'name': court.name,
+                  'displayed': court.displayed,
                   'lat': court.lat,
                   'lon': court.lon,
                   'number': court.number,

@@ -61,12 +61,12 @@ class SearchTestCase(TestCase):
     def test_alert_visible(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
-        self.assertNotIn('id="alert"', response.content)
+        self.assertNotIn('class="alert"', response.content)
 
     def test_alert_whitespace(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-court')
-        self.assertIn('id="alert"', response.content)
+        self.assertIn('class="alert"', response.content)
 
     def test_blue_badge_displayed(self):
         c = Client()
@@ -83,3 +83,9 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/tameside-magistrates-c0urt')
         self.assertEquals(404, response.status_code)
         self.assertIn('Page not found.',response.content)
+
+    def inactive_court_shows_inactive(self):
+        c = Client()
+        response = c.get('/courts/old-court-no-longer-in-use')
+        self.assertEquals(200, response.status_code)
+        self.assertIn('This court or tribunal is no longer in service.',response.content)
