@@ -74,6 +74,7 @@
             "Magistrates Court"
         ],
         "name": "Accrington Magistrates' Court",
+        "display": true,
         "contacts": [
             {
                 "sort": 2,
@@ -252,6 +253,25 @@
         "admin_id": "3456543",
         "display": true,
         "court_number": "123456",
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": []
+    },
+
+    {
+        "name": "Some old closed court",
+        "slug": "old-court-no-longer-in-use",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565433",
+        "display": false,
+        "court_number": "1232456",
         "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
