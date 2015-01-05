@@ -144,7 +144,13 @@ class CourtSearch:
         p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
         deduped = self.__dedupe([c.court for c in results])
-        return [court for court in deduped if court.areas_of_law in Rules.by_postcode]
+        courts_with_required_aol = []
+        for court in deduped:
+            for court_aol in court.areas_of_law.all():
+                if str(court_aol) in Rules.by_postcode:
+                    courts_with_required_aol.append(court)
+                    break
+        return courts_with_required_aol
 
 
     def __proximity_search( self ):
