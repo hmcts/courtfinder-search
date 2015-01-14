@@ -1,4 +1,4 @@
-Django==1.7
+Django==1.7.3
 MarkupSafe==0.23
 newrelic==2.34.0.29
 django-moj-template==0.18.0
