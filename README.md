@@ -19,26 +19,37 @@ Install python dependencies (ignore the warnings):
 
     pip install -r requirements/local.txt
 
-Install node packages:
+Install node packages, gulp and sass:
 
     npm install
+    npm install gulp -g
+    npm install gulp --save-dev
+    gem install sass
+
 
 Compile the static assets:
 
     gulp
 
-Setup postgres: create a user courtfinder with no password and create a database called courtfinder_search, which user courtfinder has owner rights.
+Setup postgres: create a user courtfinder with no password and create a database called courtfinder_search, which user courtfinder has owner and superuser rights:
+
+    psql template1
+    template1=> create user courtfinder login;
+    template1=> create database courtfinder_search;
+    template1=> alter database courtfinder_search owner to courtfinder;
+    template1=> alter user courtfinder with superuser;
+    template1=> \q
 
 Create the database and put sample data in it:
 
     cd courtfinder
-    ./manage.py runmigrations
+    ./manage.py makemigrations
     ./manage.py migrate
     ./manage.py populate-db
 
 Start the server:
 
-    ./courtfinder/manage.py runserver
+    ./manage.py runserver
 
 ## Testing and code coverage
 
