@@ -86,7 +86,7 @@ class CourtSearch:
                     results = self.__local_authority_search()
                 elif self.area_of_law.name in Rules.by_postcode:
                     loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Postcode search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
-                    results = self.__postcode_search()
+                    results = self.__postcode_search(self.area_of_law)
 
             if len(results) > 0:
                 return results
@@ -140,17 +140,12 @@ class CourtSearch:
             result.append(item)
         return result
 
-    def __postcode_search( self ):
+    def __postcode_search( self, area_of_law ):
         p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
-        deduped = self.__dedupe([c.court for c in results])
-        courts_with_required_aol = []
-        for court in deduped:
-            for court_aol in court.areas_of_law.all():
-                if str(court_aol) in Rules.by_postcode:
-                    courts_with_required_aol.append(court)
-                    break
-        return courts_with_required_aol
+
+        return filter(lambda court: area_of_law in court.areas_of_law.all(),
+                      self.__dedupe([c.court for c in results]))
 
 
     def __proximity_search( self ):
