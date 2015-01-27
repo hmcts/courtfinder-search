@@ -89,7 +89,7 @@ class CourtSearch:
                     results = self.__postcode_search(self.area_of_law)
 
             if len(results) > 0:
-                return results
+                return self.__order_by_distance(results)
 
             loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Proximity search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
             return self.__proximity_search()
