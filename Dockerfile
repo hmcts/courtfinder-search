@@ -7,4 +7,14 @@ ADD docker/* /
 RUN mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 RUN bash /setup_postgresql.sh
 
+RUN useradd -m -d /srv/search search
+
+ADD . /srv/search
+RUN rm -rf /srv/search/.git
+RUN chown -R search: /srv/search
+
+
+USER search
+WORKDIR /srv/search
+
 EXPOSE 6081
