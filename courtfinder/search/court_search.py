@@ -103,7 +103,7 @@ class CourtSearch:
             area_of_law=self.area_of_law,
             local_authority__name=self.postcode.local_authority)
 
-        return __order_by_distance([c.court for c in covered])
+        return self.__order_by_distance([c.court for c in covered])
 
 
     def __order_by_distance( self, courts ):
