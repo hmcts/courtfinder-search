@@ -6,6 +6,7 @@ RUN apt-get install -y postgresql-client-9.3 postgresql-9.3 postgresql-server-de
 ADD ./docker/pg_hba.conf /pg_hba.conf
 ADD ./docker/setup_postgresql.sh /setup_postgresql.sh
 ADD ./docker/run.sh /run.sh
+ADD ./docker/search /etc/sudoers.d/search
 RUN chmod 755 /run.sh
 
 RUN mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
@@ -20,6 +21,9 @@ RUN pip install -r /srv/search/requirements.txt
 
 RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 
+
+RUN cd /srv/search/courtfinder && python manage.py migrate
+RUN cd /srv/search/courtfinder && python manage.py populate-db
 
 #USER search
 WORKDIR /srv/search
