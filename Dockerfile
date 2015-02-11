@@ -25,7 +25,7 @@ RUN chown -R search: /srv/search
 RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 RUN bash /setup_search.sh
 
-#USER search
+USER search
 WORKDIR /srv/search
 
 EXPOSE 8000
