@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -e
 
 /etc/init.d/postgresql start
 /usr/bin/psql -c 'CREATE ROLE courtfinder LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;' -U postgres
