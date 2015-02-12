@@ -11,6 +11,9 @@ RUN chmod 755 /run.sh
 
 RUN mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 RUN bash /setup_postgresql.sh
+RUN mkdir -p /srv/node_files
+ADD ./package.json /srv/node_files/package.json
+RUN bash /setup_npm.sh
 
 RUN useradd -m -d /srv/search search
 
@@ -19,13 +22,13 @@ RUN pip install -r /requirements.txt
 
 ADD . /srv/search
 RUN rm -rf /srv/search/.git
-RUN bash /setup_npm.sh
 RUN chown -R search: /srv/search
 
 RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 
 WORKDIR /srv/search
 RUN bash /setup_search.sh
+RUN mv /srv/node_files/node_modules /srv/search/
 RUN gulp
 
 RUN update-rc.d postgresql enable
@@ -34,4 +37,3 @@ RUN chown -R search:search /srv/logs
 USER search
 
 EXPOSE 8000
-RUN bash /run.sh
