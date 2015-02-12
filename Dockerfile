@@ -5,22 +5,12 @@ RUN apt-get update
 RUN apt-get install -y postgresql-client-9.3 postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3 postgis postgresql-9.3-postgis-2.1 python-pip python-dev wget npm ruby nodejs-legacy
 RUN pip install uWSGI==2.0.8
 
-# ADD ./docker/pg_hba.conf /pg_hba.conf
-# ADD ./docker/setup_postgresql.sh /setup_postgresql.sh
-# ADD ./docker/setup_npm.sh /setup_npm.sh
-# ADD ./docker/setup_search.sh /setup_search.sh
-# ADD ./docker/run.sh /run.sh
-# ADD ./docker/search /etc/sudoers.d/search
-
 ADD /docker/. /
 RUN mv /search /etc/sudoers.d/search
 RUN chmod 755 /run.sh
 
 RUN mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 RUN bash /setup_postgresql.sh
-
-# Dummy workaround to prevent constant npm installs
-# via http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 
 RUN useradd -m -d /srv/search search
 
