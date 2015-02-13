@@ -37,3 +37,5 @@ RUN chown -R search:search /srv/logs
 USER search
 
 EXPOSE 8000
+
+# dummy commit
