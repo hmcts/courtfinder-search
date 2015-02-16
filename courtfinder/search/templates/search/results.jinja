@@ -41,7 +41,7 @@
     {%     if search_results|length == 1 %}
     <p>This is the court or tribunal nearest <span class="court-result-heading">{{ postcode }}</span>.</p>
     {%     else %}
-    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest <span class="court-result-heading">{{ postcode }}</span>
+    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest <span class="court-result-heading">{{ postcode|upper }}</span>
     {%       if aol|lower != 'all' %}
       dealing with <span class="court-result-heading">{{ aol|lower }}</span>
     {%       endif %}.</p>
