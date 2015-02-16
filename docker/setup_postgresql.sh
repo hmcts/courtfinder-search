@@ -6,4 +6,3 @@
 /usr/bin/psql -c "ALTER USER courtfinder WITH PASSWORD '123456';" -U postgres
 PGPASSWORD=123456 /usr/bin/psql courtfinder_search -c 'CREATE EXTENSION postgis;' -U courtfinder
 PGPASSWORD=123456 /usr/bin/psql courtfinder_search -c 'CREATE EXTENSION postgis_topology;' -U courtfinder
-

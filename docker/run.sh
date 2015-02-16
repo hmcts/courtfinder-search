@@ -1,3 +1,5 @@
-#!/bin/sh
+#!/bin/bash -e
 
-/etc/init.d/postgresql start
+echo 'Starting PostgreSQL server service'
+sudo /etc/init.d/postgresql start
+uwsgi --ini /srv/search/uwsgi.conf
