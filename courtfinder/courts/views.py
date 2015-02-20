@@ -99,7 +99,7 @@ def list_format_courts(courts):
     return [{'name':court.name,
              'slug':court.slug,
              'numbers': ', '.join(filter(None,('#'+str(court.number) if court.number else None, 'CCI: '+str(court.cci_code) if court.cci_code else None)))
-            } for court in courts]
+            } for court in courts if court.displayed]
 
 def list(request, first_letter='A'):
     return render(request, 'courts/list.jinja', {
