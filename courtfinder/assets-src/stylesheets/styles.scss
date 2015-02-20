@@ -3,6 +3,7 @@
 @import "device-pixels";
 @import "conditionals";
 @import "colours";
+@import "design-patterns/alpha-beta";
 
 body {
   font-size: 19px;
@@ -54,6 +55,14 @@ label {
   padding-bottom: 5px;
   margin-top: 5px;
 }
+
+.proposition-phase {
+  @include phase-tag(beta);
+  &:link {
+    color: white;
+  }
+}
+
 
 /* -- Application specific ------------- */
 
@@ -387,7 +396,6 @@ p.warning {
 
 
 #feedback-banner {
-  text-align: center;
   font-size: 85%;
   margin: .5em auto;
   width: auto;
