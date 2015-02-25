@@ -83,6 +83,6 @@ The application uses the following environment variables.
 * `SMTP_HOSTNAME`
 * `SMTP_PASSWORD`
 * `SMTP_PORT`
-* `SMTP_USERNAME`
+* `SMTP_USERNAME`: SMTP details for sending feedback emails
 * `SENTRY_URL`: for monitoring. See <https://getsentry.com/>
 * `S3_KEY`, `S3_BUCKET`, `S3_SECRET`: the `populate-db` command above either reads the court data from local files or, if those variables are set, from an S3 bucket.
