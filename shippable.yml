@@ -22,6 +22,7 @@ env:
 install:
   - pip install -r requirements/testing.txt
   - sudo gem install sass
+  - npm cache clean
   - npm install
 
 before_script:
