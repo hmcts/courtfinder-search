@@ -49,6 +49,7 @@ class CourtSearch(object):
             self.query = query
         elif postcode:
             self.postcode = Postcode(postcode)
+            self.postcode.lookup_postcode()
             try:
                 if area_of_law == 'all':
                     self.area_of_law = AreaOfLaw(name='All', slug='all')
@@ -109,6 +110,7 @@ class CourtSearch(object):
         return self.__order_by_distance([c.court for c in covered])
 
     def __order_by_distance( self, courts ):
+        
         if len(courts) == 0:
             return courts
 
@@ -253,10 +255,30 @@ class MapitLookup(PostcodeLookup):
             raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
 
     def longitude( self ):
-        if 'wgs84_long' in self.parsed_response:
-            return self.parsed_response['wgs84_long']
+        if 'wgs84_lon' in self.parsed_response:
+            return self.parsed_response['wgs84_lon']
         else:
             raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
+
+    def local_authority( self ):
+        if self.postcode.full_postcode:
+            local_authority_name = self.council_name(self.parsed_response['shortcuts']['council'])
+
+            try:
+                return LocalAuthority.objects.get(name=local_authority_name)
+            except LocalAuthority.DoesNotExist:
+                loggers['la'].error(local_authority_name)
+
+    def council_id( self, council ):
+        if isinstance(council, dict):
+            return str(council['county'])
+        else:
+            return str(council)
+
+    def council_name( self, council ):
+        return self.parsed_response['areas'][self.council_id(council)]['name']
+
+
 
 class Postcode():
 
@@ -281,22 +303,7 @@ class Postcode():
         self.latitude = lookup.latitude()
         self.longitude = lookup.longitude()
 
-        if self.full_postcode:
-            if isinstance(response['shortcuts']['council'], dict):
-                council_id = str(response['shortcuts']['council']['county'])
-            else:
-                council_id = str(response['shortcuts']['council'])
-
-            local_authority_name = response['areas'][council_id]['name']
-
-            try:
-                self.local_authority = LocalAuthority.objects.get(name=local_authority_name)
-            except LocalAuthority.DoesNotExist:
-                loggers['la'].error(local_authority_name)
-                self.local_authority = None
-
-        else:
-            self.local_authority = None
+        self.local_authority = lookup.local_authority()
 
     
     def mapit_lookup( self, postcode ):
