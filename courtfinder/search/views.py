@@ -129,9 +129,9 @@ def results(request):
             postcode = re.sub(r'[^A-Za-z0-9 ]','',postcode)
             try:
                 courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
-            except CourtSearchInvalidPostcode as e:
-                return redirect(reverse('search:postcode')+'?postcode='+
-                                postcode+'&error=badpostcode')
+            # except CourtSearchInvalidPostcode as e:
+            #     return redirect(reverse('search:postcode')+'?postcode='+
+            #                     postcode+'&error=badpostcode')
             except CourtSearchClientError as e:
                 return bad_request(request)
 

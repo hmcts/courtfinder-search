@@ -190,24 +190,96 @@ class CourtSearch(object):
         return [result for result in results if result.displayed]
 
 
-class Postcode(object):
+class PostcodeLookup():
+    def __init__( self, postcode ):
+        self.postcode = Postcode(postcode)
+        self.response = None
+        self.parsed_response = None
+
+    def url( self ):
+        """Override in concrete subclasses"""
+        
+    def latitude( self ):
+        """Override in concrete subclasses"""
+
+    def longitude( self ):
+        """Override in concrete subclasses"""
+
+
+    def parse( self, text ):
+        self.parsed_response = json.loads(text)
+        self.postcode.latitude = self.latitude()
+        self.postcode.longitude = self.longitude()
+
+
+    def perform( self, headers={} ):
+        url = self.url()
+        r = self._debug = requests.get(url, headers=headers)
+        self.response = r
+
+        if r.status_code == 200:
+            try:
+                return self.parse(r.text)
+            except CourtSearchInvalidPostcode as e:
+                raise
+            except:
+                print "r.text = " + r.text
+                raise CourtSearchError('cannot parse response JSON from ' + url)
+        elif r.status_code in [400, 404]:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, self.postcode.postcode, r.text))
+            raise CourtSearchInvalidPostcode('Postcode lookup didn\'t know this postcode: ' + url)
+        elif r.status_code == 403:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, self.postcode.postcode, r.text))
+            raise CourtSearchError('Postcode lookup rate limit exceeded: ' + url + ', ' + str(r.status_code))
+        else:
+            loggers['mapit'].error("%d - %s - %s" % (r.status_code, self.postcode.postcode, r.text))
+            raise CourtSearchError('Postcode lookup service error: ' + url + ', ' + str(r.status_code))
+    
+
+
+class MapitLookup(PostcodeLookup):
+    
+    def url( self ):
+        if self.postcode.full_postcode:
+            return settings.MAPIT_BASE_URL + self.postcode.postcode
+        else:
+            return settings.MAPIT_BASE_URL + 'partial/' + self.postcode.postcode
+        
+
+    def latitude( self ):
+        if 'wgs84_lat' in self.parsed_response:
+            return self.parsed_response['wgs84_lat']
+        else:
+            raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
+
+    def longitude( self ):
+        if 'wgs84_long' in self.parsed_response:
+            return self.parsed_response['wgs84_long']
+        else:
+            raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
+
+class Postcode():
 
     def __init__( self, postcode ):
         self.postcode = re.sub(r'[^A-Za-z0-9 ]','', postcode)
-
+        self.latitude = None
+        self.longitude = None
+        self.local_authority = None
         self.full_postcode = self.is_full_postcode( postcode )
         self.partial_postcode = not self.full_postcode
 
-        self.lookup_postcode()
+        # self.lookup_postcode()
 
     def lookup_postcode( self ):
-        response = self.mapit( self.postcode )
+        lookup = MapitLookup( self.postcode )
+        lookup.perform()
+        response = lookup.parsed_response
 
-        if 'wgs84_lat' in response:
-            self.latitude = response['wgs84_lat']
-            self.longitude = response['wgs84_lon']
-        else:
-            raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
+        #response = self.address_finder_lookup( self.postcode )
+        #response = self.uk_postcodes_lookup( self.postcode )
+
+        self.latitude = lookup.latitude()
+        self.longitude = lookup.longitude()
 
         if self.full_postcode:
             if isinstance(response['shortcuts']['council'], dict):
@@ -226,27 +298,28 @@ class Postcode(object):
         else:
             self.local_authority = None
 
-    def mapit( self, postcode ):
+    
+    def mapit_lookup( self, postcode ):
         if self.full_postcode:
             mapit_url = settings.MAPIT_BASE_URL + postcode
         else:
             mapit_url = settings.MAPIT_BASE_URL + 'partial/' + postcode
 
-        r = self._debug = requests.get(mapit_url)
-        if r.status_code == 200:
-            try:
-                return json.loads(r.text)
-            except:
-                raise CourtSearchError('MapIt: cannot parse response JSON')
-        elif r.status_code in [400, 404]:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
-            raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
-        elif r.status_code == 403:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
-            raise CourtSearchError('MapIt rate limit exceeded: ' + str(r.status_code))
+        return self.postcode_lookup(mapit_url)
+
+    def uk_postcodes_lookup( self, postcode ):
+        if self.full_postcode:
+            url = settings.UK_POSTCODES_BASE_URL + postcode + '.json'
+            return self.postcode_lookup(url)
         else:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
-            raise CourtSearchError('MapIt service error: ' + str(r.status_code))
+            raise CourtSearchInvalidPostcode('Please enter a full postcode: ' + postcode)
+
+    def address_finder_lookup( self, postcode ):
+        if self.full_postcode:
+            url = settings.ADDRESS_FINDER_BASE_URL + postcode
+            return self.postcode_lookup(url, {'Authorization': 'Token ' + settings.ADDRESS_FINDER_AUTH_TOKEN})
+        else:
+            raise CourtSearchInvalidPostcode('Please enter a full postcode: ' + postcode)
 
     def is_full_postcode( self, postcode ):
         # Regex from: https://gist.github.com/simonwhitaker/5748515

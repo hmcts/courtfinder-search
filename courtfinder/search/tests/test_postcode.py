@@ -51,7 +51,7 @@ class PostcodeTestCase(TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def _get_from_mapit_mock( self, url ):
+    def _get_from_mapit_mock( self, url, headers={} ):
         mock_response = MockResponse()
 
         if url.endswith('SE15'):
@@ -85,11 +85,16 @@ class PostcodeTestCase(TestCase):
         self.assertIsNone(p.local_authority)
 
     def test_broken_postcode(self):
-        self.assertRaises(CourtSearchInvalidPostcode, Postcode, self.broken_postcode)
+        with self.assertRaises(CourtSearchInvalidPostcode):
+            p = Postcode(self.broken_postcode)
+            p.lookup_postcode()
 
     def test_500(self):
-        self.assertRaises(CourtSearchError, Postcode, 'Service Down')
+        with self.assertRaises(CourtSearchError):
+            p = Postcode('Service Down')
+            p.lookup_postcode()
 
     def test_nowhere_postcode(self):
         with self.assertRaises(CourtSearchInvalidPostcode):
             p = Postcode(self.nowhere_postcode)
+            p.lookup_postcode()
