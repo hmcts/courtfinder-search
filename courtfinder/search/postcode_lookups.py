@@ -36,14 +36,19 @@ class PostcodeLookup():
 
 
     def parse( self, text ):
+        # import pdb; pdb.set_trace()
+
         self.parsed_response = json.loads(text)
+        
         self.postcode.latitude = self.latitude()
         self.postcode.longitude = self.longitude()
 
+    def headers( self ):
+        return {}
 
     def perform( self, headers={} ):
         url = self.url()
-        r = self._debug = requests.get(url, headers=headers)
+        r = self._debug = requests.get(url, headers=self.headers())
         self.response = r
 
         if r.status_code == 200:
@@ -95,19 +100,57 @@ class MapitLookup(PostcodeLookup):
             except LocalAuthority.DoesNotExist:
                 loggers['la'].error(local_authority_name)
 
-    def council_id( self ):
-        council = self.council_struct()
+    def local_authority_name( self ):
+        if 'areas' in self.parsed_response:
+            return self.parsed_response['areas'][self.__council_id()]['name']
+
+    def __council_struct( self ):
+        return self.parsed_response['shortcuts']['council']
+
+    def __council_id( self ):
+        council = self.__council_struct()
 
         if isinstance(council, dict):
             return str(council['county'])
         else:
             return str(council)
 
-    def local_authority_name( self ):
-        return self.parsed_response['areas'][self.council_id()]['name']
+    
+class AddressFinderLookup(PostcodeLookup):
 
-    def council_struct( self ):
-        return self.parsed_response['shortcuts']['council']
+    def url( self ):
+        if self.postcode.full_postcode:
+            return settings.ADDRESS_FINDER_BASE_URL + self.postcode.postcode
+        else:
+            return settings.ADDRESS_FINDER_BASE_URL + 'partial/' + self.postcode.postcode
+
+    def headers( self ):
+        return {'Authorization': 'Token ' + settings.ADDRESS_FINDER_AUTH_TOKEN}
+
+    def latitude( self ):
+        if 'coordinates' in self.parsed_response:
+            return self.parsed_response['coordinates'][1]
+        else:
+            raise CourtSearchInvalidPostcode('AddressFinder service didn\'t return wgs84 data')
+
+    def longitude( self ):
+        if 'coordinates' in self.parsed_response:
+            return self.parsed_response['coordinates'][0]
+        else:
+            raise CourtSearchInvalidPostcode('AddressFinder service didn\'t return wgs84 data')
+
+    def local_authority( self ):
+        if self.postcode.full_postcode:
+            local_authority_name = self.local_authority_name()
+
+            try:
+                return LocalAuthority.objects.get(name=local_authority_name)
+            except LocalAuthority.DoesNotExist:
+                loggers['la'].error(local_authority_name)
+
+    def local_authority_name( self ):
+        return None #self.parsed_response['areas'][self.__council_id()]['name']
+
 
 class Postcode():
 
@@ -166,3 +209,4 @@ class Postcode():
 
     def __unicode__( self ):
         return self.postcode
+
