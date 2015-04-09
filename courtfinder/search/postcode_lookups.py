@@ -69,6 +69,10 @@ class PostcodeLookup():
             raise CourtSearchError('Postcode lookup service error: ' + url + ', ' + str(r.status_code))
     
 
+    def supports_local_authority( self ):
+        """Override in concrete subclasses"""
+        return False
+
 
 class MapitLookup(PostcodeLookup):
     
@@ -90,6 +94,10 @@ class MapitLookup(PostcodeLookup):
             return self.parsed_response['wgs84_lon']
         else:
             raise CourtSearchInvalidPostcode('MapIt service didn\'t return wgs84 data')
+
+
+    def supports_local_authority( self ):
+        return True
 
     def local_authority( self ):
         if self.postcode.full_postcode:
@@ -139,18 +147,6 @@ class AddressFinderLookup(PostcodeLookup):
         else:
             raise CourtSearchInvalidPostcode('AddressFinder service didn\'t return wgs84 data')
 
-    def local_authority( self ):
-        if self.postcode.full_postcode:
-            local_authority_name = self.local_authority_name()
-
-            try:
-                return LocalAuthority.objects.get(name=local_authority_name)
-            except LocalAuthority.DoesNotExist:
-                loggers['la'].error(local_authority_name)
-
-    def local_authority_name( self ):
-        return None #self.parsed_response['areas'][self.__council_id()]['name']
-
 
 class Postcode():
 
@@ -167,22 +163,40 @@ class Postcode():
         # self.lookup_postcode()
 
     def lookup_postcode( self, service_name='mapit' ):
-        lookup = self.lookup_service(service_name)
-        lookup.perform()
-        response = lookup.parsed_response
+        lat_long_lookup = self.lookup_service(service_name)
+        lat_long_lookup.perform()
 
-        self.latitude = lookup.latitude()
-        self.longitude = lookup.longitude()
+        self.latitude = lat_long_lookup.latitude()
+        self.longitude = lat_long_lookup.longitude()
 
+    def lookup_local_authority( self, lat_long_lookup=None, council_lookup_service_name='mapit' ):
+
+        if self.local_authority_already_found(lat_long_lookup):
+            set_local_authority(lat_long_lookup)
+        else:
+            la_lookup = self.lookup_service(council_lookup_service_name)
+            la_lookup.perform()
+            self.set_local_authority(la_lookup)
+        
+    def set_local_authority(self, lookup):
         self.local_authority_name = lookup.local_authority_name()
         self.local_authority = lookup.local_authority()
+            
+
+    def local_authority_already_found(self, lookup_object):
+        (
+                lookup_object != None 
+            and lookup_object.supports_local_authority() 
+            and lookup_object.parsed_response != None
+        )
+
 
     def lookup_service(self, name='mapit'):
         if name == 'mapit':
             return MapitLookup( self.postcode )
         elif name == 'address_finder':
             return AddressFinderLookup( self.postcode )
-        elif name == 'uk_postcodes_lookup':
+        elif name == 'uk_postcodes':
             return UkPostcodesLookup( self.postcode )
         else:
             raise UnknownLookupService('Unknown Postcode Lookup service requested: ' + name)

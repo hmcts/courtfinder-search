@@ -6,6 +6,7 @@ import mock
 from django.test import TestCase, Client
 
 from search.court_search import Postcode, CourtSearchInvalidPostcode, CourtSearchError
+from search.postcode_lookups import MapitLookup, AddressFinderLookup #, UkPostcodesLookup
 
 postcodes = {
     'full': 'SE15 4UH',
@@ -91,14 +92,18 @@ class MapitLookupTestCase(TestCase):
         p.lookup_postcode('mapit')
         self.assertEqual(p.longitude, -0.06623508303668792)
 
+    def test_local_authority_support(self):
+        mapit = MapitLookup(postcodes['full'])
+        self.assertEqual(mapit.supports_local_authority(), True)
+
     def test_local_authority_name(self):
         p = Postcode(postcodes['full'])
-        p.lookup_postcode('mapit')
+        p.lookup_local_authority(None, 'mapit')
         self.assertEqual(p.local_authority_name, 'Southwark Borough Council')
 
     def test_no_local_authority_for_partial_postcode(self):
         p = Postcode(postcodes['partial'])
-        p.lookup_postcode('mapit')
+        p.lookup_local_authority(None, 'mapit')
         self.assertIsNone(p.local_authority)
 
     def test_broken_postcode(self):
@@ -172,15 +177,9 @@ class AddressFinderLookupTestCase(TestCase):
         p.lookup_postcode('address_finder')
         self.assertEqual(p.longitude, -1.78826971425321)
 
-    def test_local_authority_name(self):
-        p = Postcode(postcodes['full'])
-        p.lookup_postcode('address_finder')
-        self.assertEqual(p.local_authority_name, 'Southwark Borough Council')
-
-    def test_no_local_authority_for_partial_postcode(self):
-        p = Postcode(postcodes['partial'])
-        p.lookup_postcode('address_finder')
-        self.assertIsNone(p.local_authority)
+    def test_local_authority_support(self):
+        address_finder = AddressFinderLookup(postcodes['full'])
+        self.assertEqual(address_finder.supports_local_authority(), False)
 
     def test_broken_postcode(self):
         with self.assertRaises(CourtSearchInvalidPostcode):

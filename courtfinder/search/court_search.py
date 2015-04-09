@@ -27,6 +27,7 @@ class CourtSearch(object):
         elif postcode:
             self.postcode = Postcode(postcode)
             self.postcode.lookup_postcode()
+            self.postcode.lookup_local_authority()
             try:
                 if area_of_law == 'all':
                     self.area_of_law = AreaOfLaw(name='All', slug='all')
