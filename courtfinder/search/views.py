@@ -57,7 +57,7 @@ def index(request):
 
 
 def aol(request):
-    areas_of_law = AreaOfLaw.objects.all().exclude(slug='high-court').order_by('name')
+    areas_of_law = AreaOfLaw.objects.all().exclude(slug='High court').order_by('name')
     for area in areas_of_law:
         area.description = areas_of_law_description.get(area.slug, '')
     return render(request, 'search/aol.jinja', {

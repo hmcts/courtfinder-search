@@ -99,18 +99,14 @@ class MapitLookup(PostcodeLookup):
     def supports_local_authority( self ):
         return True
 
-    def local_authority( self ):
-        if self.postcode.full_postcode:
-            local_authority_name = self.local_authority_name()
-
-            try:
-                return LocalAuthority.objects.get(name=local_authority_name)
-            except LocalAuthority.DoesNotExist:
-                loggers['la'].error(local_authority_name)
-
     def local_authority_name( self ):
         if 'areas' in self.parsed_response:
             return self.parsed_response['areas'][self.__council_id()]['name']
+
+
+    def local_authority_gss_code( self ):
+        if 'areas' in self.parsed_response:
+            return self.parsed_response['areas'][self.__council_id()]['codes']['gss']
 
     def __council_struct( self ):
         return self.parsed_response['shortcuts']['council']
@@ -147,6 +143,42 @@ class AddressFinderLookup(PostcodeLookup):
         else:
             raise CourtSearchInvalidPostcode('AddressFinder service didn\'t return wgs84 data')
 
+class UkPostcodesLookup(PostcodeLookup):
+
+    def url( self ):
+        return settings.UK_POSTCODES_BASE_URL + self.postcode.postcode + '.json'
+        # if self.postcode.full_postcode:
+        #     return settings.UK_POSTCODES_BASE_URL + self.postcode.postcode + '.json'
+        # else:
+        #     raise CourtSearchInvalidPostcode('Please enter a full postcode: ' + self.postcode.postcode)
+
+    def latitude( self ):
+        if 'geo' in self.parsed_response:
+            return self.parsed_response['geo']['lat']
+        else:
+            raise CourtSearchInvalidPostcode('UkPostcodes service didn\'t return wgs84 data')
+
+    def longitude( self ):
+        if 'geo' in self.parsed_response:
+            return self.parsed_response['geo']['lng']
+        else:
+            raise CourtSearchInvalidPostcode('UkPostcodes service didn\'t return wgs84 data')
+
+    def supports_local_authority( self ):
+        return True
+
+
+    def local_authority_name( self ):
+        if 'administrative' in self.parsed_response:
+            return self.parsed_response['administrative']['council']['title']
+        else:
+            raise CourtSearchInvalidPostcode('UkPostcodes service didn\'t return a local authority name')
+
+    def local_authority_gss_code( self ):
+        if 'administrative' in self.parsed_response:
+            return self.parsed_response['administrative']['council']['code']
+        else:
+            raise CourtSearchInvalidPostcode('UkPostcodes service didn\'t return a local authority gss_code')
 
 class Postcode():
 
@@ -155,22 +187,21 @@ class Postcode():
         self.latitude = None
         self.longitude = None
         self.local_authority_name = None
+        self.local_authority_gss_code = None
         self.local_authority = None
 
         self.full_postcode = self.is_full_postcode( postcode )
         self.partial_postcode = not self.full_postcode
 
-        # self.lookup_postcode()
 
-    def lookup_postcode( self, service_name='mapit' ):
+    def lookup_postcode( self, service_name='address_finder' ):
         lat_long_lookup = self.lookup_service(service_name)
         lat_long_lookup.perform()
 
         self.latitude = lat_long_lookup.latitude()
         self.longitude = lat_long_lookup.longitude()
 
-    def lookup_local_authority( self, lat_long_lookup=None, council_lookup_service_name='mapit' ):
-
+    def lookup_local_authority( self, lat_long_lookup=None, council_lookup_service_name='uk_postcodes' ):
         if self.local_authority_already_found(lat_long_lookup):
             set_local_authority(lat_long_lookup)
         else:
@@ -180,7 +211,16 @@ class Postcode():
         
     def set_local_authority(self, lookup):
         self.local_authority_name = lookup.local_authority_name()
-        self.local_authority = lookup.local_authority()
+        self.local_authority_gss_code = lookup.local_authority_gss_code()
+
+        self.local_authority = self.local_authority_from_db()
+
+
+    def local_authority_from_db( self ):
+        try:
+            return LocalAuthority.objects.get(gss_code=self.local_authority_gss_code)
+        except LocalAuthority.DoesNotExist:
+            loggers['la'].error(self.local_authority_gss_code)
             
 
     def local_authority_already_found(self, lookup_object):

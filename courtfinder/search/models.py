@@ -84,6 +84,7 @@ class OpeningTime(models.Model):
 
 class LocalAuthority(models.Model):
     name = models.TextField()
+    gss_code = models.CharField(max_length=16, null=True)
 
     def __unicode__(self):
         return self.name
