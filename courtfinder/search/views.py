@@ -21,7 +21,7 @@ areas_of_law_description = {
     "Divorce": "ending a marriage.",
     "Domestic violence": "violence in the home.",
     "Employment": "workplace disputes including pay, redundancy and discrimination.",
-    "Forced marriage": "being made to marry against your will.",
+    "Forced marriage and FGM": "being made to marry or undergo mutilation against your will.",
     "Housing possession": "Evictions and rental disputes.",
     "High court": "",
     "Immigration": "seeking asylum, right to live in the UK and appealing deportation.",
