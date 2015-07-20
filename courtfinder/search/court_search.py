@@ -4,7 +4,8 @@ import logging
 import re
 
 from search.models import \
-    Court, AreaOfLaw, CourtAreaOfLaw, CourtLocalAuthorityAreaOfLaw, CourtPostcode
+    Court, AreaOfLaw, CourtAreaOfLaw,\
+    CourtLocalAuthorityAreaOfLaw, CourtPostcode
 from search.rules import Rules
 from search.postcode_lookups import Postcode
 from search.errors import CourtSearchClientError
@@ -21,7 +22,9 @@ loggers = {
 
 class CourtSearch(object):
 
-    def __init__(self, postcode=None, area_of_law=None, single_point_of_entry=False, query=None):
+    def __init__(self,
+                 postcode=None, area_of_law=None,
+                 single_point_of_entry=False, query=None):
         if query:
             self.query = query
         elif postcode:
@@ -55,14 +58,20 @@ class CourtSearch(object):
                 if self.area_of_law.slug == 'money-claims':
                     return Court.objects.filter(name__icontains='CCMCC')
                 elif self.area_of_law.name in Rules.has_spoe:
-                    results = [c.court for c in CourtLocalAuthorityAreaOfLaw.objects.filter(
-                        area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)]
-                    results = [c.court for c in CourtAreaOfLaw.objects.filter(
-                        area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
+                    court_aols = CourtLocalAuthorityAreaOfLaw.objects.filter(
+                        area_of_law=self.area_of_law,
+                        local_authority=self.postcode.local_authority)
+                    results = [c.court for c in court_aols]
+                    spoes = CourtAreaOfLaw.objects.filter(
+                        area_of_law=self.area_of_law,
+                        single_point_of_entry=True)
+                    results = [c.court for c in spoes if c.court in results]
 
                     if len(results) > 0:
-                        loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: SPOE' % (
-                            self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
+                        msg = 'Postcode: %-10s LA: %-30s AOL: %-20s Method: SPOE'
+                        msg = msg % (
+                            self.postcode.postcode, self.postcode.local_authority, self.area_of_law)
+                        loggers['method'].debug(msg)
                         return self.__order_by_distance(results)
 
             results = []
