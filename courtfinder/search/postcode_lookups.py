@@ -18,6 +18,15 @@ loggers = {
 }
 
 
+class UnknownLookupService():
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return self.value
+
+
 class PostcodeLookup():
 
     def __init__(self, postcode):
@@ -35,8 +44,6 @@ class PostcodeLookup():
         """Override in concrete subclasses"""
 
     def parse(self, text):
-        # import pdb; pdb.set_trace()
-
         self.parsed_response = json.loads(text)
 
         self.postcode.latitude = self.latitude()
@@ -77,8 +84,8 @@ class PostcodeLookup():
                 "%d - %s - %s" %
                 (r.status_code, self.postcode.postcode, r.text))
             raise CourtSearchError(
-                'Postcode lookup service error: {url}, {status_code}'
-                .format(url=url, status_code=str(r.status_code)))
+                'Postcode lookup service error: {url}, {status_code}, {body}'
+                .format(url=url, status_code=str(r.status_code), body=r.text))
 
     def supports_local_authority(self):
         """Override in concrete subclasses"""
@@ -213,7 +220,7 @@ class Postcode():
         self.full_postcode = self.is_full_postcode(postcode)
         self.partial_postcode = not self.full_postcode
 
-    def lookup_postcode(self, service_name='address_finder'):
+    def lookup_postcode(self, service_name='mapit'):
         lat_long_lookup = self.lookup_service(service_name)
         lat_long_lookup.perform()
 
@@ -222,7 +229,7 @@ class Postcode():
 
     def lookup_local_authority(self,
                                lat_long_lookup=None,
-                               council_lookup_service_name='uk_postcodes'):
+                               council_lookup_service_name='mapit'):
         if self.local_authority_already_found(lat_long_lookup):
             self.set_local_authority(lat_long_lookup)
         else:
@@ -258,7 +265,7 @@ class Postcode():
         elif name == 'uk_postcodes':
             return UkPostcodesLookup(self.postcode)
         else:
-            raise (
+            raise UnknownLookupService(
                 'Unknown Postcode Lookup service requested: ' + name)
 
     def is_full_postcode(self, postcode):

@@ -1,12 +1,6 @@
-import json
-import re
+from django.test import TestCase
 
-import mock
-
-from django.test import TestCase, Client
-
-from search.court_search import Postcode, CourtSearchInvalidPostcode, CourtSearchError
-from search.postcode_lookups import MapitLookup, AddressFinderLookup #, UkPostcodesLookup
+from search.court_search import Postcode
 
 postcodes = {
     'full': 'SE15 4UH',

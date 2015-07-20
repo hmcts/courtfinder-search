@@ -1,7 +1,8 @@
 from django.test import Client
 from mock import Mock, patch
 from courtfinder.test_utils import TestCaseWithData
-from search.court_search import CourtSearch, CourtSearchError
+from search.court_search import CourtSearch
+from search.errors import CourtSearchError
 from search.models import *
 
 
@@ -68,7 +69,8 @@ class SearchTestCase(TestCaseWithData):
 
     def test_bad_aol(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
+        response = c.get(
+            '/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
         self.assertEqual(response.status_code, 400)
         self.assertIn('your browser sent a request', response.content)
 
@@ -90,7 +92,8 @@ class SearchTestCase(TestCaseWithData):
 
     def test_too_much_whitespace_in_address_search(self):
         c = Client()
-        response = c.get('/search/results?q=Accrington++++Magistrates', follow=True)
+        response = c.get(
+            '/search/results?q=Accrington++++Magistrates', follow=True)
         self.assertNotIn('validation-error', response.content)
 
     def test_regexp_city_should_match(self):
@@ -116,29 +119,23 @@ class SearchTestCase(TestCaseWithData):
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
-    # def test_partial_postcode(self):
-    #    c = Client()
-    #    response = c.get('/search/results?postcode=SE15&aol=all')
-    #    self.assertEqual(response.status_code, 200)
-    #    self.assertIn('<div class="search-results">', response.content)
+    def test_partial_postcode(self):
+       c = Client()
+       response = c.get('/search/results?postcode=SE15&aol=All')
+       self.assertEqual(response.status_code, 200)
+       self.assertIn('<div class="search-results">', response.content)
 
-    # def test_partial_postcode_whitespace(self):
-    #    c = Client()
-    #    response = c.get('/search/results?postcode=SE15++&aol=all')
-    #    self.assertEqual(response.status_code, 200)
-    #    self.assertIn('<div class="search-results">', response.content)
+    def test_partial_postcode_whitespace(self):
+       c = Client()
+       response = c.get('/search/results?postcode=SE15++&aol=All')
+       self.assertEqual(response.status_code, 200)
+       self.assertIn('<div class="search-results">', response.content)
 
-    # def test_postcode_whitespace(self):
-    #    c = Client()
-    #    response = c.get('/search/results?postcode=++SE154UH++&aol=all')
-    #    self.assertEqual(response.status_code, 200)
-    #    self.assertIn('<div class="search-results">', response.content)
-
-    # def test_unknown_directive_action(self):
-    #    with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
-    #        c = Client()
-    #        response = c.get('/search/results?postcode=SE15')
-    #        self.assertRedirects(response, '/search/', 302)
+    def test_postcode_whitespace(self):
+       c = Client()
+       response = c.get('/search/results?postcode=++SE154UH++&aol=All')
+       self.assertEqual(response.status_code, 200)
+       self.assertIn('<div class="search-results">', response.content)
 
     def test_redirect_directive_action(self):
         return_value = {'action': 'redirect', 'target': 'search:postcode'}

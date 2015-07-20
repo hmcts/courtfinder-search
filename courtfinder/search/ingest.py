@@ -120,7 +120,7 @@ class Ingest(object):
 
                 if address['town'] and not(address['town'].isspace()):
                     town, created = Town.objects.get_or_create(
-                        name=address['town'])
+                        name=address['town'], county=address['county'])
 
                     CourtAddress.objects.create(
                         court=court,
