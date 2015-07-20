@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'moj_template',
     'core',
+    'healthcheck',
     'search',
     'staticpages',
     'courts',
