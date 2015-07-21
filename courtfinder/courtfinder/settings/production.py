@@ -19,3 +19,4 @@ DATABASES = {
 ALLOWED_HOSTS = '*'
 
 COURTFINDER_ADMIN_HEALTHCHECK = 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json'
+COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json'
