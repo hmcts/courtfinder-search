@@ -30,7 +30,10 @@ def healthcheck(request):
         'mapit': {
             'status': 'DOWN',
         },
-        'courtfinder': {
+        'courtfinder_search': {
+            'status': 'DOWN',
+        },
+        'courtfinder_admin': {
             'status': 'DOWN',
         },
     }
@@ -55,9 +58,18 @@ def healthcheck(request):
     try:
         r = requests.get(request.build_absolute_uri(reverse('search:search')))
         assert r.status_code == 200, 'Start page did not return 200'
-        response['courtfinder']['status'] = 'UP'
+        response['courtfinder_search']['status'] = 'UP'
     except (requests.RequestException, Exception) as e:
-        response['courtfinder']['error'] = unicode(e)
+        response['courtfinder_search']['error'] = unicode(e)
 
-    errors = any(item['status'] == 'DOWN' for item in response.values())
-    return JsonResponse(response, status=503 if errors else 200)
+    try:
+        assert settings.COURTFINDER_ADMIN_HEALTHCHECK, 'Courtfinder Admin healthcheck.json URL not known'
+        r = requests.get(settings.COURTFINDER_ADMIN_HEALTHCHECK)
+        response['courtfinder_admin']['healthcheck.json'] = r.json()
+        assert r.status_code == 200, 'Courtfinder Admin healthcheck.json did not return 200'
+        response['courtfinder_admin']['status'] = 'UP'
+    except (requests.RequestException, Exception) as e:
+        response['courtfinder_admin']['error'] = unicode(e)
+
+    fully_working = all(item['status'] == 'UP' for item in response.values())
+    return JsonResponse(response, status=200 if fully_working else 503)

@@ -1,14 +1,10 @@
 """Production settings and globals."""
-
 from __future__ import absolute_import
-
 from .base import *
-import os
 
 DEBUG = False
 STATIC_ROOT = '/srv/search/static/'
 
-########## DATABASE CONFIGURATION
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -19,7 +15,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-########## END DATABASE CONFIGURATION
 
 ALLOWED_HOSTS = '*'
 
+COURTFINDER_ADMIN_HEALTHCHECK = 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json'
