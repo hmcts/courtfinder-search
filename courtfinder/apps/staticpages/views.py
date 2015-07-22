@@ -63,7 +63,7 @@ def feedback_sent(request):
 
 
 def redirect_old_id_to_slug(old_id):
-    ids_file = settings.PROJECT_ROOT + '/data/old_id/ids.json'
+    ids_file = os.path.join(settings.PROJECT_ROOT, '../data/old_id/ids.json')
     old_ids = json.loads(open(ids_file).read())
     try:
         return redirect('courts:court', slug=old_ids[old_id])

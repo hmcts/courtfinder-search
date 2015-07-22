@@ -12,7 +12,8 @@ from search.ingest import Ingest
 class SearchTestCase(TestCase):
 
     def setUp(self):
-        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
+        test_data_dir = os.path.join(
+            settings.PROJECT_ROOT, '../data/test_data/')
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         Ingest.courts(json.loads(courts_json_1))
 
