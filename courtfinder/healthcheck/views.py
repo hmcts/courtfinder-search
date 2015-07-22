@@ -3,7 +3,6 @@ import hashlib
 import json
 import os
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.db.utils import DatabaseError
 from django.http import JsonResponse
 from django.utils import timezone
@@ -33,9 +32,6 @@ def healthcheck(request):
         'mapit': {
             'status': 'DOWN',
         },
-        'courtfinder_search': {
-            'status': 'DOWN',
-        },
         'courtfinder_admin': {
             'status': 'DOWN',
         },
@@ -60,13 +56,6 @@ def healthcheck(request):
         response['mapit']['status'] = 'UP'
     except (requests.RequestException, Exception) as e:
         response['mapit']['error'] = unicode(e)
-
-    try:
-        r = requests.get(request.build_absolute_uri(reverse('search:search')))
-        assert r.status_code == 200, 'Start page did not return 200'
-        response['courtfinder_search']['status'] = 'UP'
-    except (requests.RequestException, Exception) as e:
-        response['courtfinder_search']['error'] = unicode(e)
 
     try:
         assert settings.COURTFINDER_ADMIN_HEALTHCHECK, 'Courtfinder Admin healthcheck.json URL not known'
