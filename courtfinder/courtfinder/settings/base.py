@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'moj_template',
     'core',
+    'healthcheck',
     'search',
     'staticpages',
     'courts',
@@ -235,3 +236,5 @@ LOGGING = {
     },
 }
 
+COURTFINDER_ADMIN_HEALTHCHECK = ''
+COURTS_DATA_S3_URL = ''
