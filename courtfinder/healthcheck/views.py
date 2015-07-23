@@ -50,7 +50,7 @@ def healthcheck(request):
         response['database']['error'] = unicode(e)
 
     try:
-        r = requests.get(settings.MAPIT_BASE_URL + 'SW1A+1AA')
+        r = requests.get(settings.MAPIT_BASE_URL + 'SW1A+1AA', timeout=10)
         assert r.status_code == 200, 'MapIt service did not return 200'
         assert r.json(), 'MapIt service did not return valid json'
         response['mapit']['status'] = 'UP'
@@ -59,7 +59,7 @@ def healthcheck(request):
 
     try:
         assert settings.COURTFINDER_ADMIN_HEALTHCHECK, 'Courtfinder Admin healthcheck.json URL not known'
-        r = requests.get(settings.COURTFINDER_ADMIN_HEALTHCHECK)
+        r = requests.get(settings.COURTFINDER_ADMIN_HEALTHCHECK, timeout=10)
         response['courtfinder_admin']['healthcheck.json'] = r.json()
         assert r.status_code == 200, 'Courtfinder Admin healthcheck.json did not return 200'
         response['courtfinder_admin']['status'] = 'UP'
@@ -68,7 +68,7 @@ def healthcheck(request):
 
     try:
         assert settings.COURTS_DATA_S3_URL, 'S3 url for courts.json data not known'
-        r = requests.get(settings.COURTS_DATA_S3_URL, stream=True)
+        r = requests.get(settings.COURTS_DATA_S3_URL, stream=True, timeout=10)
         assert r.status_code == 200, 'S3 url for courts.json data did not return 200'
         digest = hashlib.md5()
         for chunk in r.iter_content(1024):
