@@ -29,8 +29,8 @@
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
           <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.name}}" {% if area.name == aol %}checked{% endif %}>
           <div class="form-label">
-            <span class="aol-name">{{area.name}}: </span>
-            <span class="aol-description">{{ area.description }}</span>
+            <span class="aol-name">{{area.name}}{% if area.description %}:</span>
+            <span class="aol-description">{{ area.description }}{% endif %}</span>
           </div>
         </label>
         {% endfor %}
@@ -39,15 +39,13 @@
           <div class="form-label">
             <span class="aol-name">None of the above or not sure: </span>
             <span class="aol-description">will display a list of the nearest courts to the postcode</span>
-
-
-
+          </div>
         </label>
       </div>
     </div>
     <div class="actions">
-    <button id="continue" class="button" type="submit">Continue</button>
-  </div>
+      <button id="continue" class="button" type="submit">Continue</button>
+    </div>
   </form>
 </div>
 {% endblock %}
