@@ -13,37 +13,42 @@ from search.court_search import CourtSearch, CourtSearchError, CourtSearchClient
 from search.rules import Rules
 
 areas_of_law_description = {
-    "Adoption": "applying to adopt a child.",
-    "Bankruptcy": "declaring bankruptcy or being made bankrupt.",
-    "Civil partnership": "ending a civil partnership.",
-    "Children": "child contact issues and disputes over maintenance payments.",
-    "Crime": "being accused of a crime, being a victim or witness.",
-    "Divorce": "ending a marriage.",
-    "Domestic violence": "violence in the home.",
-    "Employment": "workplace disputes including pay, redundancy and discrimination.",
-    "Forced marriage and FGM": "being made to marry or undergo mutilation against your will.",
-    "Housing possession": "Evictions and rental disputes.",
-    "High court": "",
-    "Immigration": "seeking asylum, right to live in the UK and appealing deportation.",
-    "Money claims": "small claims, consumer, negligence and personal injury claims.",
-    "Probate": "will settlement and disputes.",
-    "Social security": "problems with benefits, entitlement, assessment and decisions."
+    'adoption': 'applying to adopt a child.',
+    'bankruptcy': 'declaring bankruptcy or being made bankrupt.',
+    'children': 'child contact issues and disputes over maintenance payments.',
+    'civil-partnership': 'ending a civil partnership.',
+    'crime': 'being accused of a crime, being a victim or witness.',
+    'divorce': 'ending a marriage.',
+    'domestic-violence': 'violence in the home.',
+    'employment': 'workplace disputes including pay, redundancy and discrimination.',
+    'forced-marriage-and-fgm': 'being made to marry or undergo mutilation against your will.',
+    'high-court': '',
+    'housing-possession': 'Evictions and rental disputes.',
+    'immigration': 'seeking asylum, right to live in the UK and appealing deportation.',
+    'money-claims': 'small claims, consumer, negligence and personal injury claims.',
+    'probate': 'will settlement and disputes.',
+    'social-security': 'problems with benefits, entitlement, assessment and decisions.'
 }
+for key in ['forced-marriage', 'forced-marriage-and-female-genital-mutilation']:
+    areas_of_law_description[key] = areas_of_law_description['forced-marriage-and-fgm']
+
 
 def index(request):
     return render(request, 'search/index.jinja')
 
+
 def aol(request):
-    areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
-    aol = request.GET.get('aol', 'All')
+    areas_of_law = AreaOfLaw.objects.all().exclude(slug='high-court').order_by('name')
     for area in areas_of_law:
-        area.description = areas_of_law_description.get(area.name, '')
+        area.description = areas_of_law_description.get(area.slug, '')
     return render(request, 'search/aol.jinja', {
-        'areas_of_law': areas_of_law, 'aol': aol,
+        'areas_of_law': areas_of_law,
+        'aol': request.GET.get('aol', 'all'),
     })
 
+
 def spoe(request):
-    aol = request.GET.get('aol', 'All')
+    aol = request.GET.get('aol', 'all')
 
     if aol in Rules.has_spoe:
         spoe = request.GET.get('spoe', None)
@@ -55,7 +60,7 @@ def spoe(request):
 
 
 def postcode(request):
-    aol = request.GET.get('aol', 'All')
+    aol = request.GET.get('aol', 'all')
     spoe = request.GET.get('spoe', None)
     postcode = request.GET.get('postcode', None)
     error = request.GET.get('error', None)
@@ -66,10 +71,12 @@ def postcode(request):
         params['spoe'] = spoe
     return render(request, 'search/postcode.jinja', params)
 
+
 def address(request):
     error = request.GET.get('error', None)
     query = request.GET.get('q', None)
     return render(request, 'search/address.jinja', {'error': error, 'query':query})
+
 
 def results(request):
     query = request.GET.get('q', None)
@@ -90,7 +97,7 @@ def results(request):
                 return redirect(reverse('search:address')+'?error=noresults&q='+query)
 
     else:
-        aol = request.GET.get('aol', 'All')
+        aol = request.GET.get('aol', 'all')
         spoe = request.GET.get('spoe', None)
         postcode = request.GET.get('postcode', None)
         if postcode:
@@ -129,7 +136,7 @@ def results(request):
 
 
 def results_json(request):
-    aol = request.GET.get('aol', 'All')
+    aol = request.GET.get('aol', 'all')
     spoe = request.GET.get('spoe', 'start')
     postcode = request.GET.get('postcode', None)
     query = request.GET.get('q', None)
@@ -146,7 +153,6 @@ def results_json(request):
         return HttpResponseBadRequest(
                 '{"error":"%s"}' % e,
                 content_type="application/json")
-
 
 
 def data_status(request):

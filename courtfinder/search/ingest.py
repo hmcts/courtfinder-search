@@ -1,10 +1,11 @@
 from search.models import *
 from dateutil import parser
+from django.utils.text import slugify
 
-class Ingest:
 
+class Ingest(object):
     @classmethod
-    def courts(self, courts):
+    def courts(cls, courts):
         Court.objects.all().delete()
         CourtAttributeType.objects.all().delete()
         CourtAttribute.objects.all().delete()
@@ -62,9 +63,10 @@ class Ingest:
 
             for aol_obj in court_obj['areas_of_law']:
                 aol_name = aol_obj['name']
+                aol_slug = aol_obj.get('slug', slugify(aol_name))
                 aol_las = aol_obj['local_authorities']
                 aol_spoe = aol_obj.get('single_point_of_entry',False)
-                aol, created = AreaOfLaw.objects.get_or_create(name=aol_name)
+                aol, created = AreaOfLaw.objects.get_or_create(name=aol_name, slug=aol_slug)
 
                 CourtAreaOfLaw.objects.create(court=court,
                                               area_of_law=aol,
@@ -102,7 +104,6 @@ class Ingest:
                 ct, created = CourtType.objects.get_or_create(name=court_type_name)
 
                 CourtCourtType.objects.create(court=court, court_type=ct)
-
 
             for address in court_obj['addresses']:
                 address_type, created = AddressType.objects.get_or_create(name=address['type'])

@@ -1,17 +1,15 @@
 import re
 from search.models import Court
-from django.core.urlresolvers import reverse
 
-class Rules:
 
+class Rules(object):
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
                           'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
-    by_proximity = ['Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage and FGM', 'Probate']
-    by_local_authority = ['Adoption', 'Children', 'Divorce']
-    by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
-    has_spoe = ['Children', 'Divorce', 'Money claims']
-
+    by_proximity = ['civil-partnership', 'crime', 'domestic-violence', 'forced-marriage-and-fgm', 'probate']
+    by_local_authority = ['adoption', 'children', 'divorce']
+    by_postcode = ['bankruptcy', 'housing-possession', 'money-claims']
+    has_spoe = ['children', 'divorce', 'money-claims']
 
     @staticmethod
     def for_view(postcode, area_of_law):
@@ -26,7 +24,7 @@ class Rules:
             }
 
         if Rules.__postcode_in_NI(postcode):
-            if area_of_law == 'Immigration':
+            if area_of_law == 'immigration':
                 return {
                     'action': 'render'
                 }
@@ -39,14 +37,13 @@ class Rules:
 
         return None
 
-
     @staticmethod
     def for_search(postcode, area_of_law):
         """
         Does the search and returns a list of courts
         """
         if Rules.__postcode_in_NI(postcode):
-            if area_of_law == 'Immigration':
+            if area_of_law == 'immigration':
                 return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
             else:
                 return []
