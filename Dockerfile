@@ -1,28 +1,20 @@
-# FROM ubuntu:14.04
-FROM phusion/baseimage:0.9.12
+FROM ubuntu:14.04
 
-RUN apt-get update
-RUN apt-get install -y postgresql-client-9.3 postgresql-9.3 postgresql-server-dev-9.3 postgresql-contrib-9.3 postgis postgresql-9.3-postgis-2.1 python-pip python-dev wget npm ruby nodejs-legacy
+RUN apt-get clean && apt-get update
+RUN apt-get install --fix-missing -y postgresql-client postgresql postgresql-server-dev-all postgresql-contrib postgis postgresql-9.3-postgis-2.1 python-pip python-dev wget npm ruby nodejs-legacy
 RUN pip install uWSGI==2.0.8
 
-ADD /docker/. /
-RUN mv /search /etc/sudoers.d/search
-RUN chmod 755 /run.sh
+COPY /docker/. /
+RUN mv /search /etc/sudoers.d/search; chmod 755 /run.sh; mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf; mkdir -p /srv/node_files
+COPY ./package.json /srv/node_files/package.json
+RUN bash /setup_postgresql.sh; bash /setup_npm.sh; useradd -m -d /srv/search search
 
-RUN mv /pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
-RUN bash /setup_postgresql.sh
-RUN mkdir -p /srv/node_files
-ADD ./package.json /srv/node_files/package.json
-RUN bash /setup_npm.sh
-
-RUN useradd -m -d /srv/search search
-
-ADD ./requirements/base.txt /requirements.txt
+COPY ./requirements/base.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-ADD . /srv/search
-RUN rm -rf /srv/search/.git
-RUN chown -R search: /srv/search
+RUN sudo -u search mkdir -p /srv/search
+
+COPY . /srv/search
 
 RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 
@@ -33,7 +25,6 @@ RUN gulp
 
 RUN update-rc.d postgresql enable
 RUN chown -R search:search /srv/logs
+RUN chown -R search: /srv/search
 
 USER search
-
-EXPOSE 8000
