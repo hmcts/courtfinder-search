@@ -37,10 +37,11 @@ coverage.xml
 # Translations
 *.mo
 
-# Mr Developer
+# IDEs
 .mr.developer.cfg
 .project
 .pydevproject
+.idea/
 
 # Rope
 .ropeproject
@@ -68,3 +69,6 @@ generated/
 
 # Tern is a stand-alone code-analysis engine for JavaScript http://ternjs.net
 .tern-port
+
+# build products
+BUILD_VERSION.json
