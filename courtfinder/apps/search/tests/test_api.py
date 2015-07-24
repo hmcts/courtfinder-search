@@ -1,10 +1,8 @@
-import requests
 import json
 import os
-import re
 from django.test import TestCase, Client
 from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
+from search.court_search import CourtSearchError
 from search.models import *
 from django.conf import settings
 from search.ingest import Ingest
@@ -35,19 +33,22 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_address_search(self):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_no_aol(self):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_empty_query(self):
         c = Client()
@@ -61,7 +62,8 @@ class SearchTestCase(TestCase):
 
     def test_internal_error(self):
         c = Client()
-        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
+        with patch('search.court_search.CourtSearch.get_courts') as get_courts:
+            get_courts.side_effect = CourtSearchError('something went wrong')
             response = c.get('/search/results.json?q=Accrington')
             self.assertEquals(500, response.status_code)
             self.assertIn("something went wrong", response.content)

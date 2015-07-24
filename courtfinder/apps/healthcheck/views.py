@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+"Healthcheck views"
+
 import datetime
 import hashlib
 import json
@@ -16,8 +19,9 @@ def ping(request):
         'commit_id': None,
         'build_tag': None,
     }
+    build_version = os.path.join(settings.PROJECT_ROOT, 'BUILD_VERSION.json')
     try:
-        with open(os.path.join(settings.PROJECT_ROOT, 'BUILD_VERSION.json')) as f:
+        with open(build_version) as f:
             response.update(json.load(f))
     except (IOError, Exception):
         pass
@@ -58,29 +62,39 @@ def healthcheck(request):
         response['mapit']['error'] = unicode(e)
 
     try:
-        assert settings.COURTFINDER_ADMIN_HEALTHCHECK, 'Courtfinder Admin healthcheck.json URL not known'
+        assert settings.COURTFINDER_ADMIN_HEALTHCHECK, \
+            'Courtfinder Admin healthcheck.json URL not known'
         r = requests.get(settings.COURTFINDER_ADMIN_HEALTHCHECK, timeout=10)
         response['courtfinder_admin']['healthcheck.json'] = r.json()
-        assert r.status_code == 200, 'Courtfinder Admin healthcheck.json did not return 200'
+        assert r.status_code == 200, \
+            'Courtfinder Admin healthcheck.json did not return 200'
         response['courtfinder_admin']['status'] = 'UP'
     except (requests.RequestException, Exception) as e:
         response['courtfinder_admin']['error'] = unicode(e)
 
     try:
-        assert settings.COURTS_DATA_S3_URL, 'S3 url for courts.json data not known'
+        assert settings.COURTS_DATA_S3_URL, \
+            'S3 url for courts.json data not known'
         r = requests.get(settings.COURTS_DATA_S3_URL, stream=True, timeout=10)
-        assert r.status_code == 200, 'S3 url for courts.json data did not return 200'
+        assert r.status_code == 200, \
+            'S3 url for courts.json data did not return 200'
         digest = hashlib.md5()
         for chunk in r.iter_content(1024):
             digest.update(chunk)
         response['s3_courts_data']['s3_url'] = settings.COURTS_DATA_S3_URL
         response['s3_courts_data']['s3_hash'] = digest.hexdigest()
         from search.models import DataStatus
-        last_ingestion = DataStatus.objects.all().order_by('-last_ingestion_date').first()
+        last_ingestion = DataStatus.objects.all().order_by(
+            '-last_ingestion_date').first()
         response['s3_courts_data']['local_hash'] = last_ingestion.data_hash
-        response['s3_courts_data']['local_date'] = last_ingestion.last_ingestion_date
-        assert response['s3_courts_data']['s3_hash'] == last_ingestion.data_hash \
-            or timezone.now() - last_ingestion.last_ingestion_date <= datetime.timedelta(minutes=10), \
+        response['s3_courts_data']['local_date'] = \
+            last_ingestion.last_ingestion_date
+
+        same_hash = response['s3_courts_data']['s3_hash'] == \
+            last_ingestion.data_hash
+        updated_within_10_mins = datetime.timedelta(minutes=10) > \
+            (timezone.now() - last_ingestion.last_ingestion_date)
+        assert same_hash or updated_within_10_mins, \
             'Local courts data is different from S3 and older than 10min'
         response['s3_courts_data']['status'] = 'UP'
     except (requests.RequestException, Exception) as e:
