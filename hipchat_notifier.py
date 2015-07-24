@@ -1,79 +1,75 @@
-import httplib, urllib
-import getopt, sys, os
+import argparse
+import os
 import subprocess
 
-def get_connection():
-  return httplib.HTTPSConnection('api.hipchat.com')
+import requests
 
-def get_url(token):
-  return '/v1/rooms/message?auth_token=%s' % token
 
-def get_data_from_git(format_string, commit):
-  return subprocess.check_output(['git', 'log', '-1', '--format=format:%s' % format_string, commit])
+HIPCHAT_URL = 'https://api.hipchat.com/v1/rooms/message'
 
-def get_author(commit):
-  return get_data_from_git('%an <%ae>', commit)
 
-def get_date(commit):
-  return get_data_from_git('%aD', commit)
+def get_commit_data(commit):
+    output = subprocess.check_output(
+        ['git', 'log', '-1', "--format=format:%an <%ae>|%aD|%s|%b", commit])
+    return zip(['author', 'date', 'title', 'message'], output.split('|'))
 
-def get_title(commit):
-  return get_data_from_git('%s', commit)
 
-def get_full_message(commit):
-  return get_data_from_git('%b', commit)
+def post_message(token, room, success, project, commit=None):
+    params = {'auth_token': token}
+    headers = {'Content-type': 'application/x-www-form-urlencoded'}
+    if commit is None:
+        commit = os.environ['COMMIT']
+    data = {
+        'room_id': room,
+        'from': 'Shippable',
+        'color': 'green' if success else 'red',
+        'notify': True,
+        'message': (
+            '<a href="{BUILD_URL}">Build #{BUILD_NUMBER}</a> {status_text} '
+            'for project <strong>{project}</strong> on branch {BRANCH}'
+            '<br>'
+            '<strong>{author}</strong><br>'
+            '{date}<br>'
+            '<strong>{title}</strong><br>'
+            '{message}').format(
+                status_text='succeeded' if success else 'failed',
+                project=project,
+                **dict(get_commit_data(commit), **os.environ))
+    }
 
-def post_message(connection, url, room, success, project):
-  headers = {'Content-type': 'application/x-www-form-urlencoded'}
-  build_url = os.environ['BUILD_URL']
-  build_number = os.environ['BUILD_NUMBER']
-  branch = os.environ['BRANCH']
-  commit = os.environ['COMMIT']
+    response = requests.post(
+        HIPCHAT_URL, params=params, data=data, headers=headers)
+    print response.text
 
-  status_text = 'succeeded' if success else 'failed'
-  color = 'green' if success else 'red'
-  title = '<a href="%s">Build #%s</a> %s for project <strong>%s</strong> on branch %s' % (build_url, build_number, status_text, project, branch)
-  author = '<strong>%s</strong><br>%s' % (get_author(commit), get_date(commit))
-  description = '<strong>%s</strong><br>%s' % (get_title(commit), get_full_message(commit))
-  message = '<br>'.join([title, author, description])
-
-  message = {
-    'room_id': room,
-    'from': 'Shippable',
-    'color': color,
-    'message': message,
-    'notify': True,
-  }
-
-  connection.request('POST', url, urllib.urlencode(message), headers)
-  response = connection.getresponse()
-  print response.read().decode()
 
 def main():
-  try:
-    opts, args = getopt.getopt(sys.argv[1:], ':sf', ['project=', 'room=', 'token='])
-  except getopt.GetoptError as err:
-    print str(err)
-    sys.exit(2)
+    parser = argparse.ArgumentParser(
+        description='Notify HipChat of Shippable build status')
+    parser.add_argument(
+        '-s', '--success',
+        dest='success', action='store_true', default=False,
+        help='The build was successful')
+    parser.add_argument(
+        '-p', '--project',
+        dest='project', action='store', required=True,
+        help='The project being built')
+    parser.add_argument(
+        '-r', '--room',
+        dest='room', action='store', required=True,
+        help='The HipChat room to send the message to')
+    parser.add_argument(
+        '-t', '--token',
+        dest='token', action='store', required=True,
+        help='The HipChat auth token')
+    parser.add_argument(
+        'commit',
+        action='store', nargs='?', default=None,
+        help='git commit SHA of build (Optional, defaults to $COMMIT)')
+    args = parser.parse_args()
 
-  success = False
-  room = None
-  project = None
-  room = None
-  token = None
-  for o, arg in opts:
-    if o == '-s':
-      success = True
-    elif o == '--project':
-      project = arg
-    elif o == '--room':
-      room = arg
-    elif o == '--token':
-      token = arg
+    post_message(
+        args.token, args.room, args.success, args.project, args.commit)
 
-  connection = get_connection()
-  url = get_url(token)
-  post_message(connection, url, room, success, project)
 
 if __name__ == '__main__':
-  main()
+    main()

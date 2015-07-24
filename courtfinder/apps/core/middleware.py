@@ -1,13 +1,10 @@
 import json
 import logging
-from syslog import syslog
 from time import gmtime, strftime, time
 
-import pprint
-
-pp = pprint.PrettyPrinter(indent=4)
 
 class RequestLoggingMiddleware(object):
+
     def process_request(self, request):
         self.logger = logging.getLogger('courtfinder.requests')
         self.request_time = time()
@@ -30,4 +27,3 @@ class RequestLoggingMiddleware(object):
             pass
 
         return response
-

@@ -1,58 +1,36 @@
+# -*- encoding: utf-8 -*-
 """
 Django settings for courtfinder project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import abspath, basename, dirname, join, normpath, exists
-from sys import path
-from os import environ
-
-# Log handler for LogEntries
-from logentries import LogentriesHandler
-
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-########## PATH CONFIGURATION
-# Absolute filesystem path to the Django project directory:
-DJANGO_ROOT = dirname(dirname(abspath(__file__)))
-
-# Absolute filesystem path to the top-level project folder:
-SITE_ROOT = dirname(DJANGO_ROOT)
-
-# Site name:
-SITE_NAME = basename(DJANGO_ROOT)
-
-# Project root:
-PROJECT_ROOT = dirname(SITE_ROOT)
-
-# Add our project to our pythonpath, this way we don't need to type our project
-# name in our dotted import paths:
-path.append(DJANGO_ROOT)
-########## END PATH CONFIGURATION
+from os.path import abspath, dirname, join
+import sys
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# PATH vars
+def here(*args):
+    return join(abspath(dirname(__file__)), *args)
 
-# SECURITY WARNING: keep the secret key used in production secret!
+
+PROJECT_ROOT = here('..')
+
+
+def root(*args):
+    return join(abspath(PROJECT_ROOT), *args)
+
+
+APPS_ROOT = root('apps')
+sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, APPS_ROOT)
+
 SECRET_KEY = '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.contenttypes',
@@ -82,10 +60,10 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_DIRS = (
-    SITE_ROOT + '/templates',
+    root('templates'),
 )
 
-TEMPLATE_CONTEXT_PROCESSORS =  (
+TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
@@ -118,28 +96,35 @@ USE_TZ = True
 
 
 # Static files
+STATIC_ROOT = root('static')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    SITE_ROOT + '/assets',
+    root('assets'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 # Postcode lookup
 MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'
 
 # Email for feedback
-FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
-FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
+FEEDBACK_EMAIL_SENDER = os.environ.get(
+    'FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
+FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER')
 
-EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
-EMAIL_PORT = os.environ.get('SMTP_PORT', None)
-EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
-EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
+EMAIL_HOST = os.environ.get('SMTP_HOSTNAME')
+EMAIL_PORT = os.environ.get('SMTP_PORT')
+EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
 EMAIL_USE_TLS = False
 
 # Set your DSN value
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_URL', None),
+    'dsn': os.environ.get('SENTRY_URL'),
 }
 
 # Add raven to the list of installed apps
@@ -148,9 +133,14 @@ INSTALLED_APPS = INSTALLED_APPS + (
 )
 
 # Ensure logging directory is created
-LOGPATH = abspath(PROJECT_ROOT + '/../logs')
+LOGPATH = root('../logs')
 if not os.path.exists(LOGPATH):
     os.makedirs(LOGPATH)
+
+
+def log_file(filename):
+    return join(LOGPATH, filename)
+
 
 # Logging
 LOGGING = {
@@ -169,37 +159,37 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename':  LOGPATH + '/errors.log',
+            'filename':  log_file('errors.log'),
         },
         'missed-las-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': LOGPATH + '/missed-las.log',
+            'filename': log_file('missed-las.log'),
         },
         'missed-aols-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': LOGPATH + '/missed-aols.log',
+            'filename': log_file('missed-aols.log'),
         },
         'mapit-file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': LOGPATH + '/mapit.log',
+            'filename': log_file('mapit.log'),
         },
         'search-method-file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'simple',
-            'filename': LOGPATH + '/search-method.log',
+            'filename': log_file('search-method.log'),
         },
         'courtfinder-requests-file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'formatter': 'no-format',
-            'filename': LOGPATH + '/requests.log',
+            'filename': log_file('requests.log'),
         }
     },
     'loggers': {
@@ -238,3 +228,9 @@ LOGGING = {
 
 COURTFINDER_ADMIN_HEALTHCHECK = ''
 COURTS_DATA_S3_URL = ''
+
+# local.py overrides all the common settings
+try:
+    from .local import *
+except ImportError:
+    pass

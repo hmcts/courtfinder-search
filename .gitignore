@@ -33,6 +33,7 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
+pytest.ini
 
 # Translations
 *.mo
@@ -42,6 +43,7 @@ coverage.xml
 .project
 .pydevproject
 .idea/
+.sw?
 
 # Rope
 .ropeproject
@@ -59,6 +61,7 @@ reports/
 npm-debug.log
 
 # bower packages
+courtfinder/static/
 courtfinder/assets/
 courtfinder/assets-src/vendor/
 .sass-cache/
@@ -72,3 +75,6 @@ generated/
 
 # build products
 BUILD_VERSION.json
+
+# local settings overrides
+courtfinder/settings/local.py
