@@ -43,6 +43,7 @@ pytest.ini
 .project
 .pydevproject
 .idea/
+.sw?
 
 # Rope
 .ropeproject
