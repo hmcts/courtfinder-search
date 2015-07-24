@@ -8,9 +8,6 @@ language: python
 python:
   - 2.7
 
-node_js:
-  - 0.10.32
-
 env:
   global:
     - PROJECT=courtfinder-search
@@ -22,7 +19,7 @@ env:
 install:
   - pip install -r requirements/testing.txt
   - sudo gem install sass
-  - npm cache clean
+  - sudo npm install -g npm@2.13
   - npm install
 
 before_script:
