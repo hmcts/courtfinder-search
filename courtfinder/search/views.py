@@ -1,13 +1,16 @@
+from functools import wraps
 import json
-import decimal
 import re
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.core.serializers.json import DjangoJSONEncoder
+from django.utils.decorators import available_attrs
+from django.utils.text import slugify
 from django.views.defaults import bad_request
 
+from core.utils import updated_query_string
 from search.models import Court, AreaOfLaw, DataStatus
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
@@ -33,6 +36,22 @@ for key in ['forced-marriage', 'forced-marriage-and-female-genital-mutilation']:
     areas_of_law_description[key] = areas_of_law_description['forced-marriage-and-fgm']
 
 
+def normalise_aol(view):
+    # try to normalise aol as the options have changed
+    @wraps(view, assigned=available_attrs(view))
+    def inner(request, *args, **kwargs):
+        aol = request.GET.get('aol')
+        if aol and aol != 'all':
+            slugified_aol = slugify(aol)
+            slugified_aol_exists = aol != slugified_aol and AreaOfLaw.objects.filter(slug=slugified_aol).exists()
+            if slugified_aol_exists:
+                qs = updated_query_string(request.GET, aol=slugified_aol)
+                return redirect(request.build_absolute_uri('?' + qs))
+        return view(request, *args, **kwargs)
+
+    return inner
+
+
 def index(request):
     return render(request, 'search/index.jinja')
 
@@ -47,6 +66,7 @@ def aol(request):
     })
 
 
+@normalise_aol
 def spoe(request):
     aol = request.GET.get('aol', 'all')
 
@@ -59,6 +79,7 @@ def spoe(request):
         return redirect(reverse('search:postcode')+'?aol='+aol)
 
 
+@normalise_aol
 def postcode(request):
     aol = request.GET.get('aol', 'all')
     spoe = request.GET.get('spoe', None)
@@ -78,6 +99,7 @@ def address(request):
     return render(request, 'search/address.jinja', {'error': error, 'query':query})
 
 
+@normalise_aol
 def results(request):
     query = request.GET.get('q', None)
 
