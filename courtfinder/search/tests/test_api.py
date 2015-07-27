@@ -26,12 +26,12 @@ class SearchTestCase(TestCase):
 
     def test_postcode(self):
         c = Client()
-        response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
+        response = c.get('/search/results.json?postcode=SE15+4UH&aol=divorce')
         self.assertEqual(response.status_code, 200)
 
     def test_postcode_search(self):
         c = Client()
-        response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
+        response = c.get('/search/results.json?postcode=SE15&aol=divorce')
         self.assertEqual(response.status_code, 200)
         self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 

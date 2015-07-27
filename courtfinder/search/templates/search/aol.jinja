@@ -27,27 +27,25 @@
       <div id="aols" class="form-block">
         {% for area in areas_of_law %}
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
-          <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.name}}" {% if area.name == aol %}checked{% endif %}>
+          <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.slug}}" {% if area.slug == aol %}checked{% endif %}>
           <div class="form-label">
-            <span class="aol-name">{{area.name}}: </span>
-            <span class="aol-description">{{ area.description }}</span>
+            <span class="aol-name">{{area.name}}{% if area.description %}:</span>
+            <span class="aol-description">{{ area.description }}{% endif %}</span>
           </div>
         </label>
         {% endfor %}
         <label id="last-choice" for="aol-0" class="block-label form-block">
-          <input id="aol-0" type="radio" name="aol" value="All" {% if aol == 'All' %}checked{% endif %}>
+          <input id="aol-0" type="radio" name="aol" value="all" {% if aol == 'all' %}checked{% endif %}>
           <div class="form-label">
             <span class="aol-name">None of the above or not sure: </span>
             <span class="aol-description">will display a list of the nearest courts to the postcode</span>
-
-
-
+          </div>
         </label>
       </div>
     </div>
     <div class="actions">
-    <button id="continue" class="button" type="submit">Continue</button>
-  </div>
+      <button id="continue" class="button" type="submit">Continue</button>
+    </div>
   </form>
 </div>
 {% endblock %}

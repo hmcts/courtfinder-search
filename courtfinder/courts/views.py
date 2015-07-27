@@ -89,10 +89,10 @@ def court(request, slug):
 
     return render(request, 'courts/court.jinja', {
         'court': format_court(the_court),
-        'query': request.GET.get('q',''),
-        'aol': request.GET.get('aol','All'),
+        'query': request.GET.get('q', ''),
+        'aol': request.GET.get('aol', 'all'),
         'spoe': request.GET.get('spoe', None),
-        'postcode': request.GET.get('postcode',''),
+        'postcode': request.GET.get('postcode', ''),
     })
 
 def list_format_courts(courts):

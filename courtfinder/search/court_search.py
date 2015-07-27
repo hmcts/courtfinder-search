@@ -7,6 +7,7 @@ import re
 import requests
 
 from django.conf import settings
+from django.utils.text import slugify
 
 from search.models import Court, AreaOfLaw, CourtAreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
 from search.rules import Rules
@@ -20,15 +21,19 @@ loggers = {
     'method': logging.getLogger('search.method'),
 }
 
+
 class CourtSearchError(Exception):
     def __init__(self, value):
         self.value = value
+
     def __str__(self):
         return self.value
+
 
 class CourtSearchClientError(Exception):
     def __init__(self, value):
         self.value = value
+
     def __str__(self):
         return self.value
 
@@ -36,7 +41,8 @@ class CourtSearchClientError(Exception):
 class CourtSearchInvalidPostcode(CourtSearchError):
     pass
 
-class CourtSearch:
+
+class CourtSearch(object):
 
     def __init__( self, postcode=None, area_of_law=None, single_point_of_entry=False, query=None ):
         if query:
@@ -44,10 +50,10 @@ class CourtSearch:
         elif postcode:
             self.postcode = Postcode(postcode)
             try:
-                if area_of_law.lower() != 'all':
-                    self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
+                if area_of_law == 'all':
+                    self.area_of_law = AreaOfLaw(name='All', slug='all')
                 else:
-                    self.area_of_law = AreaOfLaw(name=area_of_law)
+                    self.area_of_law = AreaOfLaw.objects.get(slug=area_of_law)
             except AreaOfLaw.DoesNotExist:
                 loggers['aol'].error(area_of_law)
                 raise CourtSearchClientError('bad area of law')
@@ -56,21 +62,19 @@ class CourtSearch:
         else:
             raise CourtSearchClientError('bad request')
 
-
-
     def get_courts( self ):
         if hasattr(self, 'query'):
             return self.__address_search(self.query)
         else:
-            rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.name)
+            rule_results = Rules.for_search(self.postcode.postcode, self.area_of_law.slug)
 
             if rule_results is not None:
                 return rule_results
 
             if self.single_point_of_entry == 'start':
-                if self.area_of_law.name == 'Money claims':
+                if self.area_of_law.slug == 'money-claims':
                     return Court.objects.filter(name__icontains='CCMCC')
-                elif self.area_of_law.name in Rules.has_spoe:
+                elif self.area_of_law.slug in Rules.has_spoe:
                     results = [c.court for c in CourtLocalAuthorityAreaOfLaw.objects.filter(area_of_law=self.area_of_law, local_authority=self.postcode.local_authority)]
                     results = [c.court for c in CourtAreaOfLaw.objects.filter(area_of_law=self.area_of_law, single_point_of_entry=True) if c.court in results]
 
@@ -81,10 +85,10 @@ class CourtSearch:
             results = []
 
             if isinstance(self.area_of_law, AreaOfLaw):
-                if self.area_of_law.name in Rules.by_local_authority:
+                if self.area_of_law.slug in Rules.by_local_authority:
                     loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Local authority search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
                     results = self.__local_authority_search()
-                elif self.area_of_law.name in Rules.by_postcode:
+                elif self.area_of_law.slug in Rules.by_postcode:
                     loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Postcode search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
                     results = self.__postcode_search(self.area_of_law)
 
@@ -93,7 +97,6 @@ class CourtSearch:
 
             loggers['method'].debug('Postcode: %-10s LA: %-30s AOL: %-20s Method: Proximity search' % (self.postcode.postcode, self.postcode.local_authority, self.area_of_law))
             return self.__proximity_search()
-
 
     def __local_authority_search( self ):
         if self.postcode.local_authority is None or self.area_of_law is None:
@@ -104,7 +107,6 @@ class CourtSearch:
             local_authority__name=self.postcode.local_authority)
 
         return self.__order_by_distance([c.court for c in covered])
-
 
     def __order_by_distance( self, courts ):
         if len(courts) == 0:
@@ -124,7 +126,6 @@ class CourtSearch:
         """ % (lon, lat, court_ids))
 
         return [r for r in results]
-
 
     def __dedupe(self, seq):
         """
@@ -147,7 +148,6 @@ class CourtSearch:
         return filter(lambda court: area_of_law in court.areas_of_law.all(),
                       self.__dedupe([c.court for c in results]))
 
-
     def __proximity_search( self ):
         lat = self.postcode.latitude
         lon = self.postcode.longitude
@@ -160,11 +160,10 @@ class CourtSearch:
              ORDER BY distance
         """, [lon, lat])
 
-        if self.area_of_law.name != 'All':
+        if self.area_of_law.slug != 'all':
             return [r for r in results if self.area_of_law in r.areas_of_law.all()][:10]
         else:
             return [r for r in results][:10]
-
 
     def __address_search( self, query ):
         """
@@ -191,8 +190,7 @@ class CourtSearch:
         return [result for result in results if result.displayed]
 
 
-
-class Postcode():
+class Postcode(object):
 
     def __init__( self, postcode ):
         self.postcode = re.sub(r'[^A-Za-z0-9 ]','', postcode)
@@ -249,7 +247,6 @@ class Postcode():
         else:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
-
 
     def is_full_postcode( self, postcode ):
         # Regex from: https://gist.github.com/simonwhitaker/5748515

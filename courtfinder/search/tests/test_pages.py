@@ -18,7 +18,7 @@ class SearchPageTestCase(TestCase):
 
     def test_postcode_page(self):
         c = Client()
-        response = c.get('/search/postcode?aol=Divorce&spoe=start')
+        response = c.get('/search/postcode?aol=divorce&spoe=start')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
         self.assertIn('Enter postcode', response.content)

@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+
 
 class Court(models.Model):
     admin_id = models.IntegerField(null=True, default=None)
@@ -58,9 +58,11 @@ class CourtPostcode(models.Model):
 
 class AreaOfLaw(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
 
     def __unicode__(self):
         return self.name
+
 
 class Facility(models.Model):
     name = models.CharField(max_length=255)
@@ -70,6 +72,7 @@ class Facility(models.Model):
 
     def __unicode__(self):
         return "%s: %s" % (self.name, self.description)
+
 
 class OpeningTime(models.Model):
     description = models.CharField(max_length=1024)
@@ -95,6 +98,7 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
                                         self.local_authority.name,
                                         self.area_of_law.name)
 
+
 class CourtFacility(models.Model):
     court = models.ForeignKey(Court)
     facility = models.ForeignKey(Facility)
@@ -102,12 +106,14 @@ class CourtFacility(models.Model):
     def __unicode__(self):
         return "%s has facility %s" % (self.court.name, self.facility)
 
+
 class CourtOpeningTime(models.Model):
     court = models.ForeignKey(Court)
     opening_time = models.ForeignKey(OpeningTime)
 
     def __unicode__(self):
         return "%s has facility %s" % (self.court.name, self.opening_time)
+
 
 class CourtAreaOfLaw(models.Model):
     court = models.ForeignKey(Court)
@@ -149,7 +155,8 @@ class CourtAddress(models.Model):
     town = models.ForeignKey(Town)
 
     def __unicode__(self):
-        return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town.name)
+        return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name,
+                                            self.address, self.postcode, self.town.name)
 
 
 class Contact(models.Model):

@@ -19,7 +19,6 @@ class Command(BaseCommand):
 
     def import_files(self, data_dir):
         courts_data_path = join( data_dir, 'courts.json' )
-        courts = []
         with open(courts_data_path, 'r') as courtsfile:
             print "courts file found"
             courts = json.load(courtsfile)
