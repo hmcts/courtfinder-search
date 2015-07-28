@@ -11,7 +11,7 @@ from django.utils.text import slugify
 from django.views.defaults import bad_request
 
 from courtfinder.utils import updated_query_string
-from search.models import AreaOfLaw, DataStatus
+from search.models import AreaOfLaw, DataStatus, SearchStatistic
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 
@@ -102,6 +102,9 @@ def address(request):
 @normalise_aol
 def results(request):
     query = request.GET.get('q', None)
+
+    if 'pingdom' not in request.META.get('HTTP_USER_AGENT', '').lower():
+        SearchStatistic.search_performed()
 
     if query is not None:
         query = re.sub(r'\s+',' ',query.strip())
