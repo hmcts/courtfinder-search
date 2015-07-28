@@ -1,24 +1,10 @@
-import json
-import os
-from mock import Mock, patch
-from django.test import TestCase
-from django.test import TestCase, Client
+from django.test import Client
 from django.conf import settings
-from search.ingest import Ingest
+from mock import Mock, patch
+from courtfinder.test_utils import TestCaseWithData
 
 
-
-
-class SearchTestCase(TestCase):
-
-    def setUp(self):
-        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
-        courts_json_1 = open(test_data_dir + 'courts.json').read()
-        Ingest.courts(json.loads(courts_json_1))
-
-    def tearDown(self):
-        pass
-
+class SearchTestCase(TestCaseWithData):
     def test_top_page_returns_correct_content(self):
         c = Client()
         response = c.get('/', follow=True)

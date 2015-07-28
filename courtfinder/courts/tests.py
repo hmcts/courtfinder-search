@@ -1,21 +1,8 @@
-import requests
-import json
-import re
-from django.test import TestCase, Client
-from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
-from search.models import *
-from django.conf import settings
-from search.ingest import Ingest
+from django.test import Client
+from courtfinder.test_utils import TestCaseWithData
 
 
-class SearchTestCase(TestCase):
-
-    def setUp(self):
-        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
-        courts_json_1 = open(test_data_dir + 'courts.json').read()
-        Ingest.courts(json.loads(courts_json_1))
-
+class SearchTestCase(TestCaseWithData):
     def test_sample_court_page(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-court')
