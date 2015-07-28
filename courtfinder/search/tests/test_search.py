@@ -1,6 +1,4 @@
-import requests
 import json
-import re
 from django.test import TestCase, Client
 from mock import Mock, patch
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
@@ -39,24 +37,24 @@ class SearchTestCase(TestCase):
 
     def test_spoe_page_with_has_spoe(self):
         c = Client()
-        response = c.get('/search/spoe?aol=Children')
+        response = c.get('/search/spoe?aol=children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
         self.assertIn('About your issue', response.content)
 
     def test_spoe_page_without_spoe(self):
         c = Client()
-        response = c.get('/search/spoe?aol=Crime', follow=True)
+        response = c.get('/search/spoe?aol=crime', follow=True)
         self.assertInHTML('<h1>Enter postcode</h1>', response.content)
 
     def test_distance_search(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE154UH&aol=Crime')
+        response = c.get('/search/results?postcode=SE154UH&aol=crime')
         self.assertEqual(response.status_code, 200)
 
     def test_local_authority_search(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE154UH&aol=Divorce')
+        response = c.get('/search/results?postcode=SE154UH&aol=divorce')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Accrington',response.content)
 
@@ -67,17 +65,17 @@ class SearchTestCase(TestCase):
 
     def test_results_no_postcode(self):
         c = Client()
-        response = c.get('/search/results?aol=Crime&postcode=')
-        self.assertRedirects(response, '/search/postcode?error=nopostcode&aol=Crime', 302)
+        response = c.get('/search/results?aol=crime&postcode=')
+        self.assertRedirects(response, '/search/postcode?error=nopostcode&aol=crime', 302)
 
     def test_sample_postcode_all_aols(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&aol=All')
+        response = c.get('/search/results?postcode=SE15+4UH&aol=all')
         self.assertEqual(response.status_code, 200)
 
     def test_sample_postcode_specific_aol(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15+4UH&aol=Divorce')
+        response = c.get('/search/results?postcode=SE15+4UH&aol=divorce')
         self.assertEqual(response.status_code, 200)
 
     def test_bad_aol(self):
@@ -115,37 +113,37 @@ class SearchTestCase(TestCase):
 
     def test_scottish_postcodes(self):
         c = Client()
-        response = c.get('/search/results?postcode=G24PP&aol=All')
+        response = c.get('/search/results?postcode=G24PP&aol=all')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=G2&aol=All')
+        response = c.get('/search/results?postcode=G2&aol=all')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=AB10&aol=All')
+        response = c.get('/search/results?postcode=AB10&aol=all')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=AB10+7LY&aol=All')
+        response = c.get('/search/results?postcode=AB10+7LY&aol=all')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=BA27AY&aol=All')
+        response = c.get('/search/results?postcode=BA27AY&aol=all')
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
 #    def test_partial_postcode(self):
 #        c = Client()
-#        response = c.get('/search/results?postcode=SE15&aol=All')
+#        response = c.get('/search/results?postcode=SE15&aol=all')
 #        self.assertEqual(response.status_code, 200)
 #        self.assertIn('<div class="search-results">', response.content)
 
 #    def test_partial_postcode_whitespace(self):
 #        c = Client()
-#        response = c.get('/search/results?postcode=SE15++&aol=All')
+#        response = c.get('/search/results?postcode=SE15++&aol=all')
 #        self.assertEqual(response.status_code, 200)
 #        self.assertIn('<div class="search-results">', response.content)
 
 #    def test_postcode_whitespace(self):
 #        c = Client()
-#        response = c.get('/search/results?postcode=++SE154UH++&aol=All')
+#        response = c.get('/search/results?postcode=++SE154UH++&aol=all')
 #        self.assertEqual(response.status_code, 200)
 #        self.assertIn('<div class="search-results">', response.content)
 
@@ -174,16 +172,16 @@ class SearchTestCase(TestCase):
         self.assertRedirects(response, '/search/', 302)
 
     def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='Divorce')
+        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='divorce')
                              .get_courts()), 1)
 
     def test_local_authority_search_ordered(self):
-        self.assertEqual(CourtSearch(postcode='SE154UH', area_of_law='Divorce')
+        self.assertEqual(CourtSearch(postcode='SE154UH', area_of_law='divorce')
                          .get_courts()[0].name, "Accrington Magistrates' Court")
 
     def test_proximity_search(self):
         self.assertNotEqual(CourtSearch(postcode='SE154UH',
-                                        area_of_law='Divorce').get_courts(), [])
+                                        area_of_law='divorce').get_courts(), [])
 
     def test_court_address_search_error(self):
         with patch('search.court_search.CourtSearch.get_courts',
@@ -223,23 +221,23 @@ class SearchTestCase(TestCase):
 
     def test_broken_postcode(self):
         c = Client()
-        response = c.get('/search/results?aol=Divorce&spoe=continue&postcode=NW3+%25+au', follow=True)
+        response = c.get('/search/results?aol=divorce&spoe=continue&postcode=NW3+%25+au', follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn('NW3  au', response.content)
 
     def test_ni(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
+        response = c.get('/search/results?postcode=bt2&aol=divorce', follow=True)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_money_claims(self):
         c = Client()
-        response = c.get('/search/results?postcode=sw1h9aj&spoe=start&aol=Money+claims')
+        response = c.get('/search/results?postcode=sw1h9aj&spoe=start&aol=money-claims')
         self.assertIn("CCMCC", response.content)
 
     def test_ni_immigration(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&aol=Immigration', follow=True)
+        response = c.get('/search/results?postcode=bt2&aol=immigration', follow=True)
         self.assertNotIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
@@ -261,8 +259,9 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(cat), "cat")
         ca = CourtAttribute.objects.create(court=court, attribute_type=cat, value="cav")
         self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
-        aol = AreaOfLaw.objects.create(name="Divorce")
+        aol, _ = AreaOfLaw.objects.get_or_create(name='Divorce', slug='divorce')
         self.assertEqual(str(aol), "Divorce")
+        self.assertEqual(aol.slug, "divorce")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
         self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
         town = Town.objects.create(name="Hobbittown", county="Shire")
@@ -305,7 +304,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(email), "enquiries: a@b.com")
         court_email = CourtEmail.objects.create(court=court, email=email)
         self.assertEqual(str(court_email), "%s has email: %s" % (court.name, email.description))
-        now = datetime.now()
         data_status = DataStatus.objects.create(data_hash="wer38hr3hr37hr")
         self.assertEqual(str(data_status), "Current data hash: %s, last update: %s" %
                          (data_status.data_hash, data_status.last_ingestion_date))
