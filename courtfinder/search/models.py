@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class Court(models.Model):
@@ -224,3 +225,36 @@ class ParkingInfo(models.Model):
         return "Parking onsite: %s, Parking offsite: %s, Parking blue-badge: %s" % (self.onsite,
                                                                                     self.offsite,
                                                                                     self.blue_badge)
+
+
+class SearchStatistic(models.Model):
+    """
+    Tracks search statistics in a singleton model
+    Currently, only holds the date/time when a search was last performed
+    """
+    latest_search = models.DateTimeField(null=True)
+
+    @classmethod
+    def get_shared_statistics(cls):
+        """
+        Get or create the singleton statistics model
+        """
+        statistic, _ = cls.objects.get_or_create(pk=1)
+        return statistic
+
+    @classmethod
+    def get_latest_search(cls):
+        """
+        Gets the latest search date/time
+        """
+        statistic = cls.get_shared_statistics()
+        return statistic.latest_search
+
+    @classmethod
+    def search_performed(cls):
+        """
+        Update the latest search date/time to now
+        """
+        statistic = cls.get_shared_statistics()
+        statistic.latest_search = now()
+        statistic.save()
