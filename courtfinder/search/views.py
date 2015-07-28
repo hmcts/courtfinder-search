@@ -10,8 +10,8 @@ from django.utils.decorators import available_attrs
 from django.utils.text import slugify
 from django.views.defaults import bad_request
 
-from core.utils import updated_query_string
-from search.models import Court, AreaOfLaw, DataStatus
+from courtfinder.utils import updated_query_string
+from search.models import AreaOfLaw, DataStatus
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 
