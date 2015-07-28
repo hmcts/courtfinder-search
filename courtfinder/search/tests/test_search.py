@@ -1,23 +1,11 @@
-import json
-from django.test import TestCase, Client
+from django.test import Client
 from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
+from courtfinder.test_utils import TestCaseWithData
+from search.court_search import CourtSearch, CourtSearchError
 from search.models import *
-from django.conf import settings
-from search.ingest import Ingest
 
 
-class SearchTestCase(TestCase):
-
-    def setUp(self):
-        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
-        courts_json_1 = open(test_data_dir + 'courts.json').read()
-        Ingest.courts(json.loads(courts_json_1))
-        DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
-
-    def tearDown(self):
-        pass
-
+class SearchTestCase(TestCaseWithData):
     def test_format_results_with_postal_address(self):
         c = Client()
         response = c.get('/search/results?q=Accrington')
@@ -56,7 +44,7 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE154UH&aol=divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Accrington',response.content)
+        self.assertIn('Accrington', response.content)
 
     def test_results_no_query(self):
         c = Client()
@@ -82,11 +70,10 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
         self.assertEqual(response.status_code, 400)
-        self.assertIn('your browser sent a request',response.content)
-
+        self.assertIn('your browser sent a request', response.content)
 
     def test_inactive_court(self):
-        court = Court.objects.create(
+        Court.objects.create(
             name="Example2 Court",
             lat=0.0,
             lon=0.0,
@@ -129,39 +116,41 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
-#    def test_partial_postcode(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15&aol=all')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
+    # def test_partial_postcode(self):
+    #    c = Client()
+    #    response = c.get('/search/results?postcode=SE15&aol=all')
+    #    self.assertEqual(response.status_code, 200)
+    #    self.assertIn('<div class="search-results">', response.content)
 
-#    def test_partial_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15++&aol=all')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
+    # def test_partial_postcode_whitespace(self):
+    #    c = Client()
+    #    response = c.get('/search/results?postcode=SE15++&aol=all')
+    #    self.assertEqual(response.status_code, 200)
+    #    self.assertIn('<div class="search-results">', response.content)
 
-#    def test_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=++SE154UH++&aol=all')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
+    # def test_postcode_whitespace(self):
+    #    c = Client()
+    #    response = c.get('/search/results?postcode=++SE154UH++&aol=all')
+    #    self.assertEqual(response.status_code, 200)
+    #    self.assertIn('<div class="search-results">', response.content)
 
-#    def test_unknown_directive_action(self):
-#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
-#            c = Client()
-#            response = c.get('/search/results?postcode=SE15')
-#            self.assertRedirects(response, '/search/', 302)
+    # def test_unknown_directive_action(self):
+    #    with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
+    #        c = Client()
+    #        response = c.get('/search/results?postcode=SE15')
+    #        self.assertRedirects(response, '/search/', 302)
 
     def test_redirect_directive_action(self):
-        with patch('search.rules.Rules.for_view', Mock(return_value={'action':'redirect', 'target':'search:postcode'})):
+        return_value = {'action': 'redirect', 'target': 'search:postcode'}
+        with patch('search.rules.Rules.for_view', Mock(return_value=return_value)):
             c = Client()
             response = c.get('/search/results?postcode=BLARGH')
             self.assertRedirects(response, '/search/postcode?postcode=BLARGH&error=badpostcode', 302)
 
     def test_internal_error(self):
         c = Client()
-        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
+        side_effect = CourtSearchError('something went wrong')
+        with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=side_effect)):
             response = c.get('/search/results.json?q=Accrington')
             self.assertEquals(500, response.status_code)
             self.assertIn("something went wrong", response.content)
@@ -188,14 +177,14 @@ class SearchTestCase(TestCase):
                    Mock(side_effect=CourtSearchError('something went wrong'))):
             c = Client()
             with self.assertRaises(CourtSearchError):
-                response = c.get('/search/results?q=Accrington')
+                c.get('/search/results?q=Accrington')
 
     def test_court_postcode_search_error(self):
         with patch('search.court_search.CourtSearch.get_courts',
                    Mock(side_effect=CourtSearchError('something went wrong'))):
             c = Client()
             with self.assertRaises(CourtSearchError):
-                response = c.get('/search/results?postcode=SE15+4PE')
+                c.get('/search/results?postcode=SE15+4PE')
 
     def test_address_search(self):
         c = Client()
@@ -273,26 +262,28 @@ class SearchTestCase(TestCase):
                                                     address="The court address",
                                                     postcode="CF34RR",
                                                     town=town)
-        self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
+        self.assertEqual(str(court_address),
+                         "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
         contact = Contact.objects.create(name="Enquiries", number="0123456789")
         self.assertEqual(str(contact), "Enquiries: 0123456789")
         court_type = CourtType.objects.create(name="crown court")
         self.assertEqual(str(court_type), "crown court")
         court_contact = CourtContact.objects.create(contact=contact, court=court)
         self.assertEqual(str(court_contact), "Enquiries for Accrington Magistrates' Court is 0123456789")
-        court_court_types=CourtCourtType.objects.create(court=court,
-                                                        court_type=court_type)
+        court_court_types = CourtCourtType.objects.create(court=court,
+                                                          court_type=court_type)
         self.assertEqual(str(court_court_types), "Court type for Accrington Magistrates' Court is crown court")
-        court_postcodes=CourtPostcode.objects.create(court=court,
-                                                      postcode="BR27AY")
+        court_postcodes = CourtPostcode.objects.create(court=court,
+                                                       postcode="BR27AY")
         self.assertEqual(str(court_postcodes), "Accrington Magistrates' Court covers BR27AY")
-        local_authority=LocalAuthority.objects.create(name="Southwark Borough Council")
+        local_authority = LocalAuthority.objects.create(name="Southwark Borough Council")
         self.assertEqual(str(local_authority), "Southwark Borough Council")
-        court_local_authority_aol=CourtLocalAuthorityAreaOfLaw(court=court,
-                                                               area_of_law=aol,
-                                                               local_authority=local_authority)
-        self.assertEqual(str(court_local_authority_aol), "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
-        facility=Facility.objects.create(name="sofa", description="comfy leather")
+        court_local_authority_aol = CourtLocalAuthorityAreaOfLaw(court=court,
+                                                                 area_of_law=aol,
+                                                                 local_authority=local_authority)
+        self.assertEqual(str(court_local_authority_aol),
+                         "Accrington Magistrates' Court covers Southwark Borough Council for Divorce")
+        facility = Facility.objects.create(name="sofa", description="comfy leather")
         self.assertEqual(str(facility), "sofa: comfy leather")
         court_facility = CourtFacility.objects.create(court=court, facility=facility)
         self.assertEqual(str(court_facility), "%s has facility %s" % (court.name, facility))
@@ -314,4 +305,4 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/datastatus')
         self.assertEqual(200, response.status_code)
-        self.assertIn('415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a', response.content)
+        self.assertIn('6f115002ec6ed1745df7d676d10030fe', response.content)

@@ -58,7 +58,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'moj_template',
-    'core',
     'healthcheck',
     'search',
     'staticpages',
@@ -69,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.middleware.RequestLoggingMiddleware',
+    'courtfinder.middleware.RequestLoggingMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
