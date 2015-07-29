@@ -114,7 +114,6 @@ class Ingest(object):
                 CourtCourtType.objects.create(court=court, court_type=ct)
 
             for address in court_obj['addresses']:
-                print "importing address " + str(address)
                 address_type, created = AddressType.objects.get_or_create(
                     name=address['type'])
 

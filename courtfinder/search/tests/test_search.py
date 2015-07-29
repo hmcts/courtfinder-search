@@ -121,19 +121,19 @@ class SearchTestCase(TestCaseWithData):
 
     def test_partial_postcode(self):
        c = Client()
-       response = c.get('/search/results?postcode=SE15&aol=All')
+       response = c.get('/search/results?postcode=SE15&aol=all')
        self.assertEqual(response.status_code, 200)
        self.assertIn('<div class="search-results">', response.content)
 
     def test_partial_postcode_whitespace(self):
        c = Client()
-       response = c.get('/search/results?postcode=SE15++&aol=All')
+       response = c.get('/search/results?postcode=SE15++&aol=all')
        self.assertEqual(response.status_code, 200)
        self.assertIn('<div class="search-results">', response.content)
 
     def test_postcode_whitespace(self):
        c = Client()
-       response = c.get('/search/results?postcode=++SE154UH++&aol=All')
+       response = c.get('/search/results?postcode=++SE154UH++&aol=all')
        self.assertEqual(response.status_code, 200)
        self.assertIn('<div class="search-results">', response.content)
 
