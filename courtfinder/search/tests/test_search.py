@@ -302,4 +302,4 @@ class SearchTestCase(TestCaseWithData):
         c = Client()
         response = c.get('/search/datastatus')
         self.assertEqual(200, response.status_code)
-        self.assertIn('6f115002ec6ed1745df7d676d10030fe', response.content)
+        self.assertIn('901ef05ce3b2c1eac3c9a23005a6477b', response.content)
