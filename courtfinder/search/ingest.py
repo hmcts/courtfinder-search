@@ -77,7 +77,9 @@ class Ingest(object):
 
                 for local_authority in aol_las:
                     local_authority_object, created = LocalAuthority.objects.get_or_create(
-                        gss_code=local_authority['gss_code'], name=local_authority['name'])
+                        gss_code=local_authority.get('gss_code'),
+                        name=local_authority['name'],
+                    )
 
                     CourtLocalAuthorityAreaOfLaw.objects.create(
                         court=court,
