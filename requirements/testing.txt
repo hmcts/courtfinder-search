@@ -1,10 +1,4 @@
 -r base.txt
 
 mock==1.0.1
-nose
-#model-mommy
 coverage==3.7.1
-pytest==2.6.4
-pytest-django==2.7.0
-pytest-xdist==1.11
-pytest-cov==1.8.0

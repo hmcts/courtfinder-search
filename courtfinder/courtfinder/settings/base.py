@@ -124,7 +124,10 @@ STATICFILES_DIRS = (
 )
 
 # Postcode lookup
-MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'
+MAPIT_BASE_URL = os.environ.get('MAPIT_BASE_URL', 'http://mapit.mysociety.org/postcode/')
+ADDRESS_FINDER_BASE_URL = os.environ.get('ADDRESS_FINDER_BASE_URL', 'http://localhost:8000/postcodes/')
+ADDRESS_FINDER_AUTH_TOKEN = os.environ.get('ADDRESS_FINDER_AUTH_TOKEN', '026ce20cd34ef80431eb50ed6d6e6428fb96b922')
+UK_POSTCODES_BASE_URL = os.environ.get('UK_POSTCODES_BASE_URL', 'http://localhost:3006/postcode/')
 
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')

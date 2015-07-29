@@ -121,9 +121,10 @@
                 "slug": "immigration"
             },
             {
-                "local_authorities": [ "Southwark Borough Council" ],
-                "name": "Divorce",
-                "slug": "divorce"
+                "local_authorities": [ 
+                    { "name": "Southwark Borough Council", "gss_code": "E09000028"}
+                ],
+                "name": "Divorce"
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",

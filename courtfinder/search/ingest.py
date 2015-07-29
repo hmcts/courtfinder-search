@@ -32,13 +32,16 @@ class Ingest(object):
 
         for court_obj in courts:
             court_created_at = court_obj.get('created_at', None)
-            created_at = parser.parse(court_created_at+'UTC') if court_created_at else None
+            created_at = parser.parse(
+                court_created_at+'UTC') if court_created_at else None
             court_updated_at = court_obj.get('updated_at', None)
-            updated_at = parser.parse(court_updated_at+'UTC') if court_updated_at else None
+            updated_at = parser.parse(
+                court_updated_at+'UTC') if court_updated_at else None
             parking = court_obj.get('parking', None)
             if parking:
                 parking_info = ParkingInfo.objects.create(onsite=parking.get('onsite', None),
-                                                          offsite=parking.get('offsite', None),
+                                                          offsite=parking.get(
+                                                              'offsite', None),
                                                           blue_badge=parking.get('blue_badge', None))
             else:
                 parking_info = None
@@ -49,8 +52,8 @@ class Ingest(object):
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=court_obj['display'],
-                lat=court_obj.get('lat',None),
-                lon=court_obj.get('lon',None),
+                lat=court_obj.get('lat', None),
+                lon=court_obj.get('lon', None),
                 number=court_obj['court_number'],
                 alert=court_obj.get('alert', None),
                 directions=court_obj.get('directions', None),
@@ -72,18 +75,19 @@ class Ingest(object):
                                               area_of_law=aol,
                                               single_point_of_entry=aol_spoe)
 
-                for local_authority_name in aol_las:
-                    local_authority, created = LocalAuthority.objects.get_or_create(name=local_authority_name)
+                for local_authority in aol_las:
+                    local_authority_object, created = LocalAuthority.objects.get_or_create(
+                        gss_code=local_authority['gss_code'], name=local_authority['name'])
 
                     CourtLocalAuthorityAreaOfLaw.objects.create(
                         court=court,
                         area_of_law=aol,
-                        local_authority=local_authority
+                        local_authority=local_authority_object
                     )
 
             for facility_obj in court_obj['facilities']:
                 facility_name = facility_obj['name']
-                facility_description = facility_obj['description']
+                facility_description = facility_obj['description'] or facility_name
                 facility_image = facility_obj['image']
                 facility_image_description = facility_obj['image_description']
                 facility, created = Facility.objects.get_or_create(name=facility_name,
@@ -93,33 +97,42 @@ class Ingest(object):
                 CourtFacility.objects.create(court=court, facility=facility)
 
             for opening_time in court_obj['opening_times']:
-                opening_time, created = OpeningTime.objects.get_or_create(description=opening_time)
-                CourtOpeningTime.objects.create(court=court, opening_time=opening_time)
+                opening_time, created = OpeningTime.objects.get_or_create(
+                    description=opening_time)
+                CourtOpeningTime.objects.create(
+                    court=court, opening_time=opening_time)
 
             for email in court_obj['emails']:
-                email, created = Email.objects.get_or_create(description=email['description'], address=email['address'])
+                email, created = Email.objects.get_or_create(
+                    description=email['description'], address=email['address'])
                 CourtEmail.objects.create(court=court, email=email)
 
             for court_type_name in court_obj['court_types']:
-                ct, created = CourtType.objects.get_or_create(name=court_type_name)
+                ct, created = CourtType.objects.get_or_create(
+                    name=court_type_name)
 
                 CourtCourtType.objects.create(court=court, court_type=ct)
 
             for address in court_obj['addresses']:
-                address_type, created = AddressType.objects.get_or_create(name=address['type'])
-                town, created = Town.objects.get_or_create(name=address['town'], county=address['county'])
+                address_type, created = AddressType.objects.get_or_create(
+                    name=address['type'])
 
-                CourtAddress.objects.create(
-                    court=court,
-                    address_type=address_type,
-                    address=address['address'],
-                    postcode=address['postcode'],
-                    town=town
-                )
+                if address['town'] and not(address['town'].isspace()):
+                    town, created = Town.objects.get_or_create(
+                        name=address['town'], county=address['county'])
+
+                    CourtAddress.objects.create(
+                        court=court,
+                        address_type=address_type,
+                        address=address['address'],
+                        postcode=address['postcode'],
+                        town=town
+                    )
 
             for contact_obj in court_obj['contacts']:
                 contact, created = Contact.objects.get_or_create(name=contact_obj['name'],
-                                                                 number=contact_obj['number'],
+                                                                 number=contact_obj[
+                                                                     'number'],
                                                                  sort_order=contact_obj['sort'])
 
                 CourtContact.objects.create(

@@ -20,3 +20,13 @@ DATABASES = {
 }
 ########## END DATABASE CONFIGURATION
 
+# quieter Raven logger when running tests
+LOGGING['handlers']['console'] = {
+    'level': 'WARNING',
+    'class': 'logging.StreamHandler',
+    'formatter': 'simple'
+}
+LOGGING['loggers']['raven'] = {
+    'handlers': ['console'],
+    'level': 'WARNING'
+}

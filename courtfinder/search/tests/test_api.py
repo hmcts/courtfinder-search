@@ -1,7 +1,7 @@
 from django.test import Client
 from mock import Mock, patch
 from courtfinder.test_utils import TestCaseWithData
-from search.court_search import CourtSearchError
+from search.errors import CourtSearchError
 
 
 class SearchTestCase(TestCaseWithData):
@@ -19,19 +19,22 @@ class SearchTestCase(TestCaseWithData):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15&aol=divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_address_search(self):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_no_aol(self):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertIn(
+            '"name": "Accrington Magistrates\' Court"', response.content)
 
     def test_empty_query(self):
         c = Client()
