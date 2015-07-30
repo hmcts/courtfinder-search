@@ -76,10 +76,15 @@ class Ingest(object):
                                               single_point_of_entry=aol_spoe)
 
                 for local_authority in aol_las:
-                    local_authority_object, created = LocalAuthority.objects.get_or_create(
-                        gss_code=local_authority.get('gss_code'),
-                        name=local_authority['name'],
-                    )
+                    if isinstance(local_authority, dict):
+                        local_authority_object, created = LocalAuthority.objects.get_or_create(
+                            gss_code=local_authority.get('gss_code'),
+                            name=local_authority['name'],
+                        )
+                    else:
+                        local_authority_object, created = LocalAuthority.objects.get_or_create(
+                            name=local_authority
+                        )
 
                     CourtLocalAuthorityAreaOfLaw.objects.create(
                         court=court,
