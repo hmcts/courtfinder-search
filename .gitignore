@@ -42,6 +42,8 @@ coverage.xml
 .project
 .pydevproject
 .idea/
+tags
+cscope.out
 
 # Rope
 .ropeproject
