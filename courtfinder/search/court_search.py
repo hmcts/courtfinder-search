@@ -21,9 +21,10 @@ loggers = {
 
 
 def is_full_postcode(postcode):
-    # Regex from: https://gist.github.com/simonwhitaker/5748515
+    # this is not meant to be a definitive postcode regex, just enough to
+    # distinguish a full postcode (eg: SW1H 9AJ) from a partial one (eg: SW1H)
     return bool(re.match(
-        r'[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}',
+        r'[A-Z]{1,2}[0-9][0-9A-Z]?[0-9][A-Z]{2}$',
         postcode.upper().replace(' ', '')))
 
 
