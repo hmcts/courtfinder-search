@@ -6,6 +6,6 @@ else
   bash /setup_postgresql.sh
   touch /tmp/postgres_setup
 fi
-python manage.py migrate
-python manage.py populate-db
-uwsgi --ini /srv/search/uwsgi.conf
+# python manage.py migrate
+# python manage.py populate-db
+/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf

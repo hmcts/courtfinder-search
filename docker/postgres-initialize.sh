@@ -16,3 +16,6 @@ $POSTGRES -E <<EOSQL
 EOSQL
 echo ""
 echo "***** INSTALLED POSTGIS EXTENSIONS *****"
+echo ""
+echo "***** CLEANING UP *****"
+rm /var/lib/postgresql/postmaster.pid
