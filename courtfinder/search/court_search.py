@@ -108,12 +108,13 @@ class PostcodeCourtSearch(CourtSearch):
             loggers['aol'].error(area_of_law)
             raise CourtSearchClientError('bad area of law')
 
-        self.single_point_of_entry = single_point_of_entry
+        self.single_point_of_entry = single_point_of_entry == 'start'
 
     def get_courts(self):
 
         rule_results = Rules.for_search(
-            self.postcode.normalised, self.area_of_law.slug)
+            self.postcode.normalised, self.area_of_law.slug,
+            self.single_point_of_entry)
 
         if rule_results is not None:
             return rule_results
@@ -133,10 +134,7 @@ class PostcodeCourtSearch(CourtSearch):
                     area_of_law=self.area_of_law,
                     method=method))
 
-        if self.single_point_of_entry == 'start':
-
-            if self.area_of_law.slug == 'money-claims':
-                return Court.objects.filter(name__icontains='CCMCC')
+        if self.single_point_of_entry:
 
             if self.area_of_law.slug in Rules.has_spoe:
 
@@ -201,9 +199,6 @@ class PostcodeCourtSearch(CourtSearch):
             list(set([c.court for c in results])))
 
     def _proximity_search(self):
-        lat = self.postcode.latitude
-        lon = self.postcode.longitude
-
         results = Court.objects.raw(
             (
                 'SELECT *, '
