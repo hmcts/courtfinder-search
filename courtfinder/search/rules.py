@@ -59,7 +59,7 @@ class Rules(object):
     @staticmethod
     def _postcode_in_scotland(postcode):
         p = postcode.upper()
-        return True if re.match('^G\d+',p) or p[:2] in Rules.scottish_postcodes else False
+        return True if re.match('^G\d+', p) or p[:2] in Rules.scottish_postcodes else False
 
     @staticmethod
     def _postcode_in_NI(postcode):

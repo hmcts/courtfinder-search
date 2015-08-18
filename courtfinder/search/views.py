@@ -44,7 +44,8 @@ def normalise_aol(view):
         aol = request.GET.get('aol')
         if aol and aol != 'all':
             slugified_aol = slugify(aol)
-            slugified_aol_exists = aol != slugified_aol and AreaOfLaw.objects.filter(slug=slugified_aol).exists()
+            slugified_aol_exists = (aol != slugified_aol and
+                AreaOfLaw.objects.filter(slug=slugified_aol).exists())
             if slugified_aol_exists:
                 qs = updated_query_string(request.GET, aol=slugified_aol)
                 return redirect(request.build_absolute_uri('?' + qs))
@@ -97,7 +98,7 @@ def postcode(request):
 def address(request):
     error = request.GET.get('error', None)
     query = request.GET.get('q', None)
-    return render(request, 'search/address.jinja', {'error': error, 'query':query})
+    return render(request, 'search/address.jinja', {'error': error, 'query': query})
 
 
 @normalise_aol
@@ -108,7 +109,7 @@ def results(request):
         SearchStatistic.search_performed()
 
     if query is not None:
-        query = re.sub(r'\s+',' ',query.strip())
+        query = re.sub(r'\s+', ' ', query.strip())
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
@@ -127,15 +128,15 @@ def results(request):
         spoe = request.GET.get('spoe', None)
         postcode = request.GET.get('postcode', None)
         if postcode:
-            postcode = re.sub(r'[^A-Za-z0-9 ]','',postcode)
+            postcode = re.sub(r'[^A-Za-z0-9 ]', '', postcode)
             try:
                 courts = PostcodeCourtSearch(
                     postcode, area_of_law=aol, single_point_of_entry=spoe
                 ).get_courts()
-            except CourtSearchInvalidPostcode as e:
-                return redirect(reverse('search:postcode')+'?postcode='+
-                                postcode+'&error=badpostcode')
-            except CourtSearchClientError as e:
+            except CourtSearchInvalidPostcode:
+                return redirect(reverse('search:postcode')+'?postcode=' +
+                                postcode + '&error=badpostcode')
+            except CourtSearchClientError:
                 return bad_request(request)
 
             rules = Rules.for_view(postcode, aol)
@@ -146,7 +147,7 @@ def results(request):
 
             if rules:
                 if rules['action'] == 'redirect':
-                   return redirect(reverse(rules['target'])+rules.get('params',''))
+                    return redirect(reverse(rules['target'])+rules.get('params', ''))
                 elif rules['action'] == 'render':
                     if 'in_scotland' in rules:
                         view_obj['in_scotland'] = rules['in_scotland']
@@ -155,10 +156,10 @@ def results(request):
 
         else:
             if postcode is not None:
-                return redirect(reverse('search:postcode')+
-                                '?error=nopostcode'+
-                                '&aol='+aol+
-                                ('&spoe='+spoe if spoe is not None else ''))
+                return redirect(reverse('search:postcode') +
+                                '?error=nopostcode' +
+                                '&aol=' + aol +
+                                ('&spoe=' + spoe if spoe is not None else ''))
             else:
                 return redirect('search:search')
 
@@ -183,19 +184,19 @@ def results_json(request):
                             content_type="application/json")
     except CourtSearchError as e:
         return HttpResponseServerError(
-                '{"error":"%s"}' % e,
-                content_type="application/json")
+            '{"error":"%s"}' % e,
+            content_type="application/json")
     except CourtSearchClientError as e:
         return HttpResponseBadRequest(
-                '{"error":"%s"}' % e,
-                content_type="application/json")
+            '{"error":"%s"}' % e,
+            content_type="application/json")
 
 
 def data_status(request):
     last_change = DataStatus.objects.all().order_by('-last_ingestion_date')[0]
     last_change_object = {
         'last_ingestion_date': last_change.last_ingestion_date,
-        'data_hash': last_change.data_hash }
+        'data_hash': last_change.data_hash}
     return HttpResponse(json.dumps(last_change_object, cls=DjangoJSONEncoder), content_type="application/json")
 
 
@@ -206,7 +207,7 @@ def __format_results(results):
     """
     create a list of courts from search results that we can send to templates
     """
-    courts=[]
+    courts = []
     for result in results:
         addresses = result.courtaddress_set.all()
         address = False
@@ -221,25 +222,25 @@ def __format_results(results):
         if address:
             visible_address = {
                 'address_lines': [line for line in address.address.split('\n') if line != ''],
-                'postcode':address.postcode,
-                'town':address.town.name,
+                'postcode': address.postcode,
+                'town': address.town.name,
                 'county': address.town.county,
-                'type':address.address_type,
+                'type': address.address_type,
             }
         else:
             visible_address = {}
 
-        areas_of_law=[]
+        areas_of_law = []
         areas_of_law = [aol for aol in result.areas_of_law.all()]
 
-        court = { 'name': result.name,
-                  'lat': result.lat,
-                  'lon': result.lon,
-                  'number': result.number,
-                  'slug': result.slug,
-                  'types': [court_type.court_type.name for court_type in result.courtcourttype_set.all()],
-                  'address': visible_address,
-                  'areas_of_law': areas_of_law }
+        court = {'name': result.name,
+                 'lat': result.lat,
+                 'lon': result.lon,
+                 'number': result.number,
+                 'slug': result.slug,
+                 'types': [court_type.court_type.name for court_type in result.courtcourttype_set.all()],
+                 'address': visible_address,
+                 'areas_of_law': areas_of_law}
         dx_contacts = result.courtcontact_set.filter(contact__name='DX')
         if dx_contacts.count() > 0:
             court['dx_number'] = dx_contacts.first().contact.number
