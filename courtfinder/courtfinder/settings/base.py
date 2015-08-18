@@ -240,3 +240,8 @@ LOGGING = {
 
 COURTFINDER_ADMIN_HEALTHCHECK = ''
 COURTS_DATA_S3_URL = ''
+
+try:
+    from .local import *
+except ImportError:
+    pass
