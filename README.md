@@ -42,25 +42,24 @@ Setup postgres: create a user courtfinder with no password and create a database
 
 Create the database and put sample data in it:
 
-    cd courtfinder
-    ./manage.py makemigrations
-    ./manage.py migrate
-    ./manage.py populate-db
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py populate-db
 
 Start the server:
 
-    ./manage.py runserver
+    python manage.py runserver
 
 ## Testing and code coverage
 
 Testing uses Django's standard unit testing library. In order to run the tests, use:
 
-    python courtfinder/manage.py test search
+    python manage.py test
 
 Code coverage is measured using 'coverage', speficied in the requirements file for the testing environment. In order to run coverage, use:
 
-    coverage run --omit='courtfinder/*,*__init__*' --source='.' manage.py test staticpages courts search
-    coverage run --append --omit='courtfinder/*,*__init__*' --source='.' manage.py populate-db data/test_data
+    coverage run --source='.' manage.py test staticpages courts search
+    coverage run --append --source='.' manage.py populate-db data/test_data
 
 The two lines above runs the unit tests, so it can replace the first command mentioned above. The coverage report is then available by using:
 
