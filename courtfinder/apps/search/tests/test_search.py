@@ -1,5 +1,3 @@
-import contextlib
-
 from django.test import Client
 from mock import Mock, patch
 from postcodeinfo import NoResults
@@ -9,32 +7,7 @@ from search.court_search import CourtSearch, PostcodeCourtSearch, \
     is_full_postcode
 from search.errors import CourtSearchError
 from search.models import *
-
-
-@contextlib.contextmanager
-def valid_response(lookup, **kwargs):
-    with patch('postcodeinfo.Client') as Client:
-        client = Client.return_value
-        lookup = getattr(client, lookup)
-        postcode = lookup.return_value
-        postcode.normalised = kwargs.get('postcode', 'SE15 4UH')
-        postcode.local_authority = kwargs.get('local_authority', {
-            'name': 'Southwark',
-            'gss_code': 'E09000028'})
-        postcode.longitude = kwargs.get('lon', -2.359323760375266)
-        postcode.latitude = kwargs.get('lat', 53.7491281247251)
-        yield
-
-
-@contextlib.contextmanager
-def error(exception):
-
-    def raise_exception(*args, **kwargs):
-        raise exception()
-
-    with patch('postcodeinfo.Client._query_api') as query_api:
-        query_api.side_effect = raise_exception
-        yield
+from . import postcode_valid, postcode_error
 
 
 class SearchTestCase(TestCaseWithData):
@@ -79,13 +52,13 @@ class SearchTestCase(TestCaseWithData):
         self.assertInHTML('<h1>Enter postcode</h1>', response.content)
 
     def test_distance_search(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             c = Client()
             response = c.get('/search/results?postcode=SE154UH&aol=crime')
             self.assertEqual(response.status_code, 200)
 
     def test_local_authority_search(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             c = Client()
             response = c.get('/search/results?postcode=SE154UH&aol=divorce')
             self.assertEqual(response.status_code, 200)
@@ -103,19 +76,19 @@ class SearchTestCase(TestCaseWithData):
             response, '/search/postcode?error=nopostcode&aol=crime', 302)
 
     def test_sample_postcode_all_aols(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             c = Client()
             response = c.get('/search/results?postcode=SE15+4UH&aol=all')
             self.assertEqual(response.status_code, 200)
 
     def test_sample_postcode_specific_aol(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             c = Client()
             response = c.get('/search/results?postcode=SE15+4UH&aol=divorce')
             self.assertEqual(response.status_code, 200)
 
     def test_bad_aol(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             c = Client()
             response = c.get(
                 '/search/results?postcode=SE15+4UH&aol=doesntexist',
@@ -153,48 +126,48 @@ class SearchTestCase(TestCaseWithData):
     def test_scottish_postcodes(self):
         c = Client()
 
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get('/search/results?postcode=G24PP&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<p id="scotland">', response.content)
 
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=G2&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<p id="scotland">', response.content)
 
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=AB10&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<p id="scotland">', response.content)
 
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get('/search/results?postcode=AB10+7LY&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<p id="scotland">', response.content)
 
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get('/search/results?postcode=BA27AY&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertNotIn('<p id="scotland">', response.content)
 
     def test_partial_postcode(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=SE15&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<div class="search-results">', response.content)
 
     def test_partial_postcode_whitespace(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=SE15++&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<div class="search-results">', response.content)
 
     def test_postcode_whitespace(self):
         c = Client()
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get('/search/results?postcode=++SE154UH++&aol=all')
             self.assertEqual(response.status_code, 200)
             self.assertIn('<div class="search-results">', response.content)
@@ -202,7 +175,7 @@ class SearchTestCase(TestCaseWithData):
     def test_redirect_directive_action(self):
         rules = Mock(return_value={
             'action': 'redirect', 'target': 'search:postcode'})
-        with patch('search.rules.Rules.for_view', rules), error(NoResults):
+        with patch('search.rules.Rules.for_view', rules), postcode_error(NoResults):
             response = Client().get('/search/results?postcode=BLARGH')
             self.assertRedirects(
                 response,
@@ -223,14 +196,14 @@ class SearchTestCase(TestCaseWithData):
         self.assertRedirects(response, '/search/', 302)
 
     def test_postcode_to_local_authority_short_postcode(self):
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             self.assertEqual(
                 1,
                 len(PostcodeCourtSearch(
                     postcode='SE15', area_of_law='divorce').get_courts()))
 
     def test_local_authority_search_ordered(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             self.assertEqual(
                 "Accrington Magistrates' Court",
                 PostcodeCourtSearch(
@@ -238,7 +211,7 @@ class SearchTestCase(TestCaseWithData):
                 ).get_courts()[0].name)
 
     def test_proximity_search(self):
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             self.assertNotEqual(
                 PostcodeCourtSearch(
                     postcode='SE154UH', area_of_law='divorce'
@@ -282,7 +255,7 @@ class SearchTestCase(TestCaseWithData):
 
     def test_broken_postcode(self):
         c = Client()
-        with error(NoResults):
+        with postcode_error(NoResults):
             response = c.get((
                 '/search/results?aol=divorce&spoe=continue'
                 '&postcode=NW3+%25+au'),
@@ -292,7 +265,7 @@ class SearchTestCase(TestCaseWithData):
 
     def test_ni(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get(
                 '/search/results?postcode=bt2&aol=divorce',
                 follow=True)
@@ -302,14 +275,14 @@ class SearchTestCase(TestCaseWithData):
 
     def test_money_claims(self):
         c = Client()
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get(
                 '/search/results?postcode=sw1h9aj&spoe=start&aol=money-claims')
             self.assertIn("CCMCC", response.content)
 
     def test_ni_immigration(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get(
                 '/search/results?postcode=bt2&aol=immigration', follow=True)
             self.assertNotIn(
