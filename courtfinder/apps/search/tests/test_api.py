@@ -3,7 +3,7 @@ from mock import Mock, patch
 
 from courtfinder.test_utils import TestCaseWithData
 from search.errors import CourtSearchError
-from search.tests.test_search import valid_response
+from . import postcode_valid
 
 
 class SearchTestCase(TestCaseWithData):
@@ -14,14 +14,14 @@ class SearchTestCase(TestCaseWithData):
 
     def test_postcode(self):
         c = Client()
-        with valid_response('lookup_postcode'):
+        with postcode_valid('lookup_postcode'):
             response = c.get(
                 '/search/results.json?postcode=SE15+4UH&aol=divorce')
             self.assertEqual(response.status_code, 200)
 
     def test_postcode_search(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results.json?postcode=SE15&aol=divorce')
             self.assertEqual(response.status_code, 200)
             self.assertIn(
@@ -36,7 +36,7 @@ class SearchTestCase(TestCaseWithData):
 
     def test_no_aol(self):
         c = Client()
-        with valid_response('lookup_partial_postcode'):
+        with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results.json?postcode=SE15')
             self.assertEqual(response.status_code, 200)
             self.assertIn(

@@ -74,3 +74,6 @@ generated/
 
 # build products
 BUILD_VERSION.json
+
+# local settings
+**/settings/local.py
