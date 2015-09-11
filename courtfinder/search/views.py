@@ -12,7 +12,8 @@ from django.views.defaults import bad_request
 
 from courtfinder.utils import updated_query_string
 from search.models import AreaOfLaw, DataStatus, SearchStatistic
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
+from search.court_search import CourtSearch, PostcodeCourtSearch
+from search.errors import CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 
 areas_of_law_description = {
@@ -128,7 +129,9 @@ def results(request):
         if postcode:
             postcode = re.sub(r'[^A-Za-z0-9 ]','',postcode)
             try:
-                courts = CourtSearch(postcode=postcode, area_of_law=aol, single_point_of_entry=spoe).get_courts()
+                courts = PostcodeCourtSearch(
+                    postcode, area_of_law=aol, single_point_of_entry=spoe
+                ).get_courts()
             except CourtSearchInvalidPostcode as e:
                 return redirect(reverse('search:postcode')+'?postcode='+
                                 postcode+'&error=badpostcode')
@@ -167,7 +170,15 @@ def results_json(request):
     query = request.GET.get('q', None)
 
     try:
-        results = CourtSearch(postcode, aol, spoe, query).get_courts()
+        if query:
+            results = CourtSearch(query).get_courts()
+
+        elif postcode:
+            results = PostcodeCourtSearch(postcode, aol, spoe).get_courts()
+
+        else:
+            raise CourtSearchClientError('bad request')
+
         return HttpResponse(json.dumps(__format_results(results), default=str),
                             content_type="application/json")
     except CourtSearchError as e:
