@@ -16,7 +16,7 @@ DATABASES = {
         'NAME': 'temp_courtfinder_search',
         'USER': 'courtfinder_search',
         'PASSWORD': '123456',
-        'HOST': os.getenv('DB_HOSTNAME', '127.0.0.1'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
         'PORT': '5432',
     }
 }
