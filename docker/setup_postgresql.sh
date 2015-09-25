@@ -9,7 +9,7 @@ export PGPASSWORD=C1cwG3P7n2
 /usr/bin/psql courtfinder_search -c 'CREATE EXTENSION IF NOT EXISTS postgis_topology;' -h $DB_HOST -U courtfinder
 
 # Importing database
-cd /srv/search/courtfinder
+cd /srv/search
 python manage.py makemigrations
 python manage.py migrate
 python manage.py populate-db
