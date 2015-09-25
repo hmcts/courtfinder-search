@@ -10,12 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import abspath, basename, dirname, join, normpath, exists
+from os.path import abspath, basename, dirname, join
 from sys import path
-from os import environ
-
-# Log handler for LogEntries
-from logentries import LogentriesHandler
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -30,11 +26,12 @@ SITE_ROOT = dirname(DJANGO_ROOT)
 SITE_NAME = basename(DJANGO_ROOT)
 
 # Project root:
-PROJECT_ROOT = dirname(SITE_ROOT)
+PROJECT_ROOT = SITE_ROOT
 
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
+path.append(join(DJANGO_ROOT, 'apps'))
 ########## END PATH CONFIGURATION
 
 
@@ -81,10 +78,10 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_DIRS = (
-    SITE_ROOT + '/templates',
+    DJANGO_ROOT + '/templates',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS =  (
+TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
@@ -120,14 +117,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    SITE_ROOT + '/assets',
+    DJANGO_ROOT + '/assets',
 )
 
 # Postcode lookup
 MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'
 POSTCODEINFO_API_URL = os.environ.get('POSTCODEINFO_API_URL')
-POSTCODEINFO_API_TOKEN = os.environ.get('POSTCODEINFO_API_TOKEN')
-POSTCODEINFO_API_TIMEOUT = os.environ.get('POSTCODEINFO_API_TIMEOUT')
+POSTCODEINFO_AUTH_TOKEN = os.environ.get('POSTCODEINFO_API_TOKEN')
+POSTCODEINFO_TIMEOUT = os.environ.get('POSTCODEINFO_API_TIMEOUT')
 
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
@@ -240,3 +237,8 @@ LOGGING = {
 
 COURTFINDER_ADMIN_HEALTHCHECK = ''
 COURTS_DATA_S3_URL = ''
+
+try:
+    from .local import *
+except ImportError:
+    pass
