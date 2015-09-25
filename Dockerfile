@@ -4,8 +4,8 @@ RUN apt-get clean && apt-get update && apt-get install --fix-missing -y postgis 
 RUN pip install uWSGI==2.0.8
 
 COPY /docker/. /
-RUN mv /search /etc/sudoers.d/search; chmod 755 /run.sh; mkdir -p /srv/node_files
-COPY ./package.json /srv/node_files/package.json
+RUN mv /search /etc/sudoers.d/search; chmod 755 /run.sh; mkdir -p /srv/additionaL_files
+COPY ./package.json /srv/additional_files/package.json
 # RUN bash /setup_postgresql.sh;
 RUN bash /setup_npm.sh; useradd -m -d /srv/search search
 
@@ -19,13 +19,18 @@ COPY . /srv/search
 RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 
 WORKDIR /srv/search
-RUN mv /srv/node_files/node_modules /srv/search/
+# RUN cp -R /srv/node_files/node_modules /srv/search/
 
 WORKDIR /srv/search/courtfinder
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
+
+ADD gulpfile.js /srv/additional_files/gulpfile.js
+WORKDIR /srv/additional_files
 RUN gulp
+RUN cp -R /srv/additional_files/* /srv/search/courtfinder
+
+WORKDIR /srv/search
 RUN /bin/bash -c python manage.py collectstatic --noinput
-RUN cp -R assets /srv/search/assets
 
 RUN mkdir -p /srv/logs; chown -R search:search /srv/logs
 RUN chown -R search: /srv/search
