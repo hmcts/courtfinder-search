@@ -26,8 +26,9 @@ ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
 
 ADD gulpfile.js /srv/additional_files/gulpfile.js
 WORKDIR /srv/additional_files
+COPY courtfinder/assets-src /srv/additional_files/courtfinder/assets-src
 RUN gulp
-RUN cp -R /srv/additional_files/* /srv/search/courtfinder
+RUN cp -R /srv/additional_files/* /srv/search
 
 WORKDIR /srv/search
 RUN /bin/bash -c python manage.py collectstatic --noinput
