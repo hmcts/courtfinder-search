@@ -1,5 +1,5 @@
 #!/bin/sh
-EXPORT PGPASSWORD=C1cwG3P7n2
+export PGPASSWORD=C1cwG3P7n2
 
 /usr/bin/psql -c 'DROP DATABASE IF EXISTS "courtfinder_production;' -h $DB_HOST -U courtfinder
 /usr/bin/psql -c 'DROP DATABASE IF EXISTS "courtfinder_search;' -h $DB_HOST -U courtfinder
