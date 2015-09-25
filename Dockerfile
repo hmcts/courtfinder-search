@@ -26,7 +26,7 @@ ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
 
 ADD gulpfile.js /srv/additional_files/gulpfile.js
 WORKDIR /srv/additional_files
-COPY courtfinder/assets-src /srv/additional_files/courtfinder/assets-src
+RUN mkdir -p /srv/additional_files/courtfinder/assets-src && cp -R /srv/search/courtfinder/assets-src/* /srv/additional_files/courtfinder/assets-src
 RUN gulp
 RUN cp -R /srv/additional_files/* /srv/search
 
