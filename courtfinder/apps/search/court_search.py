@@ -124,6 +124,9 @@ class PostcodeCourtSearch(CourtSearch):
                 gss_code=self.postcode.local_authority['gss_code'])
         except LocalAuthority.DoesNotExist:
             loggers['la'].error(self.postcode.local_authority['gss_code'])
+            raise CourtSearchClientError(
+                'unknown local authority gss code {gss_code}'.format(
+                    **self.postcode.local_authority))
 
         def log_search_method(method):
             loggers['method'].debug((
