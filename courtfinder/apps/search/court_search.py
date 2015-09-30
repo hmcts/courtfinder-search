@@ -119,6 +119,7 @@ class PostcodeCourtSearch(CourtSearch):
         if rule_results is not None:
             return rule_results
 
+        local_authority = None
         try:
             local_authority = LocalAuthority.objects.get(
                 gss_code=self.postcode.local_authority['gss_code'])
