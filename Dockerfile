@@ -16,7 +16,7 @@ RUN sudo -u search mkdir -p /srv/search
 
 COPY . /srv/search
 
-RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
+# RUN wget https://courttribunalfinder.service.gov.uk/courts.json -O /srv/search/data/courts.json
 
 WORKDIR /srv/search
 # RUN cp -R /srv/node_files/node_modules /srv/search/
