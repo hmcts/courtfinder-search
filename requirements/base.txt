@@ -8,5 +8,5 @@ boto==2.29.1
 python-dateutil==2.2
 raven==5.1.1
 LogentriesLogger==0.2.1
-uWSGI==2.0.8
+uWSGI==2.0.11.2
 postcodeinfo>=0.0,<1.0
