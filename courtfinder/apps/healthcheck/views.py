@@ -17,45 +17,10 @@ def healthcheck(request):
     IRaT healthcheck.json: returns status of dependency services
     """
     response = {
-        'database': {
-            'status': 'DOWN',
-        },
-        'mapit': {
-            'status': 'DOWN',
-        },
-        'courtfinder_admin': {
-            'status': 'DOWN',
-        },
         's3_courts_data': {
             'status': 'DOWN',
         },
     }
-
-    try:
-        from django.db import connections
-
-        conn = connections['default']
-        conn.cursor()
-        response['database']['status'] = 'UP'
-    except (DatabaseError, Exception) as e:
-        response['database']['error'] = unicode(e)
-
-    try:
-        r = requests.get(settings.MAPIT_BASE_URL + 'SW1A+1AA', timeout=10)
-        assert r.status_code == 200, 'MapIt service did not return 200'
-        assert r.json(), 'MapIt service did not return valid json'
-        response['mapit']['status'] = 'UP'
-    except (requests.RequestException, Exception) as e:
-        response['mapit']['error'] = unicode(e)
-
-    try:
-        assert settings.COURTFINDER_ADMIN_HEALTHCHECK, 'Courtfinder Admin healthcheck.json URL not known'
-        r = requests.get(settings.COURTFINDER_ADMIN_HEALTHCHECK, timeout=10)
-        response['courtfinder_admin']['healthcheck.json'] = r.json()
-        assert r.status_code == 200, 'Courtfinder Admin healthcheck.json did not return 200'
-        response['courtfinder_admin']['status'] = 'UP'
-    except (requests.RequestException, Exception) as e:
-        response['courtfinder_admin']['error'] = unicode(e)
 
     try:
         assert settings.COURTS_DATA_S3_URL, 'S3 url for courts.json data not known'

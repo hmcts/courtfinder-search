@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from moj_irat.views import PingJsonView
+from moj_irat.views import HealthcheckView, PingJsonView
 
 urlpatterns = patterns('healthcheck.views',
     url(r'^ping.json$', PingJsonView.as_view(
@@ -9,6 +9,9 @@ urlpatterns = patterns('healthcheck.views',
         build_tag_key='APP_BUILD_TAG',
         version_number_key='APP_VERSION',
     ), name='ping_json'),
-    url(r'^healthcheck.json$', 'healthcheck'),
+    url(r'^healthcheck.json$',
+        HealthcheckView.as_view(),
+        name='healthcheck_json'
+    ),
     url(r'^pingdom-search-statistics$', 'pingdom_search_statistics'),
 )
