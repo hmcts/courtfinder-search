@@ -4,7 +4,7 @@ RUN apt-get clean && apt-get update && apt-get install --fix-missing -y postgis 
 RUN pip install uWSGI==2.0.8
 
 COPY /docker/. /
-RUN mv /search /etc/sudoers.d/search; chmod 755 /run.sh; mkdir -p /srv/additionaL_files
+RUN mv /search /etc/sudoers.d/search; chmod 755 /run.sh; mkdir -p /srv/additional_files
 COPY ./package.json /srv/additional_files/package.json
 # RUN bash /setup_postgresql.sh;
 RUN bash /setup_npm.sh; useradd -m -d /srv/search search
@@ -42,3 +42,4 @@ RUN chmod +x /run.sh
 USER search
 
 CMD ["/bin/bash", "-l", "/run.sh"]
+
