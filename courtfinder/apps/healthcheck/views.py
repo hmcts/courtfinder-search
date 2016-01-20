@@ -12,24 +12,6 @@ from dateutil import tz
 from search.models import SearchStatistic
 
 
-def ping(request):
-    """
-    IRaT ping.json: returns build information
-    """
-    response = {
-        'version_number': None,
-        'build_date': None,
-        'commit_id': None,
-        'build_tag': None,
-    }
-    try:
-        with open(os.path.join(settings.PROJECT_ROOT, 'BUILD_VERSION.json')) as f:
-            response.update(json.load(f))
-    except (IOError, Exception):
-        pass
-    return JsonResponse(response)
-
-
 def healthcheck(request):
     """
     IRaT healthcheck.json: returns status of dependency services
