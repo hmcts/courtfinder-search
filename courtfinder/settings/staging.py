@@ -18,5 +18,5 @@ DATABASES = {
 
 ALLOWED_HOSTS = '*'
 
-COURTFINDER_ADMIN_HEALTHCHECK = 'https://courtfinder.is.dsd.io/admin/healthcheck.json'
+COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courtfinder.is.dsd.io/admin/healthcheck.json'
 COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-staging/courts.json'
