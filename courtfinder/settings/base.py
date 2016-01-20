@@ -146,11 +146,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
 )
 
-# Ensure logging directory is created
-LOGPATH = abspath(PROJECT_ROOT + '/../logs')
-if not os.path.exists(LOGPATH):
-    os.makedirs(LOGPATH)
-
 # Logging
 LOGGING = {
     'version': 1,
@@ -164,71 +159,53 @@ LOGGING = {
         }
     },
     'handlers': {
-        'error-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename':  LOGPATH + '/errors.log',
-        },
-        'missed-las-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/missed-las.log',
-        },
-        'missed-aols-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/missed-aols.log',
-        },
-        'mapit-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/mapit.log',
-        },
-        'search-method-file': {
+        'log-stdout-debug-simple': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'simple',
-            'filename': LOGPATH + '/search-method.log',
+            'stream': sys.stdout,
         },
-        'courtfinder-requests-file': {
+        'log-stdout-debug-noformat': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'no-format',
-            'filename': LOGPATH + '/requests.log',
-        }
+            'stream': sys.stdout,
+        },
+        'log-stdout-error': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            'stream': sys.stdout,
+        },
     },
     'loggers': {
         'search.error': {
-            'handlers': ['error-file'],
+            'handlers': ['log-stdout-error'],
             'level': 'ERROR',
             'propagate': True,
         },
         'search.mapit': {
-            'handlers': ['mapit-file'],
+            'handlers': ['log-stdout-error'],
             'level': 'ERROR',
             'propagate': True,
         },
         'search.la': {
-            'handlers': ['missed-las-file'],
+            'handlers': ['log-stdout-error'],
             'level': 'ERROR',
             'propagate': True,
         },
         'search.aol': {
-            'handlers': ['missed-aols-file'],
+            'handlers': ['log-stdout-error'],
             'level': 'ERROR',
             'propagate': True,
         },
         'search.method': {
-            'handlers': ['search-method-file'],
+            'handlers': ['log-stdout-debug-simple'],
             'level': 'DEBUG',
             'propagate': True,
         },
         'courtfinder.requests': {
-            'handlers': ['courtfinder-requests-file'],
+            'handlers': ['log-stdout-debug-noformat'],
             'level': 'DEBUG',
             'propagate': True,
         }
