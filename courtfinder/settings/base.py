@@ -163,19 +163,19 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
-            'stream': sys.stdout,
+            'stream': stdout,
         },
         'log-stdout-debug-noformat': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'no-format',
-            'stream': sys.stdout,
+            'stream': stdout,
         },
         'log-stdout-error': {
             'level': 'ERROR',
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
-            'stream': sys.stdout,
+            'stream': stdout,
         },
     },
     'loggers': {
