@@ -1,5 +1,5 @@
 #!/bin/bash -e
-cd /srv/node_files
+cd /srv/additional_files
 npm install
 npm install gulp -g
 npm install gulp --save-dev

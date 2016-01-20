@@ -1,0 +1,4 @@
+FROM postgres:9.4.3
+RUN apt-get update && apt-get install -y postgis postgresql-9.4-postgis-2.1
+COPY docker/postgres-initialize.sh /docker-entrypoint-initdb.d/postgis-install.sh
+ONBUILD RUN rm -f /usr/local/var/postgres/postmaster.pid

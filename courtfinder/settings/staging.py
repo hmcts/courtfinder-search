@@ -3,14 +3,14 @@ from __future__ import absolute_import
 from .base import *
 
 DEBUG = False
-STATIC_ROOT = '/srv/search/static/'
+STATIC_ROOT = '/srv/search/assets/'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'courtfinder_search',
-        'USER': 'courtfinder_search',
-        'PASSWORD': '123456',
+        'USER': 'courtfinder',
+        'PASSWORD': 'C1cwG3P7n2',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

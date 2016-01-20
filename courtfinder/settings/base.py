@@ -99,8 +99,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'courtfinder_search',
         'USER': 'courtfinder',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'C1cwG3P7n2',
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
         'PORT': '5432',
     }
 }
@@ -114,7 +114,7 @@ USE_TZ = True
 
 
 # Static files
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = (
     DJANGO_ROOT + '/assets',
