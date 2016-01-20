@@ -1,6 +1,19 @@
 FROM ubuntu:14.04
 
-RUN apt-get clean && apt-get update && apt-get install --fix-missing -y postgis postgresql-9.3-postgis-2.1 python-pip python-dev wget npm ruby nodejs-legacy libpq-dev libnet-amazon-s3-tools-perl
+RUN apt-get clean \
+    && apt-get update \
+    && apt-get install --fix-missing -y \
+        postgis \
+        postgresql-9.3-postgis-2.1 \
+        python-pip \
+        python-dev \
+        wget \
+        npm \
+        ruby \
+        nodejs-legacy \
+        libpq-dev \
+        libnet-amazon-s3-tools-perl \
+        git
 RUN pip install uWSGI==2.0.8
 
 COPY /docker/. /
