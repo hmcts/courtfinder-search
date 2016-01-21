@@ -36,6 +36,7 @@ WORKDIR /srv/search
 
 WORKDIR /srv/search/courtfinder
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
+ENV RAILS_ENV production
 
 ADD gulpfile.js /srv/additional_files/gulpfile.js
 WORKDIR /srv/additional_files

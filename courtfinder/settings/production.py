@@ -8,15 +8,15 @@ STATIC_ROOT = '/srv/search/assets/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'courtfinder_search',
-        'USER': 'courtfinder',
-        'PASSWORD': 'C1cwG3P7n2',
+        'NAME': os.getenv('DB_NAME','courtfinder_search'),
+        'USER': os.getenv('DB_USER', 'courtfinder'),
+        'PASSWORD': os.getenv('DB_PASSWORD','C1cwG3P7n2'),
         'HOST': os.getenv('DB_HOST', '127.0.0.1'),
-        'PORT': '5432',
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
 ALLOWED_HOSTS = '*'
 
-COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json'
-COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json'
+COURTFINDER_ADMIN_HEALTHCHECK_URL = os.getenv('COURTFINDER_ADMIN_HEALTHCHECK_URL', 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json')
+COURTS_DATA_S3_URL = os.getenv('COURTS_DATA_S3_URL', 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json')
