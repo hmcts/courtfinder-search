@@ -25,7 +25,7 @@ if [ $? -eq 0 ]; then
 		echo 'Done.'
 	else
 	  echo "Failed ingesting files." >&2
-	  psql ${PSQL_ARGS} -c "DROP DATABASE $DB_NAME;"
+	  psql ${PSQL_ARGS} -c "DROP DATABASE $DB_NAME_TMP;"
 	  exit 1
 	fi
 else
