@@ -3,33 +3,137 @@ from __future__ import unicode_literals
 import os
 import json
 import hashlib
+import logging
+import sys
 
+import boto3
+from boto3.s3.transfer import S3Transfer
+import botocore
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from optparse import make_option
 
 from search.models import DataStatus
 from search.ingest import Ingest
 
+# Set up the logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(message)s')
+logger = logging.getLogger("populate-db")
+logging.getLogger("requests").setLevel(logging.WARNING)
+
 
 class Command(BaseCommand):
-    verbosity = 1
 
-    def print_info(self, msg, ending=None):
-        if self.verbosity:
-            self.stdout.write(msg, ending=ending)
+    # Add some custom options
+    option_list = BaseCommand.option_list + (
+        make_option('--load-remote',
+            action='store_true',
+            dest='load-remote',
+            default=False,
+            help='Load the courts files from remote sources'),
+        make_option('--ingest',
+            action='store_true',
+            dest='ingest',
+            default=False,
+            help='Ingest the local court files')
+    )
 
-    def import_files(self, data_dir):
-        courts_data_path = os.path.join(data_dir, 'courts.json')
-        with open(courts_data_path, 'r') as courtsfile:
-            self.print_info('Courts file found')
-            courts = json.load(courtsfile)
-            courtsfile.close()
-        self.print_info('Starting data import')
-        Ingest.courts(courts)
-        self.print_info('OK')
+    def handle(self, *args, **options):
+        """
+        Handle the loading of file data into the application
+        """
+        import pdb; pdb.set_trace()
+        courts_files = ["courts.json"]
+        local_dir = "data"
+        remote_dir = ""
+        files_changed = False
+        exit_code = 0
+        
+        cmd_run = False
+        if options['load-remote']:
+            cmd_run = True
+            files_changed = self.load_remote_files(local_dir,
+                                   remote_dir,
+                                   courts_files
+                                   )
+            if not files_changed:
+                logger.error("handle: Loaded remote files are unchanged")
+                sys.exit(1)
+            
+        if options['ingest']:
+            cmd_run = True
+            self.import_files(local_dir, courts_files)
+            sys.exit(0)
+
+        if not cmd_run:
+            logger.error("handle: No commands run, see --help option.")
+            sys.exit(1)
+
+        sys.exit(0)
+
+    def load_remote_files(self,
+                          local_dir,
+                          remote_dir,
+                          files):
+        """
+        Load court files from a remote location into the local
+        directory
+
+        Args:
+            local_dir(string): The local directory to import to
+            remote_dir(string): The remote directory to import from
+            filenames(list): List of files to import
+
+        Returns:
+            changed(bool): True if the files loaded are different to 
+                the files previously on the local dir
+        """
+        # determine where the json files are
+        changed = False
+        s3_bucket = os.environ.get('S3_BUCKET', None)
+        if s3_bucket:
+            bucket_name = s3_bucket.split('.')[0]
+            logger.info('handle: Found S3_BUCKET environment variable {}'.format(bucket_name))
+            local_dir = "data"
+            remote_dir = ""
+            found_files, changed = self.handle_s3(bucket_name,
+                                        local_dir=local_dir,
+                                        remote_dir=remote_dir,
+                                        files=files)
+        return changed
+
+    def import_files(self, local_dir, filenames):
+        """
+        Imports the set of files from the specified directory into
+        the application
+
+        Args:
+            local_dir(string): The directory containing the files
+            filenames(list): List of files to import
+        """
+        for filename in filenames:
+            courts_data_path = os.path.join(local_dir, filename)
+            with open(courts_data_path, 'r') as courtsfile:
+                logger.info('import_files: Importing file {}/{}'.format(local_dir, filename))
+                courts = json.load(courtsfile)
+                courtsfile.close()
+                # Import the data into the application
+                Ingest.courts(courts)
 
     @classmethod
     def hashes(cls, dir_path, filenames):
+        """
+        Generate a list of hashes of the specified
+        list of files in the directory
+
+        Args:
+            data_dir(string): The directory containing the files
+            filenames(list): List of files to import
+
+        Returns:
+            (list): List of hashes of the files
+        """ 
         block_size = 65536
         hasher = hashlib.md5()
         hashes = []
@@ -45,67 +149,56 @@ class Command(BaseCommand):
                 hashes.append(None)
         return hashes
 
-    def handle(self, *args, **options):
-        self.verbosity = int(options['verbosity'])
-        self.print_info('Computing hashes of existing files')
-        # determine where the json files are
-        try:
-            s3_key = os.environ['S3_KEY']
-            s3_secret = os.environ['S3_SECRET']
-            s3_bucket = os.environ['S3_BUCKET']
-            data_dir = '/tmp'
-            environment = 'S3'
-        except KeyError:
-            s3_key, s3_secret, s3_bucket = None, None, None
-            self.print_info("I didn't find the environment variables: S3_KEY, S3_SECRET, S3_BUCKET.")
-            self.print_info('Trying to find files locally instead')
-            if len(args) == 1:
-                data_dir = os.path.join(settings.PROJECT_ROOT, args[0])
+
+    def handle_s3(self,
+                  bucket_name,
+                  local_dir,
+                  remote_dir,
+                  files):
+        """
+        Handle the importing of s3 files
+
+        Args:
+            bucket_name: The name of the s3 bucket to import from
+            local_dir(string): The local directory to import to
+            remote_dir(string): The remote directory to import from
+            filenames(list): List of files to import
+
+        Returns:
+            found_files(list): All the hashes of the files imported
+            changed(bool): True if the files hashes have changed,
+                False otherwise
+        """
+        old_hashes = self.hashes(local_dir, files)
+        s3 = boto3.resource('s3')
+        found_files = []
+        for file in files:
+            local_path = os.path.join(local_dir, file)
+            remote_path = os.path.join(remote_dir, file)
+            logger.info("handle_s3: Attempting download of {} to {} "
+                        "from bucket {}, ".format(remote_path, local_path, bucket_name))
+            
+            try:
+                s3.meta.client.download_file(bucket_name, remote_path, local_path)
+                found_files.append(file)
+            except botocore.exceptions.ClientError as e:
+                # Only catch the non-existing error
+                error_code = int(e.response['Error']['Code'])
+                if error_code == 404:
+                    logger.critical("handle_s3: File {} not found in bucket {}, "
+                                   "exiting...".format(file, bucket_name))
+                                    
+                            
+        # If we found any files, then create hashes
+        if len(found_files) > 0:
+            logger.info("handle_s3: Computing hashes of new files")
+            new_hashes = self.hashes(local_dir, found_files)
+            if old_hashes == '' or new_hashes != old_hashes:
+                logger.info("handle_s3: Hashes differ. Importing the new files")
+                DataStatus.objects.create(data_hash=''.join(new_hashes))
+                return found_files, True
             else:
-                data_dir = os.path.join(settings.PROJECT_ROOT, 'data')
-            self.print_info('Looking for json data in ' + data_dir)
-            environment = 'local'
-
-        if environment == 'S3':
-            new_hashes = self.handle_s3(s3_bucket, s3_key, s3_secret, data_dir)
+                logger.info("handle_s3: Hashes are unchanged.")
+                return found_files, False
         else:
-            new_hashes = self.handle_local(data_dir)
-
-        self.print_info('Success')
-        self.print_info('Storing data state...', ending=' ')
-        DataStatus.objects.create(data_hash=''.join(new_hashes))
-        self.print_info('OK')
-        self.print_info('All done')
-
-    def handle_local(self, data_dir):
-        self.print_info('Importing from local files...')
-        self.import_files(data_dir)
-        new_hashes = self.hashes(data_dir, ['courts.json'])
-        return new_hashes
-
-    def handle_s3(self, s3_bucket, s3_key, s3_secret, data_dir):
-        old_hashes = self.hashes(data_dir, ['courts.json'])
-
-        self.print_info('Importing from S3...', ending=' ')
-
-        import boto
-
-        # connect to the bucket
-        conn = boto.connect_s3(s3_key, s3_secret)
-        bucket = conn.get_bucket(s3_bucket)
-
-        # go through the list of files
-        bucket_list = bucket.list()
-        for l in bucket_list:
-            key_string = str(l.key)
-            l.get_contents_to_filename(os.path.join(data_dir, key_string))
-        self.print_info('done')
-
-        self.print_info('Computing hashes of new files')
-        new_hashes = self.hashes(data_dir, ['courts.json'])
-        if new_hashes != old_hashes:
-            self.print_info('Hashes differ. Importing the new files')
-            self.import_files(data_dir)
-        else:
-            self.print_info('Same hashes. Not importing.')
-        return new_hashes
+            return found_files, False
