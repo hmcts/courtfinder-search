@@ -43,7 +43,6 @@ class Command(BaseCommand):
         """
         Handle the loading of file data into the application
         """
-        import pdb; pdb.set_trace()
         courts_files = ["courts.json"]
         local_dir = "data"
         remote_dir = ""
