@@ -49,25 +49,26 @@ class Command(BaseCommand):
         files_changed = False
         exit_code = 0
         
-        cmd_run = False
+        # If no commands are specified then default to the previous behaviour
+        if not options['load-remote'] and not options['ingest']:
+            logger.info("handle: No commands specified, running load-remote and ingest...")
+            options['load-remote'] = True
+            options['ingest'] = True
+
         if options['load-remote']:
-            cmd_run = True
             files_changed = self.load_remote_files(local_dir,
                                    remote_dir,
                                    courts_files
                                    )
-            if not files_changed:
+            # If the files have not changed, and we have not specifically
+            # asked for the files to be ingested,then exit
+            if not files_changed and not options['ingest']:
                 logger.error("handle: Loaded remote files are unchanged")
                 sys.exit(1)
             
         if options['ingest']:
-            cmd_run = True
             self.import_files(local_dir, courts_files)
             sys.exit(0)
-
-        if not cmd_run:
-            logger.error("handle: No commands run, see --help option.")
-            sys.exit(1)
 
         sys.exit(0)
 
