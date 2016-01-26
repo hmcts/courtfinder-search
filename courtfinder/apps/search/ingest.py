@@ -1,6 +1,7 @@
 from search.models import *
 from dateutil import parser
 from django.utils.text import slugify
+from django.db import IntegrityError
 
 
 class Ingest(object):
@@ -69,12 +70,14 @@ class Ingest(object):
                 aol_slug = aol_obj.get('slug', slugify(aol_name))
                 aol_las = aol_obj['local_authorities']
                 aol_spoe = aol_obj.get('single_point_of_entry',False)
-                aol, created = AreaOfLaw.objects.get_or_create(name=aol_name, slug=aol_slug)
-
-                CourtAreaOfLaw.objects.create(court=court,
-                                              area_of_law=aol,
-                                              single_point_of_entry=aol_spoe)
-
+                try:
+                    aol, created = AreaOfLaw.objects.get_or_create(name=aol_name, slug=aol_slug)
+                    CourtAreaOfLaw.objects.create(court=court,
+                                                area_of_law=aol,
+                                                single_point_of_entry=aol_spoe)
+                except IntegrityError as e:
+                    print("ingest: Duplicate entry aol=%s, slug=%s, skipping..."
+                                % (aol_name, aol_slug))
                 for local_authority in aol_las:
                     if isinstance(local_authority, dict):
                         local_authority_object, created = LocalAuthority.objects.get_or_create(
@@ -127,7 +130,8 @@ class Ingest(object):
                 if address['town'] and not(address['town'].isspace()):
                     town, created = Town.objects.get_or_create(
                         name=address['town'], county=address['county'])
-
+                    if not address['postcode']:
+                        address['postcode'] = ""
                     CourtAddress.objects.create(
                         court=court,
                         address_type=address_type,
