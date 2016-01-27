@@ -13,11 +13,11 @@ psql ${PSQL_ARGS} -c "DROP DATABASE ${DB_NAME_TMP};"
 
 
 echo Populating temporary database...
-$PYTHON manage.py populate-db --load-remote
+$PYTHON manage.py populate-db --load-remote --sys-exit
 if [ $? -eq 0 ]; then
 	echo Creating temporary database...
 	psql ${PSQL_ARGS} -c "CREATE DATABASE ${DB_NAME_TMP} WITH TEMPLATE ${DB_NAME} OWNER ${DB_USERNAME};"
-	$PYTHON manage.py populate-db --ingest
+	$PYTHON manage.py populate-db --ingest --sys-exit
 	if [ $? -eq 0 ]; then 
 		echo Replacing ${DB_NAME} with newly populated database ${DB_NAME_TMP}...
 		psql ${PSQL_ARGS} -c "DROP DATABASE ${DB_NAME};"
