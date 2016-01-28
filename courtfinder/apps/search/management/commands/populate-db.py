@@ -27,6 +27,12 @@ class Command(BaseCommand):
 
     # Add some custom options
     option_list = BaseCommand.option_list + (
+        make_option('--datadir',
+            action='store',
+            type='string',
+            dest='datadir',
+            default='data',
+            help='Set the data directory containing courts files'),
         make_option('--load-remote',
             action='store_true',
             dest='load-remote',
@@ -49,7 +55,7 @@ class Command(BaseCommand):
         Handle the loading of file data into the application
         """
         courts_files = ["courts.json"]
-        local_dir = "data"
+        local_dir = options['datadir']
         remote_dir = ""
         files_changed = False
         exit_code = 0
