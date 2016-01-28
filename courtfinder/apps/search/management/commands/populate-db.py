@@ -36,7 +36,12 @@ class Command(BaseCommand):
             action='store_true',
             dest='ingest',
             default=False,
-            help='Ingest the local court files')
+            help='Ingest the local court files'),
+        make_option('--sys-exit',
+            action='store_true',
+            dest='sys-exit',
+            default=False,
+            help='Make the script use sys exits')
     )
 
     def handle(self, *args, **options):
@@ -64,13 +69,21 @@ class Command(BaseCommand):
             # asked for the files to be ingested,then exit
             if not files_changed and not options['ingest']:
                 logger.error("handle: Loaded remote files are unchanged")
-                sys.exit(1)
+                if (options['sys-exit']):
+                    sys.exit(1)
+                else:
+                    return
             
         if options['ingest']:
             self.import_files(local_dir, courts_files)
+            if (options['sys-exit']):
+                    sys.exit(0)
+            else:
+                return
+        if (options['sys-exit']):
             sys.exit(0)
-
-        sys.exit(0)
+        else:
+            return
 
     def load_remote_files(self,
                           local_dir,
