@@ -57,9 +57,10 @@ class Command(BaseCommand):
         courts_files = ["courts.json"]
         local_dir = options['datadir']
         remote_dir = ""
-        files_changed = False
-        exit_code = 0
         
+        # Store the current hash
+        old_hash = self.hashes(local_dir, courts_files)
+
         # If no commands are specified then default to the previous behaviour
         if not options['load-remote'] and not options['ingest']:
             logger.info("handle: No commands specified, running load-remote and ingest...")
@@ -67,19 +68,21 @@ class Command(BaseCommand):
             options['ingest'] = True
 
         if options['load-remote']:
-            files_changed = self.load_remote_files(local_dir,
+            self.load_remote_files(local_dir,
                                    remote_dir,
-                                   courts_files
-                                   )
-            # If the files have not changed, and we have not specifically
-            # asked for the files to be ingested,then exit
-            if not files_changed and not options['ingest']:
-                logger.error("handle: Loaded remote files are unchanged")
-                if (options['sys-exit']):
-                    sys.exit(1)
-                else:
-                    return
-            
+                                   courts_files)
+
+        # If the files have not changed, and we have not specifically
+        # asked for the files to be ingested,then exit
+        new_hash = self.hashes(local_dir, courts_files)
+        if new_hash == old_hash and not options['ingest']:
+            logger.error("handle: Loaded remote files are unchanged")
+            if (options['sys-exit']):
+                sys.exit(1)
+            else:
+                return
+
+        # Ingest all the files in the local directory
         if options['ingest']:
             self.import_files(local_dir, courts_files)
             if (options['sys-exit']):
@@ -103,10 +106,6 @@ class Command(BaseCommand):
             local_dir(string): The local directory to import to
             remote_dir(string): The remote directory to import from
             filenames(list): List of files to import
-
-        Returns:
-            changed(bool): True if the files loaded are different to 
-                the files previously on the local dir
         """
         # determine where the json files are
         changed = False
@@ -116,11 +115,10 @@ class Command(BaseCommand):
             logger.info('handle: Found S3_BUCKET environment variable {}'.format(bucket_name))
             local_dir = "data"
             remote_dir = ""
-            found_files, changed = self.handle_s3(bucket_name,
-                                        local_dir=local_dir,
-                                        remote_dir=remote_dir,
-                                        files=files)
-        return changed
+            self.handle_s3(bucket_name,
+                           local_dir=local_dir,
+                           remote_dir=remote_dir,
+                           files=files)
 
     def import_files(self, local_dir, filenames):
         """
@@ -139,6 +137,9 @@ class Command(BaseCommand):
                 courtsfile.close()
                 # Import the data into the application
                 Ingest.courts(courts)
+
+        # Set the ingestion status
+        DataStatus.objects.create(data_hash=''.join(self.hashes(local_dir, filenames)))
 
     @classmethod
     def hashes(cls, dir_path, filenames):
@@ -182,11 +183,6 @@ class Command(BaseCommand):
             local_dir(string): The local directory to import to
             remote_dir(string): The remote directory to import from
             filenames(list): List of files to import
-
-        Returns:
-            found_files(list): All the hashes of the files imported
-            changed(bool): True if the files hashes have changed,
-                False otherwise
         """
         old_hashes = self.hashes(local_dir, files)
         s3 = boto3.resource('s3')
@@ -199,25 +195,9 @@ class Command(BaseCommand):
             
             try:
                 s3.meta.client.download_file(bucket_name, remote_path, local_path)
-                found_files.append(file)
             except botocore.exceptions.ClientError as e:
                 # Only catch the non-existing error
                 error_code = int(e.response['Error']['Code'])
                 if error_code == 404:
                     logger.critical("handle_s3: File {} not found in bucket {}, "
                                    "exiting...".format(file, bucket_name))
-                                    
-                            
-        # If we found any files, then create hashes
-        if len(found_files) > 0:
-            logger.info("handle_s3: Computing hashes of new files")
-            new_hashes = self.hashes(local_dir, found_files)
-            if old_hashes == '' or new_hashes != old_hashes:
-                logger.info("handle_s3: Hashes differ. Importing the new files")
-                DataStatus.objects.create(data_hash=''.join(new_hashes))
-                return found_files, True
-            else:
-                logger.info("handle_s3: Hashes are unchanged.")
-                return found_files, False
-        else:
-            return found_files, False
