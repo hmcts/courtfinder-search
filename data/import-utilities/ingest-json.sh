@@ -9,8 +9,7 @@ export PGPASSWORD=${DB_PASSWORD}
 PSQL_ARGS="-h ${DB_HOST} -p ${DB_PORT} -U ${DB_USERNAME} template1"
 
 echo Dropping any temporary database if it exists
-psql ${PSQL_ARGS} -c "DROP DATABASE ${DB_NAME_TMP};"
-
+psql ${PSQL_ARGS} -c "DROP DATABASE IF EXISTS ${DB_NAME_TMP};"
 
 echo Populating temporary database...
 $PYTHON manage.py populate-db --load-remote --sys-exit
@@ -20,12 +19,12 @@ if [ $? -eq 0 ]; then
 	$PYTHON manage.py populate-db --ingest --sys-exit
 	if [ $? -eq 0 ]; then 
 		echo Replacing ${DB_NAME} with newly populated database ${DB_NAME_TMP}...
-		psql ${PSQL_ARGS} -c "DROP DATABASE ${DB_NAME};"
+		psql ${PSQL_ARGS} -c "DROP DATABASE IF EXISTS ${DB_NAME};"
 		psql ${PSQL_ARGS} -c "ALTER DATABASE ${DB_NAME_TMP} RENAME TO ${DB_NAME};"
 		echo 'Done.'
 	else
 	  echo "Failed ingesting files." >&2
-	  psql ${PSQL_ARGS} -c "DROP DATABASE ${DB_NAME_TMP};"
+	  psql ${PSQL_ARGS} -c "DROP DATABASE IF EXISTS ${DB_NAME_TMP};"
 	  exit 1
 	fi
 else
