@@ -4,6 +4,15 @@ from django.http import Http404
 from django.utils.html import strip_entities, strip_tags
 from search.models import Court
 
+import logging
+import os
+
+# Set up the logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(message)s')
+logger = logging.getLogger("populate-db")
+logging.getLogger("requests").setLevel(logging.WARNING)
+
 
 def collapse(source, key, key2):
     """
@@ -87,12 +96,17 @@ def court(request, slug):
     except Court.DoesNotExist:
         raise Http404
 
+    s3_bucket_name = os.environ.get('S3_BUCKET', '').split('.')[0]
+    if len(s3_bucket_name) < 1:
+        logger.warning("court: s3 bucket name not found")
+
     return render(request, 'courts/court.jinja', {
         'court': format_court(the_court),
         'query': request.GET.get('q', ''),
         'aol': request.GET.get('aol', 'all'),
         'spoe': request.GET.get('spoe', None),
         'postcode': request.GET.get('postcode', ''),
+        's3_bucket_name': s3_bucket_name,
     })
 
 
