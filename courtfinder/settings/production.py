@@ -13,6 +13,14 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD','C1cwG3P7n2'),
         'HOST': os.getenv('DB_HOST', '127.0.0.1'),
         'PORT': os.getenv('DB_PORT', '5432'),
+    },
+    '_tmp': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '_tmp',
+        'USER': os.getenv('DB_USER', 'courtfinder'),
+        'PASSWORD': os.getenv('DB_PASSWORD','C1cwG3P7n2'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 

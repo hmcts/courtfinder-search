@@ -2,7 +2,7 @@
 PYTHON=python
 
 # Name of the temp database to be used to store data during import
-DB_NAME_TMP="${DB_NAME}_tmp"
+DB_NAME_TMP="_tmp"
 
 # Setup postgres pasword and args
 export PGPASSWORD=${DB_PASSWORD}
@@ -12,11 +12,11 @@ echo Dropping any temporary database if it exists
 psql ${PSQL_ARGS} -c "DROP DATABASE IF EXISTS ${DB_NAME_TMP};"
 
 echo Populating temporary database...
-$PYTHON manage.py populate-db --load-remote --sys-exit
+$PYTHON manage.py populate-db --database ${DB_NAME_TMP} --load-remote --sys-exit
 if [ $? -eq 0 ]; then
 	echo Creating temporary database...
 	psql ${PSQL_ARGS} -c "CREATE DATABASE ${DB_NAME_TMP} WITH TEMPLATE ${DB_NAME} OWNER ${DB_USERNAME};"
-	$PYTHON manage.py populate-db --ingest --sys-exit
+	$PYTHON manage.py populate-db --database ${DB_NAME_TMP} --ingest --sys-exit
 	if [ $? -eq 0 ]; then 
 		echo Replacing ${DB_NAME} with newly populated database ${DB_NAME_TMP}...
 		psql ${PSQL_ARGS} -c "DROP DATABASE IF EXISTS ${DB_NAME};"
