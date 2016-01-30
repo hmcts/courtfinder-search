@@ -1,106 +1,246 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
-from os.path import abspath, basename, dirname, join, normpath
 import json
 import hashlib
+import logging
+import sys
 
-from django.core.management.base import BaseCommand, CommandError
+import boto3
+from boto3.s3.transfer import S3Transfer
+import botocore
+from django.core.management.base import BaseCommand
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import models, migrations
+from optparse import make_option
 
 from search.models import DataStatus
 from search.ingest import Ingest
 
+# Set up the logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(message)s')
+logger = logging.getLogger("populate-db")
+logging.getLogger("requests").setLevel(logging.WARNING)
 
 
 class Command(BaseCommand):
 
-    def import_files(self, data_dir):
-        courts_data_path = join( data_dir, 'courts.json' )
-        courts = []
-        with open(courts_data_path, 'r') as courtsfile:
-            print "courts file found"
-            courts = json.load(courtsfile)
-            courtsfile.close()
-        print "Starting data import"
-        Ingest.courts(courts)
-        print "OK"
+    # Add some custom options
+    option_list = BaseCommand.option_list + (
+        make_option('--datadir',
+            action='store',
+            type='string',
+            dest='datadir',
+            default='data',
+            help='Set the data directory containing courts files'),
+        make_option('--database',
+            action='store',
+            type='string',
+            dest='database',
+            default='default',
+            help='Set the database to import data into'),
+        make_option('--load-remote',
+            action='store_true',
+            dest='load-remote',
+            default=False,
+            help='Load the courts files from remote sources'),
+        make_option('--ingest',
+            action='store_true',
+            dest='ingest',
+            default=False,
+            help='Ingest the local court files'),
+        make_option('--sys-exit',
+            action='store_true',
+            dest='sys-exit',
+            default=False,
+            help='Make the script use sys exits')
+    )
 
-    def hashes(self, dir, filenames):
-        BLOCKSIZE = 65536
+    def handle(self, *args, **options):
+        """
+        Handle the loading of file data into the application. There
+        are a number of different outcomes depending on which arguments
+        if any are supplied.
+
+        * 'no arguments' - firstly 'load-remote' is called, then,
+        if and only if the files have changed, 'ingest' is called.
+        * 'load-remote' only - courts.json is fetched from the remote store,
+        but is not ingested.
+        * 'ingest' only - the local copy of courts.json is ingested
+        * 'load-remote' and 'ingest' - The remote courts.json is fetched and
+        ingested no matter if its changed or not
+
+        Multiple database support is available through the passing of the database
+        parameter to specify which databse to load data into.
+        """
+        courts_files = ["courts.json"]
+        local_dir = options['datadir']
+        remote_dir = ""
+        
+        # Store the current hash
+        old_hash = self.hashes(local_dir, courts_files)
+
+        do_load_remote = False
+        do_ingest = False
+        ingest_if_unchanged = False
+        exit_if_unchanged = False
+
+        # If no commands are specified then default to the previous behaviour
+        if not options['load-remote'] and not options['ingest']:
+            logger.info("handle: No commands specified, running load-remote and ingest if fu=iles change...")
+            do_load_remote = True
+            do_ingest = True
+            ingest_if_unchanged = False 
+        else:
+            if options['load-remote']:
+                do_load_remote = True
+                exit_if_unchanged = True
+            if options['ingest']:
+                do_ingest = True
+                ingest_if_unchanged = True
+
+        if do_load_remote:
+            logger.info("handle: Loading remote files...")
+            self.load_remote_files(local_dir,
+                                   remote_dir,
+                                   courts_files)
+
+        files_changed = self.hashes(local_dir, courts_files) != old_hash
+
+        # If the files have not changed, and we have not specifically
+        # asked for the files to be ingested,then exit
+        if exit_if_unchanged and not files_changed:
+            logger.error("handle: Loaded remote files are unchanged, exiting...")
+            if (options['sys-exit']):
+                sys.exit(1)
+            else:
+                return
+
+        if do_ingest:
+            if files_changed or ingest_if_unchanged:
+                logger.info("handle: Ingesting files...")
+                self.import_files(local_dir, courts_files, options['database'])
+                if (options['sys-exit']):
+                    sys.exit(0)
+                else:
+                    return
+            else:
+                logger.error("handle: Loaded remote files are unchanged, not ingesting.")
+                if (options['sys-exit']):
+                    sys.exit(1)
+                else:
+                    return
+
+        
+
+    def load_remote_files(self,
+                          local_dir,
+                          remote_dir,
+                          files):
+        """
+        Load court files from a remote location into the local
+        directory
+
+        Args:
+            local_dir(string): The local directory to import to
+            remote_dir(string): The remote directory to import from
+            filenames(list): List of files to import
+        """
+        # determine where the json files are
+        changed = False
+        s3_bucket = os.environ.get('S3_BUCKET', None)
+        if s3_bucket:
+            bucket_name = s3_bucket.split('.')[0]
+            logger.info('handle: Found S3_BUCKET environment variable {}'.format(bucket_name))
+            local_dir = "data"
+            remote_dir = ""
+            self.handle_s3(bucket_name,
+                           local_dir=local_dir,
+                           remote_dir=remote_dir,
+                           files=files)
+
+    def import_files(self,
+                     local_dir,
+                     filenames,
+                     database_name="default"):
+        """
+        Imports the set of files from the specified directory into
+        the application
+
+        Args:
+            local_dir(string): The directory containing the files
+            filenames(list): List of files to import
+            database_name(string): The database to import the data into
+        """
+        for filename in filenames:
+            courts_data_path = os.path.join(local_dir, filename)
+            with open(courts_data_path, 'r') as courtsfile:
+                logger.info('import_files: Importing file {}/{}'.format(local_dir, filename))
+                courts = json.load(courtsfile)
+                courtsfile.close()
+                # Import the data into the application
+                Ingest.courts(courts, database_name=database_name)
+
+        # Set the ingestion status
+        DataStatus.objects.db_manager(database_name).create(data_hash=''.join(self.hashes(local_dir, filenames)))
+
+    @classmethod
+    def hashes(cls, dir_path, filenames):
+        """
+        Generate a list of hashes of the specified
+        list of files in the directory
+
+        Args:
+            data_dir(string): The directory containing the files
+            filenames(list): List of files to import
+
+        Returns:
+            (list): List of hashes of the files
+        """ 
+        block_size = 65536
         hasher = hashlib.md5()
         hashes = []
         for filename in filenames:
             try:
-                with open(dir+'/'+filename, 'rb') as afile:
-                    buf = afile.read(BLOCKSIZE)
+                with open(dir_path + '/' + filename, 'rb') as afile:
+                    buf = afile.read(block_size)
                     while len(buf) > 0:
                         hasher.update(buf)
-                        buf = afile.read(BLOCKSIZE)
+                        buf = afile.read(block_size)
                 hashes.append(hasher.hexdigest())
-            except:
+            except (IOError, Exception):
                 hashes.append(None)
         return hashes
 
-    def handle(self, *args, **options):
 
-        print "Computing hashes of existing files"
-        # determine where the json files are
-        try:
-            S3_BUCKET=os.environ['S3_BUCKET']
-            data_dir = '/tmp'
-            environment = 'S3'
-            old_hashes = self.hashes(data_dir, ['courts.json'])
-        except:
-            print "I didn't find the environment variables: S3_BUCKET."
-            print "Trying to find files locally instead"
-            if len(args) == 1:
-                data_dir = join(settings.PROJECT_ROOT, args[0])
-            else:
-                data_dir = join(settings.PROJECT_ROOT, 'data')
-            print "looking for json data in "+data_dir
-            environment = 'local'
+    def handle_s3(self,
+                  bucket_name,
+                  local_dir,
+                  remote_dir,
+                  files):
+        """
+        Handle the importing of s3 files
 
-        if environment == 'S3':
-            print "Importing from S3...",
-
-            import boto
-            from boto.s3.key import Key
-
-            # connect to the bucket
-            key = os.environ.get('S3_KEY', None)
-            secret = os.environ.get('S3_SECRET', None)
-
-            if key is not None and secret is not None:
-                conn = boto.connect_s3(key, secret)
-            else:
-                conn = boto.connect_s3()
-
-            bucket = conn.get_bucket(S3_BUCKET)
-
-            # go through the list of files
-            bucket_list = bucket.list()
-            for l in bucket_list:
-                keyString = str(l.key)
-                if l.key == "courts.json":
-                    l.get_contents_to_filename(join(data_dir,keyString))
-
-            print "Computing hashes of new files"
-            new_hashes = self.hashes(data_dir, ['courts.json'])
-            if new_hashes != old_hashes:
-                print "hashes differ. Importing the new files"
-                self.import_files(data_dir)
-            else:
-                print "same hashes. Not importing."
-        else:
-            print "Importing from local files..."
-            self.import_files(data_dir)
-            new_hashes = self.hashes(data_dir, ['courts.json'])
-
-        print "Success"
-        print "Storing data state...",
-        DataStatus.objects.create(data_hash=''.join(new_hashes))
-        print "OK"
-        print "All done"
+        Args:
+            bucket_name: The name of the s3 bucket to import from
+            local_dir(string): The local directory to import to
+            remote_dir(string): The remote directory to import from
+            filenames(list): List of files to import
+        """
+        old_hashes = self.hashes(local_dir, files)
+        s3 = boto3.resource('s3')
+        found_files = []
+        for file in files:
+            local_path = os.path.join(local_dir, file)
+            remote_path = os.path.join(remote_dir, file)
+            logger.info("handle_s3: Attempting download of {} to {} "
+                        "from bucket {}, ".format(remote_path, local_path, bucket_name))
+            
+            try:
+                s3.meta.client.download_file(bucket_name, remote_path, local_path)
+            except botocore.exceptions.ClientError as e:
+                # Only catch the non-existing error
+                error_code = int(e.response['Error']['Code'])
+                if error_code == 404:
+                    logger.critical("handle_s3: File {} not found in bucket {}, "
+                                   "exiting...".format(file, bucket_name))
