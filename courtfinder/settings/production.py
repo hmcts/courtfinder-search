@@ -10,7 +10,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DB_NAME','courtfinder_search'),
         'USER': os.getenv('DB_USER', 'courtfinder'),
-        'PASSWORD': os.getenv('DB_PASSWORD','C1cwG3P7n2'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST', '127.0.0.1'),
         'PORT': os.getenv('DB_PORT', '5432'),
     }
