@@ -72,7 +72,7 @@
     </div>
     {% if court.image_file %}
     <div id="photo">
-      <img property="image" src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+      <img property="image" src="https://{{ s3_bucket_name }}.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
     </div>
     {% endif %}
     <div id="left">
