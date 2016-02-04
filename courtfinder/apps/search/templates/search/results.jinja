@@ -21,11 +21,20 @@
 </div>
 <div id="search-results-page" class="content inner cf">
   <header class="page-header">
-    <h1>Search results</h1>
+    {# --- temporary survey request > #}
+    {% if aol == 'Children' or aol == 'Domestic violence' or aol == 'Divorce' %}
+      <p class="info-box" style="float:right; display:inline; width: 40%; padding: 20px 15px 20px 80px; margin-left: 50px; background: #EDEDED url('/assets/images/icon-information-2x.png') no-repeat scroll 15px 20px;">
+        Are you a separating parent?<br>
+        Your experience and thoughts can help us improve the services we offer.<br>
+        Take our <a href="https://www.surveymonkey.co.uk/r/HC72KHV">short survey</a>.
+      </p>
+    {% endif %}
+    {# --- < temporary survey request #}
+    <h1 style="float: left">Search results</h1>
   </header>
 
   {% if search_results %}
-  <div class="search-results">
+  <div class="search-results" style="clear: both">
     {% if query %}
     <p class="text-secondary">
       <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
