@@ -156,21 +156,21 @@ class SearchTestCase(TestCaseWithData):
         with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=SE15&aol=all')
             self.assertEqual(response.status_code, 200)
-            self.assertIn('<div class="search-results">', response.content)
+            self.assertIn('<div class="search-results"', response.content)
 
     def test_partial_postcode_whitespace(self):
         c = Client()
         with postcode_valid('lookup_partial_postcode'):
             response = c.get('/search/results?postcode=SE15++&aol=all')
             self.assertEqual(response.status_code, 200)
-            self.assertIn('<div class="search-results">', response.content)
+            self.assertIn('<div class="search-results"', response.content)
 
     def test_postcode_whitespace(self):
         c = Client()
         with postcode_valid('lookup_postcode'):
             response = c.get('/search/results?postcode=++SE154UH++&aol=all')
             self.assertEqual(response.status_code, 200)
-            self.assertIn('<div class="search-results">', response.content)
+            self.assertIn('<div class="search-results"', response.content)
 
     def test_redirect_directive_action(self):
         rules = Mock(return_value={
