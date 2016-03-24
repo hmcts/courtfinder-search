@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from django.conf import settings
 from itertools import chain
 import logging
 import re
@@ -82,7 +83,7 @@ class CourtSearch(object):
 class PostcodeCourtSearch(CourtSearch):
 
     def __init__(self, postcode, area_of_law=None, single_point_of_entry=False):
-        client = postcodeinfo.Client()
+        client = postcodeinfo.Client(timeout=settings.POSTCODEINFO_API_TIMEOUT)
 
         if is_full_postcode(postcode):
             self.postcode = client.lookup_postcode(postcode)

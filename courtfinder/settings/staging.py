@@ -20,3 +20,4 @@ ALLOWED_HOSTS = '*'
 
 COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courtfinder.is.dsd.io/admin/healthcheck.json'
 COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-staging/courts.json'
+POSTCODEINFO_API_TIMEOUT = os.getenv('POSTCODEINFO_API_TIMEOUT', 30)
