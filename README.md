@@ -77,6 +77,9 @@ will run the tests using 3 processes. To show the coverage report:
 
 The application uses the following environment variables.
 
+* `POSTCODEINFO_API_TOKEN`: The api token for the postcodeinfo service
+* `POSTCODEINFO_API_URL`: The url of the postcodeinfo service
+* `POSTCODEINFO_API_TIMEOUT`: The api timeout for the postcodeinfo service
 * `FEEDBACK_EMAIL_SENDER`: the from address of the feedback emails sent by the application
 * `FEEDBACK_EMAIL_RECEIVER`: the email addresses of the recipients of the feedback emails (comma separated)
 * `SMTP_HOSTNAME`
