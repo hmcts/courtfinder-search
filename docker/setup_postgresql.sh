@@ -1,8 +1,16 @@
 #!/bin/sh
+export PGPASSWORD=C1cwG3P7n2
 
-/etc/init.d/postgresql start
-/usr/bin/psql -c 'CREATE ROLE courtfinder LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;' -U postgres
-/usr/bin/psql -c 'CREATE DATABASE "courtfinder_search";' -U postgres
-/usr/bin/psql -c "ALTER USER courtfinder WITH PASSWORD '123456';" -U postgres
-PGPASSWORD=123456 /usr/bin/psql courtfinder_search -c 'CREATE EXTENSION postgis;' -U courtfinder
-PGPASSWORD=123456 /usr/bin/psql courtfinder_search -c 'CREATE EXTENSION postgis_topology;' -U courtfinder
+/usr/bin/psql -c 'DROP DATABASE IF EXISTS "courtfinder_production;' -h $DB_HOST -U courtfinder
+/usr/bin/psql -c 'DROP DATABASE IF EXISTS "courtfinder_search;' -h $DB_HOST -U courtfinder
+/usr/bin/psql -c 'CREATE DATABASE IF NOT EXISTS "courtfinder_production" WITH OWNER courtfinder_search;' -h $DB_HOST -U courtfinder
+/usr/bin/psql -c 'CREATE DATABASE IF NOT EXISTS "courtfinder_search" WITH OWNER courtfinder_search;' -h $DB_HOST -U courtfinder
+/usr/bin/psql courtfinder_search -c 'CREATE EXTENSION IF NOT EXISTS postgis;' -h $DB_HOST -U courtfinder
+/usr/bin/psql courtfinder_search -c 'CREATE EXTENSION IF NOT EXISTS postgis_topology;' -h $DB_HOST -U courtfinder
+
+# Importing database
+cd /srv/search
+python manage.py makemigrations
+python manage.py migrate
+python manage.py populate-db
+
