@@ -117,7 +117,7 @@ USE_TZ = True
 
 
 # Static files
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = (
     SITE_ROOT + '/assets',
