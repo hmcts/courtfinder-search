@@ -6,7 +6,7 @@ from .base import *
 import os
 
 DEBUG = False
-STATIC_ROOT = '/srv/search/static/'
+STATIC_ROOT = '/srv/search/assets/'
 
 DATABASES = {
     'default': {
