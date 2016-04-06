@@ -44,7 +44,7 @@ RUN gulp
 RUN cp -R /srv/additional_files/* /srv/search
 
 WORKDIR /srv/search
-RUN /bin/bash -c python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 RUN mkdir -p /srv/logs; chown -R search:search /srv/logs
 RUN chown -R search: /srv/search
