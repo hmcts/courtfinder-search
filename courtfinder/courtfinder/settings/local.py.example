@@ -9,3 +9,5 @@ DATABASES = {
         'NAME': 'courtfinder_search_tmp',
     }
 }
+
+SECRET_KEY = "a-secret-key"

@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         v.cpus = 2
     end
 
-    config.vm.synced_folder ".", "/courtfinder/"
+    config.vm.synced_folder ".", "/courtfinder_search/"
 
     config.vm.provision :shell do |sh|
         sh.privileged = false

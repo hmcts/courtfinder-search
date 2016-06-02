@@ -11,19 +11,21 @@ Clone the repository:
 
 Rename
 
-    courtfinder/courtfinder/settings/local.py.example to local.py
+    courtfinder/courtfinder/settings/local.py.example to courtfinder/courtfinder/settings/local.py
 
 In the project root run
 
     vagrant up
 
+This will provision a full development environment in a virtual machine, which include a postgres database.
+
 Then run
 
     vagrant ssh
 
-Populate the app with sample data:
-
-    ./manage.py populate-db
+Change to the courtfinder directory
+    
+    cd courtfinder
 
 You can now run the Django web server
 
