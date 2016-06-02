@@ -3,6 +3,34 @@ Court and Tribunal Finder search
 
 ## Installation
 
+### Set-up with Vagrant 
+
+Clone the repository:
+
+    git clone git@github.com:ministryofjustice/courtfinder-search.git
+
+Rename
+
+    courtfinder/courtfinder/settings/local.py.example to local.py
+
+In the project root run
+
+    vagrant up
+
+Then run
+
+    vagrant ssh
+
+Populate the app with sample data:
+
+    ./manage.py populate-db
+
+You can now run the Django web server
+
+    ./manage.py runserver 0.0.0.0:8000
+
+### None vagrant set-up
+
 This applies to OSX, but should be similar with any other Unix variant.
 
 Clone the repository:
