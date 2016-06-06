@@ -3,6 +3,50 @@ Court and Tribunal Finder search
 
 ## Installation
 
+### Set-up with Vagrant 
+
+Clone the repository:
+
+    git clone git@github.com:ministryofjustice/courtfinder-search.git
+
+Rename
+
+    courtfinder/courtfinder/settings/local.py.example to courtfinder/courtfinder/settings/local.py
+
+In the project root run
+
+    vagrant up
+
+This will provision a full development environment in a virtual machine, which include a postgres database.
+
+Then run
+
+    vagrant ssh
+
+Change to the courtfinder directory
+    
+    cd courtfinder
+
+Set up data
+
+    ./manage.py populate-db
+
+You can now run the Django web server
+
+    ./manage.py runserver 0.0.0.0:8000
+
+NOTE: If you have to run vagrant up more than once you may get an error about conflicting portsi, 
+usually port 8000. To resolve this on a mac run
+
+    lsof -i tcp:8000
+
+to get the process number (pid), then kill it with
+
+    kill -9 <pid>
+
+
+### None vagrant set-up
+
 This applies to OSX, but should be similar with any other Unix variant.
 
 Clone the repository:
