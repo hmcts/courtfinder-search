@@ -27,9 +27,23 @@ Change to the courtfinder directory
     
     cd courtfinder
 
+Set up data
+
+    ./manage.py populate-db
+
 You can now run the Django web server
 
     ./manage.py runserver 0.0.0.0:8000
+
+NOTE: If you have to run vagrant up more than once you may get an error about conflicting portsi, 
+usually port 8000. To resolve this on a mac run
+
+    lsof -i tcp:8000
+
+to get the process number (pid), then kill it with
+
+    kill -9 <pid>
+
 
 ### None vagrant set-up
 
