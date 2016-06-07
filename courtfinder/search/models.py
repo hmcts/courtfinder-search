@@ -62,6 +62,9 @@ class AreaOfLaw(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ("name",)
+
 class Facility(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=4096)
@@ -95,6 +98,7 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
                                         self.local_authority.name,
                                         self.area_of_law.name)
 
+
 class CourtFacility(models.Model):
     court = models.ForeignKey(Court)
     facility = models.ForeignKey(Facility)
@@ -102,12 +106,14 @@ class CourtFacility(models.Model):
     def __unicode__(self):
         return "%s has facility %s" % (self.court.name, self.facility)
 
+
 class CourtOpeningTime(models.Model):
     court = models.ForeignKey(Court)
     opening_time = models.ForeignKey(OpeningTime)
 
     def __unicode__(self):
         return "%s has facility %s" % (self.court.name, self.opening_time)
+
 
 class CourtAreaOfLaw(models.Model):
     court = models.ForeignKey(Court)
