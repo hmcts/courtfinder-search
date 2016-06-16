@@ -1,6 +1,13 @@
 Court and Tribunal Finder search
 ==================
 
+## *** IMPORTANT NOTICE ***
+Until further notice we are treating the *pre_template_deploy* branch as the default
+branch. Ensure all changes are made on this branch.
+
+For further information and deployment instructions please refer to the [ops 
+manual](https://opsmanual.dsd.io/run_books/courtfinder.html#non-master-branch-approach-use-this-until-further-notice).
+
 ## Installation
 
 ### Set-up with Vagrant 
