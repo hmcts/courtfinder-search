@@ -9,3 +9,4 @@ python-dateutil==2.2
 raven==5.1.1
 LogentriesLogger==0.2.1
 uWSGI==2.0.8
+git+https://github.com/ministryofjustice/django-moj-irat.git

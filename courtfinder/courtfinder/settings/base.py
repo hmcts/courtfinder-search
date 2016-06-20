@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'search',
     'staticpages',
     'courts',
+    'healthcheck',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -235,3 +236,11 @@ LOGGING = {
     },
 }
 
+AUTODISCOVER_HEALTHCHECKS = True
+COURTFINDER_ADMIN_HEALTHCHECK_URL = ''
+COURTS_DATA_S3_URL = ''
+
+try:
+    from .local import *
+except ImportError:
+    pass
