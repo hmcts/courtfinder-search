@@ -29,5 +29,5 @@ DATABASES = {
 
 ALLOWED_HOSTS = '*'
 
-COURTFINDER_ADMIN_HEALTHCHECK_URL = os.getenv('COURTFINDER_ADMIN_HEALTHCHECK_URL', 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json')
-COURTS_DATA_S3_URL = os.getenv('COURTS_DATA_S3_URL', 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json')
+COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json'
+COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json'
