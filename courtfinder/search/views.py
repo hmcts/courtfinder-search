@@ -167,7 +167,8 @@ def __format_results(results):
     """
     courts=[]
     for result in results:
-        addresses = result.courtaddress_set.all()
+
+        addresses = result.courtaddress_set.all().order_by("-pk")
         address = False
         if addresses != []:
             for a in addresses:
@@ -188,7 +189,6 @@ def __format_results(results):
         else:
             visible_address = {}
 
-        areas_of_law=[]
         areas_of_law = [aol for aol in result.areas_of_law.all()]
 
         court = { 'name': result.name,
@@ -196,7 +196,7 @@ def __format_results(results):
                   'lon': result.lon,
                   'number': result.number,
                   'slug': result.slug,
-                  'types': [court_type.court_type.name for court_type in result.courtcourttype_set.all()],
+                  'types': sorted([court_type.court_type.name for court_type in result.courtcourttype_set.all()]),
                   'address': visible_address,
                   'areas_of_law': areas_of_law }
         dx_contacts = result.courtcontact_set.filter(contact__name='DX')
