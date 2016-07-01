@@ -157,7 +157,7 @@ class CourtSearch:
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
               FROM search_court as c
               WHERE c.displayed
-             ORDER BY distance
+             ORDER BY distance, "name"
         """, [lon, lat])
 
         if self.area_of_law.name != 'All':
