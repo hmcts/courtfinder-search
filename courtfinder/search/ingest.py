@@ -1,4 +1,8 @@
+from django.db import IntegrityError
+from django.utils.text import slugify
+
 from search.models import *
+
 from dateutil import parser
 
 class Ingest:
@@ -63,17 +67,19 @@ class Ingest:
 
             for aol_obj in court_obj['areas_of_law']:
                 aol_name = aol_obj['name']
+                aol_slug = aol_obj.get('slug', slugify(aol_name))
                 aol_las = aol_obj['local_authorities']
                 aol_spoe = aol_obj.get('single_point_of_entry',False)
 
                 try:
-                    aol, created = AreaOfLaw.objects.db_manager(database_name).get_or_create(name=aol_name, slug=aol_slug)
+                    aol, created = AreaOfLaw.objects.db_manager(database_name).get_or_create(name=aol_name)
                     CourtAreaOfLaw.objects.db_manager(database_name).create(court=court,
                                                 area_of_law=aol,
                                                 single_point_of_entry=aol_spoe)
                 except IntegrityError as e:
                     print("ingest: Duplicate entry aol=%s, slug=%s, skipping..."
                                 % (aol_name, aol_slug))
+
                 for local_authority in aol_las:
                     if isinstance(local_authority, dict):
                         local_authority_object, created = LocalAuthority.objects.db_manager(database_name).get_or_create(
@@ -88,7 +94,7 @@ class Ingest:
                     CourtLocalAuthorityAreaOfLaw.objects.db_manager(database_name).create(
                         court=court,
                         area_of_law=aol,
-                        local_authority=local_authority
+                        local_authority=local_authority_object
                     )
 
             for facility_obj in court_obj['facilities']:
