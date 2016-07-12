@@ -65,15 +65,15 @@ def format_court(court):
                   'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
                   'postal_address': postal_address,
                   'visiting_address': visiting_address,
-                  'opening_times': sorted([opening_time for opening_time in court.opening_times.all()], key=lambda x: x.description),
-                  'areas_of_law': sorted([aol for aol in court.areas_of_law.all().order_by("name")]),
+                  'opening_times': court.opening_times.all().order_by("description"),
+                  'areas_of_law': court.areas_of_law.all().order_by("name"),
                   'facilities': sorted(facilities, key=lambda x: x['name']),
                   'emails': collapse(emails, 'description', 'addresses'),
                   'contacts': collapse(contacts, 'name', 'numbers'),
                   'directions': court.directions if court.directions else None,
                   'alert': court.alert if court.alert and court.alert.strip() != '' else None,
                   'parking': court.parking if court.parking else None}
-    
+
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
         court_obj['dx_number'] = dx_contact.first().number
