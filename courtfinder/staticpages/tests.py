@@ -1,12 +1,11 @@
 import json
-import os
 from mock import Mock, patch
-from django.test import TestCase
+
 from django.test import TestCase, Client
 from django.conf import settings
+
 from search.ingest import Ingest
-
-
+from .forms import FeedbackForm
 
 
 class SearchTestCase(TestCase):
@@ -15,9 +14,6 @@ class SearchTestCase(TestCase):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         Ingest.courts(json.loads(courts_json_1))
-
-    def tearDown(self):
-        pass
 
     def test_top_page_returns_correct_content(self):
         c = Client()
@@ -76,3 +72,29 @@ class SearchTestCase(TestCase):
         self.assertRedirects(r, '/courts/accrington-magistrates-court', 302)
         r = c.get('/?court_id=2038')
         self.assertEqual(r.status_code, 404)
+
+class FeedbackFormTestCase(TestCase):
+
+    def setUp(self):
+        self.post_data = {
+            "feedback_text": "ra ra ra",
+            "feedback_referer": "www.a.url.com",
+            "feedback_email": "",
+            "feedback_name": ""
+        }
+
+    def test_form_honeypot_field_invalid_if_not_empty(self):
+
+        self.post_data["feedback_name"] = "should be empty"
+
+        form = FeedbackForm(self.post_data)
+
+        self.assertFalse(form.is_valid())
+
+    def test_form_honeypot_field_valid_if_empty(self):
+
+        form = FeedbackForm(self.post_data)
+
+        self.assertTrue(form.is_valid())
+
+
