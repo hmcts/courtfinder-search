@@ -248,6 +248,8 @@ AUTODISCOVER_HEALTHCHECKS = True
 COURTFINDER_ADMIN_HEALTHCHECK_URL = ''
 COURTS_DATA_S3_URL = ''
 
+RATELIMIT_CACHE_BACKEND = 'courtfinder.brake_config.ELBBrake'
+
 try:
     from .local import *
 except ImportError:
