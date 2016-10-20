@@ -29,14 +29,14 @@ margin-top: 1em;
 }
 
 .button-get-started {
-  background-image: url("/static/images/icon-pointer.png");
+  background-image: url("/assets/images/icon-pointer.png");
   @include device-pixel-ratio {
-    background-image: url("/static/images/icon-pointer-2x.png");
+    background-image: url("/assets/images/icon-pointer-2x.png");
     background-size: 30px 19px;
   }
 
   @include ie(6) {
-    background-image: url("/static/images/icon-pointer-2x.png");
+    background-image: url("/assets/images/icon-pointer-2x.png");
   }
 }
 
