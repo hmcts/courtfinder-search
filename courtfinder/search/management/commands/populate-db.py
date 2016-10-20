@@ -11,19 +11,16 @@ from boto3.s3.transfer import S3Transfer
 import botocore
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from django.db.utils import IntegrityError, ProgrammingError
 from optparse import make_option
 
 from search.models import DataStatus
 from search.ingest import Ingest
 
-# Set up the logging
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(message)s')
-logger = logging.getLogger("populate-db")
-logging.getLogger("requests").setLevel(logging.WARNING)
-
 
 class Command(BaseCommand):
+
+    logger= None
 
     # Add some custom options
     option_list = BaseCommand.option_list + (
@@ -56,6 +53,12 @@ class Command(BaseCommand):
             help='Make the script use sys exits')
     )
 
+    
+    def __init__(self):
+        super(Command, self).__init__()
+        self.setup_logging()
+
+
     def handle(self, *args, **options):
         """
         Handle the loading of file data into the application. There
@@ -87,7 +90,7 @@ class Command(BaseCommand):
 
         # If no commands are specified then default to the previous behaviour
         if not options['load-remote'] and not options['ingest']:
-            logger.info("handle: No commands specified, running load-remote and ingest if fu=iles change...")
+            self.logger.info("handle: No commands specified, running load-remote and ingest if files change...")
             do_load_remote = True
             do_ingest = True
             ingest_if_unchanged = False 
@@ -100,34 +103,41 @@ class Command(BaseCommand):
                 ingest_if_unchanged = True
 
         if do_load_remote:
-            logger.info("handle: Loading remote files...")
-            self.load_remote_files(local_dir,
-                                   remote_dir,
-                                   courts_files)
+            self.logger.info("handle: Loading remote files...")
+            load_remote_files_success = self.load_remote_files(local_dir,
+                                                               remote_dir,
+                                                               courts_files)
+            if not load_remote_files_success:
+                self.logger.critical("handle: Failed to load remote files, exiting")
+                sys.exit(1)
 
         files_changed = self.hashes(local_dir, courts_files) != old_hash
 
         # If the files have not changed, and we have not specifically
         # asked for the files to be ingested,then exit
         if exit_if_unchanged and not files_changed:
-            logger.error("handle: Loaded remote files are unchanged, exiting...")
+            self.logger.info("handle: Loaded remote files are unchanged...")
             if (options['sys-exit']):
-                sys.exit(1)
+                sys.exit(0)
             else:
                 return
 
         if do_ingest:
             if files_changed or ingest_if_unchanged:
-                logger.info("handle: Ingesting files...")
-                self.import_files(local_dir, courts_files, options['database'])
+                self.logger.info("handle: Ingesting files...")
+                success = self.import_files(local_dir, courts_files, options['database'])
+                if not success:
+                    self.logger.critical('handle: Importing the courts data was unsuccessful')
+                    if (options['sys-exit']):
+                        sys.exit(1)
                 if (options['sys-exit']):
                     sys.exit(0)
                 else:
                     return
             else:
-                logger.error("handle: Loaded remote files are unchanged, not ingesting.")
+                self.logger.info("handle: Loaded remote files are unchanged...")
                 if (options['sys-exit']):
-                    sys.exit(1)
+                    sys.exit(0)
                 else:
                     return
 
@@ -145,19 +155,25 @@ class Command(BaseCommand):
             local_dir(string): The local directory to import to
             remote_dir(string): The remote directory to import from
             filenames(list): List of files to import
+        
+        Return:
+            (bool): True if remote files were successfully loaded, false otherwise
         """
         # determine where the json files are
-        changed = False
         s3_bucket = os.environ.get('S3_BUCKET', None)
-        if s3_bucket:
-            bucket_name = s3_bucket.split('.')[0]
-            logger.info('handle: Found S3_BUCKET environment variable {}'.format(bucket_name))
-            local_dir = "data"
-            remote_dir = ""
-            self.handle_s3(bucket_name,
-                           local_dir=local_dir,
-                           remote_dir=remote_dir,
-                           files=files)
+        if not s3_bucket:
+            self.logger.critical('handle: No S3_BUCKET environment variable found, {}'.format(bucket_name))
+            return False
+        
+        bucket_name = s3_bucket.split('.')[0]
+        self.logger.info('handle: Found S3_BUCKET environment variable {}'.format(bucket_name))
+        local_dir = "data"
+        remote_dir = ""
+        s3_success = self.handle_s3(bucket_name,
+                                   local_dir=local_dir,
+                                   remote_dir=remote_dir,
+                                   files=files)
+        return s3_success
 
     def import_files(self,
                      local_dir,
@@ -171,18 +187,27 @@ class Command(BaseCommand):
             local_dir(string): The directory containing the files
             filenames(list): List of files to import
             database_name(string): The database to import the data into
+
+        Returns:
+            (bool): True if ingestion was successful, False otherwise
         """
         for filename in filenames:
             courts_data_path = os.path.join(local_dir, filename)
             with open(courts_data_path, 'r') as courtsfile:
-                logger.info('import_files: Importing file {}/{}'.format(local_dir, filename))
+                self.logger.info('import_files: Importing file {}/{}'.format(local_dir, filename))
                 courts = json.load(courtsfile)
                 courtsfile.close()
                 # Import the data into the application
-                Ingest.courts(courts, database_name=database_name)
-
+                try:
+                    Ingest.courts(courts, database_name=database_name)
+                except (IntegrityError, ProgrammingError) as e:
+                    error_name = e.__class__.__name__
+                    self.logger.critical("import_files: There was a django '{}' error ingesting the courts data, '{}'"
+                                         .format(error_name, e.message))
+                    return False
         # Set the ingestion status
         DataStatus.objects.db_manager(database_name).create(data_hash=''.join(self.hashes(local_dir, filenames)))
+        return True
 
     @classmethod
     def hashes(cls, dir_path, filenames):
@@ -226,6 +251,9 @@ class Command(BaseCommand):
             local_dir(string): The local directory to import to
             remote_dir(string): The remote directory to import from
             filenames(list): List of files to import
+        
+        Return:
+            (bool): True if files downloaded successfully, false otherwise
         """
         old_hashes = self.hashes(local_dir, files)
         s3 = boto3.resource('s3')
@@ -233,7 +261,7 @@ class Command(BaseCommand):
         for file in files:
             local_path = os.path.join(local_dir, file)
             remote_path = os.path.join(remote_dir, file)
-            logger.info("handle_s3: Attempting download of {} to {} "
+            self.logger.info("handle_s3: Attempting download of {} to {} "
                         "from bucket {}, ".format(remote_path, local_path, bucket_name))
             
             try:
@@ -242,5 +270,32 @@ class Command(BaseCommand):
                 # Only catch the non-existing error
                 error_code = int(e.response['Error']['Code'])
                 if error_code == 404:
-                    logger.critical("handle_s3: File {} not found in bucket {}, "
-                                   "exiting...".format(file, bucket_name))
+                    self.logger.critical("handle_s3: File {} not found in bucket {}"
+                                         .format(file, bucket_name))
+                    return False
+
+        return True
+
+
+    def setup_logging(self,
+                      log_level='INFO',
+                      log_format='json',
+                      log_file=None):
+        """
+        Setup the logging
+        """
+        if log_format == 'json':
+            logging_format_str = '{"timestamp": "%(asctime)s","name": "%(name)s", "level": "%(levelname)s", "level_no": %(levelno)i, "message": "%(message)s"}'
+        else:
+            logging_format_str = '%(asctime)s %(name)s: %(levelname)s: %(message)s'
+
+        logging.basicConfig(
+            format=logging_format_str,
+            filename=log_file,
+            level=log_level)
+        # Set up the logging
+        logging.basicConfig(format=logging_format_str,
+                            level=logging.getLevelName(log_level))
+        self.logger = logging.getLogger("courtfinder-search::populate-db.py:")
+        logging.getLogger("requests").setLevel(logging.WARNING)
+        logging.getLogger('boto').setLevel(logging.CRITICAL)
