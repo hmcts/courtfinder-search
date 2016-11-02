@@ -49,7 +49,7 @@ def format_court(court):
     # contacts.sort(key=lambda x: x['sort_order'])
 
     facilities = [{'name': facility.name,
-                   'description': strip_entities(strip_tags(facility.description)),
+                   'description': facility.description,
                    'image': facility.image,
                    'image_description': facility.image_description} for facility in court.facilities.all()]
 
