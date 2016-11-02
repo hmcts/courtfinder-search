@@ -67,7 +67,7 @@ class AreaOfLaw(models.Model):
 
 class Facility(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=4096)
+    description = models.CharField(max_length=4096, null=True, blank=True)
     image = models.CharField(max_length=255)
     image_description = models.CharField(max_length=255)
 
