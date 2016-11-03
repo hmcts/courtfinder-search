@@ -118,7 +118,7 @@ class Command(BaseCommand):
         if exit_if_unchanged and not files_changed:
             self.logger.info("handle: Loaded remote files are unchanged...")
             if (options['sys-exit']):
-                sys.exit(0)
+                sys.exit(200)
             else:
                 return
 
