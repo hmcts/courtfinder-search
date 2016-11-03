@@ -30,11 +30,12 @@ log "Result ${result}"
 
 log "Populating temporary database..."
 $PYTHON courtfinder/manage.py populate-db --database ${DB_NAME_TMP} --load-remote --sys-exit
-if [ $? -eq 200 ]; then
+POPULATE_EXIT_CODE=$?
+if [ ${POPULATE_EXIT_CODE} -eq 200 ]; then
 	# 200 exit code signifies no change
     log "SUCCESS: No update required"
     exit 0
-elif [ $? -eq 0 ]; then
+elif [ ${POPULATE_EXIT_CODE} -eq 0 ]; then
 	log "Creating temporary database..."
 	result=$(psql ${PSQL_ARGS} -c "CREATE DATABASE ${DB_NAME_TMP} WITH TEMPLATE ${DB_NAME} OWNER ${DB_USERNAME};")
 	log "Result ${result}"
