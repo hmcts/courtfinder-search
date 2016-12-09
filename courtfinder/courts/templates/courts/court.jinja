@@ -8,21 +8,26 @@
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
-    {% if query %}
-    <li><a href="{% url 'search:results' %}">Search by name of address</a></li>
-    <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
+    {% if query or courtcode %} 
+      {% if query %} 
+        <li><a href="{% url 'search:address' %}">Search by name of address</a></li>
+        <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
+      {% elif courtcode %}
+        <li><a href="{% url 'search:courtcode' %}">Search by Court code</a></li>
+        <li><a href="{% url 'search:results' %}?courtcode={{ courtcode }}">Search results</a></li>
+      {% endif %}
     {% elif postcode %}
-    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
-    {%   if spoe %}
-    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
-    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
-    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
-    {%   else %}
-    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
-    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
-    {%   endif %}
+      <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+      {% if spoe %}
+        <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
+      {%   else %}
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
+      {% endif %}
     {% else %}
-    <li><a href="{% url 'courts:list' %}">Courts list</a></li>
+      <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
     {% endif %}
   </ol>
 </div>
@@ -41,8 +46,8 @@
       <div id="visiting" property='address' typeof='http://schema.org/PostalAddress'>
         <h2>Visit us:</h2>
         <span property="streetAddress">
-        {% for line in court.visiting_address.address_lines %}
-        {{ line }}<br/>
+          {% for line in court.visiting_address.address_lines %}
+          {{ line }}<br/>
           {% endfor %}
         </span>
         <span property="addressLocality">{{ court.visiting_address.town }}</span><br/>
@@ -66,7 +71,20 @@
         {{ court.postal_address.county }}<br/>
         {% endif %}
         {{ court.postal_address.postcode }}
-
+      </div>
+      {% endif %}
+      {% if court.number or court.dx_number %}
+      <div id="pros">
+        <dl>
+          {% if court.number %}
+          <dt>Court/tribunal no.</dt>
+          <dd>{{ court.number }}</dd>
+          {% endif %}
+          {% if court.dx_number %}
+          <dt><abbr title="document exchange">DX</abbr>:</dt>
+          <dd>{{ court.dx_number }}</dd>
+          {% endif %}
+        </dl>
       </div>
       {% endif %}
     </div>
@@ -87,9 +105,9 @@
         {% if court.opening_times %}
         <h2>Opening hours</h2>
         <ul>
-        {% for opening_time in court.opening_times %}
+          {% for opening_time in court.opening_times %}
           <li><time property="openingHours">{{ opening_time.description }}</time></li>
-        {% endfor %}
+          {% endfor %}
         </ul>
         {% endif %}
       </div>
@@ -104,7 +122,7 @@
             <span property="contactType">{{ email.description }}</span>:&nbsp;
             {% endif %}
             {% for address in email.addresses %}
-              <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+            <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
             {% endfor %}
           </li>
           {% endfor %}
@@ -115,14 +133,14 @@
         <ul>
           {% for contact in court.contacts %}
           {% if contact.name != 'DX' %}
-            <li property="contactPoint" typeof="ContactPoint">
-              {% if contact.name != '' %}
-              <span property="contactType">{{ contact.name }}</span>:&nbsp;
-              {% endif %}
-              {% for number in contact.numbers %}
-                <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
-              {% endfor %}
-            </li>
+          <li property="contactPoint" typeof="ContactPoint">
+            {% if contact.name != '' %}
+            <span property="contactType">{{ contact.name }}</span>:&nbsp;
+            {% endif %}
+            {% for number in contact.numbers %}
+            <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+            {% endfor %}
+          </li>
           {% endif %}
           {% endfor %}
         </ul>
@@ -141,9 +159,9 @@
         <p>If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need.</p>
         {% if court.facilities %}
         <ul>
-        {% for facility in court.facilities %}
+          {% for facility in court.facilities %}
           <li><span class="icon"><img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}"></span><span class="facility">{{ facility.description|striptags }}</span></li>
-        {% endfor %}
+          {% endfor %}
         </ul>
         {% endif %}
       </div>
@@ -152,43 +170,31 @@
       <div>
         <h2>Parking</h2>
         <ul>
-        {% if court.parking.onsite %}
+          {% if court.parking.onsite %}
           <li>{{ court.parking.onsite }}</li>
-        {% endif %}
-        {% if court.parking.offsite %}
+          {% endif %}
+          {% if court.parking.offsite %}
           <li>{{ court.parking.offsite }}</li>
-        {% endif %}
-        {% if court.parking.blue_badge %}
+          {% endif %}
+          {% if court.parking.blue_badge %}
           <li>{{ court.parking.blue_badge }}</li>
-        {% endif %}
+          {% endif %}
         </ul>
       </div>
       {% endif %}
-
-      {% if court.number or court.dx_number %}
-      <div id="pros">
-        <h2>Legal professionals</h2>
-        <dl>
-        {% if court.number %}
-          <dt>Court/tribunal no.</dt>
-          <dd>{{ court.number }}</dd>
-        {% endif %}
-        {% if court.dx_number %}
-          <dt><abbr title="document exchange">DX</abbr>:</dt>
-          <dd>{{ court.dx_number }}</dd>
-        {% endif %}
-        </dl>
-      </div>
-      {% endif %}
     </div>
-
 
     <div id="areas_of_law">
       {% if court.areas_of_law %}
       <h2>Areas of law covered</h2>
       <ul>
         {% for aol in court.areas_of_law %}
-        <li>{{ aol }}</li>
+          {% if aol.external_link %}
+            <li><a href={{aol.display_url}} title="{{aol.external_link_desc}}">
+              <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
+          {% else %}
+            <li>{{ aol.name }}</li>
+          {% endif %}
         {% endfor %}
       </ul>
       {% endif %}

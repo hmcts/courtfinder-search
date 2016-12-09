@@ -93,6 +93,7 @@ def court(request, slug):
         'aol': request.GET.get('aol','All'),
         'spoe': request.GET.get('spoe', None),
         'postcode': request.GET.get('postcode',''),
+        'courtcode': request.GET.get('courtcode', False),
     })
 
 def list_format_courts(courts):
