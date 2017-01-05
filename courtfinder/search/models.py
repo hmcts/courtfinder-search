@@ -1,3 +1,4 @@
+import urllib
 from django.db import models
 from datetime import datetime
 
@@ -58,9 +59,14 @@ class CourtPostcode(models.Model):
 
 class AreaOfLaw(models.Model):
     name = models.CharField(max_length=255)
+    external_link = models.CharField(null=True, max_length=2048)
+    external_link_desc = models.CharField(null=True, max_length=255)
 
+    def display_url(self): 
+        return urllib.unquote(self.external_link)
+    
     def __unicode__(self):
-        return self.name
+        return "%s: %s %s" % (self.name,  self.external_link, self.external_link_desc)
 
     class Meta:
         ordering = ("name",)

@@ -360,6 +360,7 @@ $small-width: 800px;
   }
 
   #pros {
+    clear: both;
     dt {
       float: left;
       padding-right: .3em;
@@ -400,4 +401,12 @@ p.warning {
   margin: .5em auto;
   width: auto;
   max-width: 960px;
+}
+
+.screen_reader_hide{
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
 }

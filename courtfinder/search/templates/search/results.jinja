@@ -9,7 +9,11 @@
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
     {% if query %}
-    <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
+      {% if courtcode_search == True %}
+        <li><a href="{% url 'search:courtcode' %}">Search by Court code</a></li>
+      {% else %}
+        <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
+      {% endif %}
     {% else %}
     <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
     {% if spoe %}
@@ -74,7 +78,7 @@
             <span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span><br/>
             {% endif %}
             {% if court.number %}
-              <span class="court-result-heading">Court number:</span> <span>{{ court.number }}</span>
+              <span class="court-result-heading">Court code:</span> <span>{{ court.number }}</span>
             {% endif %}
           </p>
         </div>
@@ -83,7 +87,12 @@
           <p class="court-result-heading">Areas of law covered:</p>
           <ul>
           {% for aol in court.areas_of_law %}
-            <li>{{ aol.name }}</li>
+            {% if aol.external_link %}
+              <li><a href="{{aol.display_url}}" title="{{aol.external_link_desc}}">
+              <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
+            {% else %}
+              <li>{{ aol.name }}</li>
+            {% endif %}
           {% endfor %}
           </ul>
           {% endif %}
@@ -107,9 +116,13 @@
         </div>
         <p class="clear">
           {% if query %}
-          <a class="more-details-link" href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
+            {% if courtcode_search == True %}
+              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?courtcode={{ query }}">More details about {{ court.name }}</a>
+            {% else %}
+              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
+            {% endif %}
           {% else %}
-          <a class="more-details-link" href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
+            <a class="more-details-link" href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
           {% endif %}
         </p>
         <hr class="clear"/>

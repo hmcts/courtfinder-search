@@ -11,6 +11,7 @@ from django.views.defaults import bad_request
 from search.models import Court, AreaOfLaw, DataStatus
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
+from urlparse import urlparse
 
 areas_of_law_description = {
     "Adoption": "applying to adopt a child.",
@@ -72,24 +73,45 @@ def address(request):
     query = request.GET.get('q', None)
     return render(request, 'search/address.jinja', {'error': error, 'query':query})
 
+def courtcode(request):
+    error = request.GET.get('error', None)
+    courtcode = request.GET.get('courtcode', None)
+    return render(request, 'search/courtcode.jinja', {'error': error, 'courtcode' : courtcode})
+
 def results(request):
     query = request.GET.get('q', None)
+    courtcode = request.GET.get('courtcode', None)
+    
+    if courtcode is not None:
+        courtcode = re.sub(r'\s+',' ',courtcode.strip())
+        if courtcode == '':
+            return redirect(reverse('search:courtcode')+'?error=noquery')
+        else:
+            results = CourtSearch(query=courtcode, courtcode_search=True).get_courts()
 
-    if query is not None:
+            if len(results) > 0:
+                return render(request, 'search/results.jinja', {
+                    'query': courtcode,
+                    'courtcode_search': True,
+                    'search_results': __format_results(results)
+                })
+            else:
+                return redirect(reverse('search:courtcode')+'?error=noresults&q='+courtcode)
+    elif query is not None:
         query = re.sub(r'\s+',' ',query.strip())
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
-            results = CourtSearch(query=query).get_courts()
+            results = CourtSearch(query=query, courtcode_search=False).get_courts()
 
             if len(results) > 0:
                 return render(request, 'search/results.jinja', {
                     'query': query,
+                    'courtcode_search': False,
                     'search_results': __format_results(results)
                 })
             else:
                 return redirect(reverse('search:address')+'?error=noresults&q='+query)
-
     else:
         aol = request.GET.get('aol', 'All')
         spoe = request.GET.get('spoe', None)
