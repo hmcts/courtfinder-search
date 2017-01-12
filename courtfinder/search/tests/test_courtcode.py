@@ -13,13 +13,7 @@ class CourtCodeTestCase(TestCase):
         Ingest.courts(json.loads(courts_json_1))
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
-    def tearDown(self):
-        pass
-
     def test_non_existing(self):
-        """
-        Only numerics
-        """
         c = Client()
 
         response = c.get('/search/results?courtcode=123', follow=True)
@@ -28,9 +22,6 @@ class CourtCodeTestCase(TestCase):
         self.assertIn('validation-error', response.content)
 
     def test_exists(self):
-        """
-        Only numerics
-        """
         c = Client()
 
         response = c.get('/search/results?courtcode=1725', follow=True)
