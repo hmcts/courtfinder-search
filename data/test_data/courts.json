@@ -5,14 +5,16 @@
                 "county": "Lancashire",
                 "type": "Visiting",
                 "postcode": "BB5 2BH",
-                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road"
+                "address": "East Lancashire Magistrates' Court\\nThe Law Courts\\nManchester Road",
+                "number": 1725
             },
             {
                 "town": "Blackburn",
                 "county": "Lancashire",
                 "type": "Postal",
                 "postcode": "BB2 1AA",
-                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate\\t\\n"
+                "address": "Accrington Magistrates' Court\\nThe Court House \\nNorthgate\\t\\n",
+                "number": 1726
             }
         ],
         "admin_id": 2800,
