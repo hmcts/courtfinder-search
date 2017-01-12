@@ -66,7 +66,7 @@ class AreaOfLaw(models.Model):
         return urllib.unquote(self.external_link)
     
     def __unicode__(self):
-        return "%s: %s %s" % (self.name,  self.external_link, self.external_link_desc)
+        return self.name
 
     class Meta:
         ordering = ("name",)
