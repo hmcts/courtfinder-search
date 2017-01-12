@@ -16,7 +16,11 @@
 </div>
 <div id="postcode-page" class="content inner cf">
   <header class="page-header">
-    <h1>Enter postcode</h1>
+    {% if aol == 'Housing possession' %}
+      <h1>Housing Possession</h1>
+    {% else %}
+      <h1>Enter postcode</h1>
+    {% endif %}
   </header>
   {% if error == 'nopostcode' %}
   <div class="group">
@@ -49,10 +53,10 @@
           Enter the postcode where the child (or children) lives.
           {% elif aol == 'Housing possession' %}
           <p>
-            <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">start a possession claim online</a>.
+            <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">Start a Possession claim online</a>.
           </p>
 
-          Enter the postcode of the property.
+          Or enter postcode of property to find nearest court.
           {% elif aol == 'Money claims' %}
           <p>
             <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Making a money claim online</a> is cheaper and submitting it takes 30 minutes.
