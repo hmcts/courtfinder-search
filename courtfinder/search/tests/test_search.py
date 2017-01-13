@@ -261,8 +261,12 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(cat), "cat")
         ca = CourtAttribute.objects.create(court=court, attribute_type=cat, value="cav")
         self.assertEqual(str(ca), "Accrington Magistrates' Court.cat = cav")
-        aol = AreaOfLaw.objects.create(name="Divorce")
+        aol = AreaOfLaw.objects.create(name="Divorce",
+                                        external_link="http://www.gov.uk/child-adoption",
+                                        external_link_desc="More information on adoption.")
         self.assertEqual(str(aol), "Divorce")
+        self.assertEqual(str(aol.external_link), "http://www.gov.uk/child-adoption")
+        self.assertEqual(str(aol.external_link_desc), "More information on adoption.")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
         self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
         town = Town.objects.create(name="Hobbittown", county="Shire")

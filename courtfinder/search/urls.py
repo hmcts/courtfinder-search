@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^results$', views.results, name='results'),
 
     url(r'^address$', views.address, name='address'),
+    url(r'^courtcode$', views.courtcode, name='courtcode'),
 
     url(r'^results.json$', views.results_json, name='api-results'),
     url(r'^datastatus$', views.data_status, name='data-status'),

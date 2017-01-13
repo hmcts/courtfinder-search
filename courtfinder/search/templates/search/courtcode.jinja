@@ -1,0 +1,44 @@
+{% extends "layout/base.jinja" %}
+
+{% block page_title %}Search by Court code{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+  </ol>
+</div>
+<div id="search-index-page" class="content inner cf">
+  <header class="page-header">
+    <h1>Search by Court code</h1>
+  </header>
+  <div class="group">
+    {% if error == 'noquery' %}
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>You did not enter a search term. Please try again.</p>
+    </section>
+    {% elif error == 'noresults' %}
+    <section class="validation-error">
+      <h2>Error</h2>
+      <p>Sorry, there are no results for {{ query }}. Please check and try another name or address.</p>
+    </section>
+    {% endif %}
+    <form method="get" action="results">
+      <fieldset class="form-group">
+        <label for="address" class="form-block">
+          <div class="form-hint">Enter one of the following</div>
+          <ul class="form-hint">
+            <li>Court code</li>
+          </ul>
+          <input id="courtcode" class="form-control" type="text" name="courtcode" autofocus/>
+        </label>
+      </fieldset>
+      <div class="actions">
+        <button id="continue" class="button" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
