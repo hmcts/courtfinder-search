@@ -37,7 +37,8 @@
   </header>
   {% if not court.displayed %}
   <div class="alert">
-    <p>This court or tribunal is no longer in service.</p>
+    <p>This court or tribunal is no longer in service. Business has been transferred to other neighbouring courts.</p>
+    <p><a href="{% url 'search:postcode' %}">Please use the postcode lookup facility to find your alternative court</a></p>
   </div>
   {% else %}
   <div>
