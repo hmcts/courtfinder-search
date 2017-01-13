@@ -42,7 +42,7 @@ class SearchTestCase(TestCase):
         response = c.get('/search/spoe?aol=Children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('About your issue', response.content)
+        self.assertIn('Children', response.content)
 
     def test_spoe_page_without_spoe(self):
         c = Client()
@@ -321,3 +321,24 @@ class SearchTestCase(TestCase):
         response = c.get('/search/datastatus')
         self.assertEqual(200, response.status_code)
         self.assertIn('415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a', response.content)
+
+    def test_employment_venues_link_displays_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE154UH&aol=Employment')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm"', response.content)
+
+    def test_social_security_and_child_support_venues_link_displays_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE154UH')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
+
+    def test_non_social_security_child_support_employment_area_of_law_search_results_for_no_venue_links(self):
+        c = Client()
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SE154UH')
+        self.assertEqual(200, response.status_code)
+        self.assertNotIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
+        self.assertNotIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+        
+

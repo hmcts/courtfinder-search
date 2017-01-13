@@ -27,7 +27,6 @@
   <header class="page-header">
     <h1>Search results</h1>
   </header>
-
   {% if search_results %}
   <div class="search-results">
     {% if query %}
@@ -51,6 +50,14 @@
       {% if in_scotland %}
     <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
       {% endif %}
+    {% endif %}
+    {% if aol == "Social security" or aol == "Children"%}
+      <p>Some tribunal hearings may take place at other venues.</p>
+      <p><a href="http://sscs.venues.tribunals.gov.uk/venues/venues.htm">Social Security and Child Support Tribunal Venues</a><p>
+    {% endif %}
+    {% if aol == "Employment" %}
+      <p>Some tribunal hearings may take place at other venues.</p>
+      <p><a href="https://www.gov.uk/guidance/employment-tribunal-offices-and-venues">Employment Tribunal Venues</a><p>
     {% endif %}
     <hr/>
     <ul id='court-results'>
