@@ -38,7 +38,10 @@ def aol(request):
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
     aol = request.GET.get('aol', 'All')
     for area in areas_of_law:
-        area.description = areas_of_law_description[area.name]
+        try:
+            area.description = areas_of_law_description[area.name]
+        except KeyError:
+            pass
     return render(request, 'search/aol.jinja', {
         'areas_of_law': areas_of_law, 'aol': aol,
     })
