@@ -16,6 +16,8 @@
       <h1>Children</h1>
     {% elif aol == 'Divorce' %}
       <h1>About your Divorce</h1>
+      {% elif aol == 'Money claims' %}
+      <h1>About your money claim</h1>
     {% else %}
       <h1>About your issue</h1>
     {% endif %}
@@ -30,13 +32,15 @@
         {% elif aol == 'Divorce' %}
           <div class="form-label">I want to start proceedings</div>
         {% else %}
-          <div class="form-label">I want to start a new claim</div>
+          <div class="form-label">about to start a new claim</div>
         {% endif %}
       </label>
       <label for="spoe-continue" class="block-label form-block">
         <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
         {% if aol == 'Children' or aol == 'Divorce'%}
         <div class="form-label">I am already in contact with a court</div>
+        {% elif aol == 'Money claims' %}
+          <div class="form-label">already have a claim</div>
         {% else %}
         <div class="form-label">already in contact with a court or tribunal</div>
         {% endif %}

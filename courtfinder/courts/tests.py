@@ -89,3 +89,9 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/old-court-no-longer-in-use')
         self.assertEquals(200, response.status_code)
         self.assertIn('This court or tribunal is no longer in service.',response.content)
+
+    def test_courts_cases_heard(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Cases heard at this venue', response.content)

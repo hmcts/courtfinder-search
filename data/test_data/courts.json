@@ -124,6 +124,18 @@
             {
                 "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Divorce"
+            },
+            {
+                "local_authorities": [],
+                "name": "Employment"
+            },
+            {
+                "local_authorities": [],
+                "name": "Children"
+            },
+            {
+                "local_authorities": [ "Southwark Borough Council" ],
+                "name": "Bankruptcy"
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",

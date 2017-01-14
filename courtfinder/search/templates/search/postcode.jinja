@@ -18,6 +18,12 @@
   <header class="page-header">
     {% if aol == 'Housing possession' %}
       <h1>Housing Possession</h1>
+    {% elif aol == 'Money claims' %}
+        {% if spoe == 'start' %}
+            <h1>For a new claim :-</h1>
+        {% else %}
+          <h1>For an existing claim :-</h1>
+        {% endif %}
     {% else %}
       <h1>Enter postcode</h1>
     {% endif %}
@@ -49,27 +55,59 @@
     <div class="form-block">
       <label for="postcode">
         <div class="form-hint">
-          {% if aol == 'Children' %}
-          Enter the postcode where the child (or children) lives.
-          {% elif aol == 'Housing possession' %}
-          <p>
-            <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">Start a Possession claim online</a>.
-          </p>
-
-          Or enter postcode of property to find nearest court.
-          {% elif aol == 'Money claims' %}
-          <p>
-            <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Making a money claim online</a> is cheaper and submitting it takes 30 minutes.
-          </p>
+          {% if aol == 'Money claims' %}
+            {% if spoe == 'start'%}
+                <div>
+                    <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Making a money claim online</a> is cheaper and submitting it takes 30 minutes.
+                </div>
+                <div class="indent2em">
+                    or
+                </div>
+                <div>
+                    <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">Contact the County Court Money Claims Centre (CCMCC)</a>
+                </div>
+            {% else %}
+                <div class='existingMoneyClaim'>
+                    That was previously entered online
+                    <div>
+                        <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Go to the Online Money Claim Service</a>
+                    </div>
+                </div>
+                <div class='existingMoneyClaim'>
+                    That was previously completed on paper
+                    <div>
+                        <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">Contact the County Court Money Claims Centre (CCMCC)</a>
+                    </div>
+                </div>
+                <div class="existingMoneyClaim">
+                    If you know a local court is dealing with your claim
+                    <div>
+                        <a href="{% url 'courts:list' %}">Go to the A-Z list of courts</a>
+                    </div>
+                </div>
+            {% endif %}    
           {% else %}
-          Enter your postcode.
+              {% if aol == 'Children' %}
+                Enter the postcode where the child (or children) lives.
+              {% elif aol == 'Housing possession' %}
+                <p>
+                  <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">Start a Possession claim online</a>.
+                </p>
+                Or enter postcode of property to find nearest court.
+              {% else %}
+                Enter your postcode.
+              {% endif %}
+            </div>
+            {% if aol == 'Divorce' %}
+              <div class='form-hint'>You will be directed to your Regional Divorce Centre.</div>
+            {% endif %}
+            <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
+            <div class="actions">
+              <button id="continue" class="button" type="submit">Continue</button>
+            </div>
           {% endif %}
         </div>
-        <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
       </label>
-    </div>
-    <div class="actions">
-      <button id="continue" class="button" type="submit">Continue</button>
     </div>
   </form>
 </div>
