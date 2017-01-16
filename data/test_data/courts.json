@@ -134,7 +134,7 @@
                 "name": "Children"
             },
             {
-                "local_authorities": [],
+                "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Bankruptcy"
             },
             {
@@ -281,6 +281,7 @@
         "contacts": [],
         "postcodes": []
     },
+
     {
         "name": "Some old closed court",
         "slug": "old-court-no-longer-in-use",
