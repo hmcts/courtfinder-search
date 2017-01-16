@@ -148,6 +148,12 @@
                 "name": "Bankruptcy",
                 "external_link_desc": "More information on bankruptcy.",
                 "external_link": "https://www.gov.uk/bankruptcy"
+            },
+            {
+                "local_authorities": [],
+                "name": "Social security"
+                "external_link_desc": null,
+                "external_link": null
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",
