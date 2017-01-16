@@ -124,6 +124,22 @@
             {
                 "local_authorities": [ "Southwark Borough Council" ],
                 "name": "Divorce"
+            },
+            {
+                "local_authorities": [],
+                "name": "Employment"
+            },
+            {
+                "local_authorities": [],
+                "name": "Children"
+            },
+            {
+                "local_authorities": [],
+                "name": "Bankruptcy"
+            },
+            {
+                "local_authorities": [],
+                "name": "Social security"
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",
@@ -265,7 +281,6 @@
         "contacts": [],
         "postcodes": []
     },
-
     {
         "name": "Some old closed court",
         "slug": "old-court-no-longer-in-use",
