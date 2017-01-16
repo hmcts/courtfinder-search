@@ -115,27 +115,39 @@
         "areas_of_law": [
             {
                 "local_authorities": [],
-                "name": "Crime"
+                "name": "Crime",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Immigration"
+                "name": "Immigration",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [ "Southwark Borough Council" ],
-                "name": "Divorce"
+                "name": "Divorce",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Employment"
+                "name": "Employment",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Children"
+                "name": "Children",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [ "Southwark Borough Council" ],
-                "name": "Bankruptcy"
+                "name": "Bankruptcy",
+                "external_link_desc": "More information on bankruptcy.",
+                "external_link": "https://www.gov.uk/bankruptcy"
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",
@@ -247,7 +259,9 @@
         "areas_of_law": [
             {
                 "local_authorities": [],
-                "name": "Crime"
+                "name": "Crime",
+                "external_link_desc": null,
+                "external_link": null
             }
         ],
         "image_file": "tameside_magistrates_court.jpg",
@@ -267,7 +281,9 @@
         "admin_id": "3456543",
         "display": true,
         "court_number": "123456",
-        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims",
+                "external_link_desc": null,
+                "external_link": null } ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
         "addresses": [],
@@ -286,7 +302,9 @@
         "admin_id": "34565433",
         "display": false,
         "court_number": "1232456",
-        "areas_of_law": [ { "local_authorities": [], "name": "Money claims" } ],
+        "areas_of_law": [ { "local_authorities": [], "name": "Money claims",
+                "external_link_desc": null,
+                "external_link": null } ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
         "addresses": [],
