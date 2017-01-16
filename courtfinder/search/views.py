@@ -4,7 +4,7 @@ import re
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponseRedirect
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.defaults import bad_request
 
@@ -34,6 +34,17 @@ areas_of_law_description = {
 
 def index(request):
     return render(request, 'search/index.jinja')
+
+def searchby(request):
+    url = 'search:'
+    searchby = request.GET.get('searchby')
+
+    if searchby == 'list':
+        url = 'courts:'
+    
+    url = url + searchby
+    return HttpResponseRedirect(reverse(url))
+
 
 def aol(request):
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')

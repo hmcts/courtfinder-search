@@ -75,7 +75,10 @@ $small-width: 800px;
   .main-option {
     @include media($min-width: $small-width) {
       float: left;
-      width: 40%;
+      ul li {
+        list-style: none;
+        margin-left: 2.5em;
+      }
     }
   }
 
