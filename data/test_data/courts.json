@@ -115,31 +115,39 @@
         "areas_of_law": [
             {
                 "local_authorities": [],
-                "name": "Crime"
+                "name": "Crime",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Immigration"
+                "name": "Immigration",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [ "Southwark Borough Council" ],
-                "name": "Divorce"
+                "name": "Divorce",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Employment"
+                "name": "Employment",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [],
-                "name": "Children"
+                "name": "Children",
+                "external_link_desc": null,
+                "external_link": null
             },
             {
                 "local_authorities": [ "Southwark Borough Council" ],
-                "name": "Bankruptcy"
-            },
-            {
-                "local_authorities": [],
-                "name": "Social security"
+                "name": "Bankruptcy",
+                "external_link_desc": "More information on bankruptcy.",
+                "external_link": "https://www.gov.uk/bankruptcy"
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",

@@ -70,9 +70,12 @@ class Ingest:
                 aol_slug = aol_obj.get('slug', slugify(aol_name))
                 aol_las = aol_obj['local_authorities']
                 aol_spoe = aol_obj.get('single_point_of_entry',False)
+                aol_external_link = aol_obj['external_link']
+                aol_external_link_desc = aol_obj['external_link_desc']
 
                 try:
-                    aol, created = AreaOfLaw.objects.db_manager(database_name).get_or_create(name=aol_name)
+                    aol, created = AreaOfLaw.objects.db_manager(database_name).get_or_create(name=aol_name,
+                        external_link=aol_external_link,external_link_desc=aol_external_link_desc)
                     CourtAreaOfLaw.objects.db_manager(database_name).create(court=court,
                                                 area_of_law=aol,
                                                 single_point_of_entry=aol_spoe)
