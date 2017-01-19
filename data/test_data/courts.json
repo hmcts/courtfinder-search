@@ -139,7 +139,8 @@
             }
         ],
         "image_file": "accrington_magistrates_court.jpg",
-        "display": true
+        "display": true,
+        "info": "<p>Test information on Accrington</>",
     },
     {
         "addresses": [
@@ -257,7 +258,8 @@
           "onsite": "On site parking is not available at this venue.",
           "offsite": "Paid off site parking is available.",
           "blue_badge": "Blue badge parking is available on site."
-        }
+        },
+        "info": "<p>Test information on Tameside</>",        
     },
     {
         "name": "County Court Money Claims Centre (CCMCC)",
@@ -275,7 +277,8 @@
         "facilities": [],
         "opening_times": [],
         "contacts": [],
-        "postcodes": []
+        "postcodes": [],
+        "info": null,        
     },
 
     {
@@ -294,6 +297,7 @@
         "facilities": [],
         "opening_times": [],
         "contacts": [],
-        "postcodes": []
+        "postcodes": [],
+        "info": null,        
     }
 ]
