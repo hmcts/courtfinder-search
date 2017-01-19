@@ -25,6 +25,7 @@ class Court(models.Model):
     cci_code = models.CharField(max_length=255, null=True, default=None)
     updated_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(null=True, default=None)
+    info = models.TextField(null=True)
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)

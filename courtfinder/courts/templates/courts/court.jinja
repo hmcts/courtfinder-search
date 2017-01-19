@@ -184,6 +184,14 @@
         </ul>
       </div>
       {% endif %}
+
+      {% if court.info %}
+        <div>
+          <h2>Further Information</h2>
+          <p>{{ court.info|safe }}</p>
+        </div>
+      {% endif %}
+
     </div>
 
     <div id="areas_of_law">
