@@ -8,21 +8,26 @@
   <ol role="breadcrumbs" class="group">
     <li><a href="{% url 'staticpages:home' %}">Home</a></li>
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
-    {% if query %}
-    <li><a href="{% url 'search:results' %}">Search by name of address</a></li>
-    <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
+    {% if query or courtcode %} 
+      {% if query %} 
+        <li><a href="{% url 'search:address' %}">Search by name of address</a></li>
+        <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
+      {% elif courtcode %}
+        <li><a href="{% url 'search:courtcode' %}">Search by Court code</a></li>
+        <li><a href="{% url 'search:results' %}?courtcode={{ courtcode }}">Search results</a></li>
+      {% endif %}
     {% elif postcode %}
-    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
-    {%   if spoe %}
-    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
-    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
-    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
-    {%   else %}
-    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
-    <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
-    {%   endif %}
+      <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+      {% if spoe %}
+        <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
+      {%   else %}
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
+      {% endif %}
     {% else %}
-    <li><a href="{% url 'courts:list' %}">Courts list</a></li>
+      <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
     {% endif %}
   </ol>
 </div>
@@ -66,7 +71,20 @@
         {{ court.postal_address.county }}<br/>
         {% endif %}
         {{ court.postal_address.postcode }}
-
+      </div>
+      {% endif %}
+      {% if court.number or court.dx_number %}
+      <div id="pros">
+        <dl>
+          {% if court.number %}
+          <dt>Court/tribunal no.</dt>
+          <dd>{{ court.number }}</dd>
+          {% endif %}
+          {% if court.dx_number %}
+          <dt><abbr title="document exchange">DX</abbr>:</dt>
+          <dd>{{ court.dx_number }}</dd>
+          {% endif %}
+        </dl>
       </div>
       {% endif %}
     </div>
@@ -164,31 +182,19 @@
         </ul>
       </div>
       {% endif %}
-
-      {% if court.number or court.dx_number %}
-      <div id="pros">
-        <h2>Legal professionals</h2>
-        <dl>
-        {% if court.number %}
-          <dt>Court/tribunal no.</dt>
-          <dd>{{ court.number }}</dd>
-        {% endif %}
-        {% if court.dx_number %}
-          <dt><abbr title="document exchange">DX</abbr>:</dt>
-          <dd>{{ court.dx_number }}</dd>
-        {% endif %}
-        </dl>
-      </div>
-      {% endif %}
     </div>
-
 
     <div id="areas_of_law">
       {% if court.areas_of_law %}
       <h2>Areas of law covered</h2>
       <ul>
         {% for aol in court.areas_of_law %}
-        <li>{{ aol }}</li>
+          {% if aol.external_link %}
+            <li><a href={{aol.display_url}} title="{{aol.external_link_desc}}">
+              <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
+          {% else %}
+            <li>{{ aol.name }}</li>
+          {% endif %}
         {% endfor %}
       </ul>
       {% endif %}
