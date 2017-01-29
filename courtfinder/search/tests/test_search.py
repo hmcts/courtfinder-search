@@ -454,31 +454,9 @@ class SearchTestCase(TestCase):
         
     def test_gov_uk_links_exist(self):
         
-        try:
-            aol = AreaOfLaw.objects.get(name="Bankruptcy")
-            c = Client()
-            response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
-            self.assertEqual(200, response.status_code)
-            self.assertIn('https://www.gov.uk/bankruptcy', response.content)
-            self.assertIn('More information on bankruptcy.', response.content)
-        except AreaOfLaw.DoesNotExist:
-            c = Client()
-            response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
-            self.assertEqual(400, response.status_code)
-            self.assertNotIn('https://www.gov.uk/bankruptcy', response.content)
-            self.assertNotIn('More information on bankruptcy.', response.content)
-
-    def test_gov_uk_links_not_exist(self):
-        try:
-            aol = AreaOfLaw.objects.get(name="Adoption")
-            c = Client()
-            response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
-            self.assertEqual(200, response.status_code)
-            self.assertIn('https://www.gov.uk/child-adoption', response.content)
-            self.assertIn('More information on adoption.', response.content)
-        except AreaOfLaw.DoesNotExist:
-            c = Client()
-            response = c.get('/search/results?aol=Adoption&postcode=SW1H9AJ')
-            self.assertEqual(400, response.status_code)
-            self.assertNotIn('https://www.gov.uk/child-adoption', response.content)
-            self.assertNotIn('More information on adoption.', response.content)
+        aol = AreaOfLaw.objects.get(name="Bankruptcy")
+        c = Client()
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('https://www.gov.uk/bankruptcy', response.content)
+        self.assertIn('More information on bankruptcy.', response.content)

@@ -1,8 +1,8 @@
 import json
 from django.test import TestCase, Client
-from search.models import *
 from django.conf import settings
 from search.ingest import Ingest
+from search.models import DataStatus
 
 
 class CourtCodeTestCase(TestCase):

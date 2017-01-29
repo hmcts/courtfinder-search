@@ -51,7 +51,7 @@ def aol(request):
     aol = request.GET.get('aol', 'All')
     for area in areas_of_law:
         try:
-            area.description = areas_of_law_description[area.name]
+            area.description = areas_of_law_description.get(area.name, None)
         except KeyError:
             pass
     return render(request, 'search/aol.jinja', {

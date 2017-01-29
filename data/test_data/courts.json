@@ -289,8 +289,14 @@
         "admin_id": "3456543",
         "display": true,
         "court_number": "123456",
-        "areas_of_law": [ { "local_authorities": [], "name": "Money claims", "external_link_desc": null,
-                "external_link": null } ],
+        "areas_of_law": [ 
+            {
+                "local_authorities": [], 
+                "name": "Money claims",
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
         "addresses": [],
@@ -299,7 +305,7 @@
         "opening_times": [],
         "contacts": [],
         "postcodes": [],
-        "info": null      
+        "info": null        
     },
 
     {
@@ -310,8 +316,14 @@
         "admin_id": "34565433",
         "display": false,
         "court_number": "1232456",
-        "areas_of_law": [ { "local_authorities": [], "name": "Money claims", "external_link_desc": null,
-                "external_link": null } ],
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
         "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
         "attributes": [],
         "addresses": [],
@@ -320,6 +332,6 @@
         "opening_times": [],
         "contacts": [],
         "postcodes": [],
-        "info": null     
+        "info": null        
     }
 ]
