@@ -4,7 +4,6 @@ from django.conf import settings
 from search.ingest import Ingest
 from search.models import DataStatus
 
-
 class CourtCodeTestCase(TestCase):
 
     def setUp(self):

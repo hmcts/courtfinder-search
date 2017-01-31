@@ -216,7 +216,6 @@ class CourtSearch:
 
         return results
 
-
 class Postcode():
 
     def __init__( self, postcode ):
