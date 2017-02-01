@@ -27,7 +27,6 @@
   <header class="page-header">
     <h1>Search results</h1>
   </header>
-
   {% if search_results %}
   <div class="search-results">
     {% if query %}
@@ -51,6 +50,14 @@
       {% if in_scotland %}
     <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
       {% endif %}
+    {% endif %}
+    {% if aol == "Social security" or aol == "Children"%}
+      <p>Some tribunal hearings may take place at other venues.</p>
+      <p><a href="http://sscs.venues.tribunals.gov.uk/venues/venues.htm">Social Security and Child Support Tribunal Venues</a><p>
+    {% endif %}
+    {% if aol == "Employment" %}
+      <p>Some tribunal hearings may take place at other venues.</p>
+      <p><a href="https://www.gov.uk/guidance/employment-tribunal-offices-and-venues">Employment Tribunal Venues</a><p>
     {% endif %}
     <hr/>
     <ul id='court-results'>
@@ -84,7 +91,7 @@
         </div>
         <div class="court-aol">
           {% if court.areas_of_law %}
-          <p class="court-result-heading">Areas of law covered:</p>
+          <p class="court-result-heading">Cases heard at this venue</p>
           <ul>
           {% for aol in court.areas_of_law %}
             {% if aol.external_link %}
@@ -97,23 +104,7 @@
           </ul>
           {% endif %}
         </div>
-        <div class="court-map">
-          <p class="court-result-heading">Find us here:</p>
-          {% if court.distance %}
-          <p class="distance-from-postcode">{{ court.distance }} miles away</p>
-          {% endif %}
-          <p>
-            {% if court.lat != None and court.lon != None %}
-            <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
-              <img src="https://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
-            </a>
-          {% else %}
-            <a target="_blank" href="https://maps.google.com/maps?q={{ court.address.postcode }}+{{ court.address.town }}+UK">
-              <img src="https://maps.googleapis.com/maps/api/staticmap?size=290x235&zoom=15&markers={{ court.address.postcode }}+{{ court.address.town }}+UK&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
-            </a>
-            <br/>
-          {% endif %}
-        </div>
+        
         <p class="clear">
           {% if query %}
             {% if courtcode_search == True %}

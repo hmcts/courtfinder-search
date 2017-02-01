@@ -12,18 +12,38 @@
 </div>
 <div id="spoe-page" class="content inner cf">
   <header class="page-header">
-    <h1>About your issue</h1>
+    {% if aol == 'Children' %}
+      <h1>Children</h1>
+    {% elif aol == 'Divorce' %}
+      <h1>About your Divorce</h1>
+      {% elif aol == 'Money claims' %}
+      <h1>About your money claim</h1>
+    {% else %}
+      <h1>About your issue</h1>
+    {% endif %}
   </header>
   <form method="get" action="{% url 'search:postcode' %}">
     <div class="form-block">
       <input type="hidden" name="aol" value="{{ aol }}"/>
       <label for="spoe-start" class="block-label form-block">
         <input id="spoe-start" type="radio" name="spoe" value="start" {% if spoe == 'start' %}checked{% endif %}/>
-        <div class="form-label">about to start a new claim</div>
+        {% if aol == 'Children' %}
+          <div class="form-label">I want to start new proceedings</div>
+        {% elif aol == 'Divorce' %}
+          <div class="form-label">I want to start proceedings</div>
+        {% else %}
+          <div class="form-label">about to start a new claim</div>
+        {% endif %}
       </label>
       <label for="spoe-continue" class="block-label form-block">
         <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
+        {% if aol == 'Children' or aol == 'Divorce'%}
+        <div class="form-label">I am already in contact with a court</div>
+        {% elif aol == 'Money claims' %}
+          <div class="form-label">already have a claim</div>
+        {% else %}
         <div class="form-label">already in contact with a court or tribunal</div>
+        {% endif %}
       </label>
     </div>
     <div class="actions">

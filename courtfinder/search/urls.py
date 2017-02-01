@@ -3,6 +3,7 @@ from search import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='search'),
+    url(r'^searchby$', views.searchby, name='searchby'),
     url(r'^aol$', views.aol, name='aol'),
     url(r'^spoe$', views.spoe, name='spoe'),
     url(r'^postcode$', views.postcode, name='postcode'),

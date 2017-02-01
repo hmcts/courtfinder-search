@@ -75,7 +75,10 @@ $small-width: 800px;
   .main-option {
     @include media($min-width: $small-width) {
       float: left;
-      width: 40%;
+      ul li {
+        list-style: none;
+        margin-left: 2.5em;
+      }
     }
   }
 
@@ -103,7 +106,7 @@ $small-width: 800px;
 
 .court-aol {
   @include media($min-width: $small-width) {
-    float: left;
+    float: right;
     width: 30%;
     box-sizing: border-box;
     padding-left: 1em;
@@ -303,7 +306,7 @@ $small-width: 800px;
     }
   }
 
-  #areas_of_law {
+  #areas_of_law, #useful_links {
     h2 {
       border-top: 10px solid #005EA5;
     }
@@ -409,4 +412,11 @@ p.warning {
   position: absolute;
   overflow: hidden;
   top: -10px;
+}
+
+.existingMoneyClaim{
+  margin-bottom: 1em;
+  div{
+    text-indent: 2em;
+  }
 }

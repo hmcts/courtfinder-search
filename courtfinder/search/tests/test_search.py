@@ -42,12 +42,61 @@ class SearchTestCase(TestCase):
         response = c.get('/search/spoe?aol=Children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('About your issue', response.content)
+        self.assertIn('<h1>Children</h1>', response.content)
+
+    def test_spoe_page_with_children_start_proceedings(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Children')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('I want to start new proceedings', response.content)
+
+    def test_spoe_page_with_children_in_contact(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Children')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('I am already in contact', response.content)
+
+    def test_spoe_page_with_has_spoe_Divorce(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('<h1>About your Divorce</h1>', response.content)
+
+    def test_spoe_page_with_divorce_proceedings(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('I want to start proceedings', response.content)
+
+    def test_spoe_page_with_divorce_in_contact(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Divorce')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/spoe.jinja')
+        self.assertIn('I am already in contact with a court', response.content)
+
+    def test_spoe_page_with_divorce_postcode_start(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Divorce&spoe=start')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+        self.assertIn('You will be directed to your Regional Divorce Centre.', response.content)
+
+    def test_spoe_page_with_divorce_postcode_continue(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Divorce&spoe=continue')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+        self.assertIn('You will be directed to your Regional Divorce Centre.', response.content)
 
     def test_spoe_page_without_spoe(self):
         c = Client()
         response = c.get('/search/spoe?aol=Crime', follow=True)
-        self.assertInHTML('<h1>Enter postcode</h1>', response.content)
+        self.assertIn('<h1>Enter postcode</h1>', response.content)
 
     def test_distance_search(self):
         c = Client()
@@ -70,10 +119,23 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?aol=Crime&postcode=')
         self.assertRedirects(response, '/search/postcode?error=nopostcode&aol=Crime', 302)
 
+    def test_results_cases_heard(self):
+        c = Client()
+        response = c.get('/search/results?q=Accrington')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Cases heard at this venue', response.content)
+
     def test_sample_postcode_all_aols(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&aol=All')
         self.assertEqual(response.status_code, 200)
+
+    def test_postcode_aol_Housing(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Housing possession')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+        self.assertIn('<h1>Housing Possession</h1>', response.content)
 
     def test_sample_postcode_specific_aol(self):
         c = Client()
@@ -237,6 +299,49 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=sw1h9aj&spoe=start&aol=Money+claims')
         self.assertIn("CCMCC", response.content)
 
+    def test_money_claims_heading(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Money claims')
+        self.assertIn('<h1>About your money claim</h1>', response.content)
+
+    def test_money_claims_landing_page_option2(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Money claims')
+        self.assertIn('already have a claim', response.content)
+
+    def test_money_claims_new_claim(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=start')
+        self.assertIn('<h1>For a new claim :-</h1>', response.content)
+
+    def test_money_claims_new_claim_ccmcc(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=start')
+        self.assertIn('courts/county-court-money-claims-centre-ccmcc', response.content)
+
+    def test_money_claims_existing(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=continue')
+        self.assertIn('<h1>For an existing claim :-</h1>', response.content)
+
+    def test_money_claims_existing_online(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=continue')
+        self.assertIn('That was previously entered online', response.content)
+        self.assertIn('https://www.gov.uk/make-money-claim-online', response.content)
+
+    def test_money_claims_existing_paper(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=continue')
+        self.assertIn('That was previously completed on paper', response.content)
+        self.assertIn('/courts/county-court-money-claims-centre-ccmcc', response.content)
+
+    def test_money_claims_existing_court_known(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=continue')
+        self.assertIn('If you know a local court is dealing with your claim', response.content)
+        self.assertIn('/courts/', response.content)
+
     def test_ni_immigration(self):
         c = Client()
         response = c.get('/search/results?postcode=bt2&aol=Immigration', follow=True)
@@ -321,3 +426,37 @@ class SearchTestCase(TestCase):
         response = c.get('/search/datastatus')
         self.assertEqual(200, response.status_code)
         self.assertIn('415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a', response.content)
+
+    def test_employment_venues_link_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?postcode=SE15&aol=Employment')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
+
+    def test_child_support_venues_link_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE15')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+
+    def test_social_security_venues_link_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?aol=Social+security&postcode=SE15')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+
+    def test_for_no_venue_links(self):
+        c = Client()
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SE15')
+        self.assertEqual(200, response.status_code)
+        self.assertNotIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
+        self.assertNotIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+        
+    def test_gov_uk_links_exist(self):
+        
+        aol = AreaOfLaw.objects.get(name="Bankruptcy")
+        c = Client()
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('https://www.gov.uk/bankruptcy', response.content)
+        self.assertIn('More information on bankruptcy.', response.content)

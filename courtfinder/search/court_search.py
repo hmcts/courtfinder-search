@@ -64,7 +64,7 @@ class CourtSearch:
             numberRE = re.compile('^[0-9]{3,4}$')
             courtNumber = numberRE.match(self.query)
 
-            if self.courtcode_search == True: #courtNumber:    
+            if self.courtcode_search:    
                 return self.__court_number_search(self.query)
             else:
                 return self.__address_search(self.query)
@@ -209,13 +209,12 @@ class CourtSearch:
         word_separator = re.compile(r'[^\w]+', re.UNICODE)
         query_regex = ''.join(map(lambda word: "(?=.*\y"+word+"\y)", re.split(word_separator, query)))
 
-        court_number_results =  sorted(Court.objects.filter(number__iregex=query_regex))
+        court_number_results = Court.objects.filter(number__iregex=query_regex, displayed='True').order_by("name")
 
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(court_number_results)))
 
-        return [result for result in results if result.displayed]
-
+        return results
 
 class Postcode():
 
