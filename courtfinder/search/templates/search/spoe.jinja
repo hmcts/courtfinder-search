@@ -22,7 +22,7 @@
       <h1>About your issue</h1>
     {% endif %}
   </header>
-  <form method="get" action="{% url 'search:postcode' %}">
+  <form method="get" action="{% url 'search:searchbyPostcodeOrCourtList' %}">
     <div class="form-block">
       <input type="hidden" name="aol" value="{{ aol }}"/>
       <label for="spoe-start" class="block-label form-block">

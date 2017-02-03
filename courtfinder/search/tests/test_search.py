@@ -58,6 +58,20 @@ class SearchTestCase(TestCase):
         self.assertTemplateUsed(response, 'search/spoe.jinja')
         self.assertIn('I am already in contact', response.content)
 
+    def test_spoe_page_with_children_in_contact_search_courts(self):
+        c = Client()
+        response = c.get('/search/searchbyPostcodeOrCourtList?aol=Children&spoe=continue', follow=True)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertEqual(status_code, 302)
+        self.assertTemplateUsed(response, 'courts/list.jinja')
+
+    def test_spoe_page_with_children_start_search_postcode(self):
+        c = Client()
+        response = c.get('/search/searchbyPostcodeOrCourtList?aol=Children&spoe=start', follow=True)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertEqual(status_code, 302)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+
     def test_spoe_page_with_has_spoe_Divorce(self):
         c = Client()
         response = c.get('/search/spoe?aol=Divorce')
@@ -92,6 +106,21 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
         self.assertIn('You will be directed to your Regional Divorce Centre.', response.content)
+
+    def test_spoe_page_with_divorce_in_contact_search_courts(self):
+        c = Client()
+        response = c.get('/search/searchbyPostcodeOrCourtList?aol=Divorce&spoe=continue', follow=True)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertEqual(status_code, 302)
+        self.assertTemplateUsed(response, 'courts/list.jinja')
+
+    def test_spoe_page_with_divorce_start_search_postcode(self):
+        c = Client()
+        response = c.get('/search/searchbyPostcodeOrCourtList?aol=Divorce&spoe=start', follow=True)
+        last_url, status_code = response.redirect_chain[-1]
+        self.assertEqual(status_code, 302)
+        self.assertTemplateUsed(response, 'search/postcode.jinja')
+
 
     def test_spoe_page_without_spoe(self):
         c = Client()

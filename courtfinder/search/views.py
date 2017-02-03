@@ -1,6 +1,6 @@
 import json
-import decimal
 import re
+from urllib import urlencode
 
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
@@ -44,6 +44,17 @@ def searchby(request):
     
     url = url + searchby
     return HttpResponseRedirect(reverse(url))
+
+def searchbyPostcodeOrCourtList(request):
+    url = 'search:postcode'
+    aol = request.GET.get('aol')
+
+    if (aol == 'Children' or aol == 'Divorce') and request.GET.get('spoe') == 'continue':
+        url = 'courts:list'
+    
+    url = "%s?%s" % (reverse(url), urlencode(request.GET))
+
+    return HttpResponseRedirect(url)
 
 
 def aol(request):
