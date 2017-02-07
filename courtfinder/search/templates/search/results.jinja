@@ -64,6 +64,11 @@
       {% for court in search_results %}
       <li>
         <h2>{{ court.name }}</h2>
+        {% if court.displayed == False %}
+        <section class="closedCourt">
+        <h3>This court or tribunal is no longer in service. Business has been transferred to other neighbouring courts.</h3>
+        </section>
+        {% endif %}
         <div class="court-addresses">
           <p>
             <span class="court-result-heading">Write to us:</span><br/>
@@ -127,3 +132,4 @@
 {% block javascripts %}
     <script src='{% static "javascripts/application.js" %}'></script>
 {% endblock %}
+

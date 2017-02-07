@@ -177,17 +177,10 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('your browser sent a request',response.content)
 
-
     def test_inactive_court(self):
-        court = Court.objects.create(
-            name="Example2 Court",
-            lat=0.0,
-            lon=0.0,
-            displayed=False,
-        )
         c = Client()
-        response = c.get('/search/results?q=Example2+Court', follow=True)
-        self.assertIn('validation-error', response.content)
+        response = c.get('/search/results?q=Some+old+closed+court', follow=True)
+        self.assertIn('closedCourt', response.content)
 
     def test_substring_should_not_match(self):
         c = Client()

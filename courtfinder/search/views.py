@@ -245,7 +245,8 @@ def __format_results(results):
                   'slug': result.slug,
                   'types': sorted([court_type.court_type.name for court_type in result.courtcourttype_set.all()]),
                   'address': visible_address,
-                  'areas_of_law': areas_of_law }
+                  'areas_of_law': areas_of_law,
+                  'displayed' : result.displayed}
         dx_contacts = result.courtcontact_set.filter(contact__name='DX')
         if dx_contacts.count() > 0:
             court['dx_number'] = dx_contacts.first().contact.number
