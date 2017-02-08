@@ -333,5 +333,31 @@
         "contacts": [],
         "postcodes": [],
         "info": null        
+    },
+    {
+        "name": "Some old open court",
+        "slug": "old-open-court-still-in-use",
+        "lat": "2",
+        "lon": "2",
+        "admin_id": "34569433",
+        "display": true,
+        "court_number": "1235456",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "spam@test.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null        
     }
 ]
