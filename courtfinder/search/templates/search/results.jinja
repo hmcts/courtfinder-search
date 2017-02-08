@@ -31,7 +31,7 @@
   <div class="search-results">
     {% if query %}
     <p class="text-secondary">
-      <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
+      <span id="number-of-results">{{ open_court_count }}</span> result{{ open_court_count|pluralize }}
     </p>
     {% else %}
     {%   if spoe %}
@@ -62,13 +62,9 @@
     <hr/>
     <ul id='court-results'>
       {% for court in search_results %}
+      {% if court.displayed %}
       <li>
         <h2>{{ court.name }}</h2>
-        {% if court.displayed == False %}
-        <section class="closedCourt">
-        <h3>This court or tribunal is no longer in service. Business has been transferred to other neighbouring courts.</h3>
-        </section>
-        {% endif %}
         <div class="court-addresses">
           <p>
             <span class="court-result-heading">Write to us:</span><br/>
@@ -123,6 +119,7 @@
         </p>
         <hr class="clear"/>
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </div>

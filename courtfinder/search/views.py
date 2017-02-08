@@ -115,10 +115,12 @@ def results(request):
             results = CourtSearch(query=courtcode, courtcode_search=True).get_courts()
 
             if len(results) > 0:
+                open_court_count = sum(1 for result in results if result.displayed)
                 return render(request, 'search/results.jinja', {
                     'query': courtcode,
                     'courtcode_search': True,
-                    'search_results': __format_results(results)
+                    'search_results': __format_results(results),
+                    'open_court_count': open_court_count
                 })
             else:
                 return redirect(reverse('search:courtcode')+'?error=noresults&q='+courtcode)
@@ -127,13 +129,18 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
+            
             results = CourtSearch(query=query, courtcode_search=False).get_courts()
 
-            if len(results) > 0:
+            if len(results) == 1 and results[0].displayed == False:
+                return redirect(reverse('courts:court', kwargs={'slug': results[0].slug}) + '?q=' + query)
+            elif len(results) > 0:
+                open_court_count = sum(1 for result in results if result.displayed)
                 return render(request, 'search/results.jinja', {
                     'query': query,
                     'courtcode_search': False,
-                    'search_results': __format_results(results)
+                    'search_results': __format_results(results),
+                    'open_court_count': open_court_count
                 })
             else:
                 return redirect(reverse('search:address')+'?error=noresults&q='+query)

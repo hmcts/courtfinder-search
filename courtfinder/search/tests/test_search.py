@@ -177,10 +177,15 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('your browser sent a request',response.content)
 
-    def test_inactive_court(self):
+    def test_inactive_court_is_not_displaying_in_address_search_results(self):
+        c = Client()
+        response = c.get('/search/results?q=Some+old', follow=True)
+        self.assertIn('<span id="number-of-results">1</span>', response.content)
+
+    def test_address_search_single_inactive_court_result_redirects_to_closed_court(self):
         c = Client()
         response = c.get('/search/results?q=Some+old+closed+court', follow=True)
-        self.assertIn('closedCourt', response.content)
+        self.assertIn('alert', response.content)
 
     def test_substring_should_not_match(self):
         c = Client()
