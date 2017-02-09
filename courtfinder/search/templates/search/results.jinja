@@ -31,7 +31,7 @@
   <div class="search-results">
     {% if query %}
     <p class="text-secondary">
-      <span id="number-of-results">{{ search_results|length }}</span> result{{ search_results|length|pluralize }}
+      <span id="number-of-results">{{ open_court_count }}</span> result{{ open_court_count|pluralize }}
     </p>
     {% else %}
     {%   if spoe %}
@@ -62,6 +62,7 @@
     <hr/>
     <ul id='court-results'>
       {% for court in search_results %}
+      {% if court.displayed %}
       <li>
         <h2>{{ court.name }}</h2>
         <div class="court-addresses">
@@ -118,6 +119,7 @@
         </p>
         <hr class="clear"/>
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </div>
@@ -127,3 +129,4 @@
 {% block javascripts %}
     <script src='{% static "javascripts/application.js" %}'></script>
 {% endblock %}
+

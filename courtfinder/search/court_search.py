@@ -196,7 +196,7 @@ class CourtSearch:
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(name_results, town_results, address_results, county_results)))
 
-        return [result for result in results if result.displayed]
+        return [result for result in results]
 
     def __court_number_search( self, query ):
         """

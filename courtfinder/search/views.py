@@ -115,10 +115,12 @@ def results(request):
             results = CourtSearch(query=courtcode, courtcode_search=True).get_courts()
 
             if len(results) > 0:
+                open_court_count = sum(1 for result in results if result.displayed)
                 return render(request, 'search/results.jinja', {
                     'query': courtcode,
                     'courtcode_search': True,
-                    'search_results': __format_results(results)
+                    'search_results': __format_results(results),
+                    'open_court_count': open_court_count
                 })
             else:
                 return redirect(reverse('search:courtcode')+'?error=noresults&q='+courtcode)
@@ -127,13 +129,18 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
+            
             results = CourtSearch(query=query, courtcode_search=False).get_courts()
 
-            if len(results) > 0:
+            if len(results) == 1 and results[0].displayed == False:
+                return redirect(reverse('courts:court', kwargs={'slug': results[0].slug}) + '?q=' + query)
+            elif len(results) > 0:
+                open_court_count = sum(1 for result in results if result.displayed)
                 return render(request, 'search/results.jinja', {
                     'query': query,
                     'courtcode_search': False,
-                    'search_results': __format_results(results)
+                    'search_results': __format_results(results),
+                    'open_court_count': open_court_count
                 })
             else:
                 return redirect(reverse('search:address')+'?error=noresults&q='+query)
@@ -245,7 +252,8 @@ def __format_results(results):
                   'slug': result.slug,
                   'types': sorted([court_type.court_type.name for court_type in result.courtcourttype_set.all()]),
                   'address': visible_address,
-                  'areas_of_law': areas_of_law }
+                  'areas_of_law': areas_of_law,
+                  'displayed' : result.displayed}
         dx_contacts = result.courtcontact_set.filter(contact__name='DX')
         if dx_contacts.count() > 0:
             court['dx_number'] = dx_contacts.first().contact.number
