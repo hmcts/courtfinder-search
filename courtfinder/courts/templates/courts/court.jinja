@@ -13,7 +13,7 @@
         <li><a href="{% url 'search:address' %}">Search by name of address</a></li>
         <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
       {% elif courtcode %}
-        <li><a href="{% url 'search:courtcode' %}">Search by Court code</a></li>
+        <li><a href="{% url 'search:courtcode' %}">Search by Court location code</a></li>
         <li><a href="{% url 'search:results' %}?courtcode={{ courtcode }}">Search results</a></li>
       {% endif %}
     {% elif postcode %}
@@ -78,7 +78,7 @@
       <div id="pros">
         <dl>
           {% if court.number %}
-          <dt>Court/tribunal no.</dt>
+          <dt>Court location/tribunal no.</dt>
           <dd>{{ court.number }}</dd>
           {% endif %}
           {% if court.dx_number %}
