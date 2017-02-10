@@ -73,7 +73,8 @@ def format_court(court):
                   'directions': court.directions if court.directions else None,
                   'alert': court.alert if court.alert and court.alert.strip() != '' else None,
                   'parking': court.parking or None,
-                  'info': court.info}
+                  'info': court.info,
+                  'hide_aols': court.hide_aols}
 
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
