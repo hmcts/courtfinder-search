@@ -90,22 +90,25 @@
             {% endif %}
           </p>
         </div>
-        <div class="court-aol">
-          {% if court.areas_of_law %}
-          <p class="court-result-heading">Cases heard at this venue</p>
-          <ul>
-          {% for aol in court.areas_of_law %}
-            {% if aol.external_link %}
-              <li><a href="{{aol.display_url}}" title="{{aol.external_link_desc}}">
-              <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
-            {% else %}
-              <li>{{ aol.name }}</li>
+
+        {% if court.hide_aols == False %}
+          <div class="court-aol">
+            {% if court.areas_of_law %}
+            <p class="court-result-heading">Cases heard at this venue</p>
+            <ul>
+            {% for aol in court.areas_of_law %}
+              {% if aol.external_link %}
+                <li><a href="{{aol.display_url}}" title="{{aol.external_link_desc}}">
+                <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
+              {% else %}
+                <li>{{ aol.name }}</li>
+              {% endif %}
+            {% endfor %}
+            </ul>
             {% endif %}
-          {% endfor %}
-          </ul>
-          {% endif %}
-        </div>
-        
+          </div>
+        {% endif %}
+         
         <p class="clear">
           {% if query %}
             {% if courtcode_search == True %}

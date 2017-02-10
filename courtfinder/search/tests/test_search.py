@@ -148,12 +148,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?aol=Crime&postcode=')
         self.assertRedirects(response, '/search/postcode?error=nopostcode&aol=Crime', 302)
 
-    def test_results_cases_heard(self):
-        c = Client()
-        response = c.get('/search/results?q=Accrington')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('Cases heard at this venue', response.content)
-
     def test_sample_postcode_all_aols(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&aol=All')
@@ -480,10 +474,21 @@ class SearchTestCase(TestCase):
         self.assertNotIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
         
     def test_gov_uk_links_exist(self):
-        
-        aol = AreaOfLaw.objects.get(name="Bankruptcy")
+        #Cannot use Accrington as it has AoLs hidden
         c = Client()
-        response = c.get('/search/results?aol=Bankruptcy&postcode=SW1H9AJ')
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SA79RB')
         self.assertEqual(200, response.status_code)
         self.assertIn('https://www.gov.uk/bankruptcy', response.content)
         self.assertIn('More information on bankruptcy.', response.content)
+
+    def test_courts_cases_heard_hide_aols(self):
+        c = Client()
+        response = c.get('/search/results?q=Accrington+Magistrates')
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('Cases heard at this venue', response.content)
+
+    def test_courts_cases_heard_show_aols(self):
+        c = Client()
+        response = c.get('/search/results?q=Tameside+Magistrates')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Cases heard at this venue', response.content)

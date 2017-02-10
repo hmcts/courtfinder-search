@@ -1,3 +1,4 @@
+import pprint
 import requests
 import json
 import re
@@ -90,8 +91,14 @@ class SearchTestCase(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertIn('This court or tribunal is no longer in service.',response.content)
 
-    def test_courts_cases_heard(self):
+    def test_courts_cases_heard_hide_aols(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('Cases heard at this venue', response.content)
+
+    def test_courts_cases_heard_show_aols(self):
+        c = Client()
+        response = c.get('/courts/tameside-magistrates-court')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Cases heard at this venue', response.content)

@@ -1,4 +1,5 @@
-[    {
+[    
+    {
         "addresses": [
             {
                 "town": "Accrington",
@@ -76,7 +77,6 @@
             "Magistrates Court"
         ],
         "name": "Accrington Magistrates' Court",
-        "display": true,
         "contacts": [
             {
                 "sort": 2,
@@ -158,7 +158,8 @@
         ],
         "image_file": "accrington_magistrates_court.jpg",
         "display": true,
-        "info": "<p>Test information on Accrington</>"
+        "info": "<p>Test information on Accrington</>",
+        "hide_aols": true
     },
     {
         "addresses": [
@@ -279,7 +280,8 @@
           "offsite": "Paid off site parking is available.",
           "blue_badge": "Blue badge parking is available on site."
         },
-        "info": "<p>Test information on Tameside</>"        
+        "info": "<p>Test information on Tameside</>",
+        "hide_aols": false       
     },
     {
         "name": "County Court Money Claims Centre (CCMCC)",
@@ -305,7 +307,8 @@
         "opening_times": [],
         "contacts": [],
         "postcodes": [],
-        "info": null        
+        "info": null,
+        "hide_aols": false        
     },
 
     {
@@ -332,7 +335,8 @@
         "opening_times": [],
         "contacts": [],
         "postcodes": [],
-        "info": null        
+        "info": null,
+        "hide_aols": false        
     },
     {
         "name": "Some old open court",
@@ -358,6 +362,40 @@
         "opening_times": [],
         "contacts": [],
         "postcodes": [],
-        "info": null        
+        "info": null,
+        "hide_aols": false        
+    },
+    {
+        "name": "Hide AoLs",
+        "slug": "Hide_AoLs",
+        "lat": "2",
+        "lon": "2",
+        "admin_id": "12121212",
+        "display": true,
+        "court_number": "1235456",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            },
+            {
+                "local_authorities": [],
+                "name": "Bankruptcy",
+                "external_link_desc": "More information on bankruptcy.",
+                "external_link": "https://www.gov.uk/bankruptcy"
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "spam@test.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": ["SA79RB"],
+        "info": null,
+        "hide_aols": false        
     }
 ]
