@@ -10,7 +10,7 @@
     <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
     {% if query %}
       {% if courtcode_search == True %}
-        <li><a href="{% url 'search:courtcode' %}">Search by Court code</a></li>
+        <li><a href="{% url 'search:courtcode' %}">Search by Court location code</a></li>
       {% else %}
         <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
       {% endif %}
@@ -86,7 +86,7 @@
             <span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span><br/>
             {% endif %}
             {% if court.number %}
-              <span class="court-result-heading">Court code:</span> <span>{{ court.number }}</span>
+              <span class="court-result-heading">Court location code:</span> <span>{{ court.number }}</span>
             {% endif %}
           </p>
         </div>
