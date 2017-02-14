@@ -74,7 +74,11 @@ def format_court(court):
                   'alert': court.alert if court.alert and court.alert.strip() != '' else None,
                   'parking': court.parking or None,
                   'info': court.info,
-                  'hide_aols': court.hide_aols}
+                  'hide_aols': court.hide_aols,
+                  'info_leaflet': court.info_leaflet,
+                  'juror_leaflet': court.juror_leaflet,
+                  'defence_leaflet': court.defence_leaflet,
+                  'prosecution_leaflet': court.prosecution_leaflet}
 
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
@@ -97,6 +101,26 @@ def court(request, slug):
         'postcode': request.GET.get('postcode',''),
         'courtcode': request.GET.get('courtcode', False),
     })
+
+def information_leaflet(request, slug):
+    try:
+        the_court = Court.objects.get(slug=slug)
+    except Court.DoesNotExist:
+        raise Http404
+
+    return render(request, 'courts/information_leaflet.jinja', {
+        'court': format_court(the_court)
+    })
+
+def prosecution_leaflet(court):
+    return
+
+def defence_leaflet(court):
+    return
+
+def juror_leaflet(court):
+    return
+
 
 def list_format_courts(courts):
     return [{'name':court.name,

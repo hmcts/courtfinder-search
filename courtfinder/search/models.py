@@ -27,6 +27,11 @@ class Court(models.Model):
     created_at = models.DateTimeField(null=True, default=None)
     info = models.TextField(null=True)
     hide_aols = models.BooleanField(null=False, default=False)
+    info_leaflet = models.CharField(max_length=2500, null=True, default=None)
+    defence_leaflet = models.CharField(max_length=2500, null=True, default=None)
+    prosecution_leaflet = models.CharField(max_length=2500, null=True, default=None)
+    juror_leaflet = models.CharField(max_length=2500, null=True, default=None)
+
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
