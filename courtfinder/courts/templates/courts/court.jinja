@@ -217,6 +217,10 @@
       <br/>
       <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure">Make a complaint</a>
     </div>
+    <div id="leaflets">
+    <h2>Venue details:</h2>
+      <a href={% url 'courts:information_leaflet' court.slug%} title='Venue details for printing'>Venue details</a>
+    </div>
   </div>
   {% endif %}
   <div id="last_update">
