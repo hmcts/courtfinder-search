@@ -1,6 +1,6 @@
 @media print{
 
-	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner
+	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner, #global-header
 	{
 		display:none;
 	}
@@ -10,9 +10,13 @@
 			background-color: #c5c5c5 !important;
 			padding: 0 !important;
 		}
+
 	}
 	@page{
-		margin:2em;
+		margin:0;
 	}
 
+	.content.inner{
+		margin:2em 2em;
+	}
 }
