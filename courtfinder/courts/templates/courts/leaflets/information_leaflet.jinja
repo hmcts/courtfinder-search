@@ -3,10 +3,12 @@
 
 {% block stylesheets %}
     <!--[if gt IE 8]><!-->
-        <link href="{% static 'stylesheets/main.css' %}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{% static 'stylesheets/main.css' %}" rel="stylesheet" type="text/css" />
     <!--<![endif]-->
     <!--[if gt IE 8]><!-->
-        <link href="{% static 'stylesheets/leaflets.css' %}" media="screen" rel="stylesheet" type="text/css" />
+        <link href="{% static 'stylesheets/leaflets.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static 'stylesheets/leaflet-print.css' %}" media="print" rel="stylesheet" type="text/css" />
     <!--<![endif]-->
 {% endblock %}
 
@@ -19,7 +21,19 @@
 
     <div class="content inner">
         <div id='leaflet'>
-            <a href="javascript:window.print()">print this leaflet</a>
+            
+            <div id="leaflet-header">
+                <div id="logo">
+                    <h1>HM Courts &amp; Tribunals Service</h1> 
+                </div>
+                    <div id="leaflet-title">
+                        <h1>Local Information Ex104</h1>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+            <a class="button"href="javascript:window.print()">print this leaflet</a>
+
             {% include "courts/leaflets/_court.jinja" %}
             {% include "courts/leaflets/_contacts.jinja" %}
             {% include "courts/leaflets/_email.jinja" %}

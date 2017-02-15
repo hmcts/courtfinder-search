@@ -1,0 +1,18 @@
+@media print{
+
+	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner
+	{
+		display:none;
+	}
+
+	#leaflet{
+		h2{
+			background-color: #c5c5c5 !important;
+			padding: 0 !important;
+		}
+	}
+	@page{
+		margin:2em;
+	}
+
+}

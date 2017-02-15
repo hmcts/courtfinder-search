@@ -19,6 +19,9 @@
 }
 
 #leaflet{
+  #logo h1:before{
+    content:url(/assets/images/crests/org_crest_27px_x2.png);
+  }
   h2{
     background-color: #c5c5c5;
     padding: .5em;
@@ -51,4 +54,14 @@
       }
     }
   }
+}
+
+@media print{
+  #global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner
+  {
+    display:none;
+  }
+
+
+
 }
