@@ -22,6 +22,18 @@
   #logo h1:before{
     content:url(/assets/images/crests/org_crest_27px_x2.png);
   }
+  #header{
+    #logo{
+      float: left;
+      width: 50%;
+    }
+    #title{
+      float: left;
+      width: 50%;
+    }
+    @include clearfix
+  }
+
   h2{
     background-color: #c5c5c5;
     padding: .5em;
@@ -33,6 +45,9 @@
     #photo{
       float: left;
       width: 30%;
+    }
+    li{
+      list-style: none;
     }
     #address{
       float: right;
@@ -65,12 +80,4 @@
   }
 }
 
-@media print{
-  #global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner
-  {
-    display:none;
-  }
 
-
-
-}
