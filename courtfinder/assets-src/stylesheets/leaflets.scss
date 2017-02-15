@@ -44,6 +44,15 @@
   #contacts, #email, #opening_times, #facilities{
     @include leaflet_list;
     @include clearfix;
+    ul li .facility{
+      float: right;
+      width: 87%;
+    }
+    .icon{
+      float: none;
+      height: 50px;
+      width: 50px;
+    }
   }
   #additional{
     ol {
