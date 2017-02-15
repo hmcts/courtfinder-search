@@ -1,7 +1,54 @@
-#visiting.leaflet{
-  float: left;
-  width: 100%;
-  h1{
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin leaflet_list{
+  ul{
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    li{
+      list-style: none;
+      word-wrap: break-word;
+    }
+  }
+}
+
+#leaflet{
+  h2{
     background-color: #c5c5c5;
+    padding: .5em;
+  }
+  div{
+        width: 100%;
+  }
+  #court{
+    #photo{
+      float: left;
+      width: 30%;
+    }
+    #address{
+      float: right;
+      text-align: left;
+      width: 60%;
+    }
+    @include clearfix;
+  }
+  #contacts, #email, #opening_times, #facilities{
+    @include leaflet_list;
+    @include clearfix;
+  }
+  #additional{
+    ol {
+      padding-left: 1em;
+      li{
+      list-style: disc outside none;
+      margin-left: 1em;
+      }
+    }
   }
 }

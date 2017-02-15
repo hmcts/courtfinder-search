@@ -1,0 +1,20 @@
+{% load static %}
+<div id='contacts'>
+  <h2>Contacts</h2>
+  <ul>
+    <li>
+      {% for contact in court.contacts %}
+        {% if contact.name != 'DX' %}
+        <li property="contactPoint" typeof="ContactPoint">
+          {% if contact.name != '' %}
+            <span property="contactType">{{ contact.name }}</span>:&nbsp;
+          {% endif %}
+          {% for number in contact.numbers %}
+            <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+          {% endfor %}
+        </li>
+        {% endif %}
+      {% endfor %}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+{% load static %}
+<div id='email'>
+  <h2>Email</h2>
+  <ul>
+    {% for email in court.emails %}
+      <li property="contactPoint" typeof="ContactPoint">
+        {% if email.description != '' %}
+          <span property="contactType">{{ email.description }}</span>:&nbsp;
+        {% endif %}
+        {% for address in email.addresses %}
+          <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+        {% endfor %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

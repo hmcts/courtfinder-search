@@ -1,0 +1,10 @@
+{% load static %}
+<div id='info'>
+  <h2>Further help</h2>
+  <p>
+    Please see www.justice.gov.uk for further details regarding {{court.name}}
+  </p>
+  {% if court.info_leaflet %}
+    <p>{{court.info_leaflet}}</p>
+  {% endif %}
+</div>

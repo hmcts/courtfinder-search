@@ -1,0 +1,17 @@
+{% load static %}
+<div id='opening_times'>
+  <h2>Opening times</h2>
+  {% if court.opening_times %}
+  <ul>
+    {% for opening_time in court.opening_times %}
+      <li>
+        <time property="openingHours">{{ opening_time.description }}</time>
+      </li>
+    {% endfor %}
+  {% endif %}
+  </ul>
+  <p>
+    The court waiting area is open to court users at least 30 minutes before the first hearing. Please arrive in
+    sufficient time to allow any security checks to be carried out.
+  </p>
+</div>

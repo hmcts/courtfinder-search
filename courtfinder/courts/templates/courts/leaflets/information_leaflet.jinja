@@ -18,12 +18,17 @@
     {% include "courts/leaflets/_breadcrumb.jinja" %}
 
     <div class="content inner">
-        <header class="page-header">
-            <h1>{{ court.name }}</h1>
-        </header>
-        <br>
-        <a href="javascript:window.print()">print this leaflet</a>
-        {% include "courts/leaflets/_court.jinja" %}
+        <div id='leaflet'>
+            <a href="javascript:window.print()">print this leaflet</a>
+            {% include "courts/leaflets/_court.jinja" %}
+            {% include "courts/leaflets/_contacts.jinja" %}
+            {% include "courts/leaflets/_email.jinja" %}
+            {% include "courts/leaflets/_opening.jinja" %}
+            {% include "courts/leaflets/_facilities.jinja" %}
+            {% include "courts/leaflets/_help.jinja" %}
+            {% include "courts/leaflets/_additional.jinja" %}
+            {% include "courts/leaflets/_info.jinja" %}
+        </div>
     </div>
 
 {% endblock %}
