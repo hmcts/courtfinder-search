@@ -5,25 +5,23 @@
 	}
 	#leaflet{
 		h2{
-			background-color: #c5c5c5;
-			border: 1px solid #c5c5c5;
+			background-color: #005ea5;
+			border: 1px solid #005ea5;
 			padding: 0.5em;
-			color: #000;
+			color: #FFF;
 			margin-top: 10px;
 		}
 	}
 	@page 
     {
         size:  auto;   /* auto is the initial value */
-        margin: 0mm;  /* this affects the margin in the printer settings */
+        margin: 2.5em;  /* this affects the margin in the printer settings */
     }
 
 	div {
   		page-break-inside: avoid;
 	}
-	.content.inner{
-		margin:2.5em;
-	}
+	
 	@font-face {
   		font-family: GDS-Logo;
   		src: local("HelveticaNeue"), local("Helvetica Neue"), local("Arial"), local("Helvetica"); 
