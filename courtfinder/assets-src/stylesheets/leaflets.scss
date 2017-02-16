@@ -19,17 +19,34 @@
 }
 
 #leaflet{
-  #logo h1:before{
-    content:url(/assets/images/crests/org_crest_27px_x2.png);
-  }
+  
   #header{
     #logo{
-      float: left;
-      width: 50%;
+      #crest{
+        &:before{
+        content:url(/assets/images/crests/org_crest_27px_x2.png);
+        }
+        float: left;
+      }
+      #hmcts{
+        float: left;
+        padding-left: 15px;
+        padding-top: 29px;
+        padding-bottom: 0px;
+        width: 182px;
+        border-left: 2px solid #000;
+        margin-left: 13px;
+      }
+      
+      float:left;
     }
     #title{
-      float: left;
+      h1{
+        padding-top: 29px;
+      }
+      float: right;
       width: 50%;
+      text-align:right;
     }
     @include clearfix
   }
@@ -37,9 +54,6 @@
   h2{
     background-color: #c5c5c5;
     padding: .5em;
-  }
-  div{
-        width: 100%;
   }
   #court{
     #photo{
