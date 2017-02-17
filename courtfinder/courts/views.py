@@ -124,8 +124,10 @@ def leaflet (request, slug, leaflet_type):
         })
 
     if leaflet_type == 'juror_information':
+        court =  format_court(the_court)
         return render(request, 'courts/leaflets/juror_leaflet.jinja', {
-          'court': format_court(the_court)
+          'court': court,
+          'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
         })
     return #not sure what to return here
 
