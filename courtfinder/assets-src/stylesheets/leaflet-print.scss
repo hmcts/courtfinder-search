@@ -6,12 +6,14 @@
 	#leaflet{
 		h2{
       background-color: unset;
-      box-shadow: inset 0 0 0 1000px #c5c5c5;
+      box-shadow: inset 0 0 0 1000px #005ea5;
+      color: unset;
+      color: white !important;
 
-			border: 1px solid #c5c5c5;
+			border: 1px solid #005ea5;
 			padding: 0.5em;
-			color: #000;
 			margin-top: 10px;
+      -webkit-print-color-adjust: exact;
 		}
 	}
 	@page 
