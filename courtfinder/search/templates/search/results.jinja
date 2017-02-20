@@ -91,10 +91,13 @@
           </p>
         </div>
 
-        {% if court.hide_aols == False %}
-          <div class="court-aol">
-            {% if court.areas_of_law %}
-            <p class="court-result-heading">Cases heard at this venue</p>
+        <div class="court-aol">
+          {% if court.areas_of_law %}
+            {% if court.hide_aols %}
+              <p class="court-result-heading">More information...</p>
+            {% else %}
+              <p class="court-result-heading">Cases heard at this venue</p>
+            {% endif %}
             <ul>
             {% for aol in court.areas_of_law %}
               {% if aol.external_link %}
@@ -105,10 +108,9 @@
               {% endif %}
             {% endfor %}
             </ul>
-            {% endif %}
-          </div>
-        {% endif %}
-         
+          {% endif %}
+        </div>
+        
         <p class="clear">
           {% if query %}
             {% if courtcode_search == True %}
