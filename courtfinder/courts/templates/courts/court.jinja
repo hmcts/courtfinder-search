@@ -117,35 +117,40 @@
       <div id="contacts">
         {% if court.emails %}
         <h2>Email</h2>
-        <ul>
           {% for email in court.emails %}
-          <li property="contactPoint" typeof="ContactPoint">
-            {% if email.description != '' %}
-            <span property="contactType">{{ email.description }}</span>:&nbsp;
-            {% endif %}
+          <div class="email-label" property="contactPoint" typeof="ContactPoint">
+          {% if email.description != '' %}
+            <span class="label-pad" property="contactType" typeof="ContactPoint">{{email.description}}:</span>
+          {% endif %}
+          </div>
+          <div class="email-addresses">
             {% for address in email.addresses %}
-              <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+              <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<br>{% endif %}
             {% endfor %}
-          </li>
+          </div>
+          <div class="spacer"></div>
           {% endfor %}
-        </ul>
         {% endif %}
         {% if court.contacts %}
         <h2>Phone numbers</h2>
-        <ul>
           {% for contact in court.contacts %}
           {% if contact.name != 'DX' %}
-            <li property="contactPoint" typeof="ContactPoint">
+            <div class="phone-label" property="contactPoint" typeof="ContactPoint">
               {% if contact.name != '' %}
-              <span property="contactType">{{ contact.name }}</span>:&nbsp;
+                <span class="label-pad" property="contactType">{{ contact.name }}:</span>
+                {% if contact.explanation != None %}
+                  <br>({{ contact.explanation }})
+                {% endif %}
               {% endif %}
+            </div>
+            <div class="phone-number">  
               {% for number in contact.numbers %}
-                <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+                <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<br>{% endif %}
               {% endfor %}
-            </li>
+            </div>
           {% endif %}
+           <div class="spacer"></div>
           {% endfor %}
-        </ul>
         {% endif %}
       </div>
 

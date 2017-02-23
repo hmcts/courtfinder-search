@@ -102,3 +102,8 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/tameside-magistrates-court')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Cases heard at this venue', response.content)
+
+    def test_contact_show_explanation(self):
+        c = Client()
+        response = c.get('/courts/old-open-court-still-in-use')
+        self.assertIn('Test explanation', response.content)
