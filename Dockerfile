@@ -13,7 +13,11 @@ RUN apt-get clean \
         nodejs-legacy \
         libpq-dev \
         libnet-amazon-s3-tools-perl \
-        git
+        git \
+        build-essential \
+        libssl-dev \
+        libffi-dev
+
 RUN pip install uWSGI==2.0.8
 
 COPY /docker/. /
@@ -22,6 +26,7 @@ COPY ./package.json /srv/additional_files/package.json
 RUN bash /setup_npm.sh; 
 RUN useradd -m -d /srv/search search
 
+RUN pip install pip --upgrade
 COPY ./requirements/base.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
