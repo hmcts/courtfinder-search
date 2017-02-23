@@ -1,9 +1,10 @@
+six==1.8.0
 Django==1.7.3
 MarkupSafe==0.23
 newrelic==2.34.0.29
 django-moj-template==0.23.1
 psycopg2==2.5.3
-requests[security]==2.3.0
+requests[security]==2.7.0
 boto==2.29.1
 boto3==1.2.3
 python-dateutil==2.2
