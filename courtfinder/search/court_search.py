@@ -258,7 +258,7 @@ class Postcode():
         else:
             mapit_url = settings.MAPIT_BASE_URL + 'partial/' + postcode
 
-        r = self._debug = requests.get(mapit_url, verify=False)
+        r = self._debug = requests.get(mapit_url)
         if r.status_code == 200:
             try:
                 return json.loads(r.text)
