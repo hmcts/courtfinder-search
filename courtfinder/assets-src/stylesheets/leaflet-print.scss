@@ -1,16 +1,40 @@
+$venue-colour:  rgba(52, 178, 51, 1);
+$prosecution-colour:  rgba(125, 154, 170, 1);
+$defence-colour:  rgba(00, 139, 149, 1);
+$juror-colour:  rgba(167, 02, 64, 1);
+
 @media print{
 	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner, #global-header
 	{
 		display:none;
 	}
-	#leaflet{
+	#leaflet
+  {
+    .venue h2{
+      box-shadow: inset 0 0 0 1000px $venue-colour;
+      border: 1px solid $venue-colour;
+      color: white !important;
+    }
+    .prosecution h2{
+      box-shadow: inset 0 0 0 1000px $prosecution-colour;
+      border: 1px solid $prosecution-colour;
+      color: white !important;
+    }
+    .defence h2{
+      box-shadow: inset 0 0 0 1000px $defence-colour;
+      $defence-colour: $defence-colour;
+      border: 1px solid ;
+      color: white !important;
+    }
+    .juror h2{
+      box-shadow: inset 0 0 0 1000px $juror-colour;
+      border: 1px solid $juror-colour;
+      color: white !important;
+    }
 		h2{
       background-color: unset;
-      box-shadow: inset 0 0 0 1000px #005ea5;
       color: unset;
-      color: white !important;
-
-			border: 1px solid #005ea5;
+      
 			padding: 0.5em;
 			/*margin-top: 10px;*/
       -webkit-print-color-adjust: exact;

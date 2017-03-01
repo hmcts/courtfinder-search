@@ -1,3 +1,8 @@
+$venue-colour:  rgba(52, 178, 51, 1);
+$prosecution-colour:  rgba(125, 154, 170, 1);
+$defence-colour:  rgba(00, 139, 149, 1);
+$juror-colour:  rgba(167, 02, 64, 1);
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -23,21 +28,10 @@
   #header{
     #logo{
       #crest{
-        &:before{
-        content:url(/assets/images/crests/org_crest_27px_x2.png);
-        }
+        content:url(/assets/images/HMCTS_BLK_SML.PNG);
+        width:200px;
         float: left;
-      }
-      #hmcts{
-        float: left;
-        padding-left: 15px;
-        padding-top: 29px;
-        padding-bottom: 0px;
-        width: 182px;
-        border-left: 2px solid #000;
-        margin-left: 13px;
-      }
-      
+      }      
       float:left;
     }
     #title{
@@ -50,10 +44,23 @@
     }
     @include clearfix
   }
-
   h2{
-    background-color: #005ea5;
     padding: .5em;
+  }
+  .venue h2{
+    background-color: $venue-colour;
+    color: white;
+  }
+  .prosecution h2{
+    background-color: $prosecution-colour;
+    color: white;
+  }
+  .defence h2{
+    background-color: $defence-colour;
+    color: white;
+  }
+  .juror h2{
+    background-color: $juror-colour;
     color: white;
   }
   h3{
@@ -79,7 +86,7 @@
     @include clearfix;
     ul li .facility{
       float: right;
-      width: 87%;
+      width: 80%;
     }
     .icon{
       float: none;
@@ -97,5 +104,5 @@
     }
   }
 }
-
+  
 

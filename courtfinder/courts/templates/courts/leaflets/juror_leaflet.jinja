@@ -21,16 +21,17 @@
 
     <div class="content inner">
         <div id='leaflet'>
-            {% include "courts/leaflets/_leaflet_header.jinja" with title=court_title %}
-            {% include "courts/leaflets/juror/_court.jinja" %}
-            {% include "courts/leaflets/juror/_contacting.jinja" %}
-            {% include "courts/leaflets/juror/_attendance.jinja" %}
-            {% include "courts/leaflets/juror/_travel.jinja" %}
-            {% include "courts/leaflets/juror/_travel.jinja" %}
-            {% include "courts/leaflets/_facilities.jinja" %}
-            {% include "courts/leaflets/juror/_meals.jinja" %}
-            {% include "courts/leaflets/juror/_whilst_at_court.jinja" %}
-            {% include "courts/leaflets/juror/_info.jinja" %}
+            <div class="juror">
+                {% include "courts/leaflets/_leaflet_header.jinja" with title=court_title %}
+                {% include "courts/leaflets/juror/_court.jinja" %}
+                {% include "courts/leaflets/juror/_contacting.jinja" %}
+                {% include "courts/leaflets/juror/_attendance.jinja" %}
+                {% include "courts/leaflets/juror/_travel.jinja" %}
+                {% include "courts/leaflets/_facilities.jinja" %}
+                {% include "courts/leaflets/juror/_meals.jinja" %}
+                {% include "courts/leaflets/juror/_whilst_at_court.jinja" %}
+                {% include "courts/leaflets/juror/_info.jinja" %}
+            </div>
         </div>
     </div>
 

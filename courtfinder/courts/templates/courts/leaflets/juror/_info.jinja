@@ -1,22 +1,7 @@
 {% load static %}
-<div id='info'>
-  <h2>Further help</h2>
-  <p>
-    Further information on going to court can be obtained from:
-</p>
-<p>
-  <b>Website:</b><span><a href='https://www.cps.gov.uk/victims_witnesses/going_to_court/' target="_blank">Being a Witness</a></span>
-</p>
-<p>
-  <b>DVD:</b>Visit <span><a href="http://www.clsa.co.uk/index.php?q=210" target="_blank">Going to court</a></span>
-</p>
-<h3 class='large_print>'>Large print versions of this leaflet are available</h3>
-<p>
-  A generic version of this leaflet (i.e this will not include a map of the local court you have been asked to
-  attend) is available in the following languages: English large print, and Welsh.
-</p>
-<h2>Further info</h2>
 {% if court.info_leaflet %}
-<p>{{court.juror_leaflet}}</p>
+  <div id='info'>
+    <h2>Further info</h2>
+    <p>{{court.juror_leaflet}}</p>
+  </div>
 {% endif %}
-</div>

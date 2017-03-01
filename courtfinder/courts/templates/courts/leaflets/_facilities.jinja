@@ -1,18 +1,18 @@
 {% load static %}
-<div class='court'>
-  <div id='facilities'>
-  <h2>Facilities</h2>
-    {% if court.facilities %}
-    <ul>
-      {% for facility in court.facilities %}
-        <li>
-          <span class="icon">
-            <img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}">
-          </span>
-          <span class="facility">{{ facility.description|default:""|striptags }}</span>
-        </li>
-      {% endfor %}
-      </ul>
-    {% endif %}
+{% if court.facilities %}
+  <div class='court'>
+    <div id='facilities'>
+    <h2>Facilities</h2>    
+      <ul>
+        {% for facility in court.facilities %}
+          <li>
+            <span class="icon">
+              <img src="{% static 'images/facility_icons.png' %}" class="icon-{{ facility.image }}" alt="{{ facility.image_description }}">
+            </span>
+            <span class="facility">{{ facility.description|default:""|striptags }}</span>
+          </li>
+        {% endfor %}
+        </ul>
+    </div>
   </div>
-</div>
+{% endif %}
