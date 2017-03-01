@@ -45,6 +45,12 @@
         <div class="form-label">already in contact with a court or tribunal</div>
         {% endif %}
       </label>
+      {% if aol == 'Money claims'%}
+      <label for="spoe-nearest" class="block-label form-block">
+        <input id="spoe-nearest" type="radio" name="spoe" value="nearest" {% if spoe == 'nearest' %}checked{% endif %}/>
+        <div class="form-label">Locate nearest county court for hearing</div>
+      </label>
+      {% endif %}
     </div>
     <div class="actions">
     <button id="continue" class="button" type="submit">Continue</button>
