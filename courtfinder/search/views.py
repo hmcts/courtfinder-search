@@ -49,7 +49,7 @@ def searchbyPostcodeOrCourtList(request):
     url = 'search:postcode'
     aol = request.GET.get('aol')
 
-    if (aol == 'Children' or aol == 'Divorce') and request.GET.get('spoe') == 'continue':
+    if (aol == 'Children' or aol == 'Divorce' or aol == 'Civil partnership') and request.GET.get('spoe') == 'continue':
         url = 'courts:list'
     
     url = "%s?%s" % (reverse(url), urlencode(request.GET))

@@ -98,7 +98,7 @@
                 Enter your postcode.
               {% endif %}
             </div>
-            {% if aol == 'Divorce' %}
+            {% if aol == 'Divorce' or aol == 'Civil partnership' %}
               <div class='form-hint'>You will be directed to your Regional Divorce Centre.</div>
             {% endif %}
             <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
