@@ -40,12 +40,6 @@
       {% else %}
         <p>The nearest County Courts for your hearing are:</p>
       {% endif %}
-    {% elif spoe %}
-      {% if search_results|length == 1 %}
-        <p>This is the court that deals with your problem.</p>
-      {% else %}
-        <p>The following courts deal with your problem.</p>
-      {% endif %}
     {% else %}
       {% if search_results|length == 1 %}
         <p>This is the court or tribunal nearest {{ postcode }}.</p>
