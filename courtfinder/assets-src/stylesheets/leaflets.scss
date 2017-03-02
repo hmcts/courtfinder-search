@@ -1,4 +1,4 @@
-$venue-colour:  rgba(52, 178, 51, 1);
+$venue-colour:  rgba(00, 109, 85, 1);
 $prosecution-colour:  rgba(125, 154, 170, 1);
 $defence-colour:  rgba(00, 139, 149, 1);
 $juror-colour:  rgba(167, 02, 64, 1);
@@ -28,8 +28,9 @@ $juror-colour:  rgba(167, 02, 64, 1);
   #header{
     #logo{
       #crest{
-        content:url(/assets/images/HMCTS_BLK_SML.PNG);
-        width:200px;
+        img{
+          width:200px;
+        }
         float: left;
       }      
       float:left;
