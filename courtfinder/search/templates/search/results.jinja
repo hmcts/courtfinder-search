@@ -30,23 +30,29 @@
   {% if search_results %}
   <div class="search-results">
     {% if query %}
-    <p class="text-secondary">
-      <span id="number-of-results">{{ open_court_count }}</span> result{{ open_court_count|pluralize }}
-    </p>
+      <p class="text-secondary">
+        <span id="number-of-results">{{ open_court_count }}</span> result{{ open_court_count|pluralize }}
+      </p>
     {% else %}
-    {%   if spoe %}
-    {%     if search_results|length == 1 %}
-    <p>This is the court that deals with your problem.</p>
-    {%     else %}
-    <p>The following courts deal with your problem.</p>
-    {%     endif %}
-    {%   else %}
-    {%     if search_results|length == 1 %}
-    <p>This is the court or tribunal nearest {{ postcode }}.</p>
-    {%     else %}
-    <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
-    {%     endif %}
-    {%   endif %}
+    {% if spoe == "nearest" and aol == "Money claims"%}
+      {% if search_results|length == 1 %}
+        <p>The nearest County Court for your hearing is:</p>
+      {% else %}
+        <p>The nearest County Courts for your hearing are:</p>
+      {% endif %}
+    {% elif spoe %}
+      {% if search_results|length == 1 %}
+        <p>This is the court that deals with your problem.</p>
+      {% else %}
+        <p>The following courts deal with your problem.</p>
+      {% endif %}
+    {% else %}
+      {% if search_results|length == 1 %}
+        <p>This is the court or tribunal nearest {{ postcode }}.</p>
+      {% else %}
+        <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
+      {% endif %}
+    {% endif %}
       {% if in_scotland %}
     <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
       {% endif %}
