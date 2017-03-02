@@ -138,7 +138,7 @@
             <div class="phone-label" property="contactPoint" typeof="ContactPoint">
               {% if contact.name != '' %}
                 <span class="label-pad" property="contactType">{{ contact.name }}:</span>
-                {% if contact.explanation != None %}
+                {% if contact.explanation != None and contact.explanation != '' %}
                   <br>({{ contact.explanation }})
                 {% endif %}
               {% endif %}
