@@ -7,10 +7,10 @@ class Rules:
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
                           'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
 
-    by_proximity = ['Civil partnership', 'Crime', 'Domestic violence', 'Forced marriage', 'Probate']
-    by_local_authority = ['Adoption', 'Children', 'Divorce']
+    by_proximity = ['Crime', 'Domestic violence', 'Forced marriage', 'Probate']
+    by_local_authority = ['Adoption', 'Children', 'Divorce', 'Civil partnership']
     by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
-    has_spoe = ['Children', 'Divorce', 'Money claims']
+    has_spoe = ['Children', 'Divorce', 'Money claims', 'Civil partnership']
 
 
     @staticmethod

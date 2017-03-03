@@ -14,7 +14,7 @@
   <header class="page-header">
     {% if aol == 'Children' %}
       <h1>Children</h1>
-    {% elif aol == 'Divorce' %}
+    {% elif aol == 'Divorce' or aol == 'Civil partnership' %}
       <h1>About your Divorce</h1>
       {% elif aol == 'Money claims' %}
       <h1>About your money claim</h1>
@@ -29,7 +29,7 @@
         <input id="spoe-start" type="radio" name="spoe" value="start" {% if spoe == 'start' %}checked{% endif %}/>
         {% if aol == 'Children' %}
           <div class="form-label">I want to start new proceedings</div>
-        {% elif aol == 'Divorce' %}
+        {% elif aol == 'Divorce' or aol == 'Civil partnership' %}
           <div class="form-label">I want to start proceedings</div>
         {% else %}
           <div class="form-label">about to start a new claim</div>
@@ -37,7 +37,7 @@
       </label>
       <label for="spoe-continue" class="block-label form-block">
         <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
-        {% if aol == 'Children' or aol == 'Divorce'%}
+        {% if aol == 'Children' or aol == 'Divorce' or aol == 'Civil partnership' %}
         <div class="form-label">I am already in contact with a court</div>
         {% elif aol == 'Money claims' %}
           <div class="form-label">already have a claim</div>
