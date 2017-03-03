@@ -6,7 +6,6 @@ from search.models import *
 from dateutil import parser
 
 class Ingest:
-
     @classmethod
     def courts(cls, courts, database_name="default"):
         Court.objects.using(database_name).all().delete()
@@ -165,3 +164,13 @@ class Ingest:
                     court=court,
                     postcode=postcode
                 )
+
+    @classmethod
+    def emergency_message(cls, emergency_message, database_name="default"):
+        EmergencyMessage.objects.using(database_name).all().delete()
+
+        em = EmergencyMessage(
+            show=emergency_message['show'],
+            message=emergency_message.get('message', None),
+        )
+        em.save(using=database_name)

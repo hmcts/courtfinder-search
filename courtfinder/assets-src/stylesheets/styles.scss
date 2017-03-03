@@ -473,3 +473,17 @@ section.closedCourt
     padding-right: 10px;
   }
 }
+
+#emergency_message {
+  &:before{
+    content: url("../images/icon-information.png");
+    position: relative;
+    bottom: -6.5px;
+    @include device-pixel-ratio() {
+      background-image: url("../images/icon-information-2x.png");
+      background-size: 100%;
+    }
+    width: 27px;
+    height: 27px;
+  }
+}
