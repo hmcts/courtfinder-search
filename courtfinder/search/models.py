@@ -176,6 +176,7 @@ class Contact(models.Model):
     number = models.CharField(max_length=255)
     sort_order = models.IntegerField(null=True, default=None)
     explanation = models.CharField(null=True, max_length=85)
+    in_leaflet = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s, %s: %s" % (self.name, self.explanation, self.number)

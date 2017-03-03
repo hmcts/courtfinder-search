@@ -82,31 +82,36 @@
                 "sort": 2,
                 "name": "Fax",
                 "number": "0870 739 4254",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": 0,
                 "name": "Enquiries",
                 "number": "01254  687500",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": 1,
                 "name": "Fine queries",
                 "number": "01282  610000",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": 3,
                 "name": "Witness service",
                 "number": "01254 265 305",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": null,
                 "name": "DX",
                 "number": "742020 Blackburn 10",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             }
         ],
         "lon": "-2.359323760375266",
@@ -164,7 +169,11 @@
         "image_file": "accrington_magistrates_court.jpg",
         "display": true,
         "info": "<p>Test information on Accrington</>",
-        "hide_aols": true
+        "hide_aols": true,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null  
     },
     {
         "addresses": [
@@ -243,25 +252,29 @@
                 "sort": 0,
                 "name": "Enquiries",
                 "number": "0161  330 2023",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": 1,
                 "name": "Enquiries",
                 "number": "0161 331 5645",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": 3,
                 "name": "Witness service",
                 "number": "0161 339 9362",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             },
             {
                 "sort": null,
                 "name": "DX",
                 "number": "702625 Ashton-under-Lyne 2",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             }
         ],
         "court_number": 1748,
@@ -290,7 +303,11 @@
           "blue_badge": "Blue badge parking is available on site."
         },
         "info": "<p>Test information on Tameside</>",
-        "hide_aols": false       
+        "hide_aols": false,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null         
     },
     {
         "name": "County Court Money Claims Centre (CCMCC)",
@@ -317,7 +334,11 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null          
     },
 
     {
@@ -345,7 +366,11 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null          
     },
     {
         "name": "Some old open court",
@@ -373,17 +398,23 @@
                 "sort": 0,
                 "name": "Enquiries",
                 "number": "0161  330 2023",
-                "explanation": "Test explanation"
+                "explanation": "Test explanation",
+                "in_leaflet": false
             },
             {
                 "sort": 1,
                 "name": "Enquiries",
                 "number": "0161 331 5645",
-                "explanation": null
+                "explanation": null,
+                "in_leaflet": false
             }],
         "postcodes": ["CF373AF"],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null          
     },
     {
         "name": "Hide AoLs",
@@ -416,6 +447,10 @@
         "contacts": [],
         "postcodes": ["SA79RB"],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,
+        "info_leaflet": null,
+        "defence_leaflet": null,   
+        "prosecution_leaflet": null,   
+        "juror_leaflet": null          
     }
 ]

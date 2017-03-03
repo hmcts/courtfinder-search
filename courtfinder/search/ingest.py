@@ -157,7 +157,8 @@ class Ingest:
                                                                  number=contact_obj[
                                                                      'number'],
                                                                  sort_order=contact_obj['sort'],
-                                                                 explanation=contact_obj['explanation'])
+                                                                 explanation=contact_obj['explanation'],
+                                                                 in_leaflet=contact_obj['in_leaflet'])
 
                 CourtContact.objects.db_manager(database_name).create(
                     court=court,
