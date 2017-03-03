@@ -199,7 +199,8 @@ class Command(BaseCommand):
                 courtsfile.close()
                 # Import the data into the application
                 try:
-                    Ingest.courts(courts, database_name=database_name)
+                    Ingest.courts(courts['courts'], database_name=database_name)
+                    Ingest.emergency_message(courts['emergency_message'], database_name=database_name)
                 except (IntegrityError, ProgrammingError) as e:
                     error_name = e.__class__.__name__
                     self.logger.critical("import_files: There was a django '{}' error ingesting the courts data, '{}'"
