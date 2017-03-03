@@ -20,7 +20,10 @@
       <h1>Housing Possession</h1>
     {% elif aol == 'Money claims' %}
         {% if spoe == 'start' %}
-            <h1>For a new claim :-</h1>
+          <h1>For a new claim :-</h1>
+        {% elif spoe == 'nearest' %}
+          <h1>Enter postcode</h1>
+          <p>Enter your postcode.</p>
         {% else %}
           <h1>For an existing claim :-</h1>
         {% endif %}
@@ -65,6 +68,11 @@
                 </div>
                 <div>
                     <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">Contact the County Court Money Claims Centre (CCMCC)</a>
+                </div>
+            {% elif spoe == 'nearest'%}
+                <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
+                <div class="actions">
+                  <button id="continue" class="button" type="submit">Continue</button>
                 </div>
             {% else %}
                 <div class='existingMoneyClaim'>
