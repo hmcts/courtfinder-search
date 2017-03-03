@@ -232,3 +232,10 @@ class ParkingInfo(models.Model):
         return "Parking onsite: %s, Parking offsite: %s, Parking blue-badge: %s" % (self.onsite,
                                                                                     self.offsite,
                                                                                     self.blue_badge)
+
+class EmergencyMessage(models.Model):
+    message = models.TextField()
+    show = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.message
