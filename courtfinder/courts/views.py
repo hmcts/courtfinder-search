@@ -74,7 +74,11 @@ def format_court(court):
                   'alert': court.alert if court.alert and court.alert.strip() != '' else None,
                   'parking': court.parking or None,
                   'info': court.info,
-                  'hide_aols': court.hide_aols}
+                  'hide_aols': court.hide_aols,
+                  'info_leaflet': court.info_leaflet,
+                  'juror_leaflet': court.juror_leaflet,
+                  'defence_leaflet': court.defence_leaflet,
+                  'prosecution_leaflet': court.prosecution_leaflet}
 
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
@@ -97,6 +101,36 @@ def court(request, slug):
         'postcode': request.GET.get('postcode',''),
         'courtcode': request.GET.get('courtcode', False),
     })
+    
+def leaflet (request, slug, leaflet_type):
+    try:
+        the_court = Court.objects.get(slug=slug)
+    except Court.DoesNotExist:
+        raise Http404 
+    
+    if leaflet_type == 'venue_information':
+        return render(request, 'courts/leaflets/information_leaflet.jinja', {
+          'court': format_court(the_court)
+        })
+
+    if leaflet_type == 'defence_witness_information':
+        return render(request, 'courts/leaflets/defence_leaflet.jinja', {
+          'court': format_court(the_court)
+        })
+
+    if leaflet_type == 'prosecution_witness_information':
+        return render(request, 'courts/leaflets/prosecution_leaflet.jinja', {
+          'court': format_court(the_court)
+        })
+
+    if leaflet_type == 'juror_information':
+        court =  format_court(the_court)
+        return render(request, 'courts/leaflets/juror_leaflet.jinja', {
+          'court': court,
+          'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
+        })
+    return #not sure what to return here
+
 
 def list_format_courts(courts):
     return [{'name':court.name,

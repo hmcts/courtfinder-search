@@ -63,7 +63,11 @@ class Ingest:
                 updated_at=updated_at,
                 parking=parking_info if parking_info else None,
                 info=court_obj['info'],
-                hide_aols=court_obj['hide_aols']
+                hide_aols=court_obj['hide_aols'],
+                info_leaflet=court_obj['info_leaflet'],
+                prosecution_leaflet=court_obj['prosecution_leaflet'],
+                defence_leaflet=court_obj['defence_leaflet'],
+                juror_leaflet=court_obj['juror_leaflet']
             )
             court.save(using=database_name)
 

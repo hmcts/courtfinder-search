@@ -1,0 +1,10 @@
+{% load static %}
+<div id='info'>
+    <h2>Getting to the court</h2>
+    <p id="map-link">
+        <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
+      </a>
+      <p><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt='Google map marker'><span>- Location of {{court.name}}</span></s></p>
+  </p>
+</div>

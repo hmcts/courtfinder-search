@@ -1,0 +1,108 @@
+$venue-colour:  rgba(00, 109, 85, 1);
+$prosecution-colour:  rgba(125, 154, 170, 1);
+$defence-colour:  rgba(00, 139, 149, 1);
+$juror-colour:  rgba(167, 02, 64, 1);
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin leaflet_list{
+  ul{
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    li{
+      list-style: none;
+      word-wrap: break-word;
+    }
+  }
+}
+
+#leaflet{
+  
+  #header{
+    #logo{
+      #crest{
+        img{
+          width:200px;
+        }
+        float: left;
+      }      
+      float:left;
+    }
+    #title{
+      h1{
+        padding-top: 29px;
+      }
+      float: right;
+      width: 50%;
+      text-align:right;
+    }
+    @include clearfix
+  }
+  h2{
+    padding: .5em;
+  }
+  .venue h2{
+    background-color: $venue-colour;
+    color: white;
+  }
+  .prosecution h2{
+    background-color: $prosecution-colour;
+    color: white;
+  }
+  .defence h2{
+    background-color: $defence-colour;
+    color: white;
+  }
+  .juror h2{
+    background-color: $juror-colour;
+    color: white;
+  }
+  h3{
+    font-size: xx-large;
+  }
+  #court{
+    #photo{
+      img{
+        width:90%
+      }
+      float: left;
+      width: 40%;
+    }
+    li{
+      list-style: none;
+    }
+    #address{
+      float: left;
+      text-align: left;
+      width: 60%;
+    }
+    @include clearfix;
+  }
+  #contacts, #email, #opening_times{
+    @include leaflet_list;
+    @include clearfix;
+    
+  }
+  #additional{
+    ol {
+      padding-left: 1em;
+      li{
+      list-style: disc outside none;
+      margin-left: 1em;
+      }
+    }
+  }
+  #facilities
+  {
+    margin-bottom:50px;
+  }
+}
+  
+

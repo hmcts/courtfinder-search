@@ -1,0 +1,13 @@
+{% load static %}
+{% if court.opening_times %}
+  <div id='opening_times'>
+    <h2>Opening times</h2>
+    <ul>
+      {% for opening_time in court.opening_times %}
+        <li>
+          <time property="openingHours">{{ opening_time.description }}</time>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
