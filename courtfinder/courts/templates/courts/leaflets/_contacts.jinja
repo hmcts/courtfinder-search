@@ -4,7 +4,7 @@
   <ul>
     <li>
       {% for contact in court.contacts %}
-        {% if contact.name != 'DX' %}
+        {% if contact.name != 'DX' and contact.in_leaflet %}
         <li property="contactPoint" typeof="ContactPoint">
           {% if contact.name != '' %}
             <span property="contactType">{{ contact.name }}</span>:&nbsp;
