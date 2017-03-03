@@ -430,3 +430,47 @@ section.closedCourt
   padding: 30px;
   margin-bottom: 15px;
 }
+
+#contacts
+{
+  .email-label
+  {
+    float:left;
+    width: 30%;
+  }
+
+  .email-addresses
+  {
+    float:right;
+    width:70%;
+    word-wrap:break-word;
+  }
+  .phone-label
+  {
+    @include media($min-width: $small-width) {
+      width:30%;
+    }
+    float:left;
+    width:50%;
+    
+  }
+
+  .phone-number
+  {
+    @include media($min-width: $small-width) {
+      width:70%;
+    }
+    float:right;
+    width:50%;
+    word-wrap:break-word;
+  }
+  .spacer
+  {
+    clear:both;
+    height:15px;
+  }
+  .label-pad
+  {
+    padding-right: 10px;
+  }
+}

@@ -156,7 +156,8 @@ class Ingest:
                 contact, created = Contact.objects.db_manager(database_name).get_or_create(name=contact_obj['name'],
                                                                  number=contact_obj[
                                                                      'number'],
-                                                                 sort_order=contact_obj['sort'])
+                                                                 sort_order=contact_obj['sort'],
+                                                                 explanation=contact_obj['explanation'])
 
                 CourtContact.objects.db_manager(database_name).create(
                     court=court,

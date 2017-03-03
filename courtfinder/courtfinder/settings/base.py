@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 )
 
 # Postcode lookup
-MAPIT_BASE_URL = 'http://mapit.mysociety.org/postcode/'
+MAPIT_BASE_URL = 'https://mapit.mysociety.org/postcode/'
 
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')

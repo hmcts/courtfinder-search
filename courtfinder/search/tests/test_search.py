@@ -405,8 +405,8 @@ class SearchTestCase(TestCase):
                                                     postcode="CF34RR",
                                                     town=town)
         self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
-        contact = Contact.objects.create(name="Enquiries", number="0123456789")
-        self.assertEqual(str(contact), "Enquiries: 0123456789")
+        contact = Contact.objects.create(name="Enquiries", number="0123456789", explanation="explanation")
+        self.assertEqual(str(contact), "Enquiries, explanation: 0123456789")
         court_type = CourtType.objects.create(name="crown court")
         self.assertEqual(str(court_type), "crown court")
         court_contact = CourtContact.objects.create(contact=contact, court=court)
@@ -492,3 +492,4 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Tameside+Magistrates')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Cases heard at this venue', response.content)
+

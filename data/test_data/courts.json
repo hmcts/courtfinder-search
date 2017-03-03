@@ -81,27 +81,32 @@
             {
                 "sort": 2,
                 "name": "Fax",
-                "number": "0870 739 4254"
+                "number": "0870 739 4254",
+                "explanation": null
             },
             {
                 "sort": 0,
                 "name": "Enquiries",
-                "number": "01254  687500"
+                "number": "01254  687500",
+                "explanation": null
             },
             {
                 "sort": 1,
                 "name": "Fine queries",
-                "number": "01282  610000"
+                "number": "01282  610000",
+                "explanation": null
             },
             {
                 "sort": 3,
                 "name": "Witness service",
-                "number": "01254 265 305"
+                "number": "01254 265 305",
+                "explanation": null
             },
             {
                 "sort": null,
                 "name": "DX",
-                "number": "742020 Blackburn 10"
+                "number": "742020 Blackburn 10",
+                "explanation": null
             }
         ],
         "lon": "-2.359323760375266",
@@ -237,22 +242,26 @@
             {
                 "sort": 0,
                 "name": "Enquiries",
-                "number": "0161  330 2023"
+                "number": "0161  330 2023",
+                "explanation": null
             },
             {
                 "sort": 1,
                 "name": "Enquiries",
-                "number": "0161 331 5645"
+                "number": "0161 331 5645",
+                "explanation": null
             },
             {
                 "sort": 3,
                 "name": "Witness service",
-                "number": "0161 339 9362"
+                "number": "0161 339 9362",
+                "explanation": null
             },
             {
                 "sort": null,
                 "name": "DX",
-                "number": "702625 Ashton-under-Lyne 2"
+                "number": "702625 Ashton-under-Lyne 2",
+                "explanation": null
             }
         ],
         "court_number": 1748,
@@ -360,7 +369,18 @@
         "court_types": [],
         "facilities": [],
         "opening_times": [],
-        "contacts": [],
+        "contacts": [{
+                "sort": 0,
+                "name": "Enquiries",
+                "number": "0161  330 2023",
+                "explanation": "Test explanation"
+            },
+            {
+                "sort": 1,
+                "name": "Enquiries",
+                "number": "0161 331 5645",
+                "explanation": null
+            }],
         "postcodes": [],
         "info": null,
         "hide_aols": false        
