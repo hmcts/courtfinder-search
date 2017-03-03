@@ -24,7 +24,15 @@
     {% else %}
       <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
       <li><a href="{% url 'courts:court' court.slug %}">{{ court.name }}</a></li>
-      <li><a href="{% url 'courts:leaflet' court.slug 'venue_information'%}">Venue details print out </a></li>
+      {% if 'venue_information' in request.path %}
+        <li><a href="{% url 'courts:leaflet' court.slug 'venue_information'%}">Venue details print out </a></li>
+      {% elif 'defence_witness_information' in request.path %}
+        <li><a href="{% url 'courts:leaflet' court.slug 'defence_information'%}">Defence witness information</a></li>
+      {% elif 'prosecution_witness_information' in request.path %}
+        <li><a href="{% url 'courts:leaflet' court.slug 'prosecution_information'%}">Prosecution witness information</a></li>
+      {% elif 'juror_information' in request.path %}
+        <li><a href="{% url 'courts:leaflet' court.slug 'juror_information'%}">Juror information</a></li>
+      {% endif %}
     {% endif %}
   </ol>
 </div>

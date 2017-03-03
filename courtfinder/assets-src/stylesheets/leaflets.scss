@@ -69,31 +69,26 @@ $juror-colour:  rgba(167, 02, 64, 1);
   }
   #court{
     #photo{
+      img{
+        width:90%
+      }
       float: left;
-      width: 30%;
+      width: 40%;
     }
     li{
       list-style: none;
     }
     #address{
-      float: right;
+      float: left;
       text-align: left;
       width: 60%;
     }
     @include clearfix;
   }
-  #contacts, #email, #opening_times, #facilities{
+  #contacts, #email, #opening_times{
     @include leaflet_list;
     @include clearfix;
-    ul li .facility{
-      float: right;
-      width: 80%;
-    }
-    .icon{
-      float: none;
-      height: 50px;
-      width: 50px;
-    }
+    
   }
   #additional{
     ol {
@@ -103,6 +98,10 @@ $juror-colour:  rgba(167, 02, 64, 1);
       margin-left: 1em;
       }
     }
+  }
+  #facilities
+  {
+    margin-bottom:50px;
   }
 }
   
