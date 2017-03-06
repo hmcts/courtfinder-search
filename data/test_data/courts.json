@@ -417,5 +417,179 @@
         "postcodes": ["SA79RB"],
         "info": null,
         "hide_aols": false        
-    }
+    },
+    {
+        "name": "No addresses",
+        "slug": "no-addresses",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565469",
+        "display": true,
+        "court_number": "1232469",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null,
+        "hide_aols": false        
+    },
+    {
+        "name": "Visiting address",
+        "slug": "visiting-address",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565470",
+        "display": true,
+        "court_number": "1232470",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [
+            {
+                "town": "Manchester",
+                "county": "Greater Manchester",
+                "type": "Visiting",
+                "postcode": "M60 9DJ",
+                "address": "Manchester County Court and Family Court Hearing Centre\nManchester Civil and Family Justice Centre\n1 Bridge Street West\n"
+            }
+        ],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null,
+        "hide_aols": false        
+    },
+    {
+        "name": "Postall address",
+        "slug": "postal-address",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565470",
+        "display": true,
+        "court_number": "1232470",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [
+            {
+                "town": "Manchester",
+                "county": "Greater Manchester",
+                "type": "Postal",
+                "postcode": "M60 9DJ",
+                "address": "Manchester County Court and Family Court Hearing Centre\nManchester Civil and Family Justice Centre\n1 Bridge Street West\n"
+            }
+        ],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null,
+        "hide_aols": false        
+    },
+     {
+        "name": "Both Postal and Visiting addresses",
+        "slug": "both-postal-and-visiting-addresses",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565470",
+        "display": true,
+        "court_number": "1232470",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [
+            {
+                "town": "Manchester",
+                "county": "Greater Manchester",
+                "type": "Visiting",
+                "postcode": "M60 9DJ",
+                "address": "Manchester County Court and Family Court Hearing Centre\nManchester Civil and Family Justice Centre\n1 Bridge Street West\n"
+            },
+            {
+                "town": "Manchester",
+                "county": "Greater Manchester",
+                "type": "Postal",
+                "postcode": "M60 9DJ",
+                "address": "Manchester County Court and Family Court Hearing Centre\nManchester Civil and Family Justice Centre\n1 Bridge Street West\n"
+            }
+        ],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null,
+        "hide_aols": false        
+    },
+     {
+        "name": "Postal and Visiting address",
+        "slug": "postal-and-visiting-address",
+        "lat": "1",
+        "lon": "1",
+        "admin_id": "34565470",
+        "display": true,
+        "court_number": "1232470",
+        "areas_of_law": [
+            {
+                "local_authorities": [], 
+                "name": "Money claims", 
+                "external_link_desc": null,
+                "external_link": null
+            }
+        ],
+        "emails": [ { "description": "Enquiries", "address": "a@b.com" }],
+        "attributes": [],
+        "addresses": [
+            {
+                "town": "Manchester",
+                "county": "Greater Manchester",
+                "type": "Postal and Visiting",
+                "postcode": "M60 9DJ",
+                "address": "Manchester County Court and Family Court Hearing Centre\nManchester Civil and Family Justice Centre\n1 Bridge Street West\n"
+            }
+        ],
+        "court_types": [],
+        "facilities": [],
+        "opening_times": [],
+        "contacts": [],
+        "postcodes": [],
+        "info": null,
+        "hide_aols": false        
+    } 
 ]

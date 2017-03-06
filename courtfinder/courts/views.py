@@ -27,7 +27,7 @@ def format_court(court):
     """
     create a courts object that we can send to templates
     """
-    addresses = court.courtaddress_set.all()
+    addresses = court.courtaddress_set.all().order_by('address_type__name')
     postal_address = None
     visiting_address = None
     for address in addresses:
@@ -38,10 +38,13 @@ def format_court(court):
             'county': address.town.county,
             'type': address.address_type
         }
-        if str(address.address_type) == 'Postal':
+        if str(address.address_type) == 'Postal' or str(address.address_type) == 'Postal and Visiting':
             postal_address = address_obj
         else:
             visiting_address = address_obj
+
+    if postal_address and str(postal_address['type']) == 'Postal and Visiting':
+        visiting_address = None
 
     emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
     emails.sort(key=lambda x: x['description'])
