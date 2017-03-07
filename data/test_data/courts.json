@@ -447,7 +447,7 @@
         "contacts": [],
         "postcodes": ["SA79RB"],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
@@ -478,7 +478,7 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
@@ -517,7 +517,7 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
@@ -556,7 +556,7 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
@@ -602,7 +602,7 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
@@ -641,7 +641,7 @@
         "contacts": [],
         "postcodes": [],
         "info": null,
-        "hide_aols": false        
+        "hide_aols": false,        
         "info_leaflet": null,
         "defence_leaflet": null,   
         "prosecution_leaflet": null,   
