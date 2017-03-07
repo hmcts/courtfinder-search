@@ -32,7 +32,7 @@
             <span property="contactType">{{ contact.name }}</span>:&nbsp;
           {% endif %}
           {% for number in contact.numbers %}
-            <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+            {{ number }}{% if not forloop.last %}<span>, </span>{% endif %}
           {% endfor %}
         </li>
       {% endif %}

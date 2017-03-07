@@ -14,7 +14,9 @@ class SearchTestCase(TestCase):
     def setUp(self):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         courts_json_1 = open(test_data_dir + 'courts.json').read()
-        Ingest.courts(json.loads(courts_json_1))
+        imports = json.loads(courts_json_1)
+        Ingest.courts(imports['courts'])
+        Ingest.emergency_message(imports['emergency_message'])
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
     def tearDown(self):
@@ -507,4 +509,24 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?q=Tameside+Magistrates')
         self.assertEqual(response.status_code, 200)
         self.assertIn('Cases heard at this venue', response.content)
+
+    def test_emergency_message_show(self):
+        c = Client()
+        response = c.get('/search/')
+        self.assertEqual(response.status_code, 200)
+
+        em = EmergencyMessage.objects.get()
+        if em.show:
+            self.assertIn('Special notice', response.content)
+            self.assertIn(em.message, response.content)
+
+    def test_emergency_message_no_show(self):
+        c = Client()
+        response = c.get('/search/')
+        self.assertEqual(response.status_code, 200)
+
+        em = EmergencyMessage.objects.get()
+        if not em.show:
+            self.assertNotIn('Special notice', response.content)
+            self.assertNotIn(em.message, response.content)
 
