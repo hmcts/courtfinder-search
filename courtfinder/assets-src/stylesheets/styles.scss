@@ -75,10 +75,10 @@ $small-width: 800px;
   .main-option {
     @include media($min-width: $small-width) {
       float: left;
-      ul li {
-        list-style: none;
-        margin-left: 2.5em;
-      }
+    }
+    ul li {
+      list-style: none;
+      margin-left: 2.5em;
     }
   }
 
@@ -306,7 +306,7 @@ $small-width: 800px;
     }
   }
 
-  #areas_of_law, #useful_links {
+  #areas_of_law, #useful_links, #leaflets {
     h2 {
       border-top: 10px solid #005EA5;
     }
@@ -352,6 +352,7 @@ $small-width: 800px;
   .icon-parking {top:-70px;left:-490px}
   .icon-loop_hearing {top: -10px;left: -10px}
   .icon-video_conf {top: -10px;left: -70px}
+  .icon-witness{top: -10px;left: -190px}
 
   .alert {
     margin-top: 2em;

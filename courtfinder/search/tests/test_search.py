@@ -347,6 +347,21 @@ class SearchTestCase(TestCase):
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
         self.assertIn('<h1>For an existing claim :-</h1>', response.content)
 
+    def test_money_claims_aol_has_nearest_court_option(self):
+        c = Client()
+        response = c.get('/search/spoe?aol=Money+claims')
+        self.assertIn('Locate nearest county court for hearing', response.content)
+
+    def test_money_claims_nearest_court_option(self):
+        c = Client()
+        response = c.get('/search/postcode?aol=Money claims&spoe=nearest')
+        self.assertIn('<h1>Enter postcode</h1>', response.content)
+
+    def test_money_claims_nearest_court_option_enter_postcode(self):
+        c = Client()
+        response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
+        self.assertIn('Some old open court', response.content)
+
     def test_money_claims_existing_online(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')

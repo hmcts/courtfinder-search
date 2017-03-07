@@ -225,7 +225,20 @@
       <br/>
       <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure" title="Information on providing feedback about our services and making a complaint.">Make a complaint</a>
     </div>
-  </div>
+  {% comment %}<div id="leaflets">
+    <h2>Leaflets for printing:</h2>
+      <a href={% url 'courts:leaflet' court.slug 'venue_information' %} title='Venue details for printing'>Venue details</a>
+      <br/>
+      <a href={% url 'courts:leaflet' court.slug 'defence_witness_information'%} title='Witness for defence information for printing'>Witness for defence</a>
+      <br/>
+      <a href={% url 'courts:leaflet' court.slug 'prosecution_witness_information'%} title='Witness for prosecution information for printing'>Witness for prosecution</a>
+      <br/>
+      {% if 'Crown Court' in court.types %}
+        <a href={% url 'courts:leaflet' court.slug 'juror_information'%} title='Juror information for printing'>Juror information</a>
+        <br/>
+      {% endif %}
+    </div>
+  </div>{% endcomment %}
   {% endif %}
   <div id="last_update">
     Last updated: {{ court.updated_at }}

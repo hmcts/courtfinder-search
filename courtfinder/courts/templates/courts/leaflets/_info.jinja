@@ -1,0 +1,9 @@
+{% load static %}
+{% if court.info_leaflet %}
+  <div id='info'>
+    <h2>Further help</h2>
+    <p>Please see www.justice.gov.uk for further details regarding {{court.name}}</p>
+    <h2>Further info</h2>
+    <p>{{court.info_leaflet}}</p>
+  </div>
+{% endif %}

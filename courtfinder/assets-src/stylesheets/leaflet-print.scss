@@ -1,0 +1,72 @@
+$venue-colour:  rgba(00, 109, 85, 1);
+$prosecution-colour:  rgba(125, 154, 170, 1);
+$defence-colour:  rgba(00, 139, 149, 1);
+$juror-colour:  rgba(167, 02, 64, 1);
+
+@media print{
+	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner, #global-header
+	{
+		display:none;
+	}
+	#leaflet
+  {
+    .venue h2{
+      box-shadow: inset 0 0 0 1000px $venue-colour;
+      border: 1px solid $venue-colour;
+      color: white !important;
+    }
+    .prosecution h2{
+      box-shadow: inset 0 0 0 1000px $prosecution-colour;
+      border: 1px solid $prosecution-colour;
+      color: white !important;
+    }
+    .defence h2{
+      box-shadow: inset 0 0 0 1000px $defence-colour;
+      $defence-colour: $defence-colour;
+      border: 1px solid ;
+      color: white !important;
+    }
+    .juror h2{
+      box-shadow: inset 0 0 0 1000px $juror-colour;
+      border: 1px solid $juror-colour;
+      color: white !important;
+    }
+		h2{
+      background-color: unset;
+      color: unset;
+      
+			padding: 0.5em;
+			/*margin-top: 10px;*/
+      -webkit-print-color-adjust: exact;
+		}
+	}
+	@page 
+    {
+        size:  auto;   /* auto is the initial value */
+        margin: 2.5em;
+        margin-bottom: 3em;
+        margin-top: 3em;
+    }
+
+	div {
+  		page-break-inside: avoid;
+	}
+	@font-face {
+  		font-family: GDS-Logo;
+  		src: local("HelveticaNeue"), local("Helvetica Neue"), local("Arial"), local("Helvetica"); 
+  	}
+  	#facilities {
+    li {
+      clear: both;
+    }
+    ul li .facility{
+     
+      width: 80% !important;
+    }
+    .icon {
+      img {
+        max-width: none !important;
+      }
+    }
+    }	  
+}	
