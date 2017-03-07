@@ -14,10 +14,12 @@
   <header class="page-header">
     {% if aol == 'Children' %}
       <h1>Children</h1>
-    {% elif aol == 'Divorce' or aol == 'Civil partnership' %}
+    {% elif aol == 'Divorce' %}
       <h1>About your Divorce</h1>
-      {% elif aol == 'Money claims' %}
+    {% elif aol == 'Money claims' %}
       <h1>About your money claim</h1>
+    {% elif aol == 'Civil partnership' %}
+      <h1>About ending your Civil Partnership</h1>
     {% else %}
       <h1>About your issue</h1>
     {% endif %}
