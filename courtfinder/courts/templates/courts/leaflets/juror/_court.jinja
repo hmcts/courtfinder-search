@@ -1,0 +1,42 @@
+{% load static %}
+{% if court.visiting_address %}
+<div id='court'>
+  <h2>Juror entrance to the courthouse</h2>
+  <p id='map-link'>
+    {% if court.image_file %}
+      <div id='photo'>
+        <img property="image" src="https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+      </div>
+    {% endif %}
+  </p>
+
+  <div id='address'>
+    <span property='streetAddress'>
+      {% for line in court.visiting_address.address_lines %}
+        {{ line }}<br/>
+      {% endfor %}
+    </span>
+
+    <span property='addressLocality'>{{ court.visiting_address.town }}</span><br/>
+
+    {% if court.visiting_address.county != court.visiting_address.town %}
+      <span property='addressRegion'>{{ court.visiting_address.county }}</span><br/>
+    {% endif %}
+
+    <span property='postalCode'>{{ court.visiting_address.postcode }}</span>
+    <br/>
+    {% for contact in court.contacts %}
+      {% if contact.name == 'DX' %}
+        <li property="contactPoint" typeof="ContactPoint">
+          {% if contact.name != '' %}
+            <span property="contactType">{{ contact.name }}</span>:&nbsp;
+          {% endif %}
+          {% for number in contact.numbers %}
+            <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+          {% endfor %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

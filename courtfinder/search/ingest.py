@@ -63,7 +63,11 @@ class Ingest:
                 updated_at=updated_at,
                 parking=parking_info if parking_info else None,
                 info=court_obj['info'],
-                hide_aols=court_obj['hide_aols']
+                hide_aols=court_obj['hide_aols'],
+                info_leaflet=court_obj['info_leaflet'],
+                prosecution_leaflet=court_obj['prosecution_leaflet'],
+                defence_leaflet=court_obj['defence_leaflet'],
+                juror_leaflet=court_obj['juror_leaflet']
             )
             court.save(using=database_name)
 
@@ -153,7 +157,8 @@ class Ingest:
                                                                  number=contact_obj[
                                                                      'number'],
                                                                  sort_order=contact_obj['sort'],
-                                                                 explanation=contact_obj['explanation'])
+                                                                 explanation=contact_obj['explanation'],
+                                                                 in_leaflet=contact_obj['in_leaflet'])
 
                 CourtContact.objects.db_manager(database_name).create(
                     court=court,

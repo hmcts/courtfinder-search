@@ -1,0 +1,31 @@
+{% extends "layout/base.jinja" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <!--[if gt IE 8]><!-->
+        <link href="{% static 'stylesheets/main.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'stylesheets/leaflets.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'stylesheets/leaflet-print.css' %}" media="print" rel="stylesheet" type="text/css" />
+    <!--<![endif]-->
+{% endblock %}
+
+{% block page_title %}Information Leaflet for {{ court.name }}
+{% endblock %}
+
+{% block content %}
+    {% include "courts/leaflets/_breadcrumb.jinja" %}
+    <div class="content inner">
+        <div id='leaflet'>
+            <div class="venue">
+                {% include "courts/leaflets/_leaflet_header.jinja" with title='Local Information Ex104' %}
+                {% include "courts/leaflets/_court.jinja" %}
+                {% include "courts/leaflets/_contacts.jinja" %}
+                {% include "courts/leaflets/_opening.jinja" %}
+                {% include "courts/leaflets/_facilities.jinja" %}
+                {% include "courts/leaflets/_help.jinja" %}
+                {% include "courts/leaflets/_additional.jinja" %}
+                {% include "courts/leaflets/_info.jinja" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
