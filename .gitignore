@@ -72,3 +72,6 @@ generated/
 .tern-port
 
 .vagrant
+
+//Don't track this file as it's v. difficult to merge
+data/courts.json
