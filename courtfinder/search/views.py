@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServer
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.defaults import bad_request
 
-from search.models import Court, AreaOfLaw, DataStatus
+from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 from urlparse import urlparse
@@ -33,7 +33,9 @@ areas_of_law_description = {
 }
 
 def index(request):
-    return render(request, 'search/index.jinja')
+    em = EmergencyMessage.objects.get()
+    return render(request, 'search/index.jinja', 
+        {'emergency_message': em.message, 'show': em.show})
 
 def searchby(request):
     url = 'search:'
