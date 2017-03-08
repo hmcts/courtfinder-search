@@ -107,34 +107,32 @@ def court(request, slug):
     
 def leaflet (request, slug, leaflet_type):
     try:
-        the_court = Court.objects.get(slug=slug)
+        court = format_court(Court.objects.get(slug=slug))
     except Court.DoesNotExist:
-        raise Http404 
-    
+        raise Http404  
+
     if leaflet_type == 'venue_information':
         return render(request, 'courts/leaflets/information_leaflet.jinja', {
-          'court': format_court(the_court)
+          'court': court
         })
 
-    if leaflet_type == 'defence_witness_information':
+    if leaflet_type == 'defence_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
         return render(request, 'courts/leaflets/defence_leaflet.jinja', {
-          'court': format_court(the_court)
+          'court': court
         })
 
-    if leaflet_type == 'prosecution_witness_information':
+    if leaflet_type == 'prosecution_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
         return render(request, 'courts/leaflets/prosecution_leaflet.jinja', {
-          'court': format_court(the_court)
+          'court': court
         })
 
-    if leaflet_type == 'juror_information':
-        court =  format_court(the_court)
+    if leaflet_type == 'juror_information' and 'Crown Court' in court['types']:
         return render(request, 'courts/leaflets/juror_leaflet.jinja', {
           'court': court,
           'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
-        })
-    return #not sure what to return here
-
-
+        })    
+    raise Http404('The requested leaflet does not exist.')
+    
 def list_format_courts(courts):
     return [{'name':court.name,
              'slug':court.slug,
