@@ -1,8 +1,3 @@
-$venue-colour:  rgba(128, 128, 128, 1);
-$prosecution-colour:  rgba(125, 154, 170, 1);
-$defence-colour:  rgba(00, 139, 149, 1);
-$juror-colour:  rgba(167, 02, 64, 1);
-
 @mixin clearfix {
   &:after {
     content: "";
@@ -46,23 +41,7 @@ $juror-colour:  rgba(167, 02, 64, 1);
     @include clearfix
   }
   h2{
-    padding: .5em;
-  }
-  .venue h2{
-    background-color: $venue-colour;
-    color: white;
-  }
-  .prosecution h2{
-    background-color: $prosecution-colour;
-    color: white;
-  }
-  .defence h2{
-    background-color: $defence-colour;
-    color: white;
-  }
-  .juror h2{
-    background-color: $juror-colour;
-    color: white;
+    color:black;
   }
   h3{
     font-size: xx-large;
