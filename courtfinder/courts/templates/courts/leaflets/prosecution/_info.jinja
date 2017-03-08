@@ -2,6 +2,6 @@
 {% if court.info_leaflet %}
   <div id='info'>
     <h2>Further info</h2>
-    <p>{{court.prosecution_leaflet}}</p>
+    <p>{{court.prosecution_leaflet|safe}}</p>
   </div>
 {% endif %}
