@@ -111,26 +111,28 @@ def leaflet (request, slug, leaflet_type):
     except Court.DoesNotExist:
         raise Http404  
 
-    if leaflet_type == 'venue_information':
-        return render(request, 'courts/leaflets/information_leaflet.jinja', {
-          'court': court
-        })
+    if court['displayed']:
+        if leaflet_type == 'venue_information':
+            return render(request, 'courts/leaflets/information_leaflet.jinja', {
+            'court': court
+            })
 
-    if leaflet_type == 'defence_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
-        return render(request, 'courts/leaflets/defence_leaflet.jinja', {
-          'court': court
-        })
+        if leaflet_type == 'defence_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
+            return render(request, 'courts/leaflets/defence_leaflet.jinja', {
+            'court': court
+            })
 
-    if leaflet_type == 'prosecution_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
-        return render(request, 'courts/leaflets/prosecution_leaflet.jinja', {
-          'court': court
-        })
+        if leaflet_type == 'prosecution_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
+            return render(request, 'courts/leaflets/prosecution_leaflet.jinja', {
+            'court': court
+            })
 
-    if leaflet_type == 'juror_information' and 'Crown Court' in court['types']:
-        return render(request, 'courts/leaflets/juror_leaflet.jinja', {
-          'court': court,
-          'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
-        })    
+        if leaflet_type == 'juror_information' and 'Crown Court' in court['types']:
+            return render(request, 'courts/leaflets/juror_leaflet.jinja', {
+            'court': court,
+            'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
+            })    
+            
     raise Http404('The requested leaflet does not exist.')
     
 def list_format_courts(courts):
