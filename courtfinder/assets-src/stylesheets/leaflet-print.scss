@@ -8,6 +8,10 @@
     h2{
       color: black;
     }
+    page-break-before: none;
+    page-break-after: none;
+  	page-break-inside: avoid;
+    
 	}
 	@page 
     {
@@ -17,9 +21,7 @@
         margin-top: 3em;
     }
 
-	div {
-  		page-break-inside: avoid;
-	}
+	
 	@font-face {
   		font-family: GDS-Logo;
   		src: local("HelveticaNeue"), local("Helvetica Neue"), local("Arial"), local("Helvetica"); 
