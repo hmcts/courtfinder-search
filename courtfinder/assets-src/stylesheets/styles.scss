@@ -477,14 +477,21 @@ section.closedCourt
 
 #emergency_message {
   &:before{
-    content: url("../images/icon-information.png");
+    content: url("../images/icon-important.png");
     position: relative;
     bottom: -6.5px;
+    text-align: 10px;
     @include device-pixel-ratio() {
-      background-image: url("../images/icon-information-2x.png");
+      background-image: url("../images/icon-important.png");
       background-size: 100%;
     }
-    width: 27px;
-    height: 27px;
   }
 }
+  #emergency_message_box{
+   
+    background-color: #fef7f7;
+    clear: both;
+    border: 3px solid #df3034;
+    padding: 30px;
+    font-size: xx-large;
+  }
