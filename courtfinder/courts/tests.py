@@ -147,5 +147,31 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/postal-and-visiting-address')
         self.assertNotIn('Visit us:', response.content)
-        self.assertIn('Visit or Write to us:', response.content)
+        self.assertIn('Visit or write to us:', response.content)
         self.assertIn('Maps and directions', response.content)
+    
+    def test_leaflet_links_for_magistrates_court(self):
+        c = Client()
+        response = c.get('/courts/leaflet-magistrates-court')
+        self.assertIn('Venue details for printing', response.content)
+        self.assertIn('Witness for prosecution information for printing', response.content)
+        self.assertIn('Witness for defence information for printing', response.content)
+        self.assertNotIn('Juror information for printing', response.content)
+
+    def test_leaflet_links_for_crown_courts(self):
+        c = Client()
+        response = c.get('/courts/leaflet-crown-court')
+        self.assertIn('Venue details for printing', response.content)
+        self.assertIn('Witness for prosecution information for printing', response.content)
+        self.assertIn('Witness for defence information for printing', response.content)
+        self.assertIn('Juror information for printing', response.content)
+    
+    def test_leaflet_links_for_non_magistrate_or_non_crown_courts(self):
+        c = Client()
+        response = c.get('/courts/county-court-money-claims-centre-ccmcc')
+        self.assertIn('Venue details for printing', response.content)
+        self.assertNotIn('Witness for prosecution information for printing', response.content)
+        self.assertNotIn('Witness for defence information for printing', response.content)
+        self.assertNotIn('Juror information for printing', response.content)
+    
+
