@@ -1,5 +1,6 @@
 import string
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.utils.html import strip_entities, strip_tags
@@ -65,6 +66,7 @@ def format_court(court):
                   'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
                   'slug': court.slug,
                   'image_file': court.image_file,
+                  'image_url': settings.COURT_IMAGE_BASE_URL + court.image_file,
                   'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
                   'postal_address': postal_address,
                   'visiting_address': visiting_address,

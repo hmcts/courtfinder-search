@@ -31,3 +31,4 @@ ALLOWED_HOSTS = '*'
 
 COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courttribunalfinder.service.gov.uk/admin/healthcheck.json'
 COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json'
+COURT_IMAGE_BASE_URL = 'https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/'
