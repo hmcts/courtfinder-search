@@ -252,6 +252,8 @@ COURT_IMAGE_BASE_URL = ''
 
 RATELIMIT_CACHE_BACKEND = 'courtfinder.brake_config.ELBBrake'
 
+FEATURE_LEAFLETS_ENABLED = False
+
 try:
     from .local import *
 except ImportError:
