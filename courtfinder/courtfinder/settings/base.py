@@ -134,6 +134,7 @@ STATICFILES_DIRS = (
 
 # Postcode lookup
 MAPIT_BASE_URL = 'https://mapit.mysociety.org/postcode/'
+MAPTI_API_KEY = os.environ.get('MAPIT_API_KEY', None)
 
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')

@@ -12,6 +12,8 @@ from search.models import Court, AreaOfLaw, CourtAreaOfLaw, CourtAddress, LocalA
 from search.rules import Rules
 
 
+MAPIT_HEADERS = {'X-Api-Key': settings.MAPTI_API_KEY if settings.MAPTI_API_KEY else ''}
+
 loggers = {
     'error': logging.getLogger('search.error'),
     'mapit': logging.getLogger('search.mapit'),
@@ -56,7 +58,6 @@ class CourtSearch:
             self.single_point_of_entry = single_point_of_entry
         else:
             raise CourtSearchClientError('bad request')
-
 
 
     def get_courts( self ):
@@ -223,7 +224,6 @@ class Postcode():
 
         self.full_postcode = self.is_full_postcode( postcode )
         self.partial_postcode = not self.full_postcode
-
         self.lookup_postcode()
 
     def lookup_postcode( self ):
@@ -258,7 +258,8 @@ class Postcode():
         else:
             mapit_url = settings.MAPIT_BASE_URL + 'partial/' + postcode
 
-        r = self._debug = requests.get(mapit_url)
+        r = self._debug = requests.get(mapit_url, headers=MAPIT_HEADERS)
+
         if r.status_code == 200:
             try:
                 return json.loads(r.text)
@@ -273,7 +274,6 @@ class Postcode():
         else:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
-
 
     def is_full_postcode( self, postcode ):
         # Regex from: https://gist.github.com/simonwhitaker/5748515

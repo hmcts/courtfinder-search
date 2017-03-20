@@ -7,6 +7,7 @@ from django.test import TestCase, Client
 
 from search.court_search import Postcode, CourtSearchInvalidPostcode, CourtSearchError
 
+
 class MockResponse():
     def __init__(self):
         self.status_code = 200
@@ -51,7 +52,7 @@ class PostcodeTestCase(TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def _get_from_mapit_mock( self, url ):
+    def _get_from_mapit_mock( self, url, headers ):
         mock_response = MockResponse()
 
         if url.endswith('SE15'):
