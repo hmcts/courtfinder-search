@@ -49,12 +49,24 @@ def format_court(court):
     emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
     emails.sort(key=lambda x: x['description'])
     contacts = [{'name':contact.name, 'numbers': [contact.number], 'explanation': contact.explanation, 'in_leaflet': contact.in_leaflet} for contact in court.contacts.all().order_by('sort_order')]
-    # contacts.sort(key=lambda x: x['sort_order'])
 
-    facilities = [{'name': facility.name,
-                   'description': facility.description,
-                   'image': facility.image,
-                   'image_description': facility.image_description} for facility in court.facilities.all()]
+    facilities = [
+        {
+            # Name is used for the css class name to set the x,y offsets on old style images
+            'name': facility.name,
+            # Description is used for the display text
+            'description': facility.description,
+            # Image class is the generated class name (empty for new style images)
+            'image_class': "" if facility.image_file_path else 'icon-' + facility.image,
+            # The relative path to the image
+            'image_src': facility.image_file_path if facility.image_file_path else 'images/facility_icons.png',
+            # This description is used for the alt text
+            'image_description': facility.image_description,
+            # The relative file path of the image
+            'image_file_path': facility.image_file_path
+        }
+        for facility in court.facilities.all()
+    ]
 
     court_obj = { 'name': court.name,
                   'displayed': court.displayed,

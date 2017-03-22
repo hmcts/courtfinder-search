@@ -13,6 +13,7 @@ from search.court_search import CourtSearch, CourtSearchError, CourtSearchClient
 from search.rules import Rules
 from urlparse import urlparse
 
+
 areas_of_law_description = {
     "Adoption": "applying to adopt a child.",
     "Bankruptcy": "declaring bankruptcy or being made bankrupt.",
@@ -32,10 +33,12 @@ areas_of_law_description = {
     "Social security": "problems with benefits, entitlement, assessment and decisions."
 }
 
+
 def index(request):
     em = EmergencyMessage.objects.get()
-    return render(request, 'search/index.jinja', 
+    return render(request, 'search/index.jinja',
         {'emergency_message': em.message, 'show': em.show})
+
 
 def searchby(request):
     url = 'search:'
@@ -43,9 +46,10 @@ def searchby(request):
 
     if searchby == 'list':
         url = 'courts:'
-    
+
     url = url + searchby
     return HttpResponseRedirect(reverse(url))
+
 
 def searchbyPostcodeOrCourtList(request):
     url = 'search:postcode'
@@ -53,7 +57,7 @@ def searchbyPostcodeOrCourtList(request):
 
     if (aol == 'Children' or aol == 'Divorce' or aol == 'Civil partnership') and request.GET.get('spoe') == 'continue':
         url = 'courts:list'
-    
+
     url = "%s?%s" % (reverse(url), urlencode(request.GET))
 
     return HttpResponseRedirect(url)
@@ -95,20 +99,23 @@ def postcode(request):
         params['spoe'] = spoe
     return render(request, 'search/postcode.jinja', params)
 
+
 def address(request):
     error = request.GET.get('error', None)
     query = request.GET.get('q', None)
     return render(request, 'search/address.jinja', {'error': error, 'query':query})
+
 
 def courtcode(request):
     error = request.GET.get('error', None)
     courtcode = request.GET.get('courtcode', None)
     return render(request, 'search/courtcode.jinja', {'error': error, 'courtcode' : courtcode})
 
+
 def results(request):
     query = request.GET.get('q', None)
     courtcode = request.GET.get('courtcode', None)
-    
+
     if courtcode is not None:
         courtcode = re.sub(r'\s+',' ',courtcode.strip())
         if courtcode == '':
@@ -131,7 +138,7 @@ def results(request):
         if query == '':
             return redirect(reverse('search:address')+'?error=noquery')
         else:
-            
+
             results = CourtSearch(query=query, courtcode_search=False).get_courts()
 
             if len(results) == 1 and results[0].displayed == False:

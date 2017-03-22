@@ -110,10 +110,14 @@ class Ingest:
                 facility_description = facility_obj['description']
                 facility_image = facility_obj['image']
                 facility_image_description = facility_obj['image_description']
-                facility, created = Facility.objects.db_manager(database_name).get_or_create(name=facility_name,
-                                                                   description=facility_description,
-                                                                   image=facility_image,
-                                                                   image_description=facility_image_description)
+                facility_image_file_path = facility_obj['image_file_path'] if "image_file_path" in facility_obj else ""
+                facility, created = Facility.objects.db_manager(database_name).get_or_create(
+                    name=facility_name,
+                    description=facility_description,
+                    image=facility_image,
+                    image_description=facility_image_description,
+                    image_file_path=facility_image_file_path,
+                )
                 CourtFacility.objects.db_manager(database_name).create(court=court, facility=facility)
 
             for opening_time in court_obj['opening_times']:

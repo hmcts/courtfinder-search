@@ -69,9 +69,9 @@ class AreaOfLaw(models.Model):
     external_link = models.CharField(null=True, max_length=2048)
     external_link_desc = models.CharField(null=True, max_length=255)
 
-    def display_url(self): 
+    def display_url(self):
         return urllib.unquote(self.external_link)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -83,6 +83,7 @@ class Facility(models.Model):
     description = models.CharField(max_length=4096, null=True, blank=True)
     image = models.CharField(max_length=255)
     image_description = models.CharField(max_length=255)
+    image_file_path = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return "%s: %s" % (self.name, self.description)
@@ -245,3 +246,4 @@ class EmergencyMessage(models.Model):
 
     def __unicode__(self):
         return self.message
+

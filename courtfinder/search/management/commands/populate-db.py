@@ -252,7 +252,7 @@ class Command(BaseCommand):
             local_dir(string): The local directory to import to
             remote_dir(string): The remote directory to import from
             filenames(list): List of files to import
-        
+
         Return:
             (bool): True if files downloaded successfully, false otherwise
         """
@@ -264,7 +264,7 @@ class Command(BaseCommand):
             remote_path = os.path.join(remote_dir, file)
             self.logger.info("handle_s3: Attempting download of {} to {} "
                         "from bucket {}, ".format(remote_path, local_path, bucket_name))
-            
+
             try:
                 s3.meta.client.download_file(bucket_name, remote_path, local_path)
             except botocore.exceptions.ClientError as e:
