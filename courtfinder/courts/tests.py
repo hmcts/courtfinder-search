@@ -174,4 +174,9 @@ class SearchTestCase(TestCase):
         self.assertNotIn('Witness for defence information for printing', response.content)
         self.assertNotIn('Juror information for printing', response.content)
     
+    def test_court_image_url_is_based_on_settings(self):
+        with self.settings(COURT_IMAGE_BASE_URL='http://example.com/images/'):
+            c = Client()
+            response = c.get('/courts/tameside-magistrates-court')
+            self.assertIn("http://example.com/images/tameside_magistrates_court.jpg", response.content)
 
