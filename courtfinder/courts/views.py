@@ -78,7 +78,7 @@ def format_court(court):
                   'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
                   'slug': court.slug,
                   'image_file': court.image_file,
-                  'image_url': settings.COURT_IMAGE_BASE_URL + court.image_file,
+                  'image_url': (settings.COURT_IMAGE_BASE_URL + court.image_file) if court.image_file else '',
                   'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
                   'postal_address': postal_address,
                   'visiting_address': visiting_address,
