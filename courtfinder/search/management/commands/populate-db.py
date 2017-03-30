@@ -162,7 +162,7 @@ class Command(BaseCommand):
         # determine where the json files are
         s3_bucket = os.environ.get('S3_BUCKET', None)
         if not s3_bucket:
-            self.logger.critical('handle: No S3_BUCKET environment variable found, {}'.format(bucket_name))
+            self.logger.critical('handle: No S3_BUCKET environment variable found')
             return False
         
         bucket_name = s3_bucket.split('.')[0]
