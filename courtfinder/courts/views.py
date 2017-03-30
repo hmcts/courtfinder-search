@@ -117,6 +117,7 @@ def court(request, slug):
         'spoe': request.GET.get('spoe', None),
         'postcode': request.GET.get('postcode',''),
         'courtcode': request.GET.get('courtcode', False),
+        'feature_leaflet_enabled': settings.FEATURE_LEAFLETS_ENABLED,
     })
     
 def leaflet (request, slug, leaflet_type):
