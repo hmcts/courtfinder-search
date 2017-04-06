@@ -229,30 +229,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
-#    def test_partial_postcode(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_partial_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15++&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=++SE154UH++&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_unknown_directive_action(self):
-#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
-#            c = Client()
-#            response = c.get('/search/results?postcode=SE15')
-#            self.assertRedirects(response, '/search/', 302)
-
     def test_redirect_directive_action(self):
         self.mock_mapit.side_effect = CourtSearchInvalidPostcode("MapIt doesn't know this postcode")
 
