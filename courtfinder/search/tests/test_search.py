@@ -377,6 +377,16 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
         self.assertIn('Some old open court', response.content)
 
+    def test_money_claims_nearest_court_option_enter_postcode_prefix_match(self):
+        c = Client()
+        response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
+        self.assertIn('No addresses', response.content)
+
+    def test_money_claims_nearest_court_option_enter_postcode_only_money_claims(self):
+        c = Client()
+        response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
+        self.assertNotIn('Leaflet Magistrates Court', response.content)
+
     def test_money_claims_existing_online(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
