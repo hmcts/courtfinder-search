@@ -268,7 +268,7 @@ class Postcode():
         elif r.status_code in [400, 404]:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
-        elif r.status_code == 403:
+        elif r.status_code in [403, 429]:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchError('MapIt rate limit exceeded: ' + str(r.status_code))
         else:
