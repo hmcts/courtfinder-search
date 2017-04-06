@@ -19,8 +19,21 @@ class SearchTestCase(TestCase):
         Ingest.emergency_message(imports['emergency_message'])
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
+        self.mapit_patcher = patch('search.court_search.Postcode.mapit')
+        self.mock_mapit = self.mapit_patcher.start()
+        self.mock_mapit.return_value = {
+            "shortcuts": {
+                "council": 2491
+            },
+            "areas": {
+                "2491": {"name": "Greater London Authority"}
+            },
+            "wgs84_lat": 51.46898208902647,
+            "wgs84_lon": -0.06624795134523233,
+        }
+
     def tearDown(self):
-        pass
+        self.mapit_patcher.stop()
 
     def test_format_results_with_postal_address(self):
         c = Client()
@@ -241,6 +254,8 @@ class SearchTestCase(TestCase):
 #            self.assertRedirects(response, '/search/', 302)
 
     def test_redirect_directive_action(self):
+        self.mock_mapit.side_effect = CourtSearchInvalidPostcode("MapIt doesn't know this postcode")
+
         with patch('search.rules.Rules.for_view', Mock(return_value={'action':'redirect', 'target':'search:postcode'})):
             c = Client()
             response = c.get('/search/results?postcode=BLARGH')
