@@ -11,7 +11,8 @@ from search.ingest import Ingest
 
 class SearchTestCase(TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         imports = json.loads(courts_json_1)
@@ -19,6 +20,7 @@ class SearchTestCase(TestCase):
         Ingest.emergency_message(imports['emergency_message'])
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
+    def setUp(self):
         self.mapit_patcher = patch('search.court_search.Postcode.mapit')
         self.mock_mapit = self.mapit_patcher.start()
         self.mock_mapit.return_value = {
