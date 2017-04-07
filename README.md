@@ -65,7 +65,7 @@ Install python dependencies (ignore the warnings):
 
 Install the test dependencies:
 
-    sudo apt install python-libxml2
+    sudo apt install python-libxml2 python-libxslt1 python-dev
 
 Install node packages, gulp and sass:
 
