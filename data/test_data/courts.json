@@ -516,7 +516,9 @@
             "facilities": [],
             "opening_times": [],
             "contacts": [],
-            "postcodes": [],
+            "postcodes": [
+                "CF37"
+            ],
             "info": null,
             "hide_aols": false,
             "info_leaflet": null,
@@ -747,7 +749,9 @@
             "facilities": [],
             "opening_times": [],
             "contacts": [],
-            "postcodes": [],
+            "postcodes": [
+                "CF37"
+            ],
             "info": null,
             "hide_aols": false,
             "info_leaflet": null,

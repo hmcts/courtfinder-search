@@ -135,26 +135,14 @@ class CourtSearch:
         return [r for r in results]
 
 
-    def __dedupe(self, seq):
-        """
-        remove duplicates from a sequence. Used below for removing dupes in result sets
-        From: http://www.peterbe.com/plog/uniqifiers-benchmark
-        """
-        seen = {}
-        result = []
-        for item in seq:
-            marker = item
-            if marker in seen: continue
-            seen[marker] = 1
-            result.append(item)
-        return result
-
     def __postcode_search( self, area_of_law ):
         p = self.postcode.postcode.lower().replace(' ', '')
-        results = CourtPostcode.objects.raw("SELECT * FROM search_courtpostcode WHERE (court_id IS NOT NULL and %s like lower(postcode) || '%%') ORDER BY -length(postcode)", [p])
+        results = CourtPostcode.objects \
+                .filter(court__areas_of_law=area_of_law) \
+                .extra(where=["%s LIKE lower(postcode) || '%%'"], params=[p]) \
+                .distinct('court')
 
-        return filter(lambda court: area_of_law in court.areas_of_law.all(),
-                      self.__dedupe([c.court for c in results]))
+        return [c.court for c in results]
 
 
     def __proximity_search( self ):

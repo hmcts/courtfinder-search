@@ -11,7 +11,8 @@ from search.ingest import Ingest
 
 class SearchTestCase(TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         imports = json.loads(courts_json_1)
@@ -19,6 +20,7 @@ class SearchTestCase(TestCase):
         Ingest.emergency_message(imports['emergency_message'])
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
+    def setUp(self):
         self.mapit_patcher = patch('search.court_search.Postcode.mapit')
         self.mock_mapit = self.mapit_patcher.start()
         self.mock_mapit.return_value = {
@@ -229,30 +231,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('<p id="scotland">', response.content)
 
-#    def test_partial_postcode(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_partial_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=SE15++&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_postcode_whitespace(self):
-#        c = Client()
-#        response = c.get('/search/results?postcode=++SE154UH++&aol=All')
-#        self.assertEqual(response.status_code, 200)
-#        self.assertIn('<div class="search-results">', response.content)
-
-#    def test_unknown_directive_action(self):
-#        with patch('search.rules.Rules.for_postcode', Mock(return_value={'action':'blah2389'})):
-#            c = Client()
-#            response = c.get('/search/results?postcode=SE15')
-#            self.assertRedirects(response, '/search/', 302)
-
     def test_redirect_directive_action(self):
         self.mock_mapit.side_effect = CourtSearchInvalidPostcode("MapIt doesn't know this postcode")
 
@@ -376,6 +354,16 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
         self.assertIn('Some old open court', response.content)
+
+    def test_money_claims_nearest_court_option_enter_postcode_prefix_match(self):
+        c = Client()
+        response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
+        self.assertIn('No addresses', response.content)
+
+    def test_money_claims_nearest_court_option_enter_postcode_only_money_claims(self):
+        c = Client()
+        response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
+        self.assertNotIn('Leaflet Magistrates Court', response.content)
 
     def test_money_claims_existing_online(self):
         c = Client()
