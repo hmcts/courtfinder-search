@@ -63,6 +63,10 @@ Install python dependencies (ignore the warnings):
 
     pip install -r requirements/local.txt
 
+Install the test dependencies:
+
+    sudo apt install python-libxml2
+
 Install node packages, gulp and sass:
 
     npm install
