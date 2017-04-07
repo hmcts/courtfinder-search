@@ -16,6 +16,7 @@ RUN apt-get clean \
         git \
         build-essential \
         libssl-dev \
+        libxml-dev \
         libffi-dev
 
 

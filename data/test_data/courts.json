@@ -26,6 +26,13 @@
             "admin_id": 2800,
             "facilities": [
                 {
+                    "image_description": "New-style facilities icon",
+                    "image": "",
+                    "image_file_path": "images/newstyle_facilitiesicon.png",
+                    "description": "<p>New-style facility icons are supported at this court</p>\\r\\n",
+                    "name": "New-style facilities icon"
+                },
+                {
                     "image_description": "Guide dogs icon.",
                     "image": "guide_dogs",
                     "description": "<p>Guide Dogs are welcome at this court.</p>\\r\\n",
