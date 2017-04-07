@@ -28,9 +28,9 @@ sudo apt-get install --fix-missing -y \
 # Development tools
 sudo apt-get install --fix-missing -y \
   htop
-#Test dependencies
+# Test dependencies
 sudo apt-get install --fix-missing -y \
-  python-libxml2 
+  python-libxml2
 
 # Add the en_GB locale
 locale -a | grep -q en_GB.utf8 || sudo locale-gen en_GB.UTF-8
