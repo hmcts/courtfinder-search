@@ -1,13 +1,17 @@
-import pprint
-import requests
 import json
+import pprint
 import re
-from django.test import TestCase, Client
-from mock import Mock, patch
-from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
-from search.models import *
+import requests
+
+import cssselect
 from django.conf import settings
+from django.test import TestCase, Client
+from lxml import html as lh
+from mock import Mock, patch
+
+from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
 from search.ingest import Ingest
+from search.models import *
 
 
 class SearchTestCase(TestCase):
@@ -126,7 +130,6 @@ class SearchTestCase(TestCase):
         self.assertNotIn('Visit or Write to us:', response.content)
         self.assertIn('Maps and directions', response.content)
 
-
     def test_postal_address(self):
         c = Client()
         response = c.get('/courts/postal-address')
@@ -149,7 +152,7 @@ class SearchTestCase(TestCase):
         self.assertNotIn('Visit us:', response.content)
         self.assertIn('Visit or write to us:', response.content)
         self.assertIn('Maps and directions', response.content)
-    
+
     def test_leaflet_links_for_magistrates_court(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
@@ -167,7 +170,7 @@ class SearchTestCase(TestCase):
             self.assertIn('Witness for prosecution information for printing', response.content)
             self.assertIn('Witness for defence information for printing', response.content)
             self.assertIn('Juror information for printing', response.content)
-    
+
     def test_leaflet_links_for_non_magistrate_or_non_crown_courts(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
@@ -176,7 +179,7 @@ class SearchTestCase(TestCase):
             self.assertNotIn('Witness for prosecution information for printing', response.content)
             self.assertNotIn('Witness for defence information for printing', response.content)
             self.assertNotIn('Juror information for printing', response.content)
-    
+
     def test_court_image_url_is_based_on_settings(self):
         with self.settings(COURT_IMAGE_BASE_URL='http://example.com/images/'):
             c = Client()
@@ -195,3 +198,33 @@ class SearchTestCase(TestCase):
             response = c.get('/courts/leaflet-magistrates-court')
             self.assertNotIn('Leaflets for printing', response.content)
 
+    def test_facilty_icons(self):
+
+        # Obtain the list of facilities for the test court
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        tree = lh.fromstring(response.content)
+        facility_list = tree.cssselect("div[id=facilities] ul li")
+
+        summary = []
+        for elem in facility_list:
+            spans = elem.cssselect("span")
+            assert spans[0].get("class") == "icon"
+            img = spans[0].cssselect("img")[0]
+
+            if img.get("class") == "":  # New-style
+                assert img.get("src") == "/assets/images/newstyle_facilitiesicon.png"
+                assert img.get("alt") == "New-style facilities icon"
+                assert spans[1].get("class") == "facility"
+                for para in spans[1].cssselect("p"):
+                    assert para[0].text == "New-style facility icons are supported at this court"
+                summary.append("new")
+
+            elif img.get("class").startswith("icon-"):  # Old-style
+                summary.append("old")
+
+            else:  # Unknown style
+                assert False, "Bad facility icon html: {}".format(elem.text)
+
+        self.assertIn("new", summary, "No new style facilities found")
+        self.assertIn("old", summary, "No old style facilities found")
