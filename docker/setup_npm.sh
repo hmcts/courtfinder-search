@@ -1,5 +1,5 @@
 #!/bin/bash -e
+ln -s /usr/bin/nodejs /usr/bin/node
 npm install
 npm install gulp -g
-npm install gulp --save-dev
 gem install sass

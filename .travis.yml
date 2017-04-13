@@ -1,0 +1,24 @@
+language: python
+dist: trusty
+python:
+  - "2.7"
+services:
+  - postrgresql
+before_install:
+  - sudo ./apt/base.sh
+  - sudo ./apt/testing.sh
+install:
+  - "pip install setuptools==32"
+  - "pip install -r requirements.txt"
+  - "pip install -r requirements/testing.txt"
+  - "npm config set registry http://registry.npmjs.org/"
+  - "sudo $(which npm) install gulp -g"
+  - "npm install"
+  - "sudo gem install sass"
+before_script:
+  - "psql -c 'CREATE DATABASE courtfinder_search;' -U postgres"
+  - "python courtfinder/manage.py syncdb --noinput"
+  - "python courtfinder/manage.py populate-db --datadir=data/test_data --ingest"
+  - "gulp"
+script:
+  - "cd courtfinder && python manage.py test"

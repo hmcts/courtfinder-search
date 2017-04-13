@@ -6,35 +6,13 @@ ssh-keyscan -t rsa,dsa -H github.com >> /home/vagrant/.ssh/known_hosts
 echo "Installing debian dependencies"
 sudo apt-get clean
 sudo apt-get update
-# Dependencies from Dockerfile
-sudo apt-get install --fix-missing -y \
-  postgis \
-  postgresql-9.3-postgis-2.1 \
-  python-pip \
-  python-dev \
-  wget \
-  npm \
-  ruby \
-  nodejs-legacy \
-  libpq-dev \
-  libnet-amazon-s3-tools-perl \
-  git \
-  build-essential \
-  libssl-dev \
-  libffi-dev
-# Application dependencies
-sudo apt-get install --fix-missing -y \
-  redis-server
-# Development tools
-sudo apt-get install --fix-missing -y \
-  htop
-# Test dependencies
-sudo apt-get install --fix-missing -y \
-  python-libxml2 \
-  python-libxslt1 \
-  python-dev
+cd /courtfinder_search
+sudo ./apt/production.sh
+sudo ./apt/development.sh
+sudo ./apt/testing.sh
 
 # Add the en_GB locale
+echo "Installing locale"
 locale -a | grep -q en_GB.utf8 || sudo locale-gen en_GB.UTF-8
 
 echo "Setting up virtualenv"
@@ -65,6 +43,7 @@ sudo chown vagrant /logs
 echo "Installing python dependencies"
 pip install setuptools==32
 pip install -r requirements.txt
+pip install -r requirements/testing.txt
 
 echo "Setting up postgres"
 sudo -u postgres bash -c "psql postgres -tAc 'SELECT 1 FROM pg_roles WHERE rolname='\''vagrant'\' | grep -q 1 || createuser --superuser vagrant"
@@ -77,6 +56,7 @@ cd /courtfinder_search/courtfinder/
 ./manage.py populate-db --datadir=../data/test_data --ingest
 
 echo "Installing frontend dependencies"
+sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm install gulp -g
 npm install
 sudo gem install sass
