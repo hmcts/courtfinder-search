@@ -30,3 +30,5 @@ ALLOWED_HOSTS = '*'
 COURTFINDER_ADMIN_HEALTHCHECK_URL = 'https://courtfinder.is.dsd.io/admin/healthcheck.json'
 COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-staging/courts.json'
 COURT_IMAGE_BASE_URL = 'https://courtfinder-servicegovuk-staging.s3.amazonaws.com/images/'
+
+FEATURE_LEAFLETS_ENABLED = True
