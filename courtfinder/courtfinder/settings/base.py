@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
-from os import environ
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
+
+def is_enabled(name, default=False):
+    default = 'yes' if default else 'no'
+    return os.getenv(name, default).lower() in ['enabled', 'yes', 'true', '1']
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
