@@ -115,7 +115,7 @@ class Ingest:
                 facility_image = facility_obj['image'] \
                         if "image" in facility_obj and facility_obj["image"] else ""
                 facility_image_description = facility_obj['image_description'] \
-                        if "image_decsription" in facility_obj and \
+                        if "image_description" in facility_obj and \
                         facility_obj["image_description"] else ""
                 facility_image_file_path = facility_obj['image_file_path'] \
                         if "image_file_path" in facility_obj and \
