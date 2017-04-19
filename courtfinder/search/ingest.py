@@ -106,11 +106,20 @@ class Ingest:
                     )
 
             for facility_obj in court_obj['facilities']:
-                facility_name = facility_obj['name']
-                facility_description = facility_obj['description']
-                facility_image = facility_obj['image']
-                facility_image_description = facility_obj['image_description']
-                facility_image_file_path = facility_obj['image_file_path'] if "image_file_path" in facility_obj else ""
+                facility_name = facility_obj['name'] \
+                        if "name" in facility_obj and \
+                        facility_obj["name"] else ""
+                facility_description = facility_obj['description'] \
+                        if "description" in facility_obj and \
+                        facility_obj["description"] else ""
+                facility_image = facility_obj['image'] \
+                        if "image" in facility_obj and facility_obj["image"] else ""
+                facility_image_description = facility_obj['image_description'] \
+                        if "image_decsription" in facility_obj and \
+                        facility_obj["image_description"] else ""
+                facility_image_file_path = facility_obj['image_file_path'] \
+                        if "image_file_path" in facility_obj and \
+                        facility_obj["image_file_path"] else ""
                 facility, created = Facility.objects.db_manager(database_name).get_or_create(
                     name=facility_name,
                     description=facility_description,
