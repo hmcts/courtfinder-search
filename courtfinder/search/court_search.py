@@ -248,6 +248,8 @@ class Postcode():
 
         r = self._debug = requests.get(mapit_url, headers=MAPIT_HEADERS)
 
+        self.log_usage(r.headers)
+
         if r.status_code == 200:
             try:
                 return r.json()
@@ -262,6 +264,34 @@ class Postcode():
         else:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
+
+    def log_usage(self, headers):
+        usage = self.get_usage(headers)
+        usage_message = 'usage: {current}/{limit} ({percent}%)'.format(**usage)
+
+        if usage['percent'] > 95:
+            loggers['mapit'].error(usage_message)
+        elif usage['percent'] > 80:
+            loggers['mapit'].warning(usage_message)
+        else:
+            loggers['mapit'].info(usage_message)
+
+    def get_usage(self, headers):
+        limit = headers.get('X-Quota-Limit')
+        current = headers.get('X-Quota-Current')
+        percent = None
+
+        if limit is not None and current is not None:
+            try:
+                current = int(current)
+                limit = int(limit)
+                percent = int((float(current) / limit) * 100)
+            except (ValueError, ZeroDivisionError): # Mapit sent us something unexpected
+                pass
+
+        return {'current': current, 'limit': limit, 'percent': percent}
+
+        return 'usage: {}/{} ({})'.format(current, limit, percent)
 
     def is_full_postcode( self, postcode ):
         # Regex from: https://gist.github.com/simonwhitaker/5748515

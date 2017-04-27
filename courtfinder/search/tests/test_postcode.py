@@ -51,6 +51,7 @@ class PostcodeTestCase(TestCase):
     def _get_from_mapit_mock( self, url, headers ):
         mock_response = mock.Mock()
         mock_response.status_code = 200
+        mock_response.headers = {}
 
         if url.endswith('SE15'):
             mock_response.json.return_value =  PostcodeTestCase.mock_mapit_partial
@@ -91,3 +92,24 @@ class PostcodeTestCase(TestCase):
     def test_nowhere_postcode(self):
         with self.assertRaises(CourtSearchInvalidPostcode):
             p = Postcode(self.nowhere_postcode)
+
+    def test_log_usage(self):
+        mapit_logger = mock.Mock()
+        with mock.patch.dict('search.court_search.loggers', mapit=mapit_logger):
+            p = Postcode(self.partial_postcode)
+
+            tests = [
+                {'current': 10,    'limit': 50,   'percent': 20,   'log_method': mapit_logger.info},
+                {'current': 81,    'limit': 100,  'percent': 81,   'log_method': mapit_logger.warning},
+                {'current': 96,    'limit': 100,  'percent': 96,   'log_method': mapit_logger.error},
+                {'current': None,  'limit': 50,   'percent': None, 'log_method': mapit_logger.error},
+                {'current': 10,    'limit': None, 'percent': None, 'log_method': mapit_logger.error},
+                {'current': "bad", 'limit': 50,   'percent': None, 'log_method': mapit_logger.error},
+                {'current': 10,    'limit': 0,    'percent': None, 'log_method': mapit_logger.error},
+            ]
+            for test in tests:
+                headers = {'X-Quota-Current': test['current'], 'X-Quota-Limit': test['limit']}
+
+                p.log_usage(headers)
+
+                assert test['log_method'].called
