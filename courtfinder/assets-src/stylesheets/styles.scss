@@ -320,6 +320,11 @@ $small-width: 800px;
   #facilities {
     li {
       clear: both;
+
+      .facility {
+        display: block;
+        overflow: hidden;
+      }
     }
     .icon {
       position: relative;
