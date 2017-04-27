@@ -8,16 +8,13 @@ from django.test import TestCase, Client
 from search.court_search import Postcode, CourtSearchInvalidPostcode, CourtSearchError
 
 
-class MockResponse():
-    def __init__(self):
-        self.status_code = 200
-        self.text = ''
-
-
 class PostcodeTestCase(TestCase):
-    mock_mapit_partial = '{"wgs84_lat": 51.47263752259685, "wgs84_lon": -0.06603088421009512, "postcode": "SE15" }'
-    mock_mapit_full = """
-        {
+    mock_mapit_partial = {
+        "wgs84_lat": 51.47263752259685,
+        "wgs84_lon": -0.06603088421009512,
+        "postcode": "SE15"
+    }
+    mock_mapit_full = {
             "postcode": "SE15 4UH",
             "shortcuts": { "WMC": 65913, "council": 2491, "ward": 8328 },
             "wgs84_lat": 51.468945906164286, "wgs84_lon": -0.06623508303668792,
@@ -31,14 +28,13 @@ class PostcodeTestCase(TestCase):
                     "generation_low": 1,
                     "id": 2491,
                     "name": "Southwark Borough Council",
-                    "parent_area": null,
+                    "parent_area": None,
                     "type": "LBO",
                     "type_name": "London borough"
                 }
             }
         }
-    """
-    mock_mapit_no_location = '{"postcode": "GY1 1AJ", "areas": {}}'
+    mock_mapit_no_location = {"postcode": "GY1 1AJ", "areas": {}}
 
     full_postcode = 'SE15 4UH'
     partial_postcode = 'SE15'
@@ -53,14 +49,15 @@ class PostcodeTestCase(TestCase):
         self.patcher.stop()
 
     def _get_from_mapit_mock( self, url, headers ):
-        mock_response = MockResponse()
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
 
         if url.endswith('SE15'):
-            mock_response.text =  PostcodeTestCase.mock_mapit_partial
+            mock_response.json.return_value =  PostcodeTestCase.mock_mapit_partial
         elif url.endswith('SE15 4UH'):
-            mock_response.text =  PostcodeTestCase.mock_mapit_full
+            mock_response.json.return_value =  PostcodeTestCase.mock_mapit_full
         elif url.endswith('GY1 1AJ'):
-            mock_response.text = PostcodeTestCase.mock_mapit_no_location
+            mock_response.json.return_value = PostcodeTestCase.mock_mapit_no_location
         elif url.endswith('Service Down'):
             mock_response.status_code = 500
         else:

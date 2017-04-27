@@ -250,8 +250,8 @@ class Postcode():
 
         if r.status_code == 200:
             try:
-                return json.loads(r.text)
-            except:
+                return r.json()
+            except ValueError:
                 raise CourtSearchError('MapIt: cannot parse response JSON')
         elif r.status_code in [400, 404]:
             loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
