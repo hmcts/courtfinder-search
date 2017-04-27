@@ -180,7 +180,7 @@
             <span class="icon">
               <img src="{% static facility.image_src %}" class="{{ facility.image_class }}" alt="{{ facility.image_description }}">
             </span>
-            <span class="facility">{{ facility.description|default:""|striptags }}</span>
+            <span class="facility">{{ facility.description|default:""|striptags|safe }}</span>
           </li>
         {% endfor %}
         </ul>
