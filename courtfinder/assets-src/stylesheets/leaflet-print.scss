@@ -1,42 +1,45 @@
-@media print{
-	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner, #global-header
-	{
+@media print {
+
+	#global-breadcrumb, a[href='javascript:window.print()'], #feedback-banner, #global-header {
 		display:none;
 	}
-	#leaflet
-  {
-    h2{
+
+	#leaflet {
+    h2 {
       color: black;
     }
+
     page-break-before: none;
     page-break-after: none;
   	page-break-inside: avoid;
-    
 	}
-	@page 
-    {
-        size:  auto;   /* auto is the initial value */
-        margin: 2.5em;
-        margin-bottom: 3em;
-        margin-top: 3em;
-    }
+
+	@page {
+    size:  auto;   /* auto is the initial value */
+    margin: 2.5em;
+    margin-bottom: 3em;
+    margin-top: 3em;
+  }
 
 	
 	@font-face {
-  		font-family: GDS-Logo;
-  		src: local("HelveticaNeue"), local("Helvetica Neue"), local("Arial"), local("Helvetica"); 
-  	}
-  	#facilities {
+    font-family: GDS-Logo;
+    src: local("HelveticaNeue"), local("Helvetica Neue"), local("Arial"), local("Helvetica"); 
+  }
+
+  #facilities {
     li {
       clear: both;
     }
-    ul li .facility{
+
+    ul li .facility {
       width: 80% !important;
     }
+
     .icon {
       img {
         max-width: none !important;
       }
     }
-    }	  
+  }
 }	
