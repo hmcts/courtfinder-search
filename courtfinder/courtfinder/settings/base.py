@@ -159,91 +159,36 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
 )
 
-# Ensure logging directory is created
-LOGPATH = abspath(PROJECT_ROOT + '/../logs')
-if not os.path.exists(LOGPATH):
-    os.makedirs(LOGPATH)
-
 # Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'root': {
+        'handlers': ['sentry'],
+        'level': 'DEBUG',
+    },
     'formatters': {
-        'simple': {
-            'format': '%(asctime)s %(message)s'
-        },
         'no-format': {
             'format': '%(message)s'
-        }
+        },
     },
     'handlers': {
-        'error-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename':  LOGPATH + '/errors.log',
-        },
-        'missed-las-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/missed-las.log',
-        },
-        'missed-aols-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/missed-aols.log',
-        },
-        'mapit-file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/mapit.log',
-        },
-        'search-method-file': {
+        # TODO: Add support for JSON logs throughout the application
+        'courtfinder-requests': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': LOGPATH + '/search-method.log',
-        },
-        'courtfinder-requests-file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'no-format',
-            'filename': LOGPATH + '/requests.log',
-        }
+        },
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
     },
     'loggers': {
-        'search.error': {
-            'handlers': ['error-file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'search.mapit': {
-            'handlers': ['mapit-file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'search.la': {
-            'handlers': ['missed-las-file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'search.aol': {
-            'handlers': ['missed-aols-file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'search.method': {
-            'handlers': ['search-method-file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
         'courtfinder.requests': {
-            'handlers': ['courtfinder-requests-file'],
+            'handlers': ['courtfinder-requests'],
             'level': 'DEBUG',
-            'propagate': True,
+            'propagate': False,
         }
     },
 }
