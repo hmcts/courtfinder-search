@@ -15,6 +15,5 @@ Feature: Search results page
     And I should see court address
   # And I should see document exchange
     And I should see the cases heard at this venue
-  # And I should see document exchange
   # And I should see the court location code
     And I should see a link for more details about the court
