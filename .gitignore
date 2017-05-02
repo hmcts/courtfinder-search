@@ -75,3 +75,6 @@ generated/
 
 //Don't track this file as it's v. difficult to merge
 data/courts.json
+
+# Ignore IDE files
+/.idea
