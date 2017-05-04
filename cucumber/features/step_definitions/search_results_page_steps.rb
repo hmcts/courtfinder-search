@@ -13,7 +13,7 @@ end
 Then(/^I should see court header$/) do
   expect(search_results_page.search_results.court_results.header.count).to eq 10
   expect(search_results_page.search_results.court_results.header[0].text)
-    .to eq 'Bow County Court and Family Court'
+    .to eq 'Tameside Magistrates\' Court'
 end
 
 Then(/^I should see court address$/) do
@@ -36,5 +36,13 @@ Then(/^I should see a link for more details about the court$/) do
   expect(search_results_page.search_results.court_results.more_details_link
     .count).to eq 10
   expect(search_results_page.search_results.court_results.more_details_link[1]
-    .text).to eq 'More details about Barkingside Magistrates\' Court'
+    .text).to eq 'More details about Accrington Magistrates\' Court'
+end
+
+Then(/^I should see a links to further information$/) do
+  expect(search_results_page.search_results.court_results.court_aol[1].li[3]
+    .text).to eq 'Divorce'
+  # TypeError: no implicit conversion of String into Integer
+  # expect(search_results_page.search_results.court_results.court_aol[0].li[1]
+  #  .link['href']).to end_with('/divorce')
 end

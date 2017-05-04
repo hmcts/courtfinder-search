@@ -14,12 +14,12 @@ Then(/^I should see issues:$/) do |issues|
 end
 
 Then(/^each issue should have a description$/) do
-  expect(area_of_law_page.form.aol_name.count).to eq 16
-  expect(area_of_law_page.form.aol_description.count).to eq 16
+  expect(area_of_law_page.form.aol_name.count).to eq 9
+  expect(area_of_law_page.form.aol_description.count).to eq 9
 end
 
 Then(/^none of the above is selected by default$/) do
-  expect(area_of_law_page.form.block_label[15]).to be_checked
+  expect(area_of_law_page.form.block_label[8]).to be_checked
 end
 
 # TODO: check where this url is going
