@@ -12,8 +12,9 @@ class SearchResultsPage < BasePage
       elements :court_town, '.court-town'
       elements :court_postcode, '.court-postcode'
       sections :court_aol, '.court-aol' do
-        element :court_result_heading, '.court-result-heading' do
-          elements :li, 'li'
+        element :court_result_heading, '.court-result-heading'
+        sections :li, 'ul > li' do
+          elements :link, 'a'
         end
       end
       elements :more_details_link, '.more-details-link'
