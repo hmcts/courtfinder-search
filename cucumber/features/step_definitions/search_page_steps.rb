@@ -14,14 +14,17 @@ end
 
 Then(/^I should see an option to search by court name or address$/) do
   expect(search_page.main_option.option[1].text).to eq 'Court Name or Address'
+  expect(search_page.main_option.option[3].label.input['type']).to eq 'radio'
 end
 
 Then(/^I should see an option to search by A\-Z list of all courts$/) do
   expect(search_page.main_option.option[2].text).to eq 'A-Z list of all courts'
+  expect(search_page.main_option.option[3].label.input['type']).to eq 'radio'
 end
 
 Then(/^I should see an option to search by court location code$/) do
   expect(search_page.main_option.option[3].text).to eq 'Court location code'
+  expect(search_page.main_option.option[3].label.input['type']).to eq 'radio'
 end
 
 Then(/^I should see the next button$/) do
