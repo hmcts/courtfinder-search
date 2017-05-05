@@ -39,10 +39,14 @@ Then(/^I should see a link for more details about the court$/) do
     .text).to eq 'More details about Accrington Magistrates\' Court'
 end
 
-Then(/^I should see a links to further information$/) do
+Then(/^I should not see a link for further information on Divorce$/) do
   expect(search_results_page.search_results.court_results.court_aol[1].li[3]
     .text).to eq 'Divorce'
-  # TypeError: no implicit conversion of String into Integer
-  # expect(search_results_page.search_results.court_results.court_aol[0].li[1]
-  #  .link['href']).to end_with('/divorce')
+  expect(search_results_page.search_results.court_results.court_aol[1].li[3])
+    .to have_no_link
+end
+
+Then(/^I should see a link for further information on Bankruptcy$/) do
+  expect(search_results_page.search_results.court_results.court_aol[4].li[0]
+    .link['href']).to end_with('/bankruptcy')
 end
