@@ -181,6 +181,12 @@
                     "name": "Social security",
                     "external_link_desc": null,
                     "external_link": null
+                },
+                {
+                    "local_authorities": [],
+                    "name": "High Court District Registry",
+                    "external_link_desc": null,
+                    "external_link": null
                 }
             ],
             "image_file": "accrington_magistrates_court.jpg",

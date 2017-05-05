@@ -26,7 +26,8 @@ areas_of_law_description = {
     "Forced marriage": "being made to marry against your will.",
     "Forced marriage and FGM": "being made to marry or undergo mutilation against your will.",
     "Housing possession": "Evictions and rental disputes.",
-    "High court": "",
+    "High court": "courts dealing with High Court matters",
+    "High Court District Registry": "courts dealing with High Court matters",
     "Immigration": "seeking asylum, right to live in the UK and appealing deportation.",
     "Money claims": "small claims, consumer, negligence and personal injury claims.",
     "Probate": "will settlement and disputes.",
@@ -67,10 +68,7 @@ def aol(request):
     areas_of_law = AreaOfLaw.objects.all().exclude(name='High court').order_by('name')
     aol = request.GET.get('aol', 'All')
     for area in areas_of_law:
-        try:
-            area.description = areas_of_law_description.get(area.name, None)
-        except KeyError:
-            pass
+        area.description = areas_of_law_description.get(area.name)
     return render(request, 'search/aol.jinja', {
         'areas_of_law': areas_of_law, 'aol': aol,
     })
