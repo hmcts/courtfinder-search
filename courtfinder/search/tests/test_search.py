@@ -1,6 +1,7 @@
 import requests
 import json
 import re
+import lxml.html
 from django.test import TestCase, Client
 from mock import Mock, patch
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
@@ -53,6 +54,22 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/aol.jinja')
         self.assertIn('About your issue', response.content)
+        print(response.content)
+
+    def test_all_areas_of_law_have_descriptions(self):
+        c = Client()
+        response = c.get('/search/aol')
+        h = lxml.html.fromstring(response.content)
+        for label in h.cssselect('#aols .form-label'):
+            name = label.cssselect('.aol-name')[0].text
+            description = label.cssselect('.aol-description')[0].text
+            self.assertNotEqual(description, 'None', '{} has no description'.format(name))
+
+    def test_area_of_law_with_no_description_does_not_error(self):
+        aol = AreaOfLaw.objects.create(name='Example')
+        c = Client()
+        response = c.get('/search/aol')
+        self.assertEqual(response.status_code, 200)
 
     def test_spoe_page_with_has_spoe(self):
         c = Client()
