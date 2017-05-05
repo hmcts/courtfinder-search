@@ -19,6 +19,8 @@ Feature: Search results page
     And I should see the cases heard at this venue
 
   Scenario: Cases heard at this venue
-    Then I should see a links to further information
+    Then I should see a link for further information on Bankruptcy
+    But I should not see a link for further information on Divorce
+
 
 
