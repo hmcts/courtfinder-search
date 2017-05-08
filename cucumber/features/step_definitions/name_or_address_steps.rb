@@ -13,15 +13,15 @@ Then(/^I should see the hint for the form$/) do
     .to eq 'Enter one of the following'
 end
 
-When(/^I search for '(.*?)'$/) do |arg1|
-  name_or_address_page.form_block.address.set(arg1)
+When(/^I search for '(.*?)'$/) do |string|
+  name_or_address_page.form_block.address.set(string)
   name_or_address_page.continue_button.click
 end
 
-Then(/^I should see the result is '(.*?)'$/) do |arg1|
+Then(/^I should see the result is '(.*?)'$/) do |string|
   expect(search_results_page.search_results.number_of_results.text).to eq '1'
   expect(search_results_page.search_results.court_results.header[0].text)
-    .to eq arg1
+    .to eq string
 end
 
 Then(/^I should see the top result is Liverpool Civil and Family Court$/) do
@@ -30,7 +30,7 @@ Then(/^I should see the top result is Liverpool Civil and Family Court$/) do
     .to eq 'Liverpool Civil and Family Court'
 end
 
-Then(/^I should see '(.*?)' error message$/) do |arg1|
+Then(/^I should see '(.*?)' error message$/) do |string|
   expect(name_or_address_page.validation_error.text)
-    .to have_content arg1
+    .to have_content string
 end
