@@ -11,7 +11,7 @@ Feature: Court location code page
 
   Scenario: Search using a valid court location code
     When I search using a valid court location code
-    Then I should see the results for 1725
+    Then I should see the results for that code
 
   Scenario: Search using an invalid court location code
     When I search using an invalid court location code

@@ -19,7 +19,7 @@ When(/^I search using a valid court location code$/) do
   court_code_page.search_index_page.continue_button.click
 end
 
-Then(/^I should see the results for 1725$/) do
+Then(/^I should see the results for that code$/) do
   expect(search_results_page.search_results.number_of_results.text).to eq '1'
   expect(search_results_page.search_results.court_results.header[0].text)
     .to eq 'Accrington Magistrates\' Court'
