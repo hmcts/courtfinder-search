@@ -42,4 +42,4 @@ end
 
 Capybara.javascript_driver = Capybara.default_driver
 Capybara.current_driver = Capybara.default_driver
-Capybara.app_host = "http://0.0.0.0:8000#{Capybara.server_port}"
+Capybara.app_host = 'http://0.0.0.0:8000'
