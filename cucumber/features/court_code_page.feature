@@ -1,4 +1,4 @@
-Feature: Court location code
+Feature: Court location code page
 
   Background: Navigating to the court location code page
     Given I visit the court location code page
