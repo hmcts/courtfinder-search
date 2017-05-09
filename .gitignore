@@ -77,4 +77,7 @@ generated/
 data/courts.json
 
 # Ignore IDE files
-/.idea
+.idea
+
+# Ignore screenshots
+screenshot_cucumber_*
