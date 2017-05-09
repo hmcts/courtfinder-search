@@ -1,6 +1,6 @@
-Feature: Court code page
+Feature: Court location code
 
-  Background: Navigating to the court code page
+  Background: Navigating to the court location code page
     Given I visit the court location code page
 
   Scenario: Displays header
