@@ -162,22 +162,29 @@ INSTALLED_APPS = INSTALLED_APPS + (
 # Logging
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
     'root': {
-        'handlers': ['sentry'],
+        'handlers': ['sentry', 'default'],
         'level': 'DEBUG',
     },
     'formatters': {
         'no-format': {
             'format': '%(message)s'
         },
+        'simple': {
+            'format': '%(asctime)s %(message)s'
+        },
     },
     'handlers': {
-        # TODO: Add support for JSON logs throughout the application
-        'courtfinder-requests': {
+        'json': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'no-format',
+        },
+        'default': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         },
         'sentry': {
             'level': 'ERROR',
@@ -186,10 +193,15 @@ LOGGING = {
     },
     'loggers': {
         'courtfinder.requests': {
-            'handlers': ['courtfinder-requests'],
+            'handlers': ['json'],
             'level': 'DEBUG',
             'propagate': False,
-        }
+        },
+        'search.mapit.json': {
+            'handlers': ['json'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 
