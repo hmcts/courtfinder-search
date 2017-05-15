@@ -17,6 +17,7 @@ MAPIT_HEADERS = {'X-Api-Key': settings.MAPTI_API_KEY if settings.MAPTI_API_KEY e
 loggers = {
     'error': logging.getLogger('search.error'),
     'mapit': logging.getLogger('search.mapit'),
+    'mapit_json': logging.getLogger('search.mapit.json'),
     'la': logging.getLogger('search.la'),
     'aol': logging.getLogger('search.aol'),
     'method': logging.getLogger('search.method'),
@@ -256,25 +257,27 @@ class Postcode():
             except ValueError:
                 raise CourtSearchError('MapIt: cannot parse response JSON')
         elif r.status_code in [400, 404]:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
+            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
             raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
         elif r.status_code in [403, 429]:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
+            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
             raise CourtSearchError('MapIt rate limit exceeded: ' + str(r.status_code))
         else:
-            loggers['mapit'].error("%d - %s - %s" % (r.status_code, postcode, r.text))
+            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
 
     def log_usage(self, headers):
         usage = self.get_usage(headers)
-        usage_message = 'usage: {current}/{limit} ({percent}%)'.format(**usage)
+        usage_message = 'MapIt usage: {current}/{limit} ({percent}%)'.format(**usage)
+        usage['message'] = usage_message
+        usage['tags'] = ['mapit']
 
         if usage['percent'] > 95:
-            loggers['mapit'].error(usage_message)
+            loggers['mapit_json'].error(json.dumps(usage))
         elif usage['percent'] > 80:
-            loggers['mapit'].warning(usage_message)
+            loggers['mapit_json'].warning(json.dumps(usage))
         else:
-            loggers['mapit'].info(usage_message)
+            loggers['mapit_json'].info(json.dumps(usage))
 
     def get_usage(self, headers):
         limit = headers.get('X-Quota-Limit')

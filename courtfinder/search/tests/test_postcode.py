@@ -95,7 +95,7 @@ class PostcodeTestCase(TestCase):
 
     def test_log_usage(self):
         mapit_logger = mock.Mock()
-        with mock.patch.dict('search.court_search.loggers', mapit=mapit_logger):
+        with mock.patch.dict('search.court_search.loggers', mapit_json=mapit_logger):
             p = Postcode(self.partial_postcode)
 
             tests = [
