@@ -163,7 +163,7 @@ def results(request):
                 return redirect(reverse('search:postcode')+'?postcode='+
                                 postcode+'&error=badpostcode')
             except CourtSearchClientError as e:
-                return bad_request(request)
+                return bad_request(request, e)
 
             rules = Rules.for_view(postcode, aol)
 
