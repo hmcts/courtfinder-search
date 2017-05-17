@@ -105,9 +105,9 @@ def address(request):
 
 
 def courtcode(request):
-    error = request.GET.get('error', None)
-    courtcode = request.GET.get('courtcode', None)
-    return render(request, 'search/courtcode.jinja', {'error': error, 'courtcode' : courtcode})
+    error = request.GET.get('error')
+    query = request.GET.get('q')
+    return render(request, 'search/courtcode.jinja', {'error': error, 'query' : query})
 
 
 def results(request):
