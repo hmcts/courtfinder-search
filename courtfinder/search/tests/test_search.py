@@ -14,10 +14,7 @@ class SearchTestCase(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """
-        TODO: on Django upgrade:
-            https://docs.djangoproject.com/en/1.8/topics/testing/tools/#django.test.TestCase.setUpTestData
-        """
+        super(SearchTestCase, cls).setUpClass()
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         courts_json_1 = open(test_data_dir + 'courts.json').read()
         imports = json.loads(courts_json_1)

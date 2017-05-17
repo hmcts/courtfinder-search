@@ -1,5 +1,5 @@
 six==1.8.0
-Django==1.7.3
+Django==1.8
 MarkupSafe==0.23
 newrelic==2.34.0.29
 django-moj-template==0.23.1
