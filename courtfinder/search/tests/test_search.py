@@ -54,7 +54,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/aol.jinja')
         self.assertIn('About your issue', response.content)
-        print(response.content)
 
     def test_all_areas_of_law_have_descriptions(self):
         c = Client()

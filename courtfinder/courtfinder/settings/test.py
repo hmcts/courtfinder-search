@@ -6,6 +6,9 @@ from os import environ
 
 from .base import *
 
+import logging
+logging.disable(logging.CRITICAL)
+
 
 ########## DATABASE CONFIGURATION
 DATABASES = {
