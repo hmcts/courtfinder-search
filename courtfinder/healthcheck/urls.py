@@ -13,5 +13,4 @@ urlpatterns = patterns('healthcheck.views',
         HealthcheckView.as_view(),
         name='healthcheck_json'
     ),
-    url(r'^pingdom-search-statistics$', 'pingdom_search_statistics'),
 )
