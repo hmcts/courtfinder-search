@@ -1,12 +1,11 @@
-six==1.8.0
+six==1.10.0
 Django==1.11.1
-MarkupSafe==0.23
+MarkupSafe==1.0
 newrelic==2.34.0.29
 django-moj-template==0.23.1
 psycopg2==2.7.1
-requests[security]==2.7.0
-boto==2.29.1
-boto3==1.2.3
+requests[security]==2.14.2
+boto3==1.4.3
 python-dateutil==2.2
 raven==5.1.1
 LogentriesLogger==0.2.1
