@@ -14,14 +14,14 @@ class Court(models.Model):
     alert = models.CharField(max_length=4096, null=True, default=None)
     directions = models.CharField(max_length=4096, null=True, default=None)
     image_file = models.CharField(max_length=255, null=True, default=None)
-    areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw', null=True)
-    emails = models.ManyToManyField('Email', through='CourtEmail', null=True)
-    attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute', null=True)
-    addresses = models.ManyToManyField('AddressType', through='CourtAddress', null=True)
-    court_types = models.ManyToManyField('CourtType', through='CourtCourtType', null=True)
-    facilities = models.ManyToManyField('Facility', through='CourtFacility', null=True)
-    opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime', null=True)
-    contacts = models.ManyToManyField('Contact', through='CourtContact', null=True)
+    areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw')
+    emails = models.ManyToManyField('Email', through='CourtEmail')
+    attributes = models.ManyToManyField('CourtAttributeType', through='CourtAttribute')
+    addresses = models.ManyToManyField('AddressType', through='CourtAddress')
+    court_types = models.ManyToManyField('CourtType', through='CourtCourtType')
+    facilities = models.ManyToManyField('Facility', through='CourtFacility')
+    opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime')
+    contacts = models.ManyToManyField('Contact', through='CourtContact')
     cci_code = models.CharField(max_length=255, null=True, default=None)
     updated_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(null=True, default=None)
@@ -224,7 +224,7 @@ class CourtCourtType(models.Model):
 
 class DataStatus(models.Model):
     data_hash = models.CharField(max_length=255)
-    last_ingestion_date = models.DateTimeField(auto_now=True, auto_now_add=True)
+    last_ingestion_date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return "Current data hash: %s, last update: %s" % (self.data_hash, self.last_ingestion_date)
