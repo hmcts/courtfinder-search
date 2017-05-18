@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from moj_irat.views import HealthcheckView, PingJsonView
 
-urlpatterns = patterns('healthcheck.views',
+urlpatterns = [
     url(r'^ping.json$', PingJsonView.as_view(
         build_date_key='APP_BUILD_DATE',
         commit_id_key='APP_GIT_COMMIT',
@@ -13,4 +13,4 @@ urlpatterns = patterns('healthcheck.views',
         HealthcheckView.as_view(),
         name='healthcheck_json'
     ),
-)
+]
