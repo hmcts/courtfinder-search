@@ -22,36 +22,17 @@ class Command(BaseCommand):
 
     logger= None
 
-    # Add some custom options
-    option_list = BaseCommand.option_list + (
-        make_option('--datadir',
-            action='store',
-            type='string',
-            dest='datadir',
-            default='data',
-            help='Set the data directory containing courts files'),
-        make_option('--database',
-            action='store',
-            type='string',
-            dest='database',
-            default='default',
-            help='Set the database to import data into'),
-        make_option('--load-remote',
-            action='store_true',
-            dest='load-remote',
-            default=False,
-            help='Load the courts files from remote sources'),
-        make_option('--ingest',
-            action='store_true',
-            dest='ingest',
-            default=False,
-            help='Ingest the local court files'),
-        make_option('--sys-exit',
-            action='store_true',
-            dest='sys-exit',
-            default=False,
-            help='Make the script use sys exits')
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('--datadir', default='data',
+                            help='Set the data directory containing courts files')
+        parser.add_argument('--database', default='default',
+                            help='Set the database to import date into')
+        parser.add_argument('--load-remote', default=False, action='store_true',
+                            help='Load the courts files from remote sources')
+        parser.add_argument('--ingest', default=False, action='store_true',
+                            help='Ingest the local court files')
+        parser.add_argument('--sys-exit', default=False, action='store_true',
+                            help='Make the script use sys exits')
 
     
     def __init__(self):
@@ -89,13 +70,13 @@ class Command(BaseCommand):
         exit_if_unchanged = False
 
         # If no commands are specified then default to the previous behaviour
-        if not options['load-remote'] and not options['ingest']:
+        if not options['load_remote'] and not options['ingest']:
             self.logger.info("handle: No commands specified, running load-remote and ingest if files change...")
             do_load_remote = True
             do_ingest = True
             ingest_if_unchanged = False 
         else:
-            if options['load-remote']:
+            if options['load_remote']:
                 do_load_remote = True
                 exit_if_unchanged = True
             if options['ingest']:
@@ -117,7 +98,7 @@ class Command(BaseCommand):
         # asked for the files to be ingested,then exit
         if exit_if_unchanged and not files_changed:
             self.logger.info("handle: Loaded remote files are unchanged...")
-            if (options['sys-exit']):
+            if (options['sys_exit']):
                 sys.exit(200)
             else:
                 return
@@ -128,15 +109,15 @@ class Command(BaseCommand):
                 success = self.import_files(local_dir, courts_files, options['database'])
                 if not success:
                     self.logger.critical('handle: Importing the courts data was unsuccessful')
-                    if (options['sys-exit']):
+                    if (options['sys_exit']):
                         sys.exit(1)
-                if (options['sys-exit']):
+                if (options['sys_exit']):
                     sys.exit(0)
                 else:
                     return
             else:
                 self.logger.info("handle: Loaded remote files are unchanged...")
-                if (options['sys-exit']):
+                if (options['sys_exit']):
                     sys.exit(0)
                 else:
                     return
