@@ -51,7 +51,7 @@ sudo -u postgres bash -c "psql postgres -tc 'SELECT 1 FROM pg_database WHERE dat
 
 cd /courtfinder_search/courtfinder/
 
-./manage.py syncdb --noinput
+python manage.py migrate --noinput
 ./manage.py migrate --noinput
 ./manage.py populate-db --datadir=../data/test_data --ingest
 
