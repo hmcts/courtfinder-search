@@ -56,9 +56,11 @@
             <span property="addressRegion">{{ court.visiting_address.county }}</span><br/>
           {% endif %}
           <span property="postalCode">{{ court.visiting_address.postcode }}</span>
-          <p id="map-link">
-            <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
-          </p>
+          {% if court.lat and court.lon %}
+            <p id="map-link">
+              <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
+            </p>
+          {% endif %}
         </div>
       {% endif %}
       {% if court.postal_address %}
@@ -77,9 +79,11 @@
           {% endif %}
           {{ court.postal_address.postcode }}
           {% if court.postal_address.type.name == 'Postal and Visiting' %}
-            <p id="map-link">
-              <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
-          </p>
+            {% if court.lat and court.lon %}
+              <p id="map-link">
+                <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
+              </p>
+            {% endif %}
           {% endif %}
         </div>
       {% endif %}
