@@ -82,7 +82,10 @@
             "cci_code": "242",
             "alert": " ",
             "opening_times": [
-                "Court building open: Monday to Friday 9:15am to close of business"
+                {
+                    "sort": 0,
+                    "opening_time": "Court building open: Monday to Friday 9:15am to close of business"
+                }
             ],
             "court_types": [
                 "Magistrates Court"
@@ -262,9 +265,18 @@
             "lat": "53.48557639318307",
             "slug": "tameside-magistrates-court",
             "opening_times": [
-                "Court building open: 9.00 am to 5.00 pm",
-                "Court counter open: 9.00 am to 4.00 pm",
-                "Telephone Enquiries from: 9.00 am to 5.00 pm"
+                {
+                    "sort": 0,
+                    "opening_time": "Court building open: 9.00 am to 5.00 pm"
+                },
+                {
+                    "sort": 1,
+                    "opening_time": "Court counter open: 9.00 am to 4.00 pm"
+                },
+                {
+                    "sort": 2,
+                    "opening_time": "Telephone Enquiries from: 9.00 am to 5.00 pm"
+                }
             ],
             "court_types": [
                 "Magistrates Court"
@@ -430,7 +442,20 @@
             "addresses": [],
             "court_types": [],
             "facilities": [],
-            "opening_times": [],
+            "opening_times": [
+                {
+                    "sort": 0,
+                    "opening_time": "a"
+                },
+                {
+                    "sort": 1,
+                    "opening_time": "b"
+                },
+                {
+                    "sort": 2,
+                    "opening_time": "c"
+                }
+            ],
             "contacts": [
                 {
                     "sort": 0,
@@ -489,7 +514,20 @@
             "addresses": [],
             "court_types": [],
             "facilities": [],
-            "opening_times": [],
+            "opening_times": [
+                {
+                    "sort": 0,
+                    "opening_time": "c"
+                },
+                {
+                    "sort": 1,
+                    "opening_time": "b"
+                },
+                {
+                    "sort": 2,
+                    "opening_time": "d"
+                }
+            ],
             "contacts": [],
             "postcodes": [
                 "SA79RB"

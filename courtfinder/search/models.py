@@ -32,7 +32,6 @@ class Court(models.Model):
     prosecution_leaflet = models.CharField(max_length=2500, null=True, default=None)
     juror_leaflet = models.CharField(max_length=2500, null=True, default=None)
 
-
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
 
@@ -124,6 +123,7 @@ class CourtFacility(models.Model):
 class CourtOpeningTime(models.Model):
     court = models.ForeignKey(Court)
     opening_time = models.ForeignKey(OpeningTime)
+    sort = models.IntegerField(default=0)
 
     def __unicode__(self):
         return "%s has facility %s" % (self.court.name, self.opening_time)

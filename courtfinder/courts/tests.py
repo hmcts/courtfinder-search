@@ -1,4 +1,5 @@
 import json
+import lxml.html
 import pprint
 import re
 import requests
@@ -228,3 +229,27 @@ class SearchTestCase(TestCase):
 
         self.assertIn("new", summary, "No new style facilities found")
         self.assertIn("old", summary, "No old style facilities found")
+
+    def test_court_opening_times_are_ordered(self):
+        client = Client()
+
+        response1 = client.get("/courts/old-open-court-still-in-use")
+        response2 = client.get("/courts/Hide_AoLs")
+        dom1 = lxml.html.fromstring(response1.content)
+        dom2 = lxml.html.fromstring(response2.content)
+
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
+        self.assertEqual(
+            [
+                i.text
+                for i in dom1.cssselect('div#opening-times ul li time')
+            ],
+            ["a", "b", "c"])
+        self.assertEqual(
+            [
+                i.text
+                for i in dom2.cssselect('div#opening-times ul li time')
+            ],
+            ["c", "b", "d"])
+

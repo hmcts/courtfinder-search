@@ -129,11 +129,11 @@ class Ingest:
                 )
                 CourtFacility.objects.db_manager(database_name).create(court=court, facility=facility)
 
-            for opening_time in court_obj['opening_times']:
+            for opening_dict in court_obj['opening_times']:
                 opening_time, created = OpeningTime.objects.db_manager(database_name).get_or_create(
-                    description=opening_time)
+                    description=opening_dict["opening_time"])
                 CourtOpeningTime.objects.db_manager(database_name).create(
-                    court=court, opening_time=opening_time)
+                    court=court, opening_time=opening_time, sort=opening_dict["sort"])
 
             for email in court_obj['emails']:
                 email, created = Email.objects.db_manager(database_name).get_or_create(
