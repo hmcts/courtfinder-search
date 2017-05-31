@@ -4,10 +4,12 @@
   <p>
        Lorem ipsum dolor sit amet, mei aliquip insolens referrentur an, mei atqui falli diceret ne, hinc persequeris eos id. Et utamur eloquentiam vix, summo soluta explicari usu ea. Ius eu dicat vivendum invenire, an simul soluta lobortis eos. Pro quaeque omnesque et, eu pri impetus mentitum persequeris, qui vidisse aperiri officiis et. Ex mei reque malis aeque, ne sed idque alterum.
   </p>
-   <p id="map-link">
-        <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
-          <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
-      </a>
-      <p><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt='Google map marker'><span>- Location of {{court.name}}</span></s></p>
+  {% if court.lat and court.lon %}
+  <p id="map-link">
+    <a target="_blank" href="https://maps.google.com/maps?q={{court.lat}},{{court.lon}}">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&zoom=15&markers={{court.lat}},{{court.lon}}&key=AIzaSyC_b504UmVatMNUg1HCmbyuXoJ8meK6lpA" alt="map showing the location of {{ court.name }} (link opens external website in new window)"/>
+    </a>
+    <p><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt='Google map marker'><span>- Location of {{court.name}}</span></s></p>
   </p>
+  {% endif %}
 </div>
