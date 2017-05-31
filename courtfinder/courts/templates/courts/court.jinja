@@ -1,5 +1,6 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
+{% load courttags %} 
 
 {% block page_title %}{{ court.name }}{% endblock %}
 
@@ -116,8 +117,8 @@
         {% if court.opening_times %}
         <h2>Opening hours</h2>
         <ul>
-        {% for opening_time in court.opening_times %}
-          <li><time property="openingHours">{{ opening_time.description }}</time></li>
+        {% for opening_time in court|court_opening_times_ordered %}
+            <li><time property="openingHours">{{ opening_time.description }}</time></li>
         {% endfor %}
         </ul>
         {% endif %}
