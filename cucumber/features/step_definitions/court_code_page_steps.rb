@@ -32,7 +32,7 @@ end
 
 Then(/^I should see the court location code error message$/) do
   expect(court_code_page.search_index_page.validation_error.text)
-    .to have_content 'Sorry, there are no results for .'
+    .to have_content 'Sorry, there are no results for London.'
   expect(court_code_page.search_index_page.validation_error.text)
-    .to have_content 'Please check and try another name or address.'
+    .to have_content 'Please check and try another court location code.'
 end
