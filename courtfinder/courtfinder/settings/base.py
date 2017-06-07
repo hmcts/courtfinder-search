@@ -50,14 +50,13 @@ SECRET_KEY = '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = DEBUG
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = '*'
 
 
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'moj_template',
@@ -79,26 +78,28 @@ ROOT_URLCONF = 'courtfinder.urls'
 
 WSGI_APPLICATION = 'courtfinder.wsgi.application'
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-TEMPLATE_DIRS = (
-    SITE_ROOT + '/templates',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS =  (
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    'django.core.context_processors.request',
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.contrib.auth.context_processors.auth",
-    "courtfinder.context_processors.globals",
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            SITE_ROOT + '/templates',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                'django.template.context_processors.request',
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
+                "django.contrib.auth.context_processors.auth",
+                "courtfinder.context_processors.globals",
+            ]
+        }
+    }
+]
 
 # Database
 DATABASES = {

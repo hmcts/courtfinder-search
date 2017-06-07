@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from search import views
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', views.index, name='search'),
     url(r'^searchby$', views.searchby, name='searchby'),
     url(r'^searchbyPostcodeOrCourtList$', views.searchbyPostcodeOrCourtList, name='searchbyPostcodeOrCourtList'),
@@ -15,4 +15,4 @@ urlpatterns = patterns('',
 
     url(r'^results.json$', views.results_json, name='api-results'),
     url(r'^datastatus$', views.data_status, name='data-status'),
-)
+]

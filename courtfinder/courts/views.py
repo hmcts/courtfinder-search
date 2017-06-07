@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from django.utils.html import strip_entities, strip_tags
+from django.utils.html import strip_tags
 from search.models import Court, AreaOfLaw
 
 

@@ -19,7 +19,7 @@ install:
   - "sudo gem install sass"
 before_script:
   - "psql -c 'CREATE DATABASE courtfinder_search;' -U postgres"
-  - "python courtfinder/manage.py syncdb --noinput"
+  - "python courtfinder/manage.py migrate --noinput"
   - "python courtfinder/manage.py populate-db --datadir=data/test_data --ingest"
   - "gulp"
 script:
