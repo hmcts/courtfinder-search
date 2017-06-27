@@ -83,10 +83,10 @@
 
           <p>
             {% if court.dx_number %}
-            <span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span><br/>
+            <span id="document-exchange-label" class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span id="document-exchange-value">{{ court.dx_number }}</span><br/>
             {% endif %}
             {% if court.number %}
-              <span class="court-result-heading">Court location code:</span> <span>{{ court.number }}</span>
+              <span id="court-location-code-label" class="court-result-heading">Court location code:</span> <span id="court-location-code-value" >{{ court.number }}</span>
             {% endif %}
           </p>
         </div>
