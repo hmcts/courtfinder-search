@@ -12,8 +12,9 @@ Then(/^I should see the enter postcode header$/) do
 end
 
 Then(/^I should see postcode error message$/) do
-  expect(postcode_page.validation_error.text)
-    .to eq 'Error You did not enter a valid postcode. Please try again.'
+  error_text = postcode_page.validation_error.text
+
+  expect(error_text).to eq 'Error You did not enter a valid postcode. Please try again.'
 end
 
 When(/^I enter a full valid postcode$/) do
@@ -22,9 +23,10 @@ When(/^I enter a full valid postcode$/) do
 end
 
 Then(/^I should see results for that postcode$/) do
-  expect(postcode_page.search_results.text)
-    .to eq 'These are the 10 courts or tribunals nearest ig12bn.'
-  expect(postcode_page.court_results.result.count).to eq 10
+  result = postcode_page.search_results
+
+  expect(result.text).to eq 'These are the 10 courts or tribunals nearest ig12bn.'
+  expect(result.count).to eq 10
 end
 
 When(/^I enter a first half of a valid postcode$/) do
@@ -33,7 +35,8 @@ When(/^I enter a first half of a valid postcode$/) do
 end
 
 Then(/^I should see results for the first half of the postcode$/) do
-  expect(postcode_page.search_results.text)
-    .to eq 'These are the 10 courts or tribunals nearest ig1.'
-  expect(postcode_page.court_results.result.count).to eq 10
+  result = postcode_page.search_results
+
+  expect(result.text).to eq 'These are the 10 courts or tribunals nearest ig1.'
+  expect(result.count).to eq 10
 end

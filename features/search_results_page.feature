@@ -11,7 +11,7 @@ Feature: Search results page
   Scenario: Displays number of results in that area
     Then I should see the number of results in that area
 
-  Scenario: Displays search results
+  Scenario: Displays search results content
     Then I should see court header
     And I should see court address
     And I should see document exchange
