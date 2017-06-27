@@ -42,5 +42,4 @@ end
 
 Capybara.javascript_driver = Capybara.default_driver
 Capybara.current_driver = Capybara.default_driver
-Capybara.app_host = 'https://staging.courttribunalfinder.service.gov.uk'
-# http://0.0.0.0:8000
+Capybara.app_host = 'http://0.0.0.0:8000'
