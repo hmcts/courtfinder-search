@@ -18,5 +18,4 @@ group :test do
   gem 'launchy'
   gem 'require_all'
   gem 'eyes_selenium'
-  gem 'vcr'
 end

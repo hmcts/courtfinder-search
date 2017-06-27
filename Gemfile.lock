@@ -125,7 +125,6 @@ GEM
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     unicode-display_width (1.2.1)
-    vcr (3.0.3)
     watir (5.0.0)
       commonwatir (~> 4)
       watir-webdriver
@@ -162,7 +161,6 @@ DEPENDENCIES
   spring-commands-cucumber
   spring-commands-rspec
   timecop
-  vcr
   webmock
 
 BUNDLED WITH
