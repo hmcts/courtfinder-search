@@ -1,3 +1,5 @@
+@courts
+
 Feature: Search by name or Address page
 
   Background: Navigating to the search by name or address page
