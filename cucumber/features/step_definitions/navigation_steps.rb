@@ -42,7 +42,7 @@ And(/^to search by postcode$/) do
 end
 
 Then(/^I see I can find out more about BETA$/) do
-  expect(navigation_page.feedback_banner.link[0].text).to eq 'beta'
+  expect(navigation_page.feedback_banner.link[0].text).to eq 'BETA'
   expect(navigation_page.feedback_banner.link[0]['href'])
     .to end_with '/service-manual/phases/beta.html'
 end
