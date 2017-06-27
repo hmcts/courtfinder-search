@@ -1,4 +1,4 @@
-Given(/^I visit the name or address page$/) do
+Given(/^I visit the search by name or address page$/) do
   name_or_address_page.load_page
 end
 
@@ -18,16 +18,18 @@ When(/^I search for '(.*?)'$/) do |search_term|
   name_or_address_page.continue_button.click
 end
 
-Then(/^I should see the result is '(.*?)'$/) do |result|
-  expect(search_results_page.search_results.number_of_results.text).to eq '1'
-  expect(search_results_page.search_results.court_results.header[0].text)
-    .to eq result
+Then(/^I should see the result is (.*?)$/) do |result|
+  search_results = search_results_page.search_results
+  expect(search_results.number_of_results.text).to eq '4'
+  expect(search_results.court_results.court_address[0].text)
+    .to have_content result
 end
 
-Then(/^I should see the top result is Liverpool Civil and Family Court$/) do
-  expect(search_results_page.search_results.number_of_results.text).to eq '10'
-  expect(search_results_page.search_results.court_results.header[0].text)
-    .to eq 'Liverpool Civil and Family Court'
+Then(/^I should see the top result (.*?)$/) do |top_result|
+  search_results = search_results_page.search_results
+  expect(search_results.number_of_results.text).to eq '4'
+  expect(search_results.court_results.court_address[0].text)
+    .to have_content top_result
 end
 
 Then(/^I should see '(.*?)' error message$/) do |error|

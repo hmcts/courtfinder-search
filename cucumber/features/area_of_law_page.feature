@@ -14,6 +14,7 @@ Feature: Area of law page
     | Crime:                         |
     | Divorce:                       |
     | Employment:                    |
+    | High Court District Registry:  |
     | Immigration:                   |
     | Money claims:                  |
     | Social security:               |
