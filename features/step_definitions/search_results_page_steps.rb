@@ -53,7 +53,7 @@ end
 
 Then(/^I should see document exchange$/) do
   expect(search_results_page.document_exchange_label.text).to eq 'DX:'
-  expect(search_results_page.document_exchange_value.text).to eq 'tbc'
+  expect(search_results_page.document_exchange_value.text).to eq '702625 Ashton-under-Lyne 2'
 end
 
 Then(/^I should see the court location code$/) do

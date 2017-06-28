@@ -26,7 +26,7 @@ Then(/^I should see results for that postcode$/) do
   result = postcode_page.search_results
 
   expect(result.text).to eq 'These are the 10 courts or tribunals nearest ig12bn.'
-  expect(result.count).to eq 10
+  expect(postcode_page.court_results.result.count).to eq 10
 end
 
 When(/^I enter a first half of a valid postcode$/) do
@@ -38,5 +38,5 @@ Then(/^I should see results for the first half of the postcode$/) do
   result = postcode_page.search_results
 
   expect(result.text).to eq 'These are the 10 courts or tribunals nearest ig1.'
-  expect(result.count).to eq 10
+  expect(postcode_page.court_results.result.count).to eq 10
 end
