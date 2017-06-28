@@ -242,6 +242,7 @@ class Postcode():
             self.local_authority = None
 
     def mapit( self, postcode ):
+
         if self.full_postcode:
             mapit_url = settings.MAPIT_BASE_URL + postcode
         else:
