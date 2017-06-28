@@ -58,5 +58,5 @@ end
 
 Then(/^I should see the court location code$/) do
   expect(search_results_page.court_location_code_label.text).to eq 'Court location code:'
-  expect(search_results_page.court_location_code_value.text).to eq 'tbc'
+  expect(search_results_page.court_location_code_value.text).to eq '1748'
 end
