@@ -1,4 +1,4 @@
-@search_results
+ @search_results
 
 Feature: Search results page
 
