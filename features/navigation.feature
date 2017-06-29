@@ -1,5 +1,3 @@
-
-
 Feature: Navigation
 
   Background: Navigating to the search results page

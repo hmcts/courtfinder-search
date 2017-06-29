@@ -12,8 +12,9 @@ end
 
 Then(/^I should see court header$/) do
   court_results = search_results_page.search_results.court_results
+
   expect(court_results.header.count).to eq 10
-  expect(court_results.header[0].text).to eq 'Tameside Magistrates\' Court'
+  expect(court_results.header[0].text).to eq 'Bow County Court and Family Court'
 end
 
 Then(/^I should see court address$/) do
@@ -35,28 +36,34 @@ Then(/^I should see a link for more details about the court$/) do
   court_results = search_results_page.search_results.court_results
 
   expect(court_results.more_details_link.count).to eq 10
-  expect(court_results.more_details_link[1].text).to eq 'More details about Accrington Magistrates\' Court'
+  expect(court_results.more_details_link[1].text).to eq 'More details about Barkingside Magistrates\' Court'
 end
 
-Then(/^I should not see a link for further information on Divorce$/) do
+Then(/^I should not see a link for further information when it is not available$/) do
   court_results = search_results_page.search_results.court_results
 
-  expect(court_results.court_aol[1].li[3].text).to eq 'Divorce'
-  expect(court_results.court_aol[1].li[3]).to have_no_link
+  expect(court_results.court_aol[1].li[0].text).to eq 'Crime'
+  expect(court_results.court_aol[1].li[0]).to have_no_link
 end
 
-Then(/^I should see a link for further information on Bankruptcy$/) do
+Then(/^I should see a link for further information when available/) do
   court_results = search_results_page.search_results.court_results
 
-  expect(court_results.court_aol[4].li[0].link['href']).to end_with('/bankruptcy')
+  expect(court_results.court_aol[0].li[0].link.text).to have_content('Housing possession')
+  expect(court_results.court_aol[0].li[0]).to have_screen_reader_hide
+  expect(court_results.court_aol[0].li[0].link['href']).to end_with('/evicting-tenants')
 end
 
 Then(/^I should see document exchange$/) do
-  expect(search_results_page.document_exchange_label.text).to eq 'DX:'
-  expect(search_results_page.document_exchange_value.text).to eq '702625 Ashton-under-Lyne 2'
+  expect(search_results_page.document_exchange_label.count).to eq 9
+  expect(search_results_page.document_exchange_label[0].text).to eq 'DX:'
+  expect(search_results_page.document_exchange_value.count).to eq 9
+  expect(search_results_page.document_exchange_value[0].text).to eq '97490 Stratford (London) 2'
 end
 
 Then(/^I should see the court location code$/) do
-  expect(search_results_page.court_location_code_label.text).to eq 'Court location code:'
-  expect(search_results_page.court_location_code_value.text).to eq '1748'
+  expect(search_results_page.court_location_code_label.count).to eq 6
+  expect(search_results_page.court_location_code_label[0].text).to eq 'Court location code:'
+  expect(search_results_page.court_location_code_value.count).to eq 6
+  expect(search_results_page.court_location_code_value[0].text).to eq '140'
 end

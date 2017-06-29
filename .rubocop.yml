@@ -12,3 +12,9 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - 'features/**/*'
+    - 'Gemfile'

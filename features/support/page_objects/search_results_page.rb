@@ -15,15 +15,16 @@ class SearchResultsPage < BasePage
         element :court_result_heading, '.court-result-heading'
         sections :li, 'ul > li' do
           element :link, 'a'
+          element :screen_reader_hide, '.screen_reader_hide'
         end
       end
       elements :more_details_link, '.more-details-link'
     end
   end
-  element :document_exchange_label, '#document-exchange-label'
-  element :document_exchange_value, '#document-exchange-value'
-  element :court_location_code_label, '#court-location-code-label'
-  element :court_location_code_value, '#court-location-code-value'
+  elements :document_exchange_label, '#document-exchange-label'
+  elements :document_exchange_value, '#document-exchange-value'
+  elements :court_location_code_label, '#court-location-code-label'
+  elements :court_location_code_value, '#court-location-code-value'
 
   def load_page(page_version = nil)
     load(v: page_version)

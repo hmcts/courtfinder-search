@@ -1,5 +1,3 @@
- @search_results
-
 Feature: Search results page
 
   Background: Navigating to the search results page
@@ -20,8 +18,8 @@ Feature: Search results page
     And I should see the cases heard at this venue
 
   Scenario: Cases heard at this venue
-    Then I should see a link for further information on Bankruptcy
-    But I should not see a link for further information on Divorce
+    Then I should see a link for further information when available
+    But I should not see a link for further information when it is not available
 
 
 

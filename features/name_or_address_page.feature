@@ -1,5 +1,3 @@
-@courts
-
 Feature: Search by name or Address page
 
   Background: Navigating to the search by name or address page
@@ -20,8 +18,8 @@ Feature: Search by name or Address page
     Then I should see the result is Manchester County Court
 
   Scenario: Search by street name
-    When I search for '1 Bridge Street West'
-    Then I should see the result is Manchester County Court
+    When I search for '29 Merton Road'
+    Then I should see the result is 29 Merton Road
 
   # TODO: Need better test data so we have a list of courts for a city
   Scenario: Search by city

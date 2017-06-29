@@ -20,14 +20,15 @@ end
 
 Then(/^I should see the result is (.*?)$/) do |result|
   search_results = search_results_page.search_results
-  expect(search_results.number_of_results.text).to eq '4'
-  expect(search_results.court_results.court_address[0].text)
-    .to have_content result
+
+  expect(search_results.number_of_results.text).to eq '1'
+  expect(search_results.court_results.court_address[0].text).to have_content result
 end
 
 Then(/^I should see the top result (.*?)$/) do |top_result|
   search_results = search_results_page.search_results
-  expect(search_results.number_of_results.text).to eq '4'
+
+  expect(search_results.number_of_results.text).to eq '20'
   expect(search_results.court_results.court_address[0].text)
     .to have_content top_result
 end
