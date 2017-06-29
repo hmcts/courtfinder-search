@@ -13,6 +13,10 @@ Feature: Search by name or Address page
     When I search for 'Manchester County Court'
     Then I should see the result is Manchester County Court
 
+  Scenario: Search a closed court
+    When I search for 'Feltham Magistrates' Court'
+    Then I should see alert
+
   Scenario: Search by building name
     When I search for 'Manchester Civil and Family Justice Centre'
     Then I should see the result is Manchester County Court
@@ -20,8 +24,7 @@ Feature: Search by name or Address page
   Scenario: Search by street name
     When I search for '29 Merton Road'
     Then I should see the result is 29 Merton Road
-
-  # TODO: Need better test data so we have a list of courts for a city
+    
   Scenario: Search by city
     When I search for 'Manchester'
     Then I should see the top result Manchester Civil and Family Justice Centre

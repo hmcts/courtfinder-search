@@ -8,6 +8,10 @@ class NameOrAddressPage < BasePage
     elements :form_hint, '.form-hint'
     element :address, '#address'
   end
+  section :alert, '.alert' do
+    elements :p, 'p'
+    element :a, 'a'
+  end
 
   def load_page(page_version = nil)
     load(v: page_version)
