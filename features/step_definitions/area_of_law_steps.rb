@@ -14,21 +14,12 @@ Then(/^I should see issues:$/) do |issues|
 end
 
 Then(/^each issue should have a description$/) do
-<<<<<<< HEAD:features/step_definitions/area_of_law_page_steps.rb
   expect(area_of_law_page.form.aol_name.count).to eq 16
   expect(area_of_law_page.form.aol_description.count).to eq 16
 end
 
 Then(/^none of the above is selected by default$/) do
   expect(area_of_law_page.form.block_label[15]).to be_checked
-=======
-  expect(area_of_law_page.form.aol_name.count).to eq 10
-  expect(area_of_law_page.form.aol_description.count).to eq 10
-end
-
-Then(/^none of the above is selected by default$/) do
-  expect(area_of_law_page.form.block_label[9]).to be_checked
->>>>>>> RST-375 fixed tests to match data:cucumber/features/step_definitions/area_of_law_page_steps.rb
 end
 
 # TODO: check where this url is going

@@ -23,8 +23,9 @@ end
 Then(/^I should see the results for that code$/) do
   results = search_results_page.search_results
 
-  expect(results.number_of_results.text).to eq '1'
-  expect(results.court_results.header[0].text).to eq 'Accrington Magistrates\' Court'
+  expect(results.number_of_results.text).to eq '2'
+  expect(results.court_results.header[0].text).to eq 'Blackburn Magistrates\' Court'
+  expect(results.court_results.header[1].text).to eq 'Burnley Magistrates\' Court'
 end
 
 When(/^I search using an invalid court location code$/) do

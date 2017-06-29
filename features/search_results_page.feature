@@ -1,5 +1,3 @@
- @search_results
-
 Feature: Search results page
 
   Background: Navigating to the search results page
