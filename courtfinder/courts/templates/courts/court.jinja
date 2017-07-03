@@ -243,6 +243,9 @@
       <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/FormFinder.do" title="Open the Formfinder tool to obtain the right form for your issue.">Find a form</a>
       <br/>
       <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure" title="Information on providing feedback about our services and making a complaint.">Make a complaint</a>
+      {% if 'Crown Court' in court.types %}
+      <a href="https://www.gov.uk/jury-service">About jury service</a>
+      {% endif %}
     </div>
   {% if feature_leaflet_enabled %}
    <div id="leaflets">
