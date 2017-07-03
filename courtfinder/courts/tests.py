@@ -253,3 +253,12 @@ class SearchTestCase(TestCase):
             ],
             ["c", "b", "d"])
 
+    def test_jury_servive_link_not_shown_on_non_crown_court(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        self.assertNotIn('About jury service', response.content)
+
+    def test_jury_service_link_shown_on_crown_court(self):
+        c = Client()
+        response = c.get('/courts/leaflet-crown-court')
+        self.assertIn('About jury service', response.content)
