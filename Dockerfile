@@ -11,7 +11,7 @@ RUN apt-get clean \
 RUN mv ./docker/search /etc/sudoers.d/search
 
 RUN bash ./docker/setup_npm.sh
-RUN gulp
+RUN npm run gulp
 
 RUN pip install pip --upgrade
 RUN pip install -r requirements/production.txt

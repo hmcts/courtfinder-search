@@ -24,6 +24,7 @@
     "url": "https://github.com/ministryofjustice/courtfinder-search/issues"
   },
   "scripts": {
+    "gulp": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

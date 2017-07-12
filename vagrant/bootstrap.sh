@@ -57,8 +57,7 @@ python manage.py migrate --noinput
 
 echo "Installing frontend dependencies"
 sudo ln -s /usr/bin/nodejs /usr/bin/node
-sudo npm install gulp -g
 npm install
 sudo gem install sass
 
-gulp
+npm run gulp
