@@ -49,7 +49,7 @@ class CourtSearch:
             self.postcode = Postcode(postcode)
             try:
                 if area_of_law.lower() != 'all':
-                    self.area_of_law = AreaOfLaw.objects.get(name=area_of_law)
+                    self.area_of_law = AreaOfLaw.objects.get(name__iexact=area_of_law)
                 else:
                     self.area_of_law = AreaOfLaw(name=area_of_law)
             except AreaOfLaw.DoesNotExist:
