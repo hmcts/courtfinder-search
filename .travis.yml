@@ -17,7 +17,7 @@ install:
   - "pip install -r requirements/testing.txt"
   - "npm config set registry http://registry.npmjs.org/"
   - "npm install"
-  - "sudo gem install sass"
+  - "sudo gem install sass -v 3.4.21"
 before_script:
   - "psql -c 'CREATE DATABASE courtfinder_search;' -U postgres"
   - "python courtfinder/manage.py migrate --noinput"
