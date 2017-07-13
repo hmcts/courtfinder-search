@@ -5,7 +5,7 @@ $POSTGRES --single -E <<EOSQL
   CREATE DATABASE template_postgis;
   UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template_postgis';
 EOSQL
-POSTGIS_CONFIG=/usr/share/postgresql/9.4/contrib/postgis-2.1
+POSTGIS_CONFIG=/usr/share/postgresql/9.4/contrib/postgis-2.3
 $POSTGRES --single template_postgis -j < $POSTGIS_CONFIG/postgis.sql
 $POSTGRES --single template_postgis -j < $POSTGIS_CONFIG/topology.sql
 $POSTGRES --single template_postgis -j < $POSTGIS_CONFIG/spatial_ref_sys.sql

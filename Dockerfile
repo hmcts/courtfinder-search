@@ -1,28 +1,28 @@
-FROM ubuntu:14.04
+FROM python:2.7
 
 RUN useradd -m -d /srv/search search
 WORKDIR /srv/search
+
+COPY apt/ ./apt
+RUN apt-get update && ./apt/production.sh
+
+COPY package.json gulpfile.js ./
+COPY docker/ ./docker
+RUN bash ./docker/setup_npm.sh && npm run gulp
+
+COPY requirements/ ./requirements
+COPY requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
 COPY . .
 
-RUN apt-get clean \
-    && apt-get update \
-    && ./apt/production.sh
-
-RUN mv ./docker/search /etc/sudoers.d/search
-
-RUN bash ./docker/setup_npm.sh
-RUN npm run gulp
-
-RUN pip install pip --upgrade
-RUN pip install -r requirements/production.txt
-
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
-
-RUN python courtfinder/manage.py collectstatic --noinput
-
-RUN mkdir -p /srv/logs; chown -R search:search /srv/logs
-RUN chown -R search: /srv/search
+RUN python courtfinder/manage.py collectstatic --noinput && \
+    mkdir -p /srv/logs && chown -R search:search /srv/logs && \
+    chown -R search: /srv/search
 
 USER search
 
-CMD ["/bin/bash", "-l", "./run.sh"]
+CMD ./run.sh
+
+EXPOSE 8000
