@@ -272,6 +272,10 @@ class SearchTestCase(TestCase):
         self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='Divorce')
                              .get_courts()), 1)
 
+    def test_area_of_law_case_insensitive(self):
+        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='divorce')
+                             .get_courts()), 1)
+
     def test_local_authority_search_ordered(self):
         self.assertEqual(CourtSearch(postcode='SE154UH', area_of_law='Divorce')
                          .get_courts()[0].name, "Accrington Magistrates' Court")
