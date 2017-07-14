@@ -1,0 +1,57 @@
+version: "3.1"
+services:
+  courtfinder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_REQUIREMENTS: ./requirements/local.txt
+    environment:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+    command: ./run_compose.sh
+    links:
+      - postgres
+    volumes:
+      - .:/srv/search
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile-postgres
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+  test-cucumber:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      COURTFINDER_PORT:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+      APP_HOST: "http://courtfinder:8000"
+    command: ./test_cucumber.sh
+    links:
+      - courtfinder
+  test-unit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_REQUIREMENTS: ./requirements/testing.txt
+    environment:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+    command: ./test_unit.sh
+    links:
+      - postgres
