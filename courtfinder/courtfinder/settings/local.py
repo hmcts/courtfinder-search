@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 from os.path import join, normpath
 
-from .base import *
+from .production import *
 
 
 ########## DEBUG CONFIGURATION
@@ -12,17 +12,5 @@ from .base import *
 DEBUG = True
 
 ########## END DEBUG CONFIGURATION
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'courtfinder_search',
-    },
-    'temp': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'courtfinder_search_tmp',
-    }
-}
 
 SECRET_KEY = "a-secret-key"

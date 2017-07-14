@@ -1,0 +1,43 @@
+FROM python:2.7-slim
+
+RUN useradd -m -d /srv/search search
+WORKDIR /srv/search
+
+# Install system dependencies
+COPY apt/ ./apt
+RUN apt-get update \
+  && ./apt/production.sh \
+  && ./apt/testing.sh \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install phantomjs
+RUN mkdir /tmp/phantomjs \
+  && curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
+      | tar -xj --strip-components=1 -C /tmp/phantomjs \
+  && mv /tmp/phantomjs/bin/phantomjs /usr/local/bin
+
+# Install python dependencies
+COPY requirements/ ./requirements
+RUN pip install --no-cache-dir -r requirements/testing.txt
+
+# Install cucumber dependencies
+COPY cucumber/Gemfile ./cucumber/Gemfile
+COPY cucumber/Gemfile.lock ./cucumber/Gemfile.lock
+WORKDIR /srv/search/cucumber
+RUN gem install bundler && bundle install
+WORKDIR /src/search
+
+COPY . .
+
+RUN chmod 777 /srv/search/cucumber
+
+ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
+RUN mkdir -p /srv/logs /srv/search/cucumber \
+  && chown -R search:search /srv/logs /srv/search/cucumber \
+  && chown -R search: /srv/search /srv/search/cucumber
+
+USER search
+
+CMD ./run_tests.sh
+
+EXPOSE 8000
