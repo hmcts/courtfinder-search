@@ -17,19 +17,9 @@ Feature: Area of law page
     | Divorce:                       |
     | Domestic violence:             |
     | Employment:                    |
-<<<<<<< HEAD
-<<<<<<< HEAD:features/area_of_law_page.feature
     | Forced marriage and FGM:       |
     | High Court District Registry:  |
     | Housing possession:            |
-=======
-    | High Court District Registry:  |
->>>>>>> RST-375 fixed tests to match data:cucumber/features/area_of_law_page.feature
-=======
-    | Forced marriage and FGM:       |
-    | High Court District Registry:  |
-    | Housing possession:            |
->>>>>>> RST-221 updating tests to match prod data
     | Immigration:                   |
     | Money claims:                  |
     | Probate:                       |
