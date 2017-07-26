@@ -88,12 +88,20 @@
           {% endif %}
         </div>
       {% endif %}
-      {% if court.number or court.dx_number %}
+      {% if court.number or court.cci_code or court.magistrate_code or court.dx_number  %}
       <div id="pros">
         <dl>
           {% if court.number %}
-          <dt>Court location/tribunal no.</dt>
+          <dt>Crown Court location code:</dt>
           <dd>{{ court.number }}</dd>
+          {% endif %}
+          {% if court.cci_code %}
+          <dt>County Court location code:</dt>
+          <dd>{{ court.cci_code }}</dd>
+          {% endif %}
+          {% if court.magistrate_code %}
+          <dt>Magistrates' Court location code:</dt>
+          <dd>{{ court.magistrate_code }}</dd>
           {% endif %}
           {% if court.dx_number %}
           <dt><abbr title="document exchange">DX</abbr>:</dt>

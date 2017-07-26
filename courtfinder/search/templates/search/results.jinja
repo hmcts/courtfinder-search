@@ -82,11 +82,17 @@
           </p>
 
           <p>
-            {% if court.dx_number %}
-            <span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span><br/>
-            {% endif %}
             {% if court.number %}
-              <span class="court-result-heading">Court location code:</span> <span>{{ court.number }}</span>
+              <div><span class="court-result-heading">Crown Court location code:</span> <span>{{ court.number }}</span></div>
+            {% endif %}
+            {% if court.cci_code %}
+              <div><span class="court-result-heading">County Court location code:</span> <span>{{ court.cci_code }}</span></div>
+            {% endif %}
+            {% if court.magistrate_code %}
+              <div><span class="court-result-heading">Magistrates' Court location code:</span> <span>{{ court.magistrate_code }}</span></div>
+            {% endif %}
+            {% if court.dx_number %}
+              <div><span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span></div>
             {% endif %}
           </p>
         </div>
@@ -110,7 +116,7 @@
             </ul>
           {% endif %}
         </div>
-        
+
         <p class="clear">
           {% if query %}
             {% if courtcode_search == True %}

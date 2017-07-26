@@ -100,7 +100,7 @@ $small-width: 800px;
 .court-addresses {
   @include media($min-width: $small-width) {
     float: left;
-    width: 30%;
+    width: 50%;
   }
 }
 
