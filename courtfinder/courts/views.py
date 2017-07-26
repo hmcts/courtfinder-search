@@ -75,6 +75,7 @@ def format_court(court):
                   'lon': court.lon,
                   'number': court.number,
                   'cci_code': court.cci_code,
+                  'magistrate_code': court.magistrate_code,
                   'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
                   'slug': court.slug,
                   'image_file': court.image_file,
@@ -153,7 +154,8 @@ def leaflet (request, slug, leaflet_type):
 def list_format_courts(courts):
     return [{'name':court.name,
              'slug':court.slug,
-             'numbers': ', '.join(filter(None,('#'+str(court.number) if court.number else None, 'CCI: '+str(court.cci_code) if court.cci_code else None)))
+             'numbers': ', '.join(filter(None,('Crown #'+str(court.number) if court.number else None, 'County #'+str(court.cci_code)
+                 if court.cci_code else None, "Magistrates #"+str(court.magistrate_code) if court.magistrate_code else None)))
             } for court in courts if court.displayed]
 
 def list(request, first_letter='A'):

@@ -80,6 +80,7 @@
             "updated_at": "2014-04-16T13:04:44.642",
             "court_number": 1725,
             "cci_code": "242",
+            "magistrate_code": "1337",
             "alert": " ",
             "opening_times": [
                 {
