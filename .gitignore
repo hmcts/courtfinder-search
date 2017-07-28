@@ -81,3 +81,7 @@ data/courts.json
 
 # Ignore screenshots
 screenshot_cucumber_*
+
+# vi etc.
+*.sw[a-p]
+.*.sw[a-p]
