@@ -15,7 +15,7 @@ def collapse(source, key, key2):
     [{'bailiff': [0800383727]}, {'bailiff':[018746]}, {'enquiries':[012874]}] =>
       [{'bailiff': [0800383727, 018746]}, {'enquiries': [012874]}}]
     """
-    result=[]
+    result = []
     for item in source:
         if len(result) > 0 and item[key] == result[-1][key]:
             result[-1][key2].append(item[key2][0])
@@ -34,8 +34,8 @@ def format_court(court):
     for address in addresses:
         address_obj = {
             'address_lines': [line for line in address.address.split('\n') if line != ''],
-            'postcode':address.postcode,
-            'town':address.town.name,
+            'postcode': address.postcode,
+            'town': address.town.name,
             'county': address.town.county,
             'type': address.address_type
         }
@@ -47,9 +47,14 @@ def format_court(court):
     if postal_address and str(postal_address['type']) == 'Postal and Visiting':
         visiting_address = None
 
-    emails = [{'description':email.description, 'addresses': [email.address]} for email in court.emails.all()]
+    emails = [{'description': email.description, 'addresses': [email.address]} for email in court.emails.all()]
     emails.sort(key=lambda x: x['description'])
-    contacts = [{'name':contact.name, 'numbers': [contact.number], 'explanation': contact.explanation, 'in_leaflet': contact.in_leaflet} for contact in court.contacts.all().order_by('sort_order')]
+    contacts = [{
+        'name': contact.name,
+        'numbers': [contact.number],
+        'explanation': contact.explanation,
+        'in_leaflet': contact.in_leaflet
+    } for contact in court.contacts.all().order_by('sort_order')]
 
     facilities = [
         {
@@ -69,34 +74,35 @@ def format_court(court):
         for facility in court.facilities.all()
     ]
 
-    court_obj = { 'name': court.name,
-                  'displayed': court.displayed,
-                  'lat': court.lat,
-                  'lon': court.lon,
-                  'number': court.number,
-                  'cci_code': court.cci_code,
-                  'magistrate_code': court.magistrate_code,
-                  'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
-                  'slug': court.slug,
-                  'image_file': court.image_file,
-                  'image_url': (settings.COURT_IMAGE_BASE_URL + court.image_file) if court.image_file else '',
-                  'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
-                  'postal_address': postal_address,
-                  'visiting_address': visiting_address,
-                  'opening_times': court.opening_times.all().order_by("description"),
-                  'areas_of_law': court.areas_of_law.all().order_by("name"),
-                  'facilities': sorted(facilities, key=lambda x: x['name']),
-                  'emails': collapse(emails, 'description', 'addresses'),
-                  'contacts': collapse(contacts, 'name', 'numbers'),
-                  'directions': court.directions if court.directions else None,
-                  'alert': court.alert if court.alert and court.alert.strip() != '' else None,
-                  'parking': court.parking or None,
-                  'info': court.info,
-                  'hide_aols': court.hide_aols,
-                  'info_leaflet': court.info_leaflet,
-                  'juror_leaflet': court.juror_leaflet,
-                  'defence_leaflet': court.defence_leaflet,
-                  'prosecution_leaflet': court.prosecution_leaflet}
+    court_obj = {
+        'name': court.name,
+        'displayed': court.displayed,
+        'lat': court.lat,
+        'lon': court.lon,
+        'number': court.number,
+        'cci_code': court.cci_code,
+        'magistrate_code': court.magistrate_code,
+        'updated_at': court.updated_at.strftime("%d %B %Y") if court.updated_at else '',
+        'slug': court.slug,
+        'image_file': court.image_file,
+        'image_url': (settings.COURT_IMAGE_BASE_URL + court.image_file) if court.image_file else '',
+        'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
+        'postal_address': postal_address,
+        'visiting_address': visiting_address,
+        'opening_times': court.opening_times.all().order_by("description"),
+        'areas_of_law': court.areas_of_law.all().order_by("name"),
+        'facilities': sorted(facilities, key=lambda x: x['name']),
+        'emails': collapse(emails, 'description', 'addresses'),
+        'contacts': collapse(contacts, 'name', 'numbers'),
+        'directions': court.directions if court.directions else None,
+        'alert': court.alert if court.alert and court.alert.strip() != '' else None,
+        'parking': court.parking or None,
+        'info': court.info,
+        'hide_aols': court.hide_aols,
+        'info_leaflet': court.info_leaflet,
+        'juror_leaflet': court.juror_leaflet,
+        'defence_leaflet': court.defence_leaflet,
+        'prosecution_leaflet': court.prosecution_leaflet}
 
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
@@ -113,50 +119,81 @@ def court(request, slug):
 
     return render(request, 'courts/court.jinja', {
         'court': format_court(the_court),
-        'query': request.GET.get('q',''),
-        'aol': request.GET.get('aol','All'),
+        'query': request.GET.get('q', ''),
+        'aol': request.GET.get('aol', 'All'),
         'spoe': request.GET.get('spoe', None),
-        'postcode': request.GET.get('postcode',''),
+        'postcode': request.GET.get('postcode', ''),
         'courtcode': request.GET.get('courtcode', False),
         'feature_leaflet_enabled': settings.FEATURE_LEAFLETS_ENABLED,
     })
-    
-def leaflet (request, slug, leaflet_type):
+
+
+def leaflet(request, slug, leaflet_type):
     try:
-        court = format_court(Court.objects.get(slug=slug))
+        format_court(Court.objects.get(slug=slug))
     except Court.DoesNotExist:
-        raise Http404  
+        raise Http404
 
     if court['displayed']:
         if leaflet_type == 'venue_information':
-            return render(request, 'courts/leaflets/information_leaflet.jinja', {
-            'court': court
-            })
+            return render(
+                request,
+                'courts/leaflets/information_leaflet.jinja',
+                {
+                    'court': court
+                }
+            )
 
         if leaflet_type == 'defence_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
-            return render(request, 'courts/leaflets/defence_leaflet.jinja', {
-            'court': court
-            })
+            return render(
+                request,
+                'courts/leaflets/defence_leaflet.jinja',
+                {
+                    'court': court
+                }
+            )
 
         if leaflet_type == 'prosecution_witness_information' and ('Crown Court' in court['types'] or 'Magistrates Court' in court['types']):
-            return render(request, 'courts/leaflets/prosecution_leaflet.jinja', {
-            'court': court
-            })
+            return render(
+                request,
+                'courts/leaflets/prosecution_leaflet.jinja',
+                {
+                    'court': court
+                }
+            )
 
         if leaflet_type == 'juror_information' and 'Crown Court' in court['types']:
-            return render(request, 'courts/leaflets/juror_leaflet.jinja', {
-            'court': court,
-            'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
-            })    
-            
+            return render(
+                request,
+                'courts/leaflets/juror_leaflet.jinja',
+                {
+                    'court': court,
+                    'court_title': 'Local Information for Jurors at the Crown Court at ' + court['name']
+                }
+            )
+
     raise Http404('The requested leaflet does not exist.')
-    
+
+
 def list_format_courts(courts):
-    return [{'name':court.name,
-             'slug':court.slug,
-             'numbers': ', '.join(filter(None,('Crown #'+str(court.number) if court.number else None, 'County #'+str(court.cci_code)
-                 if court.cci_code else None, "Magistrates #"+str(court.magistrate_code) if court.magistrate_code else None)))
-            } for court in courts if court.displayed]
+    return [{
+        'name': court.name,
+        'slug': court.slug,
+        'numbers': ', '.join(
+            filter(
+                None,
+                (
+                    'Crown #{}'.format(court.number) if court.number else None,
+                    'County #{}'.format(court.cci_code) if court.cci_code else None,
+                    'Magistrates #{}'.format(court.magistrate_code) if court.magistrate_code else None,
+                )
+            )
+        )
+        }
+            for court in courts
+            if court.displayed
+        ]
+
 
 def list(request, first_letter='A'):
     return render(request, 'courts/list.jinja', {
