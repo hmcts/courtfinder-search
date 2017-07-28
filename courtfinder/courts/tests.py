@@ -59,7 +59,7 @@ class SearchTestCase(TestCase):
     def test_court_numbers_in_list(self):
         c = Client()
         response = c.get('/courts/A')
-        self.assertIn('(Crown #1725, County #242)', response.content)
+        self.assertIn('(Crown #1725, County #242, Magistrates #1725)', response.content)
 
     def test_updated_in_court_page(self):
         c = Client()
