@@ -7,7 +7,7 @@ import re
 import requests
 
 from django.conf import settings
-
+from django.db.models import Q
 from search.models import Court, AreaOfLaw, CourtAreaOfLaw, CourtAddress, LocalAuthority, CourtLocalAuthorityAreaOfLaw, CourtPostcode
 from search.rules import Rules
 
@@ -199,7 +199,8 @@ class CourtSearch:
         word_separator = re.compile(r'[^\w]+', re.UNICODE)
         query_regex = ''.join(map(lambda word: "(?=.*\y"+word+"\y)", re.split(word_separator, query)))
 
-        court_number_results = Court.objects.filter(number__iregex=query_regex, displayed='True').order_by("name")
+        location_filter = Q(number__iregex=query_regex)|Q(cci_code__iregex=query_regex)|Q(magistrate_code__iregex=query_regex)
+        court_number_results = Court.objects.filter(displayed='True').filter(location_filter).order_by("name")
 
         # put it all together and remove duplicates
         results = list(OrderedDict.fromkeys(chain(court_number_results)))
