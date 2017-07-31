@@ -59,7 +59,21 @@ class SearchTestCase(TestCase):
     def test_court_numbers_in_list(self):
         c = Client()
         response = c.get('/courts/A')
-        self.assertIn('(Crown #1725, County #242, Magistrates #1725)', response.content)
+        self.assertIn('(Crown #1725, County #242, Magistrates #1337)', response.content)
+
+    def test_court_numbers_in_details_page(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+
+        document = lxml.html.fromstring(response.content)
+        text = document.cssselect('#pros dl')[0].text_content()
+
+        self.assertIn('Crown Court location code', text)
+        self.assertIn('1725', text)
+        self.assertIn('County Court location code', text)
+        self.assertIn('242', text)
+        self.assertIn('Magistrates\' Court location code', text)
+        self.assertIn('1337', text)
 
     def test_updated_in_court_page(self):
         c = Client()
