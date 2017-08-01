@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-apt-get install --fix-missing -y \
+apt-get install --fix-missing -y --no-install-recommends \
         postgis \
+        python-pip \
+        python-dev \
+        build-essential \
         wget \
         ruby \
         libpq-dev \
