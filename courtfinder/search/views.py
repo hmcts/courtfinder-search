@@ -256,6 +256,8 @@ def __format_results(results):
                   'lat': result.lat,
                   'lon': result.lon,
                   'number': result.number,
+                  'cci_code': result.cci_code,
+                  'magistrate_code': result.magistrate_code,
                   'slug': result.slug,
                   'types': sorted([court_type.court_type.name for court_type in result.courtcourttype_set.all()]),
                   'address': visible_address,

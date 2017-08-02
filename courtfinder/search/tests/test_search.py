@@ -554,3 +554,26 @@ class SearchTestCase(TestCase):
             self.assertNotIn('Special notice', response.content)
             self.assertNotIn(em.message, response.content)
 
+    def test_search_court_location_code(self):
+        c = Client()
+        response = c.get('/search/results?courtcode=1725')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Accrington Magistrates&#39; Court", response.content)
+        self.assertNotIn("County Court Money Claims Centre (CCMCC)", response.content)
+        self.assertNotIn("Tameside Magistrates&#39; Court", response.content)
+
+    def test_search_county_location_code(self):
+        c = Client()
+        response = c.get('/search/results?courtcode=244')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("County Court Money Claims Centre (CCMCC)", response.content)
+        self.assertNotIn("Accrington Magistrates&#39; Court", response.content)
+        self.assertNotIn("Tameside Magistrates&#39; Court", response.content)
+
+    def test_search_magistrate_location_code(self):
+        c = Client()
+        response = c.get('/search/results?courtcode=1338')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Tameside Magistrates&#39; Court", response.content)
+        self.assertNotIn("Accrington Magistrates&#39; Court", response.content)
+        self.assertNotIn("County Court Money Claims Centre (CCMCC)", response.content)

@@ -49,6 +49,7 @@ class Ingest:
             court = Court(
                 admin_id=court_obj['admin_id'],
                 cci_code=court_obj.get('cci_code', None),
+                magistrate_code=court_obj.get('magistrate_code', None),
                 name=court_obj['name'],
                 slug=court_obj['slug'],
                 displayed=court_obj['display'],

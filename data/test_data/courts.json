@@ -78,8 +78,9 @@
             "lat": "53.7491281247251",
             "slug": "accrington-magistrates-court",
             "updated_at": "2014-04-16T13:04:44.642",
-            "court_number": 1725,
+            "court_number": "1725",
             "cci_code": "242",
+            "magistrate_code": "1337",
             "alert": " ",
             "opening_times": [
                 {
@@ -312,7 +313,9 @@
                     "in_leaflet": false
                 }
             ],
-            "court_number": 1748,
+            "court_number": "1748",
+            "cci_code": "243",
+            "magistrate_code": "1338",
             "lon": "-2.102120972524918",
             "postcodes": [],
             "emails": [
@@ -352,6 +355,8 @@
             "admin_id": "3456543",
             "display": true,
             "court_number": "123456",
+            "cci_code": "244",
+            "magistrate_code": "1339",
             "areas_of_law": [
                 {
                     "local_authorities": [],
