@@ -17,7 +17,7 @@ class CourtCodeTestCase(TestCase):
     def test_non_existing(self):
         c = Client()
 
-        response = c.get('/search/results?courtcode=123', follow=True)
+        response = c.get('/search/results?courtcode=125', follow=True)
 
         self.assertEqual(response.status_code, 200)
         self.assertIn('validation-error', response.content)
