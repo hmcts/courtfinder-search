@@ -179,16 +179,6 @@ def list_format_courts(courts):
     return [{
         'name': court.name,
         'slug': court.slug,
-        'numbers': ', '.join(
-            filter(
-                None,
-                (
-                    'Crown #{}'.format(court.number) if court.number else None,
-                    'County #{}'.format(court.cci_code) if court.cci_code else None,
-                    'Magistrates #{}'.format(court.magistrate_code) if court.magistrate_code else None,
-                )
-            )
-        )
         }
             for court in courts
             if court.displayed

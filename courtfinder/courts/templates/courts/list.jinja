@@ -38,7 +38,6 @@ Index of all courts and tribunals - GOV.UK
     {% for court in courts %}
     <li>
       <a href="{% url 'courts:court' court.slug %}">{{ court.name }}</a>
-      {% if court.numbers != '' %}({{ court.numbers }}){% endif %}
     </li>
     {% endfor %}
   </ul>
