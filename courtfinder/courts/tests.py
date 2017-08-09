@@ -56,11 +56,6 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/accrington-magistrates-court')
         self.assertNotIn('<span property="contactType"></span>', response.content)
 
-    def test_court_numbers_in_list(self):
-        c = Client()
-        response = c.get('/courts/A')
-        self.assertIn('(Crown #1725, County #242, Magistrates #1337)', response.content)
-
     def test_court_numbers_in_details_page(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
