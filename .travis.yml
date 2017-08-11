@@ -18,10 +18,13 @@ install:
   - "npm config set registry http://registry.npmjs.org/"
   - "npm install"
   - "sudo gem install sass -v 3.4.21"
+env:
+  - POSTGRES_USER=postgres DJANGO_SETTINGS_MODULE=courtfinder.settings.test
 before_script:
   - "psql -c 'CREATE DATABASE courtfinder_search;' -U postgres"
-  - "python courtfinder/manage.py migrate --noinput"
-  - "python courtfinder/manage.py populate-db --datadir=data/test_data --ingest"
   - "$(npm bin)/gulp"
+  - "cd courtfinder"
+  - "python manage.py migrate --noinput"
+  - "python manage.py populate-db --datadir=../data/test_data --ingest"
 script:
-  - "cd courtfinder && python manage.py test"
+  - "python manage.py test"
