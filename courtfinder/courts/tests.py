@@ -56,6 +56,15 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/accrington-magistrates-court')
         self.assertNotIn('<span property="contactType"></span>', response.content)
 
+    def test_court_emails_are_in_order(self):
+        c = Client()
+        response = c.get('/courts/accrington-magistrates-court')
+        document = lxml.html.fromstring(response.content)
+        first = document.cssselect('.email-label span')[0].text_content()
+        second = document.cssselect('.email-label span')[1].text_content()
+        self.assertIn('Mediation', first)
+        self.assertIn('Enquiries', second)
+
     def test_court_numbers_in_details_page(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')

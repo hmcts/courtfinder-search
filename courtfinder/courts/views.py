@@ -46,9 +46,8 @@ def format_court(court):
 
     if postal_address and str(postal_address['type']) == 'Postal and Visiting':
         visiting_address = None
-
-    emails = [{'description': email.description, 'addresses': [email.address]} for email in court.emails.all()]
-    emails.sort(key=lambda x: x['description'])
+    court_emails = court.emails.all().order_by('courtemail__order')
+    emails = [{'description': email.description, 'addresses': [email.address]} for email in court_emails]
     contacts = [{
         'name': contact.name,
         'numbers': [contact.number],

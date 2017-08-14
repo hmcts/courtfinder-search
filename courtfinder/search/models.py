@@ -203,6 +203,7 @@ class Email(models.Model):
 class CourtEmail(models.Model):
     court = models.ForeignKey(Court)
     email = models.ForeignKey(Email)
+    order = models.IntegerField(null=False, default=0)
 
     def __unicode__(self):
         return "%s has email: %s" % (self.court.name, self.email.description)
