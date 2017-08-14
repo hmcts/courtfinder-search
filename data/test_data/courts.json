@@ -135,6 +135,10 @@
             ],
             "emails": [
                 {
+                    "description": "Mediation",
+                    "address": "mdenquiries@hmcts.gsi.gov.uk"
+                },
+                {
                     "description": "Enquiries",
                     "address": "ln-blackburnmcenq@hmcts.gsi.gov.uk"
                 }
