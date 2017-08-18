@@ -17,9 +17,21 @@ class SearchTestCase(TestCase):
         imports = json.loads(courts_json_1)
         Ingest.courts(imports['courts'])
         Ingest.emergency_message(imports['emergency_message'])
+        self.mapit_patcher = patch('search.court_search.Postcode.mapit')
+        self.mock_mapit = self.mapit_patcher.start()
+        self.mock_mapit.return_value = {
+            "shortcuts": {
+                "council": 2491
+            },
+            "areas": {
+                "2491": {"name": "Greater London Authority"}
+            },
+            "wgs84_lat": 51.46898208902647,
+            "wgs84_lon": -0.06624795134523233,
+        }
 
     def tearDown(self):
-        pass
+        self.mapit_patcher.stop()
 
     def test_county(self):
         c = Client()

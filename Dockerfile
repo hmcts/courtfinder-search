@@ -14,17 +14,19 @@ RUN apt-get update && ./apt/production.sh \
       && rm -rf /var/lib/apt/lists/*
 
 # Install python dependencies
+ARG PYTHON_REQUIREMENTS=./requirements.txt
 COPY requirements/ ./requirements
 COPY requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
+RUN pip install --no-cache-dir -r ${PYTHON_REQUIREMENTS}
 
 # Collect static assets
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
+COPY courtfinder/ ./courtfinder
 RUN python courtfinder/manage.py collectstatic --noinput && \
     mkdir -p /srv/logs && chown -R search:search /srv/logs && \
     chown -R search: /srv/search
+
+COPY . .
 
 USER search
 

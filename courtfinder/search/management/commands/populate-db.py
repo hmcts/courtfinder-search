@@ -23,7 +23,7 @@ class Command(BaseCommand):
     logger= None
 
     def add_arguments(self, parser):
-        parser.add_argument('--datadir', default='data',
+        parser.add_argument('--datadir', default='data/test_data',
                             help='Set the data directory containing courts files')
         parser.add_argument('--database', default='default',
                             help='Set the database to import date into')
