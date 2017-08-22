@@ -15,8 +15,7 @@ RUN apt-get update && ./apt/production.sh \
 
 # Install python dependencies
 COPY requirements/ ./requirements
-COPY requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r ./requirements.txt
+RUN pip install --no-cache-dir -r ./requirements/local.txt
 
 # Collect static assets
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production

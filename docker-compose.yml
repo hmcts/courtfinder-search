@@ -3,9 +3,7 @@ services:
   courtfinder:
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        PYTHON_REQUIREMENTS: ./requirements/local.txt
+      dockerfile: Dockerfile.dev
     environment:
       DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
       DB_HOST: "postgres"
@@ -46,9 +44,7 @@ services:
   test-unit:
     build:
       context: .
-      dockerfile: Dockerfile
-      args:
-        PYTHON_REQUIREMENTS: ./requirements/testing.txt
+      dockerfile: Dockerfile.dev
     environment:
       DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
       DB_HOST: "postgres"
