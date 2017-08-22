@@ -15,11 +15,11 @@
         <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
       {% endif %}
     {% else %}
-    <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol|urlencode}}">About your issue</a></li>
     {% if spoe %}
-    <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
+    <li><a href="{% url 'search:spoe' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}">Additional info</a></li>
     {% endif %}
-    <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
+    <li><a href="{% url 'search:postcode' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}&postcode={{postcode|urlencode}}">Search by postcode</a></li>
     {% endif %}
   </ol>
 </div>
