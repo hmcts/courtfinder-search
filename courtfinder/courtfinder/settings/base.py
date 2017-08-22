@@ -71,6 +71,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'core.middleware.RequestLoggingMiddleware',
 )
 
@@ -128,6 +129,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# Security middleware
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Static files
 STATIC_URL = '/assets/'
