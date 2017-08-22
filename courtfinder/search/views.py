@@ -200,12 +200,12 @@ def results_json(request):
         results = CourtSearch(postcode, aol, spoe, query).get_courts()
         return HttpResponse(json.dumps(__format_results(results), default=str),
                             content_type="application/json")
-    except CourtSearchError as e:
-        return HttpResponseServerError(
+    except (CourtSearchClientError, CourtSearchInvalidPostcode) as e:
+        return HttpResponseBadRequest(
                 '{"error":"%s"}' % e,
                 content_type="application/json")
-    except CourtSearchClientError as e:
-        return HttpResponseBadRequest(
+    except CourtSearchError as e:
+        return HttpResponseServerError(
                 '{"error":"%s"}' % e,
                 content_type="application/json")
 
