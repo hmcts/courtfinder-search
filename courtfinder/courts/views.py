@@ -129,7 +129,7 @@ def court(request, slug):
 
 def leaflet(request, slug, leaflet_type):
     try:
-        format_court(Court.objects.get(slug=slug))
+        court = format_court(Court.objects.get(slug=slug))
     except Court.DoesNotExist:
         raise Http404
 
