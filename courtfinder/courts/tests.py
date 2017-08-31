@@ -138,7 +138,7 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/no-addresses')
         self.assertNotIn('Visit us:', response.content)
         self.assertNotIn('Write to us:', response.content)
-        self.assertNotIn('Visit or Write to us:', response.content)
+        self.assertNotIn('Visit or write to us', response.content)
         self.assertNotIn('Maps and directions', response.content)
 
     def test_visit_address(self):
@@ -146,7 +146,7 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/visiting-address')
         self.assertIn('Visit us:', response.content)
         self.assertNotIn('Write to us:', response.content)
-        self.assertNotIn('Visit or Write to us:', response.content)
+        self.assertNotIn('Visit or write to us', response.content)
         self.assertIn('Maps and directions', response.content)
 
     def test_postal_address(self):
@@ -154,7 +154,7 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/postal-address')
         self.assertNotIn('Visit us:', response.content)
         self.assertIn('Write to us:', response.content)
-        self.assertNotIn('Visit or Write to us:', response.content)
+        self.assertNotIn('Visit or write to us', response.content)
         self.assertNotIn('Maps and directions', response.content)
 
     def test_both_address(self):
@@ -162,14 +162,14 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/both-postal-and-visiting-addresses')
         self.assertIn('Visit us:', response.content)
         self.assertIn('Write to us:', response.content)
-        self.assertNotIn('Visit or Write to us:', response.content)
+        self.assertNotIn('Visit or write to us', response.content)
         self.assertIn('Maps and directions', response.content)
 
     def test_postal_and_visit_address(self):
         c = Client()
         response = c.get('/courts/postal-and-visiting-address')
         self.assertNotIn('Visit us:', response.content)
-        self.assertIn('Visit or write to us:', response.content)
+        self.assertIn('Visit or write to us', response.content)
         self.assertIn('Maps and directions', response.content)
 
     def test_leaflet_links_for_magistrates_court(self):

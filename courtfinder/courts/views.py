@@ -39,12 +39,12 @@ def format_court(court):
             'county': address.town.county,
             'type': address.address_type
         }
-        if str(address.address_type) == 'Postal' or str(address.address_type) == 'Postal and Visiting':
+        if str(address.address_type) == 'Postal' or str(address.address_type) == 'Visit us or write to us':
             postal_address = address_obj
         else:
             visiting_address = address_obj
 
-    if postal_address and str(postal_address['type']) == 'Postal and Visiting':
+    if postal_address and str(postal_address['type']) == 'Visit us or write to us':
         visiting_address = None
     court_emails = court.emails.all().order_by('courtemail__order')
     emails = [{'description': email.description, 'addresses': [email.address]} for email in court_emails]

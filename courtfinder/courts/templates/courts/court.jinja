@@ -44,7 +44,7 @@
   {% else %}
   <div>
     <div id="addresses">
-      {% if court.postal_address.type.name != 'Postal and Visiting' and court.visiting_address %}
+      {% if court.postal_address.type.name != 'Visit us or write to us' and court.visiting_address %}
         <div id="visiting" property='address' typeof='http://schema.org/PostalAddress'>
           <h2>Visit us:</h2>
           <span property="streetAddress">
@@ -66,7 +66,7 @@
       {% endif %}
       {% if court.postal_address %}
         <div id="postal">
-          {% if court.postal_address.type.name == 'Postal and Visiting' %}
+          {% if court.postal_address.type.name == 'Visit us or write to us' %}
             <h2>Visit or write to us:</h2>
           {% else %}
             <h2>Write to us:</h2>
@@ -79,7 +79,7 @@
             {{ court.postal_address.county }}<br/>
           {% endif %}
           {{ court.postal_address.postcode }}
-          {% if court.postal_address.type.name == 'Postal and Visiting' %}
+          {% if court.postal_address.type.name == 'Visit us or write to us' %}
             {% if court.lat and court.lon %}
               <p id="map-link">
                 <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
