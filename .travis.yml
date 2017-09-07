@@ -1,27 +1,20 @@
+sudo: required
+
 language: python
-dist: trusty
-node_js:
-  - "0.10"
-python:
-  - "2.7"
-notifications:
-  email: false
+
 services:
-  - postrgresql
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.14.0
+
 before_install:
-  - sudo ./apt/base.sh
-  - sudo ./apt/testing.sh
-install:
-  - "pip install setuptools==32"
-  - "pip install -r requirements.txt"
-  - "pip install -r requirements/testing.txt"
-  - "npm config set registry http://registry.npmjs.org/"
-  - "npm install"
-  - "sudo gem install sass -v 3.4.21"
-before_script:
-  - "psql -c 'CREATE DATABASE courtfinder_search;' -U postgres"
-  - "python courtfinder/manage.py migrate --noinput"
-  - "python courtfinder/manage.py populate-db --datadir=data/test_data --ingest"
-  - "$(npm bin)/gulp"
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install: []
+
 script:
-  - "cd courtfinder && python manage.py test"
+  - make test

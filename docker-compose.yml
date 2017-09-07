@@ -1,0 +1,81 @@
+version: "3.1"
+services:
+  courtfinder:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+    command: ./run_compose.sh
+    links:
+      - postgres
+    volumes:
+      - .:/srv/search
+
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile-postgres
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+
+  test-cucumber:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      COURTFINDER_PORT:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+      APP_HOST: "http://courtfinder:8000"
+    command: ./test_cucumber.sh
+    links:
+      - courtfinder
+
+  test-unit:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      DJANGO_SETTINGS_MODULE: "courtfinder.settings.local"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+    command: ./test_unit.sh
+    links:
+      - postgres
+
+  test-security:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      COURTFINDER_PORT:
+      SECURITY: "true"
+      ZAP_PROXY: "zap"
+      ZAP_PROXY_PORT: "8089"
+      DB_HOST: "postgres"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      DB_NAME: "${POSTGRES_DB}"
+      APP_HOST: "http://courtfinder:8000"
+    command: ./test_cucumber.sh
+    links:
+      - courtfinder
+      - zap
+
+  zap:
+    image: owasp/zap2docker-stable
+    command: ./zap.sh -daemon -host 0.0.0.0 -port 8089 -config api.disablekey=true -config 'api.addrs.addr.name=.*' -config 'api.addrs.addr.regex=true'
+    links:
+      - courtfinder

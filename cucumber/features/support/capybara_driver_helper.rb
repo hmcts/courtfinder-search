@@ -8,7 +8,14 @@ Capybara.configure do |config|
 end
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 60)
+  if ENV['SECURITY'] == "true"
+    phantomjs_proxy = "--proxy=#{ENV['ZAP_PROXY']}:#{ENV['ZAP_PROXY_PORT']}"
+    puts(phantomjs_proxy)
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 60,
+                                           phantomjs_options: [phantomjs_proxy])
+  else
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 60)
+  end
 end
 
 Capybara.register_driver :firefox do |app|
@@ -42,4 +49,4 @@ end
 
 Capybara.javascript_driver = Capybara.default_driver
 Capybara.current_driver = Capybara.default_driver
-Capybara.app_host = 'http://0.0.0.0:8000'
+Capybara.app_host = ENV['APP_HOST'] || 'http://0.0.0.0:8000'
