@@ -1,13 +1,18 @@
+from .base import *
+
+DEBUG = True
+SECRET_KEY = "a-secret-key"
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'courtfinder_search',
+        'USER': 'postgres',
     },
     'temp': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'courtfinder_search_tmp',
+        'USER': 'postgres',
     }
 }
 
-SECRET_KEY = "a-secret-key"

@@ -51,6 +51,9 @@ coverage.xml
 *.log
 *.pot
 
+#local settings
+courtfinder/courtfinder/settings/local.py
+
 # Sphinx documentation
 docs/_build/
 
