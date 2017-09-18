@@ -27,4 +27,6 @@ before_script:
   - "python manage.py migrate --noinput"
   - "python manage.py populate-db --datadir=../data/test_data --ingest"
 script:
-  - "python manage.py test"
+  - coverage run --source='.' manage.py test
+  - coverage report
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then codeclimate-test-reporter; fi
