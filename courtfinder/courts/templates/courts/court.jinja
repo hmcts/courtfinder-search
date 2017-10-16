@@ -120,8 +120,15 @@
     <div id="left">
       {% if court.alert %}
       <div class="alert">
-        <p class="alert-icon"><img src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="Important information"/></p>
+        <img class="alert-icon" src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="Important information"/>
         <p>{{ court.alert|striptags }}</p>
+      </div>
+      {% endif %}
+
+      {% if court.info %}
+      <div>
+          <h2>Additional Information</h2>
+          {{ court.info|safe }}
       </div>
       {% endif %}
 
@@ -216,14 +223,6 @@
         </ul>
       </div>
       {% endif %}
-
-      {% if court.info %}
-        <div>
-          <h2>Further Information</h2>
-          <p>{{ court.info|safe }}</p>
-        </div>
-      {% endif %}
-
     </div>
 
     <div id="areas_of_law">

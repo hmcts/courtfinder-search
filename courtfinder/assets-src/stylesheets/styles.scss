@@ -360,11 +360,14 @@ $small-width: 800px;
   .icon-witness{top: -10px;left: -190px}
 
   .alert {
-    margin-top: 2em;
+    margin-top: 1em;
     min-height: 50px;
     .alert-icon {
       float: left;
-      padding: 0 20px 50px 0;
+      margin: 0 20px 10px 0;
+    }
+    p:first-of-type {
+      padding-top: 5px;
     }
   }
 
