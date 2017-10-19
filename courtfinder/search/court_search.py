@@ -258,7 +258,7 @@ class Postcode():
             except ValueError:
                 raise CourtSearchError('MapIt: cannot parse response JSON')
         elif r.status_code in [400, 404]:
-            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
+            loggers['mapit'].info("%d - %s" % (r.status_code, postcode))
             raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
         elif r.status_code in [403, 429]:
             loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
