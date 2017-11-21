@@ -7,6 +7,8 @@ apt-get install --fix-missing -y --no-install-recommends \
         libnet-amazon-s3-tools-perl \
         libpq-dev \
         libssl-dev \
+        postgis \
+        postgresql-client \
         python-dev \
         python-pip \
         ruby \
