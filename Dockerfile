@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:2.7
 
 RUN useradd -m -d /srv/search search
 WORKDIR /srv/search
