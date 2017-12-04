@@ -53,7 +53,6 @@ class CourtSearch:
                 else:
                     self.area_of_law = AreaOfLaw(name=area_of_law)
             except AreaOfLaw.DoesNotExist:
-                loggers['aol'].error(area_of_law)
                 raise CourtSearchClientError('bad area of law')
 
             self.single_point_of_entry = single_point_of_entry
@@ -236,7 +235,6 @@ class Postcode():
             try:
                 self.local_authority = LocalAuthority.objects.get(name=local_authority_name)
             except LocalAuthority.DoesNotExist:
-                loggers['la'].error(local_authority_name)
                 self.local_authority = None
 
         else:
@@ -258,13 +256,10 @@ class Postcode():
             except ValueError:
                 raise CourtSearchError('MapIt: cannot parse response JSON')
         elif r.status_code in [400, 404]:
-            loggers['mapit'].info("%d - %s" % (r.status_code, postcode))
             raise CourtSearchInvalidPostcode('MapIt doesn\'t know this postcode: ' + mapit_url)
         elif r.status_code in [403, 429]:
-            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
             raise CourtSearchError('MapIt rate limit exceeded: ' + str(r.status_code))
         else:
-            loggers['mapit'].error("%d - %s" % (r.status_code, postcode))
             raise CourtSearchError('MapIt service error: ' + str(r.status_code))
 
     def log_usage(self, headers):
