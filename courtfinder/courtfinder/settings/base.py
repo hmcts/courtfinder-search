@@ -59,12 +59,14 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'django.contrib.sessions',
     'moj_template',
     'core',
     'search',
     'staticpages',
     'courts',
     'healthcheck',
+    'admin',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,7 +74,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'core.middleware.RequestLoggingMiddleware',
+    'admin.middleware.RequireLoginMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
@@ -121,6 +126,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+LOGIN_REDIRECT_URL = 'admin:courts'
+LOGIN_URL = 'admin:login'
 
 # Internationalisation
 LANGUAGE_CODE = 'en-gb'

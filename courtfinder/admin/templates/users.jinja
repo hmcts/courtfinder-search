@@ -1,0 +1,31 @@
+{% extends "admin.jinja" %}
+
+{% block page_title %}User management{% endblock %}
+
+{% block content %}
+  <div id="admin-users-page" class="content inner cf">
+    <header class="page-header">
+      <h2>User management</h2>
+    </header>
+    <table>
+      <tr>
+        <th>first name</th>
+        <th>last_name</th>
+        <th>username</th>
+        <th>email</th>
+        <th>last login</th>
+        <th>access</th>
+      </tr>
+      {% for user in users%}
+      <tr>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.last_login }}</td>
+        <td>{% if user.is_superuser %} super user {% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
