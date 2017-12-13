@@ -1,0 +1,40 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<div id="login-page" class="content inner cf">
+  <header class="page-header">
+    <h2>Login to continue</h2>
+  </header>
+  <div class="group">
+      {% if form.errors %}
+      <section class="validation-error">
+        <h2>Error</h2>
+        <p>Your username and password didn't match. Please try again.</p>
+      </section>
+      {% endif %}
+
+      <form method="post" action="{% url 'admin:login' %}">
+      <fieldset class="form-group">
+        {% csrf_token %}
+        <label for="id_username" class="form-block">
+          <div class="form-hint">{{ form.username.label_tag }}</div>
+          {{ form.username }}
+        </label>
+
+        <label for="id_password" class="form-block">
+          <div class="form-hint">{{ form.password.label_tag }}</div>
+          {{ form.password }}
+        </label>
+        <input type="hidden" name="next" value="{{ next }}" />
+      </fieldset>
+        <div class="actions">
+        <button class="button" type="submit">Log in</button>
+        </div>
+      </form>
+  </div>
+  <div class="group">
+    <p><a href="{% url 'admin:password_reset' %}">Lost password?</a></p>
+  </div>
+</div>
+
+{% endblock %}

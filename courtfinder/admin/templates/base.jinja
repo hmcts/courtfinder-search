@@ -1,0 +1,12 @@
+{% extends 'moj_template/base.html' %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+<link href="{% static 'stylesheets/main.css' %}" media="screen" rel="stylesheet" type="text/css" />
+<link href="{% static 'stylesheets/admin.css' %}" media="screen" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block content %}
+  {% block body %}{% endblock %}
+{% endblock %}

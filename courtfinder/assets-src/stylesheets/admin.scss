@@ -1,0 +1,32 @@
+.nav-menu {
+
+  margin: auto;
+  max-width: 990px;
+
+  ul {
+    margin: 10px;
+  }
+
+  li {
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    margin: 0px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #005ea5;
+    padding: 0px 15px;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: #005ea5;
+    }
+  }
+
+  #menu-logout {
+    float:right;
+  }
+}

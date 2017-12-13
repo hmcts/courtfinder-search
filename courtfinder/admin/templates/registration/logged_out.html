@@ -1,0 +1,13 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<div id="logout-page" class="content inner cf">
+  <header class="page-header">
+    <h2>Logged out</h2>
+  </header>
+  <div class="group">
+    <p>You have been logged out, click <a href="{% url 'admin:login' %}">here</a> to log back in.</p>
+  </div>
+</div>
+
+{% endblock %}

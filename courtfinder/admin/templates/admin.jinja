@@ -1,0 +1,11 @@
+{% extends "base.jinja" %}
+
+{% block before_content %}
+<div class="nav-menu">
+  <ul>
+      <li><a href="{% url 'admin:courts' %}">Courts</a></li>
+      <li><a href="{% url 'admin:users' %}">Users</a></li>
+      <li id="menu-logout"><a href="{% url 'admin:logout' %}">Log out</a></li>
+  </ul>
+</div>
+{% endblock %}
