@@ -33,7 +33,7 @@ class SearchTestCase(TestCase):
 
     def test_postcode_search(self):
         c = Client()
-        response = c.get('/search/results.json?postcode=SE15&aol=Divorce')
+        response = c.get('/search/results.json?postcode=SE154UH&aol=Divorce')
         self.assertEqual(response.status_code, 200)
         self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 
@@ -45,7 +45,7 @@ class SearchTestCase(TestCase):
 
     def test_no_aol(self):
         c = Client()
-        response = c.get('/search/results.json?postcode=SE15')
+        response = c.get('/search/results.json?postcode=SE154UH')
         self.assertEqual(response.status_code, 200)
         self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
 

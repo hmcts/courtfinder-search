@@ -235,12 +235,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results?postcode=G24PP&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=G2&aol=All')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('<p id="scotland">', response.content)
-        response = c.get('/search/results?postcode=AB10&aol=All')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('<p id="scotland">', response.content)
         response = c.get('/search/results?postcode=AB10+7LY&aol=All')
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p id="scotland">', response.content)
@@ -268,12 +262,8 @@ class SearchTestCase(TestCase):
         response = c.get('/search/results')
         self.assertRedirects(response, '/search/', 302)
 
-    def test_postcode_to_local_authority_short_postcode(self):
-        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='Divorce')
-                             .get_courts()), 1)
-
     def test_area_of_law_case_insensitive(self):
-        self.assertEqual(len(CourtSearch(postcode='SE15', area_of_law='divorce')
+        self.assertEqual(len(CourtSearch(postcode='SE154UH', area_of_law='divorce')
                              .get_courts()), 1)
 
     def test_local_authority_search_ordered(self):
@@ -328,7 +318,7 @@ class SearchTestCase(TestCase):
 
     def test_ni(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&aol=Divorce', follow=True)
+        response = c.get('/search/results?postcode=bt2+3rd&aol=Divorce', follow=True)
         self.assertIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_money_claims(self):
@@ -406,7 +396,7 @@ class SearchTestCase(TestCase):
 
     def test_ni_immigration(self):
         c = Client()
-        response = c.get('/search/results?postcode=bt2&aol=Immigration', follow=True)
+        response = c.get('/search/results?postcode=bt23rd&aol=Immigration', follow=True)
         self.assertNotIn("this tool does not return results for Northern Ireland", response.content)
 
     def test_court_postcodes(self):
@@ -491,25 +481,25 @@ class SearchTestCase(TestCase):
 
     def test_employment_venues_link_in_search_results(self):
         c = Client()
-        response = c.get('/search/results?postcode=SE15&aol=Employment')
+        response = c.get('/search/results?postcode=SE15+4PE&aol=Employment')
         self.assertEqual(200, response.status_code)
         self.assertIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
 
     def test_child_support_venues_link_in_search_results(self):
         c = Client()
-        response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE15')
+        response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
         self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
 
     def test_social_security_venues_link_in_search_results(self):
         c = Client()
-        response = c.get('/search/results?aol=Social+security&postcode=SE15')
+        response = c.get('/search/results?aol=Social+security&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
         self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
 
     def test_for_no_venue_links(self):
         c = Client()
-        response = c.get('/search/results?aol=Bankruptcy&postcode=SE15')
+        response = c.get('/search/results?aol=Bankruptcy&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
         self.assertNotIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
         self.assertNotIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
