@@ -66,22 +66,12 @@ class PostcodeTestCase(TestCase):
 
         return mock_response
 
-
     def test_full_postcode(self):
         p = Postcode(self.full_postcode)
         self.assertTrue(p.full_postcode)
 
-    def test_partial_postcode(self):
-        p = Postcode(self.partial_postcode)
-        self.assertTrue(p.partial_postcode)
-
-#    def test_local_authority(self):
-#        p = Postcode(self.full_postcode)
-#        self.assertEqual(p.local_authority, 'Southwark Borough Council')
-
-    def test_no_local_authority_for_partial_postcode(self):
-        p = Postcode(self.partial_postcode)
-        self.assertIsNone(p.local_authority)
+    def test_partial_postcode_raises_invalid(self):
+        self.assertRaises(CourtSearchInvalidPostcode, Postcode, self.partial_postcode)
 
     def test_broken_postcode(self):
         self.assertRaises(CourtSearchInvalidPostcode, Postcode, self.broken_postcode)
@@ -96,7 +86,7 @@ class PostcodeTestCase(TestCase):
     def test_log_usage(self):
         mapit_logger = mock.Mock()
         with mock.patch.dict('search.court_search.loggers', mapit_json=mapit_logger):
-            p = Postcode(self.partial_postcode)
+            p = Postcode(self.full_postcode)
 
             tests = [
                 {'current': 10,    'limit': 50,   'percent': 20,   'log_method': mapit_logger.info},

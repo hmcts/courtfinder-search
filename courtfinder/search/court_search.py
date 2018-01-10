@@ -136,6 +136,7 @@ class CourtSearch:
 
 
     def __postcode_search( self, area_of_law ):
+
         p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects \
                 .filter(court__areas_of_law=area_of_law) \
@@ -148,7 +149,6 @@ class CourtSearch:
     def __proximity_search( self ):
         lat = self.postcode.latitude
         lon = self.postcode.longitude
-
         results = Court.objects.raw("""
             SELECT *,
                    (point(c.lon, c.lat) <@> point(%s, %s)) as distance
@@ -213,6 +213,8 @@ class Postcode():
 
         self.full_postcode = self.is_full_postcode( postcode )
         self.partial_postcode = not self.full_postcode
+        if self.partial_postcode:
+            raise CourtSearchInvalidPostcode("Please enter a full postcode")
         self.lookup_postcode()
 
     def lookup_postcode( self ):
