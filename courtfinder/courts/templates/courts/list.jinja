@@ -46,7 +46,7 @@ Index of all courts and tribunals - GOV.UK
   <nav role='navigation' class="a-z-navigation">
     <ul>
       {% for letter in letters %}
-      <a href="{% url 'courts:list' letter %}"><li>{{ letter }}</li></a>
+      <li><a href="{% url 'courts:list' letter %}">{{ letter }}</a></li>
       {% endfor %}
     </ul>
   </nav>

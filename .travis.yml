@@ -1,5 +1,7 @@
 language: python
 dist: trusty
+addons:
+  chrome: stable
 node_js:
   - "0.10"
 python:
@@ -11,6 +13,9 @@ services:
 before_install:
   - sudo ./apt/base.sh
   - sudo ./apt/testing.sh
+  - wget -N https://chromedriver.storage.googleapis.com/2.33/chromedriver_linux64.zip -P ~/
+  - unzip ~/chromedriver_linux64.zip -d ~/
+  - sudo mv ~/chromedriver /usr/local/bin/chromedriver
 install:
   - "pip install setuptools==32"
   - "pip install -r requirements.txt"
@@ -25,8 +30,12 @@ before_script:
   - "$(npm bin)/gulp"
   - "cd courtfinder"
   - "python manage.py migrate --noinput"
-  - "python manage.py populate-db --datadir=../data/test_data --ingest"
 script:
   - coverage run --source='.' manage.py test
   - coverage report
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then codeclimate-test-reporter; fi
+  - python manage.py loaddata  ../features/fixtures.yaml 2>/dev/null
+  - python manage.py runserver &
+  - sleep 2
+  - cd ..
+  - behave --format progress3 -Dheadless
