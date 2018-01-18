@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 
 def courts(request):
-    return render(request, 'courts.jinja')
+    return render(request, 'courts.jinja', {
+        'courts': Court.objects.order_by('name').all()
+    })
 
 
 def users(request):
@@ -13,7 +15,7 @@ def users(request):
     })
 
 
-def edit(request, slug):
-    return render(request, 'edit.jinja', {
-        'court': Court.objects.get(slug=slug)
+def court(request, id):
+    return render(request, 'court.jinja', {
+        'court': Court.objects.get(id=id)
     })
