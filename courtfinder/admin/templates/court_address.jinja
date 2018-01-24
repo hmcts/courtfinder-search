@@ -1,0 +1,24 @@
+{% extends "court.jinja" %}
+
+{% block details %}
+    <p>
+        {% if court.lat %}
+        Location: {{ court.lat|floatformat:2 }},{{ court.lon|floatformat:2 }} -
+        <a target="_blank" href="https://www.google.com/maps/?q={{ court.lat }},{{ court.lon }} ">view on google maps</a>
+        {% else %}
+        Location: unknown
+        {% endif %}
+    </p>
+
+    <form method="post">
+      {% if form.is_valid %}
+      <p class="form-feedback">Succesfully updated</p>
+      {% endif %}
+
+      <fieldset class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+      </fieldset>
+      <input type="submit" class="button" value="Update" />
+    </form>
+{% endblock %}

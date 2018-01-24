@@ -6,7 +6,8 @@ import views
 urlpatterns = [
     url(r'^auth/', include('django.contrib.auth.urls')),
     url(r'^courts$', views.courts, name='courts'),
-    url(r'^court/(?P<id>[0-9]+)$', views.court, name='court'),
+    url(r'^court/(?P<id>[0-9]+)$', views.edit_court, name='court'),
+    url(r'^court/address/(?P<id>[0-9]+)$', views.edit_address, name='address'),
     url(r'^users$', views.users, name='users'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

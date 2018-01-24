@@ -33,3 +33,11 @@ def step_impl(context):
 def step_impl(context):
     driver = context.browser.driver
     driver.switch_to_window(driver.window_handles[1])
+
+
+@when(u'I view court in the new window')
+def step_impl(context):
+    context.execute_steps(u'''
+        When I press "view"
+        And I switch to the new window
+    ''')

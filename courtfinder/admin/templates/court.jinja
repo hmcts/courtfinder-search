@@ -3,9 +3,20 @@
 {% block page_title %}Edit court{% endblock %}
 
 {% block content %}
-  <div id="court_edit-page" class="content inner cf">
+  <div class="content inner cf">
     <header class="page-header">
-      <h2>Editing - {{ court.name }}</h2>
+      <h2>Editing - {{ court.name }} <a class="right-link" target="_blank" href="{% url 'courts:court' court.slug %}">view</a></h2>
     </header>
+
+    <div class="nav-menu">
+      <ul>
+        <li><a href="{% url 'admin:court' court.id %}">basic</a></li>
+        <li><a href="{% url 'admin:address' court.id %}">addresses</a></li>
+      </ul>
+    </div>
+    <div class="content cf details">
+    {% block details %} {% endblock %}
+    </div>
   </div>
+
 {% endblock %}
