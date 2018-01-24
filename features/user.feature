@@ -9,4 +9,4 @@ Feature: User access
     And I fill in "password" with "$password"
     And I press "Log in"
     Then the browser's URL should be "staff/courts"
-    And I should see "Log out"
+    And I should see "log out"

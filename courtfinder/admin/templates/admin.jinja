@@ -3,9 +3,9 @@
 {% block before_content %}
 <div class="nav-menu">
   <ul>
-      <li><a href="{% url 'admin:courts' %}">Courts</a></li>
-      <li><a href="{% url 'admin:users' %}">Users</a></li>
-      <li id="menu-logout"><a href="{% url 'admin:logout' %}">Log out</a></li>
+      <li><a href="{% url 'admin:courts' %}">courts</a></li>
+      <li><a href="{% url 'admin:users' %}">users</a></li>
+      <li class="right-link"><a href="{% url 'admin:logout' %}">log out</a></li>
   </ul>
 </div>
 {% endblock %}

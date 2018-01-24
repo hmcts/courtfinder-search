@@ -1,0 +1,12 @@
+{% extends "court.jinja" %}
+
+{% block details %}
+    <form class="details" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+      {% if form.is_valid %}
+          <p class="form-feedback">Successfully updated</p>
+      {% endif %}
+    </form>
+{% endblock %}

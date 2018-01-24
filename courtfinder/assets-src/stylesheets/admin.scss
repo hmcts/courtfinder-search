@@ -1,23 +1,24 @@
 .nav-menu {
-
   margin: auto;
-  max-width: 990px;
-
+  max-width: 950px;
+  border-bottom: solid 1px;
   ul {
-    margin: 10px;
+    margin: 10px 0;
   }
 
   li {
     list-style: none;
     text-align: center;
     display: inline-block;
-    margin: 0px;
+  }
+
+  li:not(:last-child) {
+    margin-right: 30px;
   }
 
   a {
     text-decoration: none;
     color: #005ea5;
-    padding: 0px 15px;
     &:hover {
       text-decoration: underline;
     }
@@ -25,8 +26,49 @@
       color: #005ea5;
     }
   }
+}
 
-  #menu-logout {
+.right-link {
     float:right;
+    margin-right: 0px;
+}
+
+form {
+  label{
+    width: 150px;
+    float: left;
+    margin: 0px;
   }
+
+  ul.errorlist {
+    color: red;
+  }
+}
+
+form.details {
+  input[type=text] {
+    width: 600px;
+  }
+
+  textarea {
+    width: 780px;
+  }
+
+  p.form-feedback {
+    color: green;
+  }
+
+  input:required {
+    background-color: #ffffdb;
+    border: grey solid 1px;
+  }
+
+  p.form-feedback {
+    display: inline-block;
+    margin-top: 28px;
+  }
+}
+
+div.details {
+    padding-top: 20px;
 }
