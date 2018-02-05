@@ -28,7 +28,7 @@ def format_court(court):
     """
     create a courts object that we can send to templates
     """
-    addresses = court.courtaddress_set.all().order_by('address_type__name')
+    addresses = court.courtaddress_set.all().order_by('address_type__name', '-pk')
     postal_address = None
     visiting_address = None
     for address in addresses:

@@ -44,6 +44,13 @@ class Court(models.Model):
         self.name = new_name
         self.slug = slugify(new_name)
 
+    def primary_address(self):
+        try:
+            return CourtAddress.objects.filter(court=self).order_by('pk').first()
+        except CourtAddress.DoesNotExist:
+            return None
+
+
 class CourtAttributeType(models.Model):
     name = models.CharField(max_length=255)
 

@@ -18,7 +18,6 @@ Feature: List of courts
     When I click the link to "/staff/court/608"
     Then I should see "Editing - Aberystwyth Justice Centre"
 
-
   Scenario: Edit basic information, update slug with name
     When I visit "/staff/court/597"
     And I fill in "name" with "Testing court name"

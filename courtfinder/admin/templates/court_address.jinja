@@ -9,8 +9,9 @@
         Location: unknown
         {% endif %}
     </p>
+    {% for form, address_id in court_address_forms.items %}
 
-    <form method="post">
+    <form {% if forloop.first %} id ="primary_address" {%else %}id ="secondary_address"{% endif %} method="post" {% if address_id %}action="{% url 'admin:address' court.id address_id %}"{% else %}action="{% url 'admin:address' court.id %}"{% endif %}>
       {% if form.is_valid %}
       <p class="form-feedback">Succesfully updated</p>
       {% endif %}
@@ -18,7 +19,25 @@
       <fieldset class="form-group">
         {% csrf_token %}
         {{ form.as_p }}
+           <input name="form_index" {% if forloop.first %}value="0"{% else %}value="1"{% endif %} hidden/>
       </fieldset>
-      <input type="submit" class="button" value="Update" />
+
+
+      <input type="submit" class="button" name="Update" value="Update" />
+
     </form>
+
+    {% if forloop.first %}
+        <hr>
+    {% else %}
+        {% if address_id %}
+            <form method = "POST" id = "secondary_delete" action ="{% url 'admin:delete_address' court.id address_id %}">
+                {% csrf_token %}
+                <input type="submit" class = "button-secondary" name="Delete" value="Delete"></input>
+            </form>
+        {% endif %}
+    {% endif %}
+
+    {% endfor %}
+
 {% endblock %}
