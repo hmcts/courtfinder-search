@@ -41,3 +41,19 @@ def step_impl(context):
         When I press "view"
         And I switch to the new window
     ''')
+
+@when(u'I fill "{field_name}" with "{input_val}" in the form "{form_id}"')
+def step_impl(context, field_name, input_val, form_id):
+    elem = context.browser.find_by_css(("form#%s " "*[name='%s']") % (form_id, field_name))
+    elem.first._element.send_keys(input_val)
+
+@when(u'I select "{input_val}" from "{field_name}" in the form "{form_id}"')
+def step_impl(context, input_val, field_name, form_id):
+    elem = context.browser.find_by_css(("form#%(form_id)s select[name='%(field_name)s'] option[value='%(input_val)s']") % {'form_id': form_id, 'field_name': field_name, 'input_val': input_val})
+    elem.first._element.click()
+
+@when(u'I press "{button_name}" in the form "{form_id}"')
+def step_impl(context, button_name, form_id):
+    elem = context.browser.find_by_css(("form#%s " "input[name='%s']") % (form_id, button_name))
+    elem.first._element.click()
+
