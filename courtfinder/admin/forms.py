@@ -6,5 +6,5 @@ class CourtBasicForm(forms.Form):
     alert = forms.CharField(label='Urgent notice', max_length=250, required=False,
                             widget=forms.Textarea(attrs={'rows': 3}))
     info = forms.CharField(label='Additional information', max_length=4000, required=False,
-                            widget=forms.Textarea(attrs={'rows': 6}))
+                            widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
     displayed = forms.BooleanField(label='Open', required=False)
