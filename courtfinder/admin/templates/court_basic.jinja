@@ -1,7 +1,7 @@
 {% extends "court.jinja" %}
 
 {% block details %}
-    <form class="details" method="post">
+    <form class="court basic" method="post">
         {% csrf_token %}
         {{ form.as_p }}
       <input type="submit" class="button" value="Update" />
