@@ -3,7 +3,7 @@ Feature: Edit addresses for a given court
   Background:
     Given "admin" as the persona
     And I log in to the admin interface
-    And I visit "/staff/court/address/192"
+    And I visit "/staff/court/192/address"
 
   Scenario: Update primary address
     When I select "72" from "town" in the form "primary_address"
