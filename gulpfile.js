@@ -56,6 +56,9 @@ gulp.task('js', function() {
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/vendor'));
   // create debug js file
   gulp
+    .src(paths.src_dir + 'javascripts/admin.js')
+    .pipe(gulp.dest(paths.dest_dir + 'javascripts'));
+  gulp
     .src(paths.src_dir + 'javascripts/**/*debug*')
     .pipe(concat('debug.js'))
     .pipe(gulp.dest(paths.dest_dir + 'javascripts/'));
