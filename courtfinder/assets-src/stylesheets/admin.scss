@@ -49,28 +49,43 @@ div.mce-tinymce {
   margin-left: 150px;
 }
 
-form.details {
-  input[type=text] {
-    width: 600px;
-  }
-
-  textarea {
-    width: 780px;
-  }
-
+form.court {
   p.form-feedback {
     color: green;
-  }
-
-  input:required {
-    background-color: #ffffdb;
-    border: grey solid 1px;
-  }
-
-  p.form-feedback {
     display: inline-block;
     margin-top: 28px;
   }
+
+  fieldset {
+    margin: 0px;
+  }
+
+  &.basic {
+    input[type=text] {
+      width: 600px;
+    }
+
+    textarea {
+      width: 780px;
+    }
+  }
+
+  &.address {
+    input[type=text] {
+      width: 110px;
+    }
+    textarea {
+      width: 500px;
+      height: 130px;
+    }
+
+    input[name=delete]{
+      position: absolute;
+      top: 1042px;
+      left: 600px;
+    }
+  }
+
 }
 
 div.details {
