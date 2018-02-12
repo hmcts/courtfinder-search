@@ -14,14 +14,5 @@
 
 {% block javascripts %}
 <script src="{% static 'javascripts/vendor/tinymce/tinymce.min.js' %}" type="text/javascript"></script>
-<script>
-  tinymce.init({
-    selector: '.rich-editor',
-    width: 784,
-    plugins : 'autolink link',
-    menubar: '',
-    toolbar: 'undo redo | bold italic underline strikethrough | link | removeformat',
-    statusbar: false,
-  });
-  </script>
+<script src="{% static 'javascripts/admin.js' %}" type="text/javascript"></script>
 {% endblock %}

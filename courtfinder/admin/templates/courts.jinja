@@ -7,14 +7,24 @@
     <header class="page-header">
       <h2>Courts and tribunals</h2>
     </header>
-    <table>
+    <form>
+      <p>
+        <label>show closed</label>
+        <input id="closed-court-toggle" type="checkbox">
+      </p>
+      <p>
+        <label>search</label>
+        <input id="court-search-box" type="text">
+      </p>
+    </form>
+    <table id="court-list">
       <tr>
         <th>name</th>
         <th>status</th>
         <th colspan="2">actions</th>
       </tr>
       {% for court in courts %}
-      <tr>
+      <tr class="{% if not court.displayed %} closed-court hidden {% endif %}">
         <td>{{ court.name }}</td>
         <td>{% if not court.displayed %} closed {% endif %}</td>
         <td><a target="_blank" href="{% url 'courts:court' court.slug %}">view</a></td>
