@@ -1,0 +1,20 @@
+{% extends "court.jinja" %}
+
+{% block details %}
+
+    <form id="reorder_form" method="POST" action="{{reorder_url}}">
+    {% csrf_token %}
+    <input hidden name="new_sort_order" id="new_sort_order"/>
+        <ul id="sortable">
+            {% for object in objects %}
+                  <li id="{{object.pk}}" name="{{object.pk}}" class="li-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{object.name}}</li>
+            {% endfor %}
+        </ul>
+        <input type="submit" class="button" name="Update" value="Update" />
+
+    </form>
+    <form method="GET" id="secondary_cancel" class="court cancel-reorder" action="{{return_url}}">
+    {% csrf_token %}
+    <input type="submit" class="button-secondary" name="cancel" value="Cancel"></input>
+    </form>
+{% endblock %}

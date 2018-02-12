@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
+
+from search.models import Court, CourtAddress, Contact, CourtContact
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from search.models import Court, CourtAddress
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm, UserAddForm
+from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.forms import modelformset_factory
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -105,3 +107,60 @@ def delete_address(request, id, address_id=None):
         court_address.delete()
         messages.success(request, 'Address deleted')
     return HttpResponseRedirect(reverse("admin:address", args=(id, )))
+
+
+def edit_contact(request, id):
+    court = get_object_or_404(Court, pk=id)
+    contact_formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
+
+    if request.POST:
+        formset = contact_formset(request.POST)
+        if formset.is_valid():
+            instances = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for instance in instances:
+                if instance._state.adding:
+                    instance.save()
+                    court_contact = CourtContact(court=court, contact=instance)
+                    court_contact.save()
+                else:
+                    instance.save()
+            messages.success(request, 'Contacts updated')
+        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
+    court_contact_queryset = court.contacts.order_by('sort_order')
+    formset = contact_formset(queryset=court_contact_queryset)
+    return render(request, 'court_contacts.jinja', {
+            'court': court,
+            "formset": formset,
+        })
+
+
+def reorder_contacts(request, id):
+    import json
+    court = get_object_or_404(Court, pk=id)
+    return_url = reverse("admin:contact", kwargs={'id': id})
+    reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
+    if request.POST:
+        if "new_sort_order" in request.POST:
+            new_order = request.POST["new_sort_order"]
+            if new_order:
+                new_order = json.loads(new_order)
+                for i, o in enumerate(new_order):
+                    try:
+                        court_contact = CourtContact.objects.get(court=court, contact=o)
+                    except CourtContact.DoesNotExist:
+                        pass
+                    if court_contact:
+                        contact = court_contact.contact
+                        contact.sort_order = i
+                        contact.save()
+        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
+    contacts = court.contacts.order_by('sort_order')
+
+    return render(request, 'reordering.jinja', {
+        'court': court,
+        "objects": contacts,
+        "return_url": return_url,
+        "reorder_url": reorder_url,
+        })
