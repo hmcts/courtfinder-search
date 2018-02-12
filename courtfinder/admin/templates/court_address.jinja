@@ -32,7 +32,7 @@
         {% if address_id %}
             <form method="POST" id="secondary_delete" class="court address" action ="{% url 'admin:delete_address' court.id address_id %}">
                 {% csrf_token %}
-                <input type="submit" class = "button-secondary" name="delete" value="Delete"></input>
+                <input type="submit" class="button-secondary" name="delete" value="Delete"></input>
             </form>
         {% endif %}
     {% endif %}

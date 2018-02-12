@@ -1,0 +1,23 @@
+{% extends "court.jinja" %}
+
+{% block details %}
+
+    <a href="{% url 'admin:reorder_contacts' court.id %}">Reorder contacts</a>
+    <form method="post" action="{% url 'admin:contact' court.id %}">
+    {{ formset.management_form }}
+    {% for form in formset %}
+
+      <fieldset class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+      </fieldset>
+
+    {% endfor %}
+
+    <input type="submit" class="button" name="Update" value="Update" />
+    </form>
+
+{% endblock %}

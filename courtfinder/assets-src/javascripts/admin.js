@@ -35,4 +35,14 @@
     $("#court-list td:first-child:icontains('" + search + "')").parent().removeClass('hidden');
   })
 
+  /* reordering js */
+  $("#sortable").sortable({
+    axis: "y"
+  });
+  $("#sortable").disableSelection();
+  $("#sortable").on("sortstop", function(event, ui) {
+    var sortedIDs = $("#sortable").sortable("toArray");
+    var ordering = JSON.stringify(sortedIDs);
+    $("#new_sort_order").val(ordering);
+  });
 })(jQuery);

@@ -85,6 +85,16 @@ form.court {
       left: 150px;
     }
   }
+
+  &.cancel-reorder{
+
+    input[name=cancel]{
+      position: relative;
+      top: -50px;
+      left: 150px;
+    }
+
+  }
 }
 
 div.details {
@@ -99,5 +109,29 @@ div.details {
     list-style-type: none;
     color: green;
     font-weight: bold;
+  }
+}
+
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 40%;
+  li {
+    margin: 0 3px 3px 3px;
+    padding: 0.4em;
+    padding-left: 1.5em;
+    font-size: 1.0em;
+    height: 13px;
+    span {
+      position: relative;
+      margin-left: -1.3em;
+    }
+    &.li-default {
+      background: #F6F6F6;
+      border: 1px solid #DDDDDD;
+      color: #333333;
+      list-style:none;
+    }
   }
 }

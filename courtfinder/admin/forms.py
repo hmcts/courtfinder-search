@@ -1,5 +1,5 @@
 from django import forms
-from search.models import CourtAddress, AddressType, Town
+from search.models import CourtAddress, AddressType, Town, Contact
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -48,3 +48,15 @@ class CourtAddressForm(forms.ModelForm):
                 self.fields["postcode"].disabled = True
                 self.fields["town"].disabled = True
         self.fields['address_type'].queryset = address_types
+
+
+class CourtContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'number', 'explanation', 'in_leaflet', 'sort_order']
+
+    def __init__(self, *args, **kwargs):
+        super(CourtContactForm, self).__init__(*args, **kwargs)
+        self.fields["explanation"].required = False
+        self.fields['sort_order'].widget = forms.HiddenInput()
+        self.fields['sort_order'].required = False
