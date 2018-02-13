@@ -9,6 +9,14 @@
       <li class="right-link"><a href="{% url 'admin:logout' %}">log out</a></li>
   </ul>
 </div>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}
 
 

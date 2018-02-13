@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from search.models import Court, CourtAddress
 from django.contrib.auth.models import User
-from forms import CourtBasicForm, CourtAddressForm
-from django.forms.models import model_to_dict
-from django.shortcuts import get_object_or_404
-from collections import OrderedDict as odict
-from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from search.models import Court, CourtAddress
+from collections import OrderedDict as odict
+from forms import CourtBasicForm, CourtAddressForm
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -35,6 +36,8 @@ def edit_court(request, id):
                 court.alert = form.cleaned_data['alert']
                 court.info = form.cleaned_data['info']
                 court.save()
+                messages.success(request, 'Court information updated')
+                return HttpResponseRedirect(reverse("admin:court", args=(id,)))
     else:
         form = CourtBasicForm(initial=model_to_dict(court))
 
@@ -60,6 +63,7 @@ def edit_address(request, id, address_id=None):
             court_address = form.save(commit=False)
             court_address.court = court
             court_address.save()
+            messages.success(request, 'Address updated')
         return HttpResponseRedirect(reverse("admin:address", args=(id, )))
     else:
         court_addresses = court.courtaddress_set.all().order_by('pk')
@@ -84,4 +88,5 @@ def delete_address(request, id, address_id=None):
         court_address = None
     if court_address:
         court_address.delete()
+        messages.success(request, 'Address deleted')
     return HttpResponseRedirect(reverse("admin:address", args=(id, )))
