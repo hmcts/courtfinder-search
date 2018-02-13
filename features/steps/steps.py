@@ -47,10 +47,13 @@ def step_impl(context, field_name, input_val, form_id):
     elem = context.browser.find_by_css(("form#%s *[name='%s']") % (form_id, field_name))
     elem.first._element.send_keys(input_val)
 
+
 @when(u'I select "{input_val}" from "{field_name}" in the form "{form_id}"')
 def step_impl(context, input_val, field_name, form_id):
-    elem = context.browser.find_by_css(("form#%(form_id)s select[name='%(field_name)s'] option[value='%(input_val)s']") % {'form_id': form_id, 'field_name': field_name, 'input_val': input_val})
+    elem = context.browser.find_by_xpath("//form[@id='%s']//select[@name='%s']//option[contains(text(), '%s')]"
+                                         % (form_id, field_name, input_val))
     elem.first._element.click()
+
 
 @when(u'I press "{button_name}" in the form "{form_id}"')
 def step_impl(context, button_name, form_id):
