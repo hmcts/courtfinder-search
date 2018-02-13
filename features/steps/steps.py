@@ -60,3 +60,8 @@ def step_impl(context, button_name, form_id):
     elem = context.browser.find_by_css(("form#%s input[value='%s']") % (form_id, button_name))
     elem.first._element.click()
 
+
+@when(u'I fill in rich editor "{textarea}" with "{content}"')
+def step_impl(context, content, textarea):
+    with context.browser.get_iframe('id_%s_ifr' % textarea) as iframe:
+        iframe.find_by_tag('body').fill(content)

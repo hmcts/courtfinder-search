@@ -8,7 +8,7 @@ Feature: Editing basic court information
     When I visit "/staff/court/1"
     And I fill in "name" with "Testing court name"
     And I fill in "alert" with "Testing urgent notice!"
-    And I fill in "info" with "Testing additional information"
+    And I fill in rich editor "info" with "Testing additional information"
     And I press "Update"
     Then I should see "Editing - Testing court name"
     When I view court in the new window
