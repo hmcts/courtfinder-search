@@ -50,12 +50,6 @@ div.mce-tinymce {
 }
 
 form.court {
-  p.form-feedback {
-    color: green;
-    display: inline-block;
-    margin-top: 28px;
-  }
-
   fieldset {
     margin: 0px;
   }
@@ -80,14 +74,24 @@ form.court {
     }
 
     input[name=delete]{
-      position: absolute;
-      top: 1042px;
-      left: 600px;
+      position: relative;
+      top: -50px;
+      left: 150px;
     }
   }
-
 }
 
 div.details {
     padding-top: 20px;
+}
+
+.messages {
+  margin: auto;
+  padding-top: 20px;
+  max-width: 950px;
+  .success {
+    list-style-type: none;
+    color: green;
+    font-weight: bold;
+  }
 }
