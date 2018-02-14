@@ -129,6 +129,7 @@ DATABASES = {
     }
 }
 
+SESSION_COOKIE_PATH = '/staff'
 LOGIN_REDIRECT_URL = 'admin:courts'
 LOGIN_URL = 'admin:login'
 
