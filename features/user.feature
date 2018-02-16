@@ -15,4 +15,4 @@ Feature: User access
   Scenario: Redirect protected url to login
     When I visit "staff/courts"
     Then the browser's URL should be "staff/auth/login/"
-    And I should see "Login to continue"
+    And I should see "Log in to continue"
