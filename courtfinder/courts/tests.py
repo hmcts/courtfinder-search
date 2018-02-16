@@ -235,8 +235,7 @@ class SearchTestCase(TestCase):
                 assert img.get("src") == "/assets/images/newstyle_facilitiesicon.png"
                 assert img.get("alt") == "New-style facilities icon"
                 assert spans[1].get("class") == "facility"
-                for para in spans[1].cssselect("p"):
-                    assert para[0].text == "New-style facility icons are supported at this court"
+                assert spans[1].cssselect("p")[0].text == "New-style facility icons are supported at this court"
                 summary.append("new")
 
             elif img.get("class").startswith("icon-"):  # Old-style
