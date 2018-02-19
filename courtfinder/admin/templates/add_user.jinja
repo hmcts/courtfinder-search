@@ -1,0 +1,16 @@
+{% extends "admin.jinja" %}
+
+{% block page_title %}Add user{% endblock %}
+
+{% block content %}
+  <div id="admin-add-user-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Add user</h2>
+    </header>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button" value="Add user" />
+    </form>
+  </div>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from search.models import Court, CourtAddress
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm
+from forms import CourtBasicForm, CourtAddressForm, UserAddForm
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -18,6 +18,21 @@ def courts(request):
 def users(request):
     return render(request, 'users.jinja', {
         'users': User.objects.order_by('first_name').all()
+    })
+
+
+def add_user(request):
+    if request.method == 'POST':
+        form = UserAddForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            messages.success(request, '`%s` has been added' % new_user.username)
+            return HttpResponseRedirect(reverse('admin:users'))
+    else:
+        form = UserAddForm()
+
+    return render(request, 'add_user.jinja', {
+        'form': form
     })
 
 

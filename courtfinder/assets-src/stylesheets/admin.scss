@@ -43,6 +43,14 @@ form {
   ul.errorlist {
     color: red;
   }
+
+  span.helptext {
+    display: none;
+  }
+
+  input[type=text], input[type=email], input[type=password] {
+    width: 300px;
+  }
 }
 
 div.mce-tinymce {
