@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from search import models
@@ -96,3 +97,28 @@ class CourtContactForm(forms.ModelForm):
         self.fields["explanation"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
+
+
+class CourtEmailForm(forms.ModelForm):
+    class Meta:
+        model = models.Email
+        fields = ['description', 'address']
+
+
+class CourtOpeningForm(forms.ModelForm):
+    class Meta:
+        model = models.OpeningTime
+        fields = ['description']
+
+
+class CourtFacilityForm(forms.ModelForm):
+
+    description = forms.CharField(label='Description', max_length=4000, required=False,
+                            widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
+
+    class Meta:
+        model = models.Facility
+        fields = ['name', 'description']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
+        }

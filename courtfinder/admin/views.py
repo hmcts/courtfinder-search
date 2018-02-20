@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from geolocation import mapit
 from search import models
+from django.views import View
 
 
 @permission_required('emergency')
@@ -230,58 +231,251 @@ def delete_address(request, id, address_id=None):
     return redirect('admin:address', id)
 
 
-def edit_contact(request, id):
-    court = get_object_or_404(models.Court, pk=id)
-    contact_formset = modelformset_factory(models.Contact, forms.CourtContactForm, extra=1, can_delete=True)
+class BaseOrderableFormView(View):
+    template = None
+    return_url = None
+    reorder_url = None
+    formset = None
+    objects = None
+    court = None
+    ordering = True
+    update_message = "Updated"
 
-    if request.POST:
-        formset = contact_formset(request.POST)
+    def get_context_data(self):
+        pass
+
+    def process_request(self, request):
+        pass
+
+    def initialize(self, request, id):
+        self.court = get_object_or_404(models.Court, pk=id)
+
+    def initialize_get(self, request, id):
+        pass
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get('id', None)
+        self.initialize_get(request, id)
+        return render(request, self.template, self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        id = kwargs.get('id', None)
+        self.initialize(request, id)
+        self.process_request(request)
+        return redirect(self.return_url)
+
+
+class OrderableFormView(BaseOrderableFormView):
+    template = 'court/orderable.html'
+
+    def handle_instance_saving(self, instances):
+        pass
+
+    def process_request(self, request):
+        formset = self.formset(request.POST)
         if formset.is_valid():
             instances = formset.save(commit=False)
             for obj in formset.deleted_objects:
                 obj.delete()
-            for instance in instances:
-                if instance._state.adding:
-                    instance.save()
-                    court_contact = models.CourtContact(court=court, contact=instance)
-                    court_contact.save()
-                else:
-                    instance.save()
-            messages.success(request, 'Contacts updated')
-            court.update_timestamp()
-        return redirect('admin:contact', id)
-    court_contact_queryset = court.contacts.order_by('sort_order')
-    formset = contact_formset(queryset=court_contact_queryset)
-    return render(request, 'court/contacts.html', {
-        'court': court,
-        "formset": formset,
-    })
+            self.handle_instance_saving(instances)
+            messages.success(request, self.update_message)
+
+    def get_context_data(self):
+        formset = self.formset(queryset=self.objects)
+        context = {
+            'court': self.court,
+            "formset": formset,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+            "ordering": self.ordering,
+        }
+        return context
 
 
-def reorder_contacts(request, id):
-    court = get_object_or_404(models.Court, pk=id)
-    return_url = reverse("admin:contact", kwargs={'id': id})
-    reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
-    if request.POST:
+class ReorderingFormView(BaseOrderableFormView):
+    template = 'court/reordering.html'
+
+    def update_order(self, new_order):
+        pass
+
+    def process_request(self, request):
         if "new_sort_order" in request.POST:
             new_order = request.POST["new_sort_order"]
             if new_order:
-                new_order = json.loads(new_order)
-                for i, o in enumerate(new_order):
-                    try:
-                        court_contact = models.CourtContact.objects.get(court=court, contact=o)
-                    except models.CourtContact.DoesNotExist:
-                        pass
-                    if court_contact:
-                        contact = court_contact.contact
-                        contact.sort_order = i
-                        contact.save()
-        return redirect('admin:contact', id)
-    contacts = court.contacts.order_by('sort_order')
+                self.update_order(new_order)
 
-    return render(request, 'court/reordering.html', {
-        'court': court,
-        "objects": contacts,
-        "return_url": return_url,
-        "reorder_url": reorder_url,
-    })
+    def get_context_data(self):
+        context = {
+            'court': self.court,
+            "objects": self.objects,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+            }
+        return context
+
+
+class ContactMixin(object):
+
+    def initialize(self, request, id):
+        super(ContactMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(models.Contact, forms.CourtContactForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:contact", kwargs={'id': id})
+        self.update_message = 'Contacts updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
+        self.objects = self.court.contacts.order_by('sort_order')
+
+
+class ContactFormView(ContactMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                inst = instance.save()
+                instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
+                instance.save(update_fields=["sort_order"])
+                court_contact = models.CourtContact(court=self.court, contact=instance)
+                court_contact.save()
+            else:
+                instance.save()
+
+
+class ContactReorderView(ContactMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_contact = models.CourtContact.objects.get(court=self.court, contact=o)
+            except models.CourtContact.DoesNotExist:
+                pass
+            if court_contact:
+                contact = court_contact.contact
+                contact.sort_order = i
+                contact.save()
+
+
+class EmailMixin(object):
+
+    def initialize(self, request, id):
+        super(EmailMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(models.Email, forms.CourtEmailForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:email", kwargs={'id': id})
+        self.update_message = 'Emails updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
+        self.objects = self.court.emails.order_by('courtemail__order')
+
+
+class EmailFormView(EmailMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_email = models.CourtEmail(court=self.court, email=instance)
+                court_email.save()
+                court_email.order = court_email.pk  # Sets the order of the new object to its id to preserve order
+                court_email.save(update_fields=["order"])
+            else:
+                instance.save()
+
+
+class EmailReorderView(EmailMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_email = models.CourtEmail.objects.get(court=self.court, email=o)
+            except CourtEmail.DoesNotExist:
+                pass
+            if court_email:
+                court_email.order = i
+                court_email.save()
+
+
+class OpeningTimeMixin(object):
+
+    def initialize(self, request, id):
+        super(OpeningTimeMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(models.OpeningTime, forms.CourtOpeningForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:opening", kwargs={'id': id})
+        self.update_message = 'Opening times updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_openings", kwargs={'id': id})
+        self.objects = self.court.opening_times.order_by('courtopeningtime__sort')
+
+
+class OpeningFormView(OpeningTimeMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_opening = models.CourtOpeningTime(court=self.court, opening_time=instance)
+                court_opening.save()
+                court_opening.sort = court_opening.pk  # Sets the order of the new object to its id to preserve order
+                court_opening.save(update_fields=["sort"])
+            else:
+                instance.save()
+
+
+class OpeningReorderView(OpeningTimeMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_opening = models.CourtOpeningTime.objects.get(court=self.court, opening_time=o)
+            except models.CourtEmail.DoesNotExist:
+                pass
+            if court_opening:
+                court_opening.sort = i
+                court_opening.save()
+                
+                
+class FacilityMixin(object):
+
+    def initialize(self, request, id):
+        super(FacilityMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(models.Facility, forms.CourtFacilityForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:facility", kwargs={'id': id})
+        self.update_message = 'Facilities updated'
+        self.ordering = False
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
+        self.objects = self.court.facilities.all()
+
+
+class FacilityFormView(FacilityMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_facility = models.CourtFacility(court=self.court, facility=instance)
+                court_facility.save()
+            else:
+                instance.save()
+
+
+class FacilityReorderView(FacilityMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_facility = models.CourtFacility.objects.get(court=self.court, facility=o)
+            except models.CourtEmail.DoesNotExist:
+                pass
+            if court_facility:
+                court_facility.save()
