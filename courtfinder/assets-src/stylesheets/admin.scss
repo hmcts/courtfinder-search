@@ -10,10 +10,8 @@
     list-style: none;
     text-align: center;
     display: inline-block;
-  }
-
-  li:not(:last-child) {
-    margin-right: 30px;
+    padding: 0 20px;
+    margin: 0;
   }
 
   a {

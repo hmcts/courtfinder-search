@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/delete_address/(?P<address_id>[0-9]+)$', views.delete_address, name='delete_address'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),
+    url(r'^account', views.account, name='account'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

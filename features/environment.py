@@ -6,10 +6,8 @@ from selenium import webdriver
 import os
 
 PERSONAS = {
-    'admin': dict(
-        username='admin',
-        password='admin',
-    ),
+    'admin': dict(username='admin',password='admin',),
+    'tester': dict(username='tester',password='test',),
 }
 
 # override with -Dkey=value
