@@ -1,5 +1,5 @@
 from django import forms
-from search.models import CourtAddress, AddressType, Town, Contact
+from search.models import CourtAddress, AddressType, Town, Contact, Email, OpeningTime, Facility
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -60,3 +60,25 @@ class CourtContactForm(forms.ModelForm):
         self.fields["explanation"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
+
+
+class CourtEmailForm(forms.ModelForm):
+    class Meta:
+        model = Email
+        fields = ['description', 'address']
+
+
+class CourtOpeningForm(forms.ModelForm):
+    class Meta:
+        model = OpeningTime
+        fields = ['description']
+
+
+class CourtFacilityForm(forms.ModelForm):
+
+    description = forms.CharField(label='Description', max_length=4000, required=False,
+                            widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
+
+    class Meta:
+        model = Facility
+        fields = ['name', 'description']
