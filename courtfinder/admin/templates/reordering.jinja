@@ -7,7 +7,7 @@
     <input hidden name="new_sort_order" id="new_sort_order"/>
         <ul id="sortable">
             {% for object in objects %}
-                  <li id="{{object.pk}}" name="{{object.pk}}" class="li-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{object.name}}</li>
+                  <li id="{{object.pk}}" name="{{object.pk}}" class="li-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{object.order_label}}</li>
             {% endfor %}
         </ul>
         <input type="submit" class="button" name="Update" value="Update" />

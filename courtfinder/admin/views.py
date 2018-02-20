@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 
-from search.models import Court, CourtAddress, Contact, CourtContact
+from search.models import Court, CourtAddress, Contact, CourtContact, Email, CourtEmail
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm
+from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm, CourtEmailForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
@@ -126,7 +126,8 @@ def delete_address(request, id, address_id=None):
 def edit_contact(request, id):
     court = get_object_or_404(Court, pk=id)
     contact_formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
-
+    return_url = reverse("admin:contact", kwargs={'id': id})
+    reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
     if request.POST:
         formset = contact_formset(request.POST)
         if formset.is_valid():
@@ -144,9 +145,11 @@ def edit_contact(request, id):
         return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
     court_contact_queryset = court.contacts.order_by('sort_order')
     formset = contact_formset(queryset=court_contact_queryset)
-    return render(request, 'court_contacts.jinja', {
+    return render(request, 'court_orderable.jinja', {
             'court': court,
             "formset": formset,
+            "return_url": return_url,
+            "reorder_url": reorder_url,
         })
 
 
@@ -175,6 +178,65 @@ def reorder_contacts(request, id):
     return render(request, 'reordering.jinja', {
         'court': court,
         "objects": contacts,
+        "return_url": return_url,
+        "reorder_url": reorder_url,
+        })
+
+
+def edit_email(request, id):
+    court = get_object_or_404(Court, pk=id)
+    email_formset = modelformset_factory(Email, CourtEmailForm, extra=1, can_delete=True)
+    return_url = reverse("admin:email", kwargs={'id': id})
+    reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
+    if request.POST:
+        formset = email_formset(request.POST)
+        if formset.is_valid():
+            instances = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
+            for instance in instances:
+                if instance._state.adding:
+                    instance.save()
+                    court_email = CourtEmail(court=court, email=instance)
+                    court_email.save()
+                else:
+                    instance.save()
+            messages.success(request, 'Emails updated')
+        return HttpResponseRedirect(reverse("admin:email", args=(id, )))
+    court_email_queryset = court.emails.order_by('courtemail__order')
+    formset = email_formset(queryset=court_email_queryset)
+    return render(request, 'court_orderable.jinja', {
+            'court': court,
+            "formset": formset,
+            "return_url": return_url,
+            "reorder_url": reorder_url,
+        })
+
+
+def reorder_emails(request, id):
+    import json
+    court = get_object_or_404(Court, pk=id)
+    return_url = reverse("admin:email", kwargs={'id': id})
+    reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
+    if request.POST:
+        if "new_sort_order" in request.POST:
+            new_order = request.POST["new_sort_order"]
+            if new_order:
+                new_order = json.loads(new_order)
+                for i, o in enumerate(new_order):
+                    try:
+                        court_email = CourtEmail.objects.get(court=court, email=o)
+                    except CourtEmail.DoesNotExist:
+                        pass
+                    if court_email:
+                        court_email.order=i
+                        court_email.save()
+        return HttpResponseRedirect(reverse("admin:email", args=(id, )))
+    emails = court.emails.order_by('courtemail__order')
+
+    return render(request, 'reordering.jinja', {
+        'court': court,
+        "objects": emails,
         "return_url": return_url,
         "reorder_url": reorder_url,
         })
