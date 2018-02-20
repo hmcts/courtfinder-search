@@ -1,0 +1,20 @@
+{% extends "admin.jinja" %}
+
+{% block page_title %}My account{% endblock %}
+
+{% block content %}
+  <div id="admin-account-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Edit my account</h2>
+    </header>
+    {% if form.is_valid %}
+      <p>You need to <a href="{% url 'admin:login' %}">log in</a> again after changing your password.</p>
+    {% else %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button" value="Change password" />
+    </form>
+    {% endif %}
+  </div>
+{% endblock %}

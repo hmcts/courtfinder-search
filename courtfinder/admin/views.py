@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
@@ -32,6 +33,19 @@ def add_user(request):
         form = UserAddForm()
 
     return render(request, 'add_user.jinja', {
+        'form': form
+    })
+
+
+def account(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, 'account.jinja', {
         'form': form
     })
 

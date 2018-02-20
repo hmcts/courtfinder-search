@@ -13018,3 +13018,18 @@
     date_joined: "2018-01-15 15:07:39.292945+00:00"
     groups: []
     user_permissions: []
+- model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$36000$mfan3wth7xm5$LcFvLgk5pMX8PsJHplGZ/3gn/mKlIt4vja4t1Ga19HM=
+    last_login: null
+    is_superuser: false
+    username: tester
+    first_name: test
+    last_name: test
+    email: test@example.com
+    is_staff: false
+    is_active: true
+    date_joined: "2018-02-20 13:33:33.836364+00:00"
+    groups: []
+    user_permissions: []
