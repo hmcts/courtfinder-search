@@ -104,11 +104,20 @@ class Facility(models.Model):
     def __unicode__(self):
         return "%s: %s" % (self.name, self.description)
 
+    @property
+    def order_label(self):
+        return "%s" % self.name
+
+
 class OpeningTime(models.Model):
     description = models.CharField(max_length=1024)
 
     def __unicode__(self):
         return self.description
+
+    @property
+    def order_label(self):
+        return "%s" % self.description
 
 
 class LocalAuthority(models.Model):
@@ -199,6 +208,10 @@ class Contact(models.Model):
     def __unicode__(self):
         return "%s, %s: %s" % (self.name, self.explanation, self.number)
 
+    @property
+    def order_label(self):
+        return "%s" % self.name
+
 
 class CourtContact(models.Model):
     contact = models.ForeignKey(Contact)
@@ -214,6 +227,10 @@ class Email(models.Model):
 
     def __unicode__(self):
         return "%s: %s" % (self.description, self.address)
+
+    @property
+    def order_label(self):
+        return "%s" % self.description
 
 
 class CourtEmail(models.Model):

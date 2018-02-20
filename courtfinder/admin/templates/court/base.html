@@ -12,6 +12,9 @@
       <li><a href="{% url 'admin:location' court.id %}">location</a></li>
       <li><a href="{% url 'admin:address' court.id %}">addresses</a></li>
       <li><a href="{% url 'admin:contact' court.id %}">contacts</a></li>
+      <li><a href="{% url 'admin:email' court.id %}">emails</a></li>
+      <li><a href="{% url 'admin:opening' court.id %}">opening times</a></li>
+      <li><a href="{% url 'admin:facility' court.id %}">facilities</a></li>
     </ul>
     <div class="content cf details">
     {% block details %} {% endblock %}

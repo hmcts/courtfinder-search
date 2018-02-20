@@ -1,11 +1,9 @@
 {% extends "court/base.html" %}
 
 {% block details %}
-    <h3>Edit contact details</h3>
-    <p>
-        <a href="{% url 'admin:reorder_contacts' court.id %}">Reorder contacts</a>
-    </p>
-    <form method="post" action="{% url 'admin:contact' court.id %}">
+
+    {% if formset|length > 2 and ordering %}<a href="{{reorder_url}}">Reorder</a>{% endif %}
+    <form method="post" action="{{return_url}}">
     {{ formset.management_form }}
     {% for form in formset %}
 
