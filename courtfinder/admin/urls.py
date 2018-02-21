@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 import views
+from views import ContactFormView, EmailFormView
 
 urlpatterns = [
     url(r'^auth/', include('django.contrib.auth.urls')),
@@ -10,9 +11,9 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/address$', views.edit_address, name='address'),
     url(r'^court/(?P<id>[0-9]+)/address/(?P<address_id>[0-9]+)$', views.edit_address, name='address'),
     url(r'^court/(?P<id>[0-9]+)/delete_address/(?P<address_id>[0-9]+)$', views.delete_address, name='delete_address'),
-    url(r'^court/(?P<id>[0-9]+)/contact$', views.edit_contact, name='contact'),
+    url(r'^court/(?P<id>[0-9]+)/contact$', ContactFormView.as_view(), name='contact'),
     url(r'^court/(?P<id>[0-9]+)/reorder_contacts', views.reorder_contacts, name='reorder_contacts'),
-    url(r'^court/(?P<id>[0-9]+)/email$', views.edit_email, name='email'),
+    url(r'^court/(?P<id>[0-9]+)/email$', EmailFormView.as_view(), name='email'),
     url(r'^court/(?P<id>[0-9]+)/reorder_emails', views.reorder_emails, name='reorder_emails'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),

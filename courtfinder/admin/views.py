@@ -11,6 +11,7 @@ from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactFor
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
+from django.views import View
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -240,3 +241,92 @@ def reorder_emails(request, id):
         "return_url": return_url,
         "reorder_url": reorder_url,
         })
+
+
+class OrderableFormView(View):
+    return_url = None
+    reorder_url = None
+    formset = None
+    objects = None
+    court = None
+    update_message = "Updated"
+
+    def initialize(self, request, id):
+        self.court = get_object_or_404(Court, pk=id)
+
+    def initialize_get(self, request, id):
+        pass
+
+    def handle_instance_saving(self, instances):
+        pass
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get('id', None)
+        if id:
+            self.initialize_get(request, id)
+        formset = self.formset(queryset=self.objects)
+        return render(request, 'court_orderable.jinja', {
+            'court': self.court,
+            "formset": formset,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+        })
+
+    def post(self, request, *args, **kwargs):
+        id = kwargs.get('id', None)
+        if id:
+            self.initialize(request, id)
+        formset = self.formset(request.POST)
+        if formset.is_valid():
+            instances = formset.save(commit=False)
+            for obj in formset.deleted_objects:
+                obj.delete()
+            self.handle_instance_saving(instances)
+            messages.success(request, self.update_message)
+        return HttpResponseRedirect(self.return_url)
+
+
+class ContactFormView(OrderableFormView):
+
+    def initialize(self, request, id):
+        super(ContactFormView, self).initialize(request, id)
+        self.formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:contact", kwargs={'id': id})
+        self.update_message = 'Contacts updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
+        self.objects = self.court.contacts.order_by('sort_order')
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_contact = CourtContact(court=self.court, contact=instance)
+                court_contact.save()
+            else:
+                instance.save()
+
+
+class EmailFormView(OrderableFormView):
+
+    def initialize(self, request, id):
+        super(EmailFormView, self).initialize(request, id)
+        self.formset = modelformset_factory(Email, CourtEmailForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:email", kwargs={'id': id})
+        self.update_message = 'Emails updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
+        self.objects = self.court.emails.order_by('courtemail__order')
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_email = CourtEmail(court=court, email=instance)
+                court_email.save()
+            else:
+                instance.save()
