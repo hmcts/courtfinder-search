@@ -12,6 +12,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
 from django.views import View
+import json
+
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -124,126 +126,8 @@ def delete_address(request, id, address_id=None):
     return HttpResponseRedirect(reverse("admin:address", args=(id, )))
 
 
-def edit_contact(request, id):
-    court = get_object_or_404(Court, pk=id)
-    contact_formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
-    return_url = reverse("admin:contact", kwargs={'id': id})
-    reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
-    if request.POST:
-        formset = contact_formset(request.POST)
-        if formset.is_valid():
-            instances = formset.save(commit=False)
-            for obj in formset.deleted_objects:
-                obj.delete()
-            for instance in instances:
-                if instance._state.adding:
-                    instance.save()
-                    court_contact = CourtContact(court=court, contact=instance)
-                    court_contact.save()
-                else:
-                    instance.save()
-            messages.success(request, 'Contacts updated')
-        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
-    court_contact_queryset = court.contacts.order_by('sort_order')
-    formset = contact_formset(queryset=court_contact_queryset)
-    return render(request, 'court_orderable.jinja', {
-            'court': court,
-            "formset": formset,
-            "return_url": return_url,
-            "reorder_url": reorder_url,
-        })
-
-
-def reorder_contacts(request, id):
-    import json
-    court = get_object_or_404(Court, pk=id)
-    return_url = reverse("admin:contact", kwargs={'id': id})
-    reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
-    if request.POST:
-        if "new_sort_order" in request.POST:
-            new_order = request.POST["new_sort_order"]
-            if new_order:
-                new_order = json.loads(new_order)
-                for i, o in enumerate(new_order):
-                    try:
-                        court_contact = CourtContact.objects.get(court=court, contact=o)
-                    except CourtContact.DoesNotExist:
-                        pass
-                    if court_contact:
-                        contact = court_contact.contact
-                        contact.sort_order = i
-                        contact.save()
-        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
-    contacts = court.contacts.order_by('sort_order')
-
-    return render(request, 'reordering.jinja', {
-        'court': court,
-        "objects": contacts,
-        "return_url": return_url,
-        "reorder_url": reorder_url,
-        })
-
-
-def edit_email(request, id):
-    court = get_object_or_404(Court, pk=id)
-    email_formset = modelformset_factory(Email, CourtEmailForm, extra=1, can_delete=True)
-    return_url = reverse("admin:email", kwargs={'id': id})
-    reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
-    if request.POST:
-        formset = email_formset(request.POST)
-        if formset.is_valid():
-            instances = formset.save(commit=False)
-            for obj in formset.deleted_objects:
-                obj.delete()
-            for instance in instances:
-                if instance._state.adding:
-                    instance.save()
-                    court_email = CourtEmail(court=court, email=instance)
-                    court_email.save()
-                else:
-                    instance.save()
-            messages.success(request, 'Emails updated')
-        return HttpResponseRedirect(reverse("admin:email", args=(id, )))
-    court_email_queryset = court.emails.order_by('courtemail__order')
-    formset = email_formset(queryset=court_email_queryset)
-    return render(request, 'court_orderable.jinja', {
-            'court': court,
-            "formset": formset,
-            "return_url": return_url,
-            "reorder_url": reorder_url,
-        })
-
-
-def reorder_emails(request, id):
-    import json
-    court = get_object_or_404(Court, pk=id)
-    return_url = reverse("admin:email", kwargs={'id': id})
-    reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
-    if request.POST:
-        if "new_sort_order" in request.POST:
-            new_order = request.POST["new_sort_order"]
-            if new_order:
-                new_order = json.loads(new_order)
-                for i, o in enumerate(new_order):
-                    try:
-                        court_email = CourtEmail.objects.get(court=court, email=o)
-                    except CourtEmail.DoesNotExist:
-                        pass
-                    if court_email:
-                        court_email.order=i
-                        court_email.save()
-        return HttpResponseRedirect(reverse("admin:email", args=(id, )))
-    emails = court.emails.order_by('courtemail__order')
-
-    return render(request, 'reordering.jinja', {
-        'court': court,
-        "objects": emails,
-        "return_url": return_url,
-        "reorder_url": reorder_url,
-        })
-
-
-class OrderableFormView(View):
+class BaseOrderableFormView(View):
+    template = None
     return_url = None
     reorder_url = None
     formset = None
@@ -251,31 +135,37 @@ class OrderableFormView(View):
     court = None
     update_message = "Updated"
 
+    def get_context_data(self):
+        pass
+
+    def process_request(self, request):
+        pass
+
     def initialize(self, request, id):
         self.court = get_object_or_404(Court, pk=id)
 
     def initialize_get(self, request, id):
         pass
 
-    def handle_instance_saving(self, instances):
-        pass
-
     def get(self, request, *args, **kwargs):
         id = kwargs.get('id', None)
-        if id:
-            self.initialize_get(request, id)
-        formset = self.formset(queryset=self.objects)
-        return render(request, 'court_orderable.jinja', {
-            'court': self.court,
-            "formset": formset,
-            "return_url": self.return_url,
-            "reorder_url": self.reorder_url,
-        })
+        self.initialize_get(request, id)
+        return render(request, self.template, self.get_context_data())
 
     def post(self, request, *args, **kwargs):
         id = kwargs.get('id', None)
-        if id:
-            self.initialize(request, id)
+        self.initialize(request, id)
+        self.process_request(request)
+        return HttpResponseRedirect(self.return_url)
+
+
+class OrderableFormView(BaseOrderableFormView):
+    template = 'court_orderable.jinja'
+
+    def handle_instance_saving(self, instances):
+        pass
+
+    def process_request(self, request):
         formset = self.formset(request.POST)
         if formset.is_valid():
             instances = formset.save(commit=False)
@@ -283,13 +173,44 @@ class OrderableFormView(View):
                 obj.delete()
             self.handle_instance_saving(instances)
             messages.success(request, self.update_message)
-        return HttpResponseRedirect(self.return_url)
+
+    def get_context_data(self):
+        formset = self.formset(queryset=self.objects)
+        context = {
+            'court': self.court,
+            "formset": formset,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+            }
+        return context
 
 
-class ContactFormView(OrderableFormView):
+class ReorderingFormView(BaseOrderableFormView):
+    template = 'reordering.jinja'
+
+    def update_order(self, new_order):
+        pass
+
+    def process_request(self, request):
+        if "new_sort_order" in request.POST:
+            new_order = request.POST["new_sort_order"]
+            if new_order:
+                self.update_order(new_order)
+
+    def get_context_data(self):
+        context = {
+            'court': self.court,
+            "objects": self.objects,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+            }
+        return context
+
+
+class ContactMixin(object):
 
     def initialize(self, request, id):
-        super(ContactFormView, self).initialize(request, id)
+        super(ContactMixin, self).initialize(request, id)
         self.formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
         self.return_url = reverse("admin:contact", kwargs={'id': id})
         self.update_message = 'Contacts updated'
@@ -298,6 +219,9 @@ class ContactFormView(OrderableFormView):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
         self.objects = self.court.contacts.order_by('sort_order')
+
+
+class ContactFormView(ContactMixin, OrderableFormView):
 
     def handle_instance_saving(self, instances):
         for instance in instances:
@@ -309,10 +233,25 @@ class ContactFormView(OrderableFormView):
                 instance.save()
 
 
-class EmailFormView(OrderableFormView):
+class ContactReorderView(ContactMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_contact = CourtContact.objects.get(court=self.court, contact=o)
+            except CourtContact.DoesNotExist:
+                pass
+            if court_contact:
+                contact = court_contact.contact
+                contact.sort_order = i
+                contact.save()
+
+
+class EmailMixin(object):
 
     def initialize(self, request, id):
-        super(EmailFormView, self).initialize(request, id)
+        super(EmailMixin, self).initialize(request, id)
         self.formset = modelformset_factory(Email, CourtEmailForm, extra=1, can_delete=True)
         self.return_url = reverse("admin:email", kwargs={'id': id})
         self.update_message = 'Emails updated'
@@ -322,6 +261,9 @@ class EmailFormView(OrderableFormView):
         self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
         self.objects = self.court.emails.order_by('courtemail__order')
 
+
+class EmailFormView(EmailMixin, OrderableFormView):
+
     def handle_instance_saving(self, instances):
         for instance in instances:
             if instance._state.adding:
@@ -330,3 +272,17 @@ class EmailFormView(OrderableFormView):
                 court_email.save()
             else:
                 instance.save()
+
+
+class EmailReorderView(EmailMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_email = CourtEmail.objects.get(court=self.court, email=o)
+            except CourtEmail.DoesNotExist:
+                pass
+            if court_email:
+                court_email.order = i
+                court_email.save()
