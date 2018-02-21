@@ -1,29 +1,16 @@
 {% extends "court.jinja" %}
 
 {% block details %}
-    <p>
-        {% if court.lat %}
-        <a target="_blank" href="https://www.google.com/maps/?q={{ court.lat }},{{ court.lon }} ">view on google maps</a>
-        {% else %}
-        Location: unknown
-        {% endif %}
-    </p>
     {% for form, address_id in court_address_forms.items %}
 
     <form class="court address" {% if forloop.first %} id ="primary_address" {%else %}id ="secondary_address"{% endif %} method="post" {% if address_id %}action="{% url 'admin:address' court.id address_id %}"{% else %}action="{% url 'admin:address' court.id %}"{% endif %}>
-      {% if form.is_valid %}
-      <p class="form-feedback">Succesfully updated</p>
-      {% endif %}
-
       <fieldset class="form-group">
         {% csrf_token %}
         {{ form.as_p }}
            <input name="form_index" {% if forloop.first %}value="0"{% else %}value="1"{% endif %} hidden/>
       </fieldset>
 
-
       <input type="submit" class="button" name="Update" value="Update" />
-
     </form>
 
     {% if forloop.first %}

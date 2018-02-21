@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
 
 from search.models import Court, CourtAddress, Contact, CourtContact
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm
+from forms import *
+from geolocation import mapit
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
+from django.views.decorators.http import require_POST
 
 def courts(request):
     return render(request, 'courts.jinja', {
@@ -76,6 +77,41 @@ def edit_court(request, id):
         'court': court,
         'form': form
     })
+
+
+def edit_location(request, id):
+    court = get_object_or_404(Court, pk=id)
+    if request.method == 'POST':
+        form = CourtLocationForm(request.POST, instance=court)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Location details updated')
+            return HttpResponseRedirect(reverse("admin:location", args=(id,)))
+    else:
+        form = CourtLocationForm(instance=court)
+
+    return render(request, 'court_location.jinja', {
+        'court': court,
+        'form': form,
+        'postcode_form': LocatePostcodeForm()
+    })
+
+
+@require_POST
+def locate_postcode(request, id):
+    court = get_object_or_404(Court, pk=id)
+    form = LocatePostcodeForm(request.POST)
+    if form.is_valid():
+        try:
+            postcode = mapit.postcode(form.cleaned_data['postcode'])
+            court.lat, court.lon = postcode.coordinates
+            court.save()
+            messages.success(request, 'Coordinates changed to %s, %s' % (court.lat, court.lon))
+        except mapit.MapitException as e:
+            messages.error(request, 'Geolocation failed: %s' % e.message)
+    else:
+        messages.error(request, 'Geolocation failed')
+    return HttpResponseRedirect(reverse("admin:location", args=(id,)))
 
 
 def edit_address(request, id, address_id=None):

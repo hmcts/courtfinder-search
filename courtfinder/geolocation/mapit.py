@@ -51,7 +51,7 @@ class Postcode(PartialPostcode):
 def filter_postcode(validator, input):
     filtered = input.upper().replace(' ', '')
     if not validator(filtered):
-        raise InvalidPostcode(filtered)
+        raise InvalidPostcode('Invalid postcode: %s' % filtered)
     return filtered
 
 

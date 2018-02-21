@@ -1,0 +1,34 @@
+{% extends "court.jinja" %}
+
+{% block details %}
+    <h3>Locate court</h3>
+    <p>
+        Use mapit service to populate latitude and longitude from a postcode.
+        This location will be used in search to find nearest courts.
+        The location is independent from any court address.
+    </p>
+    <form class="court postcode" method="post" action="{% url 'admin:geolocation' court.id %}">
+        {% csrf_token %}
+        {{ postcode_form.as_p }}
+      <input type="submit" class="button" value="Locate" />
+    </form>
+    {% if court.lat %}
+    <h3>View map</h3>
+    <p>
+        <a target="_blank" href="https://www.google.com/maps/?q={{ court.lat }},{{ court.lon }} ">view on google maps</a>
+    </p>
+    {% endif %}
+
+    <h3>Edit location</h3>
+    <p>
+        Optional useful local landmarks or information that people might use to navigate to the court building.
+        <br>For example: 'The court is opposite the Marriot Hotel' or 'The court is signposted from the rail station.'
+    </p>
+    <form class="court basic" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+
+
+{% endblock %}
