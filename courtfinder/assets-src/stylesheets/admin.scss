@@ -1,3 +1,13 @@
+h3 {
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px 0 10px 0;
+}
+
+.button {
+  margin-top: 0px;
+}
+
 .nav-menu {
   margin: auto;
   max-width: 950px;
@@ -32,10 +42,12 @@
 }
 
 form {
+  margin-bottom: 20px;
   label{
     width: 150px;
     float: left;
     margin: 0px;
+    padding-right: 10px;
   }
 
   ul.errorlist {
@@ -52,7 +64,7 @@ form {
 }
 
 div.mce-tinymce {
-  margin-left: 150px;
+  margin-left: 160px;
 }
 
 form.court {
@@ -66,7 +78,13 @@ form.court {
     }
 
     textarea {
-      width: 780px;
+      width: 770px;
+    }
+  }
+
+  &.postcode {
+    input {
+      width: 100px;
     }
   }
 
@@ -81,7 +99,7 @@ form.court {
 
     input[name=delete]{
       position: relative;
-      top: -50px;
+      top: -70px;
       left: 150px;
     }
   }
@@ -90,7 +108,7 @@ form.court {
 
     input[name=cancel]{
       position: relative;
-      top: -50px;
+      top: -70px;
       left: 150px;
     }
 
@@ -108,6 +126,11 @@ div.details {
   .success {
     list-style-type: none;
     color: green;
+    font-weight: bold;
+  }
+  .error {
+    list-style-type: none;
+    color: red;
     font-weight: bold;
   }
 }

@@ -3,7 +3,7 @@ from search.models import CourtAddress, AddressType, Town, Contact
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from search.models import Court
 
 class UserAddForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -23,6 +23,18 @@ class CourtBasicForm(forms.Form):
     info = forms.CharField(label='Additional information', max_length=4000, required=False,
                             widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
     displayed = forms.BooleanField(label='Open', required=False)
+
+
+class CourtLocationForm(forms.ModelForm):
+    class Meta:
+        model = Court
+        fields = ('directions', 'lat', 'lon')
+        labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
+        widgets = {'directions': forms.Textarea(attrs={'rows': 4}),}
+
+
+class LocatePostcodeForm(forms.Form):
+    postcode = forms.CharField(max_length=9)
 
 
 class CourtAddressForm(forms.ModelForm):

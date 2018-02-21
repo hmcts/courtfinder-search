@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^auth/', include('django.contrib.auth.urls')),
     url(r'^courts$', views.courts, name='courts'),
     url(r'^court/(?P<id>[0-9]+)$', views.edit_court, name='court'),
+    url(r'^court/(?P<id>[0-9]+)/location$', views.edit_location, name='location'),
+    url(r'^court/(?P<id>[0-9]+)/location/geo$', views.locate_postcode, name='geolocation'),
     url(r'^court/(?P<id>[0-9]+)/address$', views.edit_address, name='address'),
     url(r'^court/(?P<id>[0-9]+)/address/(?P<address_id>[0-9]+)$', views.edit_address, name='address'),
     url(r'^court/(?P<id>[0-9]+)/delete_address/(?P<address_id>[0-9]+)$', views.delete_address, name='delete_address'),

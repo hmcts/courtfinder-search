@@ -13,7 +13,7 @@ class Court(models.Model):
     number = models.IntegerField(null=True) #Crown court location number
     parking = models.ForeignKey('ParkingInfo', null=True, default=None)
     alert = models.CharField(max_length=4096, null=True, default=None)
-    directions = models.CharField(max_length=4096, null=True, default=None)
+    directions = models.CharField(max_length=4096, null=True, default=None, blank=True)
     image_file = models.CharField(max_length=255, null=True, default=None)
     areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw')
     emails = models.ManyToManyField('Email', through='CourtEmail')
