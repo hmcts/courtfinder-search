@@ -1,5 +1,5 @@
 from django import forms
-from search.models import CourtAddress, AddressType, Town, Contact, Email
+from search.models import CourtAddress, AddressType, Town, Contact, Email, OpeningTime
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -66,3 +66,9 @@ class CourtEmailForm(forms.ModelForm):
     class Meta:
         model = Email
         fields = ['description', 'address']
+
+
+class CourtOpeningForm(forms.ModelForm):
+    class Meta:
+        model = OpeningTime
+        fields = ['description']

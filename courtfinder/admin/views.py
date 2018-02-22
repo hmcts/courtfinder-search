@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 
-from search.models import Court, CourtAddress, Contact, CourtContact, Email, CourtEmail
+from search.models import Court, CourtAddress, Contact, CourtContact, Email, CourtEmail, OpeningTime, CourtOpeningTime
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm, CourtEmailForm
+from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm, CourtEmailForm, CourtOpeningForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
@@ -268,7 +268,7 @@ class EmailFormView(EmailMixin, OrderableFormView):
         for instance in instances:
             if instance._state.adding:
                 instance.save()
-                court_email = CourtEmail(court=court, email=instance)
+                court_email = CourtEmail(court=self.court, email=instance)
                 court_email.save()
             else:
                 instance.save()
@@ -286,3 +286,43 @@ class EmailReorderView(EmailMixin, ReorderingFormView):
             if court_email:
                 court_email.order = i
                 court_email.save()
+
+
+class OpeningTimeMixin(object):
+
+    def initialize(self, request, id):
+        super(OpeningTimeMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(OpeningTime, CourtOpeningForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:opening", kwargs={'id': id})
+        self.update_message = 'Opening times updated'
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_openings", kwargs={'id': id})
+        self.objects = self.court.opening_times.order_by('courtopeningtime__sort')
+
+
+class OpeningFormView(OpeningTimeMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_opening = CourtOpeningTime(court=self.court, opening_time=instance)
+                court_opening.save()
+            else:
+                instance.save()
+
+
+class OpeningReorderView(OpeningTimeMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_opening = CourtOpeningTime.objects.get(court=self.court, opening_time=o)
+            except CourtEmail.DoesNotExist:
+                pass
+            if court_opening:
+                court_opening.sort = i
+                court_opening.save()

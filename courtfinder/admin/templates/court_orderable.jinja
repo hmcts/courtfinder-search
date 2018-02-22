@@ -2,7 +2,7 @@
 
 {% block details %}
 
-    <a href="{{reorder_url}}">Reorder</a>
+    {% if formset|length > 2 %}<a href="{{reorder_url}}">Reorder</a>{% endif %}
     <form method="post" action="{{return_url}}">
     {{ formset.management_form }}
     {% for form in formset %}
