@@ -6,10 +6,10 @@ from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeFor
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from collections import OrderedDict as odict
 from forms import *
 from geolocation import mapit
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
 from django.views.decorators.http import require_POST
@@ -35,7 +35,7 @@ def add_user(request):
         if form.is_valid():
             new_user = form.save()
             messages.success(request, '`%s` has been added' % new_user.username)
-            return HttpResponseRedirect(reverse('admin:users'))
+            return redirect('admin:users')
     else:
         form = UserAddForm()
 
@@ -52,7 +52,7 @@ def edit_user(request, username):
         if form.is_valid():
             form.save()
             messages.success(request, '`%s` has been updated' % user.username)
-            return HttpResponseRedirect(reverse('admin:edit_user', args=(user.username,)))
+            return redirect('admin:edit_user', user.username)
     else:
         form = UserEditForm(instance=user)
 
@@ -71,7 +71,7 @@ def change_user_password(request, username):
         if form.is_valid():
             form.save()
             messages.success(request, '`%s` password has been updated' % user.username)
-            return HttpResponseRedirect(reverse('admin:edit_user', args=(user.username,)))
+            return redirect('admin:edit_user', user.username)
     else:
         form = AdminPasswordChangeForm(user)
 
@@ -89,10 +89,10 @@ def delete_user(request, username):
         user = get_object_or_404(User, username=username)
         user.delete()
         messages.success(request, '`%s` has been deleted' % username)
-        return HttpResponseRedirect(reverse('admin:users'))
+        return redirect('admin:users')
     else:
         messages.error(request, 'Could\'t delete user `%s`' % username)
-        return HttpResponseRedirect(reverse('admin:edit_user', args=(username,)))
+        return redirect('admin:edit_user', username)
 
 
 def account(request):
@@ -124,7 +124,7 @@ def edit_court(request, id):
                 court.info = form.cleaned_data['info']
                 court.save()
                 messages.success(request, 'Court information updated')
-                return HttpResponseRedirect(reverse("admin:court", args=(id,)))
+                return redirect('admin:court', id)
     else:
         form = CourtBasicForm(initial=model_to_dict(court))
 
@@ -141,7 +141,7 @@ def edit_location(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Location details updated')
-            return HttpResponseRedirect(reverse("admin:location", args=(id,)))
+            return redirect('admin:location', id)
     else:
         form = CourtLocationForm(instance=court)
 
@@ -166,7 +166,7 @@ def locate_postcode(request, id):
             messages.error(request, 'Geolocation failed: %s' % e.message)
     else:
         messages.error(request, 'Geolocation failed')
-    return HttpResponseRedirect(reverse("admin:location", args=(id,)))
+    return redirect('admin:location', id)
 
 
 def edit_address(request, id, address_id=None):
@@ -186,7 +186,7 @@ def edit_address(request, id, address_id=None):
             court_address.court = court
             court_address.save()
             messages.success(request, 'Address updated')
-        return HttpResponseRedirect(reverse("admin:address", args=(id, )))
+        return redirect('admin:address',id)
     else:
         court_addresses = court.courtaddress_set.all().order_by('pk')
         court_address_forms = odict()
@@ -211,7 +211,7 @@ def delete_address(request, id, address_id=None):
     if court_address:
         court_address.delete()
         messages.success(request, 'Address deleted')
-    return HttpResponseRedirect(reverse("admin:address", args=(id, )))
+    return redirect('admin:address', id)
 
 
 def edit_contact(request, id):
@@ -232,7 +232,7 @@ def edit_contact(request, id):
                 else:
                     instance.save()
             messages.success(request, 'Contacts updated')
-        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
+        return redirect('admin:contact', id)
     court_contact_queryset = court.contacts.order_by('sort_order')
     formset = contact_formset(queryset=court_contact_queryset)
     return render(request, 'court/contacts.html', {
@@ -260,7 +260,7 @@ def reorder_contacts(request, id):
                         contact = court_contact.contact
                         contact.sort_order = i
                         contact.save()
-        return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
+        return redirect('admin:contact', id)
     contacts = court.contacts.order_by('sort_order')
 
     return render(request, 'court/reordering.html', {

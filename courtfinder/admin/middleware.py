@@ -1,7 +1,6 @@
 from inspect import getmodule
-from django.http import HttpResponseRedirect
 from django.conf import settings
-from django.shortcuts import resolve_url
+from django.shortcuts import redirect
 import views as admin_views
 
 
@@ -12,4 +11,4 @@ class RequireLoginMiddleware:
         wrapped in @login_required decorator
         """
         if getmodule(view_func) is admin_views and not request.user.is_authenticated():
-            return HttpResponseRedirect(resolve_url(settings.LOGIN_URL))
+            return redirect(settings.LOGIN_URL)
