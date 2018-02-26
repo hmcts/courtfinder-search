@@ -12,21 +12,23 @@
     </p>
     <table>
       <tr>
-        <th>first name</th>
-        <th>last_name</th>
         <th>username</th>
+        <th>first name</th>
+        <th>last name</th>
         <th>email</th>
         <th>last login</th>
-        <th>access</th>
+        <th>access level</th>
+        <th></th>
       </tr>
       {% for user in users%}
       <tr>
+        <td>{{ user.username }}</td>
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
-        <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.last_login }}</td>
-        <td>{% if user.is_superuser %} super user {% endif %}</td>
+        <td>{{ user.last_login|default:'never' }}</td>
+        <td>{% if user.is_superuser %} super admin {% endif %}</td>
+        <td><a href="{% url 'admin:edit_user' user.username %}">edit</a></td>
       </tr>
       {% endfor %}
     </table>

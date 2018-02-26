@@ -1,0 +1,28 @@
+{% extends "admin.jinja" %}
+
+{% block page_title %}Edit user{% endblock %}
+
+{% block content %}
+  <div id="admin-edit-user-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Edit user</h2>
+    </header>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+
+    <a href="{% url 'admin:user_password' username %}">Reset password</a>
+    <h3>Remove account</h3>
+    <p>Re-enter the username to confirm account deletion.</p>
+    <form id="delete-user" method="post" action="{% url 'admin:delete_user' username %}">
+      {% csrf_token %}
+      {{ delete_form.as_p }}
+      <input type="submit" class="secondary-button" value="Delete user" />
+    </form>
+
+  </div>
+
+
+{% endblock %}

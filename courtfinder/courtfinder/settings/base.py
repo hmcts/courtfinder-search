@@ -133,6 +133,12 @@ SESSION_COOKIE_PATH = '/staff'
 LOGIN_REDIRECT_URL = 'admin:courts'
 LOGIN_URL = 'admin:login'
 
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+]
+
 # Internationalisation
 LANGUAGE_CODE = 'en-gb'
 TIME_ZONE = 'UTC'
