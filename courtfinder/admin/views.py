@@ -16,14 +16,14 @@ from django.views.decorators.http import require_POST
 
 
 def courts(request):
-    return render(request, 'courts.jinja', {
+    return render(request, 'court/list.html', {
         'courts': Court.objects.order_by('name').all()
     })
 
 
 @permission_required('manage_users')
 def users(request):
-    return render(request, 'users.jinja', {
+    return render(request, 'user/list.html', {
         'users': User.objects.order_by('username').all()
     })
 
@@ -39,7 +39,7 @@ def add_user(request):
     else:
         form = UserAddForm()
 
-    return render(request, 'add_user.jinja', {
+    return render(request, 'user/add.html', {
         'form': form
     })
 
@@ -103,7 +103,7 @@ def account(request):
     else:
         form = PasswordChangeForm(request.user)
 
-    return render(request, 'account.jinja', {
+    return render(request, 'account.html', {
         'form': form
     })
 
@@ -128,7 +128,7 @@ def edit_court(request, id):
     else:
         form = CourtBasicForm(initial=model_to_dict(court))
 
-    return render(request, 'court_basic.jinja', {
+    return render(request, 'court/basic.html', {
         'court': court,
         'form': form
     })
@@ -145,7 +145,7 @@ def edit_location(request, id):
     else:
         form = CourtLocationForm(instance=court)
 
-    return render(request, 'court_location.jinja', {
+    return render(request, 'court/location.html', {
         'court': court,
         'form': form,
         'postcode_form': LocatePostcodeForm()
@@ -196,7 +196,7 @@ def edit_address(request, id, address_id=None):
         while len(court_address_forms) < 2:
             new_address = CourtAddressForm(instance=None, address_index=len(court_address_forms), court=court)
             court_address_forms[new_address] = None
-        return render(request, 'court_address.jinja', {
+        return render(request, 'court/address.html', {
             'court': court,
             "court_address_forms": court_address_forms,
         })
@@ -235,7 +235,7 @@ def edit_contact(request, id):
         return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
     court_contact_queryset = court.contacts.order_by('sort_order')
     formset = contact_formset(queryset=court_contact_queryset)
-    return render(request, 'court_contacts.jinja', {
+    return render(request, 'court/contacts.html', {
             'court': court,
             "formset": formset,
         })
@@ -263,7 +263,7 @@ def reorder_contacts(request, id):
         return HttpResponseRedirect(reverse("admin:contact", args=(id, )))
     contacts = court.contacts.order_by('sort_order')
 
-    return render(request, 'reordering.jinja', {
+    return render(request, 'court/reordering.html', {
         'court': court,
         "objects": contacts,
         "return_url": return_url,
