@@ -16,6 +16,9 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/reorder_contacts', views.reorder_contacts, name='reorder_contacts'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),
+    url(r'^users/edit/(?P<username>\S+)$', views.edit_user, name='edit_user'),
+    url(r'^users/delete/(?P<username>\S+)$', views.delete_user, name='delete_user'),
+    url(r'^users/password/(?P<username>\S+)$', views.change_user_password, name='user_password'),
     url(r'^account', views.account, name='account'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

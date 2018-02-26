@@ -2,10 +2,11 @@ from django import forms
 from search.models import CourtAddress, AddressType, Town, Contact
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from search.models import Court
 
-class UserAddForm(UserCreationForm):
+
+class UserEditForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     first_name= forms.CharField(required=True, max_length=30)
     last_name = forms.CharField(required=True, max_length=30)
@@ -14,6 +15,14 @@ class UserAddForm(UserCreationForm):
         model = User
         fields = ('username', 'is_superuser', 'first_name', 'last_name', 'email')
         labels = {'is_superuser': 'Super admin'}
+
+
+class UserAddForm(UserEditForm, UserCreationForm):
+    pass
+
+
+class UserDeleteForm(forms.Form):
+    username = UsernameField(required=True)
 
 
 class CourtBasicForm(forms.Form):

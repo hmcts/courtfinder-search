@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
 from search.models import Court, CourtAddress, Contact, CourtContact
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeForm
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
@@ -13,18 +14,21 @@ from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
 from django.views.decorators.http import require_POST
 
+
 def courts(request):
     return render(request, 'courts.jinja', {
         'courts': Court.objects.order_by('name').all()
     })
 
 
+@permission_required('manage_users')
 def users(request):
     return render(request, 'users.jinja', {
-        'users': User.objects.order_by('first_name').all()
+        'users': User.objects.order_by('username').all()
     })
 
 
+@permission_required('manage_users')
 def add_user(request):
     if request.method == 'POST':
         form = UserAddForm(request.POST)
@@ -38,6 +42,57 @@ def add_user(request):
     return render(request, 'add_user.jinja', {
         'form': form
     })
+
+
+@permission_required('manage_users')
+def edit_user(request, username):
+    user = get_object_or_404(User, username=username)
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '`%s` has been updated' % user.username)
+            return HttpResponseRedirect(reverse('admin:edit_user', args=(user.username,)))
+    else:
+        form = UserEditForm(instance=user)
+
+    return render(request, 'user/edit.html', {
+        'username': user.username,
+        'form': form,
+        'delete_form': UserDeleteForm()
+    })
+
+
+@permission_required('manage_users')
+def change_user_password(request, username):
+    user = get_object_or_404(User, username=username)
+    if request.method == 'POST':
+        form = AdminPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '`%s` password has been updated' % user.username)
+            return HttpResponseRedirect(reverse('admin:edit_user', args=(user.username,)))
+    else:
+        form = AdminPasswordChangeForm(user)
+
+    return render(request, 'user/password.html', {
+        'form': form,
+        'username': user.username,
+    })
+
+
+@require_POST
+@permission_required('manage_users')
+def delete_user(request, username):
+    form = UserDeleteForm(request.POST)
+    if form.is_valid() and form.cleaned_data['username'] == username:
+        user = get_object_or_404(User, username=username)
+        user.delete()
+        messages.success(request, '`%s` has been deleted' % username)
+        return HttpResponseRedirect(reverse('admin:users'))
+    else:
+        messages.error(request, 'Could\'t delete user `%s`' % username)
+        return HttpResponseRedirect(reverse('admin:edit_user', args=(username,)))
 
 
 def account(request):
