@@ -1,0 +1,19 @@
+{% extends "admin.html" %}
+
+{% block page_title %}Emergency message{% endblock %}
+
+{% block content %}
+  <div id="admin-emergency-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Edit emergency message</h2>
+    </header>
+    <p>
+      This message will show as a warning on the <a href="{% url 'search:search' %}">home page </a> of court finder.
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+  </div>
+{% endblock %}

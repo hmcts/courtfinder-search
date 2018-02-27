@@ -9,7 +9,25 @@ from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from geolocation import mapit
-from search.models import Court, CourtAddress, Contact, CourtContact
+from search.models import Court, CourtAddress, Contact, CourtContact, EmergencyMessage
+
+
+@permission_required('emergency')
+def emergency_message(request):
+    msg = EmergencyMessage.objects.all().first()
+    if request.method == 'POST':
+        form = forms.EmergencyMessageForm(request.POST, instance=msg)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Emergency message updated')
+            messages.warning(request, 'The message is now *%s*' % ('visible' if msg.show else 'hidden'))
+            return redirect('admin:emergency')
+    else:
+        form = forms.EmergencyMessageForm(instance=msg)
+
+    return render(request, 'emergency.html', {
+        'form': form
+    })
 
 
 def courts(request):

@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^users/delete/(?P<username>\S+)$', views.delete_user, name='delete_user'),
     url(r'^users/password/(?P<username>\S+)$', views.change_user_password, name='user_password'),
     url(r'^account', views.account, name='account'),
+    url(r'^emergency', views.emergency_message, name='emergency'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

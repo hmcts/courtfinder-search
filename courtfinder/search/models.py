@@ -254,7 +254,7 @@ class ParkingInfo(models.Model):
                                                                                     self.blue_badge)
 
 class EmergencyMessage(models.Model):
-    message = models.TextField()
+    message = models.TextField(blank=True)
     show = models.BooleanField(default=False)
 
     def __unicode__(self):

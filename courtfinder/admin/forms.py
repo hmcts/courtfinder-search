@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from search.models import Court, CourtAddress, AddressType, Town, Contact
+from search.models import Court, CourtAddress, AddressType, Town, Contact, EmergencyMessage
 
 
 class UserEditForm(forms.ModelForm):
@@ -21,6 +21,16 @@ class UserAddForm(UserEditForm, UserCreationForm):
 
 class UserDeleteForm(forms.Form):
     username = UsernameField(required=True)
+
+
+class EmergencyMessageForm(forms.ModelForm):
+    class Meta:
+        model = EmergencyMessage
+        fields = ('message','show')
+        labels = {'show': 'Show on home page'}
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
+        }
 
 
 class CourtBasicForm(forms.ModelForm):

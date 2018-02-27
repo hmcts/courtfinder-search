@@ -6,6 +6,7 @@
   <ul>
       <li><a href="{% url 'admin:courts' %}">courts</a></li>
       {% if perms.manage_users %}
+      <li><a href="{% url 'admin:emergency' %}">emergency message</a></li>
       <li><a href="{% url 'admin:users' %}">users</a></li>
       {% endif %}
       <li class="right-link"><a href="{% url 'admin:logout' %}">log out</a></li>

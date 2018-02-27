@@ -119,19 +119,22 @@ div.details {
     padding-top: 20px;
 }
 
-.messages {
+ul.messages {
   margin: auto;
   padding-top: 20px;
   max-width: 950px;
-  .success {
+  li {
     list-style-type: none;
-    color: green;
     font-weight: bold;
-  }
-  .error {
-    list-style-type: none;
-    color: red;
-    font-weight: bold;
+    &.success {
+      color: green;
+    }
+    &.warning {
+      color: darkred;
+    }
+    &.error {
+      color: red;
+    }
   }
 }
 
