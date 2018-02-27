@@ -1,9 +1,7 @@
 from django import forms
-from search.models import CourtAddress, AddressType, Town, Contact
-from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from search.models import Court
+from search.models import Court, CourtAddress, AddressType, Town, Contact
 
 
 class UserEditForm(forms.ModelForm):

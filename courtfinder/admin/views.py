@@ -1,18 +1,16 @@
-from django.shortcuts import render, redirect
-
-from search.models import Court, CourtAddress, Contact, CourtContact
+import forms
+from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeForm
+from django.contrib.auth.models import User
 from django.contrib import messages
-from django.forms.models import model_to_dict
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from collections import OrderedDict as odict
-from forms import *
-from geolocation import mapit
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
 from django.forms import modelformset_factory
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from geolocation import mapit
+from search.models import Court, CourtAddress, Contact, CourtContact
 
 
 def courts(request):
@@ -31,13 +29,13 @@ def users(request):
 @permission_required('manage_users')
 def add_user(request):
     if request.method == 'POST':
-        form = UserAddForm(request.POST)
+        form = forms.UserAddForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             messages.success(request, '`%s` has been added' % new_user.username)
             return redirect('admin:users')
     else:
-        form = UserAddForm()
+        form = forms.UserAddForm()
 
     return render(request, 'user/add.html', {
         'form': form
@@ -48,18 +46,18 @@ def add_user(request):
 def edit_user(request, username):
     user = get_object_or_404(User, username=username)
     if request.method == 'POST':
-        form = UserEditForm(request.POST, instance=user)
+        form = forms.UserEditForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request, '`%s` has been updated' % user.username)
             return redirect('admin:edit_user', user.username)
     else:
-        form = UserEditForm(instance=user)
+        form = forms.UserEditForm(instance=user)
 
     return render(request, 'user/edit.html', {
         'username': user.username,
         'form': form,
-        'delete_form': UserDeleteForm()
+        'delete_form': forms.UserDeleteForm()
     })
 
 
@@ -84,7 +82,7 @@ def change_user_password(request, username):
 @require_POST
 @permission_required('manage_users')
 def delete_user(request, username):
-    form = UserDeleteForm(request.POST)
+    form = forms.UserDeleteForm(request.POST)
     if form.is_valid() and form.cleaned_data['username'] == username:
         user = get_object_or_404(User, username=username)
         user.delete()
@@ -111,7 +109,7 @@ def account(request):
 def edit_court(request, id):
     court = get_object_or_404(Court, pk=id)
     if request.method == 'POST':
-        form = CourtBasicForm(request.POST)
+        form = forms.CourtBasicForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             # don't allow duplicate names/slugs
@@ -126,7 +124,7 @@ def edit_court(request, id):
                 messages.success(request, 'Court information updated')
                 return redirect('admin:court', id)
     else:
-        form = CourtBasicForm(initial=model_to_dict(court))
+        form = forms.CourtBasicForm(initial=model_to_dict(court))
 
     return render(request, 'court/basic.html', {
         'court': court,
@@ -137,25 +135,25 @@ def edit_court(request, id):
 def edit_location(request, id):
     court = get_object_or_404(Court, pk=id)
     if request.method == 'POST':
-        form = CourtLocationForm(request.POST, instance=court)
+        form = forms.CourtLocationForm(request.POST, instance=court)
         if form.is_valid():
             form.save()
             messages.success(request, 'Location details updated')
             return redirect('admin:location', id)
     else:
-        form = CourtLocationForm(instance=court)
+        form = forms.CourtLocationForm(instance=court)
 
     return render(request, 'court/location.html', {
         'court': court,
         'form': form,
-        'postcode_form': LocatePostcodeForm()
+        'postcode_form': forms.LocatePostcodeForm()
     })
 
 
 @require_POST
 def locate_postcode(request, id):
     court = get_object_or_404(Court, pk=id)
-    form = LocatePostcodeForm(request.POST)
+    form = forms.LocatePostcodeForm(request.POST)
     if form.is_valid():
         try:
             postcode = mapit.postcode(form.cleaned_data['postcode'])
@@ -180,7 +178,7 @@ def edit_address(request, id, address_id=None):
                 court_address = None
         else:
             court_address = None
-        form = CourtAddressForm(data=request.POST or None, address_index=form_index, court=court, instance=court_address)
+        form = forms.CourtAddressForm(data=request.POST or None, address_index=form_index, court=court, instance=court_address)
         if form.is_valid():
             court_address = form.save(commit=False)
             court_address.court = court
@@ -191,10 +189,10 @@ def edit_address(request, id, address_id=None):
         court_addresses = court.courtaddress_set.all().order_by('pk')
         court_address_forms = odict()
         for i, c in enumerate(court_addresses):
-            c_address_form = CourtAddressForm(instance=c, address_index=i, court=court)
+            c_address_form = forms.CourtAddressForm(instance=c, address_index=i, court=court)
             court_address_forms[c_address_form] = c.pk
         while len(court_address_forms) < 2:
-            new_address = CourtAddressForm(instance=None, address_index=len(court_address_forms), court=court)
+            new_address = forms.CourtAddressForm(instance=None, address_index=len(court_address_forms), court=court)
             court_address_forms[new_address] = None
         return render(request, 'court/address.html', {
             'court': court,
@@ -216,7 +214,7 @@ def delete_address(request, id, address_id=None):
 
 def edit_contact(request, id):
     court = get_object_or_404(Court, pk=id)
-    contact_formset = modelformset_factory(Contact, CourtContactForm, extra=1, can_delete=True)
+    contact_formset = modelformset_factory(Contact, forms.CourtContactForm, extra=1, can_delete=True)
 
     if request.POST:
         formset = contact_formset(request.POST)
