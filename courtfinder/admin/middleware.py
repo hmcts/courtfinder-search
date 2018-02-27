@@ -1,7 +1,7 @@
-from inspect import getmodule
+import views as admin_views
 from django.conf import settings
 from django.shortcuts import redirect
-import views as admin_views
+from inspect import getmodule
 
 
 class RequireLoginMiddleware:
