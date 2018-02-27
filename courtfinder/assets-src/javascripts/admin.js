@@ -3,7 +3,7 @@
 
   /* forms */
   tinymce.init({
-    selector: '.rich-editor',
+    selector: '.rich-editor:enabled',
     width: 784,
     plugins : 'autolink link',
     menubar: '',

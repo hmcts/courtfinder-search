@@ -125,8 +125,8 @@ def account(request):
 
 def edit_court(request, id):
     court = get_object_or_404(Court, pk=id)
+    form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court_extra'))
     if request.method == 'POST':
-        form = forms.CourtBasicForm(request.POST, instance=court)
         if form.is_valid():
             name = form.cleaned_data['name']
             # don't allow duplicate names/slugs
@@ -138,9 +138,6 @@ def edit_court(request, id):
                 court.save()
                 messages.success(request, 'Court information updated')
                 return redirect('admin:court', id)
-    else:
-        form = forms.CourtBasicForm(instance=court)
-
     return render(request, 'court/basic.html', {
         'court': court,
         'form': form
