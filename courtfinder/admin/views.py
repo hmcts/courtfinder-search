@@ -5,7 +5,6 @@ from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeFor
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.forms.models import model_to_dict
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
@@ -109,22 +108,20 @@ def account(request):
 def edit_court(request, id):
     court = get_object_or_404(Court, pk=id)
     if request.method == 'POST':
-        form = forms.CourtBasicForm(request.POST)
+        form = forms.CourtBasicForm(request.POST, instance=court)
         if form.is_valid():
             name = form.cleaned_data['name']
             # don't allow duplicate names/slugs
             if Court.objects.filter(name=name).exclude(id=id).count():
                 form.add_error('name', 'Court with this name already exists')
             else:
+                form.save(commit=False)
                 court.update_name_slug(name)
-                court.displayed = form.cleaned_data['displayed']
-                court.alert = form.cleaned_data['alert']
-                court.info = form.cleaned_data['info']
                 court.save()
                 messages.success(request, 'Court information updated')
                 return redirect('admin:court', id)
     else:
-        form = forms.CourtBasicForm(initial=model_to_dict(court))
+        form = forms.CourtBasicForm(instance=court)
 
     return render(request, 'court/basic.html', {
         'court': court,
