@@ -34,6 +34,11 @@ class EmergencyMessageForm(forms.ModelForm):
 
 
 class CourtBasicForm(forms.ModelForm):
+    def __init__(self, data, court, extra_perms):
+        super(CourtBasicForm, self).__init__(data if data else None, instance=court)
+        if not extra_perms:
+            self.fields['info'].disabled = True
+
     class Meta:
         model = Court
         fields = ('name', 'alert', 'info', 'displayed')
