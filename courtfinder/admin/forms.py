@@ -39,7 +39,7 @@ class CourtLocationForm(forms.ModelForm):
         model = Court
         fields = ('directions', 'lat', 'lon')
         labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
-        widgets = {'directions': forms.Textarea(attrs={'rows': 4}),}
+        widgets = {'directions': forms.Textarea(attrs={'rows': 4})}
 
 
 class LocatePostcodeForm(forms.Form):
