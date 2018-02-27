@@ -181,7 +181,7 @@ def edit_address(request, id, address_id=None):
             court_address.court = court
             court_address.save()
             messages.success(request, 'Address updated')
-        return redirect('admin:address',id)
+        return redirect('admin:address', id)
     else:
         court_addresses = court.courtaddress_set.all().order_by('pk')
         court_address_forms = odict()
@@ -231,9 +231,9 @@ def edit_contact(request, id):
     court_contact_queryset = court.contacts.order_by('sort_order')
     formset = contact_formset(queryset=court_contact_queryset)
     return render(request, 'court/contacts.html', {
-            'court': court,
-            "formset": formset,
-        })
+        'court': court,
+        "formset": formset,
+    })
 
 
 def reorder_contacts(request, id):
@@ -263,4 +263,4 @@ def reorder_contacts(request, id):
         "objects": contacts,
         "return_url": return_url,
         "reorder_url": reorder_url,
-        })
+    })

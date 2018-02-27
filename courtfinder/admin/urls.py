@@ -22,5 +22,3 @@ urlpatterns = [
     url(r'^account', views.account, name='account'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]
-
-
