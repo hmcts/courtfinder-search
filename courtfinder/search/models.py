@@ -12,7 +12,7 @@ class Court(models.Model):
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True) #Crown court location number
     parking = models.ForeignKey('ParkingInfo', null=True, default=None)
-    alert = models.CharField(max_length=4096, null=True, default=None)
+    alert = models.CharField(max_length=4096, null=True, default=None, blank=True)
     directions = models.CharField(max_length=4096, null=True, default=None, blank=True)
     image_file = models.CharField(max_length=255, null=True, default=None)
     areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw')
@@ -27,7 +27,7 @@ class Court(models.Model):
     magistrate_code = models.CharField(max_length=255, null=True, default=None)
     updated_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(null=True, default=None)
-    info = models.TextField(null=True)
+    info = models.TextField(null=True, blank=True)
     hide_aols = models.BooleanField(null=False, default=False)
     info_leaflet = models.CharField(max_length=2500, null=True, default=None)
     defence_leaflet = models.CharField(max_length=2500, null=True, default=None)
