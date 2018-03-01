@@ -31,7 +31,7 @@ Feature: Manage users
 
   Scenario: Change user's password
     When I click the link to "/staff/users/edit/editpass"
-    And I press "Reset password"
+    And I press "Change password"
     And I fill in "password1" with "letmein123"
     And I fill in "password2" with "letmein123"
     And I press "Change password"

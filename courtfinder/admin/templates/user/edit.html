@@ -12,8 +12,10 @@
       {{ form.as_p }}
       <input type="submit" class="button" value="Update" />
     </form>
-
-    <a href="{% url 'admin:user_password' username %}">Reset password</a>
+    <h3>Password</h3>
+    <p>
+      <a href="{% url 'admin:user_password' username %}">Change password</a>
+    </p>
     <h3>Remove account</h3>
     <p>Re-enter the username to confirm account deletion.</p>
     <form id="delete-user" method="post" action="{% url 'admin:delete_user' username %}">

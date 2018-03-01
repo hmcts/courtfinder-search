@@ -1,6 +1,8 @@
 {% extends "court/base.html" %}
 
 {% block details %}
+    <h3>Edit basic information</h3>
+    <p>Changing name will automatically update the slug (url).</p>
     <form class="court basic" method="post">
         {% csrf_token %}
         {{ form.as_p }}

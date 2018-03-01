@@ -5,7 +5,7 @@
 {% block content %}
   <div class="content inner cf">
     <header class="page-header">
-      <h2>Editing - {{ court.name }} <a class="right-link" target="_blank" href="{% url 'courts:court' court.slug %}">view</a></h2>
+      <h2>Editing - {{ court.name }} <a class="view-court-link right-link" target="_blank" href="{% url 'courts:court' court.slug %}">view in new window</a></h2>
     </header>
 
     <div class="nav-menu">
