@@ -4,7 +4,7 @@
   /* forms */
   tinymce.init({
     selector: '.rich-editor:enabled',
-    width: 784,
+    width: 774,
     plugins : 'autolink link',
     menubar: '',
     toolbar: 'undo redo | bold italic underline strikethrough | link | removeformat',
