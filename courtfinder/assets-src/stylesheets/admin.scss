@@ -45,9 +45,10 @@ form {
   margin-bottom: 20px;
   label{
     width: 150px;
-    float: left;
     margin: 0px;
     padding-right: 10px;
+    display: inline-block;
+    vertical-align: top;
   }
 
   ul.errorlist {
@@ -64,7 +65,7 @@ form {
 }
 
 div.mce-tinymce {
-  margin-left: 160px;
+    display: inline-block;
 }
 
 form.court {
@@ -100,7 +101,7 @@ form.court {
     input[name=delete]{
       position: relative;
       top: -70px;
-      left: 150px;
+      left: 162px;
     }
   }
 
