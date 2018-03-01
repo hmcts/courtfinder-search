@@ -1,4 +1,5 @@
 import forms
+import json
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeForm
@@ -9,12 +10,12 @@ from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from geolocation import mapit
-from search.models import Court, CourtAddress, Contact, CourtContact, EmergencyMessage
+from search import models
 
 
 @permission_required('emergency')
 def emergency_message(request):
-    msg = EmergencyMessage.objects.all().first()
+    msg = models.EmergencyMessage.objects.all().first()
     if request.method == 'POST':
         form = forms.EmergencyMessageForm(request.POST, instance=msg)
         if form.is_valid():
@@ -32,7 +33,7 @@ def emergency_message(request):
 
 def courts(request):
     return render(request, 'court/list.html', {
-        'courts': Court.objects.order_by('name').all()
+        'courts': models.Court.objects.order_by('name').all()
     })
 
 
@@ -124,20 +125,19 @@ def account(request):
 
 
 def edit_court(request, id):
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court_extra'))
-    if request.method == 'POST':
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            # don't allow duplicate names/slugs
-            if Court.objects.filter(name=name).exclude(id=id).count():
-                form.add_error('name', 'Court with this name already exists')
-            else:
-                form.save(commit=False)
-                court.update_name_slug(name)
-                court.save()
-                messages.success(request, 'Court information updated')
-                return redirect('admin:court', id)
+    if request.method == 'POST' and form.is_valid():
+        name = form.cleaned_data['name']
+        # don't allow duplicate names/slugs
+        if models.Court.objects.filter(name=name).exclude(id=id).count():
+            form.add_error('name', 'Court with this name already exists')
+        else:
+            form.save(commit=False)
+            court.update_name_slug(name)
+            court.save()
+            messages.success(request, 'Court information updated')
+            return redirect('admin:court', id)
     return render(request, 'court/basic.html', {
         'court': court,
         'form': form
@@ -145,7 +145,7 @@ def edit_court(request, id):
 
 
 def edit_location(request, id):
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     if request.method == 'POST':
         form = forms.CourtLocationForm(request.POST, instance=court)
         if form.is_valid():
@@ -164,7 +164,7 @@ def edit_location(request, id):
 
 @require_POST
 def locate_postcode(request, id):
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     form = forms.LocatePostcodeForm(request.POST)
     if form.is_valid():
         try:
@@ -180,13 +180,13 @@ def locate_postcode(request, id):
 
 
 def edit_address(request, id, address_id=None):
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     if request.POST:
         form_index = int(request.POST["form_index"])
         if address_id:
             try:
-                court_address = CourtAddress.objects.get(pk=address_id)
-            except CourtAddress.DoesNotExist:
+                court_address = models.CourtAddress.objects.get(pk=address_id)
+            except models.CourtAddress.DoesNotExist:
                 court_address = None
         else:
             court_address = None
@@ -212,11 +212,12 @@ def edit_address(request, id, address_id=None):
         })
 
 
+@require_POST
 def delete_address(request, id, address_id=None):
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     try:
-        court_address = CourtAddress.objects.filter(court=court).get(pk=address_id)
-    except CourtAddress.DoesNotExist:
+        court_address = models.CourtAddress.objects.filter(court=court).get(pk=address_id)
+    except models.CourtAddress.DoesNotExist:
         court_address = None
     if court_address:
         court_address.delete()
@@ -225,8 +226,8 @@ def delete_address(request, id, address_id=None):
 
 
 def edit_contact(request, id):
-    court = get_object_or_404(Court, pk=id)
-    contact_formset = modelformset_factory(Contact, forms.CourtContactForm, extra=1, can_delete=True)
+    court = get_object_or_404(models.Court, pk=id)
+    contact_formset = modelformset_factory(models.Contact, forms.CourtContactForm, extra=1, can_delete=True)
 
     if request.POST:
         formset = contact_formset(request.POST)
@@ -237,7 +238,7 @@ def edit_contact(request, id):
             for instance in instances:
                 if instance._state.adding:
                     instance.save()
-                    court_contact = CourtContact(court=court, contact=instance)
+                    court_contact = models.CourtContact(court=court, contact=instance)
                     court_contact.save()
                 else:
                     instance.save()
@@ -252,8 +253,7 @@ def edit_contact(request, id):
 
 
 def reorder_contacts(request, id):
-    import json
-    court = get_object_or_404(Court, pk=id)
+    court = get_object_or_404(models.Court, pk=id)
     return_url = reverse("admin:contact", kwargs={'id': id})
     reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
     if request.POST:
@@ -263,8 +263,8 @@ def reorder_contacts(request, id):
                 new_order = json.loads(new_order)
                 for i, o in enumerate(new_order):
                     try:
-                        court_contact = CourtContact.objects.get(court=court, contact=o)
-                    except CourtContact.DoesNotExist:
+                        court_contact = models.CourtContact.objects.get(court=court, contact=o)
+                    except models.CourtContact.DoesNotExist:
                         pass
                     if court_contact:
                         contact = court_contact.contact
