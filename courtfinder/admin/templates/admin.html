@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block before_content %}
-<div class="nav-menu">
-  <ul>
-      <li><a href="{% url 'admin:courts' %}">courts</a></li>
-      {% if perms.manage_users %}
-      <li><a href="{% url 'admin:emergency' %}">emergency message</a></li>
-      <li><a href="{% url 'admin:users' %}">users</a></li>
-      {% endif %}
-      <li class="right-link"><a href="{% url 'admin:logout' %}">log out</a></li>
-      <li class="right-link"><a href="{% url 'admin:account' %}">my account</a></li>
-  </ul>
-</div>
+{% block content %}
+<div class="content inner cf">
+    <ul class="nav-menu">
+        <li><a href="{% url 'admin:courts' %}">courts</a></li>
+        {% if perms.manage_users %}
+        <li><a href="{% url 'admin:emergency' %}">emergency message</a></li>
+        <li><a href="{% url 'admin:users' %}">users</a></li>
+        {% endif %}
+        <li class="right-link"><a href="{% url 'admin:logout' %}">log out</a></li>
+        <li class="right-link"><a href="{% url 'admin:account' %}">my account</a></li>
+    </ul>
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
+</div>
+{% block admin %}{% endblock %}
 {% endblock %}
 
 

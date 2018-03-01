@@ -2,20 +2,17 @@
 
 {% block page_title %}Edit court{% endblock %}
 
-{% block content %}
+{% block admin %}
   <div class="content inner cf">
     <header class="page-header">
       <h2>Editing - {{ court.name }} <a class="view-court-link right-link" target="_blank" href="{% url 'courts:court' court.slug %}">view in new window</a></h2>
     </header>
-
-    <div class="nav-menu">
-      <ul>
-        <li><a href="{% url 'admin:court' court.id %}">basic</a></li>
-        <li><a href="{% url 'admin:location' court.id %}">location</a></li>
-        <li><a href="{% url 'admin:address' court.id %}">addresses</a></li>
-        <li><a href="{% url 'admin:contact' court.id %}">contacts</a></li>
-      </ul>
-    </div>
+    <ul class="nav-menu">
+      <li><a href="{% url 'admin:court' court.id %}">basic</a></li>
+      <li><a href="{% url 'admin:location' court.id %}">location</a></li>
+      <li><a href="{% url 'admin:address' court.id %}">addresses</a></li>
+      <li><a href="{% url 'admin:contact' court.id %}">contacts</a></li>
+    </ul>
     <div class="content cf details">
     {% block details %} {% endblock %}
     </div>
