@@ -8,7 +8,8 @@
       <h2>Edit emergency message</h2>
     </header>
     <p>
-      This message will show as a warning on the <a href="{% url 'search:search' %}">home page </a> of court finder.
+      This message will show as a warning on the <a href="{% url 'search:search' %}">home page </a> of court finder,
+      only if the checkbox below is turned on.
     </p>
     <form method="post">
       {% csrf_token %}
