@@ -44,6 +44,11 @@ class Court(models.Model):
         self.name = new_name
         self.slug = slugify(new_name)
 
+    def update_timestamp(self):
+        #todo move into save after migration
+        self.updated_at = datetime.now()
+        self.save()
+
     def primary_address(self):
         try:
             return CourtAddress.objects.filter(court=self).order_by('pk').first()

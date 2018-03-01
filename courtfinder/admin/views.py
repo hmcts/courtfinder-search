@@ -137,6 +137,7 @@ def edit_court(request, id):
             court.update_name_slug(name)
             court.save()
             messages.success(request, 'Court information updated')
+            court.update_timestamp()
             return redirect('admin:court', id)
     return render(request, 'court/basic.html', {
         'court': court,
@@ -151,6 +152,7 @@ def edit_location(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Location details updated')
+            court.update_timestamp()
             return redirect('admin:location', id)
     else:
         form = forms.CourtLocationForm(instance=court)
@@ -172,6 +174,7 @@ def locate_postcode(request, id):
             court.lat, court.lon = postcode.coordinates
             court.save()
             messages.success(request, 'Coordinates changed to %s, %s' % (court.lat, court.lon))
+            court.update_timestamp()
         except mapit.MapitException as e:
             messages.error(request, 'Geolocation failed: %s' % e.message)
     else:
@@ -196,6 +199,7 @@ def edit_address(request, id, address_id=None):
             court_address.court = court
             court_address.save()
             messages.success(request, 'Address updated')
+            court.update_timestamp()
         return redirect('admin:address', id)
     else:
         court_addresses = court.courtaddress_set.all().order_by('pk')
@@ -222,6 +226,7 @@ def delete_address(request, id, address_id=None):
     if court_address:
         court_address.delete()
         messages.success(request, 'Address deleted')
+        court.update_timestamp()
     return redirect('admin:address', id)
 
 
@@ -243,6 +248,7 @@ def edit_contact(request, id):
                 else:
                     instance.save()
             messages.success(request, 'Contacts updated')
+            court.update_timestamp()
         return redirect('admin:contact', id)
     court_contact_queryset = court.contacts.order_by('sort_order')
     formset = contact_formset(queryset=court_contact_queryset)
