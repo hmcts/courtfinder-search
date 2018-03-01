@@ -133,16 +133,21 @@ ul.messages {
   padding-top: 20px;
   max-width: 950px;
   li {
+    border: solid;
+    padding: 10px;
     list-style-type: none;
     font-weight: bold;
     &.success {
       color: green;
+      background: #ccffcc;
     }
     &.warning {
-      color: darkred;
+      color: #b36b00;
+      background: #ffffb3;
     }
     &.error {
       color: red;
+      background: #ffd6cc;
     }
   }
 }
