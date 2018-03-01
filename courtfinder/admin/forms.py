@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from search.models import Court, CourtAddress, AddressType, Town, Contact, EmergencyMessage
+from search import models
 
 
 class UserEditForm(forms.ModelForm):
@@ -25,7 +25,7 @@ class UserDeleteForm(forms.Form):
 
 class EmergencyMessageForm(forms.ModelForm):
     class Meta:
-        model = EmergencyMessage
+        model = models.EmergencyMessage
         fields = ('message','show')
         labels = {'show': 'Show on home page'}
         widgets = {
@@ -40,7 +40,7 @@ class CourtBasicForm(forms.ModelForm):
             self.fields['info'].disabled = True
 
     class Meta:
-        model = Court
+        model = models.Court
         fields = ('name', 'alert', 'info', 'displayed')
         labels = {'alert': 'Urgent notice', 'displayed': 'Open', 'info': 'Additional information'}
         widgets = {
@@ -51,7 +51,7 @@ class CourtBasicForm(forms.ModelForm):
 
 class CourtLocationForm(forms.ModelForm):
     class Meta:
-        model = Court
+        model = models.Court
         fields = ('directions', 'lat', 'lon')
         labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
         widgets = {'directions': forms.Textarea(attrs={'rows': 4})}
@@ -63,13 +63,13 @@ class LocatePostcodeForm(forms.Form):
 
 class CourtAddressForm(forms.ModelForm):
     class Meta:
-        model = CourtAddress
+        model = models.CourtAddress
         fields = ['address_type', 'address', 'town', 'postcode']
 
     def __init__(self, address_index=None, court=None, *args, **kwargs):
         super(CourtAddressForm, self).__init__(*args, **kwargs)
-        address_types = AddressType.objects.all()
-        self.fields['town'].queryset = Town.objects.all().order_by('name')
+        address_types = models.AddressType.objects.all()
+        self.fields['town'].queryset = models.Town.objects.all().order_by('name')
         if address_index and address_index > 0:
             address_types = address_types.exclude(name="Visit us or write to us")
             if court:
@@ -77,7 +77,7 @@ class CourtAddressForm(forms.ModelForm):
                 if not primary_address_type.name == "Visit us or write to us":
                     address_types = address_types.exclude(name=primary_address_type.name)
                 else:
-                    address_types = AddressType.objects.none()
+                    address_types = models.AddressType.objects.none()
         if hasattr(self.instance, 'address_type'):
             if self.instance.address_type not in address_types:
                 self.fields["address"].disabled = True
@@ -88,7 +88,7 @@ class CourtAddressForm(forms.ModelForm):
 
 class CourtContactForm(forms.ModelForm):
     class Meta:
-        model = Contact
+        model = models.Contact
         fields = ['name', 'number', 'explanation', 'in_leaflet', 'sort_order']
 
     def __init__(self, *args, **kwargs):
