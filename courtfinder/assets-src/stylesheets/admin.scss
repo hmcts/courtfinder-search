@@ -76,6 +76,10 @@ div.mce-tinymce {
     display: inline-block;
 }
 
+fieldset.form-group {
+  margin: 0px;
+}
+
 form.court {
   fieldset {
     margin: 0px;
@@ -124,10 +128,6 @@ form.court {
   }
 }
 
-div.details {
-    padding-top: 20px;
-}
-
 ul.messages {
   margin: auto;
   padding-top: 20px;
@@ -152,17 +152,18 @@ ul.messages {
   }
 }
 
-#sortable {
+.ui-sortable {
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 40%;
+  margin-bottom: 20px;
   li {
     margin: 0 3px 3px 3px;
     padding: 0.4em;
     padding-left: 1.5em;
     font-size: 1.0em;
-    height: 13px;
+    cursor: move;
     span {
       position: relative;
       margin-left: -1.3em;

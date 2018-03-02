@@ -2,7 +2,9 @@
 
 {% block details %}
     <h3>Edit contact details</h3>
-    <a href="{% url 'admin:reorder_contacts' court.id %}">Reorder contacts</a>
+    <p>
+        <a href="{% url 'admin:reorder_contacts' court.id %}">Reorder contacts</a>
+    </p>
     <form method="post" action="{% url 'admin:contact' court.id %}">
     {{ formset.management_form }}
     {% for form in formset %}
