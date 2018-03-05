@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/reorder_emails', EmailReorderView.as_view(), name='reorder_emails'),
     url(r'^court/(?P<id>[0-9]+)/opening_times$', OpeningFormView.as_view(), name='opening'),
     url(r'^court/(?P<id>[0-9]+)/reorder_opening_times', OpeningReorderView.as_view(), name='reorder_openings'),
-
+    url(r'^court/(?P<id>[0-9]+)/facility$', FacilityFormView.as_view(), name='facility'),
+    url(r'^court/(?P<id>[0-9]+)/reorder_facilities', FacilityReorderView.as_view(), name='reorder_facilities'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),
     url(r'^account', views.account, name='account'),

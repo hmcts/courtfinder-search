@@ -1,5 +1,5 @@
 from django import forms
-from search.models import CourtAddress, AddressType, Town, Contact, Email, OpeningTime
+from search.models import CourtAddress, AddressType, Town, Contact, Email, OpeningTime, Facility
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -72,3 +72,13 @@ class CourtOpeningForm(forms.ModelForm):
     class Meta:
         model = OpeningTime
         fields = ['description']
+
+
+class CourtFacilityForm(forms.ModelForm):
+
+    description = forms.CharField(label='Description', max_length=4000, required=False,
+                            widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
+
+    class Meta:
+        model = Facility
+        fields = ['name', 'description']

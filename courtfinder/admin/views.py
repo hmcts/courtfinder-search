@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 
-from search.models import Court, CourtAddress, Contact, CourtContact, Email, CourtEmail, OpeningTime, CourtOpeningTime
+from search.models import Court, CourtAddress, Contact, CourtContact, Email, CourtEmail, OpeningTime, CourtOpeningTime, Facility, CourtFacility
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 from collections import OrderedDict as odict
-from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm, CourtEmailForm, CourtOpeningForm
+from forms import CourtBasicForm, CourtAddressForm, UserAddForm, CourtContactForm, CourtEmailForm, CourtOpeningForm, CourtFacilityForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
@@ -133,6 +133,7 @@ class BaseOrderableFormView(View):
     formset = None
     objects = None
     court = None
+    ordering = True
     update_message = "Updated"
 
     def get_context_data(self):
@@ -181,7 +182,8 @@ class OrderableFormView(BaseOrderableFormView):
             "formset": formset,
             "return_url": self.return_url,
             "reorder_url": self.reorder_url,
-            }
+            "ordering": self.ordering,
+        }
         return context
 
 
@@ -332,3 +334,43 @@ class OpeningReorderView(OpeningTimeMixin, ReorderingFormView):
             if court_opening:
                 court_opening.sort = i
                 court_opening.save()
+                
+                
+class FacilityMixin(object):
+
+    def initialize(self, request, id):
+        super(FacilityMixin, self).initialize(request, id)
+        self.formset = modelformset_factory(Facility, CourtFacilityForm, extra=1, can_delete=True)
+        self.return_url = reverse("admin:facility", kwargs={'id': id})
+        self.update_message = 'Facilities updated'
+        self.ordering = False
+
+    def initialize_get(self, request, id):
+        self.initialize(request, id)
+        self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
+        self.objects = self.court.facilities.all()
+
+
+class FacilityFormView(FacilityMixin, OrderableFormView):
+
+    def handle_instance_saving(self, instances):
+        for instance in instances:
+            if instance._state.adding:
+                instance.save()
+                court_facility = CourtFacility(court=self.court, facility=instance)
+                court_facility.save()
+            else:
+                instance.save()
+
+
+class FacilityReorderView(FacilityMixin, ReorderingFormView):
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            try:
+                court_facility = CourtFacility.objects.get(court=self.court, facility=o)
+            except CourtEmail.DoesNotExist:
+                pass
+            if court_facility:
+                court_facility.save()

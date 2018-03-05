@@ -99,6 +99,10 @@ class Facility(models.Model):
     def __unicode__(self):
         return "%s: %s" % (self.name, self.description)
 
+    @property
+    def order_label(self):
+        return "%s" % self.name
+
 
 class OpeningTime(models.Model):
     description = models.CharField(max_length=1024)
