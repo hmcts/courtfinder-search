@@ -226,7 +226,9 @@ class ContactFormView(ContactMixin, OrderableFormView):
     def handle_instance_saving(self, instances):
         for instance in instances:
             if instance._state.adding:
-                instance.save()
+                inst = instance.save()
+                instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
+                instance.save(update_fields=["sort_order"])
                 court_contact = CourtContact(court=self.court, contact=instance)
                 court_contact.save()
             else:
@@ -270,6 +272,8 @@ class EmailFormView(EmailMixin, OrderableFormView):
                 instance.save()
                 court_email = CourtEmail(court=self.court, email=instance)
                 court_email.save()
+                court_email.order = court_email.pk  # Sets the order of the new object to its id to preserve order
+                court_email.save(update_fields=["order"])
             else:
                 instance.save()
 
@@ -310,6 +314,8 @@ class OpeningFormView(OpeningTimeMixin, OrderableFormView):
                 instance.save()
                 court_opening = CourtOpeningTime(court=self.court, opening_time=instance)
                 court_opening.save()
+                court_opening.sort = court_opening.pk  # Sets the order of the new object to its id to preserve order
+                court_opening.save(update_fields=["sort"])
             else:
                 instance.save()
 
