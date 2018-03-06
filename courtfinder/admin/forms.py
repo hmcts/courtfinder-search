@@ -74,11 +74,13 @@ class CourtAddressForm(forms.ModelForm):
         if address_index and address_index > 0:
             address_types = address_types.exclude(name="Visit us or write to us")
             if court:
-                primary_address_type = court.primary_address().address_type
-                if not primary_address_type.name == "Visit us or write to us":
-                    address_types = address_types.exclude(name=primary_address_type.name)
-                else:
-                    address_types = models.AddressType.objects.none()
+                primary_address = court.primary_address()
+                if primary_address:
+                    primary_address_type = primary_address.address_type
+                    if not primary_address_type.name == "Visit us or write to us":
+                        address_types = address_types.exclude(name=primary_address_type.name)
+                    else:
+                        address_types = models.AddressType.objects.none()
         if hasattr(self.instance, 'address_type'):
             if self.instance.address_type not in address_types:
                 self.fields["address"].disabled = True
