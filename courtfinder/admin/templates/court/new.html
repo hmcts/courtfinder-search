@@ -1,0 +1,18 @@
+{% extends "admin.html" %}
+
+{% block page_title %}Add new court{% endblock %}
+
+{% block admin %}
+  <div id="admin-index-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Add new court</h2>
+    </header>
+    <p>Court will be created as closed, until it's ready for public viewing.
+        After entering a name you can fill out remaining information.</p>
+    <form class="court new" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Add court" />
+    </form>
+  </div>
+{% endblock %}
