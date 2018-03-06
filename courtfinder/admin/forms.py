@@ -122,3 +122,20 @@ class CourtFacilityForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
         }
+
+
+class CourtAreasOfLawForm(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ['areas_of_law', 'hide_aols']
+        widgets = {
+            'areas_of_law': forms.CheckboxSelectMultiple()
+        }
+        labels = {'hide_aols': "Hide 'Cases heard at this venue'"}
+
+    def _save_m2m(self):
+        # todo remove intermiediete model so this is isn't necessary?
+        mngr = models.CourtAreaOfLaw.objects
+        mngr.filter(court=self.instance).delete()
+        for aol in self.cleaned_data['areas_of_law']:
+            mngr.create(court=self.instance, area_of_law=aol)

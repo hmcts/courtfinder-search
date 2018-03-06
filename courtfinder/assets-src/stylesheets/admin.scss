@@ -124,7 +124,17 @@ form.court {
       top: -70px;
       left: 150px;
     }
-
+  }
+  &.aols {
+    label {
+      width: initial;
+    }
+    ul {
+      columns: 3;
+      input {
+        margin-right: 15px;
+      }
+    }
   }
 }
 

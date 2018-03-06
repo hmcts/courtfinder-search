@@ -1,4 +1,4 @@
-Feature: Editing basic court information
+Feature: Edit basic court information
 
   Background:
     Given "admin" as the persona

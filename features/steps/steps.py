@@ -65,3 +65,27 @@ def step_impl(context, button_name, form_id):
 def step_impl(context, content, textarea):
     with context.browser.get_iframe('id_%s_ifr' % textarea) as iframe:
         iframe.find_by_tag('body').fill(content)
+
+
+@when(u'I check box with label "{label}"')
+def step_impl(context, label):
+    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]/input" % label).first
+    box.check()
+
+
+@when(u'I uncheck box with label "{label}"')
+def step_impl(context, label):
+    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]/input" % label).first
+    box.uncheck()
+
+
+@then(u'I should see "{text}" in section "{section}"')
+def step_impl(context, text, section):
+    container = context.browser.find_by_xpath("//*[contains(text(), '%s')]/.." % section).first
+    assert text in container.text
+
+
+@then(u'I should not see "{text}" in section "{section}"')
+def step_impl(context, text, section):
+    container = context.browser.find_by_xpath("//*[contains(text(), '%s')]/.." % section).first
+    assert text not in container.text
