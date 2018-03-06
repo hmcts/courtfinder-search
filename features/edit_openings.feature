@@ -3,7 +3,7 @@ Feature: Edit opening times for a given court
   Background:
     Given "admin" as the persona
     And I log in to the admin interface
-    And I visit "/staff/court/1/opening"
+    And I visit "/staff/court/1/opening_times"
 
   Scenario: Update existing opening
     When I fill in "form-0-description" with "Test opening"
@@ -18,7 +18,7 @@ Feature: Edit opening times for a given court
     Then I should see "Test new opening"
 
   Scenario: Delete existing opening
-    When I check "form-0-DELETE"
+    When I check "form-1-DELETE"
     And I press "Update"
     And I view court in the new window
-    Then I should not see "Test opening"
+    Then I should not see "Test new opening"
