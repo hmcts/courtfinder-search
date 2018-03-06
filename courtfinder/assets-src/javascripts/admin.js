@@ -12,8 +12,8 @@
   });
 
   setTimeout(function(){
-    $('.form-feedback').fadeOut(1000);
-  }, 3000);
+    $('.messages').fadeTo('slow', 0.5);
+  }, 5000);
 
 
   /* court list */
