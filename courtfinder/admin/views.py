@@ -479,3 +479,18 @@ class FacilityReorderView(FacilityMixin, ReorderingFormView):
                 pass
             if court_facility:
                 court_facility.save()
+
+
+def areas_of_law(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.CourtAreasOfLawForm(request.POST if request.POST else None, instance=court)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Areas of law updated')
+        court.update_timestamp()
+        return redirect('admin:aols', court.id)
+
+    return render(request, 'court/aols.html', {
+        'form': form,
+        'court': court,
+    })

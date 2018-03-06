@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/reorder_opening_times', views.OpeningReorderView.as_view(), name='reorder_openings'),
     url(r'^court/(?P<id>[0-9]+)/facility$', views.FacilityFormView.as_view(), name='facility'),
     url(r'^court/(?P<id>[0-9]+)/reorder_facilities', views.FacilityReorderView.as_view(), name='reorder_facilities'),
+    url(r'^court/(?P<id>[0-9]+)/areas_of_law', views.areas_of_law, name='aols'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),
     url(r'^users/edit/(?P<username>\S+)$', views.edit_user, name='edit_user'),

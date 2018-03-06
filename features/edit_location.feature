@@ -1,4 +1,4 @@
-Feature: Editing court location
+Feature: Edit court location
 
   Background:
     Given "admin" as the persona
