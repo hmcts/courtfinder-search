@@ -34,6 +34,12 @@ class EmergencyMessageForm(forms.ModelForm):
         }
 
 
+class CourtNewForm(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ('name',)
+
+
 class CourtBasicForm(forms.ModelForm):
     def __init__(self, data, court, extra_perms):
         super(CourtBasicForm, self).__init__(data if data else None, instance=court)

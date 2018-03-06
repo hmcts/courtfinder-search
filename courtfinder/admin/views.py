@@ -38,14 +38,14 @@ def courts(request):
     })
 
 
-@permission_required('manage_users')
+@permission_required('user.manage')
 def users(request):
     return render(request, 'user/list.html', {
         'users': User.objects.order_by('username').all()
     })
 
 
-@permission_required('manage_users')
+@permission_required('user.manage')
 def add_user(request):
     if request.method == 'POST':
         form = forms.UserAddForm(request.POST)
@@ -61,7 +61,7 @@ def add_user(request):
     })
 
 
-@permission_required('manage_users')
+@permission_required('user.manage')
 def edit_user(request, username):
     user = get_object_or_404(User, username=username)
     if request.method == 'POST':
@@ -80,7 +80,7 @@ def edit_user(request, username):
     })
 
 
-@permission_required('manage_users')
+@permission_required('user.manage')
 def change_user_password(request, username):
     user = get_object_or_404(User, username=username)
     if request.method == 'POST':
@@ -99,7 +99,7 @@ def change_user_password(request, username):
 
 
 @require_POST
-@permission_required('manage_users')
+@permission_required('user.manage')
 def delete_user(request, username):
     form = forms.UserDeleteForm(request.POST)
     if form.is_valid() and form.cleaned_data['username'] == username:
@@ -125,12 +125,29 @@ def account(request):
     })
 
 
-def edit_court(request, id):
-    court = get_object_or_404(models.Court, pk=id)
-    form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court_extra'))
+@permission_required('court.new')
+def new_court(request):
+    form = forms.CourtNewForm(request.POST if request.POST else None)
     if request.method == 'POST' and form.is_valid():
         name = form.cleaned_data['name']
-        # don't allow duplicate names/slugs
+        if models.Court.objects.filter(name=name).count():
+            form.add_error('name', 'Court with this name already exists')
+        else:
+            court = form.save(commit=False)
+            court.update_name_slug(name)
+            court.save()
+            messages.success(request, 'New court has been added')
+            return redirect('admin:court', court.id)
+    return render(request, 'court/new.html', {
+        'form': form
+    })
+
+
+def edit_court(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court.info'))
+    if request.method == 'POST' and form.is_valid():
+        name = form.cleaned_data['name']
         if models.Court.objects.filter(name=name).exclude(id=id).count():
             form.add_error('name', 'Court with this name already exists')
         else:

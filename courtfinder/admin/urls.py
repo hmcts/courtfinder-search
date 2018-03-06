@@ -6,6 +6,7 @@ import views
 urlpatterns = [
     url(r'^auth/', include('django.contrib.auth.urls')),
     url(r'^courts$', views.courts, name='courts'),
+    url(r'^court/new$', views.new_court, name='new_court'),
     url(r'^court/(?P<id>[0-9]+)$', views.edit_court, name='court'),
     url(r'^court/(?P<id>[0-9]+)/location$', views.edit_location, name='location'),
     url(r'^court/(?P<id>[0-9]+)/location/geo$', views.locate_postcode, name='geolocation'),

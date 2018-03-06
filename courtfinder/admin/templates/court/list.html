@@ -7,6 +7,9 @@
     <header class="page-header">
       <h2>Courts and tribunals</h2>
     </header>
+    {% if perms.court.new %}
+        <a class="right-link" href="{% url 'admin:new_court' %}">add new court</a>
+    {% endif %}
     <form>
       <p>
         <label>include closed</label>
