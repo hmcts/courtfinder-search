@@ -1,8 +1,8 @@
 {% extends "court/base.html" %}
 
 {% block details %}
-
-    {% if formset|length > 2 and ordering %}<a href="{{reorder_url}}">Reorder</a>{% endif %}
+    {% if heading %}<h3>{{ heading }} {% if formset|length > 2 and ordering %}- <a href="{{reorder_url}}">reorder</a>{% endif %}</h3>{% endif %}
+    {% if header_message %}<p>{{ header_message }}</p>{% endif %}
     <form method="post" action="{{return_url}}">
     {{ formset.management_form }}
     {% for form in formset %}
