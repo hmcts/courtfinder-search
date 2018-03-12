@@ -136,6 +136,20 @@ form.court {
       }
     }
   }
+  &.types {
+    label {
+      width: 225px;
+    }
+    ul {
+      label {
+        width: initial;
+      }
+      columns: 3;
+      input {
+        margin-right: 15px;
+      }
+    }
+  }
 }
 
 ul.messages {

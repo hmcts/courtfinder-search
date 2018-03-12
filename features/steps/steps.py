@@ -89,3 +89,10 @@ def step_impl(context, text, section):
 def step_impl(context, text, section):
     container = context.browser.find_by_xpath("//*[contains(text(), '%s')]/.." % section).first
     assert text not in container.text
+
+
+@then(u'I should see "{text}" in element "{id}"')
+def step_impl(context, text, id):
+    container = context.browser.find_by_id(id).first
+    haystack = container.text.replace('\n', ' ')
+    assert text in haystack
