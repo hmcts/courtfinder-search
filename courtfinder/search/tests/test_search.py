@@ -8,6 +8,7 @@ from search.court_search import CourtSearch, CourtSearchError, CourtSearchClient
 from search.models import *
 from django.conf import settings
 from search.ingest import Ingest
+from datetime import datetime
 
 
 class SearchTestCase(TestCase):
