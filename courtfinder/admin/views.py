@@ -313,6 +313,7 @@ class OrderableFormView(BaseOrderableFormView):
                 obj.delete()
             self.handle_instance_saving(instances)
             messages.success(request, self.update_message)
+            self.court.update_timestamp()
 
     def get_context_data(self):
         formset = self.formset(queryset=self.objects)
@@ -430,7 +431,7 @@ class EmailReorderView(EmailMixin, ReorderingFormView):
         for i, o in enumerate(new_order):
             try:
                 court_email = models.CourtEmail.objects.get(court=self.court, email=o)
-            except CourtEmail.DoesNotExist:
+            except models.CourtEmail.DoesNotExist:
                 pass
             if court_email:
                 court_email.order = i

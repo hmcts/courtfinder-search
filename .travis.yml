@@ -38,4 +38,4 @@ script:
   - python manage.py runserver &
   - sleep 2
   - cd ..
-  - behave --format progress3 -Dheadless
+  - behave --format progress3 -Dheadless --tags=-wip

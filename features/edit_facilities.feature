@@ -5,6 +5,7 @@ Feature: Edit facilities for a given court
     And I log in to the admin interface
     And I visit "/staff/court/1/facility"
 
+  @wip
   Scenario: Update existing facility
     When I fill in "form-6-name" with "Test facility"
     And I fill in rich editor "form-6-description" with "Test fac description"
@@ -12,6 +13,7 @@ Feature: Edit facilities for a given court
     And I view court in the new window
     Then I should see "Test fac description"
 
+  @wip
   Scenario: Add new facility
     When I fill in "form-7-name" with "Test new facility"
     And I fill in rich editor "form-7-description" with "Test new fac description"
@@ -19,6 +21,7 @@ Feature: Edit facilities for a given court
     And I view court in the new window
     Then I should see "Test new fac description"
 
+  @wip
   Scenario: Delete existing facility
     When I check "form-7-DELETE"
     And I press "Update"

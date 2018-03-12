@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from search import models
+from .models import FacilityType
 
 
 class UserEditForm(forms.ModelForm):
@@ -120,16 +121,36 @@ class CourtOpeningForm(forms.ModelForm):
 
 
 class CourtFacilityForm(forms.ModelForm):
-
-    description = forms.CharField(label='Description', max_length=4000, required=False,
-                            widget=forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}))
+    name = forms.ModelChoiceField(queryset=FacilityType.objects.all().distinct('name'), required=True,
+                                  to_field_name='name')
 
     class Meta:
         model = models.Facility
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'image', 'image_description', 'image_file_path']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
+            'description': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}),
+            'image': forms.HiddenInput(),
+            'image_description': forms.HiddenInput(),
+            'image_file_path': forms.HiddenInput(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CourtFacilityForm, self).__init__(*args, **kwargs)
+        is_new_instance = self.instance._state.adding
+        if not is_new_instance:
+            try:
+                self.initial["name"] = FacilityType.objects.filter(name=self.instance.name).first()
+            except FacilityType.DoesNotExist:
+                print "Facility type not found"
+
+    def save(self, *args, **kwargs):
+        fac_form = super(CourtFacilityForm, self).save(*args, **kwargs)
+        fac_type = FacilityType.objects.filter(name=self.instance.name).first()
+        fac_form.name = fac_type.name
+        fac_form.image_description = fac_type.image_description
+        fac_form.image_file_path = fac_type.image_file_path
+        return fac_form
+
 
 
 class CourtAreasOfLawForm(forms.ModelForm):
