@@ -10,7 +10,7 @@ class Court(models.Model):
     displayed = models.BooleanField(default=False)
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
-    number = models.IntegerField(null=True) #Crown court location number
+    number = models.IntegerField(null=True, blank=True) #Crown court location number
     parking = models.ForeignKey('ParkingInfo', null=True, default=None)
     alert = models.CharField(max_length=4096, null=True, default=None, blank=True)
     directions = models.CharField(max_length=4096, null=True, default=None, blank=True)
@@ -23,8 +23,8 @@ class Court(models.Model):
     facilities = models.ManyToManyField('Facility', through='CourtFacility')
     opening_times = models.ManyToManyField('OpeningTime', through='CourtOpeningTime')
     contacts = models.ManyToManyField('Contact', through='CourtContact')
-    cci_code = models.CharField(max_length=255, null=True, default=None) #County court location number
-    magistrate_code = models.CharField(max_length=255, null=True, default=None)
+    cci_code = models.IntegerField(null=True, blank=True) #County court location number
+    magistrate_code = models.IntegerField(null=True, blank=True)
     updated_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(null=True, default=None)
     info = models.TextField(null=True, blank=True)

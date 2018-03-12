@@ -147,3 +147,24 @@ class CourtAreasOfLawForm(forms.ModelForm):
         mngr.filter(court=self.instance).delete()
         for aol in self.cleaned_data['areas_of_law']:
             mngr.create(court=self.instance, area_of_law=aol)
+
+
+class CourtTypes(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ['court_types', 'number', 'cci_code', 'magistrate_code']
+        widgets = {
+            'court_types': forms.CheckboxSelectMultiple()
+        }
+        labels = {
+            'number': 'Crown Court code',
+            'cci_code': 'County Court code',
+            'magistrate_code': "Magistrates' Court code",
+        }
+
+    def _save_m2m(self):
+        # todo remove intermiediete model so this is isn't necessary?
+        mngr = models.CourtCourtType.objects
+        mngr.filter(court=self.instance).delete()
+        for type in self.cleaned_data['court_types']:
+            mngr.create(court=self.instance, court_type=type)

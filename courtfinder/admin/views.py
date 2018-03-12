@@ -163,6 +163,21 @@ def edit_court(request, id):
     })
 
 
+def edit_types(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.CourtTypes(request.POST if request.POST else None, instance=court)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Court types updated')
+        court.update_timestamp()
+        return redirect('admin:types', court.id)
+
+    return render(request, 'court/types.html', {
+        'form': form,
+        'court': court,
+    })
+
+
 def edit_location(request, id):
     court = get_object_or_404(models.Court, pk=id)
     if request.method == 'POST':
