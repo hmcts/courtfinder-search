@@ -1,6 +1,7 @@
 import urllib
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
+
 from django.utils.text import slugify
 
 class Court(models.Model):
@@ -46,7 +47,7 @@ class Court(models.Model):
 
     def update_timestamp(self):
         #todo move into save after migration
-        self.updated_at = datetime.now()
+        self.updated_at = timezone.now()
         self.save()
 
     def primary_address(self):
