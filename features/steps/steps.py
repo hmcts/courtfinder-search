@@ -69,14 +69,14 @@ def step_impl(context, content, textarea):
 
 @when(u'I check box with label "{label}"')
 def step_impl(context, label):
-    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]/input" % label).first
-    box.check()
+    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]" % label).first
+    box.click()
 
 
 @when(u'I uncheck box with label "{label}"')
 def step_impl(context, label):
-    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]/input" % label).first
-    box.uncheck()
+    box = context.browser.find_by_xpath("//label[contains(text(), '%s')]" % label).first
+    box.click()
 
 
 @then(u'I should see "{text}" in section "{section}"')
