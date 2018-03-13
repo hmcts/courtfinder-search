@@ -79,11 +79,6 @@ class SearchTestCase(TestCase):
         self.assertIn('Magistrates\' Court location code', text)
         self.assertIn('1337', text)
 
-    def test_updated_in_court_page(self):
-        c = Client()
-        response = c.get('/courts/accrington-magistrates-court')
-        self.assertIn('Last updated: 16 April 2014', response.content)
-
     def test_alert_visible(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')

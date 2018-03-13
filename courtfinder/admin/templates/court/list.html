@@ -24,12 +24,14 @@
       <tr>
         <th>name</th>
         <th>open</th>
+        <th>updated</th>
         <th colspan="2"></th>
       </tr>
       {% for court in courts %}
       <tr class="{% if not court.displayed %} closed-court hidden {% endif %}">
         <td>{{ court.name }}</td>
         <td>{% if not court.displayed %} closed {% endif %}</td>
+        <td>{{ court.updated_at|date:"d M Y" }}</td>
         <td><a target="_blank" href="{% url 'courts:court' court.slug %}">view</a></td>
         <td><a href="{% url 'admin:court' court.id %}">edit</a></td>
       </tr>
