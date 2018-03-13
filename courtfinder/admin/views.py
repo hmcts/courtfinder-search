@@ -57,7 +57,8 @@ def add_user(request):
         form = forms.UserAddForm()
 
     return render(request, 'user/add.html', {
-        'form': form
+        'form': form,
+        'random_password': User.objects.make_random_password()
     })
 
 
@@ -95,6 +96,7 @@ def change_user_password(request, username):
     return render(request, 'user/password.html', {
         'form': form,
         'username': user.username,
+        'random_password': User.objects.make_random_password(),
     })
 
 

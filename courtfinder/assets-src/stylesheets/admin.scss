@@ -171,6 +171,24 @@ form.court {
   }
 }
 
+button#generate-password {
+  position: relative;
+  left: 487px;
+}
+
+#admin-add-user-page {
+  button#generate-password {
+    top: -300px;
+  }
+}
+
+#admin-edit-password-page {
+  button#generate-password {
+    top: -282px;
+  }
+}
+
+
 ul.messages {
   margin: auto;
   padding-top: 20px;
