@@ -21,7 +21,7 @@
     $('tr.closed-court').toggleClass('hidden');
   })
 
-  //add case insensitive contains
+  //add case insensitive contains function
   jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function (arg) {
     return function (elem) {
       return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
@@ -34,6 +34,15 @@
     $('#court-list tr:not(:first-child)').addClass('hidden');
     $("#court-list td:first-child:icontains('" + search + "')").parent().removeClass('hidden');
   })
+
+  /* password generator */
+  $('#generate-password').click(function(){
+    var button = $(this);
+    var password = button.data('pass');
+    $('#id_password1').val(password).attr('type', 'text');
+    $('#id_password2').val(password).attr('type', 'text');
+    button.hide();
+  });
 
   /* reordering js */
   $("#sortable").sortable({

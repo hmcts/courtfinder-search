@@ -12,5 +12,7 @@
       {{ form.as_p }}
       <input type="submit" class="button" value="Add user" />
     </form>
+    <button id="generate-password" data-pass="{{random_password}}" class="button-secondary">
+      Generate password</button>
   </div>
 {% endblock %}
