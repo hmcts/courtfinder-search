@@ -1,18 +1,26 @@
 h3 {
-    font-weight: 600;
-    font-size: 20px;
-    padding: 10px 0 10px 0;
-    a {
-        font-weight: normal;
-        text-decoration: none;
-        color: #005ea5;
-        &:hover {
-          text-decoration: underline;
-        }
-        &:visited {
-          color: #005ea5;
-        }
-    }
+  font-weight: 600;
+  font-size: 20px;
+  padding: 10px 0 10px 0;
+}
+
+h2, h3 {
+  a {
+    font-weight: normal;
+  }
+}
+
+$link-color: #005ea5;
+
+a {
+  text-decoration: none;
+  color: $link-color;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:visited {
+    color: $link-color;
+  }
 }
 
 .button {
