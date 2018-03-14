@@ -142,11 +142,11 @@ class CourtAreasOfLawForm(forms.ModelForm):
         labels = {'hide_aols': "Hide 'Cases heard at this venue'"}
 
     def _save_m2m(self):
-        # todo remove intermiediete model so this is isn't necessary?
+        selection = self.cleaned_data['areas_of_law']
         mngr = models.CourtAreaOfLaw.objects
-        mngr.filter(court=self.instance).delete()
+        mngr.filter(court=self.instance).exclude(area_of_law__in=selection).delete()
         for aol in self.cleaned_data['areas_of_law']:
-            mngr.create(court=self.instance, area_of_law=aol)
+            mngr.get_or_create(court=self.instance, area_of_law=aol)
 
 
 class CourtTypes(forms.ModelForm):
