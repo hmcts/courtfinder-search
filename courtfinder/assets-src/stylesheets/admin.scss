@@ -68,6 +68,12 @@ ul.nav-menu {
   margin-right: 0px;
 }
 
+#court-list {
+  .date {
+    text-align: right;
+  }
+}
+
 form {
   margin-bottom: 20px;
   label{
@@ -187,7 +193,6 @@ button#generate-password {
     top: -282px;
   }
 }
-
 
 ul.messages {
   margin: auto;
