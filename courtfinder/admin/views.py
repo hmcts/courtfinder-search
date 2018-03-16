@@ -33,8 +33,10 @@ def emergency_message(request):
 
 
 def courts(request):
+    sort = request.GET.get('sort')
+    order = sort if sort in ('name', 'updated_at') else 'name'
     return render(request, 'court/list.html', {
-        'courts': models.Court.objects.order_by('name').all()
+        'courts': models.Court.objects.order_by(order).all()
     })
 
 
