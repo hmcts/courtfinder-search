@@ -2,6 +2,7 @@ from django import forms
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.utils.text import slugify
 from search import models
 
 
@@ -39,8 +40,23 @@ class CourtNewForm(forms.ModelForm):
         model = models.Court
         fields = ('name',)
 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if not len(slugify(name)):
+            raise forms.ValidationError('This name cannot be turned into a valid url')
+        courts = models.Court.objects.filter(slug=slugify(name))
+        if self.instance:
+            courts = courts.exclude(id=self.instance.id)
+        if courts.count():
+            raise forms.ValidationError('Court with this name already exists')
+        return name
 
-class CourtBasicForm(forms.ModelForm):
+    def save(self, commit=True):
+        self.instance.slug = slugify(self.instance.name)
+        return super(forms.ModelForm, self).save(self)
+
+
+class CourtBasicForm(CourtNewForm, forms.ModelForm):
     def __init__(self, data, court, extra_perms):
         super(CourtBasicForm, self).__init__(data if data else None, instance=court)
         if not extra_perms:
