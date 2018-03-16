@@ -7,7 +7,7 @@
     <header class="page-header">
       <h2>Add user</h2>
     </header>
-    <form method="post">
+    <form class="user" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" class="button" value="Add user" />

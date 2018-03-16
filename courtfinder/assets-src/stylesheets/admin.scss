@@ -89,7 +89,9 @@ form {
   }
 
   span.helptext {
-    display: none;
+    margin-left: 164px;
+    font-size: medium;
+    display: block;
   }
 
   input[type=text], input[type=email], input[type=password] {
@@ -103,6 +105,12 @@ div.mce-tinymce {
 
 fieldset.form-group {
   margin: 0px;
+}
+
+form.user {
+  span.helptext {
+    display: none;
+  }
 }
 
 form.court {

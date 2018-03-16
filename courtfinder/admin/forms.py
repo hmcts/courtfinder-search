@@ -71,7 +71,10 @@ class CourtBasicForm(CourtNewForm, forms.ModelForm):
             'alert': forms.Textarea(attrs={'rows': 3}),
             'info': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
         }
-
+        help_texts = {
+            'alert': 'Use this field to display a temporary notice of building closure or \
+            temporary disruption to court services. This is limited to 250 characters including spaces.'
+        }
 
 class CourtLocationForm(forms.ModelForm):
     class Meta:
