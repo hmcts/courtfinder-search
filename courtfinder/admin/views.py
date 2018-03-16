@@ -133,15 +133,9 @@ def account(request):
 def new_court(request):
     form = forms.CourtNewForm(request.POST if request.POST else None)
     if request.method == 'POST' and form.is_valid():
-        name = form.cleaned_data['name']
-        if models.Court.objects.filter(name=name).count():
-            form.add_error('name', 'Court with this name already exists')
-        else:
-            court = form.save(commit=False)
-            court.update_name_slug(name)
-            court.save()
-            messages.success(request, 'New court has been added')
-            return redirect('admin:court', court.id)
+        court = form.save()
+        messages.success(request, 'New court has been added')
+        return redirect('admin:court', court.id)
     return render(request, 'court/new.html', {
         'form': form
     })
@@ -151,16 +145,10 @@ def edit_court(request, id):
     court = get_object_or_404(models.Court, pk=id)
     form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court.info'))
     if request.method == 'POST' and form.is_valid():
-        name = form.cleaned_data['name']
-        if models.Court.objects.filter(name=name).exclude(id=id).count():
-            form.add_error('name', 'Court with this name already exists')
-        else:
-            form.save(commit=False)
-            court.update_name_slug(name)
-            court.save()
-            messages.success(request, 'Court information updated')
-            court.update_timestamp()
-            return redirect('admin:court', id)
+        form.save()
+        messages.success(request, 'Court information updated')
+        court.update_timestamp()
+        return redirect('admin:court', id)
     return render(request, 'court/basic.html', {
         'court': court,
         'form': form

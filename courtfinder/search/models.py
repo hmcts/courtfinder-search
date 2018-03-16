@@ -2,7 +2,6 @@ import urllib
 from django.db import models
 from django.utils import timezone
 
-from django.utils.text import slugify
 
 class Court(models.Model):
     admin_id = models.IntegerField(null=True, default=None)
@@ -40,10 +39,6 @@ class Court(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    def update_name_slug(self, new_name):
-        self.name = new_name
-        self.slug = slugify(new_name)
 
     def update_timestamp(self):
         #todo move into save after migration
