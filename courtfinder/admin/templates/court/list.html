@@ -10,6 +10,9 @@
     {% if perms.court.new %}
         <a class="right-link" href="{% url 'admin:new_court' %}">add new court</a>
     {% endif %}
+    <p>
+      Sort by: <a href="?sort=name">name</a> | <a href="?sort=updated_at">last updated</a>
+    </p>
     <form>
       <p>
         <label>include closed</label>
