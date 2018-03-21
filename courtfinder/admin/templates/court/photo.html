@@ -1,0 +1,22 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    {% if court.image_file %}
+    <h3>Existing photo</h3>
+    <div id="photo">
+        <img property="image" src="{{ s3 }}{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+    </div>
+    <form class="court photo" method="post" action="{% url 'admin:photo_delete' court.id %}">
+        {% csrf_token %}
+        <input type="submit" class="button-secondary" value="Delete photo" />
+    </form>
+    {% endif %}
+    <h3>Upload new photo </h3>
+    <p>Uploaded images will be scaled to maximum size of 600x600 pixels
+        and automatically re-sized on the court's page.</p>
+    <form enctype="multipart/form-data" class="court photo" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Upload" />
+    </form>
+{% endblock %}
