@@ -171,6 +171,10 @@ EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
 EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
+APP_S3_BUCKET = os.getenv('APP_S3_BUCKET', '')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+
 # Set your DSN value
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_URL', None),

@@ -17,6 +17,7 @@
       <li><a href="{% url 'admin:opening' court.id %}">opening times</a></li>
       <li><a href="{% url 'admin:facility' court.id %}">facilities</a></li>
       <li><a href="{% url 'admin:aols' court.id %}">areas of law</a></li>
+      <li><a href="{% url 'admin:photo' court.id %}">photo</a></li>
     </ul>
     <div class="content cf details">
     {% block details %} {% endblock %}

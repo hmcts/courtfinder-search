@@ -171,7 +171,6 @@ class CourtFacilityForm(forms.ModelForm):
         return fac_form
 
 
-
 class CourtAreasOfLawForm(forms.ModelForm):
     class Meta:
         model = models.Court
@@ -208,3 +207,7 @@ class CourtTypes(forms.ModelForm):
         mngr.filter(court=self.instance).delete()
         for type in self.cleaned_data['court_types']:
             mngr.create(court=self.instance, court_type=type)
+
+
+class UploadPhotoForm(forms.Form):
+    image = forms.ImageField()

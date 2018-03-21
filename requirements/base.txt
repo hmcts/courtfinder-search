@@ -13,3 +13,4 @@ postcodeinfo>=0.0,<1.0
 git+https://github.com/ministryofjustice/django-moj-irat.git
 django-brake==1.5.2
 uk-postcode-utils==1.0
+Pillow==5.0.0

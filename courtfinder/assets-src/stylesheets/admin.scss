@@ -183,6 +183,11 @@ form.court {
       }
     }
   }
+  &.photo {
+    label {
+      display: none;
+    }
+  }
 }
 
 button#generate-password {

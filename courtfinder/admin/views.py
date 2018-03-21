@@ -1,10 +1,12 @@
-import forms
 import json
+import forms
+import storage
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
@@ -527,3 +529,38 @@ def areas_of_law(request, id):
         'form': form,
         'court': court,
     })
+
+
+def photo_upload(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.UploadPhotoForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            try:
+                storage.upload_court_photo(court, form.cleaned_data['image'])
+                messages.success(request, 'Photo uploaded')
+                court.update_timestamp()
+                return redirect('admin:photo', court.id)
+            except storage.StorageException as e:
+                messages.error(request, e)
+    else:
+        form = forms.UploadPhotoForm()
+
+    return render(request, 'court/photo.html', {
+        'form': form,
+        'court': court,
+        #todo for some reason court images aren't proxied trough nginx like other uploaded assets
+        's3': settings.COURT_IMAGE_BASE_URL
+    })
+
+
+@require_POST
+def photo_delete(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    try:
+        storage.delete_court_photo(court)
+        messages.success(request, 'Photo deleted')
+        court.update_timestamp()
+    except storage.StorageException as e:
+        messages.error(request, e)
+    return redirect('admin:photo', court.id)
