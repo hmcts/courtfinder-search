@@ -1,0 +1,13 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    <h3>Leaflets</h3>
+    <p>Please add details that you wish to appear for this court or tribunal only on the leaflet.
+        Maximum 2,500 characters.
+    </p>
+    <form class="court basic" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+{% endblock %}

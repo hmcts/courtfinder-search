@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/facility$', views.FacilityFormView.as_view(), name='facility'),
     url(r'^court/(?P<id>[0-9]+)/reorder_facilities$', views.FacilityReorderView.as_view(), name='reorder_facilities'),
     url(r'^court/(?P<id>[0-9]+)/areas_of_law$', views.areas_of_law, name='aols'),
+    url(r'^court/(?P<id>[0-9]+)/leaflets$', views.edit_leaflets, name='leaflets'),
     url(r'^court/(?P<id>[0-9]+)/photo$', views.photo_upload, name='photo'),
     url(r'^court/(?P<id>[0-9]+)/photo_delete$', views.photo_delete, name='photo_delete'),
     url(r'^users$', views.users, name='users'),

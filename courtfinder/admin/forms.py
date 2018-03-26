@@ -76,12 +76,30 @@ class CourtBasicForm(CourtNewForm, forms.ModelForm):
             temporary disruption to court services. This is limited to 250 characters including spaces.'
         }
 
+
 class CourtLocationForm(forms.ModelForm):
     class Meta:
         model = models.Court
         fields = ('directions', 'lat', 'lon')
         labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
         widgets = {'directions': forms.Textarea(attrs={'rows': 4})}
+
+
+class CourtLeafletsForm(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ('info_leaflet', 'defence_leaflet', 'prosecution_leaflet', 'juror_leaflet')
+        widgets = {
+            'info_leaflet': forms.Textarea(attrs={'rows': 6}),
+            'defence_leaflet': forms.Textarea(attrs={'rows': 6}),
+            'prosecution_leaflet': forms.Textarea(attrs={'rows': 6}),
+            'juror_leaflet': forms.Textarea(attrs={'rows': 6}),
+        }
+        labels = {
+            'info_leaflet': 'Information leaflet',
+            'prosecution_leaflet': 'Prosecution witness leaflet',
+            'defence_leaflet': 'Defence witness leaflet',
+        }
 
 
 class LocatePostcodeForm(forms.Form):

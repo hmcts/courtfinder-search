@@ -531,6 +531,21 @@ def areas_of_law(request, id):
     })
 
 
+@permission_required('court.leaflets')
+def edit_leaflets(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.CourtLeafletsForm(request.POST if request.POST else None, instance=court)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, 'Leaflets updated')
+        court.update_timestamp()
+        return redirect('admin:leaflets', court.id)
+    return render(request, 'court/leaflets.html', {
+        'court': court,
+        'form': form
+    })
+
+
 def photo_upload(request, id):
     court = get_object_or_404(models.Court, pk=id)
     form = forms.UploadPhotoForm(request.POST, request.FILES)
