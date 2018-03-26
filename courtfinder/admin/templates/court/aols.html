@@ -2,6 +2,7 @@
 
 {% block details %}
     <h3>Edit areas of law</h3>
+    <p>Please select at least one Area of Law.</p>
     <form class="court aols" method="post">
         {% csrf_token %}
         {{ form.as_p }}
