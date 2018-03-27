@@ -54,6 +54,10 @@ def step_impl(context, input_val, field_name, form_id):
                                          % (form_id, field_name, input_val))
     elem.first._element.click()
 
+@when(u'I select "{select_text}" from "{select_id}"')
+def step_impl(context, select_text, select_id):
+    elem = context.browser.find_by_xpath("//select[@id='%s']/option[@value='%s']" % (select_id, select_text))
+    elem.first._element.click()
 
 @when(u'I press "{button_name}" in the form "{form_id}"')
 def step_impl(context, button_name, form_id):

@@ -1,0 +1,23 @@
+{% load static %}
+<table id="court-list">
+<tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th></th>
+  </tr>
+  {% for fac in objects %}
+  <tr>
+    <td>{{ fac.name }}</td>
+    <td>{{ fac.image_description }}</td>
+    <td>
+        <span class="icon">
+              <img src="{% static fac.image_src %}" class="{{ fac.image_class }}" alt="{{ fac.image_description }}">
+        </span>
+    </td>
+    <td><a target="_blank" href="{% url 'admin:edit_facility_type' facility_id=fac.id %}">edit</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
+<a href = "{% url 'admin:edit_facility_type' %}">Add new facility type</a>

@@ -6,13 +6,14 @@ import logging
 from PIL import Image
 
 COURT_IMAGE_SIZE = 600
+FACILITY_IMAGE_SIZE = 50
 
 AWS_ID = settings.AWS_ACCESS_KEY_ID
 AWS_KEY = settings.AWS_SECRET_ACCESS_KEY
 AWS_BUCKET = settings.APP_S3_BUCKET
 
 IMAGE_ARGS = {'ContentType': 'image/jpeg', 'ACL': 'public-read'}
-
+ICON_ARGS = {'ContentType': 'image/png', 'ACL': 'public-read'}
 logger = logging.getLogger(__name__)
 
 
@@ -53,3 +54,27 @@ def delete_court_photo(court):
     except Exception as e:
         logger.error(e)
         raise StorageException('Failed to delete image from S3')
+
+
+def facility_image_file_path(facility_type):
+    filename = '%s.png' % slugify(facility_type.name)
+    if facility_type.image_file_path:
+        return facility_type.image_file_path
+    return filename, 'uploads/facility/%s' % filename
+
+
+def upload_facility_icon(facility_type, image):
+    filename, filepath = facility_image_file_path(facility_type)
+    tempfile = '/tmp/%s' % filename
+
+    im = Image.open(image)
+    im.thumbnail((FACILITY_IMAGE_SIZE, FACILITY_IMAGE_SIZE), Image.ANTIALIAS)
+    im.save(tempfile, format='PNG')
+
+    try:
+        s3().upload_file(tempfile, AWS_BUCKET, filepath, ExtraArgs=ICON_ARGS)
+        facility_type.image_file_path = filepath
+        facility_type.save()
+    except Exception as e:
+        logger.error(e)
+        raise StorageException('Failed to upload image to S3')

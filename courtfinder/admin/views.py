@@ -14,6 +14,7 @@ from django.views.decorators.http import require_POST
 from geolocation import mapit
 from search import models
 from django.views import View
+from .models import FacilityType
 
 
 @permission_required('emergency')
@@ -257,14 +258,14 @@ def delete_address(request, id, address_id=None):
     return redirect('admin:address', id)
 
 
-class BaseOrderableFormView(View):
+class BaseFormView(View):
     template = None
     return_url = None
     reorder_url = None
     formset = None
     objects = None
     court = None
-    ordering = True
+    ordering = False
     update_message = "Updated"
     heading = ""
     header_message = ""
@@ -276,7 +277,7 @@ class BaseOrderableFormView(View):
         pass
 
     def initialize(self, request, id):
-        self.court = get_object_or_404(models.Court, pk=id)
+        pass
 
     def initialize_get(self, request, id):
         pass
@@ -291,6 +292,14 @@ class BaseOrderableFormView(View):
         self.initialize(request, id)
         self.process_request(request)
         return redirect(self.return_url)
+
+
+class BaseOrderableFormView(BaseFormView):
+
+    ordering = True
+
+    def initialize(self, request, id):
+        self.court = get_object_or_404(models.Court, pk=id)
 
 
 class OrderableFormView(BaseOrderableFormView):
@@ -500,7 +509,8 @@ class FacilityFormView(FacilityMixin, OrderableFormView):
                 court_facility = models.CourtFacility(court=self.court, facility=instance)
                 court_facility.save()
             else:
-                instance.save()
+                if instance.name:
+                    instance.save()
 
 
 class FacilityReorderView(FacilityMixin, ReorderingFormView):
@@ -548,7 +558,7 @@ def edit_leaflets(request, id):
 
 def photo_upload(request, id):
     court = get_object_or_404(models.Court, pk=id)
-    form = forms.UploadPhotoForm(request.POST, request.FILES)
+    form = forms.UploadImageForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             try:
@@ -559,7 +569,7 @@ def photo_upload(request, id):
             except storage.StorageException as e:
                 messages.error(request, e)
     else:
-        form = forms.UploadPhotoForm()
+        form = forms.UploadImageForm()
 
     return render(request, 'court/photo.html', {
         'form': form,
@@ -579,3 +589,110 @@ def photo_delete(request, id):
     except storage.StorageException as e:
         messages.error(request, e)
     return redirect('admin:photo', court.id)
+
+
+class AdminListView(View):
+    template = 'lists/list_view.html'
+    objects = None
+    partial = None
+    heading = None
+    header_message = None
+
+    def initialize(self, request):
+        pass
+
+    def handle_instance_saving(self, instances):
+        pass
+
+    def get(self, request):
+        self.initialize(request)
+        return render(request, self.template, self.get_context_data())
+
+    def get_context_data(self):
+        context = {
+            'heading': self.heading,
+            'header_message': self.header_message,
+            'objects': self.objects,
+            'partial': self.partial,
+        }
+        return context
+
+
+class FacilityList(AdminListView):
+
+    def initialize(self, request):
+        self.partial = "partials/facility_table_contents.html"
+        facilities = [
+            {
+                'id': facility.id,
+                # Name is used for the css class name to set the x,y offsets on old style images
+                'name': facility.name,
+                # Image class is the generated class name (empty for new style images)
+                'image_class': "" if facility.image_file_path else 'icon-' + facility.image,
+                # The relative path to the image
+                'image_src': facility.image_file_path if facility.image_file_path else 'images/facility_icons.png',
+                # This description is used for the alt text
+                'image_description': facility.image_description,
+                # The relative file path of the image
+                'image_file_path': facility.image_file_path
+            }
+            for facility in FacilityType.objects.all()
+        ]
+        self.objects = facilities
+        self.heading = "Facility Types"
+
+
+def edit_facility_type(request, facility_id=None):
+    if facility_id:
+        facility_type = get_object_or_404(FacilityType, id=facility_id)
+        return_url = reverse("admin:edit_facility_type", kwargs={'facility_id': facility_id})
+    else:
+        facility_type = None
+        return_url = reverse("admin:edit_facility_type")
+    if request.POST:
+        form = forms.AdminFacilityTypeForm(request.POST, instance=facility_type)
+        form.save()
+        messages.success(request, 'Facility updated')
+        return redirect('admin:facility_types')
+    else:
+        form = forms.AdminFacilityTypeForm(instance=facility_type)
+    context = {
+            'facility_type': facility_type,
+            'form': form,
+            'return_url': return_url,
+            'heading': "Edit facility type",
+        }
+    template = "lists/edit_type_view.html"
+    return render(request, template, context)
+
+
+def delete_facility_type(request):
+    if request.POST:
+        fac_id = request.POST.get('facility_id', None)
+        if fac_id:
+            facility = get_object_or_404(FacilityType, id=fac_id)
+            facility.delete()
+            messages.success(request, 'Facility deleted')
+        return redirect('admin:facility_types')
+    else:
+        return redirect('admin:facility_types')
+
+
+def facility_icon_upload(request, facility_id):
+    facility_type = get_object_or_404(FacilityType, pk=facility_id)
+    form = forms.UploadImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            try:
+                storage.upload_facility_icon(facility_type, form.cleaned_data['image'])
+                messages.success(request, 'Icon updated')
+                return redirect('admin:edit_facility_type', facility_id)
+            except storage.StorageException as e:
+                messages.error(request, e)
+    else:
+        form = forms.UploadImageForm()
+
+    return render(request, 'lists/facility_icon.html', {
+        'form': form,
+        'facility_type': facility_type,
+    })

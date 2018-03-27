@@ -1,0 +1,18 @@
+{% extends "admin.html" %}
+
+{% block page_title %}Manage lists{% endblock %}
+
+{% block admin %}
+  <div class="content inner cf">
+    <header class="page-header">
+      <h2>Lists</h2>
+    </header>
+    <ul class="nav-menu">
+      <li><a href="{% url 'admin:facility_types' %}">facility types</a></li>
+    </ul>
+    <div class="content cf details">
+    {% block details %} {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
