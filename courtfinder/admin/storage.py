@@ -32,11 +32,10 @@ def upload_court_photo(court, image):
     filename, key = court_image_file_key(court)
     tempfile = '/tmp/%s' % filename
 
-    im = Image.open(image)
-    im.thumbnail((COURT_IMAGE_SIZE, COURT_IMAGE_SIZE), Image.ANTIALIAS)
-    im.save(tempfile, format='JPEG')
-
     try:
+        im = Image.open(image)
+        im.thumbnail((COURT_IMAGE_SIZE, COURT_IMAGE_SIZE), Image.ANTIALIAS)
+        im.save(tempfile, format='JPEG')
         s3().upload_file(tempfile, AWS_BUCKET, key, ExtraArgs=IMAGE_ARGS)
         court.image_file = filename
         court.save()
