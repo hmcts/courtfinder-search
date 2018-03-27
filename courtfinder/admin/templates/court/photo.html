@@ -12,8 +12,8 @@
     </form>
     {% endif %}
     <h3>Upload new photo </h3>
-    <p>Uploaded images will be scaled to maximum size of 600x600 pixels
-        and automatically re-sized on the court's page.</p>
+    <p>Ideally upload a JPG or PNG image of high quality. It will be resized and aspect ratio will be retained.
+        Please supply images in landscape form as close to a square shape as possible for best display. </p>
     <form enctype="multipart/form-data" class="court photo" method="post">
         {% csrf_token %}
         {{ form.as_p }}
