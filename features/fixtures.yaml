@@ -13078,3 +13078,87 @@
     date_joined: "2018-02-20 13:33:33.836364+00:00"
     groups: []
     user_permissions: []
+- model: admin.facilitytype
+  pk: 35
+  fields: {name: Baby changing facility, description: null, image: baby, image_description: Baby
+      changing facility icon., image_file_path: uploads/facility/image_file/45/baby.png}
+- model: admin.facilitytype
+  pk: 36
+  fields: {name: Loop Hearing, description: null, image: loop_hearing, image_description: Loop
+      Hearing icon, image_file_path: uploads/facility/image_file/54/Hearing_enhancement.png}
+- model: admin.facilitytype
+  pk: 37
+  fields: {name: Disabled access, description: null, image: disabled, image_description: Disabled
+      access icon, image_file_path: uploads/facility/image_file/49/disabled.png}
+- model: admin.facilitytype
+  pk: 38
+  fields: {name: Prayer / Quiet room, description: null, image: prayer, image_description: Prayer
+      / Quiet room icon., image_file_path: uploads/facility/image_file/58/Prayer_room_1.png}
+- model: admin.facilitytype
+  pk: 39
+  fields: {name: Disabled toilet, description: null, image: disabledwc, image_description: Disabled
+      toilet icon, image_file_path: uploads/facility/image_file/59/disabledwc.png}
+- model: admin.facilitytype
+  pk: 40
+  fields: {name: Assistance dogs, description: null, image: guide_dogs, image_description: Assistance
+      dogs icon., image_file_path: uploads/facility/image_file/50/guide_dogs.png}
+- model: admin.facilitytype
+  pk: 41
+  fields: {name: First Aid, description: null, image: firstaid, image_description: First
+      Aid icon, image_file_path: uploads/facility/image_file/62/firstaid.png}
+- model: admin.facilitytype
+  pk: 42
+  fields: {name: Interview room, description: null, image: interview, image_description: Interview
+      room icon., image_file_path: uploads/facility/image_file/53/interview.png}
+- model: admin.facilitytype
+  pk: 43
+  fields: {name: 'Children''s waiting room ', description: null, image: children,
+    image_description: Children's waiting room icon., image_file_path: uploads/facility/image_file/48/Children_s_waiting_room_1.png}
+- model: admin.facilitytype
+  pk: 44
+  fields: {name: No parking, description: null, image: no-parking, image_description: No
+      parking icon, image_file_path: uploads/facility/image_file/66/no-parking.png}
+- model: admin.facilitytype
+  pk: 45
+  fields: {name: Lift, description: null, image: '', image_description: Lift icon,
+    image_file_path: uploads/facility/image_file/67/Lift.png}
+- model: admin.facilitytype
+  pk: 46
+  fields: {name: Parking, description: null, image: parking, image_description: Parking
+      icon, image_file_path: uploads/facility/image_file/55/parking.png}
+- model: admin.facilitytype
+  pk: 47
+  fields: {name: Security arch, description: null, image: '', image_description: Security
+      arch icon, image_file_path: uploads/facility/image_file/68/Security_arch.png}
+- model: admin.facilitytype
+  pk: 48
+  fields: {name: Public toilets, description: null, image: public_toilets, image_description: public_toilets
+      icon, image_file_path: uploads/facility/image_file/60/public_toilets.png}
+- model: admin.facilitytype
+  pk: 49
+  fields: {name: Witness service, description: null, image: '', image_description: Witness
+      service icon, image_file_path: uploads/facility/image_file/69/Witness_service.png}
+- model: admin.facilitytype
+  pk: 50
+  fields: {name: Refreshments, description: null, image: hot_vending, image_description: Refreshments
+      icon, image_file_path: uploads/facility/image_file/51/hot_vending.png}
+- model: admin.facilitytype
+  pk: 51
+  fields: {name: Public pay phone, description: null, image: phone, image_description: public
+      pay phone icon, image_file_path: uploads/facility/image_file/61/phone.png}
+- model: admin.facilitytype
+  pk: 52
+  fields: {name: Video facilities, description: null, image: video_conf, image_description: Video
+      facilities icon, image_file_path: uploads/facility/image_file/56/video_conf.png}
+- model: admin.facilitytype
+  pk: 53
+  fields: {name: Waiting Room, description: null, image: waiting, image_description: Waiting
+      Room icon, image_file_path: uploads/facility/image_file/64/waiting.png}
+- model: admin.facilitytype
+  pk: 54
+  fields: {name: Wireless network connection, description: null, image: hotspot, image_description: Wireless
+      network connection icon, image_file_path: uploads/facility/image_file/57/hotspot.png}
+- model: admin.facilitytype
+  pk: 55
+  fields: {name: Witness care, description: null, image: witness, image_description: Witness
+      care icon, image_file_path: uploads/facility/image_file/63/witness.png}

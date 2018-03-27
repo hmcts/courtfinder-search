@@ -33,5 +33,10 @@ urlpatterns = [
     url(r'^users/password/(?P<username>\S+)$', views.change_user_password, name='user_password'),
     url(r'^account$', views.account, name='account'),
     url(r'^emergency$', views.emergency_message, name='emergency'),
+    url(r'^facility_types$', views.FacilityList.as_view(), name='facility_types'),
+    url(r'^edit_facility_type/$', views.edit_facility_type, name='edit_facility_type'),
+    url(r'^edit_facility_type/(?P<facility_id>[0-9]+)$', views.edit_facility_type, name='edit_facility_type'),
+    url(r'^edit_facility_type/(?P<facility_id>[0-9]+)/photo$', views.facility_icon_upload, name='facility_icon_upload'),
+    url(r'^delete_facility_type/$', views.delete_facility_type, name='delete_facility_type'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

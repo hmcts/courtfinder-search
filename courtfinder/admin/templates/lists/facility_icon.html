@@ -1,0 +1,21 @@
+{% extends "admin.html" %}
+{% load static %}
+
+{% block admin %}
+    <div class="content inner cf">
+{% if facility_type.image_file_path %}
+    <h3>Existing icon</h3>
+    <div id="photo">
+        <img property="image" src="{% static facility_type.image_file_path %}" alt="facility icon"/>
+    </div>
+{% endif %}
+    <h3>Upload new icon </h3>
+    <p>Uploaded icons will be scaled to a maximum size of 100x100 pixels
+        and automatically re-sized on the court's page.</p>
+    <form enctype="multipart/form-data" class="facility icon" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Upload" />
+    </form>
+</div>
+{% endblock %}

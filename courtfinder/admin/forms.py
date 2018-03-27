@@ -173,18 +173,23 @@ class CourtFacilityForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CourtFacilityForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
+        self.fields["image"].required = False
+        self.fields["image_description"].required = False
         if not is_new_instance:
-            try:
-                self.initial["name"] = FacilityType.objects.filter(name=self.instance.name).first()
-            except FacilityType.DoesNotExist:
-                print "Facility type not found"
+            fac_type = FacilityType.objects.filter(name=self.instance.name).first()
+            if fac_type:
+                self.initial["name"] = fac_type
+            else:
+                self.fields["name"].choices = [("", self.instance.name + " - discontinued type")] + list(self.fields["name"].choices)[1:]
+                self.fields["name"].required = False
 
     def save(self, *args, **kwargs):
         fac_form = super(CourtFacilityForm, self).save(*args, **kwargs)
-        fac_type = FacilityType.objects.filter(name=self.instance.name).first()
-        fac_form.name = fac_type.name
-        fac_form.image_description = fac_type.image_description
-        fac_form.image_file_path = fac_type.image_file_path
+        fac_type = FacilityType.objects.filter(name=fac_form.name).first()
+        if fac_type:
+            fac_form.name = fac_type.name
+            fac_form.image_description = fac_type.image_description
+            fac_form.image_file_path = fac_type.image_file_path
         return fac_form
 
 
@@ -226,5 +231,11 @@ class CourtTypes(forms.ModelForm):
             mngr.create(court=self.instance, court_type=type)
 
 
-class UploadPhotoForm(forms.Form):
+class UploadImageForm(forms.Form):
     image = forms.ImageField()
+
+
+class AdminFacilityTypeForm(forms.ModelForm):
+    class Meta:
+        model = FacilityType
+        fields = ['name', 'image_description']
