@@ -88,12 +88,11 @@ class CourtLocationForm(forms.ModelForm):
 class CourtLeafletsForm(forms.ModelForm):
     class Meta:
         model = models.Court
-        fields = ('info_leaflet', 'defence_leaflet', 'prosecution_leaflet', 'juror_leaflet')
+        fields = ('info_leaflet', 'defence_leaflet', 'prosecution_leaflet',)
         widgets = {
             'info_leaflet': forms.Textarea(attrs={'rows': 6}),
             'defence_leaflet': forms.Textarea(attrs={'rows': 6}),
             'prosecution_leaflet': forms.Textarea(attrs={'rows': 6}),
-            'juror_leaflet': forms.Textarea(attrs={'rows': 6}),
         }
         labels = {
             'info_leaflet': 'Information leaflet',
