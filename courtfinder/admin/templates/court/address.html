@@ -1,7 +1,7 @@
 {% extends "court/base.html" %}
 
 {% block details %}
-    <h3>Edit addresses</h3>
+    <h3>Addresses</h3>
     <p>A court can have up to 2 addresses. Only the second address can be removed.</p>
     {% for form, address_id in court_address_forms.items %}
     <form class="court address" {% if forloop.first %} id ="primary_address" {%else %}id ="secondary_address"{% endif %} method="post" {% if address_id %}action="{% url 'admin:address' court.id address_id %}"{% else %}action="{% url 'admin:address' court.id %}"{% endif %}>
