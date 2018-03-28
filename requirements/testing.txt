@@ -11,4 +11,3 @@ pytest-cov==2.5.1
 lxml==3.7.3
 cssselect==1.0.1
 behaving==1.5.6
-PyYAML==3.12
