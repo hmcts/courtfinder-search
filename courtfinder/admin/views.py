@@ -357,7 +357,7 @@ class ContactMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
         self.objects = self.court.contacts.order_by('sort_order')
-        self.heading = "Edit contacts"
+        self.heading = "Contacts"
         self.header_message = "The DX contact will show separately in the court header"
 
 class ContactFormView(ContactMixin, OrderableFormView):
@@ -401,7 +401,7 @@ class EmailMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
         self.objects = self.court.emails.order_by('courtemail__order')
-        self.heading = "Edit email addresses"
+        self.heading = "Email addresses"
 
 
 class EmailFormView(EmailMixin, OrderableFormView):
@@ -444,7 +444,7 @@ class OpeningTimeMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_openings", kwargs={'id': id})
         self.objects = self.court.opening_times.order_by('courtopeningtime__sort')
-        self.heading = "Edit opening times"
+        self.heading = "Opening times"
 
 
 class OpeningFormView(OpeningTimeMixin, OrderableFormView):
@@ -488,7 +488,7 @@ class FacilityMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
         self.objects = self.court.facilities.all()
-        self.heading = "Edit facilities"
+        self.heading = "Facilities"
 
 
 class FacilityFormView(FacilityMixin, OrderableFormView):

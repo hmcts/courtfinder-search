@@ -65,7 +65,7 @@ class CourtBasicForm(CourtNewForm, forms.ModelForm):
 
     class Meta:
         model = models.Court
-        fields = ('name', 'alert', 'info', 'displayed')
+        fields = ('name', 'displayed', 'alert', 'info')
         labels = {'alert': 'Urgent notice', 'displayed': 'Open', 'info': 'Additional information'}
         widgets = {
             'alert': forms.Textarea(attrs={'rows': 3}),
