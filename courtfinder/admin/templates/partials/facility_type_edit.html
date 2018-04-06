@@ -1,0 +1,22 @@
+{% load static %}
+<h3>Facility type</h3>
+
+<form method="post" action="{{return_url}}">
+{% csrf_token %}
+{{ form.as_p }}
+{% if type %}
+<p>
+{% if type.image_file_path %}<img src="{% static type.image_file_path %}"/>{% endif %}
+<a href="{% url 'admin:facility_icon_upload' type.id %}">
+{% if type.image_file_path %}Upload new icon{% else %}Upload icon{% endif %}
+</a>
+</p>
+{% endif %}
+<input type="submit" class="button" name="Update" value="Update" />
+</form>
+
+<h3>Delete facility type</h3>
+<form action="{% url 'admin:delete_facility_type' %}" method="POST">
+{% csrf_token %}
+<input hidden name="id" value="{{type.id}}"/><input class="button-secondary" type="submit" value="Delete"/>
+</form>

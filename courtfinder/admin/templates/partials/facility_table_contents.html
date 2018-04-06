@@ -1,4 +1,5 @@
 {% load static %}
+<a class = "pull-right" href = "{% url 'admin:edit_facility_type' %}">Add new facility type</a>
 <table id="court-list">
 <tr>
     <th>Name</th>
@@ -15,9 +16,8 @@
               <img src="{% static fac.image_src %}" class="{{ fac.image_class }}" alt="{{ fac.image_description }}">
         </span>
     </td>
-    <td><a target="_blank" href="{% url 'admin:edit_facility_type' facility_id=fac.id %}">edit</a></td>
+    <td><a target="_blank" href="{% url 'admin:edit_facility_type' id=fac.id %}">edit</a></td>
 
   </tr>
   {% endfor %}
 </table>
-<a href = "{% url 'admin:edit_facility_type' %}">Add new facility type</a>

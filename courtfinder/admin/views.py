@@ -14,7 +14,7 @@ from django.views.decorators.http import require_POST
 from geolocation import mapit
 from search import models
 from django.views import View
-from .models import FacilityType
+from .models import FacilityType, ContactType, OpeningType
 
 
 @permission_required('emergency')
@@ -642,42 +642,6 @@ class FacilityList(AdminListView):
         self.heading = "Facility Types"
 
 
-def edit_facility_type(request, facility_id=None):
-    if facility_id:
-        facility_type = get_object_or_404(FacilityType, id=facility_id)
-        return_url = reverse("admin:edit_facility_type", kwargs={'facility_id': facility_id})
-    else:
-        facility_type = None
-        return_url = reverse("admin:edit_facility_type")
-    if request.POST:
-        form = forms.AdminFacilityTypeForm(request.POST, instance=facility_type)
-        form.save()
-        messages.success(request, 'Facility updated')
-        return redirect('admin:facility_types')
-    else:
-        form = forms.AdminFacilityTypeForm(instance=facility_type)
-    context = {
-            'facility_type': facility_type,
-            'form': form,
-            'return_url': return_url,
-            'heading': "Edit facility type",
-        }
-    template = "lists/edit_type_view.html"
-    return render(request, template, context)
-
-
-def delete_facility_type(request):
-    if request.POST:
-        fac_id = request.POST.get('facility_id', None)
-        if fac_id:
-            facility = get_object_or_404(FacilityType, id=fac_id)
-            facility.delete()
-            messages.success(request, 'Facility deleted')
-        return redirect('admin:facility_types')
-    else:
-        return redirect('admin:facility_types')
-
-
 def facility_icon_upload(request, facility_id):
     facility_type = get_object_or_404(FacilityType, pk=facility_id)
     form = forms.UploadImageForm(request.POST, request.FILES)
@@ -696,3 +660,140 @@ def facility_icon_upload(request, facility_id):
         'form': form,
         'facility_type': facility_type,
     })
+
+
+class ContactList(AdminListView):
+
+    def initialize(self, request):
+        self.partial = "partials/contact_table_contents.html"
+        self.objects = ContactType.objects.all().order_by('name')
+        self.heading = "Contact Types"
+
+
+class OpeningList(AdminListView):
+
+    def initialize(self, request):
+        self.partial = "partials/opening_table_contents.html"
+        self.objects = OpeningType.objects.all().order_by('name')
+        self.heading = "Opening Types"
+
+class EditType(View):
+
+    form_class = None
+    type = None
+    type_model = None
+    return_url = None
+    rev_url= None
+    update_msg = None
+    partial = None
+    template = "lists/edit_type_view.html"
+    redirect_url = None
+    heading = ""
+
+    def initialize(self, request, id=None):
+        pass
+
+    def prepare(self, id=None):
+        if id:
+            self.type = get_object_or_404(self.type_model, id=id)
+            self.return_url = reverse(self.rev_url, kwargs={'id': id})
+        else:
+            self.type = None
+            self.return_url = reverse(self.rev_url)
+
+    def get(self, request, *args, **kwargs):
+        self.initialize(request)
+        id = kwargs.get('id', None)
+        self.prepare(id)
+        form = self.form_class(instance=self.type)
+        context = {
+            'type': self.type,
+            'form': form,
+            'return_url': self.return_url,
+            'heading': self.heading,
+            'partial': self.partial,
+        }
+        return render(request, self.template, context)
+
+    def post(self, request, *args, **kwargs):
+        self.initialize(request)
+        id = kwargs.get('id', None)
+        self.prepare(id)
+        form = self.form_class(request.POST, instance=self.type)
+        form.save()
+        messages.success(request, self.update_msg)
+        return redirect(self.redirect_url)
+
+
+class EditFacilityType(EditType):
+
+    def initialize(self, request):
+        self.type_model = FacilityType
+        self.rev_url = "admin:edit_facility_type"
+        self.update_msg = "Facility type updated"
+        self.form_class = forms.AdminFacilityTypeForm
+        self.partial = "partials/facility_type_edit.html"
+        self.redirect_url = 'admin:facility_types'
+        self.heading = "Edit facility type"
+
+
+class EditContactType(EditType):
+
+    def initialize(self, request):
+        self.type_model = ContactType
+        self.rev_url = "admin:edit_contact_type"
+        self.update_msg = "Contact type updated"
+        self.form_class = forms.AdminContactTypeForm
+        self.partial = "partials/contact_type_edit.html"
+        self.redirect_url = 'admin:contact_types'
+        self.heading = "Edit contact type"
+
+
+class EditOpeningType(EditType):
+
+    def initialize(self, request):
+        self.type_model = OpeningType
+        self.rev_url = "admin:edit_opening_type"
+        self.update_msg = "Opening type updated"
+        self.form_class = forms.AdminOpeningTypeForm
+        self.partial = "partials/opening_type_edit.html"
+        self.redirect_url = 'admin:opening_types'
+        self.heading = "Edit opening type"
+
+
+class DeleteType(View):
+    redirect_url = None
+    type_model = None
+    delete_msg = ""
+
+    def get(self, request):
+        redirect(self.redirect_url)
+
+    def post(self, request, *args, **kwargs):
+        id = request.POST.get('id', None)
+        if id:
+            object = get_object_or_404(self.type_model, id=id)
+            object.delete()
+            messages.success(request, self.delete_msg)
+        return redirect(self.redirect_url)
+
+
+class DeleteFacilityType(DeleteType):
+
+    redirect_url = 'admin:facility_types'
+    type_model = FacilityType
+    delete_msg = 'Facility type deleted'
+
+
+class DeleteContactType(DeleteType):
+
+    redirect_url = 'admin:contact_types'
+    type_model = ContactType
+    delete_msg = 'Contact type deleted'
+
+
+class DeleteOpeningType(DeleteType):
+
+    redirect_url = 'admin:opening_types'
+    type_model = OpeningType
+    delete_msg = 'Opening type deleted'

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.text import slugify
 from search import models
-from .models import FacilityType
+from .models import FacilityType, ContactType, OpeningType
 
 
 class UserEditForm(forms.ModelForm):
@@ -133,27 +133,118 @@ class CourtAddressForm(forms.ModelForm):
 
 
 class CourtContactForm(forms.ModelForm):
+    name = forms.ModelChoiceField(queryset=ContactType.objects.all().distinct('name'), required=True,
+                                  to_field_name='name')
+
     class Meta:
         model = models.Contact
         fields = ['name', 'number', 'explanation', 'in_leaflet', 'sort_order']
 
     def __init__(self, *args, **kwargs):
         super(CourtContactForm, self).__init__(*args, **kwargs)
+        is_new_instance = self.instance._state.adding
         self.fields["explanation"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
+        if not is_new_instance:
+            con_type = ContactType.objects.filter(name=self.instance.name).first()
+            if con_type:
+                self.initial["name"] = con_type
+            else:
+                self.fields["name"].choices = [("", self.instance.name + " - discontinued type")] + list(self.fields["name"].choices)[1:]
+                self.fields["name"].required = False
+
+    def save(self, *args, **kwargs):
+        con_form = super(CourtContactForm, self).save(*args, **kwargs)
+        con_type = ContactType.objects.filter(name=con_form.name).first()
+        if con_type:
+            con_form.name = con_type.name
+        return con_form
 
 
 class CourtEmailForm(forms.ModelForm):
+    description = forms.ModelChoiceField(queryset=ContactType.objects.all().distinct('name'), required=True,
+                                  to_field_name='name')
+
     class Meta:
         model = models.Email
         fields = ['description', 'address']
 
+    def __init__(self, *args, **kwargs):
+        super(CourtEmailForm, self).__init__(*args, **kwargs)
+        is_new_instance = self.instance._state.adding
+        if not is_new_instance:
+            con_type = ContactType.objects.filter(name=self.instance.description).first()
+            if con_type:
+                self.initial["description"] = con_type.name
+            else:
+                self.fields["description"].choices = [("", self.instance.description + " - discontinued type")] + list(self.fields["description"].choices)[1:]
+                self.fields["description"].required = False
+
+    def save(self, *args, **kwargs):
+        con_form = super(CourtEmailForm, self).save(*args, **kwargs)
+        con_type = ContactType.objects.filter(name=con_form.description).first()
+        if con_type:
+            con_form.description = con_type.name
+        return con_form
+
 
 class CourtOpeningForm(forms.ModelForm):
+
+    type = forms.ModelChoiceField(queryset=OpeningType.objects.all().distinct('name'), required=True,
+                                  to_field_name='name')
+    hours = forms.CharField(required=True, max_length=255)
+
     class Meta:
         model = models.OpeningTime
         fields = ['description']
+        widgets = {
+            'description': forms.HiddenInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CourtOpeningForm, self).__init__(*args, **kwargs)
+        is_new_instance = self.instance._state.adding
+        if not is_new_instance:
+            description_split = self.instance.description.split(':')
+            type_name = description_split[0]
+            if self.instance.description:
+                if len(description_split) > 1:
+                    type_hours = description_split[1]
+                    type_hours = type_hours[1:]
+                else:
+                    type_hours = ""
+                op_type = OpeningType.objects.filter(name=type_name).first()
+            else:
+                op_type = None
+            if op_type:
+                self.initial["type"] = type_name
+                self.initial["hours"] = type_hours
+            else:
+                self.fields["type"].choices = [("", type_name + " - discontinued type")] + list(self.fields["type"].choices)[1:]
+                self.fields["type"].required = False
+        else:
+            self.initial["type"] = ""
+            self.initial["hours"] = ""
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super(CourtOpeningForm, self).clean(*args, **kwargs)
+        clean_copy = cleaned_data.copy()
+        type_input = clean_copy.get("type", None)
+        if not type_input:
+            raise forms.ValidationError("You must select a type")
+        else:
+            op_type = OpeningType.objects.filter(name=type_input).first()
+            if op_type:
+                clean_copy["description"] = op_type.name + ": " + clean_copy["hours"]
+            else:
+                clean_copy["description"] = ""
+        clean_copy.pop("type")
+        clean_copy.pop("hours")
+        if self.errors.get("description", None):
+            del self.errors["description"]
+        self.cleaned_data = clean_copy
+        return clean_copy
 
 
 class CourtFacilityForm(forms.ModelForm):
@@ -239,3 +330,15 @@ class AdminFacilityTypeForm(forms.ModelForm):
     class Meta:
         model = FacilityType
         fields = ['name', 'image_description']
+
+
+class AdminContactTypeForm(forms.ModelForm):
+    class Meta:
+        model = ContactType
+        fields = ['name']
+
+
+class AdminOpeningTypeForm(forms.ModelForm):
+    class Meta:
+        model = OpeningType
+        fields = ['name']

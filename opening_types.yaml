@@ -1,0 +1,138 @@
+- model: admin.openingtype
+  pk: 1
+  fields: {name: Court building open}
+- model: admin.openingtype
+  pk: 2
+  fields: {name: Court building closed}
+- model: admin.openingtype
+  pk: 3
+  fields: {name: Court counter open}
+- model: admin.openingtype
+  pk: 4
+  fields: {name: Court counter closed}
+- model: admin.openingtype
+  pk: 5
+  fields: {name: Bailiff counter open}
+- model: admin.openingtype
+  pk: 6
+  fields: {name: Bailiff counter closed}
+- model: admin.openingtype
+  pk: 7
+  fields: {name: Court enquiries open}
+- model: admin.openingtype
+  pk: 8
+  fields: {name: Court enquiries closed}
+- model: admin.openingtype
+  pk: 9
+  fields: {name: Accounts Office open}
+- model: admin.openingtype
+  pk: 10
+  fields: {name: Accounts Office closed}
+- model: admin.openingtype
+  pk: 11
+  fields: {name: Court Office open}
+- model: admin.openingtype
+  pk: 12
+  fields: {name: Court Office closed}
+- model: admin.openingtype
+  pk: 13
+  fields: {name: Telephone Enquiries from}
+- model: admin.openingtype
+  pk: 14
+  fields: {name: Telephone Enquiries until}
+- model: admin.openingtype
+  pk: 15
+  fields: {name: Crown Office opens}
+- model: admin.openingtype
+  pk: 16
+  fields: {name: Crown Office closes}
+- model: admin.openingtype
+  pk: 17
+  fields: {name: County Court open}
+- model: admin.openingtype
+  pk: 18
+  fields: {name: County Court closed}
+- model: admin.openingtype
+  pk: 19
+  fields: {name: Magistrates' Court open}
+- model: admin.openingtype
+  pk: 20
+  fields: {name: Magistrates' Court closed}
+- model: admin.openingtype
+  pk: 21
+  fields: {name: Enquiry Office open}
+- model: admin.openingtype
+  pk: 22
+  fields: {name: Enquiry Office closed}
+- model: admin.openingtype
+  pk: 23
+  fields: {name: Bailiffs Office}
+- model: admin.openingtype
+  pk: 24
+  fields: {name: County Court enquiries counter}
+- model: admin.openingtype
+  pk: 25
+  fields: {name: Telephone Payments open}
+- model: admin.openingtype
+  pk: 26
+  fields: {name: Telephone Payments closed}
+- model: admin.openingtype
+  pk: 27
+  fields: {name: Telephone Payments and enquiries}
+- model: admin.openingtype
+  pk: 28
+  fields: {name: Telephones}
+- model: admin.openingtype
+  pk: 29
+  fields: {name: Customer Service Desk}
+- model: admin.openingtype
+  pk: 30
+  fields: {name: Family counter open}
+- model: admin.openingtype
+  pk: 31
+  fields: {name: Family counter closed}
+- model: admin.openingtype
+  pk: 32
+  fields: {name: Civil counter open}
+- model: admin.openingtype
+  pk: 33
+  fields: {name: Civil counter closed}
+- model: admin.openingtype
+  pk: 34
+  fields: {name: Bailiff telephone service}
+- model: admin.openingtype
+  pk: 35
+  fields: {name: Court Telephone service}
+- model: admin.openingtype
+  pk: 36
+  fields: {name: Payments counter open}
+- model: admin.openingtype
+  pk: 37
+  fields: {name: Payments counter closed}
+- model: admin.openingtype
+  pk: 38
+  fields: {name: Bankruptcy debtor's petition only}
+- model: admin.openingtype
+  pk: 39
+  fields: {name: Counter Services}
+- model: admin.openingtype
+  pk: 40
+  fields: {name: No counter service available}
+- model: admin.openingtype
+  pk: 41
+  fields: {name: Building open}
+- model: admin.openingtype
+  pk: 42
+  fields: {name: Office open}
+- model: admin.openingtype
+  pk: 43
+  fields: {name: Tribunal open}
+- model: admin.openingtype
+  pk: 44
+  fields: {name: Counter open}
+- model: admin.openingtype
+  pk: 45
+  fields: {name: Crown Court enquiries}
+- model: admin.openingtype
+  pk: 46
+  fields: {name: Fixed penalty office}
