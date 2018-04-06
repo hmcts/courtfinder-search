@@ -1,0 +1,15 @@
+{% load static %}
+<a href = "{% url 'admin:edit_opening_type' %}">Add new opening type</a>
+<table id="court-list">
+<tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  {% for op in objects %}
+  <tr>
+    <td>{{ op.name }}</td>
+    <td><a target="_blank" href="{% url 'admin:edit_opening_type' id=op.id %}">edit</a></td>
+
+  </tr>
+  {% endfor %}
+</table>

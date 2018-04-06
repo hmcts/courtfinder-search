@@ -1,0 +1,15 @@
+{% load static %}
+<a href = "{% url 'admin:edit_contact_type' %}">Add new contact type</a>
+<table id="court-list">
+<tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  {% for con in objects %}
+  <tr>
+    <td>{{ con.name }}</td>
+    <td><a target="_blank" href="{% url 'admin:edit_contact_type' id=con.id %}">edit</a></td>
+
+  </tr>
+  {% endfor %}
+</table>

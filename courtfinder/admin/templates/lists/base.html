@@ -5,12 +5,15 @@
 {% block admin %}
   <div class="content inner cf">
     <header class="page-header">
-      <h2>Lists</h2>
+      <h2>Type Lists</h2>
     </header>
     <ul class="nav-menu">
-      <li><a href="{% url 'admin:facility_types' %}">facility types</a></li>
+      <li><a href="{% url 'admin:facility_types' %}">facilities</a></li>
+      <li><a href="{% url 'admin:contact_types' %}">contacts</a></li>
+      <li><a href="{% url 'admin:opening_types' %}">opening hours</a></li>
     </ul>
     <div class="content cf details">
+        <h3>{{heading}}</h3>
     {% block details %} {% endblock %}
     </div>
   </div>
