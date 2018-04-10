@@ -27,6 +27,11 @@
     <form class="court basic" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <p>
+            If you need to manually change coordinates, you can take them from
+            <a target="_blank" href="https://www.google.co.uk/maps">Google Maps</a> or
+            <a target="_blank" href="https://www.latlong.net">Latitude and Longitude Finder</a>
+        </p>
       <input type="submit" class="button" value="Update" />
     </form>
 {% endblock %}
