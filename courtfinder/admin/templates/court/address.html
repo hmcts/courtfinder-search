@@ -4,6 +4,7 @@
     <h3>Addresses</h3>
     <p>A court can have up to 2 addresses. Only the second address can be removed.</p>
     {% for form, address_id in court_address_forms.items %}
+    <h3>{% if forloop.first %}Primary{% else %}Secondary{% endif %} address</h3>
     <form class="court address" {% if forloop.first %} id ="primary_address" {%else %}id ="secondary_address"{% endif %} method="post" {% if address_id %}action="{% url 'admin:address' court.id address_id %}"{% else %}action="{% url 'admin:address' court.id %}"{% endif %}>
       <fieldset class="form-group">
         {% csrf_token %}
@@ -14,9 +15,7 @@
       <input type="submit" class="button" name="Update" value="Update" />
     </form>
 
-    {% if forloop.first %}
-        <hr>
-    {% else %}
+    {% if forloop.last %}
         {% if address_id %}
             <form method="POST" id="secondary_delete" class="court address" action ="{% url 'admin:delete_address' court.id address_id %}">
                 {% csrf_token %}
