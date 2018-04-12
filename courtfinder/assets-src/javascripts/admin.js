@@ -7,7 +7,7 @@
     width: 774,
     plugins : 'autolink link',
     menubar: '',
-    toolbar: 'undo redo | bold italic underline strikethrough | link | removeformat',
+    toolbar: 'link',
     statusbar: false,
   });
 
