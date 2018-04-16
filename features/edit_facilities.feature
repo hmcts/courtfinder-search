@@ -20,7 +20,7 @@ Feature: Edit facilities for a given court
     Then I should see "Test new fac description"
 
   Scenario: Delete existing facility
-    When I check "form-7-DELETE"
+    When I remove the first form instance
     And I press "Update"
     And I view court in the new window
-    Then I should not see "Test new fac description"
+    Then I should not see "Guide dogs and helping dogs welcome"

@@ -269,6 +269,7 @@ class BaseFormView(View):
     update_message = "Updated"
     heading = ""
     header_message = ""
+    orderable_name = ""
 
     def get_context_data(self):
         pass
@@ -328,6 +329,7 @@ class OrderableFormView(BaseOrderableFormView):
             "ordering": self.ordering,
             'heading': self.heading,
             'header_message': self.header_message,
+            'orderable_name': self.orderable_name,
         }
         return context
 
@@ -368,6 +370,7 @@ class ContactMixin(object):
         self.objects = self.court.contacts.order_by('sort_order')
         self.heading = "Contacts"
         self.header_message = "The DX contact will show separately in the court header"
+        self.orderable_name = "contact"
 
 class ContactFormView(ContactMixin, OrderableFormView):
 
@@ -411,6 +414,7 @@ class EmailMixin(object):
         self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
         self.objects = self.court.emails.order_by('courtemail__order')
         self.heading = "Email addresses"
+        self.orderable_name = "email address"
 
 
 class EmailFormView(EmailMixin, OrderableFormView):
@@ -454,6 +458,7 @@ class OpeningTimeMixin(object):
         self.reorder_url = reverse("admin:reorder_openings", kwargs={'id': id})
         self.objects = self.court.opening_times.order_by('courtopeningtime__sort')
         self.heading = "Opening times"
+        self.orderable_name = "set of times"
 
 
 class OpeningFormView(OpeningTimeMixin, OrderableFormView):
@@ -498,6 +503,7 @@ class FacilityMixin(object):
         self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
         self.objects = self.court.facilities.all()
         self.heading = "Facilities"
+        self.orderable_name = "facility"
 
 
 class FacilityFormView(FacilityMixin, OrderableFormView):

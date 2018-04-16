@@ -7,11 +7,18 @@
     {{ formset.management_form }}
     {% for form in formset %}
 
-      <fieldset class="form-group">
+      <fieldset class="form-group orderable">
         {% csrf_token %}
         {{ form.as_p }}
+        <div class="destroy">
+          <div class="undo_msg" style="display: none;">This {{orderable_name}} will be removed.</div>
+          <button class="remove secondary">remove</button>
+          <button class="undo secondary" style="display: none;">undo</button>
+        </div>
         {% if not forloop.last %}
         <hr>
+        {% else %}
+        <br>
         {% endif %}
       </fieldset>
 

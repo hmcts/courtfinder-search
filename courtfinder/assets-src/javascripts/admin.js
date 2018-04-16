@@ -55,7 +55,23 @@
     $("#new_sort_order").val(ordering);
   });
 
+  $('.orderable').on('click', '.destroy .remove', function(e) {
+    e.preventDefault();
 
+    $(this).closest('.destroy').siblings('div').hide();
+    $(this).hide().siblings('.undo').show().siblings('.undo_msg').show();
+    $(this).parent('div').siblings('p').filter(":not(:has(input[name*='DELETE']))").hide();
+    $(this).parent('div').siblings('p').filter(":has(input[name*='DELETE'])").children('input').prop('checked', true);
+  });
+
+  $('.orderable').on('click', '.destroy .undo', function(e) {
+    e.preventDefault();
+
+    $(this).closest('.destroy').siblings('div').not('[class$="sort"]').show();
+    $(this).hide().siblings('.remove').show().siblings('.undo_msg').hide();
+    $(this).parent('div').siblings('p').filter(":not(:has(input[name*='DELETE']))").show();
+    $(this).parent('div').siblings('p').filter(":has(input[name*='DELETE'])").children('input').prop('checked', false);
+  });
 
 
 })(jQuery);
