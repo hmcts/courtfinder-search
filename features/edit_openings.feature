@@ -20,7 +20,7 @@ Feature: Edit opening times for a given court
     Then I should see "Office open: 1pm onwards"
 
   Scenario: Delete existing opening
-    When I check "form-1-DELETE"
+    When I remove the first form instance
     And I press "Update"
     And I view court in the new window
-    Then I should not see "Office open: 1pm onwards"
+    Then I should not see "Counter open: 5am - 5pm"

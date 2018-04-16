@@ -24,7 +24,7 @@ Feature: Edit contacts for a given court
     Then I should see "Fine queries"
 
   Scenario: Delete existing contact
-    When I check "form-0-DELETE"
+    When I remove the first form instance
     And I press "Update"
     And I view court in the new window
     Then I should not see "Defendants"

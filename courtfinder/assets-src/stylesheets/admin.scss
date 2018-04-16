@@ -75,6 +75,16 @@ ul.nav-menu {
 }
 
 form {
+  fieldset{
+    p {
+        input[type=checkbox][name*="DELETE"]{
+            display: none;
+        }
+        label[for*="DELETE"]{
+            display: none;
+        }
+    }
+  }
   margin-bottom: 20px;
   label{
     width: 150px;
@@ -97,6 +107,7 @@ form {
   input[type=text], input[type=email], input[type=password] {
     width: 300px;
   }
+
 }
 
 div.mce-tinymce {

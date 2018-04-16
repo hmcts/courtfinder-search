@@ -64,6 +64,11 @@ def step_impl(context, button_name, form_id):
     elem = context.browser.find_by_css(("form#%s input[value='%s']") % (form_id, button_name))
     elem.first._element.click()
 
+@when(u'I remove the first form instance')
+def step_impl(context):
+    elem = context.browser.find_by_css("button.remove").first
+    elem._element.click()
+
 
 @when(u'I fill in rich editor "{textarea}" with "{content}"')
 def step_impl(context, content, textarea):

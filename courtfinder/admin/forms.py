@@ -206,7 +206,7 @@ class CourtOpeningForm(forms.ModelForm):
         super(CourtOpeningForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
         if not is_new_instance:
-            description_split = self.instance.description.split(':')
+            description_split = self.instance.description.split(':', 1)
             type_name = description_split[0]
             if self.instance.description:
                 if len(description_split) > 1:
