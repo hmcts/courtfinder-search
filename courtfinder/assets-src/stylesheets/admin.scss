@@ -169,6 +169,14 @@ form.court {
       }
     }
   }
+  &.family{
+    label {
+      width: initial;
+    }
+    ul {
+      columns: 2;
+    }
+  }
   &.types {
     label {
       width: 225px;

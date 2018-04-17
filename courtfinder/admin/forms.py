@@ -301,6 +301,31 @@ class CourtAreasOfLawForm(forms.ModelForm):
             mngr.get_or_create(court=self.instance, area_of_law=aol)
 
 
+class FamilyCourtForm(forms.ModelForm):
+    local_authorities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+    class Meta:
+        model = models.CourtAreaOfLaw
+        fields = ['single_point_of_entry']
+
+    def __init__(self, data, area, authorities):
+        super(FamilyCourtForm, self).__init__(data if data else None, instance=area)
+        self.fields['local_authorities'].choices = [
+            (a.id, a.name) for a in models.LocalAuthority.objects.order_by('name').all()
+        ]
+        self.initial['local_authorities'] = [a.local_authority.id for a in authorities]
+        self.fields['local_authorities'].required = False
+
+    def save(self, court, area):
+        super(FamilyCourtForm, self).save()
+
+        selection = self.cleaned_data['local_authorities']
+        mngr = models.CourtLocalAuthorityAreaOfLaw.objects
+        mngr.filter(court=court, area_of_law=area).exclude(local_authority__in=selection).delete()
+        for authority_id in self.cleaned_data['local_authorities']:
+            authority = models.LocalAuthority.objects.get(pk=authority_id)
+            mngr.get_or_create(court=court, area_of_law=area, local_authority=authority)
+
+
 class CourtTypes(forms.ModelForm):
     class Meta:
         model = models.Court

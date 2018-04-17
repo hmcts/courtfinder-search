@@ -556,6 +556,35 @@ def edit_leaflets(request, id):
     })
 
 
+@permission_required('court.family')
+def edit_family_court(request, id, area_id=None):
+    court = get_object_or_404(models.Court, pk=id)
+    family_aols = ('Adoption', 'Children', 'Civil partnership','Divorce')
+
+    form = None
+    area = None
+
+    areas = court.areas_of_law.filter(name__in=family_aols)
+    if areas:
+        area = get_object_or_404(models.AreaOfLaw, pk=area_id) if area_id else areas[0]
+        authorities = models.CourtLocalAuthorityAreaOfLaw.objects.filter(court=court, area_of_law=area)
+        court_area = models.CourtAreaOfLaw.objects.get(court=court, area_of_law=area)
+
+        form = forms.FamilyCourtForm(request.POST, court_area, authorities)
+        if request.method == 'POST' and form.is_valid():
+            form.save(court, area)
+            messages.success(request, 'Family court settings updated')
+            court.update_timestamp()
+            return redirect('admin:family', court.id, area_id)
+
+    return render(request, 'court/family.html', {
+        'court': court,
+        'form': form,
+        'current_area': area,
+        'areas': areas
+    })
+
+
 def photo_upload(request, id):
     court = get_object_or_404(models.Court, pk=id)
     form = forms.UploadImageForm(request.POST, request.FILES)

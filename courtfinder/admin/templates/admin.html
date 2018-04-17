@@ -5,7 +5,7 @@
 <div class="content inner cf">
     <ul class="nav-menu">
         <li><a href="{% url 'admin:courts' %}">courts</a></li>
-        {% if perms.user.manage %}
+        {% if perms.super %}
         <li><a href="{% url 'admin:emergency' %}">emergency message</a></li>
         <li><a href="{% url 'admin:users' %}">users</a></li>
         <li><a href="{% url 'admin:facility_types' %}">lists</a></li>
