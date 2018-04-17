@@ -1,0 +1,23 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    <h3>Family court</h3>
+
+    <p>Choose area of law:
+    <ul>
+    {% for area in areas %}
+        <li><a href="{% url 'admin:family' court.id area.id %}">{{ area }}</a></li>
+    {% empty %}
+        You need to enable relevant family court <a href="{% url 'admin:aols' court.id %}">areas of law </a>
+    {% endfor %}
+    </ul>
+    </p>
+    <h3>{{ current_area }}</h3>
+    {% if form %}
+    <form class="court family" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+    {% endif %}
+{% endblock %}
