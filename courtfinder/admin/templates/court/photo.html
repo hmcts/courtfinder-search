@@ -12,8 +12,7 @@
     </form>
     {% endif %}
     <h3>Upload new photo </h3>
-    <p>Ideally upload a JPG or PNG image of high quality. It will be resized and aspect ratio will be retained.
-        Please supply images in landscape form as close to a square shape as possible for best display. </p>
+    <p>Ideally upload a JPG or PNG image of high quality. It will be resized and aspect ratio will be retained.</p>
     <form enctype="multipart/form-data" class="court photo" method="post">
         {% csrf_token %}
         {{ form.as_p }}
