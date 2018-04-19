@@ -28,3 +28,8 @@ Feature: Edit contacts for a given court
     And I press "Update"
     And I view court in the new window
     Then I should not see "Defendants"
+
+  Scenario: Attempt duplicate contact
+    When I select "Fine queries" from "id_form-3-name"
+    And I press "Update"
+    Then I should see "Court already has this contact type listed"

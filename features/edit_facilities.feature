@@ -24,3 +24,8 @@ Feature: Edit facilities for a given court
     And I press "Update"
     And I view court in the new window
     Then I should not see "Guide dogs and helping dogs welcome"
+
+  Scenario: Attempt duplicate facility
+    When I select "Security arch" from "id_form-0-name"
+    And I press "Update"
+    Then I should see "Court already has this facility type listed"

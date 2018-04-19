@@ -104,7 +104,6 @@ class CourtLeafletsForm(forms.ModelForm):
 class LocatePostcodeForm(forms.Form):
     postcode = forms.CharField(max_length=9)
 
-
 class CourtAddressForm(forms.ModelForm):
     class Meta:
         model = models.CourtAddress
@@ -231,12 +230,13 @@ class CourtOpeningForm(forms.ModelForm):
         cleaned_data = super(CourtOpeningForm, self).clean(*args, **kwargs)
         clean_copy = cleaned_data.copy()
         type_input = clean_copy.get("type", None)
-        if not type_input:
-            raise forms.ValidationError("You must select a type")
+        hours_input = clean_copy.get("hours", None)
+        if not type_input or not hours_input:
+            raise forms.ValidationError("You must fill in the required fields")
         else:
             op_type = OpeningType.objects.filter(name=type_input).first()
             if op_type:
-                clean_copy["description"] = op_type.name + ": " + clean_copy["hours"]
+                clean_copy["description"] = op_type.name + ": " + hours_input
             else:
                 clean_copy["description"] = ""
         clean_copy.pop("type")
@@ -303,6 +303,7 @@ class CourtAreasOfLawForm(forms.ModelForm):
 
 class FamilyCourtForm(forms.ModelForm):
     local_authorities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+
     class Meta:
         model = models.CourtAreaOfLaw
         fields = ['single_point_of_entry']

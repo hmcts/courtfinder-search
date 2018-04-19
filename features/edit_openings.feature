@@ -6,11 +6,11 @@ Feature: Edit opening times for a given court
     And I visit "/staff/court/1/opening_times"
 
   Scenario: Update existing opening
-    When I select "Counter open" from "id_form-0-type"
+    When I select "Court counter closed" from "id_form-0-type"
     And I fill in "form-0-hours" with "5am - 5pm"
     And I press "Update"
     And I view court in the new window
-    Then I should see "Counter open: 5am - 5pm"
+    Then I should see "Court counter closed: 5am - 5pm"
 
   Scenario: Add new opening
     When I select "Office open" from "id_form-1-type"
@@ -24,3 +24,9 @@ Feature: Edit opening times for a given court
     And I press "Update"
     And I view court in the new window
     Then I should not see "Counter open: 5am - 5pm"
+
+  Scenario: Attempt duplicate opening
+    When I select "Office open" from "id_form-1-type"
+    And I fill in "form-1-hours" with "1pm onwards"
+    And I press "Update"
+    Then I should see "Court already has this opening type listed"
