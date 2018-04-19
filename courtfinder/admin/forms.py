@@ -327,6 +327,25 @@ class FamilyCourtForm(forms.ModelForm):
             mngr.get_or_create(court=court, area_of_law=area, local_authority=authority)
 
 
+class PostcodesForm(forms.Form):
+    postcodes = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+    action = forms.ChoiceField(widget=forms.RadioSelect,
+        choices=(('move', 'Move',), ('delete', 'Delete',)))
+    destination_court = forms.ChoiceField(widget=forms.Select, required=False,
+        help_text="If you're moving postcodes, select destination court from the list")
+
+    def __init__(self, data, postcodes, courts):
+        super(PostcodesForm, self).__init__(data if data else None)
+        self.fields['postcodes'].choices = [(p.id, p.postcode) for p in postcodes]
+        self.fields['destination_court'].choices = [(c.id, c.name) for c in courts]
+        self.fields['destination_court'].choices.insert(0, (None, '---'))
+
+
+class AddPostcodesForm(forms.Form):
+    postcodes = forms.CharField(required=True, max_length=300, widget=forms.Textarea(attrs={'rows': 3}),
+        help_text="Comma seperated list of postcodes e.g. SA1 1AA, sa12bb. Case and spaces not significant.")
+
+
 class CourtTypes(forms.ModelForm):
     class Meta:
         model = models.Court
