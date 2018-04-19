@@ -21,6 +21,7 @@
       {% if perms.super %}
         <li><a href="{% url 'admin:leaflets' court.id %}">leaflets</a></li>
         <li><a href="{% url 'admin:family' court.id %}">family court</a></li>
+        <li><a href="{% url 'admin:postcodes' court.id %}">postcodes</a></li>
       {% endif %}
     </ul>
     <div class="content cf details">

@@ -1,0 +1,23 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    <h3>Postcodes</h3>
+    {% if areas %}
+    <h3>Add new postcodes</h3>
+    <form class="court basic" method="post" action="{% url 'admin:add_postcodes' court.id%}">
+        {% csrf_token %}
+        {{ add_form.as_p }}
+      <input type="submit" class="button" value="Add" />
+    </form>
+
+    <h3>Delete or move postcodes</h3>
+    <form class="court postcodes" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+
+    {% else %}
+        <p>You need to enable relevant civil court <a href="{% url 'admin:aols' court.id %}">areas of law</a></p>
+    {% endif %}
+{% endblock %}

@@ -15,6 +15,7 @@ from geolocation import mapit
 from search import models
 from django.views import View
 from .models import FacilityType, ContactType, OpeningType
+from ukpostcodeutils.validation import is_valid_postcode, is_valid_partial_postcode
 
 
 @permission_required('emergency')
@@ -589,6 +590,60 @@ def edit_family_court(request, id, area_id=None):
         'current_area': area,
         'areas': areas
     })
+
+
+@permission_required('court.postcodes')
+def edit_postcodes(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    civil_aols = ('Bankruptcy', 'Housing possession', 'Money claims')
+    areas = court.areas_of_law.filter(name__in=civil_aols)
+
+    postcodes = models.CourtPostcode.objects.filter(court=court).order_by('postcode')
+    destination_courts = models.Court.objects.filter(areas_of_law__in=areas)\
+        .exclude(id=court.id).distinct().order_by('name')
+    form = forms.PostcodesForm(request.POST, postcodes, destination_courts)
+    if request.method == 'POST' and form.is_valid():
+        if form.cleaned_data['action'] == 'delete':
+            models.CourtPostcode.objects.filter(
+                court=court, id__in=form.cleaned_data['postcodes']).delete()
+            messages.success(request, 'Selected postcodes deleted')
+        elif form.cleaned_data['action'] == 'move':
+            move_to = form.cleaned_data['destination_court']
+            if move_to:
+                models.CourtPostcode.objects.filter(
+                    court=court, id__in=form.cleaned_data['postcodes']).update(court_id=move_to)
+                messages.success(request, 'Selected postcodes moved')
+            else:
+                messages.error(request, 'Select court to move the postcodes to')
+        court.update_timestamp()
+        return redirect('admin:postcodes', court.id)
+
+    return render(request, 'court/postcodes.html', {
+        'court': court,
+        'form': form,
+        'add_form': forms.AddPostcodesForm,
+        'areas': areas
+    })
+
+
+@permission_required('court.postcodes')
+@require_POST
+def add_postcodes(request, id):
+    court = get_object_or_404(models.Court, pk=id)
+    form = forms.AddPostcodesForm(request.POST)
+    if form.is_valid():
+        postcodes = form.cleaned_data['postcodes'].split(',')
+        errors = []
+        for p in  postcodes:
+            postcode = p.upper().replace(' ', '')
+            if is_valid_partial_postcode(postcode) or is_valid_postcode(postcode):
+                models.CourtPostcode.objects.get_or_create(court=court, postcode=postcode)
+            else:
+                errors.append(postcode)
+        if errors:
+            messages.warning(request, 'Invalid postcodes were skipped: %s' % ','.join(errors))
+        messages.success(request, 'Postcodes updated')
+        return redirect('admin:postcodes', court.id)
 
 
 def photo_upload(request, id):

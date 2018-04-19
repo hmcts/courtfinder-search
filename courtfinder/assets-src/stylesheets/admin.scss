@@ -188,6 +188,14 @@ form.court {
       columns: 2;
     }
   }
+  &.postcodes{
+    label {
+      width: initial;
+    }
+    ul {
+      columns: 5;
+    }
+  }
   &.types {
     label {
       width: 225px;

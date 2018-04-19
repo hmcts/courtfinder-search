@@ -8,7 +8,7 @@
     {% for area in areas %}
         <li><a href="{% url 'admin:family' court.id area.id %}">{{ area }}</a></li>
     {% empty %}
-        You need to enable relevant family court <a href="{% url 'admin:aols' court.id %}">areas of law </a>
+        You need to enable relevant family court <a href="{% url 'admin:aols' court.id %}">areas of law</a>
     {% endfor %}
     </ul>
     </p>
