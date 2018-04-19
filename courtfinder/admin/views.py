@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.forms import modelformset_factory
+from django.forms import modelformset_factory, ValidationError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from geolocation import mapit
@@ -291,7 +291,10 @@ class BaseFormView(View):
     def post(self, request, *args, **kwargs):
         id = kwargs.get('id', None)
         self.initialize(request, id)
-        self.process_request(request)
+        try:
+            self.process_request(request)
+        except ValidationError as e:
+            messages.error(request, e.message)
         return redirect(self.return_url)
 
 
@@ -372,10 +375,13 @@ class ContactMixin(object):
         self.header_message = "The DX contact will show separately in the court header"
         self.orderable_name = "contact"
 
+
 class ContactFormView(ContactMixin, OrderableFormView):
 
     def handle_instance_saving(self, instances):
         for instance in instances:
+            if self.type_count(instance) > 0:
+                raise ValidationError("Court already has this contact type listed")
             if instance._state.adding:
                 inst = instance.save()
                 instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
@@ -384,6 +390,10 @@ class ContactFormView(ContactMixin, OrderableFormView):
                 court_contact.save()
             else:
                 instance.save()
+
+    def type_count(self, instance):
+        return models.CourtContact.objects.filter(court=self.court, contact__name=instance.name)\
+            .exclude(contact__pk=instance.pk).count()
 
 
 class ContactReorderView(ContactMixin, ReorderingFormView):
@@ -421,6 +431,8 @@ class EmailFormView(EmailMixin, OrderableFormView):
 
     def handle_instance_saving(self, instances):
         for instance in instances:
+            if self.type_count(instance) > 0:
+                raise ValidationError("Court already has this contact type listed")
             if instance._state.adding:
                 instance.save()
                 court_email = models.CourtEmail(court=self.court, email=instance)
@@ -429,6 +441,10 @@ class EmailFormView(EmailMixin, OrderableFormView):
                 court_email.save(update_fields=["order"])
             else:
                 instance.save()
+
+    def type_count(self, instance):
+        return models.CourtEmail.objects.filter(court=self.court, email__description=instance.description)\
+            .exclude(email__pk=instance.pk).count()
 
 
 class EmailReorderView(EmailMixin, ReorderingFormView):
@@ -465,6 +481,8 @@ class OpeningFormView(OpeningTimeMixin, OrderableFormView):
 
     def handle_instance_saving(self, instances):
         for instance in instances:
+            if self.type_count(instance) > 0:
+                raise ValidationError("Court already has this opening type listed")
             if instance._state.adding:
                 instance.save()
                 court_opening = models.CourtOpeningTime(court=self.court, opening_time=instance)
@@ -473,6 +491,12 @@ class OpeningFormView(OpeningTimeMixin, OrderableFormView):
                 court_opening.save(update_fields=["sort"])
             else:
                 instance.save()
+
+    def type_count(self, instance):
+        instance_type = instance.description.split(":", 1)[0]
+        return models.CourtOpeningTime.objects.filter(court=self.court,
+                                                      opening_time__description__icontains=instance_type)\
+            .exclude(opening_time__pk=instance.pk).count()
 
 
 class OpeningReorderView(OpeningTimeMixin, ReorderingFormView):
@@ -510,6 +534,8 @@ class FacilityFormView(FacilityMixin, OrderableFormView):
 
     def handle_instance_saving(self, instances):
         for instance in instances:
+            if self.type_count(instance) > 0:
+                raise ValidationError("Court already has this facility type listed")
             if instance._state.adding:
                 instance.save()
                 court_facility = models.CourtFacility(court=self.court, facility=instance)
@@ -517,6 +543,10 @@ class FacilityFormView(FacilityMixin, OrderableFormView):
             else:
                 if instance.name:
                     instance.save()
+
+    def type_count(self, instance):
+        return models.CourtFacility.objects.filter(court=self.court, facility__name=instance.name)\
+            .exclude(facility__pk=instance.pk).count()
 
 
 class FacilityReorderView(FacilityMixin, ReorderingFormView):
