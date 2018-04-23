@@ -598,21 +598,30 @@ def edit_postcodes(request, id):
     civil_aols = ('Bankruptcy', 'Housing possession', 'Money claims')
     areas = court.areas_of_law.filter(name__in=civil_aols)
 
-    postcodes = models.CourtPostcode.objects.filter(court=court).order_by('postcode')
+    pmngr = models.CourtPostcode.objects
+    postcodes = pmngr.filter(court=court).order_by('postcode')
     destination_courts = models.Court.objects.filter(areas_of_law__in=areas)\
         .exclude(id=court.id).distinct().order_by('name')
+
     form = forms.PostcodesForm(request.POST, postcodes, destination_courts)
     if request.method == 'POST' and form.is_valid():
         if form.cleaned_data['action'] == 'delete':
-            models.CourtPostcode.objects.filter(
-                court=court, id__in=form.cleaned_data['postcodes']).delete()
+            pmngr.filter(court=court, id__in=form.cleaned_data['postcodes']).delete()
             messages.success(request, 'Selected postcodes deleted')
         elif form.cleaned_data['action'] == 'move':
             move_to = form.cleaned_data['destination_court']
             if move_to:
-                models.CourtPostcode.objects.filter(
-                    court=court, id__in=form.cleaned_data['postcodes']).update(court_id=move_to)
-                messages.success(request, 'Selected postcodes moved')
+                errors = []
+                for p in pmngr.filter(court=court, id__in=form.cleaned_data['postcodes']):
+                    if pmngr.filter(court_id=move_to, postcode=p.postcode).count():
+                        errors.append(p.postcode)
+                    else:
+                        p.court_id = move_to
+                        p.save()
+                if errors:
+                    messages.warning(request, 'Postcodes already at destination were skipped: %s'
+                                     % ','.join(errors))
+                messages.success(request, 'Postcodes updated')
             else:
                 messages.error(request, 'Select court to move the postcodes to')
         court.update_timestamp()
