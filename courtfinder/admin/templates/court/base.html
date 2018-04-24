@@ -8,7 +8,7 @@
       <h2>Editing - {{ court.name }} <a class="view-court-link right-link" target="_blank" href="{% url 'courts:court' court.slug %}">view in new window</a></h2>
     </header>
     <ul class="nav-menu">
-      <li><a href="{% url 'admin:court' court.id %}">basic</a></li>
+      <li><a href="{% url 'admin:court' court.id %}">general</a></li>
       <li><a href="{% url 'admin:types' court.id %}">types</a></li>
       <li><a href="{% url 'admin:location' court.id %}">location</a></li>
       <li><a href="{% url 'admin:address' court.id %}">addresses</a></li>

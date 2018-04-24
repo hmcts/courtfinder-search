@@ -153,7 +153,7 @@ def edit_court(request, id):
         messages.success(request, 'Court information updated')
         court.update_timestamp()
         return redirect('admin:court', id)
-    return render(request, 'court/basic.html', {
+    return render(request, 'court/general.html', {
         'court': court,
         'form': form
     })
