@@ -27,11 +27,22 @@
     <form class="court basic" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <p>
-            If you need to manually change coordinates, you can take them from
-            <a target="_blank" href="https://www.google.co.uk/maps">Google Maps</a> or
-            <a target="_blank" href="https://www.latlong.net">Latitude and Longitude Finder</a>
-        </p>
       <input type="submit" class="button" value="Update" />
     </form>
+    <h3>Finding latitude &amp; longitude</h3>
+    <ul>
+        <p>
+        If you need to manually change coordinates, you can take them from any of the following websites:
+        </p>
+        <li>
+        <a target="_blank" href="https://www.google.co.uk/maps">Google Maps</a>
+            (right click anywhere on the map and choose "What's here?", coordinates will show up at the bottom)
+        </li>
+        <li>
+        <a target="_blank" href="https://www.latlong.net">Latitude and Longitude Finder</a>
+        </li>
+        <li>
+        <a target="_blank" href="https://www.gps-coordinates.org/">GPS Coordinates</a>
+        </li>
+    </ul>
 {% endblock %}
