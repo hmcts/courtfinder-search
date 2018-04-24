@@ -16,10 +16,11 @@ Feature: Edit contacts for a given court
     And I should see "Testing explanation"
 
   Scenario: Add new contact
-    When I select "Fine queries" from "id_form-5-name"
-    And I fill in "form-5-number" with "077777"
-    And I fill in "form-5-explanation" with "Testing explanation"
-    And I press "Update"
+    When I visit "/staff/court/1/add_contact"
+    And I select "Fine queries" from "id_name"
+    And I fill in "number" with "077777"
+    And I fill in "explanation" with "Testing explanation"
+    And I press "Save"
     And I view court in the new window
     Then I should see "Fine queries"
 
@@ -30,6 +31,8 @@ Feature: Edit contacts for a given court
     Then I should not see "Defendants"
 
   Scenario: Attempt duplicate contact
-    When I select "Fine queries" from "id_form-3-name"
-    And I press "Update"
+    When I visit "/staff/court/1/add_contact"
+    And I select "Fine queries" from "id_name"
+    And I fill in "number" with "01234"
+    And I press "Save"
     Then I should see "Court already has this contact type listed"

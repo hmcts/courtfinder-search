@@ -1,0 +1,20 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    {% if heading %}<h3>Add {{ heading }}</h3>{% endif %}
+    {% if header_message %}<p>{{ header_message }}</p>{% endif %}
+    <form method="post" action="{{add_url}}">
+
+      <fieldset class="form-group orderable">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+      </fieldset>
+
+
+    <input type="submit" class="button" name="Save" value="Save" />
+    <input type="submit" class="button" name="SaveAnother" value="Save and Add Another" />
+    </form>
+    <a href="{{return_url}}">Return to list of {{orderable_name}}s</a>
+
+{% endblock %}

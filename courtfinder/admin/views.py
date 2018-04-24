@@ -307,10 +307,44 @@ class BaseOrderableFormView(BaseFormView):
         self.court = get_object_or_404(models.Court, pk=id)
 
 
+class AddOrderableView(BaseOrderableFormView):
+    template = 'court/new_orderable.html'
+
+    def save_instance(self):
+        pass
+
+    def process_request(self, request):
+        form = self.form(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            self.save_instance(instance)
+            messages.success(request, self.update_message)
+            self.court.update_timestamp()
+        if "SaveAnother" in request.POST:
+            self.return_url = self.add_url  # If user clicks save and add another then redirect to add page
+
+    def get_context_data(self):
+        context = {
+            'court': self.court,
+            "form": self.form,
+            "return_url": self.return_url,
+            "add_url": self.add_url,
+            "ordering": self.ordering,
+            'heading': self.heading,
+            'header_message': self.header_message,
+            'orderable_name': self.orderable_name,
+        }
+        return context
+
+
 class OrderableFormView(BaseOrderableFormView):
     template = 'court/orderable.html'
 
     def handle_instance_saving(self, instances):
+        for instance in instances:
+            self.save_instance(instance)
+
+    def save_instance(self, instance):
         pass
 
     def process_request(self, request):
@@ -328,6 +362,7 @@ class OrderableFormView(BaseOrderableFormView):
         context = {
             'court': self.court,
             "formset": formset,
+            "add_url": self.add_url,
             "return_url": self.return_url,
             "reorder_url": self.reorder_url,
             "ordering": self.ordering,
@@ -364,7 +399,9 @@ class ContactMixin(object):
 
     def initialize(self, request, id):
         super(ContactMixin, self).initialize(request, id)
-        self.formset = modelformset_factory(models.Contact, forms.CourtContactForm, extra=1, can_delete=True)
+        self.formset = modelformset_factory(models.Contact, forms.CourtContactForm, extra=0, can_delete=True)
+        self.form = forms.CourtContactForm
+        self.add_url = reverse("admin:add_contact", kwargs={'id': id})
         self.return_url = reverse("admin:contact", kwargs={'id': id})
         self.update_message = 'Contacts updated'
 
@@ -376,25 +413,29 @@ class ContactMixin(object):
         self.header_message = "The DX contact will show separately in the court header"
         self.orderable_name = "contact"
 
-
-class ContactFormView(ContactMixin, OrderableFormView):
-
-    def handle_instance_saving(self, instances):
-        for instance in instances:
-            if self.type_count(instance) > 0:
-                raise ValidationError("Court already has this contact type listed")
-            if instance._state.adding:
-                inst = instance.save()
-                instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
-                instance.save(update_fields=["sort_order"])
-                court_contact = models.CourtContact(court=self.court, contact=instance)
-                court_contact.save()
-            else:
-                instance.save()
+    def save_instance(self, instance):
+        if self.type_count(instance) > 0:
+            raise ValidationError("Court already has this contact type listed")
+        if instance._state.adding:
+            inst = instance.save()
+            instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
+            instance.save(update_fields=["sort_order"])
+            court_contact = models.CourtContact(court=self.court, contact=instance)
+            court_contact.save()
+        else:
+            instance.save()
 
     def type_count(self, instance):
         return models.CourtContact.objects.filter(court=self.court, contact__name=instance.name)\
             .exclude(contact__pk=instance.pk).count()
+
+
+class ContactFormView(ContactMixin, OrderableFormView):
+    pass
+
+
+class AddContactView(ContactMixin, AddOrderableView):
+    pass
 
 
 class ContactReorderView(ContactMixin, ReorderingFormView):
@@ -416,7 +457,9 @@ class EmailMixin(object):
 
     def initialize(self, request, id):
         super(EmailMixin, self).initialize(request, id)
-        self.formset = modelformset_factory(models.Email, forms.CourtEmailForm, extra=1, can_delete=True)
+        self.formset = modelformset_factory(models.Email, forms.CourtEmailForm, extra=0, can_delete=True)
+        self.form = forms.CourtEmailForm
+        self.add_url = reverse("admin:add_email", kwargs={'id': id})
         self.return_url = reverse("admin:email", kwargs={'id': id})
         self.update_message = 'Emails updated'
 
@@ -427,25 +470,29 @@ class EmailMixin(object):
         self.heading = "Email addresses"
         self.orderable_name = "email address"
 
-
-class EmailFormView(EmailMixin, OrderableFormView):
-
-    def handle_instance_saving(self, instances):
-        for instance in instances:
-            if self.type_count(instance) > 0:
-                raise ValidationError("Court already has this contact type listed")
-            if instance._state.adding:
-                instance.save()
-                court_email = models.CourtEmail(court=self.court, email=instance)
-                court_email.save()
-                court_email.order = court_email.pk  # Sets the order of the new object to its id to preserve order
-                court_email.save(update_fields=["order"])
-            else:
-                instance.save()
+    def save_instance(self, instance):
+        if self.type_count(instance) > 0:
+            raise ValidationError("Court already has this contact type listed")
+        if instance._state.adding:
+            instance.save()
+            court_email = models.CourtEmail(court=self.court, email=instance)
+            court_email.save()
+            court_email.order = court_email.pk  # Sets the order of the new object to its id to preserve order
+            court_email.save(update_fields=["order"])
+        else:
+            instance.save()
 
     def type_count(self, instance):
         return models.CourtEmail.objects.filter(court=self.court, email__description=instance.description)\
             .exclude(email__pk=instance.pk).count()
+
+
+class EmailFormView(EmailMixin, OrderableFormView):
+    pass
+
+
+class AddEmailView(EmailMixin, AddOrderableView):
+    pass
 
 
 class EmailReorderView(EmailMixin, ReorderingFormView):
@@ -466,7 +513,9 @@ class OpeningTimeMixin(object):
 
     def initialize(self, request, id):
         super(OpeningTimeMixin, self).initialize(request, id)
-        self.formset = modelformset_factory(models.OpeningTime, forms.CourtOpeningForm, extra=1, can_delete=True)
+        self.formset = modelformset_factory(models.OpeningTime, forms.CourtOpeningForm, extra=0, can_delete=True)
+        self.form = forms.CourtOpeningForm
+        self.add_url = reverse("admin:add_opening", kwargs={'id': id})
         self.return_url = reverse("admin:opening", kwargs={'id': id})
         self.update_message = 'Opening times updated'
 
@@ -477,27 +526,31 @@ class OpeningTimeMixin(object):
         self.heading = "Opening times"
         self.orderable_name = "set of times"
 
-
-class OpeningFormView(OpeningTimeMixin, OrderableFormView):
-
-    def handle_instance_saving(self, instances):
-        for instance in instances:
-            if self.type_count(instance) > 0:
-                raise ValidationError("Court already has this opening type listed")
-            if instance._state.adding:
-                instance.save()
-                court_opening = models.CourtOpeningTime(court=self.court, opening_time=instance)
-                court_opening.save()
-                court_opening.sort = court_opening.pk  # Sets the order of the new object to its id to preserve order
-                court_opening.save(update_fields=["sort"])
-            else:
-                instance.save()
+    def save_instance(self, instance):
+        if self.type_count(instance) > 0:
+            raise ValidationError("Court already has this opening type listed")
+        if instance._state.adding:
+            instance.save()
+            court_opening = models.CourtOpeningTime(court=self.court, opening_time=instance)
+            court_opening.save()
+            court_opening.sort = court_opening.pk  # Sets the order of the new object to its id to preserve order
+            court_opening.save(update_fields=["sort"])
+        else:
+            instance.save()
 
     def type_count(self, instance):
         instance_type = instance.description.split(":", 1)[0]
         return models.CourtOpeningTime.objects.filter(court=self.court,
                                                       opening_time__description__icontains=instance_type)\
             .exclude(opening_time__pk=instance.pk).count()
+
+
+class OpeningFormView(OpeningTimeMixin, OrderableFormView):
+    pass
+
+
+class AddOpeningView(OpeningTimeMixin, AddOrderableView):
+    pass
 
 
 class OpeningReorderView(OpeningTimeMixin, ReorderingFormView):
@@ -518,7 +571,9 @@ class FacilityMixin(object):
 
     def initialize(self, request, id):
         super(FacilityMixin, self).initialize(request, id)
-        self.formset = modelformset_factory(models.Facility, forms.CourtFacilityForm, extra=1, can_delete=True)
+        self.formset = modelformset_factory(models.Facility, forms.CourtFacilityForm, extra=0, can_delete=True)
+        self.form = forms.CourtFacilityForm
+        self.add_url = reverse("admin:add_facility", kwargs={'id': id})
         self.return_url = reverse("admin:facility", kwargs={'id': id})
         self.update_message = 'Facilities updated'
         self.ordering = False
@@ -530,24 +585,28 @@ class FacilityMixin(object):
         self.heading = "Facilities"
         self.orderable_name = "facility"
 
-
-class FacilityFormView(FacilityMixin, OrderableFormView):
-
-    def handle_instance_saving(self, instances):
-        for instance in instances:
-            if self.type_count(instance) > 0:
-                raise ValidationError("Court already has this facility type listed")
-            if instance._state.adding:
+    def save_instance(self, instance):
+        if self.type_count(instance) > 0:
+            raise ValidationError("Court already has this facility type listed")
+        if instance._state.adding:
+            instance.save()
+            court_facility = models.CourtFacility(court=self.court, facility=instance)
+            court_facility.save()
+        else:
+            if instance.name:
                 instance.save()
-                court_facility = models.CourtFacility(court=self.court, facility=instance)
-                court_facility.save()
-            else:
-                if instance.name:
-                    instance.save()
 
     def type_count(self, instance):
         return models.CourtFacility.objects.filter(court=self.court, facility__name=instance.name)\
             .exclude(facility__pk=instance.pk).count()
+
+
+class FacilityFormView(FacilityMixin, OrderableFormView):
+    pass
+
+
+class AddFacilityView(FacilityMixin, AddOrderableView):
+    pass
 
 
 class FacilityReorderView(FacilityMixin, ReorderingFormView):

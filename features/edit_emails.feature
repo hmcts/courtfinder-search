@@ -14,9 +14,10 @@ Feature: Edit emails for a given court
     And I should see "Testing address"
 
   Scenario: Add new email
-    When I select "Fine queries" from "id_form-1-description"
-    And I fill in "form-1-address" with "Testing address"
-    And I press "Update"
+    When I visit "/staff/court/1/add_email"
+    When I select "Fine queries" from "id_description"
+    And I fill in "address" with "Testing address"
+    And I press "Save"
     And I view court in the new window
     Then I should see "Fine queries"
 
@@ -27,7 +28,8 @@ Feature: Edit emails for a given court
     Then I should not see "Defendants"
 
   Scenario: Attempt duplicate email
-    When I select "Fine queries" from "id_form-1-description"
-    And I fill in "form-1-address" with "Testing address"
-    And I press "Update"
+    When I visit "/staff/court/1/add_email"
+    And I select "Fine queries" from "id_description"
+    And I fill in "address" with "Testing address"
+    And I press "Save"
     Then I should see "Court already has this contact type listed"
