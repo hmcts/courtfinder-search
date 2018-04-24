@@ -13,9 +13,10 @@ Feature: Edit facilities for a given court
     Then I should see "Test fac description"
 
   Scenario: Add new facility
-    When I select "Disabled toilet" from "id_form-7-name"
-    And I fill in rich editor "form-7-description" with "Test new fac description"
-    And I press "Update"
+    When I visit "/staff/court/1/add_facility"
+    And I select "Disabled toilet" from "id_name"
+    And I fill in rich editor "description" with "Test new fac description"
+    And I press "Save"
     And I view court in the new window
     Then I should see "Test new fac description"
 

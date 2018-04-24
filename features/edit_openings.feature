@@ -13,9 +13,10 @@ Feature: Edit opening times for a given court
     Then I should see "Court counter closed: 5am - 5pm"
 
   Scenario: Add new opening
-    When I select "Office open" from "id_form-1-type"
-    And I fill in "form-1-hours" with "1pm onwards"
-    And I press "Update"
+    When I visit "/staff/court/1/add_opening_times"
+    And I select "Office open" from "id_type"
+    And I fill in "hours" with "1pm onwards"
+    And I press "Save"
     And I view court in the new window
     Then I should see "Office open: 1pm onwards"
 
@@ -26,7 +27,8 @@ Feature: Edit opening times for a given court
     Then I should not see "Counter open: 5am - 5pm"
 
   Scenario: Attempt duplicate opening
-    When I select "Office open" from "id_form-1-type"
-    And I fill in "form-1-hours" with "1pm onwards"
-    And I press "Update"
+    When I visit "/staff/court/1/add_opening_times"
+    And I select "Court counter closed" from "id_type"
+    And I fill in "hours" with "1pm onwards"
+    And I press "Save"
     Then I should see "Court already has this opening type listed"
