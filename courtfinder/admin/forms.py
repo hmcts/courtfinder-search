@@ -328,9 +328,9 @@ class FamilyCourtForm(forms.ModelForm):
 
 
 class PostcodesForm(forms.Form):
-    postcodes = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+    postcodes = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, label='')
     action = forms.ChoiceField(widget=forms.RadioSelect,
-        choices=(('move', 'Move',), ('delete', 'Delete',)))
+        choices=(('move', 'Move',), ('delete', 'Delete',)), label='')
     destination_court = forms.ChoiceField(widget=forms.Select, required=False,
         help_text="If you're moving postcodes, select destination court from the list")
 

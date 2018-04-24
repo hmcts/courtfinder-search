@@ -192,7 +192,7 @@ form.court {
     label {
       width: initial;
     }
-    ul {
+    ul#id_postcodes, ul#id_action{
       columns: 5;
     }
   }
