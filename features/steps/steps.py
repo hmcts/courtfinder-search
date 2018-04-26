@@ -75,6 +75,11 @@ def step_impl(context, content, textarea):
     with context.browser.get_iframe('id_%s_ifr' % textarea) as iframe:
         iframe.find_by_tag('body').fill(content)
 
+@when(u'I clear rich editor "{textarea}"')
+def step_impl(context, textarea):
+    with context.browser.get_iframe('id_%s_ifr' % textarea) as iframe:
+        iframe.find_by_tag('body').fill("")
+
 
 @when(u'I check box with label "{label}"')
 def step_impl(context, label):
@@ -105,3 +110,7 @@ def step_impl(context, text, id):
     container = context.browser.find_by_id(id).first
     haystack = container.text.replace('\n', ' ')
     assert text in haystack
+
+@then(u'"{name}" should be marked as required')
+def step_impl(context, name):
+    assert context.browser.is_element_present_by_xpath("//input[@name='%s'][@required='']" % name)

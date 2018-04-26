@@ -16,6 +16,7 @@ from search import models
 from django.views import View
 from .models import FacilityType, ContactType, OpeningType
 from ukpostcodeutils.validation import is_valid_postcode
+from django.template.loader import render_to_string
 
 
 @permission_required('emergency')
@@ -264,6 +265,8 @@ class BaseFormView(View):
     return_url = None
     reorder_url = None
     formset = None
+    prepared_formset = None
+    prepared_form = None
     objects = None
     court = None
     ordering = False
@@ -292,10 +295,14 @@ class BaseFormView(View):
     def post(self, request, *args, **kwargs):
         id = kwargs.get('id', None)
         self.initialize(request, id)
+        error = False
         try:
             self.process_request(request)
         except ValidationError as e:
             messages.error(request, e.message)
+            error = True
+        if error:
+            return render(request, self.template, self.get_context_data())
         return redirect(self.return_url)
 
 
@@ -317,16 +324,20 @@ class AddOrderableView(BaseOrderableFormView):
         form = self.form(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
+            self.prepared_form = form
             self.save_instance(instance)
             messages.success(request, self.update_message)
             self.court.update_timestamp()
+        else:
+            self.prepared_form = form
+            raise ValidationError("You are missing a required field")
         if "SaveAnother" in request.POST:
             self.return_url = self.add_url  # If user clicks save and add another then redirect to add page
 
     def get_context_data(self):
         context = {
             'court': self.court,
-            "form": self.form,
+            "form": self.prepared_form,
             "return_url": self.return_url,
             "add_url": self.add_url,
             "ordering": self.ordering,
@@ -356,12 +367,14 @@ class OrderableFormView(BaseOrderableFormView):
             self.handle_instance_saving(instances)
             messages.success(request, self.update_message)
             self.court.update_timestamp()
+        else:
+            self.prepared_formset = formset
+            raise ValidationError("You are missing a required field")
 
     def get_context_data(self):
-        formset = self.formset(queryset=self.objects)
         context = {
             'court': self.court,
-            "formset": formset,
+            "formset": self.prepared_formset,
             "add_url": self.add_url,
             "return_url": self.return_url,
             "reorder_url": self.reorder_url,
@@ -404,14 +417,16 @@ class ContactMixin(object):
         self.add_url = reverse("admin:add_contact", kwargs={'id': id})
         self.return_url = reverse("admin:contact", kwargs={'id': id})
         self.update_message = 'Contacts updated'
+        self.heading = "Contacts"
+        self.header_message = render_to_string('partials/contact_message.html')
+        self.orderable_name = "contact"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
         self.objects = self.court.contacts.order_by('sort_order')
-        self.heading = "Contacts"
-        self.header_message = "The DX contact will show separately in the court header"
-        self.orderable_name = "contact"
+        self.prepared_formset = self.formset(queryset=self.objects)
+        self.prepared_form = self.form
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -462,13 +477,17 @@ class EmailMixin(object):
         self.add_url = reverse("admin:add_email", kwargs={'id': id})
         self.return_url = reverse("admin:email", kwargs={'id': id})
         self.update_message = 'Emails updated'
+        self.heading = "Email addresses"
+        self.header_message = "List email addresses for enquiries first. No duplicate email addresses allowed."
+        self.orderable_name = "email address"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
         self.objects = self.court.emails.order_by('courtemail__order')
-        self.heading = "Email addresses"
-        self.orderable_name = "email address"
+        self.prepared_formset = self.formset(queryset=self.objects)
+        self.prepared_form = self.form
+
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -518,13 +537,17 @@ class OpeningTimeMixin(object):
         self.add_url = reverse("admin:add_opening", kwargs={'id': id})
         self.return_url = reverse("admin:opening", kwargs={'id': id})
         self.update_message = 'Opening times updated'
+        self.heading = "Opening times"
+        self.header_message = render_to_string('partials/opening_message.html')
+        self.orderable_name = "set of times"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_openings", kwargs={'id': id})
         self.objects = self.court.opening_times.order_by('courtopeningtime__sort')
-        self.heading = "Opening times"
-        self.orderable_name = "set of times"
+        self.prepared_formset = self.formset(queryset=self.objects)
+        self.prepared_form = self.form
+
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -577,13 +600,16 @@ class FacilityMixin(object):
         self.return_url = reverse("admin:facility", kwargs={'id': id})
         self.update_message = 'Facilities updated'
         self.ordering = False
+        self.heading = "Facilities"
+        self.orderable_name = "facility"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
         self.objects = self.court.facilities.all()
-        self.heading = "Facilities"
-        self.orderable_name = "facility"
+        self.prepared_formset = self.formset(queryset=self.objects)
+        self.prepared_form = self.form
+
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:

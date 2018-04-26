@@ -30,3 +30,14 @@ Feature: Edit facilities for a given court
     When I select "Security arch" from "id_form-0-name"
     And I press "Update"
     Then I should see "Court already has this facility type listed"
+
+  Scenario: No description validation for existing facility
+    When I clear rich editor "form-0-description"
+    And I press "Update"
+    Then I should see "You are missing a required field"
+
+  Scenario: No description validation for new facility
+    When I visit "/staff/court/1/add_facility"
+    And I select "Public toilets" from "id_name"
+    And I press "Save"
+    Then I should see "You are missing a required field"
