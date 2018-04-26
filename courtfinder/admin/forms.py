@@ -142,6 +142,7 @@ class CourtContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CourtContactForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
+        self.fields["number"].required = True
         self.fields["explanation"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
@@ -283,6 +284,12 @@ class CourtFacilityForm(forms.ModelForm):
             fac_form.image_file_path = fac_type.image_file_path
         return fac_form
 
+    def clean(self, *args, **kwargs):
+        cleaned_data = super(CourtFacilityForm, self).clean(*args, **kwargs)
+        description = cleaned_data.get("description", None)
+        if not description:
+            raise forms.ValidationError("You must fill in the required fields")
+        return cleaned_data
 
 class CourtAreasOfLawForm(forms.ModelForm):
     class Meta:

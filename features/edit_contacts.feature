@@ -36,3 +36,14 @@ Feature: Edit contacts for a given court
     And I fill in "number" with "01234"
     And I press "Save"
     Then I should see "Court already has this contact type listed"
+
+  Scenario: No number validation for existing contact
+    When I clear field "form-0-number"
+    And I press "Update"
+    Then I should see "This field is required"
+
+  Scenario: No number validation for new contact
+    When I visit "/staff/court/1/add_contact"
+    And I select "Fine queries" from "id_name"
+    And I press "Save"
+    Then "number" should be marked as required
