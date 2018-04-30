@@ -73,5 +73,13 @@
     $(this).parent('div').siblings('p').filter(":has(input[name*='DELETE'])").children('input').prop('checked', false);
   });
 
+  /* postcode management */
+  $('input[name=action]').change(function(){
+    $('#move-button')
+      .attr('value', this.value == 'move' ? 'Move postcodes' : 'Delete - this operation is irreversible, are you sure?')
+      .toggleClass('button', this.value == 'move')
+      .show();
+  });
+  $('input[name=action]:checked').trigger('change');
 
 })(jQuery);

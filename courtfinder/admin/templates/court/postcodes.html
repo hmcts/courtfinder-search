@@ -3,7 +3,7 @@
 {% block details %}
     <h3>Postcodes</h3>
     {% if areas %}
-    <h3>Add new postcodes</h3>
+    <p>Only full postcodes are allowed, no partials e.g SA1 1AA, not SA1</p>
     <form class="court basic" method="post" action="{% url 'admin:add_postcodes' court.id%}">
         {% csrf_token %}
         {{ add_form.as_p }}
@@ -14,7 +14,7 @@
     <form class="court postcodes" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-      <input type="submit" class="button" value="Update" />
+      <input id="move-button" style="display: none;" type="submit" class="button-secondary" value="Update" />
     </form>
 
     {% else %}
