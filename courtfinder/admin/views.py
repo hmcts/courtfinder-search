@@ -15,7 +15,7 @@ from geolocation import mapit
 from search import models
 from django.views import View
 from .models import FacilityType, ContactType, OpeningType
-from ukpostcodeutils.validation import is_valid_postcode, is_valid_partial_postcode
+from ukpostcodeutils.validation import is_valid_postcode
 
 
 @permission_required('emergency')
@@ -734,7 +734,7 @@ def add_postcodes(request, id):
         errors = []
         for p in  postcodes:
             postcode = p.upper().replace(' ', '')
-            if is_valid_partial_postcode(postcode) or is_valid_postcode(postcode):
+            if is_valid_postcode(postcode):
                 models.CourtPostcode.objects.get_or_create(court=court, postcode=postcode)
             else:
                 errors.append(postcode)

@@ -343,7 +343,8 @@ class PostcodesForm(forms.Form):
 
 class AddPostcodesForm(forms.Form):
     postcodes = forms.CharField(required=True, max_length=300, widget=forms.Textarea(attrs={'rows': 3}),
-        help_text="Comma seperated list of postcodes e.g. SA1 1AA, sa12bb. Case and spaces not significant.")
+        help_text="Comma seperated list of postcodes e.g. SA1 1AA, sa12bb. Case and spaces not significant.",
+        label='Add postcodes')
 
 
 class CourtTypes(forms.ModelForm):
