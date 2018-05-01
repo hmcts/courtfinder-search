@@ -1,7 +1,7 @@
 {% extends "court/base.html" %}
 
 {% block details %}
-    {% if heading %}<h3>{{ heading }} {% if formset|length > 1 and ordering %}- <a href="{{reorder_url}}">reorder</a>{% endif %}<a class = "right-link" href = "{{add_url}}">Add new {{orderable_name}}</a></h3>{% endif %}
+    {% if heading %}<h3>{{ heading }} {% if formset|length > 1 and ordering %}- <a href="{{reorder_url}}">reorder</a>{% endif %}<a class="right-link" href="{{add_url}}">Add new {{orderable_name}}</a></h3>{% endif %}
     {% if header_message %}<p>{{ header_message }}</p>{% endif %}
 {% if formset|length > 0 %}
 <form method="post" action="{{return_url}}">

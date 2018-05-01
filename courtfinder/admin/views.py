@@ -811,6 +811,8 @@ class AdminListView(View):
     partial = None
     heading = None
     header_message = None
+    list_add_url = None
+    type_name = None
 
     def initialize(self, request):
         pass
@@ -828,6 +830,8 @@ class AdminListView(View):
             'header_message': self.header_message,
             'objects': self.objects,
             'partial': self.partial,
+            'list_add_url': self.list_add_url,
+            'type_name': self.type_name,
         }
         return context
 
@@ -854,7 +858,8 @@ class FacilityList(AdminListView):
         ]
         self.objects = facilities
         self.heading = "Facility Types"
-
+        self.list_add_url = reverse("admin:edit_facility_type")
+        self.type_name = "facility type"
 
 def facility_icon_upload(request, facility_id):
     facility_type = get_object_or_404(FacilityType, pk=facility_id)
@@ -882,7 +887,8 @@ class ContactList(AdminListView):
         self.partial = "partials/contact_table_contents.html"
         self.objects = ContactType.objects.all().order_by('name')
         self.heading = "Contact Types"
-
+        self.list_add_url = reverse("admin:edit_contact_type")
+        self.type_name = "contact type"
 
 class OpeningList(AdminListView):
 
@@ -890,6 +896,8 @@ class OpeningList(AdminListView):
         self.partial = "partials/opening_table_contents.html"
         self.objects = OpeningType.objects.all().order_by('name')
         self.heading = "Opening Types"
+        self.list_add_url = reverse("admin:edit_opening_type")
+        self.type_name = "opening type"
 
 class EditType(View):
 
