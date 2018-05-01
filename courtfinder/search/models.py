@@ -90,6 +90,7 @@ class AreaOfLaw(models.Model):
     class Meta:
         ordering = ("name",)
 
+
 class Facility(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=4096, null=True, blank=True)

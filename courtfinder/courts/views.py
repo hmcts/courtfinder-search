@@ -4,8 +4,8 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.utils.html import strip_tags
-from search.models import Court, AreaOfLaw
-
+from search.models import Court, AreaOfLaw, Facility
+from admin.models import FacilityType
 
 def collapse(source, key, key2):
     """
@@ -22,6 +22,22 @@ def collapse(source, key, key2):
         else:
             result.append(item)
     return result
+
+
+def order_facilities(facility_list):
+    ordered_names = FacilityType.objects.all().order_by('order')
+    new_list = []
+    for o in ordered_names:
+        try:
+            fac = facility_list.get(name=o.name)
+        except Facility.DoesNotExist:
+            fac = None
+        if fac:
+            new_list.append(fac)
+    excluded_facilities = [f for f in facility_list if f not in new_list]
+    excluded_facilities = sorted(excluded_facilities, key=lambda x: x.name)
+    new_list += excluded_facilities
+    return new_list
 
 
 def format_court(court):
@@ -70,7 +86,7 @@ def format_court(court):
             # The relative file path of the image
             'image_file_path': facility.image_file_path
         }
-        for facility in court.facilities.all()
+        for facility in order_facilities(court.facilities.all())
     ]
 
     court_obj = {
@@ -90,7 +106,7 @@ def format_court(court):
         'visiting_address': visiting_address,
         'opening_times': court.opening_times.all().order_by("description"),
         'areas_of_law': court.areas_of_law.all().order_by("name"),
-        'facilities': sorted(facilities, key=lambda x: x['name']),
+        'facilities': facilities,
         'emails': collapse(emails, 'description', 'addresses'),
         'contacts': collapse(contacts, 'name', 'numbers'),
         'directions': court.directions if court.directions else None,

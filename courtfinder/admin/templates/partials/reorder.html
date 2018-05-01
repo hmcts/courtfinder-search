@@ -1,0 +1,14 @@
+<form id="reorder_form" method="POST" action="{{reorder_url}}">
+    {% csrf_token %}
+    <input hidden name="new_sort_order" id="new_sort_order"/>
+        <ul id="sortable">
+            {% for object in objects %}
+                  <li id="{{object.pk}}" name="{{object.pk}}" class="li-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{object.order_label}}</li>
+            {% endfor %}
+        </ul>
+    <div>
+    <input type="submit" style="display:inline;" class="button" name="Update" value="Update" />
+    <a  style="display:inline;" class="court button-secondary cancel-reorder" name="cancel" value="Cancel" href="{{return_url}}">Cancel</a></div>
+</form>
+
+

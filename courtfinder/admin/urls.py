@@ -53,5 +53,7 @@ urlpatterns = [
     url(r'^edit_opening_type/$', views.EditOpeningType.as_view(), name='edit_opening_type'),
     url(r'^edit_opening_type/(?P<id>[0-9]+)$', views.EditOpeningType.as_view(), name='edit_opening_type'),
     url(r'^delete_opening_type/$', views.DeleteOpeningType.as_view(), name='delete_opening_type'),
+    url(r'^reorder_facility_types/$', views.ReorderingFacilityList.as_view(), name='reorder_facility_types'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]
+
