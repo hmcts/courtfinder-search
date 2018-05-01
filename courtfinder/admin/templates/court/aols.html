@@ -1,8 +1,8 @@
 {% extends "court/base.html" %}
 
 {% block details %}
-    <h3>Areas of law</h3>
-    <p>Please select at least one Area of Law.</p>
+    <h3>Cases heard at this venue</h3>
+    <p>Please select at least one Area of Law, which the court deals with.</p>
     <form class="court aols" method="post">
         {% csrf_token %}
         {{ form.as_p }}
