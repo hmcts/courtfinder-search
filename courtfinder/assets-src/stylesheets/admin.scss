@@ -161,14 +161,6 @@ form.court {
     }
   }
 
-  &.cancel-reorder{
-
-    input[name=cancel]{
-      position: relative;
-      top: -70px;
-      left: 150px;
-    }
-  }
   &.aols {
     label {
       width: initial;
@@ -214,6 +206,14 @@ form.court {
     label {
       display: none;
     }
+  }
+}
+
+form#reorder_form {
+  a[name=cancel]{
+    position: relative;
+    top: -22px;
+    vertical-align: bottom;
   }
 }
 

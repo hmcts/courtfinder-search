@@ -854,7 +854,7 @@ class FacilityList(AdminListView):
                 # The relative file path of the image
                 'image_file_path': facility.image_file_path
             }
-            for facility in FacilityType.objects.all()
+            for facility in FacilityType.objects.all().order_by('order')
         ]
         self.objects = facilities
         self.heading = "Facility Types"
@@ -1019,3 +1019,48 @@ class DeleteOpeningType(DeleteType):
     redirect_url = 'admin:opening_types'
     type_model = OpeningType
     delete_msg = 'Opening type deleted'
+
+
+class ReorderingListView(ReorderingFormView):
+
+    template = "lists/reordering.html"
+
+    def initialize(self, request, id):
+        pass
+
+    def initialize_get(self, request, id):
+        pass
+
+    def get_context_data(self):
+        context = {
+            "objects": self.objects,
+            "return_url": self.return_url,
+            "reorder_url": self.reorder_url,
+            "list_add_url": self.list_add_url,
+            "hide_add_link": True,
+            }
+        return context
+
+
+class ReorderingFacilityList(ReorderingListView):
+
+    def initialize(self, request, id):
+        self.return_url = 'admin:facility_types'
+
+    def initialize_get(self, request, id):
+        self.return_url = reverse('admin:facility_types')
+        self.reorder_url = reverse('admin:reorder_facility_types')
+        self.objects = FacilityType.objects.all().order_by('order')
+        self.list_add_url = reverse("admin:edit_facility_type")
+
+    def update_order(self, new_order):
+        new_order = json.loads(new_order)
+        for i, o in enumerate(new_order):
+            fac_type = None
+            try:
+                fac_type = FacilityType.objects.get(pk=o)
+            except FacilityType.DoesNotExist:
+                pass
+            if fac_type:
+                fac_type.order = i
+                fac_type.save()

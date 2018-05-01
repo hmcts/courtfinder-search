@@ -13,7 +13,7 @@
       <li><a href="{% url 'admin:opening_types' %}">opening hours</a></li>
     </ul>
     <div class="content cf details">
-        <h3>{{heading}}<a class="right-link" href="{{list_add_url}}">Add new {{type_name}}</a></h3>
+        <h3>{{heading}}{% if not hide_add_link %}<a class="right-link" href="{{list_add_url}}">Add new {{type_name}}</a>{% endif %}</h3>
     {% block details %} {% endblock %}
     </div>
   </div>

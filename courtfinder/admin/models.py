@@ -7,9 +7,14 @@ class FacilityType(models.Model):
     image = models.CharField(max_length=255)
     image_description = models.CharField(max_length=255)
     image_file_path = models.CharField(max_length=255, null=True, blank=True)
+    order = models.IntegerField(null=False, default=0)
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def order_label(self):
+        return "%s" % self.name
 
 
 class ContactType(models.Model):
