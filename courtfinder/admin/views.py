@@ -548,10 +548,7 @@ class OpeningTimeMixin(object):
         self.prepared_formset = self.formset(queryset=self.objects)
         self.prepared_form = self.form
 
-
     def save_instance(self, instance):
-        if self.type_count(instance) > 0:
-            raise ValidationError("Court already has this opening type listed")
         if instance._state.adding:
             instance.save()
             court_opening = models.CourtOpeningTime(court=self.court, opening_time=instance)
@@ -560,12 +557,6 @@ class OpeningTimeMixin(object):
             court_opening.save(update_fields=["sort"])
         else:
             instance.save()
-
-    def type_count(self, instance):
-        instance_type = instance.description.split(":", 1)[0]
-        return models.CourtOpeningTime.objects.filter(court=self.court,
-                                                      opening_time__description__icontains=instance_type)\
-            .exclude(opening_time__pk=instance.pk).count()
 
 
 class OpeningFormView(OpeningTimeMixin, OrderableFormView):

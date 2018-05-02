@@ -26,13 +26,6 @@ Feature: Edit opening times for a given court
     And I view court in the new window
     Then I should not see "Counter open: 5am - 5pm"
 
-  Scenario: Attempt duplicate opening
-    When I visit "/staff/court/1/add_opening_times"
-    And I select "Court counter closed" from "id_type"
-    And I fill in "hours" with "1pm onwards"
-    And I press "Save"
-    Then I should see "Court already has this opening type listed"
-
   Scenario: No hours validation for existing opening
     When I clear field "form-0-hours"
     And I press "Update"
