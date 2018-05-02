@@ -7,7 +7,7 @@ Feature: Edit emails for a given court
 
   Scenario: Update existing email
     When I select "Defendants" from "id_form-0-description"
-    And I fill in "form-0-address" with "Testing address"
+    And I fill in "form-0-address" with "Testing address 1"
     And I press "Update"
     And I view court in the new window
     Then I should see "Defendants"
@@ -32,7 +32,7 @@ Feature: Edit emails for a given court
     And I select "Fine queries" from "id_description"
     And I fill in "address" with "Testing address"
     And I press "Save"
-    Then I should see "Court already has this contact type listed"
+    Then I should see "Court already has contact with this email listed"
 
   Scenario: No address validation for existing email
     When I clear field "form-0-address"

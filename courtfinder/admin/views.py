@@ -430,7 +430,7 @@ class ContactMixin(object):
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
-            raise ValidationError("Court already has this contact type listed")
+            raise ValidationError("Court already has contact with this number listed")
         if instance._state.adding:
             inst = instance.save()
             instance.sort_order = inst  # Sets the order of the new object to its id to preserve order
@@ -441,7 +441,7 @@ class ContactMixin(object):
             instance.save()
 
     def type_count(self, instance):
-        return models.CourtContact.objects.filter(court=self.court, contact__name=instance.name)\
+        return models.CourtContact.objects.filter(court=self.court, contact__number=instance.number)\
             .exclude(contact__pk=instance.pk).count()
 
 
@@ -491,7 +491,7 @@ class EmailMixin(object):
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
-            raise ValidationError("Court already has this contact type listed")
+            raise ValidationError("Court already has contact with this email listed")
         if instance._state.adding:
             instance.save()
             court_email = models.CourtEmail(court=self.court, email=instance)
@@ -502,7 +502,7 @@ class EmailMixin(object):
             instance.save()
 
     def type_count(self, instance):
-        return models.CourtEmail.objects.filter(court=self.court, email__description=instance.description)\
+        return models.CourtEmail.objects.filter(court=self.court, email__address=instance.address)\
             .exclude(email__pk=instance.pk).count()
 
 
