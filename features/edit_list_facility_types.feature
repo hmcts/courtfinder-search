@@ -29,3 +29,10 @@ Feature: Edit facility types list
     When I visit "/staff/edit_facility_type/36"
     And I press "Delete"
     Then I should not see "Car wash"
+
+  Scenario: Attempt to add duplicate facility type
+    When I visit "/staff/edit_facility_type/"
+    And I fill in "name" with "First Aid"
+    And I fill in "image_description" with "medical"
+    And I press "Update"
+    Then I should see "This type is already listed"
