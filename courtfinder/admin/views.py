@@ -919,13 +919,7 @@ class EditType(View):
         id = kwargs.get('id', None)
         self.prepare(id)
         form = self.form_class(instance=self.type)
-        context = {
-            'type': self.type,
-            'form': form,
-            'return_url': self.return_url,
-            'heading': self.heading,
-            'partial': self.partial,
-        }
+        context = self.get_context_data(form)
         return render(request, self.template, context)
 
     def post(self, request, *args, **kwargs):
@@ -933,10 +927,37 @@ class EditType(View):
         id = kwargs.get('id', None)
         self.prepare(id)
         form = self.form_class(request.POST, instance=self.type)
-        form.save()
+        instance = form.save(commit=False)
+        error = False
+        try:
+            self.save_form(instance)
+        except ValidationError as e:
+            messages.error(request, e.message)
+            error = True
+        if error:
+            return render(request, self.template, self.get_context_data(form))
         messages.success(request, self.update_msg)
         return redirect(self.redirect_url)
 
+    def get_context_data(self, form):
+        context = {
+            'type': self.type,
+            'form': form,
+            'return_url': self.return_url,
+            'list_url': reverse(self.redirect_url),
+            'heading': self.heading,
+            'partial': self.partial,
+        }
+        return context
+
+    def save_form(self, instance):
+        if self.type_count(instance) > 0:
+            raise ValidationError("This type is already listed")
+        instance.save()
+
+    def type_count(self, instance):
+        return self.type_model.objects.filter(name__iexact=instance.name)\
+            .exclude(pk=instance.pk).count()
 
 class EditFacilityType(EditType):
 
