@@ -364,6 +364,7 @@ class OrderableFormView(BaseOrderableFormView):
             instances = formset.save(commit=False)
             for obj in formset.deleted_objects:
                 obj.delete()
+            self.prepared_formset = formset
             self.handle_instance_saving(instances)
             messages.success(request, self.update_message)
             self.court.update_timestamp()
