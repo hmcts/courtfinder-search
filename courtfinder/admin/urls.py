@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^facility_types$', views.FacilityList.as_view(), name='facility_types'),
     url(r'^contact_types$', views.ContactList.as_view(), name='contact_types'),
     url(r'^opening_types$', views.OpeningList.as_view(), name='opening_types'),
+    url(r'^aols$', views.AreaOfLawList.as_view(), name='aols'),
     url(r'^edit_facility_type/$', views.EditFacilityType.as_view(), name='edit_facility_type'),
     url(r'^edit_facility_type/(?P<id>[0-9]+)$', views.EditFacilityType.as_view(), name='edit_facility_type'),
     url(r'^edit_facility_type/(?P<id>[0-9]+)/photo$', views.facility_icon_upload, name='facility_icon_upload'),
@@ -53,6 +54,9 @@ urlpatterns = [
     url(r'^edit_opening_type/$', views.EditOpeningType.as_view(), name='edit_opening_type'),
     url(r'^edit_opening_type/(?P<id>[0-9]+)$', views.EditOpeningType.as_view(), name='edit_opening_type'),
     url(r'^delete_opening_type/$', views.DeleteOpeningType.as_view(), name='delete_opening_type'),
+    url(r'^edit_aol/$', views.EditAOL.as_view(), name='edit_aol'),
+    url(r'^edit_aol/(?P<id>[0-9]+)$', views.EditAOL.as_view(), name='edit_aol'),
+    url(r'^delete_aol/$', views.DeleteAOL.as_view(), name='delete_aol'),
     url(r'^reorder_facility_types/$', views.ReorderingFacilityList.as_view(), name='reorder_facility_types'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]

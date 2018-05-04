@@ -1,0 +1,14 @@
+{% load static %}
+<table id="court-list">
+<tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  {% for aol in objects %}
+  <tr>
+    <td>{{ aol.name }}</td>
+    <td><a target="_blank" href="{% url 'admin:edit_aol' id=aol.id %}">edit</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
