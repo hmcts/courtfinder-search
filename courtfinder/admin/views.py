@@ -438,7 +438,10 @@ class ContactMixin(object):
             court_contact = models.CourtContact(court=self.court, contact=instance)
             court_contact.save()
         else:
-            instance.save()
+            if instance.name:
+                instance.save()
+            else:
+                instance.save(update_fields=['number', 'explanation', 'in_leaflet', 'sort_order'])
 
     def type_count(self, instance):
         return models.CourtContact.objects.filter(court=self.court, contact__number=instance.number)\
@@ -488,7 +491,6 @@ class EmailMixin(object):
         self.prepared_formset = self.formset(queryset=self.objects)
         self.prepared_form = self.form
 
-
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
             raise ValidationError("Court already has contact with this email listed")
@@ -499,7 +501,10 @@ class EmailMixin(object):
             court_email.order = court_email.pk  # Sets the order of the new object to its id to preserve order
             court_email.save(update_fields=["order"])
         else:
-            instance.save()
+            if instance.description:
+                instance.save()
+            else:
+                instance.save(update_fields=['address'])
 
     def type_count(self, instance):
         return models.CourtEmail.objects.filter(court=self.court, email__address=instance.address)\
@@ -601,7 +606,6 @@ class FacilityMixin(object):
         self.prepared_formset = self.formset(queryset=self.objects)
         self.prepared_form = self.form
 
-
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
             raise ValidationError("Court already has this facility type listed")
@@ -612,6 +616,8 @@ class FacilityMixin(object):
         else:
             if instance.name:
                 instance.save()
+            else:
+                instance.save(update_fields=['description', 'image', 'image_description', 'image_file_path'])
 
     def type_count(self, instance):
         return models.CourtFacility.objects.filter(court=self.court, facility__name=instance.name)\
