@@ -887,6 +887,7 @@ class ContactList(AdminListView):
         self.list_add_url = reverse("admin:edit_contact_type")
         self.type_name = "contact type"
 
+
 class OpeningList(AdminListView):
 
     def initialize(self, request):
@@ -895,6 +896,16 @@ class OpeningList(AdminListView):
         self.heading = "Opening Types"
         self.list_add_url = reverse("admin:edit_opening_type")
         self.type_name = "opening type"
+
+
+class AreaOfLawList(AdminListView):
+
+    def initialize(self, request):
+        self.partial = "partials/aol_table_contents.html"
+        self.objects = models.AreaOfLaw.objects.all().order_by('name')
+        self.heading = "Areas of Law"
+        self.list_add_url = reverse("admin:edit_aol")
+        self.type_name = "area of law"
 
 class EditType(View):
 
@@ -1001,6 +1012,18 @@ class EditOpeningType(EditType):
         self.heading = "Edit opening type"
 
 
+class EditAOL(EditType):
+
+    def initialize(self, request):
+        self.type_model = models.AreaOfLaw
+        self.rev_url = "admin:edit_aol"
+        self.update_msg = "Area of law updated"
+        self.form_class = forms.AdminAOLForm
+        self.partial = "partials/aol_edit.html"
+        self.redirect_url = 'admin:aols'
+        self.heading = "Edit area of law"
+
+
 class DeleteType(View):
     redirect_url = None
     type_model = None
@@ -1037,6 +1060,12 @@ class DeleteOpeningType(DeleteType):
     redirect_url = 'admin:opening_types'
     type_model = OpeningType
     delete_msg = 'Opening type deleted'
+
+
+class DeleteAOL(DeleteType):
+    redirect_url = 'admin:aols'
+    type_model = models.AreaOfLaw
+    delete_msg = "Area of law deleted"
 
 
 class ReorderingListView(ReorderingFormView):

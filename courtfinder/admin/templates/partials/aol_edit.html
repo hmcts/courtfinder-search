@@ -1,0 +1,13 @@
+<h3>Area of law <a class="right-link" href="{{list_url}}">return to area of law list</a></h3>
+
+<form method="post" action="{{return_url}}">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" class="button" name="Update" value="Update" />
+</form>
+
+<h3>Delete area of law</h3>
+<form action="{% url 'admin:delete_aol' %}" method="POST">
+{% csrf_token %}
+<input hidden name="id" value="{{type.id}}"/><input class="button-secondary" type="submit" value="Delete"/>
+</form>

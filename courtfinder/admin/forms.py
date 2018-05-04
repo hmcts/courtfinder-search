@@ -395,3 +395,9 @@ class AdminOpeningTypeForm(forms.ModelForm):
     class Meta:
         model = OpeningType
         fields = ['name']
+
+
+class AdminAOLForm(forms.ModelForm):
+    class Meta:
+        model = models.AreaOfLaw
+        fields = ['name', 'external_link', 'external_link_desc']
