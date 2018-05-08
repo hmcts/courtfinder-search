@@ -30,6 +30,8 @@ def order_facilities(facility_list):
     for o in ordered_names:
         try:
             fac = facility_list.get(name=o.name)
+        except Facility.MultipleObjectsReturned:
+            fac = facility_list.filter(name=o.name).first()
         except Facility.DoesNotExist:
             fac = None
         if fac:
