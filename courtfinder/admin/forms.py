@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from search import models
 from .models import FacilityType, ContactType, OpeningType
 import re
+import urllib
 
 
 class UserEditForm(forms.ModelForm):
@@ -414,3 +415,19 @@ class AdminAOLForm(forms.ModelForm):
     class Meta:
         model = models.AreaOfLaw
         fields = ['name', 'external_link', 'external_link_desc']
+
+    def __init__(self, *args, **kwargs):
+        super(AdminAOLForm, self).__init__(*args, **kwargs)
+        self.fields['name'].disabled = True
+        is_new_instance = self.instance._state.adding
+        if not is_new_instance:
+            if self.instance.external_link:
+                self.initial['external_link'] = self.instance.display_url()
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super(AdminAOLForm, self).clean(*args, **kwargs)
+        clean_copy = cleaned_data.copy()
+        uncoded_url = clean_copy.get('external_link', None)
+        if uncoded_url:
+            clean_copy['external_link'] = urllib.quote(uncoded_url)
+        return clean_copy
