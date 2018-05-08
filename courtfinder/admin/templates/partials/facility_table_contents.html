@@ -12,11 +12,17 @@
     <td>{{ fac.name }}</td>
     <td>{{ fac.image_description }}</td>
     <td>
+        {% if fac.image_src %}
         <span class="icon">
               <img src="{% static fac.image_src %}" class="{{ fac.image_class }}" alt="{{ fac.image_description }}">
         </span>
+        {% else %}
+        <span>
+            No icon uploaded
+        </span>
+        {% endif %}
     </td>
-    <td><a target="_blank" href="{% url 'admin:edit_facility_type' id=fac.id %}">edit</a></td>
+    <td><a href="{% url 'admin:edit_facility_type' id=fac.id %}">edit</a></td>
 
   </tr>
   {% endfor %}

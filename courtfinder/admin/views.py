@@ -851,7 +851,7 @@ class FacilityList(AdminListView):
                 # Image class is the generated class name (empty for new style images)
                 'image_class': "" if facility.image_file_path else 'icon-' + facility.image,
                 # The relative path to the image
-                'image_src': facility.image_file_path if facility.image_file_path else 'images/facility_icons.png',
+                'image_src': facility.image_file_path if facility.image_file_path else None,
                 # This description is used for the alt text
                 'image_description': facility.image_description,
                 # The relative file path of the image
@@ -864,15 +864,15 @@ class FacilityList(AdminListView):
         self.list_add_url = reverse("admin:edit_facility_type")
         self.type_name = "facility type"
 
-def facility_icon_upload(request, facility_id):
-    facility_type = get_object_or_404(FacilityType, pk=facility_id)
+def facility_icon_upload(request, id):
+    facility_type = get_object_or_404(FacilityType, pk=id)
     form = forms.UploadImageForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             try:
                 storage.upload_facility_icon(facility_type, form.cleaned_data['image'])
                 messages.success(request, 'Icon updated')
-                return redirect('admin:edit_facility_type', facility_id)
+                return redirect('admin:edit_facility_type', id)
             except storage.StorageException as e:
                 messages.error(request, e)
     else:

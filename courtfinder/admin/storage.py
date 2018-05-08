@@ -59,12 +59,14 @@ def delete_court_photo(court):
 def facility_image_file_path(facility_type):
     filename = '%s.png' % slugify(facility_type.name)
     if facility_type.image_file_path:
-        return facility_type.image_file_path
+        return filename, facility_type.image_file_path
     return filename, 'uploads/facility/%s' % filename
 
 
 def upload_facility_icon(facility_type, image):
     filename, filepath = facility_image_file_path(facility_type)
+    # Filename is only being used to store the temporary file and so if replacing an existing image,
+    # it will still ultimately use the same full file path
     tempfile = '/tmp/%s' % filename
 
     im = Image.open(image)
