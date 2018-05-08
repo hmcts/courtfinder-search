@@ -3,6 +3,7 @@ import forms
 import storage
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -803,7 +804,8 @@ def photo_delete(request, id):
     return redirect('admin:photo', court.id)
 
 
-class AdminListView(View):
+class AdminListView(PermissionRequiredMixin, View):
+    permission_required = 'list.manage'
     template = 'lists/list_view.html'
     objects = None
     partial = None
