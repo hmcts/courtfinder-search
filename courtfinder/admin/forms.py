@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.text import slugify
 from search import models
 from .models import FacilityType, ContactType, OpeningType
+import re
 
 
 class UserEditForm(forms.ModelForm):
@@ -83,6 +84,18 @@ class CourtLocationForm(forms.ModelForm):
         fields = ('directions', 'lat', 'lon')
         labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
         widgets = {'directions': forms.Textarea(attrs={'rows': 4})}
+
+    def clean_lat(self):
+        data = self.cleaned_data['lat']
+        if not re.match('^(\+|-)?((\d((\.)|\.\d+)?)|(0*?[0-8]\d((\.)|\.\d+)?)|(0*?90((\.)|\.0+)?))$', str(data)):
+            raise forms.ValidationError('Invalid latitude')
+        return data
+
+    def clean_lon(self):
+        data = self.cleaned_data['lon']
+        if not re.match('^(\+|-)?((\d((\.)|\.\d+)?)|(0*?\d\d((\.)|\.\d+)?)|(0*?1[0-7]\d((\.)|\.\d+)?)|(0*?180((\.)|\.0+)?))$', str(data)):
+            raise forms.ValidationError('Invalid longitude')
+        return data
 
 
 class CourtLeafletsForm(forms.ModelForm):
