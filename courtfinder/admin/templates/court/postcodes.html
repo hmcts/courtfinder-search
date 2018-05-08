@@ -10,12 +10,14 @@
       <input type="submit" class="button" value="Add" />
     </form>
 
+    {% if postcodes %}
     <h3>Delete or move postcodes</h3>
     <form class="court postcodes" method="post">
         {% csrf_token %}
         {{ form.as_p }}
       <input id="move-button" style="display: none;" type="submit" class="button-secondary" value="Update" />
     </form>
+    {% endif %}
 
     {% else %}
         <p>You need to enable relevant civil court <a href="{% url 'admin:aols' court.id %}">areas of law</a></p>

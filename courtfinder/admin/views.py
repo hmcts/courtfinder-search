@@ -744,7 +744,8 @@ def edit_postcodes(request, id):
         'court': court,
         'form': form,
         'add_form': forms.AddPostcodesForm,
-        'areas': areas
+        'areas': areas,
+        'postcodes': postcodes
     })
 
 
