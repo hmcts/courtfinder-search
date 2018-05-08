@@ -814,6 +814,7 @@ class AdminListView(PermissionRequiredMixin, View):
     header_message = None
     list_add_url = None
     type_name = None
+    hide_add_link = False
 
     def initialize(self, request):
         pass
@@ -833,6 +834,7 @@ class AdminListView(PermissionRequiredMixin, View):
             'partial': self.partial,
             'list_add_url': self.list_add_url,
             'type_name': self.type_name,
+            'hide_add_link': self.hide_add_link,
         }
         return context
 
@@ -910,9 +912,11 @@ class AreaOfLawList(AdminListView):
         self.heading = "Areas of Law"
         self.list_add_url = reverse("admin:edit_aol")
         self.type_name = "area of law"
+        self.hide_add_link = True
 
-class EditType(View):
 
+class EditType(PermissionRequiredMixin, View):
+    permission_required = 'type.manage'
     form_class = None
     type = None
     type_model = None
@@ -948,12 +952,16 @@ class EditType(View):
         id = kwargs.get('id', None)
         self.prepare(id)
         form = self.form_class(request.POST, instance=self.type)
-        instance = form.save(commit=False)
         error = False
-        try:
-            self.save_form(instance)
-        except ValidationError as e:
-            messages.error(request, e.message)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            try:
+                self.save_form(instance)
+            except ValidationError as e:
+                messages.error(request, e.message)
+                error = True
+        else:
+            messages.error(request, form.errors)
             error = True
         if error:
             return render(request, self.template, self.get_context_data(form))
@@ -979,6 +987,7 @@ class EditType(View):
     def type_count(self, instance):
         return self.type_model.objects.filter(name__iexact=instance.name)\
             .exclude(pk=instance.pk).count()
+
 
 class EditFacilityType(EditType):
 
@@ -1065,11 +1074,6 @@ class DeleteOpeningType(DeleteType):
     type_model = OpeningType
     delete_msg = 'Opening type deleted'
 
-
-class DeleteAOL(DeleteType):
-    redirect_url = 'admin:aols'
-    type_model = models.AreaOfLaw
-    delete_msg = "Area of law deleted"
 
 
 class ReorderingListView(ReorderingFormView):

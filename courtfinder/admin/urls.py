@@ -56,7 +56,6 @@ urlpatterns = [
     url(r'^delete_opening_type/$', views.DeleteOpeningType.as_view(), name='delete_opening_type'),
     url(r'^edit_aol/$', views.EditAOL.as_view(), name='edit_aol'),
     url(r'^edit_aol/(?P<id>[0-9]+)$', views.EditAOL.as_view(), name='edit_aol'),
-    url(r'^delete_aol/$', views.DeleteAOL.as_view(), name='delete_aol'),
     url(r'^reorder_facility_types/$', views.ReorderingFacilityList.as_view(), name='reorder_facility_types'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]
