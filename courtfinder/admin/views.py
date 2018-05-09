@@ -696,7 +696,7 @@ def edit_family_court(request, id, area_id=None):
             form.save(court, area)
             messages.success(request, 'Family court settings updated')
             court.update_timestamp()
-            return redirect('admin:family', court.id, area_id)
+            return redirect('admin:family', court.id, area.id)
 
     return render(request, 'court/family.html', {
         'court': court,
