@@ -237,6 +237,7 @@ class CourtOpeningForm(forms.ModelForm):
             else:
                 self.fields["type"].choices = [("", type_name + " - discontinued type")] + list(self.fields["type"].choices)[1:]
                 self.fields["type"].required = False
+                self.initial["hours"] = type_hours
         else:
             self.initial["type"] = ""
             self.initial["hours"] = ""
@@ -246,7 +247,9 @@ class CourtOpeningForm(forms.ModelForm):
         clean_copy = cleaned_data.copy()
         type_input = clean_copy.get("type", None)
         hours_input = clean_copy.get("hours", None)
-        if not type_input or not hours_input:
+        if not type_input:
+            return cleaned_data
+        if not hours_input:
             raise forms.ValidationError("You must fill in the required fields")
         else:
             op_type = OpeningType.objects.filter(name=type_input).first()
