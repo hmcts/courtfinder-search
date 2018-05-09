@@ -275,6 +275,7 @@ class BaseFormView(View):
     heading = ""
     header_message = ""
     orderable_name = ""
+    orderable_plural = ""
 
     def get_context_data(self):
         pass
@@ -345,6 +346,7 @@ class AddOrderableView(BaseOrderableFormView):
             'heading': self.heading,
             'header_message': self.header_message,
             'orderable_name': self.orderable_name,
+            'orderable_plural': self.orderable_plural,
         }
         return context
 
@@ -384,6 +386,7 @@ class OrderableFormView(BaseOrderableFormView):
             'heading': self.heading,
             'header_message': self.header_message,
             'orderable_name': self.orderable_name,
+            'orderable_plural': self.orderable_plural,
         }
         return context
 
@@ -422,6 +425,7 @@ class ContactMixin(object):
         self.heading = "Contacts"
         self.header_message = render_to_string('partials/contact_message.html')
         self.orderable_name = "contact"
+        self.orderable_plural = 'contacts'
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
@@ -485,6 +489,7 @@ class EmailMixin(object):
         self.heading = "Email addresses"
         self.header_message = "List email addresses for enquiries first. No duplicate email addresses allowed."
         self.orderable_name = "email address"
+        self.orderable_plural = "email addresses"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
@@ -547,6 +552,7 @@ class OpeningTimeMixin(object):
         self.heading = "Opening times"
         self.header_message = render_to_string('partials/opening_message.html')
         self.orderable_name = "set of times"
+        self.orderable_plural = "opening times"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
@@ -600,6 +606,7 @@ class FacilityMixin(object):
         self.ordering = False
         self.heading = "Facilities"
         self.orderable_name = "facility"
+        self.orderable_plural = "facilities"
 
     def initialize_get(self, request, id):
         self.initialize(request, id)
