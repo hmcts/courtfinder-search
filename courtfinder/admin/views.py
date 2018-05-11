@@ -934,6 +934,7 @@ class EditType(PermissionRequiredMixin, View):
     template = "lists/edit_type_view.html"
     redirect_url = None
     heading = ""
+    existing = True
 
     def initialize(self, request, id=None):
         pass
@@ -942,8 +943,10 @@ class EditType(PermissionRequiredMixin, View):
         if id:
             self.type = get_object_or_404(self.type_model, id=id)
             self.return_url = reverse(self.rev_url, kwargs={'id': id})
+            self.existing = True
         else:
             self.type = None
+            self.existing = False
             self.return_url = reverse(self.rev_url)
 
     def get(self, request, *args, **kwargs):
@@ -983,6 +986,7 @@ class EditType(PermissionRequiredMixin, View):
             'list_url': reverse(self.redirect_url),
             'heading': self.heading,
             'partial': self.partial,
+            'existing': self.existing,
         }
         return context
 

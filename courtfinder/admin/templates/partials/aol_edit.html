@@ -3,5 +3,5 @@
 <form method="post" action="{{return_url}}">
 {% csrf_token %}
 {{ form.as_p }}
-<input type="submit" class="button" name="Update" value="Update" />
+<input type="submit" class="button" {% if existing %}name="Update" value="Update"{% else %}name="Add" value="Add" {% endif %} />
 </form>

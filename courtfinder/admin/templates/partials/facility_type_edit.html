@@ -12,11 +12,12 @@
 </a>
 </p>
 {% endif %}
-<input type="submit" class="button" name="Update" value="Update" />
+<input type="submit" class="button" {% if existing %}name="Update" value="Update"{% else %}name="Add" value="Add" {% endif %} />
 </form>
-
+{% if existing %}
 <h3>Delete facility type</h3>
 <form action="{% url 'admin:delete_facility_type' %}" method="POST">
 {% csrf_token %}
 <input hidden name="id" value="{{type.id}}"/><input class="button-secondary" type="submit" value="Delete"/>
 </form>
+{% endif %}
