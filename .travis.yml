@@ -11,6 +11,7 @@ notifications:
 services:
   - postrgresql
 before_install:
+  - sudo apt-get -qq update
   - sudo ./apt/base.sh
   - sudo ./apt/testing.sh
   - wget -N https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip -P ~/
