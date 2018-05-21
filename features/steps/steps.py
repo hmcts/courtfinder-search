@@ -114,3 +114,7 @@ def step_impl(context, text, id):
 @then(u'"{name}" should be marked as required')
 def step_impl(context, name):
     assert context.browser.is_element_present_by_xpath("//input[@name='%s'][@required='']" % name)
+
+@then(u'I should see an image with text "{text}"')
+def step_impl(context, text):
+    assert context.browser.is_element_present_by_xpath("//img[contains(@alt, '%s')]" % text)

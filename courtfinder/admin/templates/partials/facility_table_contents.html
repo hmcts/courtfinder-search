@@ -18,7 +18,7 @@
         </span>
         {% else %}
         <span>
-            No icon uploaded
+            <a href = "{% url 'admin:facility_icon_upload' fac.id %}">upload icon</a>
         </span>
         {% endif %}
     </td>

@@ -198,7 +198,9 @@
         {% for facility in court.facilities %}
           <li>
             <span class="icon">
+              {% if facility.image_src %}
               <img src="{% static facility.image_src %}" class="{{ facility.image_class }}" alt="{{ facility.image_description }}">
+              {% endif %}
             </span>
             <span class="facility">{{ facility.description|default:""|safe }}</span>
           </li>

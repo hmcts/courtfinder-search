@@ -19,6 +19,7 @@ Feature: Edit facilities for a given court
     And I press "Save"
     And I view court in the new window
     Then I should see "Test new fac description"
+    And I should see an image with text "Disabled toilet"
 
   Scenario: Delete existing facility
     When I remove the first form instance

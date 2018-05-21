@@ -82,7 +82,7 @@ def format_court(court):
             # Image class is the generated class name (empty for new style images)
             'image_class': "" if facility.image_file_path else 'icon-' + facility.image,
             # The relative path to the image
-            'image_src': facility.image_file_path if facility.image_file_path else 'images/facility_icons.png',
+            'image_src': facility.image_file_path if facility.image_file_path else None,
             # This description is used for the alt text
             'image_description': facility.image_description,
             # The relative file path of the image
