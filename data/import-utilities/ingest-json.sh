@@ -1,6 +1,12 @@
 #!/bin/bash
 PYTHON=python
 
+if [ "$1" != "migration-override" ]; then
+  # disable import for new admin, unless it's manual override
+  echo "Import disabled for new admin, quitting..."
+  exit 0
+fi
+
 MESSAGE_FORMAT="json"
 
 # Name of the temp database to be used to store data during import
