@@ -212,36 +212,6 @@ class SearchTestCase(TestCase):
             response = c.get('/courts/leaflet-magistrates-court')
             self.assertNotIn('Leaflets for printing', response.content)
 
-    def test_facilty_icons(self):
-
-        # Obtain the list of facilities for the test court
-        c = Client()
-        response = c.get('/courts/accrington-magistrates-court')
-        tree = lh.fromstring(response.content)
-        facility_list = tree.cssselect("div[id=facilities] ul li")
-
-        summary = []
-        for elem in facility_list:
-            spans = elem.cssselect("span")
-            assert spans[0].get("class") == "icon"
-            img = spans[0].cssselect("img")[0]
-
-            if img.get("class") == "":  # New-style
-                assert img.get("src") == "/assets/images/newstyle_facilitiesicon.png"
-                assert img.get("alt") == "New-style facilities icon"
-                assert spans[1].get("class") == "facility"
-                assert spans[1].cssselect("p")[0].text == "New-style facility icons are supported at this court"
-                summary.append("new")
-
-            elif img.get("class").startswith("icon-"):  # Old-style
-                summary.append("old")
-
-            else:  # Unknown style
-                assert False, "Bad facility icon html: {}".format(elem.text)
-
-        self.assertIn("new", summary, "No new style facilities found")
-        self.assertIn("old", summary, "No old style facilities found")
-
     def test_court_opening_times_are_ordered(self):
         client = Client()
 
