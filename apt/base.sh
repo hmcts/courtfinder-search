@@ -12,4 +12,5 @@ apt-get install --fix-missing -y --no-install-recommends \
         python-dev \
         python-pip \
         ruby \
-        wget
+        wget \
+        curl
