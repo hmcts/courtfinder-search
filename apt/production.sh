@@ -2,6 +2,5 @@
 
 $(dirname $0)/base.sh
 
-apt-get install --fix-missing -y \
-        npm \
-        nodejs
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+apt install nodejs
