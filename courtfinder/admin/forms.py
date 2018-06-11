@@ -182,11 +182,12 @@ class CourtEmailForm(forms.ModelForm):
 
     class Meta:
         model = models.Email
-        fields = ['description', 'address']
+        fields = ['description', 'address', 'explanation']
 
     def __init__(self, *args, **kwargs):
         super(CourtEmailForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
+        self.fields["explanation"].required = False
         if not is_new_instance:
             con_type = ContactType.objects.filter(name=self.instance.description).first()
             if con_type:

@@ -150,6 +150,9 @@
           <div class="email-label" property="contactPoint" typeof="ContactPoint">
           {% if email.description != '' %}
             <span class="label-pad" property="contactType" typeof="ContactPoint">{{email.description}}:</span>
+            {% if email.explanation != None and email.explanation != '' %}
+                  <br>({{ email.explanation }})
+            {% endif %}
           {% endif %}
           </div>
           <div class="email-addresses">
