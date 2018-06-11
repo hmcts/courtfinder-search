@@ -8,10 +8,12 @@ Feature: Edit emails for a given court
   Scenario: Update existing email
     When I select "Defendants" from "id_form-0-description"
     And I fill in "form-0-address" with "Testing address 1"
+    And I fill in "form-0-explanation" with "Testing explanation 1"
     And I press "Update"
     And I view court in the new window
     Then I should see "Defendants"
     And I should see "Testing address"
+    And I should see "Testing explanation 1"
 
   Scenario: Add new email
     When I visit "/staff/court/1/add_email"

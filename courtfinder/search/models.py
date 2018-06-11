@@ -221,6 +221,7 @@ class CourtContact(models.Model):
 class Email(models.Model):
     description = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
+    explanation = models.CharField(null=True, max_length=85)
 
     def __unicode__(self):
         return "%s: %s" % (self.description, self.address)
