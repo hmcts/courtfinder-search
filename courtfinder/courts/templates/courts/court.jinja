@@ -150,15 +150,17 @@
           <div class="email-label" property="contactPoint" typeof="ContactPoint">
           {% if email.description != '' %}
             <span class="label-pad" property="contactType" typeof="ContactPoint">{{email.description}}:</span>
-            {% if email.explanation != None and email.explanation != '' %}
-                  <br>({{ email.explanation }})
-            {% endif %}
           {% endif %}
           </div>
           <div class="email-addresses">
             {% for address in email.addresses %}
               <a property="email" href="mailto:{{ address }}">{{ address }}</a>{% if not forloop.last %}<br>{% endif %}
             {% endfor %}
+          </div>
+          <div class="contact-explanation" >
+            {% if email.explanation != None and email.explanation != '' %}
+              ({{ email.explanation }})
+            {% endif %}
           </div>
           <div class="spacer"></div>
           {% endfor %}
@@ -170,15 +172,17 @@
             <div class="phone-label" property="contactPoint" typeof="ContactPoint">
               {% if contact.name != '' %}
                 <span class="label-pad" property="contactType">{{ contact.name }}:</span>
-                {% if contact.explanation != None and contact.explanation != '' %}
-                  <br>({{ contact.explanation }})
-                {% endif %}
               {% endif %}
             </div>
             <div class="phone-number">  
               {% for number in contact.numbers %}
                 <a property="telephone" href="tel:{{ number }}">{{ number }}</a>{% if not forloop.last %}<br>{% endif %}
               {% endfor %}
+            </div>
+            <div class="contact-explanation" >
+              {% if contact.explanation != None and contact.explanation != '' %}
+                ({{ contact.explanation }})
+              {% endif %}
             </div>
           {% endif %}
            <div class="spacer"></div>
