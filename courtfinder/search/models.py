@@ -190,6 +190,7 @@ class CourtAddress(models.Model):
     address = models.TextField()
     postcode = models.CharField(max_length=255)
     town = models.ForeignKey(Town)
+    town_name = models.CharField(null=True, max_length=255, default=None)
 
     def __unicode__(self):
         return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town.name)

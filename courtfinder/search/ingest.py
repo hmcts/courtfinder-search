@@ -162,7 +162,8 @@ class Ingest:
                         address_type=address_type,
                         address=address['address'],
                         postcode=address['postcode'],
-                        town=town
+                        town=town,
+                        town_name=address['town'],
                     )
 
             for contact_obj in court_obj['contacts']:
