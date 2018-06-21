@@ -30,7 +30,6 @@ class Ingest:
         CourtCourtType.objects.using(database_name).all().delete()
         DataStatus.objects.using(database_name).all().delete()
         ParkingInfo.objects.using(database_name).all().delete()
-        Town.objects.using(database_name).all().delete()
 
         for court_obj in courts:
             court_created_at = court_obj.get('created_at', None)
@@ -153,8 +152,6 @@ class Ingest:
                     name=address['type'])
 
                 if address['town'] and not(address['town'].isspace()):
-                    town, created = Town.objects.db_manager(database_name).get_or_create(
-                        name=address['town'], county=address['county'])
                     if not address['postcode']:
                         address['postcode'] = ""
                     CourtAddress.objects.db_manager(database_name).create(
@@ -162,7 +159,6 @@ class Ingest:
                         address_type=address_type,
                         address=address['address'],
                         postcode=address['postcode'],
-                        town=town,
                         town_name=address['town'],
                     )
 

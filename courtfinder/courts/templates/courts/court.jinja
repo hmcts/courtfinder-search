@@ -53,9 +53,6 @@
             {% endfor %}
           </span>
           <span property="addressLocality">{{ court.visiting_address.town }}</span><br/>
-          {% if court.visiting_address.county != court.visiting_address.town %}
-            <span property="addressRegion">{{ court.visiting_address.county }}</span><br/>
-          {% endif %}
           <span property="postalCode">{{ court.visiting_address.postcode }}</span>
           {% if court.lat and court.lon %}
             <p id="map-link">
@@ -75,9 +72,6 @@
             {{ line }}<br/>
           {% endfor %}
           {{ court.postal_address.town }}<br/>
-          {% if court.postal_address.county != court.postal_address.town %}
-            {{ court.postal_address.county }}<br/>
-          {% endif %}
           {{ court.postal_address.postcode }}
           {% if court.postal_address.type.name == 'Visit us or write to us' %}
             {% if court.lat and court.lon %}

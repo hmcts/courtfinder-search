@@ -19,10 +19,6 @@
 
     <span property='addressLocality'>{{ court.visiting_address.town }}</span><br/>
 
-    {% if court.visiting_address.county != court.visiting_address.town %}
-      <span property='addressRegion'>{{ court.visiting_address.county }}</span><br/>
-    {% endif %}
-
     <span property='postalCode'>{{ court.visiting_address.postcode }}</span>
     <br/>
     {% for contact in court.contacts %}

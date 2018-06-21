@@ -169,14 +169,6 @@ class CourtAreaOfLaw(models.Model):
                                                 self.single_point_of_entry)
 
 
-class Town(models.Model):
-    name = models.CharField(max_length=255)
-    county = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.name, self.county)
-
-
 class AddressType(models.Model):
     name = models.CharField(max_length=255)
 
@@ -189,11 +181,10 @@ class CourtAddress(models.Model):
     court = models.ForeignKey(Court)
     address = models.TextField()
     postcode = models.CharField(max_length=255)
-    town = models.ForeignKey(Town)
     town_name = models.CharField(null=True, max_length=255, default=None)
 
     def __unicode__(self):
-        return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town.name)
+        return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town_name)
 
 
 class Contact(models.Model):

@@ -53,8 +53,7 @@ def format_court(court):
         address_obj = {
             'address_lines': [line for line in address.address.split('\n') if line != ''],
             'postcode': address.postcode,
-            'town': address.town.name,
-            'county': address.town.county,
+            'town': address.town_name,
             'type': address.address_type
         }
         if str(address.address_type) == 'Postal' or str(address.address_type) == 'Visit us or write to us':
