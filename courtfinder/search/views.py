@@ -243,8 +243,7 @@ def __format_results(results):
             visible_address = {
                 'address_lines': [line for line in address.address.split('\n') if line != ''],
                 'postcode':address.postcode,
-                'town':address.town.name,
-                'county': address.town.county,
+                'town':address.town_name,
                 'type':address.address_type,
             }
         else:

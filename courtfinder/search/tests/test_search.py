@@ -427,15 +427,13 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(aol.external_link_desc), "More information on adoption.")
         aols = CourtAreaOfLaw.objects.create(court=court, area_of_law=aol)
         self.assertEqual(str(aols), "Accrington Magistrates' Court deals with Divorce (spoe: False)")
-        town = Town.objects.create(name="Hobbittown", county="Shire")
-        self.assertEqual(str(town), "Hobbittown (Shire)")
         address_type = AddressType.objects.create(name="Postal")
         self.assertEqual(str(address_type), "Postal")
         court_address = CourtAddress.objects.create(address_type=address_type,
                                                     court=court,
                                                     address="The court address",
                                                     postcode="CF34RR",
-                                                    town=town)
+                                                    town_name="Hobbittown")
         self.assertEqual(str(court_address), "Postal for Accrington Magistrates' Court is The court address, CF34RR, Hobbittown")
         contact = Contact.objects.create(name="Enquiries", number="0123456789", explanation="explanation")
         self.assertEqual(str(contact), "Enquiries, explanation: 0123456789")

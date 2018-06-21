@@ -121,12 +121,14 @@ class LocatePostcodeForm(forms.Form):
 class CourtAddressForm(forms.ModelForm):
     class Meta:
         model = models.CourtAddress
-        fields = ['address_type', 'address', 'town', 'postcode']
+        fields = ['address_type', 'address', 'town_name', 'postcode']
+        labels = {
+            'town_name': 'Town',
+        }
 
     def __init__(self, address_index=None, court=None, *args, **kwargs):
         super(CourtAddressForm, self).__init__(*args, **kwargs)
         address_types = models.AddressType.objects.all()
-        self.fields['town'].queryset = models.Town.objects.all().order_by('name')
         if address_index and address_index > 0:
             address_types = address_types.exclude(name="Visit us or write to us")
             if court:
@@ -141,7 +143,7 @@ class CourtAddressForm(forms.ModelForm):
             if self.instance.address_type not in address_types:
                 self.fields["address"].disabled = True
                 self.fields["postcode"].disabled = True
-                self.fields["town"].disabled = True
+                self.fields["town_name"].disabled = True
         self.fields['address_type'].queryset = address_types
 
 

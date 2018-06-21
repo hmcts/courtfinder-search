@@ -21,11 +21,6 @@ class SearchTestCase(TestCase):
     def tearDown(self):
         pass
 
-    def test_county(self):
-        c = Client()
-        response = c.get('/search/results.json?q=Accrington')
-        self.assertIn('"county": "Lancashire"', response.content)
-
     def test_postcode(self):
         c = Client()
         response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
