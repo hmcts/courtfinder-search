@@ -108,6 +108,8 @@ class Facility(models.Model):
 
 class OpeningTime(models.Model):
     description = models.CharField(max_length=1024)
+    type = models.CharField(null=True, max_length=255, default=None)
+    hours = models.CharField(null=True, max_length=255, default=None)
 
     def __unicode__(self):
         return self.description
