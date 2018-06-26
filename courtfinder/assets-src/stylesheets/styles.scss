@@ -512,3 +512,19 @@ section.closedCourt
     padding: 30px;
     font-size: xx-large;
   }
+
+.language-switcher {
+  float: right;
+  margin: 0 0 0 1em;
+  padding: 0 0 8px;
+  @include core-16;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin: 0;
+    list-style-type: none;
+  }
+}

@@ -11,6 +11,17 @@
 
 {% block before_content %}
 <div id="feedback-banner">
+  {% if welsh_feature %}
+  <nav id="language-switcher" class="language-switcher">
+      <ul>
+        {% ifequal LANGUAGE_CODE "en" %}
+        <li><a rel="alternate" href="{% url 'set_language' %}?lang=cy" hreflang="cy" lang="cy">Cymraeg</a></li>
+        {% else %}
+        <li><a rel="alternate" href="{% url 'set_language' %}?lang=en" hreflang="en" lang="en">English</a></li>
+        {% endifequal %}
+      </ul>
+  </nav>
+  {% endif %}
   {% url 'staticpages:feedback' as feedback_url %}
   {% blocktrans %}This is a new service - <a href="{{ feedback_url }}">your feedback</a> will help us to improve it.{% endblocktrans %}
   <hr/>
