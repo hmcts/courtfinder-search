@@ -31,6 +31,7 @@ before_script:
   - "$(npm bin)/gulp"
   - "cd courtfinder"
   - "python manage.py migrate --noinput"
+  - "python manage.py compilemessages"
 script:
   - coverage run --source='.' manage.py test
   - coverage report
