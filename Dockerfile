@@ -26,6 +26,8 @@ RUN python courtfinder/manage.py collectstatic --noinput && \
     mkdir -p /srv/logs && chown -R search:search /srv/logs && \
     chown -R search: /srv/search
 
+RUN python courtfinder/manage.py compilemessages
+
 USER search
 
 CMD ./run.sh

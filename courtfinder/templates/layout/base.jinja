@@ -1,6 +1,6 @@
 {% extends 'moj_template/base.html' %}
+{% load i18n %}
 {% load staticfiles %}
-
 {% block stylesheets %}
 <!--[if gt IE 8]><!--><link href="{% static 'stylesheets/main.css' %}" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
@@ -11,8 +11,8 @@
 
 {% block before_content %}
 <div id="feedback-banner">
-  <a href="https://www.gov.uk/service-manual/phases/beta.html" class="proposition-phase">beta</a>
-  This is a new service - <a href="{% url 'staticpages:feedback' %}">your feedback</a> will help us to improve it.
+  {% url 'staticpages:feedback' as feedback_url %}
+  {% blocktrans %}This is a new service - <a href="{{ feedback_url }}">your feedback</a> will help us to improve it.{% endblocktrans %}
   <hr/>
 </div>
 {% endblock %}

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
+from django.utils.translation import ugettext_lazy as _
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
@@ -71,15 +72,16 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'core.middleware.RequestLoggingMiddleware',
     'admin.middleware.RequireLoginMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
@@ -145,6 +147,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+LANGUAGES = (
+    ('en', _('English')),
+    # ('cy', _('Welsh')),
+)
+
+LOCALE_PATHS = (
+    SITE_ROOT + '/locale',
+)
 
 # Security middleware
 SECURE_BROWSER_XSS_FILTER = True
