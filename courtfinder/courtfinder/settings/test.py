@@ -1,6 +1,7 @@
 """Production settings and globals."""
 
 from __future__ import absolute_import
+from django.utils.translation import ugettext_lazy as _
 
 from os import environ
 
@@ -25,3 +26,10 @@ DATABASES = {
     }
 }
 
+
+FEATURE_WELSH_ENABLED = True
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('cy', _('Welsh')),
+)
