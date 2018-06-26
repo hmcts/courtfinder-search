@@ -1,7 +1,7 @@
 """Production settings and globals."""
 
 from __future__ import absolute_import
-
+from django.utils.translation import ugettext_lazy as _
 from .base import *
 import os
 
@@ -34,3 +34,10 @@ COURTS_DATA_S3_URL = os.getenv('COURTS_DATA_S3_URL', 'https://s3-eu-west-1.amazo
 COURT_IMAGE_BASE_URL = os.getenv('COURT_IMAGE_BASE_URL', 'https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/')
 
 FEATURE_LEAFLETS_ENABLED = is_enabled('FEATURE_LEAFLETS_ENABLED')
+FEATURE_WELSH_ENABLED = is_enabled('FEATURE_WELSH_ENABLED')
+
+if FEATURE_WELSH_ENABLED:
+    LANGUAGES = (
+        ('en', _('English')),
+        ('cy', _('Welsh')),
+    )
