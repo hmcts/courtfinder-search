@@ -13,4 +13,5 @@ apt-get install --fix-missing -y --no-install-recommends \
         python-pip \
         ruby \
         wget \
-        curl
+        curl \
+        gettext
