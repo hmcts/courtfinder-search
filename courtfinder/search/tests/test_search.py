@@ -457,7 +457,7 @@ class SearchTestCase(TestCase):
         self.assertEqual(str(facility), "sofa: comfy leather")
         court_facility = CourtFacility.objects.create(court=court, facility=facility)
         self.assertEqual(str(court_facility), "%s has facility %s" % (court.name, facility))
-        opening_time = OpeningTime.objects.create(description="open 7/7")
+        opening_time = OpeningTime.objects.create(type="open 7/7")
         self.assertEqual(str(opening_time), "open 7/7")
         court_opening_time = CourtOpeningTime.objects.create(court=court, opening_time=opening_time)
         self.assertEqual(str(court_opening_time), "%s has facility %s" % (court.name, opening_time))

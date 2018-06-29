@@ -107,16 +107,18 @@ class Facility(models.Model):
 
 
 class OpeningTime(models.Model):
-    description = models.CharField(max_length=1024)
     type = models.CharField(null=True, max_length=255, default=None)
     hours = models.CharField(null=True, max_length=255, default=None)
 
     def __unicode__(self):
-        return self.description
+        if self.hours:
+            return "%s: %s" % (self.type, self.hours)
+        else:
+            return "%s" % self.type
 
     @property
     def order_label(self):
-        return "%s" % self.description
+        return "%s" % self.type
 
 
 class LocalAuthority(models.Model):

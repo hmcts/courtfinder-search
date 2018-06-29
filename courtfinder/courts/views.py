@@ -105,7 +105,7 @@ def format_court(court):
         'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
         'postal_address': postal_address,
         'visiting_address': visiting_address,
-        'opening_times': court.opening_times.all().order_by("description"),
+        'opening_times': court.opening_times.all().order_by("type"),
         'areas_of_law': court.areas_of_law.all().order_by("name"),
         'facilities': facilities,
         'emails': emails,
