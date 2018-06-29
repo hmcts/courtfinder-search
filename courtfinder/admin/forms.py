@@ -118,6 +118,7 @@ class CourtLeafletsForm(forms.ModelForm):
 class LocatePostcodeForm(forms.Form):
     postcode = forms.CharField(max_length=9)
 
+
 class CourtAddressForm(forms.ModelForm):
     class Meta:
         model = models.CourtAddress
@@ -214,58 +215,25 @@ class CourtOpeningForm(forms.ModelForm):
 
     class Meta:
         model = models.OpeningTime
-        fields = ['description']
-        widgets = {
-            'description': forms.HiddenInput(),
-        }
+        fields = ['type', 'hours']
 
     def __init__(self, *args, **kwargs):
         super(CourtOpeningForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
         if not is_new_instance:
-            description_split = self.instance.description.split(':', 1)
-            type_name = description_split[0]
-            if self.instance.description:
-                if len(description_split) > 1:
-                    type_hours = description_split[1]
-                    type_hours = type_hours[1:]
-                else:
-                    type_hours = ""
-                op_type = OpeningType.objects.filter(name=type_name).first()
-            else:
-                op_type = None
+            op_type = OpeningType.objects.filter(name=self.instance.type).first()
             if op_type:
-                self.initial["type"] = type_name
-                self.initial["hours"] = type_hours
+                self.initial["type"] = op_type.name
             else:
-                self.fields["type"].choices = [("", type_name + " - discontinued type")] + list(self.fields["type"].choices)[1:]
+                self.fields["type"].choices = [("", self.instance.type + " - discontinued type")] + list(self.fields["type"].choices)[1:]
                 self.fields["type"].required = False
-                self.initial["hours"] = type_hours
-        else:
-            self.initial["type"] = ""
-            self.initial["hours"] = ""
 
-    def clean(self, *args, **kwargs):
-        cleaned_data = super(CourtOpeningForm, self).clean(*args, **kwargs)
-        clean_copy = cleaned_data.copy()
-        type_input = clean_copy.get("type", None)
-        hours_input = clean_copy.get("hours", None)
-        if not type_input:
-            return cleaned_data
-        if not hours_input:
-            raise forms.ValidationError("You must fill in the required fields")
-        else:
-            op_type = OpeningType.objects.filter(name=type_input).first()
-            if op_type:
-                clean_copy["description"] = op_type.name + ": " + hours_input
-            else:
-                clean_copy["description"] = ""
-        clean_copy.pop("type")
-        clean_copy.pop("hours")
-        if self.errors.get("description", None):
-            del self.errors["description"]
-        self.cleaned_data = clean_copy
-        return clean_copy
+    def save(self, *args, **kwargs):
+        op_form = super(CourtOpeningForm, self).save(*args, **kwargs)
+        op_type = OpeningType.objects.filter(name=op_form.type).first()
+        if op_type:
+            op_form.type = op_type.name
+        return op_form
 
 
 class CourtFacilityForm(forms.ModelForm):

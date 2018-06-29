@@ -130,8 +130,16 @@ class Ingest:
                 CourtFacility.objects.db_manager(database_name).create(court=court, facility=facility)
 
             for opening_dict in court_obj['opening_times']:
+                description_split = opening_dict["opening_time"].split(':', 1)
+                opening_type = description_split[0]
+                if description_split:
+                    if len(description_split) > 1:
+                        opening_hours = description_split[1]
+                        opening_hours = opening_hours[1:]
+                    else:
+                        opening_hours = None
                 opening_time, created = OpeningTime.objects.db_manager(database_name).get_or_create(
-                    description=opening_dict["opening_time"])
+                    type=opening_type, hours=opening_hours)
                 CourtOpeningTime.objects.db_manager(database_name).create(
                     court=court, opening_time=opening_time, sort=opening_dict["sort"])
 

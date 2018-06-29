@@ -5,7 +5,7 @@
     <ul>
       {% for opening_time in court.opening_times %}
         <li>
-          <time property="openingHours">{{ opening_time.description }}</time>
+          <time property="openingHours">{{ opening_time }}</time>
         </li>
       {% endfor %}
     </ul>

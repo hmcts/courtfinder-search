@@ -8385,1884 +8385,1431 @@
       access icon, image_file_path: uploads/facility/image_file/49/disabled.png}
 - model: search.openingtime
   pk: 1
-  fields: {description: 'Court building open: 8:30am to 5:30pm', type: Court building
-      open, hours: '8:30am to 5:30pm'}
+  fields: {type: Court building open, hours: '8:30am to 5:30pm'}
 - model: search.openingtime
   pk: 2
-  fields: {description: 'Court counter open: 9am to 5pm (4:30pm on Friday)', type: Court
-      counter open, hours: '9am to 5pm (4:30pm on Friday)'}
+  fields: {type: Court counter open, hours: '9am to 5pm (4:30pm on Friday)'}
 - model: search.openingtime
   pk: 3
-  fields: {description: 'Court building open: 8.45 am - 4.45 pm', type: Court building
-      open, hours: 8.45 am - 4.45 pm}
+  fields: {type: Court building open, hours: 8.45 am - 4.45 pm}
 - model: search.openingtime
   pk: 4
-  fields: {description: 'Court building open: Mon - Thurs 9am - 5pm and Fri 9am- 4:30pm',
-    type: Court building open, hours: 'Mon - Thurs 9am - 5pm and Fri 9am- 4:30pm'}
+  fields: {type: Court building open, hours: 'Mon - Thurs 9am - 5pm and Fri 9am- 4:30pm'}
 - model: search.openingtime
   pk: 5
-  fields: {description: 'Tribunal open: Monday to Friday 9am to 5pm', type: Tribunal
-      open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Tribunal open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 6
-  fields: {description: 'Court building open: This is an administrative site only',
-    type: Court building open, hours: This is an administrative site only}
+  fields: {type: Court building open, hours: This is an administrative site only}
 - model: search.openingtime
   pk: 7
-  fields: {description: 'Court building open: Monday to Friday 9am to 4pm', type: Court
-      building open, hours: Monday to Friday 9am to 4pm}
+  fields: {type: Court building open, hours: Monday to Friday 9am to 4pm}
 - model: search.openingtime
   pk: 8
-  fields: {description: 'Court counter open: By Appointment only on 0207 947 7502',
-    type: Court counter open, hours: By Appointment only on 0207 947 7502}
+  fields: {type: Court counter open, hours: By Appointment only on 0207 947 7502}
 - model: search.openingtime
   pk: 9
-  fields: {description: 'Court building open: Monday to Friday 9:30am to 4pm', type: Court
-      building open, hours: 'Monday to Friday 9:30am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:30am to 4pm'}
 - model: search.openingtime
   pk: 10
-  fields: {description: 'Court counter open: 10am to 2pm', type: Court counter open,
-    hours: 10am to 2pm}
+  fields: {type: Court counter open, hours: 10am to 2pm}
 - model: search.openingtime
   pk: 11
-  fields: {description: 'Court building open: 9am to 5pm', type: Court building open,
-    hours: 9am to 5pm}
+  fields: {type: Court building open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 12
-  fields: {description: 'Court counter open: 9am to 4pm', type: Court counter open,
-    hours: 9am to 4pm}
+  fields: {type: Court counter open, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 13
-  fields: {description: 'Court building open: Monday to Friday 9am until close of
-      business', type: Court building open, hours: Monday to Friday 9am until close
-      of business}
+  fields: {type: Court building open, hours: Monday to Friday 9am until close of business}
 - model: search.openingtime
   pk: 14
-  fields: {description: 'Court counter open: By prior appointment only', type: Court
-      counter open, hours: By prior appointment only}
+  fields: {type: Court counter open, hours: By prior appointment only}
 - model: search.openingtime
   pk: 15
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 4pm', type: Court
-      building open, hours: 'Monday to Friday 8:30am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 4pm'}
 - model: search.openingtime
   pk: 16
-  fields: {description: 'Bailiff counter open: 8:30am to 10:30am', type: Bailiff counter
-      open, hours: '8:30am to 10:30am'}
+  fields: {type: Bailiff counter open, hours: '8:30am to 10:30am'}
 - model: search.openingtime
   pk: 17
-  fields: {description: 'Court building open: Monday to Thursday 9am to 5pm, Friday
-      9am to 4:30pm', type: Court building open, hours: 'Monday to Thursday 9am to
-      5pm, Friday 9am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Thursday 9am to 5pm, Friday
+      9am to 4:30pm'}
 - model: search.openingtime
   pk: 18
-  fields: {description: 'Court counter open: Monday to Friday 9.00am to 4pm ', type: Court
-      counter open, hours: 'Monday to Friday 9.00am to 4pm '}
+  fields: {type: Court counter open, hours: 'Monday to Friday 9.00am to 4pm '}
 - model: search.openingtime
   pk: 19
-  fields: {description: 'Court building open: Monday to Friday 9am to 5pm', type: Court
-      building open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Court building open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 20
-  fields: {description: 'Court building open: 9am to 5pm (concourse level)', type: Court
-      building open, hours: 9am to 5pm (concourse level)}
+  fields: {type: Court building open, hours: 9am to 5pm (concourse level)}
 - model: search.openingtime
   pk: 21
-  fields: {description: 'Court enquiries open: 10am to 2pm (floor 5)', type: Court
-      enquiries open, hours: 10am to 2pm (floor 5)}
+  fields: {type: Court enquiries open, hours: 10am to 2pm (floor 5)}
 - model: search.openingtime
   pk: 22
-  fields: {description: 'Telephones: 8:30am to 5pm', type: Telephones, hours: '8:30am
-      to 5pm'}
+  fields: {type: Telephones, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 23
-  fields: {description: 'Bailiff counter open: 8am to 10am (floor 5)', type: Bailiff
-      counter open, hours: 8am to 10am (floor 5)}
+  fields: {type: Bailiff counter open, hours: 8am to 10am (floor 5)}
 - model: search.openingtime
   pk: 24
-  fields: {description: 'Telephone Enquiries from: 9am to 5pm', type: Telephone Enquiries
-      from, hours: 9am to 5pm}
+  fields: {type: Telephone Enquiries from, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 25
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:30pm', type: Court
-      building open, hours: 'Monday to Friday 9am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:30pm'}
 - model: search.openingtime
   pk: 26
-  fields: {description: 'Telephone Enquiries from: 8:30am to 5pm', type: Telephone
-      Enquiries from, hours: '8:30am to 5pm'}
+  fields: {type: Telephone Enquiries from, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 27
-  fields: {description: 'Building open: Monday to Friday  9am to 5pm ', type: Building
-      open, hours: 'Monday to Friday  9am to 5pm '}
+  fields: {type: Building open, hours: 'Monday to Friday  9am to 5pm '}
 - model: search.openingtime
   pk: 28
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 8:30am to 5pm ',
-    type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5pm '}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5pm '}
 - model: search.openingtime
   pk: 29
-  fields: {description: 'Court counter open: 9:30am to 4pm', type: Court counter open,
-    hours: '9:30am to 4pm'}
+  fields: {type: Court counter open, hours: '9:30am to 4pm'}
 - model: search.openingtime
   pk: 30
-  fields: {description: 'Bailiffs Office: 8:30am to 10:30am', type: Bailiffs Office,
-    hours: '8:30am to 10:30am'}
+  fields: {type: Bailiffs Office, hours: '8:30am to 10:30am'}
 - model: search.openingtime
   pk: 31
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 5pm', type: Court
-      building open, hours: 'Monday to Friday 8:30am to 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 5pm'}
 - model: search.openingtime
   pk: 32
-  fields: {description: 'Court counter open: By prior appointment only (High court
-      and Administrative Court 10am to 4pm)', type: Court counter open, hours: By
-      prior appointment only (High court and Administrative Court 10am to 4pm)}
+  fields: {type: Court counter open, hours: By prior appointment only (High court
+      and Administrative Court 10am to 4pm)}
 - model: search.openingtime
   pk: 33
-  fields: {description: 'Court counter open: 8:30am to 5pm', type: Court counter open,
-    hours: '8:30am to 5pm'}
+  fields: {type: Court counter open, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 34
-  fields: {description: 'Court building open: Monday to Friday 9am to 4pm ', type: Court
-      building open, hours: 'Monday to Friday 9am to 4pm '}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4pm '}
 - model: search.openingtime
   pk: 35
-  fields: {description: 'Court enquiries open: 9:30am to 4pm ', type: Court enquiries
-      open, hours: '9:30am to 4pm '}
+  fields: {type: Court enquiries open, hours: '9:30am to 4pm '}
 - model: search.openingtime
   pk: 36
-  fields: {description: 'County Court enquiries counter: 10am to 2pm ', type: County
-      Court enquiries counter, hours: '10am to 2pm '}
+  fields: {type: County Court enquiries counter, hours: '10am to 2pm '}
 - model: search.openingtime
   pk: 37
-  fields: {description: 'Court counter open: For urgent matters only, by prior appointment.',
-    type: Court counter open, hours: 'For urgent matters only, by prior appointment.'}
+  fields: {type: Court counter open, hours: 'For urgent matters only, by prior appointment.'}
 - model: search.openingtime
   pk: 38
-  fields: {description: 'Tribunal open: Monday to Friday 9am to 5:30pm', type: Tribunal
-      open, hours: 'Monday to Friday 9am to 5:30pm'}
+  fields: {type: Tribunal open, hours: 'Monday to Friday 9am to 5:30pm'}
 - model: search.openingtime
   pk: 39
-  fields: {description: 'Telephone Enquiries from: 9am to  5pm', type: Telephone Enquiries
-      from, hours: 9am to  5pm}
+  fields: {type: Telephone Enquiries from, hours: 9am to  5pm}
 - model: search.openingtime
   pk: 40
-  fields: {description: 'No counter service available: ', type: No counter service
-      available, hours: ''}
+  fields: {type: No counter service available, hours: ''}
 - model: search.openingtime
   pk: 41
-  fields: {description: 'Court building open: Monday to Friday  9am until close of
-      business', type: Court building open, hours: Monday to Friday  9am until close
-      of business}
+  fields: {type: Court building open, hours: Monday to Friday  9am until close of
+      business}
 - model: search.openingtime
   pk: 42
-  fields: {description: 'Magistrates'' Court open: Monday to Thursday 8:30am to 5pm,
-      Friday 9am to 4:30pm ', type: Magistrates' Court open, hours: 'Monday to Thursday
-      8:30am to 5pm, Friday 9am to 4:30pm '}
+  fields: {type: Magistrates' Court open, hours: 'Monday to Thursday 8:30am to 5pm,
+      Friday 9am to 4:30pm '}
 - model: search.openingtime
   pk: 43
-  fields: {description: 'Court building open: Monday to Thursday 8:30am to 5pm, Friday
-      9am to 4:30pm ', type: Court building open, hours: 'Monday to Thursday 8:30am
-      to 5pm, Friday 9am to 4:30pm '}
+  fields: {type: Court building open, hours: 'Monday to Thursday 8:30am to 5pm, Friday
+      9am to 4:30pm '}
 - model: search.openingtime
   pk: 44
-  fields: {description: 'Court building open: Monday to Friday 9:30am to 4:30pm',
-    type: Court building open, hours: 'Monday to Friday 9:30am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:30am to 4:30pm'}
 - model: search.openingtime
   pk: 45
-  fields: {description: 'Court counter open: 10am to 2pm for urgent appointments only',
-    type: Court counter open, hours: 10am to 2pm for urgent appointments only}
+  fields: {type: Court counter open, hours: 10am to 2pm for urgent appointments only}
 - model: search.openingtime
   pk: 46
-  fields: {description: 'Court building open: Monday to Friday 9:30am to 5pm', type: Court
-      building open, hours: 'Monday to Friday 9:30am to 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:30am to 5pm'}
 - model: search.openingtime
   pk: 47
-  fields: {description: 'Court building open: 9am to 4pm', type: Court building open,
-    hours: 9am to 4pm}
+  fields: {type: Court building open, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 48
-  fields: {description: 'Bailiffs Office: 8.00am to 10am', type: Bailiffs Office,
-    hours: 8.00am to 10am}
+  fields: {type: Bailiffs Office, hours: 8.00am to 10am}
 - model: search.openingtime
   pk: 49
-  fields: {description: 'Court counter open: By prior appointment only, please contact
-      enquiries', type: Court counter open, hours: 'By prior appointment only, please
-      contact enquiries'}
+  fields: {type: Court counter open, hours: 'By prior appointment only, please contact
+      enquiries'}
 - model: search.openingtime
   pk: 50
-  fields: {description: 'Building open: 9:30am to 5pm', type: Building open, hours: '9:30am
-      to 5pm'}
+  fields: {type: Building open, hours: '9:30am to 5pm'}
 - model: search.openingtime
   pk: 51
-  fields: {description: 'Telephone Enquiries from: 9:30am to 5pm', type: Telephone
-      Enquiries from, hours: '9:30am to 5pm'}
+  fields: {type: Telephone Enquiries from, hours: '9:30am to 5pm'}
 - model: search.openingtime
   pk: 52
-  fields: {description: 'Court counter open: By prior appointment (please phone the
-      enquiries number for an appointment)', type: Court counter open, hours: By prior
-      appointment (please phone the enquiries number for an appointment)}
+  fields: {type: Court counter open, hours: By prior appointment (please phone the
+      enquiries number for an appointment)}
 - model: search.openingtime
   pk: 53
-  fields: {description: 'Court counter open: 9am to 5pm (Magistrates'' Court)', type: Court
-      counter open, hours: 9am to 5pm (Magistrates' Court)}
+  fields: {type: Court counter open, hours: 9am to 5pm (Magistrates' Court)}
 - model: search.openingtime
   pk: 54
-  fields: {description: 'County Court enquiries counter: 10am to 2pm', type: County
-      Court enquiries counter, hours: 10am to 2pm}
+  fields: {type: County Court enquiries counter, hours: 10am to 2pm}
 - model: search.openingtime
   pk: 55
-  fields: {description: 'Court building open: Monday to Friday 8am to 6pm', type: Court
-      building open, hours: Monday to Friday 8am to 6pm}
+  fields: {type: Court building open, hours: Monday to Friday 8am to 6pm}
 - model: search.openingtime
   pk: 56
-  fields: {description: 'County Court enquiries counter: By prior appointment only',
-    type: County Court enquiries counter, hours: By prior appointment only}
+  fields: {type: County Court enquiries counter, hours: By prior appointment only}
 - model: search.openingtime
   pk: 57
-  fields: {description: 'Court building open: 8:30am to 5pm', type: Court building
-      open, hours: '8:30am to 5pm'}
+  fields: {type: Court building open, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 58
-  fields: {description: 'Tribunal open: Monday to Friday 8:30am to 5pm', type: Tribunal
-      open, hours: 'Monday to Friday 8:30am to 5pm'}
+  fields: {type: Tribunal open, hours: 'Monday to Friday 8:30am to 5pm'}
 - model: search.openingtime
   pk: 59
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 8:30am to 5:00pm',
-    type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5:00pm'}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5:00pm'}
 - model: search.openingtime
   pk: 60
-  fields: {description: 'Court counter open: 9am to 4.30pm', type: Court counter open,
-    hours: 9am to 4.30pm}
+  fields: {type: Court counter open, hours: 9am to 4.30pm}
 - model: search.openingtime
   pk: 61
-  fields: {description: 'Court building open: 9.00 am to 5.00 pm', type: Court building
-      open, hours: 9.00 am to 5.00 pm}
+  fields: {type: Court building open, hours: 9.00 am to 5.00 pm}
 - model: search.openingtime
   pk: 62
-  fields: {description: 'Court counter open: Monday, Tuesday,  Thursday, Friday 9.00
-      am to 5.00 pm', type: Court counter open, hours: 'Monday, Tuesday,  Thursday,
-      Friday 9.00 am to 5.00 pm'}
+  fields: {type: Court counter open, hours: 'Monday, Tuesday,  Thursday, Friday 9.00
+      am to 5.00 pm'}
 - model: search.openingtime
   pk: 63
-  fields: {description: 'Telephones: 9.00am to 5.00pm', type: Telephones, hours: 9.00am
-      to 5.00pm}
+  fields: {type: Telephones, hours: 9.00am to 5.00pm}
 - model: search.openingtime
   pk: 64
-  fields: {description: 'Court counter open: Wednesday 10.00 am to 5.00 pm', type: Court
-      counter open, hours: Wednesday 10.00 am to 5.00 pm}
+  fields: {type: Court counter open, hours: Wednesday 10.00 am to 5.00 pm}
 - model: search.openingtime
   pk: 65
-  fields: {description: 'Court counter open: By appointment only. Please contact us
-      using the enquiries number below', type: Court counter open, hours: By appointment
-      only. Please contact us using the enquiries number below}
+  fields: {type: Court counter open, hours: By appointment only. Please contact us
+      using the enquiries number below}
 - model: search.openingtime
   pk: 66
-  fields: {description: 'Tribunal open: Monday to Friday 9am to 4pm', type: Tribunal
-      open, hours: Monday to Friday 9am to 4pm}
+  fields: {type: Tribunal open, hours: Monday to Friday 9am to 4pm}
 - model: search.openingtime
   pk: 67
-  fields: {description: 'Court Office open: 9am to 5pm', type: Court Office open,
-    hours: 9am to 5pm}
+  fields: {type: Court Office open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 68
-  fields: {description: 'Court counter open: 10am to 4:30pm', type: Court counter
-      open, hours: '10am to 4:30pm'}
+  fields: {type: Court counter open, hours: '10am to 4:30pm'}
 - model: search.openingtime
   pk: 69
-  fields: {description: 'Court counter open: By appointment only. County court appointments
-      line to book in see below.', type: Court counter open, hours: By appointment
-      only. County court appointments line to book in see below.}
+  fields: {type: Court counter open, hours: By appointment only. County court appointments
+      line to book in see below.}
 - model: search.openingtime
   pk: 70
-  fields: {description: 'Court building open: 8:30am to 4:30pm', type: Court building
-      open, hours: '8:30am to 4:30pm'}
+  fields: {type: Court building open, hours: '8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 71
-  fields: {description: 'Crown Court enquiries: 8:30am to 4:30pm', type: Crown Court
-      enquiries, hours: '8:30am to 4:30pm'}
+  fields: {type: Crown Court enquiries, hours: '8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 72
-  fields: {description: 'Telephone Enquiries from: 8:30am to 4:30pm', type: Telephone
-      Enquiries from, hours: '8:30am to 4:30pm'}
+  fields: {type: Telephone Enquiries from, hours: '8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 73
-  fields: {description: 'Court building open: 8.30am to 5pm', type: Court building
-      open, hours: 8.30am to 5pm}
+  fields: {type: Court building open, hours: 8.30am to 5pm}
 - model: search.openingtime
   pk: 74
-  fields: {description: 'Telephones: 9am to 5pm', type: Telephones, hours: 9am to
-      5pm}
+  fields: {type: Telephones, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 75
-  fields: {description: 'Court counter open: Monday to Friday 10am to 2pm for urgent
-      appointments only', type: Court counter open, hours: Monday to Friday 10am to
-      2pm for urgent appointments only}
+  fields: {type: Court counter open, hours: Monday to Friday 10am to 2pm for urgent
+      appointments only}
 - model: search.openingtime
   pk: 76
-  fields: {description: 'Bailiff counter open: 9:30am to 10:30am', type: Bailiff counter
-      open, hours: '9:30am to 10:30am'}
+  fields: {type: Bailiff counter open, hours: '9:30am to 10:30am'}
 - model: search.openingtime
   pk: 77
-  fields: {description: 'Court counter open: By prior appointment only (High court
-      10am to 4pm)', type: Court counter open, hours: By prior appointment only (High
-      court 10am to 4pm)}
+  fields: {type: Court counter open, hours: By prior appointment only (High court
+      10am to 4pm)}
 - model: search.openingtime
   pk: 78
-  fields: {description: 'Court building open: 9am to 5pm on sitting days ', type: Court
-      building open, hours: '9am to 5pm on sitting days '}
+  fields: {type: Court building open, hours: '9am to 5pm on sitting days '}
 - model: search.openingtime
   pk: 79
-  fields: {description: 'Court building open: 9am to 5pm, on sitting days only', type: Court
-      building open, hours: '9am to 5pm, on sitting days only'}
+  fields: {type: Court building open, hours: '9am to 5pm, on sitting days only'}
 - model: search.openingtime
   pk: 80
-  fields: {description: 'Telephones: Monday to Friday 8:30am to 5pm', type: Telephones,
-    hours: 'Monday to Friday 8:30am to 5pm'}
+  fields: {type: Telephones, hours: 'Monday to Friday 8:30am to 5pm'}
 - model: search.openingtime
   pk: 81
-  fields: {description: 'Telephones: Monday to Friday 9am to 5pm', type: Telephones,
-    hours: Monday to Friday 9am to 5pm}
+  fields: {type: Telephones, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 82
-  fields: {description: 'Counter open: 9am to 5pm', type: Counter open, hours: 9am
-      to 5pm}
+  fields: {type: Counter open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 83
-  fields: {description: 'Court counter open: For urgent appointments only', type: Court
-      counter open, hours: For urgent appointments only}
+  fields: {type: Court counter open, hours: For urgent appointments only}
 - model: search.openingtime
   pk: 84
-  fields: {description: 'Court building open: Monday to Wednesday only 9am until close
-      of business on sitting days only', type: Court building open, hours: Monday
-      to Wednesday only 9am until close of business on sitting days only}
+  fields: {type: Court building open, hours: Monday to Wednesday only 9am until close
+      of business on sitting days only}
 - model: search.openingtime
   pk: 85
-  fields: {description: 'Court counter open: Appointments only', type: Court counter
-      open, hours: Appointments only}
+  fields: {type: Court counter open, hours: Appointments only}
 - model: search.openingtime
   pk: 86
-  fields: {description: 'Crown Court enquiries: Counter opens - 8:30am to 4:00pm',
-    type: Crown Court enquiries, hours: 'Counter opens - 8:30am to 4:00pm'}
+  fields: {type: Crown Court enquiries, hours: 'Counter opens - 8:30am to 4:00pm'}
 - model: search.openingtime
   pk: 87
-  fields: {description: 'Telephone Enquiries from: 8.30am to 5pm', type: Telephone
-      Enquiries from, hours: 8.30am to 5pm}
+  fields: {type: Telephone Enquiries from, hours: 8.30am to 5pm}
 - model: search.openingtime
   pk: 88
-  fields: {description: 'Court building open: 9am', type: Court building open, hours: 9am}
+  fields: {type: Court building open, hours: 9am}
 - model: search.openingtime
   pk: 89
-  fields: {description: 'Court counter open: Monday to Friday 9am to 11am and 1:30pm
-      to 2:30pm', type: Court counter open, hours: 'Monday to Friday 9am to 11am and
-      1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: 'Monday to Friday 9am to 11am and 1:30pm
+      to 2:30pm'}
 - model: search.openingtime
   pk: 90
-  fields: {description: 'Court counter open: (Application counter) 9am to 10am', type: Court
-      counter open, hours: (Application counter) 9am to 10am}
+  fields: {type: Court counter open, hours: (Application counter) 9am to 10am}
 - model: search.openingtime
   pk: 91
-  fields: {description: 'Court building open: 9.00 am to 5.00pm', type: Court building
-      open, hours: 9.00 am to 5.00pm}
+  fields: {type: Court building open, hours: 9.00 am to 5.00pm}
 - model: search.openingtime
   pk: 92
-  fields: {description: 'Court building open: 8.00 am until close of business', type: Court
-      building open, hours: 8.00 am until close of business}
+  fields: {type: Court building open, hours: 8.00 am until close of business}
 - model: search.openingtime
   pk: 93
-  fields: {description: 'Court enquiries open: Monday to Friday 9am to 4pm', type: Court
-      enquiries open, hours: Monday to Friday 9am to 4pm}
+  fields: {type: Court enquiries open, hours: Monday to Friday 9am to 4pm}
 - model: search.openingtime
   pk: 94
-  fields: {description: 'Telephone Enquiries from: Monday to Thursday 9am to 5pm,
-      Friday 9am to 4:30pm', type: Telephone Enquiries from, hours: 'Monday to Thursday
-      9am to 5pm, Friday 9am to 4:30pm'}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Thursday 9am to 5pm,
+      Friday 9am to 4:30pm'}
 - model: search.openingtime
   pk: 95
-  fields: {description: 'Court building open: Monday to friday 8am to 6pm', type: Court
-      building open, hours: Monday to friday 8am to 6pm}
+  fields: {type: Court building open, hours: Monday to friday 8am to 6pm}
 - model: search.openingtime
   pk: 96
-  fields: {description: 'Court building open: Open for court hearings only', type: Court
-      building open, hours: Open for court hearings only}
+  fields: {type: Court building open, hours: Open for court hearings only}
 - model: search.openingtime
   pk: 97
-  fields: {description: 'Court counter open: 10am to 4pm (fines enquiries only)',
-    type: Court counter open, hours: 10am to 4pm (fines enquiries only)}
+  fields: {type: Court counter open, hours: 10am to 4pm (fines enquiries only)}
 - model: search.openingtime
   pk: 98
-  fields: {description: 'Telephones: Enquiry line Monday to Thursday 9am to 5pm, Friday
-      9am to 4:30pm', type: Telephones, hours: 'Enquiry line Monday to Thursday 9am
-      to 5pm, Friday 9am to 4:30pm'}
+  fields: {type: Telephones, hours: 'Enquiry line Monday to Thursday 9am to 5pm, Friday
+      9am to 4:30pm'}
 - model: search.openingtime
   pk: 99
-  fields: {description: 'Court counter open: By prior appointment only.  ', type: Court
-      counter open, hours: 'By prior appointment only.  '}
+  fields: {type: Court counter open, hours: 'By prior appointment only.  '}
 - model: search.openingtime
   pk: 100
-  fields: {description: 'Court counter open: By prior appointment only to do so Tel.
-      020 8963 8212', type: Court counter open, hours: By prior appointment only to
-      do so Tel. 020 8963 8212}
+  fields: {type: Court counter open, hours: By prior appointment only to do so Tel.
+      020 8963 8212}
 - model: search.openingtime
   pk: 101
-  fields: {description: 'Court building open: Monday to Friday 8am to 5pm', type: Court
-      building open, hours: Monday to Friday 8am to 5pm}
+  fields: {type: Court building open, hours: Monday to Friday 8am to 5pm}
 - model: search.openingtime
   pk: 102
-  fields: {description: 'Court building open: Monday to Thursday 9am to 5pm, Friday
-      9am to 4:30pm )', type: Court building open, hours: 'Monday to Thursday 9am
-      to 5pm, Friday 9am to 4:30pm )'}
+  fields: {type: Court building open, hours: 'Monday to Thursday 9am to 5pm, Friday
+      9am to 4:30pm )'}
 - model: search.openingtime
   pk: 103
-  fields: {description: 'Court counter open: Appointments Only Counter 10am to 2pm
-      - To book an appointment dial 01305 752510 ', type: Court counter open, hours: 'Appointments
-      Only Counter 10am to 2pm - To book an appointment dial 01305 752510 '}
+  fields: {type: Court counter open, hours: 'Appointments Only Counter 10am to 2pm
+      - To book an appointment dial 01305 752510 '}
 - model: search.openingtime
   pk: 104
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 4pm.', type: Court
-      building open, hours: 'Monday to Friday 8:30am to 4pm.'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 4pm.'}
 - model: search.openingtime
   pk: 105
-  fields: {description: 'Telephone Enquiries from: 8.00 am to 5.00 pm', type: Telephone
-      Enquiries from, hours: 8.00 am to 5.00 pm}
+  fields: {type: Telephone Enquiries from, hours: 8.00 am to 5.00 pm}
 - model: search.openingtime
   pk: 106
-  fields: {description: 'Counter open: 10am to 2pm for urgent appointments only',
-    type: Counter open, hours: 10am to 2pm for urgent appointments only}
+  fields: {type: Counter open, hours: 10am to 2pm for urgent appointments only}
 - model: search.openingtime
   pk: 107
-  fields: {description: 'Court building open: Monday to Friday 8:45am to 4:30pm',
-    type: Court building open, hours: 'Monday to Friday 8:45am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:45am to 4:30pm'}
 - model: search.openingtime
   pk: 108
-  fields: {description: 'Court building open: 9am to close of court business', type: Court
-      building open, hours: 9am to close of court business}
+  fields: {type: Court building open, hours: 9am to close of court business}
 - model: search.openingtime
   pk: 109
-  fields: {description: 'Building open: Please telephone for opening times or an appointment.',
-    type: Building open, hours: Please telephone for opening times or an appointment.}
+  fields: {type: Building open, hours: Please telephone for opening times or an appointment.}
 - model: search.openingtime
   pk: 110
-  fields: {description: 'Court building open: Monday to Friday 10am to 4pm', type: Court
-      building open, hours: Monday to Friday 10am to 4pm}
+  fields: {type: Court building open, hours: Monday to Friday 10am to 4pm}
 - model: search.openingtime
   pk: 111
-  fields: {description: 'Court building open: 9am to 4:30pm', type: Court building
-      open, hours: '9am to 4:30pm'}
+  fields: {type: Court building open, hours: '9am to 4:30pm'}
 - model: search.openingtime
   pk: 112
-  fields: {description: 'Telephones: Central Index Search Line 0906 754 0043 (premium
-      number)', type: Telephones, hours: Central Index Search Line 0906 754 0043 (premium
+  fields: {type: Telephones, hours: Central Index Search Line 0906 754 0043 (premium
       number)}
 - model: search.openingtime
   pk: 113
-  fields: {description: 'Court counter open: 10am to 4pm -By prior appointment only
-      -  To make an appointment, call 0344 892 4000', type: Court counter open, hours: '10am
-      to 4pm -By prior appointment only -  To make an appointment, call 0344 892 4000'}
+  fields: {type: Court counter open, hours: '10am to 4pm -By prior appointment only
+      -  To make an appointment, call 0344 892 4000'}
 - model: search.openingtime
   pk: 114
-  fields: {description: 'Court building open: Monday to Friday 7:30am to 7pm', type: Court
-      building open, hours: 'Monday to Friday 7:30am to 7pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 7:30am to 7pm'}
 - model: search.openingtime
   pk: 115
-  fields: {description: 'Court building open: 9.00am-5.00pm', type: Court building
-      open, hours: 9.00am-5.00pm}
+  fields: {type: Court building open, hours: 9.00am-5.00pm}
 - model: search.openingtime
   pk: 116
-  fields: {description: 'Court building open: Monday to Friday - 8am to 6pm', type: Court
-      building open, hours: Monday to Friday - 8am to 6pm}
+  fields: {type: Court building open, hours: Monday to Friday - 8am to 6pm}
 - model: search.openingtime
   pk: 117
-  fields: {description: 'Civil counter open: For urgent matters only, by prior appointment ',
-    type: Civil counter open, hours: 'For urgent matters only, by prior appointment '}
+  fields: {type: Civil counter open, hours: 'For urgent matters only, by prior appointment '}
 - model: search.openingtime
   pk: 118
-  fields: {description: 'Family counter open: For urgent matters only, by prior appointment ',
-    type: Family counter open, hours: 'For urgent matters only, by prior appointment '}
+  fields: {type: Family counter open, hours: 'For urgent matters only, by prior appointment '}
 - model: search.openingtime
   pk: 119
-  fields: {description: 'Crown Court enquiries: Counter open from 10am to 2pm', type: Crown
-      Court enquiries, hours: Counter open from 10am to 2pm}
+  fields: {type: Crown Court enquiries, hours: Counter open from 10am to 2pm}
 - model: search.openingtime
   pk: 120
-  fields: {description: 'Court building closed: ', type: Court building closed, hours: ''}
+  fields: {type: Court building closed, hours: ''}
 - model: search.openingtime
   pk: 121
-  fields: {description: 'Court counter open: By appointment only. ', type: Court counter
-      open, hours: 'By appointment only. '}
+  fields: {type: Court counter open, hours: 'By appointment only. '}
 - model: search.openingtime
   pk: 122
-  fields: {description: 'Court counter open: 9:30 am to 2.30pm', type: Court counter
-      open, hours: '9:30 am to 2.30pm'}
+  fields: {type: Court counter open, hours: '9:30 am to 2.30pm'}
 - model: search.openingtime
   pk: 123
-  fields: {description: 'Tribunal open: Monday to Friday 9:30am to 4:45pm', type: Tribunal
-      open, hours: 'Monday to Friday 9:30am to 4:45pm'}
+  fields: {type: Tribunal open, hours: 'Monday to Friday 9:30am to 4:45pm'}
 - model: search.openingtime
   pk: 124
-  fields: {description: 'Court building open: 9am when court sitting to close of business',
-    type: Court building open, hours: 9am when court sitting to close of business}
+  fields: {type: Court building open, hours: 9am when court sitting to close of business}
 - model: search.openingtime
   pk: 125
-  fields: {description: 'Building open: 8:30am to 5pm', type: Building open, hours: '8:30am
-      to 5pm'}
+  fields: {type: Building open, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 126
-  fields: {description: 'Counter open: 8:30am to 5pm', type: Counter open, hours: '8:30am
-      to 5pm'}
+  fields: {type: Counter open, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 127
-  fields: {description: 'Court building open: 8:45 am', type: Court building open,
-    hours: '8:45 am'}
+  fields: {type: Court building open, hours: '8:45 am'}
 - model: search.openingtime
   pk: 128
-  fields: {description: 'Court counter open: 8:45 am - 4.00pm (3.30pm Friday)', type: Court
-      counter open, hours: '8:45 am - 4.00pm (3.30pm Friday)'}
+  fields: {type: Court counter open, hours: '8:45 am - 4.00pm (3.30pm Friday)'}
 - model: search.openingtime
   pk: 129
-  fields: {description: 'Court building open: The courthouse is only open whilst hearings
-      are taking place.', type: Court building open, hours: The courthouse is only
-      open whilst hearings are taking place.}
+  fields: {type: Court building open, hours: The courthouse is only open whilst hearings
+      are taking place.}
 - model: search.openingtime
   pk: 130
-  fields: {description: 'Court building open: Monday to Friday 9am until close of
-      business.', type: Court building open, hours: Monday to Friday 9am until close
-      of business.}
+  fields: {type: Court building open, hours: Monday to Friday 9am until close of business.}
 - model: search.openingtime
   pk: 131
-  fields: {description: 'Court counter open: By appointment only', type: Court counter
-      open, hours: By appointment only}
+  fields: {type: Court counter open, hours: By appointment only}
 - model: search.openingtime
   pk: 132
-  fields: {description: 'Office open: For telephone enquiries from 9am to 5pm only',
-    type: Office open, hours: For telephone enquiries from 9am to 5pm only}
+  fields: {type: Office open, hours: For telephone enquiries from 9am to 5pm only}
 - model: search.openingtime
   pk: 133
-  fields: {description: 'Building open: Monday to Friday 9am to 4:30pm', type: Building
-      open, hours: 'Monday to Friday 9am to 4:30pm'}
+  fields: {type: Building open, hours: 'Monday to Friday 9am to 4:30pm'}
 - model: search.openingtime
   pk: 134
-  fields: {description: 'Building open: 9am to 5pm', type: Building open, hours: 9am
-      to 5pm}
+  fields: {type: Building open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 135
-  fields: {description: 'Counter open: 9am - 5pm', type: Counter open, hours: 9am
-      - 5pm}
+  fields: {type: Counter open, hours: 9am - 5pm}
 - model: search.openingtime
   pk: 136
-  fields: {description: 'Tribunal open: 8:30am to 5pm', type: Tribunal open, hours: '8:30am
-      to 5pm'}
+  fields: {type: Tribunal open, hours: '8:30am to 5pm'}
 - model: search.openingtime
   pk: 137
-  fields: {description: 'Court counter open: 9am to 5pm', type: Court counter open,
-    hours: 9am to 5pm}
+  fields: {type: Court counter open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 138
-  fields: {description: 'Building open: 9am to 4pm', type: Building open, hours: 9am
-      to 4pm}
+  fields: {type: Building open, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 139
-  fields: {description: 'Bailiff counter open: 8:30am to 10am', type: Bailiff counter
-      open, hours: '8:30am to 10am'}
+  fields: {type: Bailiff counter open, hours: '8:30am to 10am'}
 - model: search.openingtime
   pk: 140
-  fields: {description: 'Building open: 8:30am to 5pm for Hearings only', type: Building
-      open, hours: '8:30am to 5pm for Hearings only'}
+  fields: {type: Building open, hours: '8:30am to 5pm for Hearings only'}
 - model: search.openingtime
   pk: 141
-  fields: {description: 'Court building open: 9:30am to 4:30pm (4pm Friday)', type: Court
-      building open, hours: '9:30am to 4:30pm (4pm Friday)'}
+  fields: {type: Court building open, hours: '9:30am to 4:30pm (4pm Friday)'}
 - model: search.openingtime
   pk: 142
-  fields: {description: 'Court building open: 9.00 am to 4.00 pm', type: Court building
-      open, hours: 9.00 am to 4.00 pm}
+  fields: {type: Court building open, hours: 9.00 am to 4.00 pm}
 - model: search.openingtime
   pk: 143
-  fields: {description: 'Court counter open: 9am to 1pm and 1:45pm to 5pm', type: Court
-      counter open, hours: '9am to 1pm and 1:45pm to 5pm'}
+  fields: {type: Court counter open, hours: '9am to 1pm and 1:45pm to 5pm'}
 - model: search.openingtime
   pk: 144
-  fields: {description: 'Court counter open: 9.00 am to 5.00pm', type: Court counter
-      open, hours: 9.00 am to 5.00pm}
+  fields: {type: Court counter open, hours: 9.00 am to 5.00pm}
 - model: search.openingtime
   pk: 145
-  fields: {description: 'Court counter open: 9:15am to 4pm', type: Court counter open,
-    hours: '9:15am to 4pm'}
+  fields: {type: Court counter open, hours: '9:15am to 4pm'}
 - model: search.openingtime
   pk: 146
-  fields: {description: 'Court building open: 9:30am to 4:30pm', type: Court building
-      open, hours: '9:30am to 4:30pm'}
+  fields: {type: Court building open, hours: '9:30am to 4:30pm'}
 - model: search.openingtime
   pk: 147
-  fields: {description: 'Court building open: 8.30 am until close of business', type: Court
-      building open, hours: 8.30 am until close of business}
+  fields: {type: Court building open, hours: 8.30 am until close of business}
 - model: search.openingtime
   pk: 148
-  fields: {description: 'Court building closed: 5.00 pm', type: Court building closed,
-    hours: 5.00 pm}
+  fields: {type: Court building closed, hours: 5.00 pm}
 - model: search.openingtime
   pk: 149
-  fields: {description: 'Tribunal open: Monday to Friday 7am to 7pm', type: Tribunal
-      open, hours: Monday to Friday 7am to 7pm}
+  fields: {type: Tribunal open, hours: Monday to Friday 7am to 7pm}
 - model: search.openingtime
   pk: 150
-  fields: {description: 'Court building open: 9:15 am until close of business', type: Court
-      building open, hours: '9:15 am until close of business'}
+  fields: {type: Court building open, hours: '9:15 am until close of business'}
 - model: search.openingtime
   pk: 151
-  fields: {description: 'Tribunal open: when sitting ', type: Tribunal open, hours: 'when
-      sitting '}
+  fields: {type: Tribunal open, hours: 'when sitting '}
 - model: search.openingtime
   pk: 152
-  fields: {description: 'Court building open: 08:30am', type: Court building open,
-    hours: '08:30am'}
+  fields: {type: Court building open, hours: '08:30am'}
 - model: search.openingtime
   pk: 153
-  fields: {description: 'Court building open: Monday to Friday 9am until business
-      finishes.', type: Court building open, hours: Monday to Friday 9am until business
-      finishes.}
+  fields: {type: Court building open, hours: Monday to Friday 9am until business finishes.}
 - model: search.openingtime
   pk: 154
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 4:30pm',
-    type: Court building open, hours: 'Monday to Friday 8:30am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 155
-  fields: {description: 'Court building open: 9.00 am only when the Court is sitting.',
-    type: Court building open, hours: 9.00 am only when the Court is sitting.}
+  fields: {type: Court building open, hours: 9.00 am only when the Court is sitting.}
 - model: search.openingtime
   pk: 156
-  fields: {description: 'Counter open: Monday to Friday 9am to 5pm', type: Counter
-      open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Counter open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 157
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 9am to 5pm', type: Telephone
-      Enquiries from, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Telephone Enquiries from, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 158
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 8:30am to 5pm',
-    type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5pm'}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Friday 8:30am to 5pm'}
 - model: search.openingtime
   pk: 159
-  fields: {description: 'Counter open: By appointment only', type: Counter open, hours: By
-      appointment only}
+  fields: {type: Counter open, hours: By appointment only}
 - model: search.openingtime
   pk: 160
-  fields: {description: 'Office open: Please telephone for opening times or an appointment.',
-    type: Office open, hours: Please telephone for opening times or an appointment.}
+  fields: {type: Office open, hours: Please telephone for opening times or an appointment.}
 - model: search.openingtime
   pk: 161
-  fields: {description: 'Court building open: Monday to Friday  - 9am to 5pm', type: Court
-      building open, hours: Monday to Friday  - 9am to 5pm}
+  fields: {type: Court building open, hours: Monday to Friday  - 9am to 5pm}
 - model: search.openingtime
   pk: 162
-  fields: {description: 'Court counter open: 9am to 11am : 1:30pm to 4:30pm (Counter
-      closed on Saturdays)', type: Court counter open, hours: '9am to 11am : 1:30pm
-      to 4:30pm (Counter closed on Saturdays)'}
+  fields: {type: Court counter open, hours: '9am to 11am : 1:30pm to 4:30pm (Counter
+      closed on Saturdays)'}
 - model: search.openingtime
   pk: 163
-  fields: {description: 'Court building open: 8.00 am to 5.00pm', type: Court building
-      open, hours: 8.00 am to 5.00pm}
+  fields: {type: Court building open, hours: 8.00 am to 5.00pm}
 - model: search.openingtime
   pk: 164
-  fields: {description: 'Court counter open: 10.00 am to 2.00pm', type: Court counter
-      open, hours: 10.00 am to 2.00pm}
+  fields: {type: Court counter open, hours: 10.00 am to 2.00pm}
 - model: search.openingtime
   pk: 165
-  fields: {description: 'Court counter open: 10am to 2pm ', type: Court counter open,
-    hours: '10am to 2pm '}
+  fields: {type: Court counter open, hours: '10am to 2pm '}
 - model: search.openingtime
   pk: 166
-  fields: {description: 'Court counter open: 9.00 am to 4.00pm', type: Court counter
-      open, hours: 9.00 am to 4.00pm}
+  fields: {type: Court counter open, hours: 9.00 am to 4.00pm}
 - model: search.openingtime
   pk: 167
-  fields: {description: 'Telephone Enquiries from: 9.00 am to 5.00 pm', type: Telephone
-      Enquiries from, hours: 9.00 am to 5.00 pm}
+  fields: {type: Telephone Enquiries from, hours: 9.00 am to 5.00 pm}
 - model: search.openingtime
   pk: 168
-  fields: {description: 'Telephones: 9:00am to 5:00pm', type: Telephones, hours: '9:00am
-      to 5:00pm'}
+  fields: {type: Telephones, hours: '9:00am to 5:00pm'}
 - model: search.openingtime
   pk: 169
-  fields: {description: 'Court counter open: 8:30am to 5pm ', type: Court counter
-      open, hours: '8:30am to 5pm '}
+  fields: {type: Court counter open, hours: '8:30am to 5pm '}
 - model: search.openingtime
   pk: 170
-  fields: {description: 'Counter Services: By appointment only -  Please call 0208
-      831 3392 to make an appointment.', type: Counter Services, hours: By appointment
-      only -  Please call 0208 831 3392 to make an appointment.}
+  fields: {type: Counter Services, hours: By appointment only -  Please call 0208
+      831 3392 to make an appointment.}
 - model: search.openingtime
   pk: 171
-  fields: {description: 'Court building open: 9.00 am to 4.00pm', type: Court building
-      open, hours: 9.00 am to 4.00pm}
+  fields: {type: Court building open, hours: 9.00 am to 4.00pm}
 - model: search.openingtime
   pk: 172
-  fields: {description: 'Court counter open: 9.30 am to 4.00pm', type: Court counter
-      open, hours: 9.30 am to 4.00pm}
+  fields: {type: Court counter open, hours: 9.30 am to 4.00pm}
 - model: search.openingtime
   pk: 173
-  fields: {description: 'Court counter open: 8.30 am to 4.00 pm', type: Court counter
-      open, hours: 8.30 am to 4.00 pm}
+  fields: {type: Court counter open, hours: 8.30 am to 4.00 pm}
 - model: search.openingtime
   pk: 174
-  fields: {description: 'Telephone Enquiries from: 9.00 am', type: Telephone Enquiries
-      from, hours: 9.00 am}
+  fields: {type: Telephone Enquiries from, hours: 9.00 am}
 - model: search.openingtime
   pk: 175
-  fields: {description: 'Telephone Enquiries until: 5.00 pm', type: Telephone Enquiries
-      until, hours: 5.00 pm}
+  fields: {type: Telephone Enquiries until, hours: 5.00 pm}
 - model: search.openingtime
   pk: 176
-  fields: {description: 'Building open: Please telephone for opening times or an appointment',
-    type: Building open, hours: Please telephone for opening times or an appointment}
+  fields: {type: Building open, hours: Please telephone for opening times or an appointment}
 - model: search.openingtime
   pk: 177
-  fields: {description: 'Court building open: Monday, Wednesday, Thursday and Friday
-      9am until close of business', type: Court building open, hours: 'Monday, Wednesday,
-      Thursday and Friday 9am until close of business'}
+  fields: {type: Court building open, hours: 'Monday, Wednesday, Thursday and Friday
+      9am until close of business'}
 - model: search.openingtime
   pk: 178
-  fields: {description: 'Court building open: 8am to 7pm Not public', type: Court
-      building open, hours: 8am to 7pm Not public}
+  fields: {type: Court building open, hours: 8am to 7pm Not public}
 - model: search.openingtime
   pk: 179
-  fields: {description: 'Court counter open: 10am to 5pm', type: Court counter open,
-    hours: 10am to 5pm}
+  fields: {type: Court counter open, hours: 10am to 5pm}
 - model: search.openingtime
   pk: 180
-  fields: {description: 'Court counter open: 9am to 11:30am and 1:30pm to 2:30pm',
-    type: Court counter open, hours: '9am to 11:30am and 1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: '9am to 11:30am and 1:30pm to 2:30pm'}
 - model: search.openingtime
   pk: 181
-  fields: {description: 'Court counter open: 9:15am to 11:30am and 1:30pm to 2:30pm',
-    type: Court counter open, hours: '9:15am to 11:30am and 1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: '9:15am to 11:30am and 1:30pm to 2:30pm'}
 - model: search.openingtime
   pk: 182
-  fields: {description: 'Court counter open: 9am to 11:30am and 1pm to 2:30pm', type: Court
-      counter open, hours: '9am to 11:30am and 1pm to 2:30pm'}
+  fields: {type: Court counter open, hours: '9am to 11:30am and 1pm to 2:30pm'}
 - model: search.openingtime
   pk: 183
-  fields: {description: 'Court building open: Monday to Friday 9am until close of
-      court business', type: Court building open, hours: Monday to Friday 9am until
-      close of court business}
+  fields: {type: Court building open, hours: Monday to Friday 9am until close of court
+      business}
 - model: search.openingtime
   pk: 184
-  fields: {description: 'Court building open: This is a satellite court house and
-      is only operational during court sessions', type: Court building open, hours: This
-      is a satellite court house and is only operational during court sessions}
+  fields: {type: Court building open, hours: This is a satellite court house and is
+      only operational during court sessions}
 - model: search.openingtime
   pk: 185
-  fields: {description: 'Court building open: Open for court hearings only.', type: Court
-      building open, hours: Open for court hearings only.}
+  fields: {type: Court building open, hours: Open for court hearings only.}
 - model: search.openingtime
   pk: 186
-  fields: {description: 'Court building open: 9am to 6pm', type: Court building open,
-    hours: 9am to 6pm}
+  fields: {type: Court building open, hours: 9am to 6pm}
 - model: search.openingtime
   pk: 187
-  fields: {description: 'Court building open: 9:15am to 4:30pm', type: Court building
-      open, hours: '9:15am to 4:30pm'}
+  fields: {type: Court building open, hours: '9:15am to 4:30pm'}
 - model: search.openingtime
   pk: 188
-  fields: {description: 'Counter Services: 9am to 5pm', type: Counter Services, hours: 9am
-      to 5pm}
+  fields: {type: Counter Services, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 189
-  fields: {description: 'Court counter open: Monday, Wednesday and Friday 9:30am to
+  fields: {type: Court counter open, hours: 'Monday, Wednesday and Friday 9:30am to
       10:30am. Tuesday and Thursday 9am to 10am.  The court counter will no longer
-      be open from the 15th February 2016.', type: Court counter open, hours: 'Monday,
-      Wednesday and Friday 9:30am to 10:30am. Tuesday and Thursday 9am to 10am.  The
-      court counter will no longer be open from the 15th February 2016.'}
+      be open from the 15th February 2016.'}
 - model: search.openingtime
   pk: 190
-  fields: {description: 'Court Office open: 9am to 4pm', type: Court Office open,
-    hours: 9am to 4pm}
+  fields: {type: Court Office open, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 191
-  fields: {description: 'Court building open: as per Hearing Notice - All Correspondence
-      to Blackpool County Court', type: Court building open, hours: as per Hearing
-      Notice - All Correspondence to Blackpool County Court}
+  fields: {type: Court building open, hours: as per Hearing Notice - All Correspondence
+      to Blackpool County Court}
 - model: search.openingtime
   pk: 192
-  fields: {description: 'Court building open: Open for hearings only', type: Court
-      building open, hours: Open for hearings only}
+  fields: {type: Court building open, hours: Open for hearings only}
 - model: search.openingtime
   pk: 193
-  fields: {description: 'Court enquiries open: Monday to Friday 9am to 5pm', type: Court
-      enquiries open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Court enquiries open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 194
-  fields: {description: 'Court building open: Monday to Friday 8:45am to 5pm', type: Court
-      building open, hours: 'Monday to Friday 8:45am to 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:45am to 5pm'}
 - model: search.openingtime
   pk: 195
-  fields: {description: 'Court building open: 9:30am (when in session)', type: Court
-      building open, hours: '9:30am (when in session)'}
+  fields: {type: Court building open, hours: '9:30am (when in session)'}
 - model: search.openingtime
   pk: 196
-  fields: {description: 'Court building open: This court sits infrequently - all enquiries
-      Chester Crown on 01244 317606', type: Court building open, hours: This court
-      sits infrequently - all enquiries Chester Crown on 01244 317606}
+  fields: {type: Court building open, hours: This court sits infrequently - all enquiries
+      Chester Crown on 01244 317606}
 - model: search.openingtime
   pk: 197
-  fields: {description: 'Court building open: 9.00 am to 400pm', type: Court building
-      open, hours: 9.00 am to 400pm}
+  fields: {type: Court building open, hours: 9.00 am to 400pm}
 - model: search.openingtime
   pk: 198
-  fields: {description: 'Court counter open: Monday to Friday 9am to 4pm', type: Court
-      counter open, hours: Monday to Friday 9am to 4pm}
+  fields: {type: Court counter open, hours: Monday to Friday 9am to 4pm}
 - model: search.openingtime
   pk: 199
-  fields: {description: 'Court counter open: 9:15am to 11.30am and 1:30pm to 2:30pm.  The
-      court counter will no longer be open from the 15th February 2016', type: Court
-      counter open, hours: '9:15am to 11.30am and 1:30pm to 2:30pm.  The court counter
-      will no longer be open from the 15th February 2016'}
+  fields: {type: Court counter open, hours: '9:15am to 11.30am and 1:30pm to 2:30pm.  The
+      court counter will no longer be open from the 15th February 2016'}
 - model: search.openingtime
   pk: 200
-  fields: {description: 'Court counter open: 9am to 2pm', type: Court counter open,
-    hours: 9am to 2pm}
+  fields: {type: Court counter open, hours: 9am to 2pm}
 - model: search.openingtime
   pk: 201
-  fields: {description: 'Court building open: 9.00 am to 5.00 pm or until Courts in
-      session finish.', type: Court building open, hours: 9.00 am to 5.00 pm or until
-      Courts in session finish.}
+  fields: {type: Court building open, hours: 9.00 am to 5.00 pm or until Courts in
+      session finish.}
 - model: search.openingtime
   pk: 202
-  fields: {description: 'Court building open: Monday to Friday  8am to 5pm', type: Court
-      building open, hours: Monday to Friday  8am to 5pm}
+  fields: {type: Court building open, hours: Monday to Friday  8am to 5pm}
 - model: search.openingtime
   pk: 203
-  fields: {description: 'Court building open: 9.00am to 4.30pm', type: Court building
-      open, hours: 9.00am to 4.30pm}
+  fields: {type: Court building open, hours: 9.00am to 4.30pm}
 - model: search.openingtime
   pk: 204
-  fields: {description: 'Court building open: 9am to 5:30 pm', type: Court building
-      open, hours: '9am to 5:30 pm'}
+  fields: {type: Court building open, hours: '9am to 5:30 pm'}
 - model: search.openingtime
   pk: 205
-  fields: {description: 'Court building open: Monday, Tuesday and Friday 9am to close
-      of business', type: Court building open, hours: 'Monday, Tuesday and Friday
-      9am to close of business'}
+  fields: {type: Court building open, hours: 'Monday, Tuesday and Friday 9am to close
+      of business'}
 - model: search.openingtime
   pk: 206
-  fields: {description: 'Court building open: 8am to 5:00pm', type: Court building
-      open, hours: '8am to 5:00pm'}
+  fields: {type: Court building open, hours: '8am to 5:00pm'}
 - model: search.openingtime
   pk: 207
-  fields: {description: 'Court counter open: 9am to 3pm', type: Court counter open,
-    hours: 9am to 3pm}
+  fields: {type: Court counter open, hours: 9am to 3pm}
 - model: search.openingtime
   pk: 208
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:45pm', type: Court
-      building open, hours: 'Monday to Friday 9am to 4:45pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:45pm'}
 - model: search.openingtime
   pk: 209
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:30pm ', type: Court
-      building open, hours: 'Monday to Friday 9am to 4:30pm '}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:30pm '}
 - model: search.openingtime
   pk: 210
-  fields: {description: 'Counter open: Counter open 9am to11am and 1:30pm to 2:30pm ',
-    type: Counter open, hours: 'Counter open 9am to11am and 1:30pm to 2:30pm '}
+  fields: {type: Counter open, hours: 'Counter open 9am to11am and 1:30pm to 2:30pm '}
 - model: search.openingtime
   pk: 211
-  fields: {description: 'Court counter open: 9:30 am to 4pm', type: Court counter
-      open, hours: '9:30 am to 4pm'}
+  fields: {type: Court counter open, hours: '9:30 am to 4pm'}
 - model: search.openingtime
   pk: 212
-  fields: {description: 'Court building open: 8:30 am to 5pm', type: Court building
-      open, hours: '8:30 am to 5pm'}
+  fields: {type: Court building open, hours: '8:30 am to 5pm'}
 - model: search.openingtime
   pk: 213
-  fields: {description: 'Court building open:  Monday to Thursday 9am to 5pm, 9am
-      - 4:30pm Friday', type: Court building open, hours: ' Monday to Thursday 9am
-      to 5pm, 9am - 4:30pm Friday'}
+  fields: {type: Court building open, hours: ' Monday to Thursday 9am to 5pm, 9am
+      - 4:30pm Friday'}
 - model: search.openingtime
   pk: 214
-  fields: {description: 'Telephones:  Monday to Thursday 9am to 5pm, 9am - 4:30pm
-      Friday', type: Telephones, hours: ' Monday to Thursday 9am to 5pm, 9am - 4:30pm
+  fields: {type: Telephones, hours: ' Monday to Thursday 9am to 5pm, 9am - 4:30pm
       Friday'}
 - model: search.openingtime
   pk: 215
-  fields: {description: 'Counter Services:  Monday to Thursday 9am to 5pm, 9am - 4:30pm
-      Friday', type: Counter Services, hours: ' Monday to Thursday 9am to 5pm, 9am
-      - 4:30pm Friday'}
+  fields: {type: Counter Services, hours: ' Monday to Thursday 9am to 5pm, 9am - 4:30pm
+      Friday'}
 - model: search.openingtime
   pk: 216
-  fields: {description: 'Court counter open: Monday to Friday 9am to 5pm', type: Court
-      counter open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Court counter open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 217
-  fields: {description: 'Court building open: 9am to 5pm, Thursdays only', type: Court
-      building open, hours: '9am to 5pm, Thursdays only'}
+  fields: {type: Court building open, hours: '9am to 5pm, Thursdays only'}
 - model: search.openingtime
   pk: 218
-  fields: {description: "Building open: Extended sitting days \u2013 Monday to Thursday
-      5 pm to 7:30 pm.", type: Building open, hours: "Extended sitting days \u2013
-      Monday to Thursday 5 pm to 7:30 pm."}
+  fields: {type: Building open, hours: "Extended sitting days \u2013 Monday to Thursday
+      5 pm to 7:30 pm."}
 - model: search.openingtime
   pk: 219
-  fields: {description: 'Court building open: 9.00 am', type: Court building open,
-    hours: 9.00 am}
+  fields: {type: Court building open, hours: 9.00 am}
 - model: search.openingtime
   pk: 220
-  fields: {description: 'Court counter open: 10am to 2pm (For prior appointments only)',
-    type: Court counter open, hours: 10am to 2pm (For prior appointments only)}
+  fields: {type: Court counter open, hours: 10am to 2pm (For prior appointments only)}
 - model: search.openingtime
   pk: 221
-  fields: {description: 'Court counter closed: ', type: Court counter closed, hours: ''}
+  fields: {type: Court counter closed, hours: ''}
 - model: search.openingtime
   pk: 222
-  fields: {description: 'Court counter closed: No counter service at this court',
-    type: Court counter closed, hours: No counter service at this court}
+  fields: {type: Court counter closed, hours: No counter service at this court}
 - model: search.openingtime
   pk: 223
-  fields: {description: 'Court building open: Monday to Friday 8am to 4pm', type: Court
-      building open, hours: Monday to Friday 8am to 4pm}
+  fields: {type: Court building open, hours: Monday to Friday 8am to 4pm}
 - model: search.openingtime
   pk: 224
-  fields: {description: 'Court building open: Only open when Courts are in session',
-    type: Court building open, hours: Only open when Courts are in session}
+  fields: {type: Court building open, hours: Only open when Courts are in session}
 - model: search.openingtime
   pk: 225
-  fields: {description: 'Telephone Enquiries from: 8.30 am to 1pm.', type: Telephone
-      Enquiries from, hours: 8.30 am to 1pm.}
+  fields: {type: Telephone Enquiries from, hours: 8.30 am to 1pm.}
 - model: search.openingtime
   pk: 226
-  fields: {description: 'Court building open: 9.00 am to 4.30 pm', type: Court building
-      open, hours: 9.00 am to 4.30 pm}
+  fields: {type: Court building open, hours: 9.00 am to 4.30 pm}
 - model: search.openingtime
   pk: 227
-  fields: {description: 'Court building closed: 4.30 pm', type: Court building closed,
-    hours: 4.30 pm}
+  fields: {type: Court building closed, hours: 4.30 pm}
 - model: search.openingtime
   pk: 228
-  fields: {description: 'Court building open: 9.30 am to 4.30 pm', type: Court building
-      open, hours: 9.30 am to 4.30 pm}
+  fields: {type: Court building open, hours: 9.30 am to 4.30 pm}
 - model: search.openingtime
   pk: 229
-  fields: {description: 'Court counter open: 9.30 am to 4.00 pm', type: Court counter
-      open, hours: 9.30 am to 4.00 pm}
+  fields: {type: Court counter open, hours: 9.30 am to 4.00 pm}
 - model: search.openingtime
   pk: 230
-  fields: {description: 'Court counter open: 9am to 3:30 pm', type: Court counter
-      open, hours: '9am to 3:30 pm'}
+  fields: {type: Court counter open, hours: '9am to 3:30 pm'}
 - model: search.openingtime
   pk: 231
-  fields: {description: 'Counter Services: Monday to Friday 9am to 5pm', type: Counter
-      Services, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Counter Services, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 232
-  fields: {description: 'Court building open: ''Please telephone for opening times
-      and an appointment', type: Court building open, hours: '''Please telephone for
-      opening times and an appointment'}
+  fields: {type: Court building open, hours: '''Please telephone for opening times
+      and an appointment'}
 - model: search.openingtime
   pk: 233
-  fields: {description: 'Court counter open: 10am to 2pm, by appointment only for
-      urgent work. To book an appointment ring 01708 775329 ', type: Court counter
-      open, hours: '10am to 2pm, by appointment only for urgent work. To book an appointment
-      ring 01708 775329 '}
+  fields: {type: Court counter open, hours: '10am to 2pm, by appointment only for
+      urgent work. To book an appointment ring 01708 775329 '}
 - model: search.openingtime
   pk: 234
-  fields: {description: 'Court counter open: at Taunton Magistrates Court, St John''s
-      Road, Taunton, Somerset TA1 4AX, 9:00am to 4:30pm Monday to Friday', type: Court
-      counter open, hours: 'at Taunton Magistrates Court, St John''s Road, Taunton,
-      Somerset TA1 4AX, 9:00am to 4:30pm Monday to Friday'}
+  fields: {type: Court counter open, hours: 'at Taunton Magistrates Court, St John''s
+      Road, Taunton, Somerset TA1 4AX, 9:00am to 4:30pm Monday to Friday'}
 - model: search.openingtime
   pk: 235
-  fields: {description: 'Court building closed: Skegness Magistrates court closed
-      in September 2016.', type: Court building closed, hours: Skegness Magistrates
-      court closed in September 2016.}
+  fields: {type: Court building closed, hours: Skegness Magistrates court closed in
+      September 2016.}
 - model: search.openingtime
   pk: 236
-  fields: {description: 'Telephone Enquiries from: 9am - 5pm (Monday to Thursday),
-      9am - 4pm (Friday)', type: Telephone Enquiries from, hours: '9am - 5pm (Monday
-      to Thursday), 9am - 4pm (Friday)'}
+  fields: {type: Telephone Enquiries from, hours: '9am - 5pm (Monday to Thursday),
+      9am - 4pm (Friday)'}
 - model: search.openingtime
   pk: 237
-  fields: {description: 'Court building open: 8:00 am until close of business', type: Court
-      building open, hours: '8:00 am until close of business'}
+  fields: {type: Court building open, hours: '8:00 am until close of business'}
 - model: search.openingtime
   pk: 238
-  fields: {description: 'Court building open: 9:00am - 4:00pm', type: Court building
-      open, hours: '9:00am - 4:00pm'}
+  fields: {type: Court building open, hours: '9:00am - 4:00pm'}
 - model: search.openingtime
   pk: 239
-  fields: {description: 'Court building open: 09am to 4.30pm', type: Court building
-      open, hours: 09am to 4.30pm}
+  fields: {type: Court building open, hours: 09am to 4.30pm}
 - model: search.openingtime
   pk: 240
-  fields: {description: 'Telephone Enquiries from: 9.00am - 5.00pm', type: Telephone
-      Enquiries from, hours: 9.00am - 5.00pm}
+  fields: {type: Telephone Enquiries from, hours: 9.00am - 5.00pm}
 - model: search.openingtime
   pk: 241
-  fields: {description: 'Court building open: 9:15am  to 4:30pm', type: Court building
-      open, hours: '9:15am  to 4:30pm'}
+  fields: {type: Court building open, hours: '9:15am  to 4:30pm'}
 - model: search.openingtime
   pk: 242
-  fields: {description: 'Enquiry Office open: 9:30am to 12:30pm and 1:30pm to 3pm',
-    type: Enquiry Office open, hours: '9:30am to 12:30pm and 1:30pm to 3pm'}
+  fields: {type: Enquiry Office open, hours: '9:30am to 12:30pm and 1:30pm to 3pm'}
 - model: search.openingtime
   pk: 243
-  fields: {description: 'Court counter open: 9am to 4:30pm ', type: Court counter
-      open, hours: '9am to 4:30pm '}
+  fields: {type: Court counter open, hours: '9am to 4:30pm '}
 - model: search.openingtime
   pk: 244
-  fields: {description: 'Court building open: 9am until close of court business',
-    type: Court building open, hours: 9am until close of court business}
+  fields: {type: Court building open, hours: 9am until close of court business}
 - model: search.openingtime
   pk: 245
-  fields: {description: 'Court counter open: 9am to 4pm (3.45pm Friday)', type: Court
-      counter open, hours: 9am to 4pm (3.45pm Friday)}
+  fields: {type: Court counter open, hours: 9am to 4pm (3.45pm Friday)}
 - model: search.openingtime
   pk: 246
-  fields: {description: 'Court counter open: Monday to Thursday 9am to 12pm and 1pm
-      to 4pm', type: Court counter open, hours: Monday to Thursday 9am to 12pm and
-      1pm to 4pm}
+  fields: {type: Court counter open, hours: Monday to Thursday 9am to 12pm and 1pm
+      to 4pm}
 - model: search.openingtime
   pk: 247
-  fields: {description: 'Court counter open: Monday to Friday 9am to 4:30pm ', type: Court
-      counter open, hours: 'Monday to Friday 9am to 4:30pm '}
+  fields: {type: Court counter open, hours: 'Monday to Friday 9am to 4:30pm '}
 - model: search.openingtime
   pk: 248
-  fields: {description: 'Court building open: 9am - 5pm', type: Court building open,
-    hours: 9am - 5pm}
+  fields: {type: Court building open, hours: 9am - 5pm}
 - model: search.openingtime
   pk: 249
-  fields: {description: 'Telephone Enquiries from: 9am to 5pm (4:30pm Friday) ', type: Telephone
-      Enquiries from, hours: '9am to 5pm (4:30pm Friday) '}
+  fields: {type: Telephone Enquiries from, hours: '9am to 5pm (4:30pm Friday) '}
 - model: search.openingtime
   pk: 250
-  fields: {description: 'Court building open: 8:30 am Monday - Friday to 5 pm (Monday
-      - Thursday) and 4:30 pm Friday', type: Court building open, hours: '8:30 am
-      Monday - Friday to 5 pm (Monday - Thursday) and 4:30 pm Friday'}
+  fields: {type: Court building open, hours: '8:30 am Monday - Friday to 5 pm (Monday
+      - Thursday) and 4:30 pm Friday'}
 - model: search.openingtime
   pk: 251
-  fields: {description: 'Counter open: 10am to 4:30pm ', type: Counter open, hours: '10am
-      to 4:30pm '}
+  fields: {type: Counter open, hours: '10am to 4:30pm '}
 - model: search.openingtime
   pk: 252
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:30 pm ', type: Court
-      building open, hours: 'Monday to Friday 9am to 4:30 pm '}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:30 pm '}
 - model: search.openingtime
   pk: 253
-  fields: {description: 'Telephone Enquiries from: 9.00 am - 5.00 pm ', type: Telephone
-      Enquiries from, hours: '9.00 am - 5.00 pm '}
+  fields: {type: Telephone Enquiries from, hours: '9.00 am - 5.00 pm '}
 - model: search.openingtime
   pk: 254
-  fields: {description: 'Telephone Payments open: 9.00 am to 5.00 pm', type: Telephone
-      Payments open, hours: 9.00 am to 5.00 pm}
+  fields: {type: Telephone Payments open, hours: 9.00 am to 5.00 pm}
 - model: search.openingtime
   pk: 255
-  fields: {description: 'Telephone Payments and enquiries: 9.00 am to 5.00 pm (Monday
-      - Friday)', type: Telephone Payments and enquiries, hours: 9.00 am to 5.00 pm
-      (Monday - Friday)}
+  fields: {type: Telephone Payments and enquiries, hours: 9.00 am to 5.00 pm (Monday
+      - Friday)}
 - model: search.openingtime
   pk: 256
-  fields: {description: 'Court building open: Monday to Friday 10am to 4:30pm', type: Court
-      building open, hours: 'Monday to Friday 10am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 10am to 4:30pm'}
 - model: search.openingtime
   pk: 257
-  fields: {description: 'Telephones: 10am to 4pm', type: Telephones, hours: 10am to
-      4pm}
+  fields: {type: Telephones, hours: 10am to 4pm}
 - model: search.openingtime
   pk: 258
-  fields: {description: 'Court building open: 9am to 4.30pm', type: Court building
-      open, hours: 9am to 4.30pm}
+  fields: {type: Court building open, hours: 9am to 4.30pm}
 - model: search.openingtime
   pk: 259
-  fields: {description: 'Telephone Enquiries from: 10am to 4pm', type: Telephone Enquiries
-      from, hours: 10am to 4pm}
+  fields: {type: Telephone Enquiries from, hours: 10am to 4pm}
 - model: search.openingtime
   pk: 260
-  fields: {description: 'Court counter open: 9:30am to 4:30pm', type: Court counter
-      open, hours: '9:30am to 4:30pm'}
+  fields: {type: Court counter open, hours: '9:30am to 4:30pm'}
 - model: search.openingtime
   pk: 261
-  fields: {description: 'Telephone Enquiries from: 10.00 am', type: Telephone Enquiries
-      from, hours: 10.00 am}
+  fields: {type: Telephone Enquiries from, hours: 10.00 am}
 - model: search.openingtime
   pk: 262
-  fields: {description: 'Telephone Enquiries until: 4.15 pm (3.45 pm on Friday)',
-    type: Telephone Enquiries until, hours: 4.15 pm (3.45 pm on Friday)}
+  fields: {type: Telephone Enquiries until, hours: 4.15 pm (3.45 pm on Friday)}
 - model: search.openingtime
   pk: 263
-  fields: {description: 'Court building open: Open specifically for Court Hearings
-      only.', type: Court building open, hours: Open specifically for Court Hearings
+  fields: {type: Court building open, hours: Open specifically for Court Hearings
       only.}
 - model: search.openingtime
   pk: 264
-  fields: {description: 'Court building open: Monday to Friday 9:15am to 4pm', type: Court
-      building open, hours: 'Monday to Friday 9:15am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:15am to 4pm'}
 - model: search.openingtime
   pk: 265
-  fields: {description: 'Enquiry Office open: 9.00 am to 4.00pm', type: Enquiry Office
-      open, hours: 9.00 am to 4.00pm}
+  fields: {type: Enquiry Office open, hours: 9.00 am to 4.00pm}
 - model: search.openingtime
   pk: 266
-  fields: {description: 'Enquiry Office open: 9:00am to 4.00 pm', type: Enquiry Office
-      open, hours: '9:00am to 4.00 pm'}
+  fields: {type: Enquiry Office open, hours: '9:00am to 4.00 pm'}
 - model: search.openingtime
   pk: 267
-  fields: {description: 'Telephone Enquiries from: 9am to 5pm, Appointments 9am to
-      4pm', type: Telephone Enquiries from, hours: '9am to 5pm, Appointments 9am to
+  fields: {type: Telephone Enquiries from, hours: '9am to 5pm, Appointments 9am to
       4pm'}
 - model: search.openingtime
   pk: 268
-  fields: {description: 'Court building open: 9.30 am to 4.00pm', type: Court building
-      open, hours: 9.30 am to 4.00pm}
+  fields: {type: Court building open, hours: 9.30 am to 4.00pm}
 - model: search.openingtime
   pk: 269
-  fields: {description: 'Court building open: 9am to 4pm (Monday to Friday)', type: Court
-      building open, hours: 9am to 4pm (Monday to Friday)}
+  fields: {type: Court building open, hours: 9am to 4pm (Monday to Friday)}
 - model: search.openingtime
   pk: 270
-  fields: {description: 'Telephone Enquiries from: 10am to 3.30pm', type: Telephone
-      Enquiries from, hours: 10am to 3.30pm}
+  fields: {type: Telephone Enquiries from, hours: 10am to 3.30pm}
 - model: search.openingtime
   pk: 271
-  fields: {description: 'Court building open: Monday to Friday 7:30am to 6:30pm',
-    type: Court building open, hours: 'Monday to Friday 7:30am to 6:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 7:30am to 6:30pm'}
 - model: search.openingtime
   pk: 272
-  fields: {description: 'Telephone Enquiries from: 8:30am to 17:00pm', type: Telephone
-      Enquiries from, hours: '8:30am to 17:00pm'}
+  fields: {type: Telephone Enquiries from, hours: '8:30am to 17:00pm'}
 - model: search.openingtime
   pk: 273
-  fields: {description: 'Court building open: 9am until close of business when court
-      sitting', type: Court building open, hours: 9am until close of business when
-      court sitting}
+  fields: {type: Court building open, hours: 9am until close of business when court
+      sitting}
 - model: search.openingtime
   pk: 274
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 6pm', type: Court
-      building open, hours: 'Monday to Friday 8:30am to 6pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 6pm'}
 - model: search.openingtime
   pk: 275
-  fields: {description: 'Court building open: Monday and Wednesday only 9:30am until
-      close of business', type: Court building open, hours: 'Monday and Wednesday
-      only 9:30am until close of business'}
+  fields: {type: Court building open, hours: 'Monday and Wednesday only 9:30am until
+      close of business'}
 - model: search.openingtime
   pk: 276
-  fields: {description: 'Bailiff counter open: 8am to 10am', type: Bailiff counter
-      open, hours: 8am to 10am}
+  fields: {type: Bailiff counter open, hours: 8am to 10am}
 - model: search.openingtime
   pk: 277
-  fields: {description: 'Court building open: Monday to Friday 8:30am to 5:30pm',
-    type: Court building open, hours: 'Monday to Friday 8:30am to 5:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30am to 5:30pm'}
 - model: search.openingtime
   pk: 278
-  fields: {description: 'Court counter open: by appointment only. County Court appointments
-      line to book in see below.', type: Court counter open, hours: by appointment
-      only. County Court appointments line to book in see below.}
+  fields: {type: Court counter open, hours: by appointment only. County Court appointments
+      line to book in see below.}
 - model: search.openingtime
   pk: 279
-  fields: {description: 'Court building open: 8:30am to close of business', type: Court
-      building open, hours: '8:30am to close of business'}
+  fields: {type: Court building open, hours: '8:30am to close of business'}
 - model: search.openingtime
   pk: 280
-  fields: {description: 'Court counter open: By prior appointment only ', type: Court
-      counter open, hours: 'By prior appointment only '}
+  fields: {type: Court counter open, hours: 'By prior appointment only '}
 - model: search.openingtime
   pk: 281
-  fields: {description: 'Telephones: 9am to 5pm (9am to 4:30pm Friday)', type: Telephones,
-    hours: '9am to 5pm (9am to 4:30pm Friday)'}
+  fields: {type: Telephones, hours: '9am to 5pm (9am to 4:30pm Friday)'}
 - model: search.openingtime
   pk: 282
-  fields: {description: 'Building open: Monday to Friday 8:30am to 4:30pm', type: Building
-      open, hours: 'Monday to Friday 8:30am to 4:30pm'}
+  fields: {type: Building open, hours: 'Monday to Friday 8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 283
-  fields: {description: 'Telephone Payments open: Monday to Friday 9am to 4pm', type: Telephone
-      Payments open, hours: Monday to Friday 9am to 4pm}
+  fields: {type: Telephone Payments open, hours: Monday to Friday 9am to 4pm}
 - model: search.openingtime
   pk: 284
-  fields: {description: 'Enquiry Office open: Monday to Friday 10am to 2pm', type: Enquiry
-      Office open, hours: Monday to Friday 10am to 2pm}
+  fields: {type: Enquiry Office open, hours: Monday to Friday 10am to 2pm}
 - model: search.openingtime
   pk: 285
-  fields: {description: 'Telephone Payments and enquiries: 9am to 5pm', type: Telephone
-      Payments and enquiries, hours: 9am to 5pm}
+  fields: {type: Telephone Payments and enquiries, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 286
-  fields: {description: 'Telephone Payments open: 8.30 am to 4.00 pm', type: Telephone
-      Payments open, hours: 8.30 am to 4.00 pm}
+  fields: {type: Telephone Payments open, hours: 8.30 am to 4.00 pm}
 - model: search.openingtime
   pk: 287
-  fields: {description: 'Telephone Enquiries from: 8.30 am to 5.00 pm', type: Telephone
-      Enquiries from, hours: 8.30 am to 5.00 pm}
+  fields: {type: Telephone Enquiries from, hours: 8.30 am to 5.00 pm}
 - model: search.openingtime
   pk: 288
-  fields: {description: 'Court counter open: 8:30am to 5pm (4:30pm Friday)', type: Court
-      counter open, hours: '8:30am to 5pm (4:30pm Friday)'}
+  fields: {type: Court counter open, hours: '8:30am to 5pm (4:30pm Friday)'}
 - model: search.openingtime
   pk: 289
-  fields: {description: 'Bailiffs Office: open from 8:30am', type: Bailiffs Office,
-    hours: 'open from 8:30am'}
+  fields: {type: Bailiffs Office, hours: 'open from 8:30am'}
 - model: search.openingtime
   pk: 290
-  fields: {description: 'Court counter open: 10am to 2pm  by prior appointment only',
-    type: Court counter open, hours: 10am to 2pm  by prior appointment only}
+  fields: {type: Court counter open, hours: 10am to 2pm  by prior appointment only}
 - model: search.openingtime
   pk: 291
-  fields: {description: 'Court counter open: 10am to 4pm', type: Court counter open,
-    hours: 10am to 4pm}
+  fields: {type: Court counter open, hours: 10am to 4pm}
 - model: search.openingtime
   pk: 292
-  fields: {description: 'Telephone Enquiries from: 8:30 to 17:00pm ', type: Telephone
-      Enquiries from, hours: '8:30 to 17:00pm '}
+  fields: {type: Telephone Enquiries from, hours: '8:30 to 17:00pm '}
 - model: search.openingtime
   pk: 293
-  fields: {description: 'Counter Services: 10am to 4:30pm', type: Counter Services,
-    hours: '10am to 4:30pm'}
+  fields: {type: Counter Services, hours: '10am to 4:30pm'}
 - model: search.openingtime
   pk: 294
-  fields: {description: 'Court counter open: 10am to 4pm by prior appointment only',
-    type: Court counter open, hours: 10am to 4pm by prior appointment only}
+  fields: {type: Court counter open, hours: 10am to 4pm by prior appointment only}
 - model: search.openingtime
   pk: 295
-  fields: {description: 'Court building open: Monday to Friday 9am to 5pm ', type: Court
-      building open, hours: 'Monday to Friday 9am to 5pm '}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 5pm '}
 - model: search.openingtime
   pk: 296
-  fields: {description: 'Enquiry Office open: 10am to 4pm (3:30pm on Friday)', type: Enquiry
-      Office open, hours: '10am to 4pm (3:30pm on Friday)'}
+  fields: {type: Enquiry Office open, hours: '10am to 4pm (3:30pm on Friday)'}
 - model: search.openingtime
   pk: 297
-  fields: {description: 'Counter Services: 9am to 4pm', type: Counter Services, hours: 9am
-      to 4pm}
+  fields: {type: Counter Services, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 298
-  fields: {description: 'Court building open: 9.00 am (only open on days when court
-      is sitting)', type: Court building open, hours: 9.00 am (only open on days when
-      court is sitting)}
+  fields: {type: Court building open, hours: 9.00 am (only open on days when court
+      is sitting)}
 - model: search.openingtime
   pk: 299
-  fields: {description: 'Court building open: Monday to Friday from 9am to 4pm', type: Court
-      building open, hours: Monday to Friday from 9am to 4pm}
+  fields: {type: Court building open, hours: Monday to Friday from 9am to 4pm}
 - model: search.openingtime
   pk: 300
-  fields: {description: 'Court counter open: By appointment only for urgent work. ',
-    type: Court counter open, hours: 'By appointment only for urgent work. '}
+  fields: {type: Court counter open, hours: 'By appointment only for urgent work. '}
 - model: search.openingtime
   pk: 301
-  fields: {description: 'Court building open: Monday to Friday 9 am to 4 pm', type: Court
-      building open, hours: Monday to Friday 9 am to 4 pm}
+  fields: {type: Court building open, hours: Monday to Friday 9 am to 4 pm}
 - model: search.openingtime
   pk: 302
-  fields: {description: 'Court counter open: 9:15am to 11am and 1:30pm to 2:30pm',
-    type: Court counter open, hours: '9:15am to 11am and 1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: '9:15am to 11am and 1:30pm to 2:30pm'}
 - model: search.openingtime
   pk: 303
-  fields: {description: 'Court counter open:  10am to 4.30pm. Urgent matters only
-      from 3pm', type: Court counter open, hours: ' 10am to 4.30pm. Urgent matters
-      only from 3pm'}
+  fields: {type: Court counter open, hours: ' 10am to 4.30pm. Urgent matters only
+      from 3pm'}
 - model: search.openingtime
   pk: 304
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:30 pm', type: Court
-      building open, hours: 'Monday to Friday 9am to 4:30 pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:30 pm'}
 - model: search.openingtime
   pk: 305
-  fields: {description: 'Enquiry Office open: For Crown Court enquiries, from 10am
-      to 2pm', type: Enquiry Office open, hours: 'For Crown Court enquiries, from
-      10am to 2pm'}
+  fields: {type: Enquiry Office open, hours: 'For Crown Court enquiries, from 10am
+      to 2pm'}
 - model: search.openingtime
   pk: 306
-  fields: {description: 'Enquiry Office open: For County Court enquiries, by prior
-      appointment only ', type: Enquiry Office open, hours: 'For County Court enquiries,
-      by prior appointment only '}
+  fields: {type: Enquiry Office open, hours: 'For County Court enquiries, by prior
+      appointment only '}
 - model: search.openingtime
   pk: 307
-  fields: {description: 'Bailiff counter open: 9:30am', type: Bailiff counter open,
-    hours: '9:30am'}
+  fields: {type: Bailiff counter open, hours: '9:30am'}
 - model: search.openingtime
   pk: 308
-  fields: {description: 'Court counter open: Monday to Thurday 9am to 4:30pm, Friday
-      9am to 4pm', type: Court counter open, hours: 'Monday to Thurday 9am to 4:30pm,
-      Friday 9am to 4pm'}
+  fields: {type: Court counter open, hours: 'Monday to Thurday 9am to 4:30pm, Friday
+      9am to 4pm'}
 - model: search.openingtime
   pk: 309
-  fields: {description: 'Court building open: Monday to Thurday 9am to 4:30pm, Friday
-      9am to 4pm', type: Court building open, hours: 'Monday to Thurday 9am to 4:30pm,
-      Friday 9am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Thurday 9am to 4:30pm, Friday
+      9am to 4pm'}
 - model: search.openingtime
   pk: 310
-  fields: {description: 'Telephone Enquiries from: Monday to Thurday 9am to 5:00pm,
-      Friday 9am to 4:30pm', type: Telephone Enquiries from, hours: 'Monday to Thurday
-      9am to 5:00pm, Friday 9am to 4:30pm'}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Thurday 9am to 5:00pm,
+      Friday 9am to 4:30pm'}
 - model: search.openingtime
   pk: 311
-  fields: {description: 'County Court enquiries counter: 10am to 2pm (High Court and
-      Administrative Court 4pm)', type: County Court enquiries counter, hours: 10am
-      to 2pm (High Court and Administrative Court 4pm)}
+  fields: {type: County Court enquiries counter, hours: 10am to 2pm (High Court and
+      Administrative Court 4pm)}
 - model: search.openingtime
   pk: 312
-  fields: {description: 'Bailiff counter open: From 9am', type: Bailiff counter open,
-    hours: From 9am}
+  fields: {type: Bailiff counter open, hours: From 9am}
 - model: search.openingtime
   pk: 313
-  fields: {description: 'Crown Court enquiries: 10am to 4pm', type: Crown Court enquiries,
-    hours: 10am to 4pm}
+  fields: {type: Crown Court enquiries, hours: 10am to 4pm}
 - model: search.openingtime
   pk: 314
-  fields: {description: 'Court building open: only when court is sitting.', type: Court
-      building open, hours: only when court is sitting.}
+  fields: {type: Court building open, hours: only when court is sitting.}
 - model: search.openingtime
   pk: 315
-  fields: {description: 'Court counter open: 9.45 am to 2.00pm', type: Court counter
-      open, hours: 9.45 am to 2.00pm}
+  fields: {type: Court counter open, hours: 9.45 am to 2.00pm}
 - model: search.openingtime
   pk: 316
-  fields: {description: 'Court building open: 9am to 5pm to the public and Court Users',
-    type: Court building open, hours: 9am to 5pm to the public and Court Users}
+  fields: {type: Court building open, hours: 9am to 5pm to the public and Court Users}
 - model: search.openingtime
   pk: 317
-  fields: {description: 'Tribunal open: Monday to Friday 8:30am to 4:30pm', type: Tribunal
-      open, hours: 'Monday to Friday 8:30am to 4:30pm'}
+  fields: {type: Tribunal open, hours: 'Monday to Friday 8:30am to 4:30pm'}
 - model: search.openingtime
   pk: 318
-  fields: {description: 'Counter open: 9am to 4pm', type: Counter open, hours: 9am
-      to 4pm}
+  fields: {type: Counter open, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 319
-  fields: {description: 'Court enquiries open: 9am to 5pm', type: Court enquiries
-      open, hours: 9am to 5pm}
+  fields: {type: Court enquiries open, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 320
-  fields: {description: 'Court counter open: 9:30am and 4pm', type: Court counter
-      open, hours: '9:30am and 4pm'}
+  fields: {type: Court counter open, hours: '9:30am and 4pm'}
 - model: search.openingtime
   pk: 321
-  fields: {description: 'Court counter open: 10am to 2pm (hearing days only)', type: Court
-      counter open, hours: 10am to 2pm (hearing days only)}
+  fields: {type: Court counter open, hours: 10am to 2pm (hearing days only)}
 - model: search.openingtime
   pk: 322
-  fields: {description: 'Telephones: 9am to 5pm (9am to 4:30pm Fridays)', type: Telephones,
-    hours: '9am to 5pm (9am to 4:30pm Fridays)'}
+  fields: {type: Telephones, hours: '9am to 5pm (9am to 4:30pm Fridays)'}
 - model: search.openingtime
   pk: 323
-  fields: {description: 'County Court enquiries counter: By prior appointment only ',
-    type: County Court enquiries counter, hours: 'By prior appointment only '}
+  fields: {type: County Court enquiries counter, hours: 'By prior appointment only '}
 - model: search.openingtime
   pk: 324
-  fields: {description: 'Court counter open: 9am to 5pm (Crown Court)', type: Court
-      counter open, hours: 9am to 5pm (Crown Court)}
+  fields: {type: Court counter open, hours: 9am to 5pm (Crown Court)}
 - model: search.openingtime
   pk: 325
-  fields: {description: 'Court building open: 8.30 am to 4.00pm', type: Court building
-      open, hours: 8.30 am to 4.00pm}
+  fields: {type: Court building open, hours: 8.30 am to 4.00pm}
 - model: search.openingtime
   pk: 326
-  fields: {description: 'County Court enquiries counter: 10.00 am to 2.00pm', type: County
-      Court enquiries counter, hours: 10.00 am to 2.00pm}
+  fields: {type: County Court enquiries counter, hours: 10.00 am to 2.00pm}
 - model: search.openingtime
   pk: 327
-  fields: {description: 'Counter open: 10.00am to 4.00pm (Magistrates Enquiries Only)',
-    type: Counter open, hours: 10.00am to 4.00pm (Magistrates Enquiries Only)}
+  fields: {type: Counter open, hours: 10.00am to 4.00pm (Magistrates Enquiries Only)}
 - model: search.openingtime
   pk: 328
-  fields: {description: 'Crown Office opens: 9am to 5pm', type: Crown Office opens,
-    hours: 9am to 5pm}
+  fields: {type: Crown Office opens, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 329
-  fields: {description: 'Court counter closed: There is no Public Counter', type: Court
-      counter closed, hours: There is no Public Counter}
+  fields: {type: Court counter closed, hours: There is no Public Counter}
 - model: search.openingtime
   pk: 330
-  fields: {description: 'Civil counter open: 10am to 2pm', type: Civil counter open,
-    hours: 10am to 2pm}
+  fields: {type: Civil counter open, hours: 10am to 2pm}
 - model: search.openingtime
   pk: 331
-  fields: {description: 'Crown Court enquiries: 9am to 5pm', type: Crown Court enquiries,
-    hours: 9am to 5pm}
+  fields: {type: Crown Court enquiries, hours: 9am to 5pm}
 - model: search.openingtime
   pk: 332
-  fields: {description: 'Telephone Enquiries from: 08:30am to 5pm', type: Telephone
-      Enquiries from, hours: '08:30am to 5pm'}
+  fields: {type: Telephone Enquiries from, hours: '08:30am to 5pm'}
 - model: search.openingtime
   pk: 333
-  fields: {description: 'No counter service available: Please visit Thames Magistrates''
-      Court from  9am to 11am and 1:30pm to 2:30pm', type: No counter service available,
-    hours: 'Please visit Thames Magistrates'' Court from  9am to 11am and 1:30pm to
-      2:30pm'}
+  fields: {type: No counter service available, hours: 'Please visit Thames Magistrates''
+      Court from  9am to 11am and 1:30pm to 2:30pm'}
 - model: search.openingtime
   pk: 334
-  fields: {description: 'Court counter closed: No counter service at this court ',
-    type: Court counter closed, hours: 'No counter service at this court '}
+  fields: {type: Court counter closed, hours: 'No counter service at this court '}
 - model: search.openingtime
   pk: 335
-  fields: {description: 'Court building open: 9.00 am until close of business', type: Court
-      building open, hours: 9.00 am until close of business}
+  fields: {type: Court building open, hours: 9.00 am until close of business}
 - model: search.openingtime
   pk: 336
-  fields: {description: 'Court counter open: 9am to 4:30pm', type: Court counter open,
-    hours: '9am to 4:30pm'}
+  fields: {type: Court counter open, hours: '9am to 4:30pm'}
 - model: search.openingtime
   pk: 337
-  fields: {description: 'Court building open: Monday to Thursday  9:30am to 4pm',
-    type: Court building open, hours: 'Monday to Thursday  9:30am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Thursday  9:30am to 4pm'}
 - model: search.openingtime
   pk: 338
-  fields: {description: 'Counter open: 10am to 2pm', type: Counter open, hours: 10am
-      to 2pm}
+  fields: {type: Counter open, hours: 10am to 2pm}
 - model: search.openingtime
   pk: 339
-  fields: {description: 'Court counter open: 10am to 2pm (by prior appointment only)',
-    type: Court counter open, hours: 10am to 2pm (by prior appointment only)}
+  fields: {type: Court counter open, hours: 10am to 2pm (by prior appointment only)}
 - model: search.openingtime
   pk: 340
-  fields: {description: 'Court building open: Monday to Thursday 9am to 5pm (9am to
-      4:30pm Friday)', type: Court building open, hours: 'Monday to Thursday 9am to
-      5pm (9am to 4:30pm Friday)'}
+  fields: {type: Court building open, hours: 'Monday to Thursday 9am to 5pm (9am to
+      4:30pm Friday)'}
 - model: search.openingtime
   pk: 341
-  fields: {description: 'Court building open: 9am to 4:30pm (4:15pm Friday)', type: Court
-      building open, hours: '9am to 4:30pm (4:15pm Friday)'}
+  fields: {type: Court building open, hours: '9am to 4:30pm (4:15pm Friday)'}
 - model: search.openingtime
   pk: 342
-  fields: {description: 'Court building open: Monday to Friday 8am to 6pm ', type: Court
-      building open, hours: 'Monday to Friday 8am to 6pm '}
+  fields: {type: Court building open, hours: 'Monday to Friday 8am to 6pm '}
 - model: search.openingtime
   pk: 343
-  fields: {description: 'Court counter open: 9am to 5pm ', type: Court counter open,
-    hours: '9am to 5pm '}
+  fields: {type: Court counter open, hours: '9am to 5pm '}
 - model: search.openingtime
   pk: 344
-  fields: {description: 'Court counter open: 9am to 2:30pm (closed 11am to 1:30pm)',
-    type: Court counter open, hours: '9am to 2:30pm (closed 11am to 1:30pm)'}
+  fields: {type: Court counter open, hours: '9am to 2:30pm (closed 11am to 1:30pm)'}
 - model: search.openingtime
   pk: 345
-  fields: {description: 'Court building open: For hearings only - all enquiries to
-      Barrow County Court', type: Court building open, hours: For hearings only -
-      all enquiries to Barrow County Court}
+  fields: {type: Court building open, hours: For hearings only - all enquiries to
+      Barrow County Court}
 - model: search.openingtime
   pk: 346
-  fields: {description: 'Court counter closed: Please phone 01229 840370 for civil
-      and family queries', type: Court counter closed, hours: Please phone 01229 840370
-      for civil and family queries}
+  fields: {type: Court counter closed, hours: Please phone 01229 840370 for civil
+      and family queries}
 - model: search.openingtime
   pk: 347
-  fields: {description: 'Court counter open: 9am to 11am and 1:30pm to 2:30pm', type: Court
-      counter open, hours: '9am to 11am and 1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: '9am to 11am and 1:30pm to 2:30pm'}
 - model: search.openingtime
   pk: 348
-  fields: {description: 'Tribunal open: Monday to Friday  9am to 4pm', type: Tribunal
-      open, hours: Monday to Friday  9am to 4pm}
+  fields: {type: Tribunal open, hours: Monday to Friday  9am to 4pm}
 - model: search.openingtime
   pk: 349
-  fields: {description: 'Telephone Enquiries from: 9am to 4pm', type: Telephone Enquiries
-      from, hours: 9am to 4pm}
+  fields: {type: Telephone Enquiries from, hours: 9am to 4pm}
 - model: search.openingtime
   pk: 350
-  fields: {description: 'Tribunal open: Monday to Friday 8am to 5pm', type: Tribunal
-      open, hours: Monday to Friday 8am to 5pm}
+  fields: {type: Tribunal open, hours: Monday to Friday 8am to 5pm}
 - model: search.openingtime
   pk: 351
-  fields: {description: 'County Court enquiries counter: 10am to 2pm, by appointment
-      only ', type: County Court enquiries counter, hours: '10am to 2pm, by appointment
+  fields: {type: County Court enquiries counter, hours: '10am to 2pm, by appointment
       only '}
 - model: search.openingtime
   pk: 352
-  fields: {description: 'County Court enquiries counter: Urgent matters only 10am
-      to 2pm. For non-urgent matters, an appointment service is available. ', type: County
-      Court enquiries counter, hours: 'Urgent matters only 10am to 2pm. For non-urgent
-      matters, an appointment service is available. '}
+  fields: {type: County Court enquiries counter, hours: 'Urgent matters only 10am
+      to 2pm. For non-urgent matters, an appointment service is available. '}
 - model: search.openingtime
   pk: 353
-  fields: {description: 'Family counter open: By prior appointment only - Please contact
-      the relevant team to book an appointment', type: Family counter open, hours: By
-      prior appointment only - Please contact the relevant team to book an appointment}
+  fields: {type: Family counter open, hours: By prior appointment only - Please contact
+      the relevant team to book an appointment}
 - model: search.openingtime
   pk: 354
-  fields: {description: 'Court building open: Monday to Friday 8:30 am 5pm', type: Court
-      building open, hours: 'Monday to Friday 8:30 am 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30 am 5pm'}
 - model: search.openingtime
   pk: 355
-  fields: {description: 'Bailiffs Office: 8am to 10am', type: Bailiffs Office, hours: 8am
-      to 10am}
+  fields: {type: Bailiffs Office, hours: 8am to 10am}
 - model: search.openingtime
   pk: 356
-  fields: {description: 'Court counter open: 10am to 2pm (High Court and Administrative
-      Court 4pm)', type: Court counter open, hours: 10am to 2pm (High Court and Administrative
+  fields: {type: Court counter open, hours: 10am to 2pm (High Court and Administrative
       Court 4pm)}
 - model: search.openingtime
   pk: 357
-  fields: {description: 'Court building open: Monday to Friday 9am to 1pm and 1:45pm
-      until close of business', type: Court building open, hours: 'Monday to Friday
-      9am to 1pm and 1:45pm until close of business'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 1pm and 1:45pm
+      until close of business'}
 - model: search.openingtime
   pk: 358
-  fields: {description: 'Court counter open: For urgent matters only by prior appointment ',
-    type: Court counter open, hours: 'For urgent matters only by prior appointment '}
+  fields: {type: Court counter open, hours: 'For urgent matters only by prior appointment '}
 - model: search.openingtime
   pk: 359
-  fields: {description: 'Telephones: Monday to Thursday 8:30am to 5pm, Friday 8:30am
-      to 4:30pm', type: Telephones, hours: 'Monday to Thursday 8:30am to 5pm, Friday
-      8:30am to 4:30pm'}
+  fields: {type: Telephones, hours: 'Monday to Thursday 8:30am to 5pm, Friday 8:30am
+      to 4:30pm'}
 - model: search.openingtime
   pk: 360
-  fields: {description: 'Court building open: This is a satellite court and is only
-      open when sitting.', type: Court building open, hours: This is a satellite court
-      and is only open when sitting.}
+  fields: {type: Court building open, hours: This is a satellite court and is only
+      open when sitting.}
 - model: search.openingtime
   pk: 361
-  fields: {description: 'Court counter open: 10am to 2pm (by prior appointment only).',
-    type: Court counter open, hours: 10am to 2pm (by prior appointment only).}
+  fields: {type: Court counter open, hours: 10am to 2pm (by prior appointment only).}
 - model: search.openingtime
   pk: 362
-  fields: {description: 'Court counter open: 9am to 1pm', type: Court counter open,
-    hours: 9am to 1pm}
+  fields: {type: Court counter open, hours: 9am to 1pm}
 - model: search.openingtime
   pk: 363
-  fields: {description: 'Court building open: Monday to Thursday 9am to 5pm  (4:30pm
-      on Friday)', type: Court building open, hours: 'Monday to Thursday 9am to 5pm  (4:30pm
+  fields: {type: Court building open, hours: 'Monday to Thursday 9am to 5pm  (4:30pm
       on Friday)'}
 - model: search.openingtime
   pk: 364
-  fields: {description: 'Court counter open: 9:30am to 4pm (3:30pm Friday)', type: Court
-      counter open, hours: '9:30am to 4pm (3:30pm Friday)'}
+  fields: {type: Court counter open, hours: '9:30am to 4pm (3:30pm Friday)'}
 - model: search.openingtime
   pk: 365
-  fields: {description: 'Court counter open: Crime - 9:30am to 4:00pm Mon-Thursday.
-      9:30am to 3:30pm Friday.', type: Court counter open, hours: 'Crime - 9:30am
-      to 4:00pm Mon-Thursday. 9:30am to 3:30pm Friday.'}
+  fields: {type: Court counter open, hours: 'Crime - 9:30am to 4:00pm Mon-Thursday.
+      9:30am to 3:30pm Friday.'}
 - model: search.openingtime
   pk: 366
-  fields: {description: 'Court building open: Employment - 9:00am to 5:00pm Monday-Friday.',
-    type: Court building open, hours: 'Employment - 9:00am to 5:00pm Monday-Friday.'}
+  fields: {type: Court building open, hours: 'Employment - 9:00am to 5:00pm Monday-Friday.'}
 - model: search.openingtime
   pk: 367
-  fields: {description: "County Court open: Extended sitting days \u2013 Monday to
-      Thursday 5 pm to 7:30 pm.", type: County Court open, hours: "Extended sitting
-      days \u2013 Monday to Thursday 5 pm to 7:30 pm."}
+  fields: {type: County Court open, hours: "Extended sitting days \u2013 Monday to
+      Thursday 5 pm to 7:30 pm."}
 - model: search.openingtime
   pk: 368
-  fields: {description: 'Bailiff telephone service: For payments only Tel: 01865 264200
-      (option 1 then option 7) ', type: Bailiff telephone service, hours: 'For payments
-      only Tel: 01865 264200 (option 1 then option 7) '}
+  fields: {type: Bailiff telephone service, hours: 'For payments only Tel: 01865 264200
+      (option 1 then option 7) '}
 - model: search.openingtime
   pk: 369
-  fields: {description: 'Court counter open: by prior appointment only', type: Court
-      counter open, hours: by prior appointment only}
+  fields: {type: Court counter open, hours: by prior appointment only}
 - model: search.openingtime
   pk: 370
-  fields: {description: 'Court counter open: Monday to Friday 10am to 4pm  by appointment
-      only', type: Court counter open, hours: Monday to Friday 10am to 4pm  by appointment
+  fields: {type: Court counter open, hours: Monday to Friday 10am to 4pm  by appointment
       only}
 - model: search.openingtime
   pk: 371
-  fields: {description: 'Court building open: Monday to Friday 9:00am to 5:00pm',
-    type: Court building open, hours: 'Monday to Friday 9:00am to 5:00pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:00am to 5:00pm'}
 - model: search.openingtime
   pk: 372
-  fields: {description: 'Telephone Enquiries from: 9:00am to 5:00pm', type: Telephone
-      Enquiries from, hours: '9:00am to 5:00pm'}
+  fields: {type: Telephone Enquiries from, hours: '9:00am to 5:00pm'}
 - model: search.openingtime
   pk: 373
-  fields: {description: 'Bailiff counter open: 9:00am to 10:00am', type: Bailiff counter
-      open, hours: '9:00am to 10:00am'}
+  fields: {type: Bailiff counter open, hours: '9:00am to 10:00am'}
 - model: search.openingtime
   pk: 374
-  fields: {description: 'Civil counter open: 10:00am to 2:00pm', type: Civil counter
-      open, hours: '10:00am to 2:00pm'}
+  fields: {type: Civil counter open, hours: '10:00am to 2:00pm'}
 - model: search.openingtime
   pk: 375
-  fields: {description: 'Magistrates'' Court open: Counter open 9:00am to 4:30pm',
-    type: Magistrates' Court open, hours: 'Counter open 9:00am to 4:30pm'}
+  fields: {type: Magistrates' Court open, hours: 'Counter open 9:00am to 4:30pm'}
 - model: search.openingtime
   pk: 376
-  fields: {description: 'Civil counter open: By appointment only. Please book appointments
-      on 01202 502809', type: Civil counter open, hours: By appointment only. Please
-      book appointments on 01202 502809}
+  fields: {type: Civil counter open, hours: By appointment only. Please book appointments
+      on 01202 502809}
 - model: search.openingtime
   pk: 377
-  fields: {description: 'Family counter open: By appointment only. Please book appointments
-      on 01202 502860', type: Family counter open, hours: By appointment only. Please
-      book appointments on 01202 502860}
+  fields: {type: Family counter open, hours: By appointment only. Please book appointments
+      on 01202 502860}
 - model: search.openingtime
   pk: 378
-  fields: {description: 'Telephones: Monday to Friday 8.30am to 5.00pm ', type: Telephones,
-    hours: 'Monday to Friday 8.30am to 5.00pm '}
+  fields: {type: Telephones, hours: 'Monday to Friday 8.30am to 5.00pm '}
 - model: search.openingtime
   pk: 379
-  fields: {description: 'Court building open: 9.00 am to 4.30pm', type: Court building
-      open, hours: 9.00 am to 4.30pm}
+  fields: {type: Court building open, hours: 9.00 am to 4.30pm}
 - model: search.openingtime
   pk: 380
-  fields: {description: 'Building open: Monday to Friday 9am to 5pm', type: Building
-      open, hours: Monday to Friday 9am to 5pm}
+  fields: {type: Building open, hours: Monday to Friday 9am to 5pm}
 - model: search.openingtime
   pk: 381
-  fields: {description: 'Counter open: 10am to 4:15pm (Times in accepting certain
-      documents may vary, please check with Tribunal)', type: Counter open, hours: '10am
-      to 4:15pm (Times in accepting certain documents may vary, please check with
-      Tribunal)'}
+  fields: {type: Counter open, hours: '10am to 4:15pm (Times in accepting certain
+      documents may vary, please check with Tribunal)'}
 - model: search.openingtime
   pk: 382
-  fields: {description: 'Court building open: 8am to 6pm', type: Court building open,
-    hours: 8am to 6pm}
+  fields: {type: Court building open, hours: 8am to 6pm}
 - model: search.openingtime
   pk: 383
-  fields: {description: 'Court building open: 8:45am to 4:30pm', type: Court building
-      open, hours: '8:45am to 4:30pm'}
+  fields: {type: Court building open, hours: '8:45am to 4:30pm'}
 - model: search.openingtime
   pk: 384
-  fields: {description: 'Court counter open: Monday to Friday 10am to 2pm ', type: Court
-      counter open, hours: 'Monday to Friday 10am to 2pm '}
+  fields: {type: Court counter open, hours: 'Monday to Friday 10am to 2pm '}
 - model: search.openingtime
   pk: 385
-  fields: {description: 'Court building open: Monday to Friday 9am to 4:30pm, Saturday
-      9am to 1pmdays)', type: Court building open, hours: 'Monday to Friday 9am to
-      4:30pm, Saturday 9am to 1pmdays)'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9am to 4:30pm, Saturday
+      9am to 1pmdays)'}
 - model: search.openingtime
   pk: 386
-  fields: {description: 'Court counter open: Monday to Friday 9am to 11:30am and 1:30pm
-      to 2:30pm', type: Court counter open, hours: 'Monday to Friday 9am to 11:30am
-      and 1:30pm to 2:30pm'}
+  fields: {type: Court counter open, hours: 'Monday to Friday 9am to 11:30am and 1:30pm
+      to 2:30pm'}
 - model: search.openingtime
   pk: 387
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 10am to 3:30pm  ',
-    type: Telephone Enquiries from, hours: 'Monday to Friday 10am to 3:30pm  '}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Friday 10am to 3:30pm  '}
 - model: search.openingtime
   pk: 388
-  fields: {description: 'Court counter open: Ushers reception  9:30am until end of
-      court sitting day.', type: Court counter open, hours: 'Ushers reception  9:30am
-      until end of court sitting day.'}
+  fields: {type: Court counter open, hours: 'Ushers reception  9:30am until end of
+      court sitting day.'}
 - model: search.openingtime
   pk: 389
-  fields: {description: 'Court counter open: 10am to 2pm (for urgent applications,
-      by prior appointment only).', type: Court counter open, hours: '10am to 2pm
-      (for urgent applications, by prior appointment only).'}
+  fields: {type: Court counter open, hours: '10am to 2pm (for urgent applications,
+      by prior appointment only).'}
 - model: search.openingtime
   pk: 390
-  fields: {description: 'Court counter open: By appointment only  ', type: Court counter
-      open, hours: 'By appointment only  '}
+  fields: {type: Court counter open, hours: 'By appointment only  '}
 - model: search.openingtime
   pk: 391
-  fields: {description: 'Court counter open: 9am to 3pm ', type: Court counter open,
-    hours: '9am to 3pm '}
+  fields: {type: Court counter open, hours: '9am to 3pm '}
 - model: search.openingtime
   pk: 392
-  fields: {description: 'Court counter open: For urgent matters only by prior appointment',
-    type: Court counter open, hours: For urgent matters only by prior appointment}
+  fields: {type: Court counter open, hours: For urgent matters only by prior appointment}
 - model: search.openingtime
   pk: 393
-  fields: {description: 'Court building open: Closed every Monday & Thursday. Open
-      Tues, Wed & Fri: 9.00 am to 5.00 pm (4.30 pm Friday)', type: Court building
-      open, hours: 'Closed every Monday & Thursday. Open Tues, Wed & Fri: 9.00 am
-      to 5.00 pm (4.30 pm Friday)'}
+  fields: {type: Court building open, hours: 'Closed every Monday & Thursday. Open
+      Tues, Wed & Fri: 9.00 am to 5.00 pm (4.30 pm Friday)'}
 - model: search.openingtime
   pk: 394
-  fields: {description: 'Court counter open: Tues, Wed & Fri: 9.00 am to 4.30 pm (4.00
-      pm Friday)', type: Court counter open, hours: 'Tues, Wed & Fri: 9.00 am to 4.30
-      pm (4.00 pm Friday)'}
+  fields: {type: Court counter open, hours: 'Tues, Wed & Fri: 9.00 am to 4.30 pm (4.00
+      pm Friday)'}
 - model: search.openingtime
   pk: 395
-  fields: {description: 'Court building open:  Monday to Friday 9am to 4pm', type: Court
-      building open, hours: ' Monday to Friday 9am to 4pm'}
+  fields: {type: Court building open, hours: ' Monday to Friday 9am to 4pm'}
 - model: search.openingtime
   pk: 396
-  fields: {description: 'Court counter open: 10am to 4pm by prior appointment, for
-      urgent enquiries only', type: Court counter open, hours: '10am to 4pm by prior
-      appointment, for urgent enquiries only'}
+  fields: {type: Court counter open, hours: '10am to 4pm by prior appointment, for
+      urgent enquiries only'}
 - model: search.openingtime
   pk: 397
-  fields: {description: 'Court counter open: 10am to 2pm, by prior appointment only',
-    type: Court counter open, hours: '10am to 2pm, by prior appointment only'}
+  fields: {type: Court counter open, hours: '10am to 2pm, by prior appointment only'}
 - model: search.openingtime
   pk: 398
-  fields: {description: 'Court counter open: 9am to 11am and 1:30pm to 2:30pm ', type: Court
-      counter open, hours: '9am to 11am and 1:30pm to 2:30pm '}
+  fields: {type: Court counter open, hours: '9am to 11am and 1:30pm to 2:30pm '}
 - model: search.openingtime
   pk: 399
-  fields: {description: 'Court building open: Monday to Friday 8:30 am 6pm', type: Court
-      building open, hours: 'Monday to Friday 8:30 am 6pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:30 am 6pm'}
 - model: search.openingtime
   pk: 400
-  fields: {description: 'Telephone Enquiries from: Monday - Thursday: 9am to 5pm,
-      Friday 9am - 4:45pm', type: Telephone Enquiries from, hours: 'Monday - Thursday:
-      9am to 5pm, Friday 9am - 4:45pm'}
+  fields: {type: Telephone Enquiries from, hours: 'Monday - Thursday: 9am to 5pm,
+      Friday 9am - 4:45pm'}
 - model: search.openingtime
   pk: 401
-  fields: {description: 'Counter Services: (Prior appointment only) 10am to 2pm ',
-    type: Counter Services, hours: '(Prior appointment only) 10am to 2pm '}
+  fields: {type: Counter Services, hours: '(Prior appointment only) 10am to 2pm '}
 - model: search.openingtime
   pk: 402
-  fields: {description: 'Court counter open: By prior appointment only. ', type: Court
-      counter open, hours: 'By prior appointment only. '}
+  fields: {type: Court counter open, hours: 'By prior appointment only. '}
 - model: search.openingtime
   pk: 403
-  fields: {description: 'Telephone Payments open: 9am to 3.45pm', type: Telephone
-      Payments open, hours: 9am to 3.45pm}
+  fields: {type: Telephone Payments open, hours: 9am to 3.45pm}
 - model: search.openingtime
   pk: 404
-  fields: {description: 'Court building open: Monday to Friday 8.30am to 5.00pm',
-    type: Court building open, hours: Monday to Friday 8.30am to 5.00pm}
+  fields: {type: Court building open, hours: Monday to Friday 8.30am to 5.00pm}
 - model: search.openingtime
   pk: 405
-  fields: {description: 'Court counter open: Monday to Friday 10:00am to 4:00pm by
+  fields: {type: Court counter open, hours: 'Monday to Friday 10:00am to 4:00pm by
       appointment only. To make an appointment please ring 0300 303 0642. Please note
-      you will not be seen without an appointment.', type: Court counter open, hours: 'Monday
-      to Friday 10:00am to 4:00pm by appointment only. To make an appointment please
-      ring 0300 303 0642. Please note you will not be seen without an appointment.'}
+      you will not be seen without an appointment.'}
 - model: search.openingtime
   pk: 406
-  fields: {description: 'Court building open: 9:30am to 4pm on hearing days', type: Court
-      building open, hours: '9:30am to 4pm on hearing days'}
+  fields: {type: Court building open, hours: '9:30am to 4pm on hearing days'}
 - model: search.openingtime
   pk: 407
-  fields: {description: 'Building open: 9:00am to 5:00pm', type: Building open, hours: '9:00am
-      to 5:00pm'}
+  fields: {type: Building open, hours: '9:00am to 5:00pm'}
 - model: search.openingtime
   pk: 408
-  fields: {description: 'Court counter open: 10am to 4pm by appointment only ', type: Court
-      counter open, hours: '10am to 4pm by appointment only '}
+  fields: {type: Court counter open, hours: '10am to 4pm by appointment only '}
 - model: search.openingtime
   pk: 409
-  fields: {description: 'Crown Office opens: 10am to 4pm', type: Crown Office opens,
-    hours: 10am to 4pm}
+  fields: {type: Crown Office opens, hours: 10am to 4pm}
 - model: search.openingtime
   pk: 410
-  fields: {description: 'Court building open: Monday  to Friday 9am - 4pm ', type: Court
-      building open, hours: 'Monday  to Friday 9am - 4pm '}
+  fields: {type: Court building open, hours: 'Monday  to Friday 9am - 4pm '}
 - model: search.openingtime
   pk: 411
-  fields: {description: 'Court building open: 9.00am to 5.00pm', type: Court building
-      open, hours: 9.00am to 5.00pm}
+  fields: {type: Court building open, hours: 9.00am to 5.00pm}
 - model: search.openingtime
   pk: 412
-  fields: {description: 'Counter Services: Face to face enquiries strictly by appointment
-      only.   See appointment numbers below.', type: Counter Services, hours: Face
-      to face enquiries strictly by appointment only.   See appointment numbers below.}
+  fields: {type: Counter Services, hours: Face to face enquiries strictly by appointment
+      only.   See appointment numbers below.}
 - model: search.openingtime
   pk: 413
-  fields: {description: 'Court counter open: For Urgent Matters Only: by prior appointment',
-    type: Court counter open, hours: 'For Urgent Matters Only: by prior appointment'}
+  fields: {type: Court counter open, hours: 'For Urgent Matters Only: by prior appointment'}
 - model: search.openingtime
   pk: 414
-  fields: {description: 'Court counter open: 10am to 4pm (by prior appointment only)',
-    type: Court counter open, hours: 10am to 4pm (by prior appointment only)}
+  fields: {type: Court counter open, hours: 10am to 4pm (by prior appointment only)}
 - model: search.openingtime
   pk: 415
-  fields: {description: 'Court building open: 8:30am to 4:30pm (4pm Friday)', type: Court
-      building open, hours: '8:30am to 4:30pm (4pm Friday)'}
+  fields: {type: Court building open, hours: '8:30am to 4:30pm (4pm Friday)'}
 - model: search.openingtime
   pk: 416
-  fields: {description: 'Court building open: Monday to Friday, 9am to 5pm', type: Court
-      building open, hours: 'Monday to Friday, 9am to 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday, 9am to 5pm'}
 - model: search.openingtime
   pk: 417
-  fields: {description: 'County Court enquiries counter: By appointment only.  ',
-    type: County Court enquiries counter, hours: 'By appointment only.  '}
+  fields: {type: County Court enquiries counter, hours: 'By appointment only.  '}
 - model: search.openingtime
   pk: 418
-  fields: {description: 'Court building open: Monday to Friday 7:30am to 5:30pm',
-    type: Court building open, hours: 'Monday to Friday 7:30am to 5:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 7:30am to 5:30pm'}
 - model: search.openingtime
   pk: 419
-  fields: {description: 'Bailiff counter open: 8:30am to 9:30am', type: Bailiff counter
-      open, hours: '8:30am to 9:30am'}
+  fields: {type: Bailiff counter open, hours: '8:30am to 9:30am'}
 - model: search.openingtime
   pk: 420
-  fields: {description: 'Court building open: Monday to Thursday 9am to 5pm. Friday
-      9am to 4:30pm', type: Court building open, hours: 'Monday to Thursday 9am to
-      5pm. Friday 9am to 4:30pm'}
+  fields: {type: Court building open, hours: 'Monday to Thursday 9am to 5pm. Friday
+      9am to 4:30pm'}
 - model: search.openingtime
   pk: 421
-  fields: {description: 'Office open: Please telephone for opening times.', type: Office
-      open, hours: Please telephone for opening times.}
+  fields: {type: Office open, hours: Please telephone for opening times.}
 - model: search.openingtime
   pk: 422
-  fields: {description: 'Court building open: Monday to Friday, 9am to 4pm', type: Court
-      building open, hours: 'Monday to Friday, 9am to 4pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday, 9am to 4pm'}
 - model: search.openingtime
   pk: 423
-  fields: {description: 'Bailiff counter open: 7:30am to 9:30am', type: Bailiff counter
-      open, hours: '7:30am to 9:30am'}
+  fields: {type: Bailiff counter open, hours: '7:30am to 9:30am'}
 - model: search.openingtime
   pk: 424
-  fields: {description: 'Court enquiries open: 10am to 2pm', type: Court enquiries
-      open, hours: 10am to 2pm}
+  fields: {type: Court enquiries open, hours: 10am to 2pm}
 - model: search.openingtime
   pk: 425
-  fields: {description: 'Court counter open: 10am to 2pm (by appointment only)', type: Court
-      counter open, hours: 10am to 2pm (by appointment only)}
+  fields: {type: Court counter open, hours: 10am to 2pm (by appointment only)}
 - model: search.openingtime
   pk: 426
-  fields: {description: 'Court building open: 9.15 am (Mon-Thurs) 9.00 am (Fri)',
-    type: Court building open, hours: 9.15 am (Mon-Thurs) 9.00 am (Fri)}
+  fields: {type: Court building open, hours: 9.15 am (Mon-Thurs) 9.00 am (Fri)}
 - model: search.openingtime
   pk: 427
-  fields: {description: 'Court counter open: 8:30am to 4pm', type: Court counter open,
-    hours: '8:30am to 4pm'}
+  fields: {type: Court counter open, hours: '8:30am to 4pm'}
 - model: search.openingtime
   pk: 428
-  fields: {description: 'Court building open: from 9:45am until close of business
-      on days the court is sitting.', type: Court building open, hours: 'from 9:45am
-      until close of business on days the court is sitting.'}
+  fields: {type: Court building open, hours: 'from 9:45am until close of business
+      on days the court is sitting.'}
 - model: search.openingtime
   pk: 429
-  fields: {description: 'Court counter open:  10am to 2pm', type: Court counter open,
-    hours: ' 10am to 2pm'}
+  fields: {type: Court counter open, hours: ' 10am to 2pm'}
 - model: search.openingtime
   pk: 430
-  fields: {description: 'Court building open: Monday to Friday 8:45am to 4.45pm',
-    type: Court building open, hours: 'Monday to Friday 8:45am to 4.45pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 8:45am to 4.45pm'}
 - model: search.openingtime
   pk: 431
-  fields: {description: 'Court counter open: No payment Counter.  Enquiry Counter
-      opens at 9.30 am', type: Court counter open, hours: No payment Counter.  Enquiry
-      Counter opens at 9.30 am}
+  fields: {type: Court counter open, hours: No payment Counter.  Enquiry Counter opens
+      at 9.30 am}
 - model: search.openingtime
   pk: 432
-  fields: {description: 'Court counter open: 10am to 2pm for urgent matters only ',
-    type: Court counter open, hours: '10am to 2pm for urgent matters only '}
+  fields: {type: Court counter open, hours: '10am to 2pm for urgent matters only '}
 - model: search.openingtime
   pk: 433
-  fields: {description: 'Court building open: Monday to Friday 9:30am until close
-      of business', type: Court building open, hours: 'Monday to Friday 9:30am until
-      close of business'}
+  fields: {type: Court building open, hours: 'Monday to Friday 9:30am until close
+      of business'}
 - model: search.openingtime
   pk: 434
-  fields: {description: 'Court counter open: Strictly by appointment only', type: Court
-      counter open, hours: Strictly by appointment only}
+  fields: {type: Court counter open, hours: Strictly by appointment only}
 - model: search.openingtime
   pk: 435
-  fields: {description: 'Court counter open: By prior appointment only (except High
-      Court and Administrative Court 10am to 4pm)', type: Court counter open, hours: By
-      prior appointment only (except High Court and Administrative Court 10am to 4pm)}
+  fields: {type: Court counter open, hours: By prior appointment only (except High
+      Court and Administrative Court 10am to 4pm)}
 - model: search.openingtime
   pk: 436
-  fields: {description: 'Telephone Enquiries from: 8.30am to 17:00pm ', type: Telephone
-      Enquiries from, hours: '8.30am to 17:00pm '}
+  fields: {type: Telephone Enquiries from, hours: '8.30am to 17:00pm '}
 - model: search.openingtime
   pk: 437
-  fields: {description: 'Court building open: 8.30 am to 5.30pm', type: Court building
-      open, hours: 8.30 am to 5.30pm}
+  fields: {type: Court building open, hours: 8.30 am to 5.30pm}
 - model: search.openingtime
   pk: 438
-  fields: {description: 'Court counter open: 09.45 am to 4.00pm', type: Court counter
-      open, hours: 09.45 am to 4.00pm}
+  fields: {type: Court counter open, hours: 09.45 am to 4.00pm}
 - model: search.openingtime
   pk: 439
-  fields: {description: 'Court counter open: Monday to Friday 9am to 5pm ', type: Court
-      counter open, hours: 'Monday to Friday 9am to 5pm '}
+  fields: {type: Court counter open, hours: 'Monday to Friday 9am to 5pm '}
 - model: search.openingtime
   pk: 440
-  fields: {description: 'Court building open: Monday to Friday 7:45am to 5pm', type: Court
-      building open, hours: 'Monday to Friday 7:45am to 5pm'}
+  fields: {type: Court building open, hours: 'Monday to Friday 7:45am to 5pm'}
 - model: search.openingtime
   pk: 441
-  fields: {description: 'Counter Services: By appointment only', type: Counter Services,
-    hours: By appointment only}
+  fields: {type: Counter Services, hours: By appointment only}
 - model: search.openingtime
   pk: 442
-  fields: {description: 'Court building open: 8:30am to 4pm (9am to 4pm Thursday)',
-    type: Court building open, hours: '8:30am to 4pm (9am to 4pm Thursday)'}
+  fields: {type: Court building open, hours: '8:30am to 4pm (9am to 4pm Thursday)'}
 - model: search.openingtime
   pk: 443
-  fields: {description: 'Court counter open: 9:30am to 2pm (High Court and Administrative
-      Court 4pm)', type: Court counter open, hours: '9:30am to 2pm (High Court and
-      Administrative Court 4pm)'}
+  fields: {type: Court counter open, hours: '9:30am to 2pm (High Court and Administrative
+      Court 4pm)'}
 - model: search.openingtime
   pk: 444
-  fields: {description: 'Telephone Enquiries from: Monday to Friday 9am to 5pm ',
-    type: Telephone Enquiries from, hours: 'Monday to Friday 9am to 5pm '}
+  fields: {type: Telephone Enquiries from, hours: 'Monday to Friday 9am to 5pm '}
 - model: search.localauthority
   pk: 1
   fields: {name: Barnet Borough Council}
