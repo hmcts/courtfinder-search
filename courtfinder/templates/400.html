@@ -1,15 +1,15 @@
 {% extends "layout/base.jinja" %}
-
-{% block page_title %}Court and Tribunal Finder Error - GOV.UK{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Court and Tribunal Finder Error" %}{% endblock %}
 
 {% block content %}
 <div class="content inner cf">
   <header class="page-header">
-    <h1>Court and tribunal finder</h1>
+    <h1>{% trans "Court and tribunal finder" %}</h1>
   </header>
   <div class="group">
-    <p>We're sorry, but your browser sent a request that this server could not understand.</p>
-    <p>Go to the <a href="/search">home page</a></p>
+    <p>{% trans "We're sorry, but your browser sent a request that this server could not understand." %}</p>
+    <p>{% blocktrans with home_url='/search' %}Go to the <a href="{{ home_url }}">home page</a>{% endblocktrans %}</p>
   </div>
 </div>
 {% endblock %}

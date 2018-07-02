@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-26 12:26+0000\n"
+"POT-Creation-Date: 2018-07-02 08:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: courtfinder/settings/base.py:152
+#: courtfinder/settings/base.py:152 courtfinder/settings/local.py:37
+#: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
 msgid "English"
 msgstr ""
 
-#: courtfinder/settings/base.py:153
+#: courtfinder/settings/local.py:38 courtfinder/settings/production.py:42
+#: courtfinder/settings/test.py:34
 msgid "Welsh"
 msgstr ""
 
-#: templates/layout/base.jinja:15
+#: templates/400.html:3 templates/404.html:3 templates/500.html:3
+msgid "Court and Tribunal Finder Error"
+msgstr ""
+
+#: templates/400.html:8 templates/404.html:8 templates/500.html:8
+msgid "Court and tribunal finder"
+msgstr ""
+
+#: templates/400.html:11
+msgid "We're sorry, but your browser sent a request that this server could not understand."
+msgstr ""
+
+#: templates/400.html:12 templates/404.html:12 templates/500.html:12
+#, python-format
+msgid "Go to the <a href=\"%(home_url)s\">home page</a>"
+msgstr ""
+
+#: templates/404.html:11
+msgid "Page not found"
+msgstr ""
+
+#: templates/500.html:11
+msgid "We're sorry, but something went wrong"
+msgstr ""
+
+#: templates/layout/base.jinja:26
 #, python-format
 msgid "This is a new service - <a href=\"%(feedback_url)s\">your feedback</a> will help us to improve it."
+msgstr ""
+
+#: templates/layout/base.jinja:34
+msgid "Help"
+msgstr ""
+
+#: templates/layout/base.jinja:35
+msgid "Cookies"
+msgstr ""
+
+#: templates/layout/base.jinja:36
+msgid "Contact"
 msgstr ""
