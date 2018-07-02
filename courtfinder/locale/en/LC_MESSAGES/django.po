@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-02 08:58+0000\n"
+"POT-Creation-Date: 2018-07-02 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,62 @@ msgstr ""
 msgid "Welsh"
 msgstr ""
 
+#: staticpages/templates/staticpages/feedback.jinja:3
+#: staticpages/templates/staticpages/feedback_sent.jinja:3 templates/400.html:3
+#: templates/404.html:3 templates/500.html:3
+msgid "Court and Tribunal Finder"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:3
+msgid "Feedback"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:8
+msgid "Send feedback"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:10
+msgid "Please do not use this feedback form for complaints about HM Courts & Tribunals Service. Complaints should be sent to the office where the problem arose to help us sort out the issue quickly and accurately."
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:16
+msgid "Comments (Please don't leave sensitive personal details, like your phone number)"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:18
+msgid "2000 characters max"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:21
+msgid "Your email address (optional) - if you'd like us to contact you for more feedback"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:25
+msgid "Leave this field blank"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback.jinja:29
+msgid "Continue"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback_sent.jinja:3
+msgid "Feedback sent"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback_sent.jinja:8
+msgid "Home"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback_sent.jinja:9
+msgid "Find a court or tribunal"
+msgstr ""
+
+#: staticpages/templates/staticpages/feedback_sent.jinja:14
+msgid "Thank you for your feedback"
+msgstr ""
+
 #: templates/400.html:3 templates/404.html:3 templates/500.html:3
-msgid "Court and Tribunal Finder Error"
+msgid "Error"
 msgstr ""
 
 #: templates/400.html:8 templates/404.html:8 templates/500.html:8

@@ -1,32 +1,32 @@
 {% extends "layout/base.jinja" %}
-
-{% block page_title %}Feedback for Court and Tribunal Finder{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Court and Tribunal Finder" %} - {% trans "Feedback" %}{% endblock %}
 
 {% block content %}
 <div class="content inner cf">
   <header class="page-header">
-    <h1>Send feedback</h1>
+    <h1>{% trans "Send feedback" %}</h1>
   </header>
-  <p class="warning">Please do not use this feedback form for complaints about HM Courts & Tribunals Service. Complaints should be sent to the office where the problem arose to help us sort out the issue quickly and accurately.</p>
+  <p class="warning">{% trans "Please do not use this feedback form for complaints about HM Courts & Tribunals Service. Complaints should be sent to the office where the problem arose to help us sort out the issue quickly and accurately." %}</p>
   <div class="group">
     <form id="feedback-form" method="post" action="{% url 'staticpages:feedback_submit' %}">
       {% csrf_token %}
       <input name="feedback_referer" type="hidden" value="{{ request.META.HTTP_REFERER }}"/>
       <label for="feedback_text" class="form-block">
-        <div class="form-label">Comments (Please don't leave sensitive personal details, like your phone number)</div>
+        <div class="form-label">{% trans "Comments (Please don't leave sensitive personal details, like your phone number)" %}</div>
         <textarea id="feedback_text" name="feedback_text" rows="5" autofocus></textarea>
-        <div class="form-hint">2000 characters max</div>
+        <div class="form-hint">{% trans "2000 characters max" %}</div>
       </label>
       <label for="feedback_email" class="form-block">
-        <div class="form-label">Your email address (optional) - if you'd like us to contact you for more feedback</div>
+        <div class="form-label">{% trans "Your email address (optional) - if you'd like us to contact you for more feedback" %}</div>
         <input name="feedback_email" type="email"/>
       </label>
       <label for="feedback_name" class="hidden">
-        <div class="form-label">[Leave this field blank]</div>
+        <div class="form-label">[{% trans "Leave this field blank" %}]</div>
         <input name="feedback_name" type="text" />
       </label>
       <div class="actions">
-        <button id="continue" class="button" type="submit">Continue</button>
+        <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
       </div>
     </form>
   </div>

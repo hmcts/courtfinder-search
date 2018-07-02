@@ -29,7 +29,7 @@ class SearchTestCase(TestCase):
         response = c.get('/feedback')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'staticpages/feedback.jinja')
-        self.assertInHTML('<title>Feedback for Court and Tribunal Finder</title>', response.content, count=1)
+        self.assertInHTML('<title>Court and Tribunal Finder - Feedback</title>', response.content, count=1)
 
     def test_api_doc_returns_correct_content(self):
         c = Client()
