@@ -5,9 +5,10 @@
   tinymce.init({
     selector: '.rich-editor:enabled',
     width: 774,
-    plugins : 'autolink link',
+    plugins : 'autolink link paste',
     menubar: '',
     toolbar: 'link',
+    paste_as_text: true,
     statusbar: false,
   });
 
