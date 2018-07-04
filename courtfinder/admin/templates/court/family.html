@@ -12,8 +12,8 @@
     {% endfor %}
     </ul>
     </p>
-    <h3>{{ current_area }}</h3>
     {% if form %}
+    <h3>{{ current_area }}</h3>
     <form class="court family" method="post">
         {% csrf_token %}
         {{ form.as_p }}
