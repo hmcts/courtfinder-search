@@ -1,22 +1,19 @@
 import requests
-import json
 import re
 from django.test import TestCase, Client
 from mock import Mock, patch
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchInvalidPostcode
 from search.models import *
 from django.conf import settings
-from search.ingest import Ingest
+from django.core import management
+from django.core.management.commands import loaddata
 
 
 class SearchTestCase(TestCase):
 
     def setUp(self):
-        test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
-        courts_json_1 = open(test_data_dir + 'courts.json').read()
-        imports = json.loads(courts_json_1)
-        Ingest.courts(imports['courts'])
-        Ingest.emergency_message(imports['emergency_message'])
+        test_data_dir = settings.PROJECT_ROOT + '/data/test_data/'
+        management.call_command('loaddata', test_data_dir + 'test_data.yaml', verbosity=0)
 
     def tearDown(self):
         pass

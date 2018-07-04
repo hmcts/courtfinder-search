@@ -1,17 +1,14 @@
-import json
 from django.test import TestCase, Client
 from django.conf import settings
-from search.ingest import Ingest
+from django.core import management
+from django.core.management.commands import loaddata
 from search.models import DataStatus
 
 class CourtCodeTestCase(TestCase):
 
     def setUp(self):
         test_data_dir = settings.PROJECT_ROOT + '/data/test_data/'
-        courts_json_1 = open(test_data_dir + 'courts.json').read()
-        imports = json.loads(courts_json_1)
-        Ingest.courts(imports['courts'])
-        Ingest.emergency_message(imports['emergency_message'])
+        management.call_command('loaddata', test_data_dir + 'test_data.yaml', verbosity=0)
         DataStatus.objects.create(data_hash='415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
     def test_non_existing(self):
