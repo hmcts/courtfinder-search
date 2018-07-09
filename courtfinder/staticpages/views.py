@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import Http404
-
+from django.utils.translation import get_language_from_request
 from raven.contrib.django.raven_compat.models import client
 from brake.decorators import ratelimit
 
@@ -37,17 +37,19 @@ def feedback(request):
     return render(request, 'staticpages/feedback.jinja')
 
 
+feedback_receiver_languages = {"en": settings.FEEDBACK_EMAIL_RECEIVER,
+                               "cy": settings.WELSH_FEEDBACK_EMAIL_RECEIVER}
+
+
 @ratelimit(rate='3/h')
 def feedback_submit(request):
     form = FeedbackForm(request.POST)
 
     rate_limited = getattr(request, 'limited', False)
-
     if form.is_valid() and not rate_limited:
         from_address = settings.FEEDBACK_EMAIL_SENDER
-        to_addresses = [address.strip() for address in
-                        settings.FEEDBACK_EMAIL_RECEIVER.split(',')]
-
+        to_addresses = [address.strip() for address in feedback_receiver_languages[get_language_from_request(request)]
+                        .split(',')]
         if from_address and to_addresses:
             feedback_email = form.cleaned_data['feedback_email']
 
@@ -59,12 +61,10 @@ def feedback_submit(request):
                 request.META.get('HTTP_USER_AGENT','(unknown)'),
                 feedback_email,
                 form.cleaned_data['feedback_text'])
-
             try:
                 send_mail('Feedback received for Court and Tribunal Finder',
                           message, from_address,
                           to_addresses, fail_silently=False)
-
             except smtplib.SMTPException:
                 client.captureException()
 

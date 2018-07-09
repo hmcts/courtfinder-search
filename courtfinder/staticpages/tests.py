@@ -1,11 +1,14 @@
 from mock import Mock, patch
 
-from django.test import TestCase, Client
+from django.test import TestCase, Client, RequestFactory
 from django.conf import settings
+from django.utils import translation
 
 from .forms import FeedbackForm
-from django.core import management
+from django.core import management, mail
 from django.core.management.commands import loaddata
+from .views import feedback_submit
+
 
 class SearchTestCase(TestCase):
 
@@ -71,6 +74,7 @@ class SearchTestCase(TestCase):
         r = c.get('/?court_id=2038')
         self.assertEqual(r.status_code, 404)
 
+
 class FeedbackFormTestCase(TestCase):
 
     def setUp(self):
@@ -80,6 +84,7 @@ class FeedbackFormTestCase(TestCase):
             "feedback_email": "",
             "feedback_name": ""
         }
+        self.factory = RequestFactory()
 
     def test_form_honeypot_field_invalid_if_not_empty(self):
 
@@ -95,4 +100,20 @@ class FeedbackFormTestCase(TestCase):
 
         self.assertTrue(form.is_valid())
 
+    @patch('staticpages.views.get_language_from_request', return_value='cy')
+    def test_correct_welsh_to_addresses(self, get_language_from_request):
+        mail.outbox = []
+        request = self.factory.post('/feedback_submit', self.post_data,
+                                        follow=True)
+        feedback_submit(request)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to[0], 'welsh_receive@b.com')
 
+    @patch('staticpages.views.get_language_from_request', return_value='en')
+    def test_correct_english_to_addresses(self, get_language_from_request):
+        mail.outbox = []
+        request = self.factory.post('/feedback_submit', self.post_data,
+                                        follow=True)
+        feedback_submit(request)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to[0], 'eng_receive@a.com')
