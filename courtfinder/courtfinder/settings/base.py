@@ -175,6 +175,7 @@ MAPTI_API_KEY = os.environ.get('MAPIT_API_KEY', None)
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
 FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
+WELSH_FEEDBACK_EMAIL_RECEIVER = os.environ.get('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
 
 EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
 EMAIL_PORT = os.environ.get('SMTP_PORT', None)

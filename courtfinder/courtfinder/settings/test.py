@@ -33,3 +33,7 @@ LANGUAGES = (
     ('en', _('English')),
     ('cy', _('Welsh')),
 )
+
+
+FEEDBACK_EMAIL_RECEIVER = 'eng_receive@a.com'
+WELSH_FEEDBACK_EMAIL_RECEIVER = 'welsh_receive@b.com'
