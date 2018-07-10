@@ -1,27 +1,28 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
+{% load i18n %}
 
-{% block page_title %}Additional info{% endblock %}
+{% block page_title %}{% trans "Additional info" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find the right court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find the right court or tribunal" %}</a></li>
   </ol>
 </div>
 <div id="spoe-page" class="content inner cf">
   <header class="page-header">
     {% if aol == 'Children' %}
-      <h1>Children</h1>
+      <h1>{% trans "Children" %}</h1>
     {% elif aol == 'Divorce' %}
-      <h1>About your Divorce</h1>
+      <h1>{% trans "About your Divorce" %}</h1>
     {% elif aol == 'Money claims' %}
-      <h1>About your money claim</h1>
+      <h1>{% trans "About your money claim" %}</h1>
     {% elif aol == 'Civil partnership' %}
-      <h1>About ending your Civil Partnership</h1>
+      <h1>{% trans "About ending your Civil Partnership" %}</h1>
     {% else %}
-      <h1>About your issue</h1>
+      <h1>{% trans "About your issue" %}</h1>
     {% endif %}
   </header>
   <form method="get" action="{% url 'search:searchbyPostcodeOrCourtList' %}">
@@ -30,32 +31,32 @@
       <label for="spoe-start" class="block-label form-block">
         <input id="spoe-start" type="radio" name="spoe" value="start" {% if spoe == 'start' %}checked{% endif %}/>
         {% if aol == 'Children' %}
-          <div class="form-label">I want to start new proceedings</div>
+          <div class="form-label">{% trans "I want to start new proceedings" %}</div>
         {% elif aol == 'Divorce' or aol == 'Civil partnership' %}
-          <div class="form-label">I want to start proceedings</div>
+          <div class="form-label">{% trans "I want to start proceedings" %}</div>
         {% else %}
-          <div class="form-label">about to start a new claim</div>
+          <div class="form-label">{% trans "about to start a new claim" %}</div>
         {% endif %}
       </label>
       <label for="spoe-continue" class="block-label form-block">
         <input id="spoe-continue" type="radio" name="spoe" value="continue" {% if spoe == 'continue' %}checked{% endif %}/>
         {% if aol == 'Children' or aol == 'Divorce' or aol == 'Civil partnership' %}
-        <div class="form-label">I am already in contact with a court</div>
+        <div class="form-label">{% trans "I am already in contact with a court" %}</div>
         {% elif aol == 'Money claims' %}
-          <div class="form-label">already have a claim</div>
+          <div class="form-label">{% trans "already have a claim" %}</div>
         {% else %}
-        <div class="form-label">already in contact with a court or tribunal</div>
+        <div class="form-label">{% trans "already in contact with a court or tribunal" %}</div>
         {% endif %}
       </label>
       {% if aol == 'Money claims'%}
       <label for="spoe-nearest" class="block-label form-block">
         <input id="spoe-nearest" type="radio" name="spoe" value="nearest" {% if spoe == 'nearest' %}checked{% endif %}/>
-        <div class="form-label">Locate nearest county court for hearing</div>
+        <div class="form-label">{% trans "locate nearest county court for hearing" %}</div>
       </label>
       {% endif %}
     </div>
     <div class="actions">
-    <button id="continue" class="button" type="submit">Continue</button>
+    <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
   </div>
   </form>
 </div>

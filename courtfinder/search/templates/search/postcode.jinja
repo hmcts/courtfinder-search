@@ -1,52 +1,52 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
-
-{% block page_title %}Enter postcode{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Enter postcode" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
-    <li><a href="{% url 'search:aol' %}?aol={{aol|urlencode}}">About your issue</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol|urlencode}}">{% trans "About your issue" %}</a></li>
     {% if spoe %}
-    <li><a href="{% url 'search:spoe' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}">Additional info</a></li>
+    <li><a href="{% url 'search:spoe' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}">{% trans "Additional info" %}</a></li>
     {% endif %}
   </ol>
 </div>
 <div id="postcode-page" class="content inner cf">
   <header class="page-header">
     {% if aol == 'Housing possession' %}
-      <h1>Housing Possession</h1>
+      <h1>{% trans "Housing Possession" %}</h1>
     {% elif aol == 'Money claims' %}
         {% if spoe == 'start' %}
-          <h1>For a new claim :-</h1>
+          <h1>{% trans "For a new claim:" %}</h1>
         {% elif spoe == 'nearest' %}
-          <h1>Enter postcode</h1>
-          <p>Enter your postcode.</p>
+          <h1>{% trans "Enter postcode" %}</h1>
+          <p>{% trans "Enter your postcode." %}</p>
         {% else %}
-          <h1>For an existing claim :-</h1>
+          <h1>{% trans "For an existing claim:" %}</h1>
         {% endif %}
     {% else %}
-      <h1>Enter postcode</h1>
+      <h1>{% trans "Enter postcode" %}</h1>
     {% endif %}
   </header>
   {% if error == 'nopostcode' %}
   <div class="group">
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>You did not enter a postcode. Please try again.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "You did not enter a postcode. Please try again." %}</p>
     </section>
   </div>
   {% elif error == 'badpostcode' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>You did not enter a valid postcode. Please try again.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "You did not enter a valid postcode. Please try again." %}</p>
     </section>
   {% elif error == 'ni' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>Aside from immigration tribunals, this tool does not return results for Northern Ireland.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "Aside from immigration tribunals, this tool does not return results for Northern Ireland." %}</p>
     </section>
   </div>
   {% endif %}
@@ -61,57 +61,59 @@
           {% if aol == 'Money claims' %}
             {% if spoe == 'start'%}
                 <div>
+                    {% blocktrans trimmed %}
                     <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Making a money claim online</a> is cheaper and submitting it takes 30 minutes.
+                    {% endblocktrans %}
                 </div>
                 <div class="indent2em">
-                    or
+                    {% trans "or" %}
                 </div>
                 <div>
-                    <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">Contact the County Court Money Claims Centre (CCMCC)</a>
+                    <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">{% trans "Contact the County Court Money Claims Centre (CCMCC)" %}</a>
                 </div>
             {% elif spoe == 'nearest'%}
                 <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
                 <div class="actions">
-                  <button id="continue" class="button" type="submit">Continue</button>
+                  <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
                 </div>
             {% else %}
                 <div class='existingMoneyClaim'>
-                    That was previously entered online
+                    {% trans "That was previously entered online" %}
                     <div>
-                        <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">Go to the Online Money Claim Service</a>
+                        <a id="money-claims-online-link" href="https://www.gov.uk/make-money-claim-online" target="_blank">{% trans "Go to the Online Money Claim Service" %}</a>
                     </div>
                 </div>
                 <div class='existingMoneyClaim'>
-                    That was previously completed on paper
+                    {% trans "That was previously completed on paper" %}
                     <div>
-                        <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">Contact the County Court Money Claims Centre (CCMCC)</a>
+                        <a href="{% url 'courts:court' 'county-court-money-claims-centre-ccmcc' %}">{% trans "Contact the County Court Money Claims Centre (CCMCC)" %}</a>
                     </div>
                 </div>
                 <div class="existingMoneyClaim">
-                    If you know a local court is dealing with your claim
+                    {% trans "If you know a local court is dealing with your claim" %}
                     <div>
-                        <a href="{% url 'courts:list' %}">Go to the A-Z list of courts</a>
+                        <a href="{% url 'courts:list' %}">{% trans "Go to the A-Z list of courts" %}</a>
                     </div>
                 </div>
             {% endif %}    
           {% else %}
               {% if aol == 'Children' %}
-                Enter the postcode where the child (or children) lives.
+                {% trans "Enter the postcode where the child (or children) lives." %}
               {% elif aol == 'Housing possession' %}
                 <p>
-                  <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">Start a Possession claim online</a>.
+                  <a id="housing-possession-online-link" href="https://www.gov.uk/possession-claim-online-recover-property" target="_blank">{% trans "Start a Possession claim online" %}</a>.
                 </p>
-                Or enter postcode of property to find nearest court.
+                {% trans "Or enter postcode of property to find nearest court." %}
               {% else %}
-                Enter your postcode.
+                {% trans "Enter your postcode." %}
               {% endif %}
             </div>
             {% if aol == 'Divorce' or aol == 'Civil partnership' %}
-              <div class='form-hint'>You will be directed to your Regional Divorce Centre.</div>
+              <div class='form-hint'>{% trans "You will be directed to your Regional Divorce Centre." %}</div>
             {% endif %}
             <input id="postcode" type="text" name="postcode" value="{{ postcode|default:'' }}" autofocus/>
             <div class="actions">
-              <button id="continue" class="button" type="submit">Continue</button>
+              <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
             </div>
           {% endif %}
         </div>

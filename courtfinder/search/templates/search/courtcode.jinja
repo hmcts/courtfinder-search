@@ -1,44 +1,44 @@
 {% extends "layout/base.jinja" %}
-
-{% block page_title %}Search by Court location code{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Search by Court location code" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">
   <header class="page-header">
-    <h1>Search by Court location code</h1>
+    <h1>{% trans "Search by Court location code" %}</h1>
   </header>
   <div class="group">
     {% if error == 'noquery' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>You did not enter a search term. Please try again.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "You did not enter a search term. Please try again." %}</p>
     </section>
     {% elif error == 'noresults' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>Sorry, there are no results for {{ query }}. Please check and try another court location code.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% blocktrans %}Sorry, there are no results for {{ query }}. Please check and try another court location code.{% endblocktrans %}</p>
     </section>
     {% endif %}
     <form method="get" action="results">
       <fieldset class="form-group">
         <label for="address" class="form-block">
-          <div class="form-hint">Enter one of the following</div>
+          <div class="form-hint">{% trans "Enter one of the following" %}</div>
           <ul class="form-hint">
-            <li>Crown Court location code</li>
-            <li>County Court location code</li>
-            <li>Magistrates' Court location code</li>
+            <li>{% trans "Crown Court location code" %}</li>
+            <li>{% trans "County Court location code" %}</li>
+            <li>{% trans "Magistrates' Court location code" %}</li>
           </ul>
           <input id="courtcode" class="form-control" type="text" name="courtcode" autofocus/>
         </label>
       </fieldset>
       <div class="actions">
-        <button id="continue" class="button" type="submit">Continue</button>
+        <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
       </div>
     </form>
   </div>

@@ -1,50 +1,50 @@
 {% extends "layout/base.jinja" %}
-
-{% block page_title %}Find the right court or tribunal{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Find the right court or tribunal" %}{% endblock %}
 
 {% block content %}
   <div id="global-breadcrumb" class="header-context">
     <ol role="breadcrumbs" class="group">
-      <li><a href="{% url 'staticpages:home' %}">Home</a></li>
+      <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
     </ol>
   </div>
   <div id="search-index-page" class="content inner cf">
     <header class="page-header">
-      <h1>Find the right court or tribunal</h1>
+      <h1>{% trans "Find the right court or tribunal" %}</h1>
     </header>
     {% if show %}
       <div id='emergency_message_box'>
-        <label id='emergency_message' for='emergency_message'> Special notice:</label>
+        <label id='emergency_message' for='emergency_message'>{% trans "Special notice:" %}</label>
         {{emergency_message|safe}}
       </div>
     {% endif %}
     <form class="form-block" method="get" action="{% url 'search:searchby' %}">
       <div class="options">
         <div class="main-option">
-          Search by :-
+          {% trans "Search by :" %}
           <ul>
             <li>
               <label>
                 <input type="radio" name="searchby" value="aol" checked />
-                The Area of Law I am interested in (recommended)</label>
+                {% trans "The Area of Law I am interested in (recommended)" %}</label>
             </li>
             <li>
               <label>
                 <input type="radio" name="searchby" value="address" />
-                Court Name or Address</label>
+                {% trans "Court Name or Address" %}</label>
             </li>
             <li>
               <label>
                 <input type="radio" name="searchby" value="list" />
-                A-Z list of all courts</label>
+                {% trans "A-Z list of all courts" %}</label>
             </li>
             <li>
               <label>
                 <input type="radio" name="searchby" value="courtcode" />
-                Court location code</label>
+                {% trans "Court location code" %}</label>
             </li>
           </ul>
-          <button class="button-get-started button" id="start-button" class="button" type="submit">Next</button>
+          <button class="button-get-started button" id="start-button" class="button" type="submit">{% trans "Next" %}</button>
         </div>
       </div>
     </form>
