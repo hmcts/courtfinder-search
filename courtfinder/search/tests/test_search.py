@@ -337,7 +337,7 @@ class SearchTestCase(TestCase):
     def test_money_claims_new_claim(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=start')
-        self.assertIn('<h1>For a new claim :-</h1>', response.content)
+        self.assertIn('<h1>For a new claim:</h1>', response.content)
 
     def test_money_claims_new_claim_ccmcc(self):
         c = Client()
@@ -347,12 +347,12 @@ class SearchTestCase(TestCase):
     def test_money_claims_existing(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
-        self.assertIn('<h1>For an existing claim :-</h1>', response.content)
+        self.assertIn('<h1>For an existing claim:</h1>', response.content)
 
     def test_money_claims_aol_has_nearest_court_option(self):
         c = Client()
         response = c.get('/search/spoe?aol=Money+claims')
-        self.assertIn('Locate nearest county court for hearing', response.content)
+        self.assertIn('locate nearest county court for hearing', response.content)
 
     def test_money_claims_nearest_court_option(self):
         c = Client()

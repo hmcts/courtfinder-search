@@ -1,63 +1,64 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
-
-{% block page_title %}Search results{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Search results" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
     {% if query %}
       {% if courtcode_search == True %}
-        <li><a href="{% url 'search:courtcode' %}">Search by Court location code</a></li>
+        <li><a href="{% url 'search:courtcode' %}">{% trans "Search by Court location code" %}</a></li>
       {% else %}
-        <li><a href="{% url 'search:address' %}">Search by name or address</a></li>
+        <li><a href="{% url 'search:address' %}">{% trans "Search by name or address" %}</a></li>
       {% endif %}
     {% else %}
-    <li><a href="{% url 'search:aol' %}?aol={{aol|urlencode}}">About your issue</a></li>
+    <li><a href="{% url 'search:aol' %}?aol={{aol|urlencode}}">{% trans "About your issue" %}</a></li>
     {% if spoe %}
-    <li><a href="{% url 'search:spoe' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}">Additional info</a></li>
+    <li><a href="{% url 'search:spoe' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}">{% trans "Additional info" %}</a></li>
     {% endif %}
-    <li><a href="{% url 'search:postcode' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}&postcode={{postcode|urlencode}}">Search by postcode</a></li>
+    <li><a href="{% url 'search:postcode' %}?aol={{aol|urlencode}}&spoe={{spoe|urlencode}}&postcode={{postcode|urlencode}}">{% trans "Search by postcode" %}</a></li>
     {% endif %}
   </ol>
 </div>
 <div id="search-results-page" class="content inner cf">
   <header class="page-header">
-    <h1>Search results</h1>
+    <h1>{% trans "Search results" %}</h1>
   </header>
   {% if search_results %}
   <div class="search-results">
     {% if query %}
       <p class="text-secondary">
-        <span id="number-of-results">{{ open_court_count }}</span> result{{ open_court_count|pluralize }}
+        <span id="number-of-results">{{ open_court_count }}</span>
+        {% blocktrans count open_court_count as results %}result{% plural %}results{% endblocktrans %}
       </p>
     {% else %}
     {% if spoe == "nearest" and aol == "Money claims"%}
       {% if search_results|length == 1 %}
-        <p>The nearest County Court for your hearing is:</p>
+        <p>{% trans "The nearest County Court for your hearing is:" %}</p>
       {% else %}
-        <p>The nearest County Courts for your hearing are:</p>
+        <p>{% trans "The nearest County Courts for your hearing are:" %}</p>
       {% endif %}
     {% else %}
       {% if search_results|length == 1 %}
-        <p>This is the court or tribunal nearest {{ postcode }}.</p>
+        <p>{% blocktrans %}This is the court or tribunal nearest {{ postcode }}.{% endblocktrans %}</p>
       {% else %}
-        <p>These are the <span id="number-of-results">{{ search_results|length }}</span> courts or tribunals nearest {{ postcode }}.</p>
+        <p>{% blocktrans with results=search_results|length %}These are the {{ results }} courts or tribunals nearest {{ postcode }}.{% endblocktrans %}</p>
       {% endif %}
     {% endif %}
       {% if in_scotland %}
-    <p id="scotland"><em>This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland.</em></p>
+    <p id="scotland"><em>{% trans "This tool shows courts and tribunals in England and Wales, and some tribunals in Scotland and Northern Ireland." %}</em></p>
       {% endif %}
     {% endif %}
     {% if aol == "Social security" or aol == "Children"%}
-      <p>Some tribunal hearings may take place at other venues.</p>
-      <p><a href="http://sscs.venues.tribunals.gov.uk/venues/venues.htm" title="Other Social Security and Child Support Tribunal venues.">Social Security and Child Support Tribunal Venues</a><p>
+      <p>{% trans "Some tribunal hearings may take place at other venues." %}</p>
+      <p><a href="http://sscs.venues.tribunals.gov.uk/venues/venues.htm">{% trans "Social Security and Child Support Tribunal Venues" %}</a><p>
     {% endif %}
     {% if aol == "Employment" %}
-      <p>Some tribunal hearings may take place at other venues.</p>
-      <p><a href="https://www.gov.uk/guidance/employment-tribunal-offices-and-venues" title="Other local Employment Tribunal venues.">Employment Tribunal Venues</a><p>
+      <p>{% trans "Some tribunal hearings may take place at other venues." %}</p>
+      <p><a href="https://www.gov.uk/guidance/employment-tribunal-offices-and-venues">{% trans "Employment Tribunal Venues" %}</a><p>
     {% endif %}
     <hr/>
     <ul id='court-results'>
@@ -67,7 +68,7 @@
         <h2>{{ court.name }}</h2>
         <div class="court-addresses">
           <p>
-            <span class="court-result-heading">Write to us:</span><br/>
+            <span class="court-result-heading">{% trans "Write to us:" %}</span><br/>
             {% with a=court.address %}
             <span class="court-address">
             {% for line in a.address_lines %}
@@ -83,16 +84,16 @@
 
           <p>
             {% if court.number %}
-              <div><span class="court-result-heading">Crown Court location code:</span> <span>{{ court.number }}</span></div>
+              <div><span class="court-result-heading">{% trans "Crown Court location code:" %}</span> <span>{{ court.number }}</span></div>
             {% endif %}
             {% if court.cci_code %}
-              <div><span class="court-result-heading">County Court location code:</span> <span>{{ court.cci_code }}</span></div>
+              <div><span class="court-result-heading">{% trans "County Court location code:" %}</span> <span>{{ court.cci_code }}</span></div>
             {% endif %}
             {% if court.magistrate_code %}
-              <div><span class="court-result-heading">Magistrates' Court location code:</span> <span>{{ court.magistrate_code }}</span></div>
+              <div><span class="court-result-heading">{% trans "Magistrates' Court location code:" %}</span> <span>{{ court.magistrate_code }}</span></div>
             {% endif %}
             {% if court.dx_number %}
-              <div><span class="court-result-heading"><abbr title="document exchange">DX</abbr>:</span> <span>{{ court.dx_number }}</span></div>
+              <div><span class="court-result-heading"><abbr title="{% trans "document exchange" %}">DX</abbr>:</span> <span>{{ court.dx_number }}</span></div>
             {% endif %}
           </p>
         </div>
@@ -100,9 +101,9 @@
         <div class="court-aol">
           {% if court.areas_of_law %}
             {% if court.hide_aols %}
-              <p class="court-result-heading">More information...</p>
+              <p class="court-result-heading">{% trans "More information..." %}</p>
             {% else %}
-              <p class="court-result-heading">Cases heard at this venue</p>
+              <p class="court-result-heading">{% trans "Cases heard at this venue" %}</p>
             {% endif %}
             <ul>
             {% for aol in court.areas_of_law %}
@@ -120,12 +121,12 @@
         <p class="clear">
           {% if query %}
             {% if courtcode_search == True %}
-              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?courtcode={{ query }}">More details about {{ court.name }}</a>
+              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?courtcode={{ query }}">{% trans "More details about" %} {{ court.name }}</a>
             {% else %}
-              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?q={{ query }}">More details about {{ court.name }}</a>
+              <a class="more-details-link" href="{% url 'courts:court' court.slug %}?q={{ query }}">{% trans "More details about" %} {{ court.name }}</a>
             {% endif %}
           {% else %}
-            <a class="more-details-link" href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">More details about {{ court.name }}</a>
+            <a class="more-details-link" href="{% url 'courts:court' court.slug %}?aol={{ aol }}&postcode={{ postcode }}">{% trans "More details about" %} {{ court.name }}</a>
           {% endif %}
         </p>
         <hr class="clear"/>

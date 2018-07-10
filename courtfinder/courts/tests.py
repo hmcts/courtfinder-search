@@ -100,7 +100,7 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/tameside-magistrates-c0urt')
         self.assertEquals(404, response.status_code)
-        self.assertIn('Page not found.',response.content)
+        self.assertIn('Page not found',response.content)
 
     def inactive_court_shows_inactive(self):
         c = Client()

@@ -1,45 +1,45 @@
 {% extends "layout/base.jinja" %}
-
-{% block page_title %}Search by name or address{% endblock %}
+{% load i18n %}
+{% block page_title %}{% trans "Search by name or address" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
   </ol>
 </div>
 <div id="search-index-page" class="content inner cf">
   <header class="page-header">
-    <h1>Search by name or address</h1>
+    <h1>{% trans "Search by name or address" %}</h1>
   </header>
   <div class="group">
     {% if error == 'noquery' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>You did not enter a search term. Please try again.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "You did not enter a search term. Please try again." %}</p>
     </section>
     {% elif error == 'noresults' %}
     <section class="validation-error">
-      <h2>Error</h2>
-      <p>Sorry, there are no results for {{ query }}. Please check and try another name or address.</p>
+      <h2>{% trans "Error" %}</h2>
+      <p>{% blocktrans %}Sorry, there are no results for {{ query }}. Please check and try another name or address.{% endblocktrans %}</p>
     </section>
     {% endif %}
     <form method="get" action="results">
       <fieldset class="form-group">
         <label for="address" class="form-block">
-          <div class="form-hint">Enter one of the following</div>
+          <div class="form-hint">{% trans "Enter one of the following" %}</div>
           <ul class="form-hint">
-            <li>court or tribunal name</li>
-            <li>building name</li>
-            <li>street name</li>
-            <li>town or city name</li>
+            <li>{% trans "court or tribunal name" %}</li>
+            <li>{% trans "building name" %}</li>
+            <li>{% trans "street name" %}</li>
+            <li>{% trans "town or city name" %}</li>
           </ul>
           <input id="address" class="form-control" type="text" name="q" autofocus/>
         </label>
       </fieldset>
       <div class="actions">
-        <button id="continue" class="button" type="submit">Continue</button>
+        <button id="continue" class="button" type="submit">{% trans "Continue" %}</button>
       </div>
     </form>
   </div>
