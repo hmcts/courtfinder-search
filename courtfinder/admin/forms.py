@@ -59,16 +59,46 @@ class CourtNewForm(forms.ModelForm):
         return super(forms.ModelForm, self).save(self)
 
 
-class CourtBasicForm(CourtNewForm, forms.ModelForm):
-    def __init__(self, data, court, extra_perms):
-        super(CourtBasicForm, self).__init__(data if data else None, instance=court)
+class TranslatableCourtForm(forms.ModelForm):
+
+    welsh_fields = []
+
+    def __init__(self, welsh_enabled=False, *args, **kwargs):
+        super(TranslatableCourtForm, self).__init__(*args, **kwargs)
+        if not welsh_enabled:
+            self.remove_welsh_fields()
+        else:
+            self.add_welsh_widgets_and_labels()
+
+    def remove_welsh_fields(self):
+        for wf in self.welsh_fields:
+            del self.fields[wf]
+
+    def add_welsh_widgets_and_labels(self):
+        for wf in self.welsh_fields:
+            old_field = wf[:-3]
+            self.fields[wf].label = self.fields[old_field].label + " (Welsh)"
+            if hasattr(self.fields[old_field], 'widget'):
+                self.fields[wf].widget = self.fields[old_field].widget
+
+
+class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
+
+    welsh_fields = ['alert_cy', 'info_cy']
+
+    def __init__(self, data, court, extra_perms, welsh_enabled):
+        super(CourtBasicForm, self).__init__(welsh_enabled, data if data else None, instance=court)
         if not extra_perms:
             self.fields['info'].disabled = True
+            self.fields['welsh_enabled'].disabled = True
+            self.fields['welsh_enabled'].help_text = 'This field is disabled and can only be toggled by super admins'
+            if welsh_enabled:
+                self.fields['info_cy'].disabled = True
 
     class Meta:
         model = models.Court
-        fields = ('name', 'displayed', 'alert', 'info')
-        labels = {'alert': 'Urgent notice', 'displayed': 'Open', 'info': 'Additional information'}
+        fields = ('name', 'displayed', 'welsh_enabled', 'alert', 'alert_cy', 'info', 'info_cy')
+        labels = {'alert': 'Urgent notice', 'displayed': 'Open', 'welsh_enabled': 'Supports welsh translation', 'info': 'Additional information'}
         widgets = {
             'alert': forms.Textarea(attrs={'rows': 3}),
             'info': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
@@ -79,10 +109,12 @@ class CourtBasicForm(CourtNewForm, forms.ModelForm):
         }
 
 
-class CourtLocationForm(forms.ModelForm):
+class CourtLocationForm(TranslatableCourtForm):
+    welsh_fields = ['directions_cy']
+
     class Meta:
         model = models.Court
-        fields = ('directions', 'lat', 'lon')
+        fields = ('directions', 'directions_cy', 'lat', 'lon')
         labels = {'directions': 'Local Information', 'lat': 'Latitude', 'lon': 'Longitude'}
         widgets = {'directions': forms.Textarea(attrs={'rows': 4})}
 
@@ -99,10 +131,12 @@ class CourtLocationForm(forms.ModelForm):
         return data
 
 
-class CourtLeafletsForm(forms.ModelForm):
+class CourtLeafletsForm(TranslatableCourtForm):
+    welsh_fields = ['info_leaflet_cy', 'defence_leaflet_cy', 'prosecution_leaflet_cy']
+
     class Meta:
         model = models.Court
-        fields = ('info_leaflet', 'defence_leaflet', 'prosecution_leaflet',)
+        fields = ('info_leaflet','info_leaflet_cy', 'defence_leaflet', 'defence_leaflet_cy', 'prosecution_leaflet', 'prosecution_leaflet_cy')
         widgets = {
             'info_leaflet': forms.Textarea(attrs={'rows': 6}),
             'defence_leaflet': forms.Textarea(attrs={'rows': 6}),
@@ -148,19 +182,22 @@ class CourtAddressForm(forms.ModelForm):
         self.fields['address_type'].queryset = address_types
 
 
-class CourtContactForm(forms.ModelForm):
+class CourtContactForm(TranslatableCourtForm):
     name = forms.ModelChoiceField(queryset=ContactType.objects.all().distinct('name'), required=True,
                                   to_field_name='name')
+    welsh_fields = ['explanation_cy']
 
     class Meta:
         model = models.Contact
-        fields = ['name', 'number', 'explanation', 'in_leaflet', 'sort_order']
+        fields = ['name', 'number', 'explanation', 'explanation_cy', 'in_leaflet', 'sort_order']
 
-    def __init__(self, *args, **kwargs):
-        super(CourtContactForm, self).__init__(*args, **kwargs)
+    def __init__(self, welsh_enabled=False, *args, **kwargs):
+        super(CourtContactForm, self).__init__(welsh_enabled, *args, **kwargs)
         is_new_instance = self.instance._state.adding
         self.fields["number"].required = True
         self.fields["explanation"].required = False
+        if kwargs.pop('welsh_enabled', False):
+            self.fields["explanation_cy"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
         if not is_new_instance:
@@ -179,18 +216,21 @@ class CourtContactForm(forms.ModelForm):
         return con_form
 
 
-class CourtEmailForm(forms.ModelForm):
+class CourtEmailForm(TranslatableCourtForm):
+    welsh_fields = ['explanation_cy']
     description = forms.ModelChoiceField(queryset=ContactType.objects.all().distinct('name'), required=True,
                                   to_field_name='name')
 
     class Meta:
         model = models.Email
-        fields = ['description', 'address', 'explanation']
+        fields = ['description', 'address', 'explanation', 'explanation_cy']
 
     def __init__(self, *args, **kwargs):
         super(CourtEmailForm, self).__init__(*args, **kwargs)
         is_new_instance = self.instance._state.adding
         self.fields["explanation"].required = False
+        if kwargs.pop('welsh_enabled', False):
+            self.fields["explanation_cy"].required = False
         if not is_new_instance:
             con_type = ContactType.objects.filter(name=self.instance.description).first()
             if con_type:
@@ -207,7 +247,7 @@ class CourtEmailForm(forms.ModelForm):
         return con_form
 
 
-class CourtOpeningForm(forms.ModelForm):
+class CourtOpeningForm(TranslatableCourtForm):
 
     type = forms.ModelChoiceField(queryset=OpeningType.objects.all().distinct('name'), required=True,
                                   to_field_name='name')
@@ -236,13 +276,14 @@ class CourtOpeningForm(forms.ModelForm):
         return op_form
 
 
-class CourtFacilityForm(forms.ModelForm):
+class CourtFacilityForm(TranslatableCourtForm):
+    welsh_fields=['description_cy']
     name = forms.ModelChoiceField(queryset=FacilityType.objects.all().distinct('name'), required=True,
                                   to_field_name='name')
 
     class Meta:
         model = models.Facility
-        fields = ['name', 'description', 'image', 'image_description', 'image_file_path']
+        fields = ['name', 'description', 'description_cy', 'image', 'image_description', 'image_file_path']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}),
             'image': forms.HiddenInput(),

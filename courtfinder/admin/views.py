@@ -19,7 +19,6 @@ from .models import FacilityType, ContactType, OpeningType
 from ukpostcodeutils.validation import is_valid_postcode
 from django.template.loader import render_to_string
 
-
 @permission_required('emergency')
 def emergency_message(request):
     msg = models.EmergencyMessage.objects.all().first()
@@ -149,7 +148,7 @@ def new_court(request):
 
 def edit_court(request, id):
     court = get_object_or_404(models.Court, pk=id)
-    form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court.info'))
+    form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court.info'), court.welsh_enabled)
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, 'Court information updated')
@@ -179,14 +178,14 @@ def edit_types(request, id):
 def edit_location(request, id):
     court = get_object_or_404(models.Court, pk=id)
     if request.method == 'POST':
-        form = forms.CourtLocationForm(request.POST, instance=court)
+        form = forms.CourtLocationForm(data=request.POST, welsh_enabled=court.welsh_enabled, instance=court)
         if form.is_valid():
             form.save()
             messages.success(request, 'Location details updated')
             court.update_timestamp()
             return redirect('admin:location', id)
     else:
-        form = forms.CourtLocationForm(instance=court)
+        form = forms.CourtLocationForm(court.welsh_enabled, instance=court)
 
     return render(request, 'court/location.html', {
         'court': court,
@@ -276,6 +275,7 @@ class BaseFormView(View):
     header_message = ""
     orderable_name = ""
     orderable_plural = ""
+    welsh_enabled = False
 
     def get_context_data(self):
         pass
@@ -314,6 +314,7 @@ class BaseOrderableFormView(BaseFormView):
 
     def initialize(self, request, id):
         self.court = get_object_or_404(models.Court, pk=id)
+        self.welsh_enabled = self.court.welsh_enabled
 
 
 class AddOrderableView(BaseOrderableFormView):
@@ -323,7 +324,7 @@ class AddOrderableView(BaseOrderableFormView):
         pass
 
     def process_request(self, request):
-        form = self.form(request.POST)
+        form = self.form(welsh_enabled=self.welsh_enabled, data=request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             self.prepared_form = form
@@ -331,6 +332,7 @@ class AddOrderableView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
+            print form
             self.prepared_form = form
             raise ValidationError("You are missing a required field")
         if "SaveAnother" in request.POST:
@@ -362,7 +364,7 @@ class OrderableFormView(BaseOrderableFormView):
         pass
 
     def process_request(self, request):
-        formset = self.formset(request.POST)
+        formset = self.formset(request.POST, form_kwargs={'welsh_enabled': self.welsh_enabled})
         if formset.is_valid():
             instances = formset.save(commit=False)
             for obj in formset.deleted_objects:
@@ -372,6 +374,7 @@ class OrderableFormView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
+            print formset.errors
             self.prepared_formset = formset
             raise ValidationError("You are missing a required field")
 
@@ -431,8 +434,8 @@ class ContactMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_contacts", kwargs={'id': id})
         self.objects = self.court.contacts.order_by('sort_order')
-        self.prepared_formset = self.formset(queryset=self.objects)
-        self.prepared_form = self.form
+        self.prepared_formset = self.formset(queryset=self.objects, form_kwargs={'welsh_enabled': self.welsh_enabled})
+        self.prepared_form = self.form(welsh_enabled=self.welsh_enabled)
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -495,8 +498,8 @@ class EmailMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_emails", kwargs={'id': id})
         self.objects = self.court.emails.order_by('courtemail__order')
-        self.prepared_formset = self.formset(queryset=self.objects)
-        self.prepared_form = self.form
+        self.prepared_formset = self.formset(queryset=self.objects, form_kwargs={'welsh_enabled': self.welsh_enabled})
+        self.prepared_form = self.form(welsh_enabled=self.welsh_enabled)
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -612,8 +615,8 @@ class FacilityMixin(object):
         self.initialize(request, id)
         self.reorder_url = reverse("admin:reorder_facilities", kwargs={'id': id})
         self.objects = self.court.facilities.all()
-        self.prepared_formset = self.formset(queryset=self.objects)
-        self.prepared_form = self.form
+        self.prepared_formset = self.formset(queryset=self.objects, form_kwargs={'welsh_enabled': self.welsh_enabled})
+        self.prepared_form = self.form(welsh_enabled=self.welsh_enabled)
 
     def save_instance(self, instance):
         if self.type_count(instance) > 0:
@@ -672,7 +675,7 @@ def areas_of_law(request, id):
 @permission_required('court.leaflets')
 def edit_leaflets(request, id):
     court = get_object_or_404(models.Court, pk=id)
-    form = forms.CourtLeafletsForm(request.POST if request.POST else None, instance=court)
+    form = forms.CourtLeafletsForm(court.welsh_enabled, request.POST if request.POST else None, instance=court)
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, 'Leaflets updated')

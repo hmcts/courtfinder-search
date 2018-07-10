@@ -13,7 +13,9 @@ class Court(models.Model):
     number = models.IntegerField(null=True, blank=True) #Crown court location number
     parking = models.ForeignKey('ParkingInfo', null=True, default=None)
     alert = models.CharField(max_length=250, null=True, default=None, blank=True)
+    alert_cy = models.CharField(max_length=250, null=True, default=None, blank=True)
     directions = models.CharField(max_length=4096, null=True, default=None, blank=True)
+    directions_cy = models.CharField(max_length=4096, null=True, default=None, blank=True)
     image_file = models.CharField(max_length=255, null=True, default=None)
     areas_of_law = models.ManyToManyField('AreaOfLaw', through='CourtAreaOfLaw')
     emails = models.ManyToManyField('Email', through='CourtEmail')
@@ -28,11 +30,16 @@ class Court(models.Model):
     updated_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(null=True, default=None)
     info = models.TextField(null=True, blank=True)
+    info_cy = models.TextField(null=True, blank=True)
     hide_aols = models.BooleanField(null=False, default=False)
     info_leaflet = models.CharField(max_length=2500, null=True, default=None, blank=True)
+    info_leaflet_cy = models.CharField(max_length=2500, null=True, default=None, blank=True)
     defence_leaflet = models.CharField(max_length=2500, null=True, default=None, blank=True)
+    defence_leaflet_cy = models.CharField(max_length=2500, null=True, default=None, blank=True)
     prosecution_leaflet = models.CharField(max_length=2500, null=True, default=None, blank=True)
+    prosecution_leaflet_cy = models.CharField(max_length=2500, null=True, default=None, blank=True)
     juror_leaflet = models.CharField(max_length=2500, null=True, default=None, blank=True)
+    welsh_enabled = models.BooleanField(default=False)
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
@@ -94,6 +101,7 @@ class AreaOfLaw(models.Model):
 class Facility(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=4096, null=True, blank=True)
+    description_cy = models.CharField(max_length=4096, null=True, blank=True)
     image = models.CharField(max_length=255)
     image_description = models.CharField(max_length=255)
     image_file_path = models.CharField(max_length=255, null=True, blank=True)
@@ -197,6 +205,7 @@ class Contact(models.Model):
     sort_order = models.IntegerField(null=True, default=None)
     explanation = models.CharField(null=True, max_length=85)
     in_leaflet = models.BooleanField(default=False)
+    explanation_cy = models.CharField(null=True, max_length=85)
 
     def __unicode__(self):
         return "%s, %s: %s" % (self.name, self.explanation, self.number)
@@ -218,6 +227,7 @@ class Email(models.Model):
     description = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     explanation = models.CharField(null=True, max_length=85)
+    explanation_cy = models.CharField(null=True, max_length=85)
 
     def __unicode__(self):
         return "%s: %s" % (self.description, self.address)
