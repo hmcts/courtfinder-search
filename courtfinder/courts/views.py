@@ -1,10 +1,12 @@
 import string
+import json
+from collections import OrderedDict
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.utils.html import strip_tags
-from search.models import Court, AreaOfLaw, Facility
+from search.models import Court, AreaOfLaw, Facility, CourtAddress
 from admin.models import FacilityType
 
 def collapse(source, key, key2):
@@ -142,6 +144,37 @@ def court(request, slug):
         'courtcode': request.GET.get('courtcode', False),
         'feature_leaflet_enabled': settings.FEATURE_LEAFLETS_ENABLED,
     })
+
+
+def court_json(request, slug):
+    court = get_object_or_404(Court, slug=slug)
+
+    response = OrderedDict([
+        ('name', court.name),
+        ('slug', court.slug),
+        ('info', court.info),
+        ('open', court.displayed),
+        ('directions', court.directions),
+        ('lat', court.lat),
+        ('lon', court.lon),
+        ('crown_location_code', court.number),
+        ('county_location_code', court.cci_code),
+        ('magistrates_location_code', court.magistrate_code),
+        ('areas_of_law', [x.name for x in court.areas_of_law.all()]),
+        ('types', [x.name for x in court.court_types.all()]),
+        ('emails', [{'address': x.address, 'description': x.description, 'explanation': x.explanation}
+                   for x in court.emails.all()]),
+        ('contacts', [{'number': x.number, 'description': x.name, 'explanation': x.explanation}
+                   for x in court.contacts.all()]),
+        ('opening_times', [{'description': x.type, 'hours': x.hours}
+                   for x in court.opening_times.all()]),
+        ('facilities', [{'description': x.description, 'name': x.name}
+                   for x in court.facilities.all()]),
+        ('addresses', [{'type': str(x.address_type), 'address': x.address, 'town': x.town_name, 'postcode': x.postcode}
+                   for x in CourtAddress.objects.filter(court=court).all()]),
+    ])
+
+    return HttpResponse(json.dumps(response),content_type="application/json")
 
 
 def leaflet(request, slug, leaflet_type):
