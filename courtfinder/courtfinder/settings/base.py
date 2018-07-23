@@ -81,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'core.middleware.RequestLoggingMiddleware',
     'admin.middleware.RequireLoginMiddleware',
+    'admin.middleware.ForceAdminEnglishMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 )
 
