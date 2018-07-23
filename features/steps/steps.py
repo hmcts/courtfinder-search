@@ -118,3 +118,7 @@ def step_impl(context, name):
 @then(u'I should see an image with text "{text}"')
 def step_impl(context, text):
     assert context.browser.is_element_present_by_xpath("//img[contains(@alt, '%s')]" % text)
+
+@then(u'I should see a link with title "{text}"')
+def step_impl(context, text):
+    assert context.browser.is_element_present_by_xpath("//a[contains(@title, '%s')]" % text)

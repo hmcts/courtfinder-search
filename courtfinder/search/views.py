@@ -13,6 +13,7 @@ from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 from urlparse import urlparse
+from core.welsh_utils import display_in_welsh, translate_attribute, translate_type
 
 
 areas_of_law_description = {
@@ -250,7 +251,15 @@ def __format_results(results):
         else:
             visible_address = {}
 
-        areas_of_law = [aol for aol in result.areas_of_law.all()]
+        areas_of_law = [
+        {
+            'name': aol.name,
+            'external_link': aol.external_link,
+            'display_url': aol.display_url,
+            'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc,
+                                                 display_in_welsh(),
+                                                 'external_link_desc')
+        } for aol in result.areas_of_law.all()]
 
         court = { 'name': result.name,
                   'lat': result.lat,
