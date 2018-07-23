@@ -411,25 +411,39 @@ class UploadImageForm(forms.Form):
 class AdminFacilityTypeForm(forms.ModelForm):
     class Meta:
         model = FacilityType
-        fields = ['name', 'image_description']
+        fields = ['name', 'name_cy', 'image_description', 'image_description_cy']
+        labels = {
+            'name_cy': 'Name (Welsh)',
+            'image_description_cy': 'Image description (Welsh)',
+        }
 
 
 class AdminContactTypeForm(forms.ModelForm):
     class Meta:
         model = ContactType
-        fields = ['name']
+        fields = ['name', 'name_cy']
+        labels = {
+            'name_cy': 'Name (Welsh)',
+        }
 
 
 class AdminOpeningTypeForm(forms.ModelForm):
     class Meta:
         model = OpeningType
-        fields = ['name']
+        fields = ['name', 'name_cy']
+        labels = {
+            'name_cy': 'Name (Welsh)',
+        }
 
 
 class AdminAOLForm(forms.ModelForm):
     class Meta:
         model = models.AreaOfLaw
-        fields = ['name', 'external_link', 'external_link_desc']
+        fields = ['name', 'external_link', 'external_link_desc', 'external_link_desc_cy']
+        labels = {
+            'name_cy': 'Name (Welsh)',
+            'external_link_desc_cy': 'External link desc (Welsh)',
+        }
 
     def __init__(self, *args, **kwargs):
         super(AdminAOLForm, self).__init__(*args, **kwargs)

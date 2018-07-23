@@ -87,6 +87,7 @@ class AreaOfLaw(models.Model):
     name = models.CharField(max_length=255)
     external_link = models.CharField(null=True, max_length=2048)
     external_link_desc = models.CharField(null=True, max_length=255)
+    external_link_desc_cy = models.CharField(blank=True, null=True, default=None, max_length=255)
 
     def display_url(self):
         return urllib.unquote(self.external_link)
