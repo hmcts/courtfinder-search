@@ -86,16 +86,6 @@ class SearchTestCase(TestCase):
         response = c.get('/courts/tameside-magistrates-court')
         self.assertIn('class="alert"', response.content)
 
-    def test_blue_badge_displayed(self):
-        c = Client()
-        response = c.get('/courts/tameside-magistrates-court')
-        self.assertIn('On site parking is not available at this venue.',
-                      response.content)
-        self.assertIn('Paid off site parking is available.',
-                      response.content)
-        self.assertIn('Blue badge parking is available on site.',
-                      response.content)
-
     def test_court_404(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-c0urt')

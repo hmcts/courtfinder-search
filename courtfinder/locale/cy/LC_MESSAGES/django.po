@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 11:00+0000\n"
+"POT-Creation-Date: 2018-07-23 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Karol Grecki <karol.grecki@hmcts.net>, 2018\n"
 "Language-Team: Welsh (United Kingdom) (https://www.transifex.com/ministry-of-"
@@ -178,46 +178,42 @@ msgid ""
 "or to discuss a reasonable adjustment you need."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:215
-msgid "Parking"
-msgstr ""
-
-#: courts/templates/courts/court.jinja:234
+#: courts/templates/courts/court.jinja:217
 #: search/templates/search/results.jinja:104
 msgid "More information..."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:236
+#: courts/templates/courts/court.jinja:219
 #: search/templates/search/results.jinja:106
 msgid "Cases heard at this venue"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:252
+#: courts/templates/courts/court.jinja:235
 msgid "Useful links:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:253
+#: courts/templates/courts/court.jinja:236
 msgid "Security in our buildings"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:256
+#: courts/templates/courts/court.jinja:239
 msgid "Open the Formfinder tool to obtain the right form for your issue."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:256
+#: courts/templates/courts/court.jinja:239
 msgid "Find a form"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:259
+#: courts/templates/courts/court.jinja:242
 msgid ""
 "Information on providing feedback about our services and making a complaint."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:259
+#: courts/templates/courts/court.jinja:242
 msgid "Make a complaint"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:262
+#: courts/templates/courts/court.jinja:245
 msgid "About jury service"
 msgstr ""
 

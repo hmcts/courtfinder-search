@@ -209,23 +209,6 @@
         </ul>
         {% endif %}
       </div>
-
-      {% if court.parking %}
-      <div>
-        <h2>{% trans "Parking" %}</h2>
-        <ul>
-        {% if court.parking.onsite %}
-          <li>{{ court.parking.onsite }}</li>
-        {% endif %}
-        {% if court.parking.offsite %}
-          <li>{{ court.parking.offsite }}</li>
-        {% endif %}
-        {% if court.parking.blue_badge %}
-          <li>{{ court.parking.blue_badge }}</li>
-        {% endif %}
-        </ul>
-      </div>
-      {% endif %}
     </div>
 
     <div id="areas_of_law">
