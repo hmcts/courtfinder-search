@@ -8,15 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-10 13:39+0000\n"
+"POT-Creation-Date: 2018-07-23 09:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Karol Grecki <karol.grecki@hmcts.net>, 2018\n"
-"Language-Team: Welsh (United Kingdom) (https://www.transifex.com/ministry-of-justice/teams/85417/cy_GB/)\n"
+"Language-Team: Welsh (United Kingdom) (https://www.transifex.com/ministry-of-"
+"justice/teams/85417/cy_GB/)\n"
+"Language: cy_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cy_GB\n"
-"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
+"11) ? 2 : 3;\n"
 
 #: courtfinder/settings/base.py:152 courtfinder/settings/local.py:37
 #: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
@@ -28,12 +30,7 @@ msgstr "Saesneg"
 msgid "Welsh"
 msgstr "Cymraeg"
 
-#: search/templates/search/address.jinja:3
-#: search/templates/search/address.jinja:14
-#: search/templates/search/results.jinja:15
-msgid "Search by name or address"
-msgstr ""
-
+#: courts/templates/courts/court.jinja:10 courts/templates/courts/list.jinja:14
 #: search/templates/search/address.jinja:8 search/templates/search/aol.jinja:9
 #: search/templates/search/courtcode.jinja:8
 #: search/templates/search/index.jinja:8
@@ -44,12 +41,223 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: courts/templates/courts/court.jinja:11 courts/templates/courts/list.jinja:15
 #: search/templates/search/address.jinja:9
 #: search/templates/search/courtcode.jinja:9
 #: search/templates/search/postcode.jinja:10
 #: search/templates/search/results.jinja:10
 #: staticpages/templates/staticpages/feedback_sent.jinja:9
 msgid "Find a court or tribunal"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:14
+msgid "Search by name of address"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:15
+#: courts/templates/courts/court.jinja:18
+#: courts/templates/courts/court.jinja:25
+#: courts/templates/courts/court.jinja:28
+#: search/templates/search/results.jinja:4
+#: search/templates/search/results.jinja:28
+msgid "Search results"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:17
+#: search/templates/search/courtcode.jinja:3
+#: search/templates/search/courtcode.jinja:14
+#: search/templates/search/results.jinja:13
+msgid "Search by Court location code"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:21 search/templates/search/aol.jinja:4
+#: search/templates/search/aol.jinja:15
+#: search/templates/search/postcode.jinja:11
+#: search/templates/search/results.jinja:18
+#: search/templates/search/spoe.jinja:25
+msgid "About your issue"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:23
+#: search/templates/search/postcode.jinja:13
+#: search/templates/search/results.jinja:20
+#: search/templates/search/spoe.jinja:5
+msgid "Additional info"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:24
+#: courts/templates/courts/court.jinja:27
+#: search/templates/search/results.jinja:22
+msgid "Search by postcode"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:31
+#: search/templates/search/index.jinja:39
+msgid "A-Z list of all courts"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:41
+msgid ""
+"This court or tribunal is no longer in service. Business has been "
+"transferred to other neighbouring courts."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:42
+msgid "Please use the postcode lookup facility to find your alternative court"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:49
+msgid "Visit us:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:59
+#: courts/templates/courts/court.jinja:79
+msgid "Maps and directions"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:67
+msgid "Visit or write to us:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:69
+#: search/templates/search/results.jinja:71
+msgid "Write to us:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:89
+#: search/templates/search/results.jinja:87
+msgid "Crown Court location code:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:93
+#: search/templates/search/results.jinja:90
+msgid "County Court location code:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:97
+#: search/templates/search/results.jinja:93
+msgid "Magistrates' Court location code:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:111
+msgid "picture of the court or tribunal building"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:117
+msgid "Important information"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:124
+msgid "Additional Information"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:131
+msgid "Opening hours"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:142
+msgid "Email"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:163
+msgid "Phone numbers"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:189
+msgid "Local information"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:195
+msgid "Building facilities"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:196
+msgid ""
+"If you have a disability and need help coming to a hearing, please contact "
+"the court or tribunal to make sure the facilities meet your specific needs "
+"or to discuss a reasonable adjustment you need."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:215
+msgid "Parking"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:234
+#: search/templates/search/results.jinja:104
+msgid "More information..."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:236
+#: search/templates/search/results.jinja:106
+msgid "Cases heard at this venue"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:252
+msgid "Useful links:"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:253
+msgid "Security in our buildings"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:256
+msgid "Open the Formfinder tool to obtain the right form for your issue."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:256
+msgid "Find a form"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:259
+msgid ""
+"Information on providing feedback about our services and making a complaint."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:259
+msgid "Make a complaint"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:262
+msgid "About jury service"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:5
+#, python-format
+msgid "List of courts and tribunals starting with %(letter)s"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:7
+msgid "Index of all courts and tribunals"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:21
+msgid "Courts and Tribunals"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:24
+msgid "Browse by name of court or tribunal"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:27
+#, python-format
+msgid ""
+"There are no courts or tribunals starting with %(letter)s. Please select "
+"another letter."
+msgstr ""
+
+#: courts/templates/courts/list.jinja:31
+msgid "Select the first letter of the court's name"
+msgstr ""
+
+#: courts/templates/courts/list.jinja:35
+#, python-format
+msgid "Names starting with %(letter)s"
+msgstr ""
+
+#: search/templates/search/address.jinja:3
+#: search/templates/search/address.jinja:14
+#: search/templates/search/results.jinja:15
+msgid "Search by name or address"
 msgstr ""
 
 #: search/templates/search/address.jinja:19
@@ -72,8 +280,8 @@ msgstr ""
 #: search/templates/search/address.jinja:25
 #, python-format
 msgid ""
-"Sorry, there are no results for %(query)s. Please check and try another name"
-" or address."
+"Sorry, there are no results for %(query)s. Please check and try another name "
+"or address."
 msgstr ""
 
 #: search/templates/search/address.jinja:31
@@ -107,16 +315,8 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: search/templates/search/aol.jinja:4 search/templates/search/aol.jinja:15
-#: search/templates/search/postcode.jinja:11
-#: search/templates/search/results.jinja:18
-#: search/templates/search/spoe.jinja:25
-msgid "About your issue"
-msgstr ""
-
 #: search/templates/search/aol.jinja:10 search/templates/search/index.jinja:3
-#: search/templates/search/index.jinja:13
-#: search/templates/search/spoe.jinja:11
+#: search/templates/search/index.jinja:13 search/templates/search/spoe.jinja:11
 msgid "Find the right court or tribunal"
 msgstr ""
 
@@ -130,12 +330,6 @@ msgstr ""
 
 #: search/templates/search/aol.jinja:41
 msgid "will display a list of the nearest courts to the postcode"
-msgstr ""
-
-#: search/templates/search/courtcode.jinja:3
-#: search/templates/search/courtcode.jinja:14
-#: search/templates/search/results.jinja:13
-msgid "Search by Court location code"
 msgstr ""
 
 #: search/templates/search/courtcode.jinja:25
@@ -173,10 +367,6 @@ msgstr ""
 msgid "Court Name or Address"
 msgstr ""
 
-#: search/templates/search/index.jinja:39
-msgid "A-Z list of all courts"
-msgstr ""
-
 #: search/templates/search/index.jinja:44
 msgid "Court location code"
 msgstr ""
@@ -189,12 +379,6 @@ msgstr ""
 #: search/templates/search/postcode.jinja:25
 #: search/templates/search/postcode.jinja:31
 msgid "Enter postcode"
-msgstr ""
-
-#: search/templates/search/postcode.jinja:13
-#: search/templates/search/results.jinja:20
-#: search/templates/search/spoe.jinja:5
-msgid "Additional info"
 msgstr ""
 
 #: search/templates/search/postcode.jinja:20
@@ -280,15 +464,6 @@ msgstr ""
 msgid "You will be directed to your Regional Divorce Centre."
 msgstr ""
 
-#: search/templates/search/results.jinja:4
-#: search/templates/search/results.jinja:28
-msgid "Search results"
-msgstr ""
-
-#: search/templates/search/results.jinja:22
-msgid "Search by postcode"
-msgstr ""
-
 #: search/templates/search/results.jinja:35
 msgid "result"
 msgid_plural "results"
@@ -312,9 +487,7 @@ msgstr ""
 
 #: search/templates/search/results.jinja:48
 #, python-format
-msgid ""
-"These are the %(search_results|length)s courts or tribunals nearest "
-"%(postcode)s."
+msgid "These are the %(results)s courts or tribunals nearest %(postcode)s."
 msgstr ""
 
 #: search/templates/search/results.jinja:52
@@ -336,32 +509,8 @@ msgstr ""
 msgid "Employment Tribunal Venues"
 msgstr ""
 
-#: search/templates/search/results.jinja:71
-msgid "Write to us:"
-msgstr ""
-
-#: search/templates/search/results.jinja:87
-msgid "Crown Court location code:"
-msgstr ""
-
-#: search/templates/search/results.jinja:90
-msgid "County Court location code:"
-msgstr ""
-
-#: search/templates/search/results.jinja:93
-msgid "Magistrates' Court location code:"
-msgstr ""
-
 #: search/templates/search/results.jinja:96
 msgid "document exchange"
-msgstr ""
-
-#: search/templates/search/results.jinja:104
-msgid "More information..."
-msgstr ""
-
-#: search/templates/search/results.jinja:106
-msgid "Cases heard at this venue"
 msgstr ""
 
 #: search/templates/search/results.jinja:124
@@ -415,8 +564,8 @@ msgid "locate nearest county court for hearing"
 msgstr ""
 
 #: staticpages/templates/staticpages/feedback.jinja:3
-#: staticpages/templates/staticpages/feedback_sent.jinja:3
-#: templates/400.html:3 templates/404.html:3 templates/500.html:3
+#: staticpages/templates/staticpages/feedback_sent.jinja:3 templates/400.html:3
+#: templates/404.html:3 templates/500.html:3
 msgid "Court and Tribunal Finder"
 msgstr ""
 
@@ -431,8 +580,8 @@ msgstr ""
 #: staticpages/templates/staticpages/feedback.jinja:10
 msgid ""
 "Please do not use this feedback form for complaints about HM Courts & "
-"Tribunals Service. Complaints should be sent to the office where the problem"
-" arose to help us sort out the issue quickly and accurately."
+"Tribunals Service. Complaints should be sent to the office where the problem "
+"arose to help us sort out the issue quickly and accurately."
 msgstr ""
 
 #: staticpages/templates/staticpages/feedback.jinja:16

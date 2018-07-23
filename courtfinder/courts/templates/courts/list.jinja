@@ -1,39 +1,38 @@
 {% extends "layout/base.jinja" %}
-
-
+{% load i18n %}
 {% block page_title %}
 {% if letter %}
-List of courts and tribunals starting with {{ letter }} - GOV.UK
+{% blocktrans %}List of courts and tribunals starting with {{ letter }}{% endblocktrans %}
 {% else %}
-Index of all courts and tribunals - GOV.UK
+{% trans "Index of all courts and tribunals" %}
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
   </ol>
 </div>
 
 <div id="search-index-page" class="content inner cf">
   <header class="page-header">
-    <h1>Courts and Tribunals</h1>
+    <h1>{% trans "Courts and Tribunals" %}</h1>
   </header>
 
-  <p>Browse by name of court or tribunal</p>
+  <p>{% trans "Browse by name of court or tribunal" %}</p>
 
   {% if letter and not courts %}
-  <p>There are no courts or tribunals starting with {{ letter }}. Please select another letter.</p>
+  <p>{% blocktrans %}There are no courts or tribunals starting with {{ letter }}. Please select another letter.{% endblocktrans %}</p>
   {% endif %}
 
   {% if not letter  %}
-  <p>Select the first letter of the court's name</p>
+  <p>{% trans "Select the first letter of the court's name" %}</p>
   {% endif %}
 
   {% if letter and courts %}
-  <h2 class="clear letterheader">Names starting with {{ letter }}</h2>
+  <h2 class="clear letterheader">{% blocktrans %}Names starting with {{ letter }}{% endblocktrans %}</h2>
   <ul>
     {% for court in courts %}
     <li>
@@ -51,7 +50,5 @@ Index of all courts and tribunals - GOV.UK
     </ul>
   </nav>
 </div>
-
-
 
 {% endblock %}

@@ -1,34 +1,34 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
 {% load courttags %} 
-
+{% load i18n %}
 {% block page_title %}{{ court.name }}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
   <ol role="breadcrumbs" class="group">
-    <li><a href="{% url 'staticpages:home' %}">Home</a></li>
-    <li><a href="{% url 'search:search' %}">Find a court or tribunal</a></li>
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
     {% if query or courtcode %} 
       {% if query %} 
-        <li><a href="{% url 'search:address' %}">Search by name of address</a></li>
-        <li><a href="{% url 'search:results' %}?q={{ query }}">Search results</a></li>
+        <li><a href="{% url 'search:address' %}">{% trans "Search by name of address" %}</a></li>
+        <li><a href="{% url 'search:results' %}?q={{ query }}">{% trans "Search results" %}</a></li>
       {% elif courtcode %}
-        <li><a href="{% url 'search:courtcode' %}">Search by Court location code</a></li>
-        <li><a href="{% url 'search:results' %}?courtcode={{ courtcode }}">Search results</a></li>
+        <li><a href="{% url 'search:courtcode' %}">{% trans "Search by Court location code" %}</a></li>
+        <li><a href="{% url 'search:results' %}?courtcode={{ courtcode }}">{% trans "Search results" %}</a></li>
       {% endif %}
     {% elif postcode %}
-      <li><a href="{% url 'search:aol' %}?aol={{aol}}">About your issue</a></li>
+      <li><a href="{% url 'search:aol' %}?aol={{aol}}">{% trans "About your issue" %}</a></li>
       {% if spoe %}
-        <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">Additional info</a></li>
-        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">Search by postcode</a></li>
-        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">Search results</a></li>
+        <li><a href="{% url 'search:spoe' %}?aol={{aol}}&spoe={{spoe}}">{% trans "Additional info" %}</a></li>
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&spoe={{spoe}}&postcode={{postcode}}">{% trans "Search by postcode" %}</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&spoe={{ spoe }}&aol={{ aol }}">{% trans "Search results" %}</a></li>
       {%   else %}
-        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">Search by postcode</a></li>
-        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">Search results</a></li>
+        <li><a href="{% url 'search:postcode' %}?aol={{aol}}&postcode={{postcode}}">{% trans "Search by postcode" %}</a></li>
+        <li><a href="{% url 'search:results' %}?postcode={{ postcode }}&aol={{ aol }}">{% trans "Search results" %}</a></li>
       {% endif %}
     {% else %}
-      <li><a href="{% url 'courts:list' %}">A-Z list of all courts</a></li>
+      <li><a href="{% url 'courts:list' %}">{% trans "A-Z list of all courts" %}</a></li>
     {% endif %}
   </ol>
 </div>
@@ -38,15 +38,15 @@
   </header>
   {% if not court.displayed %}
   <div class="alert">
-    <p>This court or tribunal is no longer in service. Business has been transferred to other neighbouring courts.</p>
-    <p><a href="{% url 'search:postcode' %}">Please use the postcode lookup facility to find your alternative court</a></p>
+    <p>{% trans "This court or tribunal is no longer in service. Business has been transferred to other neighbouring courts." %}</p>
+    <p><a href="{% url 'search:postcode' %}">{% trans "Please use the postcode lookup facility to find your alternative court" %}</a></p>
   </div>
   {% else %}
   <div>
     <div id="addresses">
       {% if court.postal_address.type.name != 'Visit us or write to us' and court.visiting_address %}
         <div id="visiting" property='address' typeof='http://schema.org/PostalAddress'>
-          <h2>Visit us:</h2>
+          <h2>{% trans "Visit us:" %}</h2>
           <span property="streetAddress">
             {% for line in court.visiting_address.address_lines %}
               {{ line }}<br/>
@@ -56,7 +56,7 @@
           <span property="postalCode">{{ court.visiting_address.postcode }}</span>
           {% if court.lat and court.lon %}
             <p id="map-link">
-              <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
+              <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">{% trans "Maps and directions" %}</a>
             </p>
           {% endif %}
         </div>
@@ -64,9 +64,9 @@
       {% if court.postal_address %}
         <div id="postal">
           {% if court.postal_address.type.name == 'Visit us or write to us' %}
-            <h2>Visit or write to us:</h2>
+            <h2>{% trans "Visit or write to us:" %}</h2>
           {% else %}
-            <h2>Write to us:</h2>
+            <h2>{% trans "Write to us:" %}</h2>
           {% endif %}
           {% for line in court.postal_address.address_lines %}
             {{ line }}<br/>
@@ -76,7 +76,7 @@
           {% if court.postal_address.type.name == 'Visit us or write to us' %}
             {% if court.lat and court.lon %}
               <p id="map-link">
-                <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">Maps and directions <img src="{% static 'images/external-links/external-link-black-24x24.png' %}" alt="link opens an external website in a new window"/></a>
+                <a href="https://maps.google.com/maps?q={{ court.lat }},{{ court.lon }}" target="_blank">{% trans "Maps and directions" %}</a>
               </p>
             {% endif %}
           {% endif %}
@@ -86,15 +86,15 @@
       <div id="pros">
         <dl>
           {% if court.number %}
-          <dt>Crown Court location code:</dt>
+          <dt>{% trans "Crown Court location code:" %}</dt>
           <dd>{{ court.number }}</dd>
           {% endif %}
           {% if court.cci_code %}
-          <dt>County Court location code:</dt>
+          <dt>{% trans "County Court location code:" %}</dt>
           <dd>{{ court.cci_code }}</dd>
           {% endif %}
           {% if court.magistrate_code %}
-          <dt>Magistrates' Court location code:</dt>
+          <dt>{% trans "Magistrates' Court location code:" %}</dt>
           <dd>{{ court.magistrate_code }}</dd>
           {% endif %}
           {% if court.dx_number %}
@@ -108,27 +108,27 @@
     </div>
     {% if court.image_file %}
       <div id="photo">
-        <img property="image" src="{{ court.image_url }}" alt="picture of the court or tribunal building"/>
+        <img property="image" src="{{ court.image_url }}" alt="{% trans "picture of the court or tribunal building" %}"/>
       </div>
     {% endif %}
     <div id="left">
       {% if court.alert %}
       <div class="alert">
-        <img class="alert-icon" src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="Important information"/>
+        <img class="alert-icon" src="https://assets.digital.cabinet-office.gov.uk/static/icon-important-187bcc8d8a6d56498c4ac26cadad102d.png" alt="{% trans "Important information" %}"/>
         <p>{{ court.alert|striptags }}</p>
       </div>
       {% endif %}
 
       {% if court.info %}
       <div>
-          <h2>Additional Information</h2>
+          <h2>{% trans "Additional Information" %}</h2>
           {{ court.info|safe }}
       </div>
       {% endif %}
 
       <div id="opening-times">
         {% if court.opening_times %}
-        <h2>Opening hours</h2>
+        <h2>{% trans "Opening hours" %}</h2>
         <ul>
         {% for opening_time in court|court_opening_times_ordered %}
             <li><time property="openingHours">{{ opening_time }}</time></li>
@@ -139,7 +139,7 @@
 
       <div id="contacts">
         {% if court.emails %}
-        <h2>Email</h2>
+        <h2>{% trans "Email" %}</h2>
           {% for email in court.emails %}
           <div class="email-label" property="contactPoint" typeof="ContactPoint">
           {% if email.description != '' %}
@@ -160,7 +160,7 @@
           {% endfor %}
         {% endif %}
         {% if court.contacts %}
-        <h2>Phone numbers</h2>
+        <h2>{% trans "Phone numbers" %}</h2>
           {% for contact in court.contacts %}
           {% if contact.name != 'DX' %}
             <div class="phone-label" property="contactPoint" typeof="ContactPoint">
@@ -186,14 +186,14 @@
 
       {% if court.directions %}
       <div id="directions">
-        <h2>Local information</h2>
+        <h2>{% trans "Local information" %}</h2>
         <p>{{ court.directions|striptags }}</p>
       </div>
       {% endif %}
 
       <div id="facilities">
-        <h2>Building facilities</h2>
-        <p>If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need.</p>
+        <h2>{% trans "Building facilities" %}</h2>
+        <p>{% trans "If you have a disability and need help coming to a hearing, please contact the court or tribunal to make sure the facilities meet your specific needs or to discuss a reasonable adjustment you need." %}</p>
         {% if court.facilities %}
         <ul>
         {% for facility in court.facilities %}
@@ -212,7 +212,7 @@
 
       {% if court.parking %}
       <div>
-        <h2>Parking</h2>
+        <h2>{% trans "Parking" %}</h2>
         <ul>
         {% if court.parking.onsite %}
           <li>{{ court.parking.onsite }}</li>
@@ -231,9 +231,9 @@
     <div id="areas_of_law">
       {% if court.areas_of_law %}
         {% if court.hide_aols %}
-          <h2>More information...</h2>
+          <h2>{% trans "More information..." %}</h2>
         {% else %}
-          <h2>Cases heard at this venue</h2>
+          <h2>{% trans "Cases heard at this venue" %}</h2>
         {% endif %}
         <ul>
           {% for aol in court.areas_of_law %}
@@ -249,15 +249,17 @@
     </div>
 
     <div id="useful_links">
-    <h2>Useful links:</h2>
-      <a href="https://www.gov.uk/entering-court-or-tribunal-building">Security in our buildings</a>
+    <h2>{% trans "Useful links:" %}</h2>
+      <a href="https://www.gov.uk/entering-court-or-tribunal-building">{% trans "Security in our buildings" %}</a>
       <br/>
-      <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/FormFinder.do" title="Open the Formfinder tool to obtain the right form for your issue.">Find a form</a>
+      <a href="https://hmctsformfinder.justice.gov.uk/HMCTS/FormFinder.do"
+         title="{% trans "Open the Formfinder tool to obtain the right form for your issue." %}">{% trans "Find a form" %}</a>
       <br/>
-      <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure" title="Information on providing feedback about our services and making a complaint.">Make a complaint</a>
+      <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure"
+         title="{% trans "Information on providing feedback about our services and making a complaint." %}">{% trans "Make a complaint" %}</a>
       {% if 'Crown Court' in court.types %}
       <br/>
-      <a href="https://www.gov.uk/jury-service">About jury service</a>
+      <a href="https://www.gov.uk/jury-service">{% trans "About jury service" %}</a>
       {% endif %}
     </div>
   {% if feature_leaflet_enabled %}
