@@ -6,8 +6,9 @@ from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.utils.html import strip_tags
-from search.models import Court, AreaOfLaw, Facility, CourtAddress
-from admin.models import FacilityType
+from search.models import Court, AreaOfLaw, Facility, CourtAddress, CourtOpeningTime
+from admin.models import FacilityType, ContactType, OpeningType
+from core.welsh_utils import display_court_in_welsh, translate_attribute, translate_type
 
 def collapse(source, key, key2):
     """
@@ -48,6 +49,7 @@ def format_court(court):
     """
     create a courts object that we can send to templates
     """
+    welsh = display_court_in_welsh(court)
     addresses = court.courtaddress_set.all().order_by('address_type__name', '-pk')
     postal_address = None
     visiting_address = None
@@ -66,30 +68,50 @@ def format_court(court):
     if postal_address and str(postal_address['type']) == 'Visit us or write to us':
         visiting_address = None
     court_emails = court.emails.all().order_by('courtemail__order')
-    emails = [{'description': email.description, 'addresses': [email.address], 'explanation': email.explanation} for email in court_emails]
+    emails = [{'description': translate_type(ContactType, email.description, welsh), 'addresses': [email.address], 'explanation': translate_attribute(email, "explanation", welsh)} for email in court_emails]
     contacts = [{
-        'name': contact.name,
+        'name': translate_type(ContactType, contact.name, welsh),
         'numbers': [contact.number],
-        'explanation': contact.explanation,
+        'explanation': translate_attribute(contact, "explanation", welsh),
         'in_leaflet': contact.in_leaflet
     } for contact in court.contacts.all().order_by('sort_order')]
 
     facilities = [
         {
             # Name is used for the css class name to set the x,y offsets on old style images
-            'name': facility.name,
+            'name': translate_type(FacilityType, facility.name, welsh),
             # Description is used for the display text
-            'description': facility.description,
+            'description': translate_attribute(facility, "description", welsh) ,
             # Image class is the generated class name (empty for new style images)
             'image_class': "" if facility.image_file_path else 'icon-' + facility.image,
             # The relative path to the image
             'image_src': facility.image_file_path if facility.image_file_path else None,
             # This description is used for the alt text
-            'image_description': facility.image_description,
+            'image_description': translate_type(FacilityType, facility.image_description, welsh, "image_description"),
             # The relative file path of the image
             'image_file_path': facility.image_file_path
         }
         for facility in order_facilities(court.facilities.all())
+    ]
+
+    opening_times = [
+        {
+            # Displayed text concatenates the type with the hours
+            'displayed_text': "%s: %s" % (translate_type(OpeningType, court_opening.opening_time.type, welsh), court_opening.opening_time.hours) if court_opening.opening_time.hours else "%s" % translate_type(OpeningType, court_opening.opening_time.type, welsh),
+        }
+        for court_opening in CourtOpeningTime.objects.filter(court_id=court.id).order_by('sort')
+    ]
+
+    aols = [
+        {
+            #Displayed text concatenates the type with the hours
+            'name': aol.name,
+            'external_link': aol.external_link,
+            'display_url': aol.display_url,
+            'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc, welsh,
+                                                 'external_link_desc')
+        }
+        for aol in court.areas_of_law.all().order_by("name")
     ]
 
     court_obj = {
@@ -107,20 +129,20 @@ def format_court(court):
         'types': [court_type.court_type.name for court_type in court.courtcourttype_set.all()],
         'postal_address': postal_address,
         'visiting_address': visiting_address,
-        'opening_times': court.opening_times.all().order_by("type"),
-        'areas_of_law': court.areas_of_law.all().order_by("name"),
+        'opening_times': opening_times,
+        'areas_of_law': aols,
         'facilities': facilities,
         'emails': emails,
         'contacts': contacts,
-        'directions': court.directions if court.directions else None,
-        'alert': court.alert if court.alert and court.alert.strip() != '' else None,
+        'directions': translate_attribute(court, "directions", welsh) if court.directions else None,
+        'alert': translate_attribute(court, "alert", welsh) if court.alert and court.alert.strip() != '' else None,
         'parking': court.parking or None,
-        'info': court.info,
+        'info': translate_attribute(court, "info", welsh),
         'hide_aols': court.hide_aols,
-        'info_leaflet': court.info_leaflet,
+        'info_leaflet': translate_attribute(court, "info_leaflet", welsh),
         'juror_leaflet': court.juror_leaflet,
-        'defence_leaflet': court.defence_leaflet,
-        'prosecution_leaflet': court.prosecution_leaflet}
+        'defence_leaflet': translate_attribute(court, "defence_leaflet", welsh),
+        'prosecution_leaflet': translate_attribute(court, "prosecution_leaflet", welsh)}
 
     dx_contact = court.contacts.filter(courtcontact__contact__name='DX')
     if dx_contact.count() > 0:
