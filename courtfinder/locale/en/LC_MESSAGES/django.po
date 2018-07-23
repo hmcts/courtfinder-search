@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 09:47+0000\n"
+"POT-Creation-Date: 2018-07-23 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -514,7 +514,7 @@ msgstr ""
 msgid "More details about"
 msgstr ""
 
-#: search/templates/search/spoe.jinja:17
+#: search/templates/search/spoe.jinja:17 search/views.py:22
 msgid "Children"
 msgstr ""
 
@@ -556,6 +556,134 @@ msgstr ""
 
 #: search/templates/search/spoe.jinja:54
 msgid "locate nearest county court for hearing"
+msgstr ""
+
+#: search/views.py:19
+msgid "Adoption"
+msgstr ""
+
+#: search/views.py:19
+msgid "applying to adopt a child."
+msgstr ""
+
+#: search/views.py:20
+msgid "Bankruptcy"
+msgstr ""
+
+#: search/views.py:20
+msgid "declaring bankruptcy or being made bankrupt."
+msgstr ""
+
+#: search/views.py:21
+msgid "Civil partnership"
+msgstr ""
+
+#: search/views.py:21
+msgid "ending a civil partnership."
+msgstr ""
+
+#: search/views.py:22
+msgid "child contact issues and disputes over maintenance payments."
+msgstr ""
+
+#: search/views.py:23
+msgid "Crime"
+msgstr ""
+
+#: search/views.py:23
+msgid "being accused of a crime, being a victim or witness."
+msgstr ""
+
+#: search/views.py:24
+msgid "Divorce"
+msgstr ""
+
+#: search/views.py:24
+msgid "ending a marriage."
+msgstr ""
+
+#: search/views.py:25
+msgid "Domestic violence"
+msgstr ""
+
+#: search/views.py:25
+msgid "violence in the home."
+msgstr ""
+
+#: search/views.py:26
+msgid "Employment"
+msgstr ""
+
+#: search/views.py:26
+msgid "workplace disputes including pay, redundancy and discrimination."
+msgstr ""
+
+#: search/views.py:27
+msgid "Forced marriage"
+msgstr ""
+
+#: search/views.py:27
+msgid "being made to marry against your will."
+msgstr ""
+
+#: search/views.py:28
+msgid "Forced marriage and FGM"
+msgstr ""
+
+#: search/views.py:28
+msgid "being made to marry or undergo mutilation against your will."
+msgstr ""
+
+#: search/views.py:29
+msgid "Housing possession"
+msgstr ""
+
+#: search/views.py:29
+msgid "Evictions and rental disputes."
+msgstr ""
+
+#: search/views.py:30
+msgid "High court"
+msgstr ""
+
+#: search/views.py:30 search/views.py:31
+msgid "courts dealing with High Court matters"
+msgstr ""
+
+#: search/views.py:31
+msgid "High Court District Registry"
+msgstr ""
+
+#: search/views.py:32
+msgid "Immigration"
+msgstr ""
+
+#: search/views.py:32
+msgid "seeking asylum, right to live in the UK and appealing deportation."
+msgstr ""
+
+#: search/views.py:33
+msgid "Money claims"
+msgstr ""
+
+#: search/views.py:33
+msgid "small claims, consumer, negligence and personal injury claims."
+msgstr ""
+
+#: search/views.py:34
+msgid "Probate"
+msgstr ""
+
+#: search/views.py:34
+msgid "will settlement and disputes."
+msgstr ""
+
+#: search/views.py:35
+msgid "Social security"
+msgstr ""
+
+#: search/views.py:35
+msgid "problems with benefits, entitlement, assessment and decisions."
 msgstr ""
 
 #: staticpages/templates/staticpages/feedback.jinja:3

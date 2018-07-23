@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponseRedirect
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.defaults import bad_request
+from django.utils.translation import gettext as _
 
 from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
@@ -15,23 +16,23 @@ from urlparse import urlparse
 
 
 areas_of_law_description = {
-    "Adoption": "applying to adopt a child.",
-    "Bankruptcy": "declaring bankruptcy or being made bankrupt.",
-    "Civil partnership": "ending a civil partnership.",
-    "Children": "child contact issues and disputes over maintenance payments.",
-    "Crime": "being accused of a crime, being a victim or witness.",
-    "Divorce": "ending a marriage.",
-    "Domestic violence": "violence in the home.",
-    "Employment": "workplace disputes including pay, redundancy and discrimination.",
-    "Forced marriage": "being made to marry against your will.",
-    "Forced marriage and FGM": "being made to marry or undergo mutilation against your will.",
-    "Housing possession": "Evictions and rental disputes.",
-    "High court": "courts dealing with High Court matters",
-    "High Court District Registry": "courts dealing with High Court matters",
-    "Immigration": "seeking asylum, right to live in the UK and appealing deportation.",
-    "Money claims": "small claims, consumer, negligence and personal injury claims.",
-    "Probate": "will settlement and disputes.",
-    "Social security": "problems with benefits, entitlement, assessment and decisions."
+    _("Adoption"): _("applying to adopt a child."),
+    _("Bankruptcy"): _("declaring bankruptcy or being made bankrupt."),
+    _("Civil partnership"): _("ending a civil partnership."),
+    _("Children"): _("child contact issues and disputes over maintenance payments."),
+    _("Crime"): _("being accused of a crime, being a victim or witness."),
+    _("Divorce"): _("ending a marriage."),
+    _("Domestic violence"): _("violence in the home."),
+    _("Employment"): _("workplace disputes including pay, redundancy and discrimination."),
+    _("Forced marriage"): _("being made to marry against your will."),
+    _("Forced marriage and FGM"): _("being made to marry or undergo mutilation against your will."),
+    _("Housing possession"): _("Evictions and rental disputes."),
+    _("High court"): _("courts dealing with High Court matters"),
+    _("High Court District Registry"): _("courts dealing with High Court matters"),
+    _("Immigration"): _("seeking asylum, right to live in the UK and appealing deportation."),
+    _("Money claims"): _("small claims, consumer, negligence and personal injury claims."),
+    _("Probate"): _("will settlement and disputes."),
+    _("Social security"): _("problems with benefits, entitlement, assessment and decisions.")
 }
 
 
