@@ -196,7 +196,7 @@ class CourtContactForm(TranslatableCourtForm):
         is_new_instance = self.instance._state.adding
         self.fields["number"].required = True
         self.fields["explanation"].required = False
-        if kwargs.pop('welsh_enabled', False):
+        if welsh_enabled:
             self.fields["explanation_cy"].required = False
         self.fields['sort_order'].widget = forms.HiddenInput()
         self.fields['sort_order'].required = False
@@ -225,11 +225,11 @@ class CourtEmailForm(TranslatableCourtForm):
         model = models.Email
         fields = ['description', 'address', 'explanation', 'explanation_cy']
 
-    def __init__(self, *args, **kwargs):
-        super(CourtEmailForm, self).__init__(*args, **kwargs)
+    def __init__(self, welsh_enabled=False, *args, **kwargs):
+        super(CourtEmailForm, self).__init__(welsh_enabled, *args, **kwargs)
         is_new_instance = self.instance._state.adding
         self.fields["explanation"].required = False
-        if kwargs.pop('welsh_enabled', False):
+        if welsh_enabled:
             self.fields["explanation_cy"].required = False
         if not is_new_instance:
             con_type = ContactType.objects.filter(name=self.instance.description).first()
