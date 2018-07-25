@@ -572,7 +572,10 @@ class OpeningTimeMixin(object):
             court_opening.sort = court_opening.pk  # Sets the order of the new object to its id to preserve order
             court_opening.save(update_fields=["sort"])
         else:
-            instance.save()
+            if instance.type:
+                instance.save()
+            else:
+                instance.save(update_fields=['hours'])
 
 
 class OpeningFormView(OpeningTimeMixin, OrderableFormView):
