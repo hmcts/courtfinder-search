@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 12:04+0000\n"
+"POT-Creation-Date: 2018-07-30 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: courtfinder/settings/base.py:152 courtfinder/settings/local.py:37
+#: courtfinder/settings/base.py:153 courtfinder/settings/local.py:37
 #: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
 msgid "English"
 msgstr ""
@@ -93,124 +93,130 @@ msgstr ""
 msgid "A-Z list of all courts"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:41
+#: courts/templates/courts/court.jinja:37
+msgid ""
+"Please note that information provided for courts in England will not be "
+"available in Welsh."
+msgstr ""
+
+#: courts/templates/courts/court.jinja:46
 msgid ""
 "This court or tribunal is no longer in service. Business has been "
 "transferred to other neighbouring courts."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:42
+#: courts/templates/courts/court.jinja:47
 msgid "Please use the postcode lookup facility to find your alternative court"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:49
+#: courts/templates/courts/court.jinja:54
 msgid "Visit us:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:59
-#: courts/templates/courts/court.jinja:79
+#: courts/templates/courts/court.jinja:64
+#: courts/templates/courts/court.jinja:84
 msgid "Maps and directions"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:67
+#: courts/templates/courts/court.jinja:72
 msgid "Visit or write to us:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:69
+#: courts/templates/courts/court.jinja:74
 #: search/templates/search/results.jinja:71
 msgid "Write to us:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:89
+#: courts/templates/courts/court.jinja:94
 #: search/templates/search/results.jinja:87
 msgid "Crown Court location code:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:93
+#: courts/templates/courts/court.jinja:98
 #: search/templates/search/results.jinja:90
 msgid "County Court location code:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:97
+#: courts/templates/courts/court.jinja:102
 #: search/templates/search/results.jinja:93
 msgid "Magistrates' Court location code:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:111
+#: courts/templates/courts/court.jinja:116
 msgid "picture of the court or tribunal building"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:117
+#: courts/templates/courts/court.jinja:122
 msgid "Important information"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:124
+#: courts/templates/courts/court.jinja:129
 msgid "Additional Information"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:131
+#: courts/templates/courts/court.jinja:136
 msgid "Opening hours"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:142
+#: courts/templates/courts/court.jinja:147
 msgid "Email"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:163
+#: courts/templates/courts/court.jinja:168
 msgid "Phone numbers"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:189
+#: courts/templates/courts/court.jinja:194
 msgid "Local information"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:195
+#: courts/templates/courts/court.jinja:200
 msgid "Building facilities"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:196
+#: courts/templates/courts/court.jinja:201
 msgid ""
 "If you have a disability and need help coming to a hearing, please contact "
 "the court or tribunal to make sure the facilities meet your specific needs "
 "or to discuss a reasonable adjustment you need."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:217
+#: courts/templates/courts/court.jinja:222
 #: search/templates/search/results.jinja:104
 msgid "More information..."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:219
+#: courts/templates/courts/court.jinja:224
 #: search/templates/search/results.jinja:106
 msgid "Cases heard at this venue"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:235
+#: courts/templates/courts/court.jinja:240
 msgid "Useful links:"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:236
+#: courts/templates/courts/court.jinja:241
 msgid "Security in our buildings"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:239
+#: courts/templates/courts/court.jinja:244
 msgid "Open the Formfinder tool to obtain the right form for your issue."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:239
+#: courts/templates/courts/court.jinja:244
 msgid "Find a form"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:242
+#: courts/templates/courts/court.jinja:247
 msgid ""
 "Information on providing feedback about our services and making a complaint."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:242
+#: courts/templates/courts/court.jinja:247
 msgid "Make a complaint"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:245
+#: courts/templates/courts/court.jinja:250
 msgid "About jury service"
 msgstr ""
 
@@ -510,7 +516,7 @@ msgstr ""
 msgid "More details about"
 msgstr ""
 
-#: search/templates/search/spoe.jinja:17 search/views.py:22
+#: search/templates/search/spoe.jinja:17 search/views.py:23
 msgid "Children"
 msgstr ""
 
@@ -554,131 +560,131 @@ msgstr ""
 msgid "locate nearest county court for hearing"
 msgstr ""
 
-#: search/views.py:19
+#: search/views.py:20
 msgid "Adoption"
 msgstr ""
 
-#: search/views.py:19
+#: search/views.py:20
 msgid "applying to adopt a child."
 msgstr ""
 
-#: search/views.py:20
+#: search/views.py:21
 msgid "Bankruptcy"
 msgstr ""
 
-#: search/views.py:20
+#: search/views.py:21
 msgid "declaring bankruptcy or being made bankrupt."
 msgstr ""
 
-#: search/views.py:21
+#: search/views.py:22
 msgid "Civil partnership"
 msgstr ""
 
-#: search/views.py:21
+#: search/views.py:22
 msgid "ending a civil partnership."
 msgstr ""
 
-#: search/views.py:22
+#: search/views.py:23
 msgid "child contact issues and disputes over maintenance payments."
 msgstr ""
 
-#: search/views.py:23
+#: search/views.py:24
 msgid "Crime"
 msgstr ""
 
-#: search/views.py:23
+#: search/views.py:24
 msgid "being accused of a crime, being a victim or witness."
 msgstr ""
 
-#: search/views.py:24
+#: search/views.py:25
 msgid "Divorce"
 msgstr ""
 
-#: search/views.py:24
+#: search/views.py:25
 msgid "ending a marriage."
 msgstr ""
 
-#: search/views.py:25
+#: search/views.py:26
 msgid "Domestic violence"
 msgstr ""
 
-#: search/views.py:25
+#: search/views.py:26
 msgid "violence in the home."
 msgstr ""
 
-#: search/views.py:26
+#: search/views.py:27
 msgid "Employment"
 msgstr ""
 
-#: search/views.py:26
+#: search/views.py:27
 msgid "workplace disputes including pay, redundancy and discrimination."
 msgstr ""
 
-#: search/views.py:27
+#: search/views.py:28
 msgid "Forced marriage"
 msgstr ""
 
-#: search/views.py:27
+#: search/views.py:28
 msgid "being made to marry against your will."
 msgstr ""
 
-#: search/views.py:28
+#: search/views.py:29
 msgid "Forced marriage and FGM"
 msgstr ""
 
-#: search/views.py:28
+#: search/views.py:29
 msgid "being made to marry or undergo mutilation against your will."
 msgstr ""
 
-#: search/views.py:29
+#: search/views.py:30
 msgid "Housing possession"
 msgstr ""
 
-#: search/views.py:29
+#: search/views.py:30
 msgid "Evictions and rental disputes."
 msgstr ""
 
-#: search/views.py:30
+#: search/views.py:31
 msgid "High court"
 msgstr ""
 
-#: search/views.py:30 search/views.py:31
+#: search/views.py:31 search/views.py:32
 msgid "courts dealing with High Court matters"
 msgstr ""
 
-#: search/views.py:31
+#: search/views.py:32
 msgid "High Court District Registry"
 msgstr ""
 
-#: search/views.py:32
+#: search/views.py:33
 msgid "Immigration"
 msgstr ""
 
-#: search/views.py:32
+#: search/views.py:33
 msgid "seeking asylum, right to live in the UK and appealing deportation."
 msgstr ""
 
-#: search/views.py:33
+#: search/views.py:34
 msgid "Money claims"
 msgstr ""
 
-#: search/views.py:33
+#: search/views.py:34
 msgid "small claims, consumer, negligence and personal injury claims."
 msgstr ""
 
-#: search/views.py:34
+#: search/views.py:35
 msgid "Probate"
 msgstr ""
 
-#: search/views.py:34
+#: search/views.py:35
 msgid "will settlement and disputes."
 msgstr ""
 
-#: search/views.py:35
+#: search/views.py:36
 msgid "Social security"
 msgstr ""
 
-#: search/views.py:35
+#: search/views.py:36
 msgid "problems with benefits, entitlement, assessment and decisions."
 msgstr ""
 

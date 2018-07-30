@@ -4922,7 +4922,7 @@
     alert: null, directions: null, image_file: swansea_civil_justice_centre.jpg, cci_code: 344,
     magistrate_code: null, updated_at: ! '2017-10-30 11:56:57.881000+00:00', created_at: ! '2013-07-30
       16:17:02.878000+00:00', info: '', hide_aols: false, info_leaflet: '', defence_leaflet: '',
-    prosecution_leaflet: '', juror_leaflet: null}
+    prosecution_leaflet: '', juror_leaflet: null, welsh_enabled: true}
 - model: search.court
   pk: 586
   fields: {admin_id: 3008, name: Hull and Holderness Magistrates' Court and Hearing
