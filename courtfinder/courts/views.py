@@ -8,7 +8,7 @@ from django.http import HttpResponse, Http404
 from django.utils.html import strip_tags
 from search.models import Court, AreaOfLaw, Facility, CourtAddress, CourtOpeningTime
 from admin.models import FacilityType, ContactType, OpeningType
-from core.welsh_utils import display_court_in_welsh, translate_attribute, translate_type
+from core.welsh_utils import display_court_in_welsh, translate_attribute, translate_type, display_in_welsh
 
 def collapse(source, key, key2):
     """
@@ -165,6 +165,7 @@ def court(request, slug):
         'postcode': request.GET.get('postcode', ''),
         'courtcode': request.GET.get('courtcode', False),
         'feature_leaflet_enabled': settings.FEATURE_LEAFLETS_ENABLED,
+        'show_welsh_notice': display_in_welsh() and not the_court.welsh_enabled
     })
 
 
