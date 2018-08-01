@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 14:31+0000\n"
+"POT-Creation-Date: 2018-08-01 14:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,7 +196,7 @@ msgid "Useful links:"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:241
-msgid "Security in our buildings"
+msgid "Entering our buildings"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:244
