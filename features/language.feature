@@ -13,11 +13,11 @@ Feature: Access the website in English and Welsh
     When I press "Cymraeg"
     And I visit "/courts/central-london-county-court"
     Then I should see "Mae hwn yn wasanaeth newydd"
-    And I should see "Please note that information provided for courts in England will not be available in Welsh."
+    And I should see "Please note that information provided for venues in England will not be available in Welsh."
 
   Scenario: Access Welsh court in Welsh language - no notice
     When I press "Cymraeg"
     And I visit "/courts/swansea-civil-and-family-justice-centre"
     Then I should see "Mae hwn yn wasanaeth newydd"
-    And I should not see "Please note that information provided for courts in England will not be available in Welsh."
+    And I should not see "Please note that information provided for venues in England will not be available in Welsh."
 

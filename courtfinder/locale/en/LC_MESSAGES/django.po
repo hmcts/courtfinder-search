@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 15:25+0000\n"
+"POT-Creation-Date: 2018-08-01 14:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr ""
 
 #: courts/templates/courts/court.jinja:37
 msgid ""
-"Please note that information provided for courts in England will not be "
+"Please note that information provided for venues in England will not be "
 "available in Welsh."
 msgstr ""
 
