@@ -280,8 +280,10 @@ class ParkingInfo(models.Model):
                                                                                     self.offsite,
                                                                                     self.blue_badge)
 
+
 class EmergencyMessage(models.Model):
     message = models.TextField(blank=True)
+    message_cy = models.TextField(blank=True, null=True, default=None)
     show = models.BooleanField(default=False)
 
     def __unicode__(self):

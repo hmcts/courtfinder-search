@@ -40,7 +40,7 @@ areas_of_law_description = {
 def index(request):
     em = EmergencyMessage.objects.get()
     return render(request, 'search/index.jinja',
-        {'emergency_message': em.message, 'show': em.show})
+        {'emergency_message': em.message_cy if display_in_welsh() else em.message, 'show': em.show})
 
 
 def searchby(request):

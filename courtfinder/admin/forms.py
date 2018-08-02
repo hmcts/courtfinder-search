@@ -29,12 +29,14 @@ class UserDeleteForm(forms.Form):
 
 
 class EmergencyMessageForm(forms.ModelForm):
+
     class Meta:
         model = models.EmergencyMessage
-        fields = ('show', 'message')
-        labels = {'show': 'Show on home page'}
+        fields = ('show', 'message', 'message_cy')
+        labels = {'show': 'Show on home page', 'message_cy': 'Message (Welsh)'}
         widgets = {
-            'message': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
+            'message': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'}),
+            'message_cy': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
         }
 
 
