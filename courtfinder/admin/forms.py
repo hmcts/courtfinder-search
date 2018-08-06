@@ -441,11 +441,12 @@ class AdminOpeningTypeForm(forms.ModelForm):
 class AdminAOLForm(forms.ModelForm):
     class Meta:
         model = models.AreaOfLaw
-        fields = ['name', 'external_link', 'external_link_desc', 'external_link_desc_cy']
+        fields = ['name', 'external_link', 'external_link_cy', 'external_link_desc', 'external_link_desc_cy']
         labels = {
             'name_cy': 'Name (Welsh)',
+            'external_link_cy': 'External link (Welsh)',
             'external_link_desc_cy': 'External link desc (Welsh)',
-        }
+            }
 
     def __init__(self, *args, **kwargs):
         super(AdminAOLForm, self).__init__(*args, **kwargs)
@@ -454,6 +455,9 @@ class AdminAOLForm(forms.ModelForm):
         if not is_new_instance:
             if self.instance.external_link:
                 self.initial['external_link'] = self.instance.display_url()
+            if self.instance.external_link_cy:
+                self.initial['external_link_cy'] = self.instance.display_url_cy()
+
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(AdminAOLForm, self).clean(*args, **kwargs)

@@ -255,7 +255,7 @@ def __format_results(results):
         {
             'name': aol.name,
             'external_link': aol.external_link,
-            'display_url': aol.display_url,
+            'display_url': aol.display_url_cy if display_in_welsh() else aol.display_url,
             'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc,
                                                  display_in_welsh(),
                                                  'external_link_desc')

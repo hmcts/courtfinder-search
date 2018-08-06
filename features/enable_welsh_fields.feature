@@ -100,8 +100,39 @@ Feature: Enable welsh fields for court
   Scenario: welsh aols show on welsh court page
     When I visit "/staff/edit_aol/2"
     And I fill in "external_link_desc_cy" with "adopting welsh"
+    And I fill in "external_link_cy" with "http://www.visitwales.com/"
     And I press "Update"
     And I visit "/staff/court/2"
     And I view court in the new window
     And I press "Cymraeg"
     Then I should see a link with title "adopting welsh"
+    Then I should see a link with href "http://www.visitwales.com/"
+
+  Scenario: welsh aols show on court search in welsh
+    When I visit "/staff/edit_aol/2"
+    And I fill in "external_link_desc_cy" with "adopting welsh"
+    And I fill in "external_link_cy" with "http://www.visitwales.com/"
+    And I press "Update"
+    And I visit "search/results?q=aylesbury"
+    And I press "Cymraeg"
+    Then I should see a link with title "adopting welsh"
+    Then I should see a link with href "http://www.visitwales.com/"
+
+  Scenario: welsh aols dont show on english court page
+    When I visit "/staff/edit_aol/2"
+    And I fill in "external_link_desc_cy" with "adopting welsh"
+    And I fill in "external_link_cy" with "http://www.visitwales.com/"
+    And I press "Update"
+    And I visit "/staff/court/2"
+    And I view court in the new window
+    Then I should not see a link with title "adopting welsh"
+    Then I should not see a link with href "http://www.visitwales.com/"
+
+  Scenario: welsh aols dont show on court search in english
+    When I visit "/staff/edit_aol/2"
+    And I fill in "external_link_desc_cy" with "adopting welsh"
+    And I fill in "external_link_cy" with "http://www.visitwales.com/"
+    And I press "Update"
+    And I visit "search/results?q=aylesbury"
+    Then I should not see a link with title "adopting welsh"
+    Then I should not see a link with href "http://www.visitwales.com/"

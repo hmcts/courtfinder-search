@@ -42,6 +42,7 @@ def step_impl(context):
         And I switch to the new window
     ''')
 
+
 @when(u'I fill "{field_name}" with "{input_val}" in the form "{form_id}"')
 def step_impl(context, field_name, input_val, form_id):
     elem = context.browser.find_by_css(("form#%s *[name='%s']") % (form_id, field_name))
@@ -122,3 +123,15 @@ def step_impl(context, text):
 @then(u'I should see a link with title "{text}"')
 def step_impl(context, text):
     assert context.browser.is_element_present_by_xpath("//a[contains(@title, '%s')]" % text)
+
+@then(u'I should not see a link with title "{text}"')
+def step_impl(context, text):
+    assert not context.browser.is_element_present_by_xpath("//a[contains(@title, '%s')]" % text)
+
+@then(u'I should see a link with href "{text}"')
+def step_impl(context, text):
+    assert context.browser.is_element_present_by_xpath("//a[contains(@href, '%s')]" % text)
+
+@then(u'I should not see a link with href "{text}"')
+def step_impl(context, text):
+    assert not context.browser.is_element_present_by_xpath("//a[contains(@href, '%s')]" % text)
