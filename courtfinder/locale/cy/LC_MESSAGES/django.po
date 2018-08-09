@@ -2,23 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 14:41+0000\n"
+"POT-Creation-Date: 2018-08-01 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Karol Grecki <karol.grecki@hmcts.net>, 2018\n"
-"Language-Team: Welsh (United Kingdom) (https://www.transifex.com/ministry-of-"
-"justice/teams/85417/cy_GB/)\n"
-"Language: cy_GB\n"
+"Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi.gov.uk>, 2018\n"
+"Language-Team: Welsh (United Kingdom) (https://www.transifex.com/ministry-of-justice/teams/85417/cy_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
-"11) ? 2 : 3;\n"
+"Language: cy_GB\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;\n"
 
 #: courtfinder/settings/base.py:153 courtfinder/settings/local.py:37
 #: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
@@ -30,7 +28,8 @@ msgstr "Saesneg"
 msgid "Welsh"
 msgstr "Cymraeg"
 
-#: courts/templates/courts/court.jinja:10 courts/templates/courts/list.jinja:14
+#: courts/templates/courts/court.jinja:10
+#: courts/templates/courts/list.jinja:14
 #: search/templates/search/address.jinja:8 search/templates/search/aol.jinja:9
 #: search/templates/search/courtcode.jinja:8
 #: search/templates/search/index.jinja:8
@@ -39,20 +38,21 @@ msgstr "Cymraeg"
 #: search/templates/search/spoe.jinja:10
 #: staticpages/templates/staticpages/feedback_sent.jinja:8
 msgid "Home"
-msgstr ""
+msgstr "Cartref"
 
-#: courts/templates/courts/court.jinja:11 courts/templates/courts/list.jinja:15
+#: courts/templates/courts/court.jinja:11
+#: courts/templates/courts/list.jinja:15
 #: search/templates/search/address.jinja:9
 #: search/templates/search/courtcode.jinja:9
 #: search/templates/search/postcode.jinja:10
 #: search/templates/search/results.jinja:10
 #: staticpages/templates/staticpages/feedback_sent.jinja:9
 msgid "Find a court or tribunal"
-msgstr ""
+msgstr "Chwilio am lys neu dribiwnlys "
 
 #: courts/templates/courts/court.jinja:14
 msgid "Search by name of address"
-msgstr ""
+msgstr "Chwilio yn ôl enw neu gyfeiriad"
 
 #: courts/templates/courts/court.jinja:15
 #: courts/templates/courts/court.jinja:18
@@ -61,14 +61,14 @@ msgstr ""
 #: search/templates/search/results.jinja:4
 #: search/templates/search/results.jinja:28
 msgid "Search results"
-msgstr ""
+msgstr "Canlyniadau eich chwiliad "
 
 #: courts/templates/courts/court.jinja:17
 #: search/templates/search/courtcode.jinja:3
 #: search/templates/search/courtcode.jinja:14
 #: search/templates/search/results.jinja:13
 msgid "Search by Court location code"
-msgstr ""
+msgstr "Chwilio yn ôl cod lleoliad y Llys"
 
 #: courts/templates/courts/court.jinja:21 search/templates/search/aol.jinja:4
 #: search/templates/search/aol.jinja:15
@@ -76,106 +76,112 @@ msgstr ""
 #: search/templates/search/results.jinja:18
 #: search/templates/search/spoe.jinja:25
 msgid "About your issue"
-msgstr ""
+msgstr "Ynglŷn â’ch mater"
 
 #: courts/templates/courts/court.jinja:23
 #: search/templates/search/postcode.jinja:13
 #: search/templates/search/results.jinja:20
 #: search/templates/search/spoe.jinja:5
 msgid "Additional info"
-msgstr ""
+msgstr "Gwybodaeth Ychwanegol "
 
 #: courts/templates/courts/court.jinja:24
 #: courts/templates/courts/court.jinja:27
 #: search/templates/search/results.jinja:22
 msgid "Search by postcode"
-msgstr ""
+msgstr "Chwilio yn ôl cod post"
 
 #: courts/templates/courts/court.jinja:31
 #: search/templates/search/index.jinja:39
 msgid "A-Z list of all courts"
-msgstr ""
+msgstr "Rhestr A-Y o'r holl lysoedd "
 
 #: courts/templates/courts/court.jinja:37
 msgid ""
 "Please note that information provided for venues in England will not be "
 "available in Welsh."
 msgstr ""
+"Nodwch os gwelwch yn dda na fydd gwybodaeth am leoliadau yn Lloegr ar gael "
+"yn Gymraeg. "
 
 #: courts/templates/courts/court.jinja:46
 msgid ""
 "This court or tribunal is no longer in service. Business has been "
 "transferred to other neighbouring courts."
 msgstr ""
+"Nid yw'r llys neu'r tribiwnlys hwn yn bodoli mwyach. Mae'r gwaith wedi'i "
+"drosglwyddo i lysoedd cyfagos."
 
 #: courts/templates/courts/court.jinja:47
 msgid "Please use the postcode lookup facility to find your alternative court"
 msgstr ""
+"Defnyddiwch y cyfleuster chwilio gan ddefnyddio cod post i ddod o hyd i lys "
+"arall"
 
 #: courts/templates/courts/court.jinja:54
 msgid "Visit us:"
-msgstr ""
+msgstr "Ymwelwch â ni:"
 
 #: courts/templates/courts/court.jinja:64
 #: courts/templates/courts/court.jinja:84
 msgid "Maps and directions"
-msgstr ""
+msgstr "Mapiau a chyfarwyddiadau "
 
 #: courts/templates/courts/court.jinja:72
 msgid "Visit or write to us:"
-msgstr ""
+msgstr "Ymwelwch â ni neu ysgrifennwch atom:"
 
 #: courts/templates/courts/court.jinja:74
 #: search/templates/search/results.jinja:71
 msgid "Write to us:"
-msgstr ""
+msgstr "Ysgrifennwch atom:"
 
 #: courts/templates/courts/court.jinja:94
 #: search/templates/search/results.jinja:87
 msgid "Crown Court location code:"
-msgstr ""
+msgstr "Cod lleoliad Llys y Goron:"
 
 #: courts/templates/courts/court.jinja:98
 #: search/templates/search/results.jinja:90
 msgid "County Court location code:"
-msgstr ""
+msgstr "Cod lleoliad y Llys Sirol:"
 
 #: courts/templates/courts/court.jinja:102
 #: search/templates/search/results.jinja:93
 msgid "Magistrates' Court location code:"
-msgstr ""
+msgstr "Cod lleoliad y Llys Ynadon:"
 
 #: courts/templates/courts/court.jinja:116
 msgid "picture of the court or tribunal building"
-msgstr ""
+msgstr "llun o'r llys neu adeilad y tribiwnlys "
 
 #: courts/templates/courts/court.jinja:122
 msgid "Important information"
-msgstr ""
+msgstr "Gwybodaeth bwysig"
 
 #: courts/templates/courts/court.jinja:129
 msgid "Additional Information"
-msgstr ""
+msgstr "Gwybodaeth Ychwanegol "
 
 #: courts/templates/courts/court.jinja:136
 msgid "Opening hours"
-msgstr ""
+msgstr "Oriau agor"
 
 #: courts/templates/courts/court.jinja:147
 msgid "Email"
-msgstr ""
+msgstr "E-bost"
 
 #: courts/templates/courts/court.jinja:168
 msgid "Phone numbers"
-msgstr ""
+msgstr "Rhifau ffôn"
 
 #: courts/templates/courts/court.jinja:194
 msgid "Local information"
-msgstr ""
+msgstr "Gwybodaeth leol "
 
 #: courts/templates/courts/court.jinja:200
 msgid "Building facilities"
-msgstr ""
+msgstr "Cyfleusterau yn yr adeilad "
 
 #: courts/templates/courts/court.jinja:201
 msgid ""
@@ -183,62 +189,69 @@ msgid ""
 "the court or tribunal to make sure the facilities meet your specific needs "
 "or to discuss a reasonable adjustment you need."
 msgstr ""
+"Os oes gennych anabledd a bod angen cymorth arnoch i ddod i wrandawiad, "
+"cysylltwch â’r llys neu’r tribiwnlys i wneud yn siŵr bod y cyfleusterau yno "
+"yn bodloni eich anghenion penodol neu i drafod addasiad rhesymol rydych ei "
+"angen."
 
 #: courts/templates/courts/court.jinja:222
 #: search/templates/search/results.jinja:104
 msgid "More information..."
-msgstr ""
+msgstr "Mwy o wybodaeth..."
 
 #: courts/templates/courts/court.jinja:224
 #: search/templates/search/results.jinja:106
 msgid "Cases heard at this venue"
-msgstr ""
+msgstr "Achosion a wrandawir yn y lleoliad hwn "
 
 #: courts/templates/courts/court.jinja:240
 msgid "Useful links:"
-msgstr ""
+msgstr "Dolenni defnyddiol:"
 
 #: courts/templates/courts/court.jinja:241
 msgid "Entering our buildings"
-msgstr ""
+msgstr "Dod i mewn i'n hadeiladau"
 
 #: courts/templates/courts/court.jinja:244
 msgid "Open the Formfinder tool to obtain the right form for your issue."
 msgstr ""
+"Defnyddiwch y gwasanaeth Chwilio am Ffurflenni i ddod o hyd i'r ffurflen "
+"gywir ar gyfer eich mater. "
 
 #: courts/templates/courts/court.jinja:244
 msgid "Find a form"
-msgstr ""
+msgstr "Chwilio am ffurflen "
 
 #: courts/templates/courts/court.jinja:247
 msgid ""
 "Information on providing feedback about our services and making a complaint."
-msgstr ""
+msgstr "Gwybodaeth am roi adborth am ein gwasanaethau a gwneud cwyn. "
 
 #: courts/templates/courts/court.jinja:247
 msgid "Make a complaint"
-msgstr ""
+msgstr "Gwneud cwyn "
 
 #: courts/templates/courts/court.jinja:250
 msgid "About jury service"
-msgstr ""
+msgstr "Ynghylch gwasanaethu ar reithgor"
 
 #: courts/templates/courts/list.jinja:5
 #, python-format
 msgid "List of courts and tribunals starting with %(letter)s"
 msgstr ""
+"Rhestr o lysoedd a thribiwnlysoedd sy'n dechrau gyda'r lythyren %(letter)s"
 
 #: courts/templates/courts/list.jinja:7
 msgid "Index of all courts and tribunals"
-msgstr ""
+msgstr "Mynegai o'r holl lysoedd a thribiwnlysoedd "
 
 #: courts/templates/courts/list.jinja:21
 msgid "Courts and Tribunals"
-msgstr ""
+msgstr "Llysoedd a Thribiwnlysoedd "
 
 #: courts/templates/courts/list.jinja:24
 msgid "Browse by name of court or tribunal"
-msgstr ""
+msgstr "Pori drwy ddefnyddio enw'r llys neu dribiwnlys "
 
 #: courts/templates/courts/list.jinja:27
 #, python-format
@@ -246,21 +259,23 @@ msgid ""
 "There are no courts or tribunals starting with %(letter)s. Please select "
 "another letter."
 msgstr ""
+"Nid oes yna lysoedd neu dribiwnlysoedd sy'n dechrau gyda'r lythyren "
+"%(letter)s. Dewiswch un arall. "
 
 #: courts/templates/courts/list.jinja:31
 msgid "Select the first letter of the court's name"
-msgstr ""
+msgstr "Dewiswch lythyren cyntaf enw'r llys "
 
 #: courts/templates/courts/list.jinja:35
 #, python-format
 msgid "Names starting with %(letter)s"
-msgstr ""
+msgstr "Enwau sy'n dechrau gyda'r lythyren %(letter)s"
 
 #: search/templates/search/address.jinja:3
 #: search/templates/search/address.jinja:14
 #: search/templates/search/results.jinja:15
 msgid "Search by name or address"
-msgstr ""
+msgstr "Chwilio yn ôl enw neu gyfeiriad"
 
 #: search/templates/search/address.jinja:19
 #: search/templates/search/address.jinja:24
@@ -272,40 +287,42 @@ msgstr ""
 #: search/templates/search/postcode.jinja:48 templates/400.html:3
 #: templates/404.html:3 templates/500.html:3
 msgid "Error"
-msgstr ""
+msgstr "Gwall"
 
 #: search/templates/search/address.jinja:20
 #: search/templates/search/courtcode.jinja:20
 msgid "You did not enter a search term. Please try again."
-msgstr ""
+msgstr "Ni wnaethoch nodi term chwilio. Rhowch gynnig arall arni. "
 
 #: search/templates/search/address.jinja:25
 #, python-format
 msgid ""
-"Sorry, there are no results for %(query)s. Please check and try another name "
-"or address."
+"Sorry, there are no results for %(query)s. Please check and try another name"
+" or address."
 msgstr ""
+"Nid oes yna unrhyw ganlyniadau ar gyfer %(query)s. Defnyddiwch enw neu "
+"gyfeiriad arall."
 
 #: search/templates/search/address.jinja:31
 #: search/templates/search/courtcode.jinja:31
 msgid "Enter one of the following"
-msgstr ""
+msgstr "Nodwch un o'r canlynol "
 
 #: search/templates/search/address.jinja:33
 msgid "court or tribunal name"
-msgstr ""
+msgstr "enw'r llys neu dribiwnlys "
 
 #: search/templates/search/address.jinja:34
 msgid "building name"
-msgstr ""
+msgstr "enw'r adeilad"
 
 #: search/templates/search/address.jinja:35
 msgid "street name"
-msgstr ""
+msgstr "enw'r stryd"
 
 #: search/templates/search/address.jinja:36
 msgid "town or city name"
-msgstr ""
+msgstr "enw'r dref neu ddinas "
 
 #: search/templates/search/address.jinja:42
 #: search/templates/search/aol.jinja:47
@@ -315,24 +332,26 @@ msgstr ""
 #: search/templates/search/spoe.jinja:59
 #: staticpages/templates/staticpages/feedback.jinja:29
 msgid "Continue"
-msgstr ""
+msgstr "Parhau"
 
 #: search/templates/search/aol.jinja:10 search/templates/search/index.jinja:3
-#: search/templates/search/index.jinja:13 search/templates/search/spoe.jinja:11
+#: search/templates/search/index.jinja:13
+#: search/templates/search/spoe.jinja:11
 msgid "Find the right court or tribunal"
-msgstr ""
+msgstr "Chwilio am y llys neu dribiwnlys cywir"
 
 #: search/templates/search/aol.jinja:20
 msgid "You did not enter a type of legal problem. Please try again."
 msgstr ""
+"Ni wnaethoch nodi math o broblem cyfreithiol. Rhowch gynnig arall arni. "
 
 #: search/templates/search/aol.jinja:40
 msgid "None of the above or not sure:"
-msgstr ""
+msgstr "Dim un o'r uchod neu ddim yn siŵr:"
 
 #: search/templates/search/aol.jinja:41
 msgid "will display a list of the nearest courts to the postcode"
-msgstr ""
+msgstr "bydd yn dangos rhestr o'r llysoedd agosaf i'r cod post "
 
 #: search/templates/search/courtcode.jinja:25
 #, python-format
@@ -340,79 +359,83 @@ msgid ""
 "Sorry, there are no results for %(query)s. Please check and try another "
 "court location code."
 msgstr ""
+"Nid oes yna unrhyw ganlyniadau ar gyfer %(query)s. Defnyddiwch god lleoliad "
+"llys arall."
 
 #: search/templates/search/courtcode.jinja:33
 msgid "Crown Court location code"
-msgstr ""
+msgstr "Cod lleoliad Llys y Goron"
 
 #: search/templates/search/courtcode.jinja:34
 msgid "County Court location code"
-msgstr ""
+msgstr "Cod lleoliad y Llys Sirol"
 
 #: search/templates/search/courtcode.jinja:35
 msgid "Magistrates' Court location code"
-msgstr ""
+msgstr "Cod lleoliad y Llys Ynadon"
 
 #: search/templates/search/index.jinja:17
 msgid "Special notice:"
-msgstr ""
+msgstr "Hysbysiad arbennig:"
 
 #: search/templates/search/index.jinja:24
 msgid "Search by :"
-msgstr ""
+msgstr "Chwilio yn ôl:"
 
 #: search/templates/search/index.jinja:29
 msgid "The Area of Law I am interested in (recommended)"
-msgstr ""
+msgstr "Maes y Gyfraith y mae gennyf ddiddordeb ynddo (argymhellir) "
 
 #: search/templates/search/index.jinja:34
 msgid "Court Name or Address"
-msgstr ""
+msgstr "Enw neu Gyfeiriad y Llys "
 
 #: search/templates/search/index.jinja:44
 msgid "Court location code"
-msgstr ""
+msgstr "Cod lleoliad y Llys "
 
 #: search/templates/search/index.jinja:47
 msgid "Next"
-msgstr ""
+msgstr "Nesaf"
 
 #: search/templates/search/postcode.jinja:4
 #: search/templates/search/postcode.jinja:25
 #: search/templates/search/postcode.jinja:31
 msgid "Enter postcode"
-msgstr ""
+msgstr "Nodi cod post"
 
 #: search/templates/search/postcode.jinja:20
 msgid "Housing Possession"
-msgstr ""
+msgstr "Meddiannu Cartref"
 
 #: search/templates/search/postcode.jinja:23
 msgid "For a new claim:"
-msgstr ""
+msgstr "Gwneud hawliad newydd:"
 
 #: search/templates/search/postcode.jinja:26
 #: search/templates/search/postcode.jinja:108
 msgid "Enter your postcode."
-msgstr ""
+msgstr "Nodwch eich cod post. "
 
 #: search/templates/search/postcode.jinja:28
 msgid "For an existing claim:"
-msgstr ""
+msgstr "Ar gyfer hawliad sydd eisoes yn bodoli:"
 
 #: search/templates/search/postcode.jinja:38
 msgid "You did not enter a postcode. Please try again."
-msgstr ""
+msgstr "Ni wnaethoch nodi cod post. Rhowch gynnig arall arni. "
 
 #: search/templates/search/postcode.jinja:44
 msgid "You did not enter a valid postcode. Please try again."
-msgstr ""
+msgstr "Ni wnaethoch nodi cod post dilys. Rhowch gynnig arall arni. "
 
 #: search/templates/search/postcode.jinja:49
 msgid ""
 "Aside from immigration tribunals, this tool does not return results for "
 "Northern Ireland."
 msgstr ""
+"Ar wahân i dribiwnlysoedd mewnfudo, nid yw'r gwasanaeth hwn yn rhoi "
+"canlyniadau ar gyfer Gogledd Iwerddon. "
 
 #: search/templates/search/postcode.jinja:64
 msgid ""
@@ -420,342 +443,361 @@ msgid ""
 "claim-online\" target=\"_blank\">Making a money claim online</a> is cheaper "
 "and submitting it takes 30 minutes."
 msgstr ""
+"Mae <a id=\"money-claims-online-link\" href=\"https://www.gov.uk/make-money-"
+"claim-online\" target=\"_blank\">Gwneud hawliad arian ar-lein</a> yn costio "
+"llai ac yn cymryd 30 munud i'w gwblhau. "
 
 #: search/templates/search/postcode.jinja:69
 msgid "or"
-msgstr ""
+msgstr "neu"
 
 #: search/templates/search/postcode.jinja:72
 #: search/templates/search/postcode.jinja:89
 msgid "Contact the County Court Money Claims Centre (CCMCC)"
-msgstr ""
+msgstr "Cysylltwch â Chanolfan Hawliadau Arian y Llys Sirol (CCMCC)"
 
 #: search/templates/search/postcode.jinja:81
 msgid "That was previously entered online"
-msgstr ""
+msgstr "A gafodd ei gyflwyno'n flaenorol ar-lein "
 
 #: search/templates/search/postcode.jinja:83
 msgid "Go to the Online Money Claim Service"
-msgstr ""
+msgstr "Ewch i'r Gwasanaeth Hawliadau Arian Ar-lein "
 
 #: search/templates/search/postcode.jinja:87
 msgid "That was previously completed on paper"
-msgstr ""
+msgstr "A gafodd ei gwblhau'n flaenorol ar bapur"
 
 #: search/templates/search/postcode.jinja:93
 msgid "If you know a local court is dealing with your claim"
-msgstr ""
+msgstr "Os ydych chi'n gwybod bod llys lleol yn delio â'ch hawliad"
 
 #: search/templates/search/postcode.jinja:95
 msgid "Go to the A-Z list of courts"
-msgstr ""
+msgstr "Ewch i'r rhestr A-Y o'r holl lysoedd "
 
 #: search/templates/search/postcode.jinja:101
 msgid "Enter the postcode where the child (or children) lives."
-msgstr ""
+msgstr "Nodwch god post lle mae'r plentyn (neu'r plant) yn byw. "
 
 #: search/templates/search/postcode.jinja:104
 msgid "Start a Possession claim online"
-msgstr ""
+msgstr "Dechrau hawliad Meddiant ar-lein"
 
 #: search/templates/search/postcode.jinja:106
 msgid "Or enter postcode of property to find nearest court."
-msgstr ""
+msgstr "Neu nodwch god post yr eiddo i chwilio am y llys agosaf. "
 
 #: search/templates/search/postcode.jinja:112
 msgid "You will be directed to your Regional Divorce Centre."
-msgstr ""
+msgstr "Fe'ch cyfeirir at eich Canolfan Ysgariadau Rhanbarthol."
 
 #: search/templates/search/results.jinja:35
 msgid "result"
 msgid_plural "results"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "canlyniad"
+msgstr[1] "canlyniad"
+msgstr[2] "canlyniadau"
+msgstr[3] "canlyniadau"
 
 #: search/templates/search/results.jinja:40
 msgid "The nearest County Court for your hearing is:"
-msgstr ""
+msgstr "Y Llys Sirol agosaf ar gyfer eich gwrandawiad yw:"
 
 #: search/templates/search/results.jinja:42
 msgid "The nearest County Courts for your hearing are:"
-msgstr ""
+msgstr "Y Llysoedd Sirol agosaf ar gyfer eich gwrandawiad yw:"
 
 #: search/templates/search/results.jinja:46
 #, python-format
 msgid "This is the court or tribunal nearest %(postcode)s."
-msgstr ""
+msgstr "Dyma'r llys neu dribiwnlys sydd agosaf at %(postcode)s."
 
 #: search/templates/search/results.jinja:48
 #, python-format
 msgid "These are the %(results)s courts or tribunals nearest %(postcode)s."
-msgstr ""
+msgstr "Dyma'r %(results)s llys a thribiwnlys sydd agosaf at %(postcode)s."
 
 #: search/templates/search/results.jinja:52
 msgid ""
 "This tool shows courts and tribunals in England and Wales, and some "
 "tribunals in Scotland and Northern Ireland."
 msgstr ""
+"Mae'r gwasanaeth hwn yn dangos llysoedd a tribiwnlysoedd yng Nghymru a "
+"Lloegr, a rhai thribiwnlysoedd yn Yr Alban a Gogledd Iwerddon. "
 
 #: search/templates/search/results.jinja:56
 #: search/templates/search/results.jinja:60
 msgid "Some tribunal hearings may take place at other venues."
 msgstr ""
+"Efallai y cynhelir rhai gwrandawiadau tribiwnlys mewn lleoliadau eraill. "
 
 #: search/templates/search/results.jinja:57
 msgid "Social Security and Child Support Tribunal Venues"
-msgstr ""
+msgstr "Lleoliadau Tribiwnlys Nawdd Cymdeithasol a Chynnal Plant "
 
 #: search/templates/search/results.jinja:61
 msgid "Employment Tribunal Venues"
-msgstr ""
+msgstr "Lleoliadau Tribiwnlys Cyflogaeth"
 
 #: search/templates/search/results.jinja:96
 msgid "document exchange"
-msgstr ""
+msgstr "cyfnewid dogfen"
 
 #: search/templates/search/results.jinja:124
 #: search/templates/search/results.jinja:126
 #: search/templates/search/results.jinja:129
 msgid "More details about"
-msgstr ""
+msgstr "Rhagor o fanylion am "
 
 #: search/templates/search/spoe.jinja:17 search/views.py:23
 msgid "Children"
-msgstr ""
+msgstr "Plant"
 
 #: search/templates/search/spoe.jinja:19
 msgid "About your Divorce"
-msgstr ""
+msgstr "Ynghylch eich Ysgariad"
 
 #: search/templates/search/spoe.jinja:21
 msgid "About your money claim"
-msgstr ""
+msgstr "Ynghylch eich hawliad arian "
 
 #: search/templates/search/spoe.jinja:23
 msgid "About ending your Civil Partnership"
-msgstr ""
+msgstr "Ynghylch diweddu eich Partneriaeth Sifil"
 
 #: search/templates/search/spoe.jinja:34
 msgid "I want to start new proceedings"
-msgstr ""
+msgstr "Rwyf eisiau dechrau achos newydd "
 
 #: search/templates/search/spoe.jinja:36
 msgid "I want to start proceedings"
-msgstr ""
+msgstr "Rwyf eisiau dechrau achos"
 
 #: search/templates/search/spoe.jinja:38
 msgid "about to start a new claim"
-msgstr ""
+msgstr "rwyf ar fin dechrau hawliad newydd"
 
 #: search/templates/search/spoe.jinja:44
 msgid "I am already in contact with a court"
-msgstr ""
+msgstr "Rwyf eisoes mewn cysylltiad â llys"
 
 #: search/templates/search/spoe.jinja:46
 msgid "already have a claim"
-msgstr ""
+msgstr "rwyf wedi gwneud hawliad yn barod "
 
 #: search/templates/search/spoe.jinja:48
 msgid "already in contact with a court or tribunal"
-msgstr ""
+msgstr "eisoes mewn cysylltiad â llys neu dribiwnlys "
 
 #: search/templates/search/spoe.jinja:54
 msgid "locate nearest county court for hearing"
-msgstr ""
+msgstr "chwilio am y llys sirol agosaf ar gyfer gwrandawiad "
 
 #: search/views.py:20
 msgid "Adoption"
-msgstr ""
+msgstr "Mabwysiadu "
 
 #: search/views.py:20
 msgid "applying to adopt a child."
-msgstr ""
+msgstr "gwneud cais i fabwysiadu plentyn. "
 
 #: search/views.py:21
 msgid "Bankruptcy"
-msgstr ""
+msgstr "Methdaliad"
 
 #: search/views.py:21
 msgid "declaring bankruptcy or being made bankrupt."
-msgstr ""
+msgstr "Datgan methdaliad neu gael eich dyfarnu'n fethdalwr. "
 
 #: search/views.py:22
 msgid "Civil partnership"
-msgstr ""
+msgstr "Partneriaeth sifil"
 
 #: search/views.py:22
 msgid "ending a civil partnership."
-msgstr ""
+msgstr "diweddu partneriaeth sifil. "
 
 #: search/views.py:23
 msgid "child contact issues and disputes over maintenance payments."
-msgstr ""
+msgstr "materion cyswllt â phlant ac anghydfodau ynghylch taliadau cynnal. "
 
 #: search/views.py:24
 msgid "Crime"
-msgstr ""
+msgstr "Trosedd"
 
 #: search/views.py:24
 msgid "being accused of a crime, being a victim or witness."
-msgstr ""
+msgstr "wedi cael eich cyhuddo o gyflawni trosedd, yn ddioddefwr neu'n dyst."
 
 #: search/views.py:25
 msgid "Divorce"
-msgstr ""
+msgstr "Ysgariad"
 
 #: search/views.py:25
 msgid "ending a marriage."
-msgstr ""
+msgstr "diweddu priodas. "
 
 #: search/views.py:26
 msgid "Domestic violence"
-msgstr ""
+msgstr "Trais domestig"
 
 #: search/views.py:26
 msgid "violence in the home."
-msgstr ""
+msgstr "trais yn y cartref. "
 
 #: search/views.py:27
 msgid "Employment"
-msgstr ""
+msgstr "Cyflogaeth "
 
 #: search/views.py:27
 msgid "workplace disputes including pay, redundancy and discrimination."
 msgstr ""
+"anghydfodau yn y gweithle gan gynnwys tâl, colli swydd a gwahaniaethu. "
 
 #: search/views.py:28
 msgid "Forced marriage"
-msgstr ""
+msgstr "Priodas dan orfod"
 
 #: search/views.py:28
 msgid "being made to marry against your will."
-msgstr ""
+msgstr "cael eich gorfodi i briodi yn erbyn eich ewyllys. "
 
 #: search/views.py:29
 msgid "Forced marriage and FGM"
-msgstr ""
+msgstr "Priodas dan orfod ac anffurfio organau cenhedlu benywod"
 
 #: search/views.py:29
 msgid "being made to marry or undergo mutilation against your will."
 msgstr ""
+"cael eich gorfodi i briodi neu anffurfio eich organau yn erbyn eich ewyllys."
+" "
 
 #: search/views.py:30
 msgid "Housing possession"
-msgstr ""
+msgstr "Meddiannu cartref"
 
 #: search/views.py:30
 msgid "Evictions and rental disputes."
-msgstr ""
+msgstr "Troi allan ac anghydfodau rhent. "
 
 #: search/views.py:31
 msgid "High court"
-msgstr ""
+msgstr "Yr Uchel Lys "
 
 #: search/views.py:31 search/views.py:32
 msgid "courts dealing with High Court matters"
-msgstr ""
+msgstr "llysoedd sy'n delio â materion yr Uchel Lys "
 
 #: search/views.py:32
 msgid "High Court District Registry"
-msgstr ""
+msgstr "Cofrestrfa Ranbarthol yr Uchel Lys "
 
 #: search/views.py:33
 msgid "Immigration"
-msgstr ""
+msgstr "Mewnfudo"
 
 #: search/views.py:33
 msgid "seeking asylum, right to live in the UK and appealing deportation."
-msgstr ""
+msgstr "ceisio lloches, hawl i fyw yn y DU ac apelio yn erbyn allgludiad."
 
 #: search/views.py:34
 msgid "Money claims"
-msgstr ""
+msgstr "Hawliadau arian"
 
 #: search/views.py:34
 msgid "small claims, consumer, negligence and personal injury claims."
 msgstr ""
+"hawliadau bychain, hawliadau defnyddwyr, esgeuluster ac anafiadau personol. "
 
 #: search/views.py:35
 msgid "Probate"
-msgstr ""
+msgstr "Profiant"
 
 #: search/views.py:35
 msgid "will settlement and disputes."
-msgstr ""
+msgstr "setlo ewyllys ac anghydfodau. "
 
 #: search/views.py:36
 msgid "Social security"
-msgstr ""
+msgstr "Nawdd cymdeithasol "
 
 #: search/views.py:36
 msgid "problems with benefits, entitlement, assessment and decisions."
 msgstr ""
+"problemau gyda'r hawl i hawlio, asesiadau a phenderfyniadau budd-daliadau. "
 
 #: staticpages/templates/staticpages/feedback.jinja:3
-#: staticpages/templates/staticpages/feedback_sent.jinja:3 templates/400.html:3
-#: templates/404.html:3 templates/500.html:3
+#: staticpages/templates/staticpages/feedback_sent.jinja:3
+#: templates/400.html:3 templates/404.html:3 templates/500.html:3
 msgid "Court and Tribunal Finder"
-msgstr ""
+msgstr "Gwasanaeth Chwilio am Lysoedd a Thribiwnlysoedd "
 
 #: staticpages/templates/staticpages/feedback.jinja:3
 msgid "Feedback"
-msgstr ""
+msgstr "Adborth"
 
 #: staticpages/templates/staticpages/feedback.jinja:8
 msgid "Send feedback"
-msgstr ""
+msgstr "Anfon adborth"
 
 #: staticpages/templates/staticpages/feedback.jinja:10
 msgid ""
 "Please do not use this feedback form for complaints about HM Courts & "
-"Tribunals Service. Complaints should be sent to the office where the problem "
-"arose to help us sort out the issue quickly and accurately."
+"Tribunals Service. Complaints should be sent to the office where the problem"
+" arose to help us sort out the issue quickly and accurately."
 msgstr ""
+"Peidiwch â defnyddio’r ffurflen adborth hon i wneud cwyn am Wasanaeth "
+"Llysoedd a Thribiwnlysoedd EM. Dylech anfon cwynion i’r swyddfa lle "
+"digwyddodd y broblem i’n helpu i ddatrys y mater yn gyflym ac yn briodol. "
 
 #: staticpages/templates/staticpages/feedback.jinja:16
 msgid ""
 "Comments (Please don't leave sensitive personal details, like your phone "
 "number)"
 msgstr ""
+"Sylwadau (Peidiwch â nodi gwybodaeth bersonol sensitif, fel eich rhif ffôn)"
 
 #: staticpages/templates/staticpages/feedback.jinja:18
 msgid "2000 characters max"
-msgstr ""
+msgstr "uchafswm o 2000 o nodau "
 
 #: staticpages/templates/staticpages/feedback.jinja:21
 msgid ""
 "Your email address (optional) - if you'd like us to contact you for more "
 "feedback"
 msgstr ""
+"Eich cyfeiriad e-bost (dewisol) - os hoffech i ni gysylltu â chi i gael mwy "
+"o adborth"
 
 #: staticpages/templates/staticpages/feedback.jinja:25
 msgid "Leave this field blank"
-msgstr ""
+msgstr "Gadael y maes hwn yn wag "
 
 #: staticpages/templates/staticpages/feedback_sent.jinja:3
 msgid "Feedback sent"
-msgstr ""
+msgstr "Adborth wedi'i anfon"
 
 #: staticpages/templates/staticpages/feedback_sent.jinja:14
 msgid "Thank you for your feedback"
-msgstr ""
+msgstr "Diolch yn fawr am eich adborth"
 
 #: templates/400.html:8 templates/404.html:8 templates/500.html:8
 msgid "Court and tribunal finder"
-msgstr ""
+msgstr "Gwasanaeth chwilio am lysoedd a thribiwnlysoedd "
 
 #: templates/400.html:11
 msgid ""
 "We're sorry, but your browser sent a request that this server could not "
 "understand."
 msgstr ""
+"Mae'n ddrwg gennym, ond bu i'ch porwr anfon cais na all y gweinydd hwn ei "
+"ddeall. "
 
 #: templates/400.html:12 templates/404.html:12 templates/500.html:12
 #, python-format
 msgid "Go to the <a href=\"%(home_url)s\">home page</a>"
-msgstr ""
+msgstr "Mynd i'r <a href=\"%(home_url)s\">dudalen gartref</a>"
 
 #: templates/404.html:11
 msgid "Page not found"
@@ -763,7 +805,7 @@ msgstr "Ni ddaethpwyd o hyd i'r dudalen"
 
 #: templates/500.html:11
 msgid "We're sorry, but something went wrong"
-msgstr ""
+msgstr "Mae'n ddrwg gennym, ond aeth rhywbeth o'i le"
 
 #: templates/layout/base.jinja:26
 #, python-format
@@ -784,4 +826,4 @@ msgstr "Cwcis"
 
 #: templates/layout/base.jinja:36
 msgid "Contact"
-msgstr ""
+msgstr "Cysylltu "
