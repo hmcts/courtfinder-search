@@ -109,9 +109,9 @@
             {% for aol in court.areas_of_law %}
               {% if aol.external_link %}
                 <li><a href="{{aol.display_url}}" title="{{aol.external_link_desc}}">
-                <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{{ aol.name }}</a></li>
+                <span class='screen_reader_hide'>{{aol.external_link_desc}}</span>{% trans aol.name %}</a></li>
               {% else %}
-                <li>{{ aol.name }}</li>
+                <li>{% trans aol.name %}</li>
               {% endif %}
             {% endfor %}
             </ul>
