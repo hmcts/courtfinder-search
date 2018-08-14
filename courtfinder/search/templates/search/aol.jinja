@@ -29,8 +29,8 @@
         <label for="aol-{{forloop.counter}}" class="block-label form-block aol-label">
           <input id="aol-{{forloop.counter}}" type="radio" name="aol" value="{{area.name}}" {% if area.name == aol %}checked{% endif %}>
           <div class="form-label">
-            <span class="aol-name">{{area.name}}: </span>
-            <span class="aol-description">{{ area.description }}</span>
+            <span class="aol-name">{% trans area.name %}: </span>
+            <span class="aol-description">{% trans area.description %}</span>
           </div>
         </label>
         {% endfor %}
