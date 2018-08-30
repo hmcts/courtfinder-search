@@ -197,8 +197,10 @@ class CourtAddress(models.Model):
     address_type = models.ForeignKey(AddressType)
     court = models.ForeignKey(Court)
     address = models.TextField()
+    address_cy = models.TextField(null=True, blank=True, default=None)
     postcode = models.CharField(max_length=255)
     town_name = models.CharField(null=True, max_length=255, default=None)
+    town_name_cy = models.CharField(null=True, max_length=255, default=None)
 
     def __unicode__(self):
         return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town_name)

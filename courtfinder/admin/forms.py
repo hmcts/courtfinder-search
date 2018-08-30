@@ -155,16 +155,18 @@ class LocatePostcodeForm(forms.Form):
     postcode = forms.CharField(max_length=9)
 
 
-class CourtAddressForm(forms.ModelForm):
+class CourtAddressForm(TranslatableCourtForm):
+    welsh_fields = ['address_cy', 'town_name_cy']
+
     class Meta:
         model = models.CourtAddress
-        fields = ['address_type', 'address', 'town_name', 'postcode']
+        fields = ['address_type', 'address', 'address_cy', 'town_name', 'town_name_cy', 'postcode']
         labels = {
             'town_name': 'Town',
         }
 
-    def __init__(self, address_index=None, court=None, *args, **kwargs):
-        super(CourtAddressForm, self).__init__(*args, **kwargs)
+    def __init__(self, welsh_enabled=False, address_index=None, court=None, *args, **kwargs):
+        super(CourtAddressForm, self).__init__(welsh_enabled, *args, **kwargs)
         address_types = models.AddressType.objects.all()
         if address_index and address_index > 0:
             address_types = address_types.exclude(name="Visit us or write to us")
@@ -181,6 +183,9 @@ class CourtAddressForm(forms.ModelForm):
                 self.fields["address"].disabled = True
                 self.fields["postcode"].disabled = True
                 self.fields["town_name"].disabled = True
+                if welsh_enabled:
+                    self.fields["address_cy"].disabled = True
+                    self.fields["town_name_cy"].disabled = True
         self.fields['address_type'].queryset = address_types
 
 

@@ -232,7 +232,7 @@ def edit_address(request, id, address_id=None):
                 court_address = None
         else:
             court_address = None
-        form = forms.CourtAddressForm(data=request.POST or None, address_index=form_index, court=court, instance=court_address)
+        form = forms.CourtAddressForm(data=request.POST or None, welsh_enabled=court.welsh_enabled, address_index=form_index, court=court, instance=court_address)
         if form.is_valid():
             court_address = form.save(commit=False)
             court_address.court = court
@@ -244,10 +244,10 @@ def edit_address(request, id, address_id=None):
         court_addresses = court.courtaddress_set.all().order_by('pk')
         court_address_forms = odict()
         for i, c in enumerate(court_addresses):
-            c_address_form = forms.CourtAddressForm(instance=c, address_index=i, court=court)
+            c_address_form = forms.CourtAddressForm(instance=c, welsh_enabled=court.welsh_enabled, address_index=i, court=court)
             court_address_forms[c_address_form] = c.pk
         while len(court_address_forms) < 2:
-            new_address = forms.CourtAddressForm(instance=None, address_index=len(court_address_forms), court=court)
+            new_address = forms.CourtAddressForm(instance=None, welsh_enabled=court.welsh_enabled, address_index=len(court_address_forms), court=court)
             court_address_forms[new_address] = None
         return render(request, 'court/address.html', {
             'court': court,

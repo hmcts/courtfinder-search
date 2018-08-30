@@ -13,7 +13,7 @@ from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
 from urlparse import urlparse
-from core.welsh_utils import display_in_welsh, translate_attribute, translate_type
+from core.welsh_utils import display_in_welsh, display_court_in_welsh, translate_attribute, translate_type
 
 
 areas_of_law_description = {
@@ -242,11 +242,13 @@ def __format_results(results):
                     address = addresses[0]
 
         if address:
+            welsh = display_court_in_welsh(address.court)
             visible_address = {
-                'address_lines': [line for line in address.address.split('\n') if line != ''],
-                'postcode':address.postcode,
-                'town':address.town_name,
-                'type':address.address_type,
+                'address_lines': [line for line in translate_attribute(address, 'address', welsh).split('\n')
+                                  if line != ''],
+                'postcode': address.postcode,
+                'town': translate_attribute(address, 'town_name', welsh),
+                'type': address.address_type,
             }
         else:
             visible_address = {}
