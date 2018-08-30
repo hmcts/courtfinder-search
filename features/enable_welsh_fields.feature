@@ -60,6 +60,26 @@ Feature: Enable welsh fields for court
     And I press "Cymraeg"
     Then I should see "Welsh fac exp"
 
+  Scenario: welsh address should show on welsh court page
+    When I visit "/staff/court/2/address"
+    And I fill "address_cy" with "Welsh address" in the form "primary_address"
+    And I fill "town_name_cy" with "cymtown" in the form "primary_address"
+    And I press "Update" in the form "primary_address"
+    And I view court in the new window
+    And I press "Cymraeg"
+    Then I should see "cymtown"
+    And I should see "Welsh address"
+
+  Scenario: welsh address should show on welsh court search results
+    When I visit "/staff/court/2/address"
+    And I fill "address_cy" with "Welsh address" in the form "secondary_address"
+    And I fill "town_name_cy" with "cymtown" in the form "secondary_address"
+    And I press "Update" in the form "secondary_address"
+    And I visit "search/results?q=cymtown"
+    And I press "Cymraeg"
+    Then I should see "cymtown"
+    And I should see "Welsh address"
+
   Scenario: welsh fields show on add facilities page
     When I visit "/staff/court/2/add_facility"
     Then I should see "Description (Welsh)"

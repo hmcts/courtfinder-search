@@ -55,9 +55,9 @@ def format_court(court):
     visiting_address = None
     for address in addresses:
         address_obj = {
-            'address_lines': [line for line in address.address.split('\n') if line != ''],
+            'address_lines': [line for line in translate_attribute(address, "address", welsh).split('\n') if line != ''],
             'postcode': address.postcode,
-            'town': address.town_name,
+            'town': translate_attribute(address, "town_name", welsh),
             'type': address.address_type
         }
         if str(address.address_type) == 'Postal' or str(address.address_type) == 'Visit us or write to us':
