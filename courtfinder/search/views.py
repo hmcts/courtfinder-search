@@ -263,7 +263,7 @@ def __format_results(results):
                                                  'external_link_desc')
         } for aol in result.areas_of_law.all()]
 
-        court = { 'name': result.name,
+        court = { 'name': translate_attribute(result, 'name', display_court_in_welsh(result)),
                   'lat': result.lat,
                   'lon': result.lon,
                   'number': result.number,

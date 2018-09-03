@@ -115,7 +115,7 @@ def format_court(court):
     ]
 
     court_obj = {
-        'name': court.name,
+        'name': translate_attribute(court, "name", welsh) ,
         'displayed': court.displayed,
         'lat': court.lat,
         'lon': court.lon,
@@ -249,7 +249,8 @@ def leaflet(request, slug, leaflet_type):
 
 def list_format_courts(courts):
     return [{
-        'name': court.name,
+        'name': court.name + " (%s)" % (court.name_cy)
+        if court.name_cy and display_court_in_welsh(court) else court.name,
         'slug': court.slug,
         }
             for court in courts

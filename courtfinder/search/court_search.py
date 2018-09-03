@@ -174,7 +174,9 @@ class CourtSearch:
         word_separator = re.compile(r'[^\w]+', re.UNICODE)
         query_regex = ''.join(map(lambda word: "(?=.*\y"+word+"\y)", re.split(word_separator, query)))
 
-        name_results =  sorted(Court.objects.filter(name__iregex=query_regex), key=lambda c: -len(c.areas_of_law.all()))
+        name_results = sorted(Court.objects.filter(Q(name__iregex=query_regex) |
+                                                   Q(name_cy__iregex=query_regex)).distinct(),
+                              key=lambda c: -len(c.areas_of_law.all()))
         # then we get courts with the query string in their address
         address_results = Court.objects.filter(Q(courtaddress__address__iregex=query_regex) |
                                                Q(courtaddress__address_cy__iregex=query_regex)).distinct()
