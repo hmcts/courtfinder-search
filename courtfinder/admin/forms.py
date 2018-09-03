@@ -86,7 +86,7 @@ class TranslatableCourtForm(forms.ModelForm):
 
 class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
 
-    welsh_fields = ['alert_cy', 'info_cy']
+    welsh_fields = ['name_cy', 'alert_cy', 'info_cy']
 
     def __init__(self, data, court, extra_perms, welsh_enabled):
         super(CourtBasicForm, self).__init__(welsh_enabled, data if data else None, instance=court)
@@ -99,7 +99,7 @@ class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
 
     class Meta:
         model = models.Court
-        fields = ('name', 'displayed', 'welsh_enabled', 'alert', 'alert_cy', 'info', 'info_cy')
+        fields = ('name', 'name_cy', 'displayed', 'welsh_enabled', 'alert', 'alert_cy', 'info', 'info_cy')
         labels = {'alert': 'Urgent notice', 'displayed': 'Open', 'welsh_enabled': 'Supports welsh translation', 'info': 'Additional information'}
         widgets = {
             'alert': forms.Textarea(attrs={'rows': 3}),

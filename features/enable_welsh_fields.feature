@@ -9,6 +9,7 @@ Feature: Enable welsh fields for court
 
   Scenario: welsh fields show on edit basic info page
     When I visit "/staff/court/2"
+    And I fill in "name_cy" with "welsh court name"
     And I fill in "alert" with "english alert"
     And I fill in "alert_cy" with "Welsh alert"
     And I fill in rich editor "info" with "english info"
@@ -16,8 +17,25 @@ Feature: Enable welsh fields for court
     And I press "Update"
     And I view court in the new window
     And I press "Cymraeg"
+    Then I should see "welsh court name"
     Then I should see "Welsh alert"
     And I should see "Welsh info"
+
+  Scenario: welsh name should show on welsh court search results
+    When I visit "/staff/court/2"
+    And I fill in "name_cy" with "cymcourtname"
+    And I press "Update"
+    And I visit "search/results?q=cymcourtname"
+    And I press "Cymraeg"
+    Then I should see "cymcourtname"
+
+  Scenario: welsh name should show bracketed in list results
+    When I visit "/staff/court/2"
+    And I fill in "name_cy" with "cymcourtname"
+    And I press "Update"
+    And I visit "/courts/A"
+    And I press "Cymraeg"
+    Then I should see "Aylesbury Magistrates' Court and Family Court (cymcourtname)"
 
   Scenario: welsh fields show on edit location page
     When I visit "/staff/court/2/location"

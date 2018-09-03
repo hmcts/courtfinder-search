@@ -6,6 +6,7 @@ from django.utils import timezone
 class Court(models.Model):
     admin_id = models.IntegerField(null=True, default=None)
     name = models.CharField(max_length=255)
+    name_cy = models.CharField(max_length=255, null=True, default=None, blank=True)
     slug = models.SlugField(max_length=255)
     displayed = models.BooleanField(default=False)
     lat = models.FloatField(null=True)
