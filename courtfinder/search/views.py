@@ -49,6 +49,8 @@ def searchby(request):
 
     if searchby == 'list':
         url = 'courts:'
+        if display_in_welsh():
+            searchby = 'welsh_list'
 
     url = url + searchby
     return HttpResponseRedirect(reverse(url))

@@ -1,0 +1,33 @@
+{% extends "layout/base.jinja" %}
+{% load i18n %}
+{% block page_title %}
+{% blocktrans %}Courts and Tribunals in Wales{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+<div id="global-breadcrumb" class="header-context">
+  <ol role="breadcrumbs" class="group">
+    <li><a href="{% url 'staticpages:home' %}">{% trans "Home" %}</a></li>
+    <li><a href="{% url 'search:search' %}">{% trans "Find a court or tribunal" %}</a></li>
+  </ol>
+</div>
+
+<div id="search-index-page" class="content inner cf">
+  <header class="page-header">
+    <h1>{% trans "Courts and Tribunals in Wales" %}</h1>
+  </header>
+
+  {% if courts %}
+  <ul>
+    {% for court in courts %}
+    <li>
+      <a href="{% url 'courts:court' court.slug %}">{{ court.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <p><a href="{% url 'courts:list' %}">{% trans "View complete list of all venues in English" %}</a></p>
+</div>
+
+{% endblock %}

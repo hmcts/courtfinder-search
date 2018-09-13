@@ -17,3 +17,11 @@ Feature: Search courts
     Then I should see "Names starting with B"
     And I should see "Banbury County Court"
 
+  Scenario: A-Z list in Welsh
+    When I press "Cymraeg"
+    When I choose "list" from "searchby"
+    And I press "Nesaf"
+    Then I should see "Courts and Tribunals in Wales"
+    When I press "View complete list of all venues in English"
+    Then I should see "Llysoedd a Thribiwnlysoedd"
+
