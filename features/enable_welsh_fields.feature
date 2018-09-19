@@ -29,14 +29,6 @@ Feature: Enable welsh fields for court
     And I press "Cymraeg"
     Then I should see "cymcourtname"
 
-  Scenario: welsh name should show bracketed in list results
-    When I visit "/staff/court/2"
-    And I fill in "name_cy" with "cymcourtname"
-    And I press "Update"
-    And I visit "/courts/A"
-    And I press "Cymraeg"
-    Then I should see "Aylesbury Magistrates' Court and Family Court (cymcourtname)"
-
   Scenario: welsh fields show on edit location page
     When I visit "/staff/court/2/location"
     And I fill in "directions" with "English directions"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 14:41+0000\n"
+"POT-Creation-Date: 2018-09-19 10:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: courtfinder/context_processors.py:6 courtfinder/context_processors.py:7
+#: templates/400.html:8 templates/404.html:8 templates/500.html:8
+msgid "Court and tribunal finder"
+msgstr ""
 
 #: courtfinder/settings/base.py:153 courtfinder/settings/local.py:37
 #: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
@@ -28,6 +33,7 @@ msgid "Welsh"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:10 courts/templates/courts/list.jinja:14
+#: courts/templates/courts/welsh_list.jinja:10
 #: search/templates/search/address.jinja:8 search/templates/search/aol.jinja:9
 #: search/templates/search/courtcode.jinja:8
 #: search/templates/search/index.jinja:8
@@ -39,6 +45,7 @@ msgid "Home"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:11 courts/templates/courts/list.jinja:15
+#: courts/templates/courts/welsh_list.jinja:11
 #: search/templates/search/address.jinja:9
 #: search/templates/search/courtcode.jinja:9
 #: search/templates/search/postcode.jinja:10
@@ -251,6 +258,15 @@ msgstr ""
 #: courts/templates/courts/list.jinja:35
 #, python-format
 msgid "Names starting with %(letter)s"
+msgstr ""
+
+#: courts/templates/courts/welsh_list.jinja:4
+#: courts/templates/courts/welsh_list.jinja:17
+msgid "Courts and Tribunals in Wales"
+msgstr ""
+
+#: courts/templates/courts/welsh_list.jinja:30
+msgid "View complete list of all venues in English"
 msgstr ""
 
 #: search/templates/search/address.jinja:3
@@ -735,10 +751,6 @@ msgstr ""
 
 #: staticpages/templates/staticpages/feedback_sent.jinja:14
 msgid "Thank you for your feedback"
-msgstr ""
-
-#: templates/400.html:8 templates/404.html:8 templates/500.html:8
-msgid "Court and tribunal finder"
 msgstr ""
 
 #: templates/400.html:11

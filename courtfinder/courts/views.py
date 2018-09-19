@@ -247,10 +247,10 @@ def leaflet(request, slug, leaflet_type):
     raise Http404('The requested leaflet does not exist.')
 
 
-def list_format_courts(courts):
+def list_format_courts(courts, translate=False):
     return [{
-        'name': court.name + " (%s)" % (court.name_cy)
-        if court.name_cy and display_court_in_welsh(court) else court.name,
+        'name': court.name_cy if translate and court.name_cy and display_court_in_welsh(court)
+                else court.name,
         'slug': court.slug,
         }
             for court in courts
@@ -263,4 +263,11 @@ def list(request, first_letter='A'):
         'letter': first_letter,
         'letters': string.ascii_uppercase,
         'courts': list_format_courts(Court.objects.filter(name__iregex=r'^'+first_letter).order_by('name')) if first_letter else None
+    })
+
+
+def welsh_list(request):
+    courts = Court.objects.filter(welsh_enabled=True).order_by('name')
+    return render(request, 'courts/welsh_list.jinja', {
+        'courts': list_format_courts(courts, True)
     })
