@@ -1,6 +1,8 @@
+import csv
 import json
 import forms
 import storage
+import datetime
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -10,6 +12,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms import modelformset_factory, ValidationError
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from geolocation import mapit
@@ -18,6 +21,7 @@ from django.views import View
 from .models import FacilityType, ContactType, OpeningType
 from ukpostcodeutils.validation import is_valid_postcode
 from django.template.loader import render_to_string
+
 
 @permission_required('emergency')
 def emergency_message(request):
@@ -43,6 +47,20 @@ def courts(request):
     return render(request, 'court/list.html', {
         'courts': models.Court.objects.order_by(order).all()
     })
+
+
+def courts_export(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="courts-%s.csv"' % datetime.datetime.now().date()
+
+    writer = csv.writer(response)
+    writer.writerow(['name', 'open', 'updated', 'areas of law', 'url'])
+    for c in models.Court.objects.order_by('name').all():
+        url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
+        aols = '|'.join(str(a) for a in c.areas_of_law.all())
+        updated = c.updated_at.date() if c.updated_at else 'n/a'
+        writer.writerow([c.name, 'open' if c.displayed else 'closed', updated, aols, url])
+    return response
 
 
 def courts_by_aol(request, aol):
