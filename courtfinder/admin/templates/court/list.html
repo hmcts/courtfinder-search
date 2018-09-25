@@ -1,7 +1,6 @@
 {% extends "admin.html" %}
 
 {% block page_title %}Courts and tribunals{% endblock %}
-
 {% block admin %}
   <div id="admin-index-page" class="content inner cf">
     <header class="page-header">
@@ -13,6 +12,7 @@
     <p>
       Sort by: <a href="?sort=name">name</a> | <a href="?sort=updated_at">last updated</a>
     </p>
+      <a class="right-link" href="{% url 'admin:courts_export' %}">download csv</a>
     <form>
       <p>
         <label>include closed</label>
@@ -23,6 +23,8 @@
         <input id="court-search-box" autocomplete="off" type="text">
       </p>
     </form>
+    <p>
+    </p>
     <table id="court-list">
       <tr>
         <th>name</th>
