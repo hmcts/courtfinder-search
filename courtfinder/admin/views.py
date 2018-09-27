@@ -56,10 +56,11 @@ def courts_export(request):
     writer = csv.writer(response)
     writer.writerow(['name', 'open', 'updated', 'areas of law', 'url'])
     for c in models.Court.objects.order_by('name').all():
-        url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
         aols = '|'.join(str(a) for a in c.areas_of_law.all())
         updated = c.updated_at.date() if c.updated_at else 'n/a'
-        writer.writerow([c.name, 'open' if c.displayed else 'closed', updated, aols, url])
+        url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
+        row = [c.name, 'open' if c.displayed else 'closed', str(updated), aols, url]
+        writer.writerow([s.encode('UTF8') for s in row])
     return response
 
 
