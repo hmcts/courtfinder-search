@@ -111,6 +111,13 @@ class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
         }
 
 
+class DeleteCourtForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Court
+        fields = ('name',)
+
+
 class CourtLocationForm(TranslatableCourtForm):
     welsh_fields = ['directions_cy']
 
