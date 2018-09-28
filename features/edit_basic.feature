@@ -30,3 +30,10 @@ Feature: Edit basic court information
     And I press "Update"
     And I view court in the new window
     Then I should see "This court or tribunal is no longer in service"
+
+  Scenario: Delete court
+    When I visit "/staff/court/7"
+    And I fill "name" with "Mayor's and City of London Court" in the form "delete-court"
+    And I press "Delete court"
+    Then I should see "`Mayor's and City of London Court` has been deleted"
+    And I should not see an element with xpath "/table/tr/td[text()='Mayor\'s and City of London Court']"

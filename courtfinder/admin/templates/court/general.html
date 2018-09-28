@@ -5,6 +5,15 @@
     <form class="court basic" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-      <input type="submit" class="button" value="Update" />
+        <input type="submit" class="button" value="Update" />
     </form>
+    {% if court and perms.court.delete %}
+    <h3>Delete court</h3>
+    <form id="delete-court" action="{% url 'admin:delete_court' id=court.id  %}" method="post">
+        <p>Re-enter the court name to confirm court deletion.</p>
+        {% csrf_token %}
+        {{ delete_form.as_p }}
+        <input class="secondary-button" type="submit" value="Delete court" />
+    </form>
+    {% endif %}
 {% endblock %}

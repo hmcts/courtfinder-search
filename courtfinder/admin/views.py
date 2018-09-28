@@ -126,7 +126,7 @@ def delete_user(request, username):
         messages.success(request, '`%s` has been deleted' % username)
         return redirect('admin:users')
     else:
-        messages.error(request, 'Could\'t delete user `%s`' % username)
+        messages.error(request, 'Couldn\'t delete user `%s`' % username)
         return redirect('admin:edit_user', username)
 
 
@@ -158,6 +158,7 @@ def new_court(request):
 def edit_court(request, id):
     court = get_object_or_404(models.Court, pk=id)
     form = forms.CourtBasicForm(request.POST, court, request.user.has_perm('court.info'), court.welsh_enabled)
+    delete_form = forms.DeleteCourtForm()
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, 'Court information updated')
@@ -165,8 +166,22 @@ def edit_court(request, id):
         return redirect('admin:court', id)
     return render(request, 'court/general.html', {
         'court': court,
-        'form': form
+        'delete_form': delete_form,
+        'form': form,
     })
+
+@permission_required('court.delete')
+@require_POST
+def delete_court(request, id):
+    court = get_object_or_404(models.Court, id=id)
+    delete_form = forms.DeleteCourtForm(request.POST)
+    if delete_form.is_valid() and court.name == delete_form.cleaned_data['name']:
+        court.delete()
+        messages.success(request, '`%s` has been deleted' % court.name)
+        return redirect('admin:courts')
+    else:
+        messages.error(request, 'Couldn\'t delete court')
+        return redirect('admin:court', id)
 
 
 def edit_types(request, id):
