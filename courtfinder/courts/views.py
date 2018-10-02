@@ -267,7 +267,7 @@ def list(request, first_letter='A'):
 
 
 def welsh_list(request):
-    courts = Court.objects.filter(welsh_enabled=True).order_by('name')
+    courts = Court.objects.filter(welsh_enabled=True).order_by('name_cy')
     return render(request, 'courts/welsh_list.jinja', {
         'courts': list_format_courts(courts, True)
     })
