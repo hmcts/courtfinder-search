@@ -134,6 +134,10 @@
 - model: search.areaoflaw
   pk: 9
   fields: {name: Money claims, external_link: null, external_link_desc: null}
+- model: search.areaoflaw
+  pk: 10
+  fields: {name: Tax, external_link: 'https://www.gov.uk/tax-tribunal', external_link_desc: Information
+   about tax tribunals}
 - model: search.facility
   pk: 1
   fields: {name: New-style facilities icon, description: <p>New-style facility icons
@@ -368,6 +372,9 @@
 - model: search.courtareaoflaw
   pk: 19
   fields: {court: 11, area_of_law: 9, single_point_of_entry: false}
+- model: search.courtareaoflaw
+  pk: 20
+  fields: {court: 11, area_of_law: 10, single_point_of_entry: false}
 - model: search.addresstype
   pk: 1
   fields: {name: Visiting}

@@ -493,6 +493,12 @@ class SearchTestCase(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
 
+    def test_tax_venues_link_in_search_results(self):
+        c = Client()
+        response = c.get('/search/results?aol=Tax&postcode=SE15+4PE')
+        self.assertEqual(200, response.status_code)
+        self.assertIn('https://www.gov.uk/tax-tribunal', response.content)
+
     def test_for_no_venue_links(self):
         c = Client()
         response = c.get('/search/results?aol=Bankruptcy&postcode=SE15+4PE')
