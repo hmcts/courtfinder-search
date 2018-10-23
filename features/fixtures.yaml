@@ -8211,6 +8211,10 @@
   pk: 15
   fields: {name: Probate, external_link: https%3A%2F%2Fwww.gov.uk%2Fwills-probate-inheritance,
     external_link_desc: Information about wills and probate}
+- model: search.areaoflaw
+  pk: 16
+  fields: {name: Tax, external_link: https%3A%2F%2Fwww.gov.uk%2Ftax-tribunal,
+    external_link_desc: Information about tax tribunals}
 - model: search.facility
   pk: 1
   fields: {name: Guide dogs, description: "<p>Guide dogs and helping dogs welcome</p>\r\n",
@@ -10887,6 +10891,9 @@
 - model: search.courtareaoflaw
   pk: 29
   fields: {court: 10, area_of_law: 6, single_point_of_entry: false}
+- model: search.courtareaoflaw
+  pk: 30
+  fields: {court: 10, area_of_law: 16, single_point_of_entry: false}
 - model: search.addresstype
   pk: 1
   fields: {name: Visiting}

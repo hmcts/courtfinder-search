@@ -33,7 +33,8 @@ areas_of_law_description = {
     _("Immigration"): _("seeking asylum, right to live in the UK and appealing deportation."),
     _("Money claims"): _("small claims, consumer, negligence and personal injury claims."),
     _("Probate"): _("will settlement and disputes."),
-    _("Social security"): _("problems with benefits, entitlement, assessment and decisions.")
+    _("Social security"): _("problems with benefits, entitlement, assessment and decisions."),
+    _("Tax"): _("appealing a tax decision.")
 }
 
 
