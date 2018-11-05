@@ -3,7 +3,7 @@ Django==1.11.16
 MarkupSafe==1.0
 django-moj-template==0.23.1
 psycopg2==2.7.1
-requests[security]==2.14.2
+requests[security]==2.20.0
 boto3==1.4.3
 python-dateutil==2.6
 raven==6.0.0
