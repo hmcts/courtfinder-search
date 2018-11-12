@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-19 10:00+0000\n"
+"POT-Creation-Date: 2018-11-12 12:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi."
 "gov.uk>, 2018\n"
@@ -26,17 +26,18 @@ msgstr ""
 msgid "Court and tribunal finder"
 msgstr "Gwasanaeth chwilio am lysoedd a thribiwnlysoedd "
 
-#: courtfinder/settings/base.py:153 courtfinder/settings/local.py:37
+#: courtfinder/settings/base.py:153 courtfinder/settings/local.py:33
 #: courtfinder/settings/production.py:41 courtfinder/settings/test.py:33
 msgid "English"
 msgstr "Saesneg"
 
-#: courtfinder/settings/local.py:38 courtfinder/settings/production.py:42
+#: courtfinder/settings/local.py:34 courtfinder/settings/production.py:42
 #: courtfinder/settings/test.py:34
 msgid "Welsh"
 msgstr "Cymraeg"
 
-#: courts/templates/courts/court.jinja:10 courts/templates/courts/list.jinja:14
+#: courts/templates/courts/court.jinja:10
+#: courts/templates/courts/list.jinja:14
 #: courts/templates/courts/welsh_list.jinja:10
 #: search/templates/search/address.jinja:8 search/templates/search/aol.jinja:9
 #: search/templates/search/courtcode.jinja:8
@@ -48,7 +49,8 @@ msgstr "Cymraeg"
 msgid "Home"
 msgstr "Cartref"
 
-#: courts/templates/courts/court.jinja:11 courts/templates/courts/list.jinja:15
+#: courts/templates/courts/court.jinja:11
+#: courts/templates/courts/list.jinja:15
 #: courts/templates/courts/welsh_list.jinja:11
 #: search/templates/search/address.jinja:9
 #: search/templates/search/courtcode.jinja:9
@@ -352,7 +354,8 @@ msgid "Continue"
 msgstr "Parhau"
 
 #: search/templates/search/aol.jinja:10 search/templates/search/index.jinja:3
-#: search/templates/search/index.jinja:13 search/templates/search/spoe.jinja:11
+#: search/templates/search/index.jinja:13
+#: search/templates/search/spoe.jinja:11
 msgid "Find the right court or tribunal"
 msgstr "Chwilio am y llys neu dribiwnlys cywir"
 
@@ -669,8 +672,7 @@ msgstr "Cyflogaeth "
 
 #: search/views.py:27
 msgid "workplace disputes including pay, redundancy and discrimination."
-msgstr ""
-"anghydfodau yn y gweithle gan gynnwys tâl, colli swydd a gwahaniaethu."
+msgstr "anghydfodau yn y gweithle gan gynnwys tâl, colli swydd a gwahaniaethu."
 
 #: search/views.py:28
 msgid "Forced marriage"
@@ -743,9 +745,17 @@ msgid "problems with benefits, entitlement, assessment and decisions."
 msgstr ""
 "problemau gyda'r hawl i hawlio, asesiadau a phenderfyniadau budd-daliadau."
 
+#: search/views.py:37
+msgid "Tax"
+msgstr "Treth"
+
+#: search/views.py:37
+msgid "appealing a tax decision."
+msgstr "apelio yn erbyn penderfyniad treth"
+
 #: staticpages/templates/staticpages/feedback.jinja:3
-#: staticpages/templates/staticpages/feedback_sent.jinja:3 templates/400.html:3
-#: templates/404.html:3 templates/500.html:3
+#: staticpages/templates/staticpages/feedback_sent.jinja:3
+#: templates/400.html:3 templates/404.html:3 templates/500.html:3
 msgid "Court and Tribunal Finder"
 msgstr "Gwasanaeth Chwilio am Lysoedd a Thribiwnlysoedd"
 
