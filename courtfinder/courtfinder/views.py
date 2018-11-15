@@ -17,3 +17,9 @@ def set_language(request):
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
 
     return response
+
+
+def cy_redirect(request):
+    response = http.HttpResponseRedirect(request.get_full_path()[3:])
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'cy')
+    return response

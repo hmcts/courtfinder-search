@@ -23,3 +23,11 @@ Feature: Access the website in English and Welsh
    #And I should not see "Please note that information provided for venues in England will not be available in Welsh."
     And I should not see "Nodwch os gwelwch yn dda na fydd gwybodaeth am leoliadau yn Lloegr ar gael yn Gymraeg."
 
+  Scenario: Link to Welsh content, check redirect and that the language switching still works
+    When I visit "/search/results?aol=Adoption&postcode=s1+1aa"
+    Then I should see "These are the 3 courts or tribunals nearest s1 1aa."
+    When I visit "/cy/search/results?aol=Adoption&postcode=s1+1aa"
+    Then I should see "Dyma'r 3 llys a thribiwnlys sydd agosaf at s1 1aa."
+    And the browser's URL should be "/search/results?aol=Adoption&postcode=s1+1aa"
+    When I press "English"
+    Then I should see "These are the 3 courts or tribunals nearest s1 1aa."

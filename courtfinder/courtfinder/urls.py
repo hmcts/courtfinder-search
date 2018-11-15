@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^staff/', include('admin.urls', namespace='admin')),
     url(r'^admin/', RedirectView.as_view(pattern_name='admin:courts', permanent=True)),
     url(r"^change-language/$", views.set_language, name="set_language"),
+    url(r"^cy/", views.cy_redirect, name="cy_redirect"),
 ]
