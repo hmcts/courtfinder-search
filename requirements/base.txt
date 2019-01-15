@@ -1,5 +1,5 @@
 six==1.11
-Django==1.11.16
+Django==1.11.18
 MarkupSafe==1.0
 django-moj-template==0.23.1
 psycopg2==2.7.1
