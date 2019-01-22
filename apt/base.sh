@@ -9,7 +9,7 @@ apt-get install --fix-missing -y --no-install-recommends \
         libssl-dev \
         postgis \
         postgresql-client \
-        python-dev \
+        python3-dev \
         python-pip \
         ruby \
         wget \
