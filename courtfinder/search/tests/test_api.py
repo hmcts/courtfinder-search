@@ -18,26 +18,9 @@ class SearchTestCase(TestCase):
     def tearDown(self):
         pass
 
-    def test_postcode(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-
-    def test_postcode_search(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE154UH&aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '"name": "Accrington Magistrates\' Court"')
-
     def test_address_search(self):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '"name": "Accrington Magistrates\' Court"')
-
-    def test_no_aol(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE154UH')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '"name": "Accrington Magistrates\' Court"')
 
