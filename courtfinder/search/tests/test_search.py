@@ -40,19 +40,19 @@ class SearchTestCase(TestCase):
     def test_format_results_with_postal_address(self):
         c = Client()
         response = c.get('/search/results?q=Accrington')
-        self.assertIn("Blackburn", response.content)
+        self.assertContains(response, "Blackburn")
 
     def test_search_space_in_name(self):
         c = Client()
         response = c.get('/search/results?q=Accrington+Magistrates')
-        self.assertIn("Accrington", response.content)
+        self.assertContains(response, "Accrington")
 
     def test_aol_page(self):
         c = Client()
         response = c.get('/search/aol')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/aol.jinja')
-        self.assertIn('About your issue', response.content)
+        self.assertContains(response, 'About your issue')
 
     def test_all_areas_of_law_have_descriptions(self):
         c = Client()
@@ -74,21 +74,21 @@ class SearchTestCase(TestCase):
         response = c.get('/search/spoe?aol=Children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('<h1>Children</h1>', response.content)
+        self.assertContains(response, '<h1>Children</h1>')
 
     def test_spoe_page_with_children_start_proceedings(self):
         c = Client()
         response = c.get('/search/spoe?aol=Children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('I want to start new proceedings', response.content)
+        self.assertContains(response, 'I want to start new proceedings')
 
     def test_spoe_page_with_children_in_contact(self):
         c = Client()
         response = c.get('/search/spoe?aol=Children')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('I am already in contact', response.content)
+        self.assertContains(response, 'I am already in contact')
 
     def test_spoe_page_with_children_in_contact_search_courts(self):
         c = Client()
@@ -109,35 +109,35 @@ class SearchTestCase(TestCase):
         response = c.get('/search/spoe?aol=Divorce')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('<h1>About your Divorce</h1>', response.content)
+        self.assertContains(response, '<h1>About your Divorce</h1>')
 
     def test_spoe_page_with_divorce_proceedings(self):
         c = Client()
         response = c.get('/search/spoe?aol=Divorce')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('I want to start proceedings', response.content)
+        self.assertContains(response, 'I want to start proceedings')
 
     def test_spoe_page_with_divorce_in_contact(self):
         c = Client()
         response = c.get('/search/spoe?aol=Divorce')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertIn('I am already in contact with a court', response.content)
+        self.assertContains(response, 'I am already in contact with a court')
 
     def test_spoe_page_with_divorce_postcode_start(self):
         c = Client()
         response = c.get('/search/postcode?aol=Divorce&spoe=start')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
-        self.assertIn('You will be directed to your Regional Divorce Centre.', response.content)
+        self.assertContains(response, 'You will be directed to your Regional Divorce Centre.')
 
     def test_spoe_page_with_divorce_postcode_continue(self):
         c = Client()
         response = c.get('/search/postcode?aol=Divorce&spoe=continue')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
-        self.assertIn('You will be directed to your Regional Divorce Centre.', response.content)
+        self.assertContains(response, 'You will be directed to your Regional Divorce Centre.')
 
     def test_spoe_page_with_divorce_in_contact_search_courts(self):
         c = Client()
@@ -157,7 +157,7 @@ class SearchTestCase(TestCase):
     def test_spoe_page_without_spoe(self):
         c = Client()
         response = c.get('/search/spoe?aol=Crime', follow=True)
-        self.assertIn('<h1>Enter postcode</h1>', response.content)
+        self.assertContains(response, '<h1>Enter postcode</h1>')
 
     def test_distance_search(self):
         c = Client()
@@ -168,7 +168,7 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?postcode=SE154UH&aol=Divorce')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Accrington',response.content)
+        self.assertContains(response, 'Accrington')
 
     def test_results_no_query(self):
         c = Client()
@@ -190,7 +190,7 @@ class SearchTestCase(TestCase):
         response = c.get('/search/postcode?aol=Housing possession')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
-        self.assertIn('<h1>Housing Possession</h1>', response.content)
+        self.assertContains(response, '<h1>Housing Possession</h1>')
 
     def test_sample_postcode_specific_aol(self):
         c = Client()
@@ -200,45 +200,44 @@ class SearchTestCase(TestCase):
     def test_bad_aol(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4UH&aol=doesntexist', follow=True)
-        self.assertEqual(response.status_code, 400)
-        self.assertIn('your browser sent a request',response.content)
+        self.assertContains(response, 'your browser sent a request', status_code=400)
 
     def test_inactive_court_is_not_displaying_in_address_search_results(self):
         c = Client()
         response = c.get('/search/results?q=Some+old', follow=True)
-        self.assertIn('<span id="number-of-results">1</span>', response.content)
+        self.assertContains(response, '<span id="number-of-results">1</span>')
 
     def test_address_search_single_inactive_court_result_redirects_to_closed_court(self):
         c = Client()
         response = c.get('/search/results?q=Some+old+closed+court', follow=True)
-        self.assertIn('alert', response.content)
+        self.assertContains(response, 'alert')
 
     def test_substring_should_not_match(self):
         c = Client()
         response = c.get('/search/results?q=ample2', follow=True)
-        self.assertIn('validation-error', response.content)
+        self.assertContains(response, 'validation-error')
 
     def test_too_much_whitespace_in_address_search(self):
         c = Client()
         response = c.get('/search/results?q=Accrington++++Magistrates', follow=True)
-        self.assertNotIn('validation-error', response.content)
+        self.assertNotContains(response, 'validation-error')
 
     def test_regexp_city_should_match(self):
         c = Client()
         response = c.get('/search/results?q=accrington', follow=True)
-        self.assertNotIn('validation-error', response.content)
+        self.assertNotContains(response, 'validation-error')
 
     def test_scottish_postcodes(self):
         c = Client()
         response = c.get('/search/results?postcode=G24PP&aol=All')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('<p id="scotland">', response.content)
+        self.assertContains(response, '<p id="scotland">')
         response = c.get('/search/results?postcode=AB10+7LY&aol=All')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('<p id="scotland">', response.content)
+        self.assertContains(response, '<p id="scotland">')
         response = c.get('/search/results?postcode=BA27AY&aol=All')
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn('<p id="scotland">', response.content)
+        self.assertNotContains(response, '<p id="scotland">')
 
     def test_redirect_directive_action(self):
         self.mock_mapit.side_effect = CourtSearchInvalidPostcode("MapIt doesn't know this postcode")
@@ -252,8 +251,7 @@ class SearchTestCase(TestCase):
         c = Client()
         with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
             response = c.get('/search/results.json?q=Accrington')
-            self.assertEquals(500, response.status_code)
-            self.assertIn("something went wrong", response.content)
+            self.assertContains(response, "something went wrong", status_code=500)
 
     def test_search_no_postcode_nor_q(self):
         c = Client()
@@ -295,13 +293,13 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?q=accrington+court')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Accrington Magistrates', response.content)
+        self.assertContains(response, 'Accrington Magistrates')
 
     def test_unordered_word_match(self):
         c = Client()
         response = c.get('/search/results?q=magistrates+court+accrington')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Accrington Magistrates', response.content)
+        self.assertContains(response, 'Accrington Magistrates')
 
     def test_empty_postcode(self):
         c = Client()
@@ -312,90 +310,90 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/results?aol=Divorce&spoe=continue&postcode=NW3+%25+au', follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('NW3  au', response.content)
+        self.assertContains(response, 'NW3  au')
 
     def test_ni(self):
         c = Client()
         response = c.get('/search/results?postcode=bt2+3rd&aol=Divorce', follow=True)
-        self.assertIn("this tool does not return results for Northern Ireland", response.content)
+        self.assertContains(response, "this tool does not return results for Northern Ireland")
 
     def test_money_claims(self):
         c = Client()
         response = c.get('/search/results?postcode=sw1h9aj&spoe=start&aol=Money+claims')
-        self.assertIn("CCMCC", response.content)
+        self.assertContains(response, "CCMCC")
 
     def test_money_claims_heading(self):
         c = Client()
         response = c.get('/search/spoe?aol=Money claims')
-        self.assertIn('<h1>About your money claim</h1>', response.content)
+        self.assertContains(response, '<h1>About your money claim</h1>')
 
     def test_money_claims_landing_page_option2(self):
         c = Client()
         response = c.get('/search/spoe?aol=Money claims')
-        self.assertIn('already have a claim', response.content)
+        self.assertContains(response, 'already have a claim')
 
     def test_money_claims_new_claim(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=start')
-        self.assertIn('<h1>For a new claim:</h1>', response.content)
+        self.assertContains(response, '<h1>For a new claim:</h1>')
 
     def test_money_claims_new_claim_ccmcc(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=start')
-        self.assertIn('courts/county-court-money-claims-centre-ccmcc', response.content)
+        self.assertContains(response, 'courts/county-court-money-claims-centre-ccmcc')
 
     def test_money_claims_existing(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
-        self.assertIn('<h1>For an existing claim:</h1>', response.content)
+        self.assertContains(response, '<h1>For an existing claim:</h1>')
 
     def test_money_claims_aol_has_nearest_court_option(self):
         c = Client()
         response = c.get('/search/spoe?aol=Money+claims')
-        self.assertIn('locate nearest county court for hearing', response.content)
+        self.assertContains(response, 'locate nearest county court for hearing')
 
     def test_money_claims_nearest_court_option(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=nearest')
-        self.assertIn('<h1>Enter postcode</h1>', response.content)
+        self.assertContains(response, '<h1>Enter postcode</h1>')
 
     def test_money_claims_nearest_court_option_enter_postcode(self):
         c = Client()
         response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
-        self.assertIn('Some old open court', response.content)
+        self.assertContains(response, 'Some old open court')
 
     def test_money_claims_nearest_court_option_enter_postcode_prefix_match(self):
         c = Client()
         response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
-        self.assertIn('No addresses', response.content)
+        self.assertContains(response, 'No addresses')
 
     def test_money_claims_nearest_court_option_enter_postcode_only_money_claims(self):
         c = Client()
         response = c.get('/search/results?aol=Money%20claims&spoe=nearest&postcode=CF373AF')
-        self.assertNotIn('Leaflet Magistrates Court', response.content)
+        self.assertNotContains(response, 'Leaflet Magistrates Court')
 
     def test_money_claims_existing_online(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
-        self.assertIn('That was previously entered online', response.content)
-        self.assertIn('https://www.gov.uk/make-money-claim-online', response.content)
+        self.assertContains(response, 'That was previously entered online')
+        self.assertContains(response, 'https://www.gov.uk/make-money-claim-online')
 
     def test_money_claims_existing_paper(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
-        self.assertIn('That was previously completed on paper', response.content)
-        self.assertIn('/courts/county-court-money-claims-centre-ccmcc', response.content)
+        self.assertContains(response, 'That was previously completed on paper')
+        self.assertContains(response, '/courts/county-court-money-claims-centre-ccmcc')
 
     def test_money_claims_existing_court_known(self):
         c = Client()
         response = c.get('/search/postcode?aol=Money claims&spoe=continue')
-        self.assertIn('If you know a local court is dealing with your claim', response.content)
-        self.assertIn('/courts/', response.content)
+        self.assertContains(response, 'If you know a local court is dealing with your claim')
+        self.assertContains(response, '/courts/')
 
     def test_ni_immigration(self):
         c = Client()
         response = c.get('/search/results?postcode=bt23rd&aol=Immigration', follow=True)
-        self.assertNotIn("this tool does not return results for Northern Ireland", response.content)
+        self.assertNotContains(response, "this tool does not return results for Northern Ireland")
 
     def test_court_postcodes(self):
         court = Court.objects.get(name="Accrington Magistrates' Court")
@@ -473,58 +471,58 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/search/datastatus')
         self.assertEqual(200, response.status_code)
-        self.assertIn('415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a', response.content)
+        self.assertContains(response, '415d49233b8592cf5195b33f0eddbdc86cebc72f2d575d392e941a53c085281a')
 
     def test_employment_venues_link_in_search_results(self):
         c = Client()
         response = c.get('/search/results?postcode=SE15+4PE&aol=Employment')
         self.assertEqual(200, response.status_code)
-        self.assertIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
+        self.assertContains(response, 'https://www.gov.uk/guidance/employment-tribunal-offices-and-venues')
 
     def test_child_support_venues_link_in_search_results(self):
         c = Client()
         response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
-        self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+        self.assertContains(response, 'http://sscs.venues.tribunals.gov.uk/venues/venues.htm')
 
     def test_social_security_venues_link_in_search_results(self):
         c = Client()
         response = c.get('/search/results?aol=Social+security&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
-        self.assertIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+        self.assertContains(response, 'http://sscs.venues.tribunals.gov.uk/venues/venues.htm')
 
     def test_tax_venues_link_in_search_results(self):
         c = Client()
         response = c.get('/search/results?aol=Tax&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
-        self.assertIn('https://www.gov.uk/tax-tribunal', response.content)
+        self.assertContains(response, 'https://www.gov.uk/tax-tribunal')
 
     def test_for_no_venue_links(self):
         c = Client()
         response = c.get('/search/results?aol=Bankruptcy&postcode=SE15+4PE')
         self.assertEqual(200, response.status_code)
-        self.assertNotIn('https://www.gov.uk/guidance/employment-tribunal-offices-and-venues', response.content)
-        self.assertNotIn('http://sscs.venues.tribunals.gov.uk/venues/venues.htm', response.content)
+        self.assertNotContains(response, 'https://www.gov.uk/guidance/employment-tribunal-offices-and-venues')
+        self.assertNotContains(response, 'http://sscs.venues.tribunals.gov.uk/venues/venues.htm')
         
     def test_gov_uk_links_exist(self):
         #Cannot use Accrington as it has AoLs hidden
         c = Client()
         response = c.get('/search/results?aol=Bankruptcy&postcode=SA79RB')
         self.assertEqual(200, response.status_code)
-        self.assertIn('https://www.gov.uk/bankruptcy', response.content)
-        self.assertIn('More information on bankruptcy.', response.content)
+        self.assertContains(response, 'https://www.gov.uk/bankruptcy')
+        self.assertContains(response, 'More information on bankruptcy.')
 
     def test_courts_cases_heard_hide_aols(self):
         c = Client()
         response = c.get('/search/results?q=Accrington+Magistrates')
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn('Cases heard at this venue', response.content)
+        self.assertNotContains(response, 'Cases heard at this venue')
 
     def test_courts_cases_heard_show_aols(self):
         c = Client()
         response = c.get('/search/results?q=Tameside+Magistrates')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Cases heard at this venue', response.content)
+        self.assertContains(response, 'Cases heard at this venue')
 
     def test_emergency_message_show(self):
         c = Client()
@@ -533,8 +531,8 @@ class SearchTestCase(TestCase):
 
         em = EmergencyMessage.objects.get()
         if em.show:
-            self.assertIn('Special notice', response.content)
-            self.assertIn(em.message, response.content)
+            self.assertContains(response, 'Special notice')
+            self.assertContains(response, em.message)
 
     def test_emergency_message_no_show(self):
         c = Client()
@@ -543,29 +541,29 @@ class SearchTestCase(TestCase):
 
         em = EmergencyMessage.objects.get()
         if not em.show:
-            self.assertNotIn('Special notice', response.content)
-            self.assertNotIn(em.message, response.content)
+            self.assertNotContains(response, 'Special notice')
+            self.assertNotContains(response, em.message)
 
     def test_search_court_location_code(self):
         c = Client()
         response = c.get('/search/results?courtcode=1725')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Accrington Magistrates&#39; Court", response.content)
-        self.assertNotIn("County Court Money Claims Centre (CCMCC)", response.content)
-        self.assertNotIn("Tameside Magistrates&#39; Court", response.content)
+        self.assertContains(response, "Accrington Magistrates&#39; Court")
+        self.assertNotContains(response, "County Court Money Claims Centre (CCMCC)")
+        self.assertNotContains(response, "Tameside Magistrates&#39; Court")
 
     def test_search_county_location_code(self):
         c = Client()
         response = c.get('/search/results?courtcode=244')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("County Court Money Claims Centre (CCMCC)", response.content)
-        self.assertNotIn("Accrington Magistrates&#39; Court", response.content)
-        self.assertNotIn("Tameside Magistrates&#39; Court", response.content)
+        self.assertContains(response, "County Court Money Claims Centre (CCMCC)")
+        self.assertNotContains(response, "Accrington Magistrates&#39; Court")
+        self.assertNotContains(response, "Tameside Magistrates&#39; Court")
 
     def test_search_magistrate_location_code(self):
         c = Client()
         response = c.get('/search/results?courtcode=1338')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Tameside Magistrates&#39; Court", response.content)
-        self.assertNotIn("Accrington Magistrates&#39; Court", response.content)
-        self.assertNotIn("County Court Money Claims Centre (CCMCC)", response.content)
+        self.assertContains(response, "Tameside Magistrates&#39; Court")
+        self.assertNotContains(response, "Accrington Magistrates&#39; Court")
+        self.assertNotContains(response, "County Court Money Claims Centre (CCMCC)")

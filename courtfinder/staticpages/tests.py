@@ -21,25 +21,21 @@ class SearchTestCase(TestCase):
         response = c.get('/', follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
-        self.assertInHTML('<title>Find the right court or tribunal</title>', response.content, count=1)
 
     def test_feedback_page_returns_correct_content(self):
         c = Client()
         response = c.get('/feedback')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'staticpages/feedback.jinja')
-        self.assertInHTML('<title>Court and Tribunal Finder - Feedback</title>', response.content, count=1)
 
     def test_api_doc_returns_correct_content(self):
         c = Client()
         response = c.get('/api')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'staticpages/api.jinja')
-        self.assertInHTML('<title>Find a court or tribunal - API - GOV.UK</title>', response.content, count=1)
         response = c.get('/api.html')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'staticpages/api.jinja')
-        self.assertInHTML('<title>Find a court or tribunal - API - GOV.UK</title>', response.content, count=1)
 
     def test_feedback_sent_page_returns_correct_content(self):
         with patch('django.core.mail.send_mail', Mock(return_value=2)):
@@ -55,7 +51,7 @@ class SearchTestCase(TestCase):
                               follow=True)
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
-            self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
+            self.assertContains(response, '<h1>Thank you for your feedback</h1>')
             response = c.post('/feedback_submit',
                               {
                                   'feedback_text': 'I like it',
@@ -64,7 +60,7 @@ class SearchTestCase(TestCase):
                               follow=True)
             self.assertEqual(response.status_code, 200)
             self.assertTemplateUsed(response, 'staticpages/feedback_sent.jinja')
-            self.assertInHTML('<h1>Thank you for your feedback</h1>', response.content, count=1)
+            self.assertContains(response, '<h1>Thank you for your feedback</h1>')
 
     def test_court_id_redirect(self):
         c = Client()

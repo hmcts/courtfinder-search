@@ -17,7 +17,7 @@ class CourtCodeTestCase(TestCase):
         response = c.get('/search/results?courtcode=123', follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn('validation-error', response.content)
+        self.assertContains(response, 'validation-error')
 
     def test_exists(self):
         c = Client()
@@ -25,5 +25,5 @@ class CourtCodeTestCase(TestCase):
         response = c.get('/search/results?courtcode=1725', follow=True)
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Accrington", response.content)
-        self.assertNotIn('validation-error', response.content)
+        self.assertContains(response, "Accrington")
+        self.assertNotContains(response, 'validation-error')
