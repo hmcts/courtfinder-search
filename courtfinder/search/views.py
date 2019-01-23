@@ -1,7 +1,6 @@
 import json
 import re
-from urllib import urlencode
-
+from urllib.parse import urlencode
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponseRedirect
@@ -12,7 +11,6 @@ from django.utils.translation import gettext as _
 from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules
-from urlparse import urlparse
 from core.welsh_utils import display_in_welsh, display_court_in_welsh, translate_attribute, translate_type
 
 

@@ -476,5 +476,5 @@ class AdminAOLForm(forms.ModelForm):
         clean_copy = cleaned_data.copy()
         uncoded_url = clean_copy.get('external_link', None)
         if uncoded_url:
-            clean_copy['external_link'] = urllib.quote(uncoded_url)
+            clean_copy['external_link'] = urllib.parse.quote(uncoded_url)
         return clean_copy

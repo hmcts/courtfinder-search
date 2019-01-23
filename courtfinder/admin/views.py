@@ -1,7 +1,7 @@
 import csv
 import json
-import forms
-import storage
+from . import forms
+from . import storage
 import datetime
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
@@ -375,7 +375,6 @@ class AddOrderableView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
-            print form
             self.prepared_form = form
             raise ValidationError("You are missing a required field")
         if "SaveAnother" in request.POST:
@@ -417,7 +416,6 @@ class OrderableFormView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
-            print formset.errors
             self.prepared_formset = formset
             raise ValidationError("You are missing a required field")
 

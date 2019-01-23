@@ -300,5 +300,5 @@ class Postcode():
         # Regex from: https://gist.github.com/simonwhitaker/5748515
         return bool(re.match(r'[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}', postcode.upper().replace(' ', '')))
 
-    def __unicode__( self ):
+    def __str__( self ):
         return self.postcode

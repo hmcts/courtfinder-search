@@ -1,4 +1,4 @@
-import views as admin_views
+from . import views as admin_views
 from django.conf import settings
 from django.shortcuts import redirect
 from django.utils import translation
