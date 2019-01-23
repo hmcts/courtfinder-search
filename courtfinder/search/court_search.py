@@ -282,8 +282,7 @@ class Postcode():
     def get_usage(self, headers):
         limit = headers.get('X-Quota-Limit')
         current = headers.get('X-Quota-Current')
-        percent = None
-
+        percent = 0
         if limit is not None and current is not None:
             try:
                 current = int(current)
