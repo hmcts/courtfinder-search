@@ -60,7 +60,7 @@ def courts_export(request):
         updated = c.updated_at.date() if c.updated_at else 'n/a'
         url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
         row = [c.name, 'open' if c.displayed else 'closed', str(updated), aols, url]
-        writer.writerow([s.encode('UTF8') for s in row])
+        writer.writerow(row)
     return response
 
 
