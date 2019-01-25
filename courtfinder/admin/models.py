@@ -11,7 +11,7 @@ class FacilityType(models.Model):
     image_file_path = models.CharField(max_length=255, null=True, blank=True)
     order = models.IntegerField(null=False, default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @property
@@ -23,7 +23,7 @@ class ContactType(models.Model):
     name = models.CharField(max_length=255)
     name_cy = models.CharField(max_length=255, blank=True, null=True, default=None)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -31,5 +31,5 @@ class OpeningType(models.Model):
     name = models.CharField(max_length=255)
     name_cy = models.CharField(max_length=255, blank=True, null=True, default=None)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

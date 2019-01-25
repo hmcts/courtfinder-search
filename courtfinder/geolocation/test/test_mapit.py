@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from geolocation import mapit
 from django.test import TestCase
 from mock import patch, MagicMock
@@ -16,13 +17,13 @@ class MapitTestCase(TestCase):
         get.assert_called_once_with('https://mapit.mysociety.org/xyz', headers={'X-Api-Key': None})
 
     def test_filter_postcode(self):
-        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda(s): True, 'SW1A 1AA'))
-        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda(s): True, 'sw1a 1aa'))
-        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda(s): True, ' sw1a 1aa '))
+        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda s: True, 'SW1A 1AA'))
+        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda s: True, 'sw1a 1aa'))
+        self.assertEqual('SW1A1AA', mapit.filter_postcode(lambda s: True, ' sw1a 1aa '))
 
     def test_filter_validate_exception(self):
         with self.assertRaises(mapit.InvalidPostcode):
-            mapit.filter_postcode(lambda(s): False, 'XXX')
+            mapit.filter_postcode(lambda s: False, 'XXX')
 
     @patch('geolocation.mapit.api_call')
     def test_postcode_call(self, api):

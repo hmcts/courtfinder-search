@@ -25,7 +25,7 @@ class SearchPageTestCase(TestCase):
         response = c.get('/search/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/index.jinja')
-        self.assertIn('Find the right court or tribunal', response.content)
+        self.assertContains(response, 'Find the right court or tribunal')
 
 
     def test_postcode_page(self):
@@ -33,4 +33,4 @@ class SearchPageTestCase(TestCase):
         response = c.get('/search/postcode?aol=Divorce&spoe=start')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/postcode.jinja')
-        self.assertIn('Enter postcode', response.content)
+        self.assertContains(response, 'Enter postcode')

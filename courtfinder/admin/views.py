@@ -1,7 +1,7 @@
 import csv
 import json
-import forms
-import storage
+from . import forms
+from . import storage
 import datetime
 from collections import OrderedDict as odict
 from django.contrib.auth.decorators import permission_required
@@ -60,7 +60,7 @@ def courts_export(request):
         updated = c.updated_at.date() if c.updated_at else 'n/a'
         url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
         row = [c.name, 'open' if c.displayed else 'closed', str(updated), aols, url]
-        writer.writerow([s.encode('UTF8') for s in row])
+        writer.writerow(row)
     return response
 
 
@@ -249,7 +249,7 @@ def locate_postcode(request, id):
             messages.success(request, 'Coordinates changed to %s, %s' % (court.lat, court.lon))
             court.update_timestamp()
         except mapit.MapitException as e:
-            messages.error(request, 'Geolocation failed: %s' % e.message)
+            messages.error(request, 'Geolocation failed: %s' % e)
     else:
         messages.error(request, 'Geolocation failed')
     return redirect('admin:location', id)
@@ -344,7 +344,7 @@ class BaseFormView(View):
         try:
             self.process_request(request)
         except ValidationError as e:
-            messages.error(request, e.message)
+            messages.error(request, e)
             error = True
         if error:
             return render(request, self.template, self.get_context_data())
@@ -375,7 +375,6 @@ class AddOrderableView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
-            print form
             self.prepared_form = form
             raise ValidationError("You are missing a required field")
         if "SaveAnother" in request.POST:
@@ -417,7 +416,6 @@ class OrderableFormView(BaseOrderableFormView):
             messages.success(request, self.update_message)
             self.court.update_timestamp()
         else:
-            print formset.errors
             self.prepared_formset = formset
             raise ValidationError("You are missing a required field")
 
@@ -1017,7 +1015,7 @@ class EditType(PermissionRequiredMixin, View):
             try:
                 self.save_form(instance)
             except ValidationError as e:
-                messages.error(request, e.message)
+                messages.error(request, e)
                 error = True
         else:
             messages.error(request, form.errors)

@@ -18,28 +18,11 @@ class SearchTestCase(TestCase):
     def tearDown(self):
         pass
 
-    def test_postcode(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE15+4UH&aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-
-    def test_postcode_search(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE154UH&aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
     def test_address_search(self):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
-
-    def test_no_aol(self):
-        c = Client()
-        response = c.get('/search/results.json?postcode=SE154UH')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('"name": "Accrington Magistrates\' Court"', response.content)
+        self.assertContains(response, '"name": "Accrington Magistrates\' Court"')
 
     def test_empty_query(self):
         c = Client()
@@ -49,11 +32,10 @@ class SearchTestCase(TestCase):
     def test_court_type(self):
         c = Client()
         response = c.get('/search/results.json?q=Accrington')
-        self.assertIn('Magistrates Court', response.content)
+        self.assertContains(response, 'Magistrates Court')
 
     def test_internal_error(self):
         c = Client()
         with patch('search.court_search.CourtSearch.get_courts', Mock(side_effect=CourtSearchError('something went wrong'))):
             response = c.get('/search/results.json?q=Accrington')
-            self.assertEquals(500, response.status_code)
-            self.assertIn("something went wrong", response.content)
+            self.assertContains(response, "something went wrong", status_code=500)

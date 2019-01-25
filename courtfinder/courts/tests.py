@@ -25,33 +25,33 @@ class SearchTestCase(TestCase):
         c = Client()
         response = c.get('/courts/tameside-magistrates-court')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Tameside", response.content)
+        self.assertContains(response, "Tameside")
 
     def test_sample_court_page_2(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Accrington", response.content)
+        self.assertContains(response, "Accrington")
 
     def test_court_list_a(self):
         c = Client()
         response = c.get('/courts/A')
-        self.assertIn("Names starting with A", response.content)
+        self.assertContains(response, "Names starting with A")
 
     def test_court_list_x_no_courts(self):
         c = Client()
         response = c.get('/courts/X')
-        self.assertIn("There are no courts or tribunals starting with X", response.content)
+        self.assertContains(response, "There are no courts or tribunals starting with X")
 
     def test_court_list_index(self):
         c = Client()
         response = c.get('/courts/')
-        self.assertIn("Select the first letter of the court's name", response.content)
+        self.assertContains(response, "Select the first letter of the court's name")
 
     def test_court_with_email_without_description(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
-        self.assertNotIn('<span property="contactType"></span>', response.content)
+        self.assertNotContains(response, '<span property="contactType"></span>')
 
     def test_court_emails_are_in_order(self):
         c = Client()
@@ -79,125 +79,124 @@ class SearchTestCase(TestCase):
     def test_alert_visible(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
-        self.assertNotIn('class="alert"', response.content)
+        self.assertNotContains(response, 'class="alert"')
 
     def test_alert_whitespace(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-court')
-        self.assertIn('class="alert"', response.content)
+        self.assertContains(response, 'class="alert"')
 
     def test_court_404(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-c0urt')
-        self.assertEquals(404, response.status_code)
-        self.assertIn('Page not found',response.content)
+        self.assertContains(response, 'Page not found', status_code=404)
 
     def inactive_court_shows_inactive(self):
         c = Client()
         response = c.get('/courts/old-court-no-longer-in-use')
         self.assertEquals(200, response.status_code)
-        self.assertIn('This court or tribunal is no longer in service.',response.content)
+        self.assertContains(response, 'This court or tribunal is no longer in service.')
 
     def test_courts_cases_heard_hide_aols(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn('Cases heard at this venue', response.content)
+        self.assertNotContains(response, 'Cases heard at this venue')
 
     def test_courts_cases_heard_show_aols(self):
         c = Client()
         response = c.get('/courts/tameside-magistrates-court')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Cases heard at this venue', response.content)
+        self.assertContains(response, 'Cases heard at this venue')
 
     def test_contact_show_explanation(self):
         c = Client()
         response = c.get('/courts/old-open-court-still-in-use')
-        self.assertIn('Test explanation', response.content)
+        self.assertContains(response, 'Test explanation')
 
     def test_no_addresses(self):
         c = Client()
         response = c.get('/courts/no-addresses')
-        self.assertNotIn('Visit us:', response.content)
-        self.assertNotIn('Write to us:', response.content)
-        self.assertNotIn('Visit or write to us', response.content)
-        self.assertNotIn('Maps and directions', response.content)
+        self.assertNotContains(response, 'Visit us:')
+        self.assertNotContains(response, 'Write to us:')
+        self.assertNotContains(response, 'Visit or write to us')
+        self.assertNotContains(response, 'Maps and directions')
 
     def test_visit_address(self):
         c = Client()
         response = c.get('/courts/visiting-address')
-        self.assertIn('Visit us:', response.content)
-        self.assertNotIn('Write to us:', response.content)
-        self.assertNotIn('Visit or write to us', response.content)
-        self.assertIn('Maps and directions', response.content)
+        self.assertContains(response, 'Visit us:')
+        self.assertNotContains(response, 'Write to us:')
+        self.assertNotContains(response, 'Visit or write to us')
+        self.assertContains(response, 'Maps and directions')
 
     def test_postal_address(self):
         c = Client()
         response = c.get('/courts/postal-address')
-        self.assertNotIn('Visit us:', response.content)
-        self.assertIn('Write to us:', response.content)
-        self.assertNotIn('Visit or write to us', response.content)
-        self.assertNotIn('Maps and directions', response.content)
+        self.assertNotContains(response, 'Visit us:')
+        self.assertContains(response, 'Write to us:')
+        self.assertNotContains(response, 'Visit or write to us')
+        self.assertNotContains(response, 'Maps and directions')
 
     def test_both_address(self):
         c = Client()
         response = c.get('/courts/both-postal-and-visiting-addresses')
-        self.assertIn('Visit us:', response.content)
-        self.assertIn('Write to us:', response.content)
-        self.assertNotIn('Visit or write to us', response.content)
-        self.assertIn('Maps and directions', response.content)
+        self.assertContains(response, 'Visit us:')
+        self.assertContains(response, 'Write to us:')
+        self.assertNotContains(response, 'Visit or write to us')
+        self.assertContains(response, 'Maps and directions')
 
     def test_postal_and_visit_address(self):
         c = Client()
         response = c.get('/courts/postal-and-visiting-address')
-        self.assertNotIn('Visit us:', response.content)
-        self.assertIn('Visit or write to us', response.content)
-        self.assertIn('Maps and directions', response.content)
+        self.assertNotContains(response, 'Visit us:')
+        self.assertContains(response, 'Visit or write to us')
+        self.assertContains(response, 'Maps and directions')
 
     def test_leaflet_links_for_magistrates_court(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
             response = c.get('/courts/leaflet-magistrates-court')
-            self.assertIn('Venue details for printing', response.content)
-            self.assertIn('Witness for prosecution information for printing', response.content)
-            self.assertIn('Witness for defence information for printing', response.content)
-            self.assertNotIn('Juror information for printing', response.content)
+            self.assertContains(response, 'Venue details for printing')
+            self.assertContains(response, 'Witness for prosecution information for printing')
+            self.assertContains(response, 'Witness for defence information for printing')
+            self.assertNotContains(response, 'Juror information for printing')
 
     def test_leaflet_links_for_crown_courts(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
             response = c.get('/courts/leaflet-crown-court')
-            self.assertIn('Venue details for printing', response.content)
-            self.assertIn('Witness for prosecution information for printing', response.content)
-            self.assertIn('Witness for defence information for printing', response.content)
-            self.assertIn('Juror information for printing', response.content)
+            self.assertContains(response, 'Venue details for printing')
+            self.assertContains(response, 'Witness for prosecution information for printing')
+            self.assertContains(response, 'Witness for defence information for printing')
+            self.assertContains(response, 'Juror information for printing')
 
     def test_leaflet_links_for_non_magistrate_or_non_crown_courts(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
             response = c.get('/courts/county-court-money-claims-centre-ccmcc')
-            self.assertIn('Venue details for printing', response.content)
-            self.assertNotIn('Witness for prosecution information for printing', response.content)
-            self.assertNotIn('Witness for defence information for printing', response.content)
-            self.assertNotIn('Juror information for printing', response.content)
+            self.assertContains(response, 'Venue details for printing')
+            self.assertNotContains(response, 'Witness for prosecution information for printing')
+            self.assertNotContains(response, 'Witness for defence information for printing')
+            self.assertNotContains(response, 'Juror information for printing')
 
     def test_court_image_url_is_based_on_settings(self):
         with self.settings(COURT_IMAGE_BASE_URL='http://example.com/images/'):
             c = Client()
             response = c.get('/courts/tameside-magistrates-court')
-            self.assertIn("http://example.com/images/tameside_magistrates_court.jpg", response.content)
+            self.assertContains(response, "http://example.com/images/tameside_magistrates_court.jpg")
 
     def test_leaflet_section_shown_when_enabled(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=True):
             c = Client()
             response = c.get('/courts/leaflet-magistrates-court')
-            self.assertIn('Leaflets for printing', response.content)
+            self.assertContains(response, 'Leaflets for printing')
 
     def test_leaflet_section_not_shown_when_disabled(self):
         with self.settings(FEATURE_LEAFLETS_ENABLED=False):
             c = Client()
             response = c.get('/courts/leaflet-magistrates-court')
-            self.assertNotIn('Leaflets for printing', response.content)
+            self.assertNotContains(response, 'Leaflets for printing')
 
     def test_court_opening_times_are_ordered(self):
         client = Client()
@@ -225,9 +224,9 @@ class SearchTestCase(TestCase):
     def test_jury_servive_link_not_shown_on_non_crown_court(self):
         c = Client()
         response = c.get('/courts/accrington-magistrates-court')
-        self.assertNotIn('About jury service', response.content)
+        self.assertNotContains(response, 'About jury service')
 
     def test_jury_service_link_shown_on_crown_court(self):
         c = Client()
         response = c.get('/courts/leaflet-crown-court')
-        self.assertIn('About jury service', response.content)
+        self.assertContains(response, 'About jury service')
