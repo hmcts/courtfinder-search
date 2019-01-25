@@ -249,7 +249,7 @@ def locate_postcode(request, id):
             messages.success(request, 'Coordinates changed to %s, %s' % (court.lat, court.lon))
             court.update_timestamp()
         except mapit.MapitException as e:
-            messages.error(request, 'Geolocation failed: %s' % e.message)
+            messages.error(request, 'Geolocation failed: %s' % e)
     else:
         messages.error(request, 'Geolocation failed')
     return redirect('admin:location', id)
@@ -344,7 +344,7 @@ class BaseFormView(View):
         try:
             self.process_request(request)
         except ValidationError as e:
-            messages.error(request, e.message)
+            messages.error(request, e)
             error = True
         if error:
             return render(request, self.template, self.get_context_data())
@@ -1015,7 +1015,7 @@ class EditType(PermissionRequiredMixin, View):
             try:
                 self.save_form(instance)
             except ValidationError as e:
-                messages.error(request, e.message)
+                messages.error(request, e)
                 error = True
         else:
             messages.error(request, form.errors)
