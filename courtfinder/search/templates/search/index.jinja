@@ -18,6 +18,9 @@
         {{emergency_message|safe}}
       </div>
     {% endif %}
+    <div id="index_extra_information_message">
+        <span>{% trans "Find contact details for court and tribunal venues" %}</span>
+    </div>
     <form class="form-block" method="get" action="{% url 'search:searchby' %}">
       <div class="options">
         <div class="main-option">
