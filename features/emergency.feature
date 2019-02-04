@@ -11,7 +11,6 @@ Feature: Edit home page emergency message
     And I press "Update"
     Then I should see "Emergency message updated"
     When I visit "/search"
-    And I should see "Special notice:"
     And I should see "Testing emergency message!"
 
   Scenario: Edit welsh emergency message
@@ -29,5 +28,4 @@ Feature: Edit home page emergency message
     And I press "Update"
     Then I should see "The message is now *hidden*"
     When I visit "/search"
-    And I should not see "Special notice:"
     And I should not see "Testing emergency message!"

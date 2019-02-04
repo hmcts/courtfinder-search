@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-28 13:45+0000\n"
+"POT-Creation-Date: 2019-02-07 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi."
 "gov.uk>, 2018\n"
@@ -102,7 +102,7 @@ msgid "Search by postcode"
 msgstr "Chwilio yn ôl cod post"
 
 #: courts/templates/courts/court.jinja:31
-#: search/templates/search/index.jinja:42
+#: search/templates/search/index.jinja:41
 msgid "A-Z list of all courts"
 msgstr "Rhestr A-Y o'r holl lysoedd"
 
@@ -393,31 +393,27 @@ msgstr "Cod lleoliad y Llys Sirol"
 msgid "Magistrates' Court location code"
 msgstr "Cod lleoliad y Llys Ynadon"
 
-#: search/templates/search/index.jinja:17
-msgid "Special notice:"
-msgstr "Hysbysiad arbennig:"
+#: search/templates/search/index.jinja:21
+msgid "Use this service to find contact details for court and tribunal venues."
+msgstr "Defnyddiwch y gwasanaeth hwn i ddod o hyd i fanylion cyswllt Llysoedd a Thribiwnlysoedd"
 
-#: search/templates/search/index.jinja:22
-msgid "Find contact details for court and tribunal venues"
-msgstr "Manylion cyswllt llysoedd a thribiwnlysoedd"
-
-#: search/templates/search/index.jinja:27
-msgid "Search by :"
+#: search/templates/search/index.jinja:26
+msgid "Search by:"
 msgstr "Chwilio yn ôl:"
 
-#: search/templates/search/index.jinja:32
+#: search/templates/search/index.jinja:31
 msgid "The Area of Law I am interested in (recommended)"
 msgstr "Maes y Gyfraith y mae gennyf ddiddordeb ynddo (argymhellir)"
 
-#: search/templates/search/index.jinja:37
+#: search/templates/search/index.jinja:36
 msgid "Court Name or Address"
 msgstr "Enw neu Gyfeiriad y Llys"
 
-#: search/templates/search/index.jinja:47
+#: search/templates/search/index.jinja:46
 msgid "Court location code"
 msgstr "Cod lleoliad y Llys"
 
-#: search/templates/search/index.jinja:50
+#: search/templates/search/index.jinja:49
 msgid "Next"
 msgstr "Nesaf"
 
@@ -853,3 +849,6 @@ msgstr "Cwcis"
 #: templates/layout/base.jinja:36
 msgid "Contact"
 msgstr "Cysylltu"
+
+#~ msgid "Special notice:"
+#~ msgstr "Hysbysiad arbennig:"
