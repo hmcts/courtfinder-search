@@ -8,6 +8,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.views.defaults import bad_request
 from django.utils.translation import gettext as _
 
+
 from search.models import Court, AreaOfLaw, DataStatus, EmergencyMessage
 from search.court_search import CourtSearch, CourtSearchError, CourtSearchClientError, CourtSearchInvalidPostcode
 from search.rules import Rules

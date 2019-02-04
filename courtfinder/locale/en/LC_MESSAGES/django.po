@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-28 13:45+0000\n"
+"POT-Creation-Date: 2019-02-07 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,7 +98,7 @@ msgid "Search by postcode"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:31
-#: search/templates/search/index.jinja:42
+#: search/templates/search/index.jinja:41
 msgid "A-Z list of all courts"
 msgstr ""
 
@@ -369,31 +369,27 @@ msgstr ""
 msgid "Magistrates' Court location code"
 msgstr ""
 
-#: search/templates/search/index.jinja:17
-msgid "Special notice:"
+#: search/templates/search/index.jinja:21
+msgid "Use this service to find contact details for court and tribunal venues."
 msgstr ""
 
-#: search/templates/search/index.jinja:22
-msgid "Find contact details for court and tribunal venues"
+#: search/templates/search/index.jinja:26
+msgid "Search by:"
 msgstr ""
 
-#: search/templates/search/index.jinja:27
-msgid "Search by :"
-msgstr ""
-
-#: search/templates/search/index.jinja:32
+#: search/templates/search/index.jinja:31
 msgid "The Area of Law I am interested in (recommended)"
 msgstr ""
 
-#: search/templates/search/index.jinja:37
+#: search/templates/search/index.jinja:36
 msgid "Court Name or Address"
 msgstr ""
 
-#: search/templates/search/index.jinja:47
+#: search/templates/search/index.jinja:46
 msgid "Court location code"
 msgstr ""
 
-#: search/templates/search/index.jinja:50
+#: search/templates/search/index.jinja:49
 msgid "Next"
 msgstr ""
 

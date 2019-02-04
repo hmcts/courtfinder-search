@@ -70,7 +70,6 @@ $small-width: 800px;
 
 .options {
 
-  margin-top: 2em;
 
   .main-option {
     @include media($min-width: $small-width) {
@@ -492,25 +491,19 @@ section.closedCourt
 
 }
 
-#emergency_message {
-  &:before{
-    content: url("../images/icon-important.png");
-    position: relative;
-    bottom: -6.5px;
-    text-align: 10px;
-    @include device-pixel-ratio() {
-      background-image: url("../images/icon-important.png");
-      background-size: 100%;
-    }
-  }
-}
+
   #emergency_message_box{
    
     background-color: #fef7f7;
     clear: both;
     border: 3px solid #df3034;
-    padding: 30px;
-    font-size: xx-large;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 70%;
+  }
+
+  #index_extra_information_message{
+    padding-top: 20px;
   }
 
 .language-switcher {

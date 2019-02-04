@@ -14,17 +14,16 @@
     </header>
     {% if show %}
       <div id='emergency_message_box'>
-        <label id='emergency_message' for='emergency_message'>{% trans "Special notice:" %}</label>
         {{emergency_message|safe}}
       </div>
     {% endif %}
     <div id="index_extra_information_message">
-        <span>{% trans "Find contact details for court and tribunal venues" %}</span>
+        <span>{% trans "Use this service to find contact details for court and tribunal venues." %}</span>
     </div>
     <form class="form-block" method="get" action="{% url 'search:searchby' %}">
       <div class="options">
         <div class="main-option">
-          {% trans "Search by :" %}
+          {% trans "Search by:" %}
           <ul>
             <li>
               <label>
