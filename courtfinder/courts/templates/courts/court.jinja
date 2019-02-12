@@ -245,6 +245,9 @@
       <br/>
       <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure"
          title="{% trans "Information on providing feedback about our services and making a complaint." %}">{% trans "Make a complaint" %}</a>
+      <br/>
+      <a href="https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/equality-and-diversity{% ifequal LANGUAGE_CODE "cy" %}.cy{% endifequal %}"
+         title="{% trans "Equality and diversity" %}">{% trans "Equality and diversity" %}</a>
       {% if 'Crown Court' in court.types %}
       <br/>
       <a href="https://www.gov.uk/jury-service">{% trans "About jury service" %}</a>
