@@ -206,6 +206,10 @@ class CourtAddress(models.Model):
     def __str__(self):
         return "%s for %s is %s, %s, %s" % (self.address_type.name, self.court.name, self.address, self.postcode, self.town_name)
 
+    def line(self):
+        lines = self.address.splitlines()
+        return "%s, %s, %s" % (', '.join(lines), self.town_name, self.postcode)
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=255)

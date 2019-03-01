@@ -54,12 +54,16 @@ def courts_export(request):
     response['Content-Disposition'] = 'attachment; filename="courts-%s.csv"' % datetime.datetime.now().date()
 
     writer = csv.writer(response)
-    writer.writerow(['name', 'open', 'updated', 'areas of law', 'url'])
+    writer.writerow(['name', 'open', 'updated', 'address', 'areas of law', 'url'])
     for c in models.Court.objects.order_by('name').all():
-        aols = '|'.join(str(a) for a in c.areas_of_law.all())
+        aols = ', '.join(str(a) for a in c.areas_of_law.all())
         updated = c.updated_at.date() if c.updated_at else 'n/a'
         url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
-        row = [c.name, 'open' if c.displayed else 'closed', str(updated), aols, url]
+
+        a = c.courtaddress_set.first()
+        address = a.line() if a else ''
+
+        row = [c.name, 'open' if c.displayed else 'closed', str(updated), address, aols, url]
         writer.writerow(row)
     return response
 
