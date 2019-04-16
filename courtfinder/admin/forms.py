@@ -265,7 +265,7 @@ class CourtOpeningForm(TranslatableCourtForm):
 
     type = forms.ModelChoiceField(queryset=OpeningType.objects.all().distinct('name'), required=True,
                                   to_field_name='name')
-    hours = forms.CharField(required=True, max_length=255)
+    hours = forms.CharField(required=False, max_length=255)
 
     class Meta:
         model = models.OpeningTime
