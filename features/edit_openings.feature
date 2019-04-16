@@ -26,13 +26,14 @@ Feature: Edit opening times for a given court
     And I view court in the new window
     Then I should not see "Counter open: 5am - 5pm"
 
-  Scenario: No hours validation for existing opening
+  Scenario: No validation for no hours for existing opening
     When I clear field "form-0-hours"
     And I press "Update"
-    Then I should see "This field is required"
+    And I view court in the new window
+    Then I should see "Court counter closed"
 
   Scenario: No hours validation for new opening
     When I visit "/staff/court/1/add_opening_times"
     And I select "Fixed penalty office" from "id_type"
     And I press "Save"
-    Then "hours" should be marked as required
+    Then I should not see "This field is required"
