@@ -8,7 +8,7 @@ COPY apt/ ./apt
 COPY package.json gulpfile.js ./
 COPY docker/ ./docker
 COPY courtfinder/assets-src/ ./courtfinder/assets-src
-RUN  apt-get clean && apt-get update && apt-get upgrade -f
+RUN  apt-get clean -y && apt-get update -y && apt-get upgrade -f -y
       && ./apt/production.sh \
       && ./docker/setup_npm.sh && npm run gulp && rm -rf ./node_modules \
       && apt-get purge -y --auto-remove ruby npm nodejs \
