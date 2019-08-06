@@ -453,9 +453,11 @@ class AdminOpeningTypeForm(forms.ModelForm):
 class AdminAOLForm(forms.ModelForm):
     class Meta:
         model = models.AreaOfLaw
-        fields = ['name', 'external_link', 'external_link_cy', 'external_link_desc', 'external_link_desc_cy']
+        fields = ['name', 'alt_name', 'alt_name_cy', 'external_link', 'external_link_cy', 'external_link_desc', 'external_link_desc_cy']
         labels = {
             'name_cy': 'Name (Welsh)',
+            'alt_name': 'Alternative name',
+            'alt_name_cy': 'Alternative name (Welsh)',
             'external_link_cy': 'External link (Welsh)',
             'external_link_desc_cy': 'External link desc (Welsh)',
             }

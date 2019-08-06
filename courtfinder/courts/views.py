@@ -105,10 +105,10 @@ def format_court(court):
     aols = [
         {
             #Displayed text concatenates the type with the hours
-            'name': aol.name,
+            'name': aol.name if not aol.alt_name else translate_type(AreaOfLaw, aol.alt_name, display_in_welsh(), 'alt_name'),
             'external_link': aol.external_link,
-            'display_url': aol.display_url_cy if display_court_in_welsh(court) else aol.display_url,
-            'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc, welsh,
+            'display_url': aol.display_url_cy if display_in_welsh() else aol.display_url,
+            'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc, display_in_welsh(),
                                                  'external_link_desc')
         }
         for aol in court.areas_of_law.all().order_by("name")

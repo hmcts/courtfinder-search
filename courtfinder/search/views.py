@@ -257,7 +257,7 @@ def __format_results(results):
 
         areas_of_law = [
         {
-            'name': aol.name,
+            'name': aol.name if not aol.alt_name else translate_type(AreaOfLaw, aol.alt_name, display_in_welsh(), 'alt_name'),
             'external_link': aol.external_link,
             'display_url': aol.display_url_cy if display_in_welsh() else aol.display_url,
             'external_link_desc': translate_type(AreaOfLaw, aol.external_link_desc,
