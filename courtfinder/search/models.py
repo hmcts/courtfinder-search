@@ -86,6 +86,8 @@ class CourtPostcode(models.Model):
 
 class AreaOfLaw(models.Model):
     name = models.CharField(max_length=255)
+    alt_name = models.CharField(max_length=255, blank=True, null=True)
+    alt_name_cy = models.CharField(max_length=255, blank=True, null=True)
     external_link = models.CharField(null=True, max_length=2048)
     external_link_cy = models.CharField(blank=True, null=True, default=None, max_length=2048)
     external_link_desc = models.CharField(null=True, max_length=255)
