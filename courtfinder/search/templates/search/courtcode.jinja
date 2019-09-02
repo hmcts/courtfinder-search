@@ -1,6 +1,6 @@
 {% extends "layout/base.jinja" %}
 {% load i18n %}
-{% block page_title %}{% trans "Search by Court location code" %}{% endblock %}
+{% block page_title %}{% if error %}{% trans "Error" %}: {% endif %}{% trans "Search by Court location code" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">

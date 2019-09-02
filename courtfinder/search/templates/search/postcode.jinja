@@ -1,7 +1,7 @@
 {% extends "layout/base.jinja" %}
 {% load static %}
 {% load i18n %}
-{% block page_title %}{% trans "Enter postcode" %}{% endblock %}
+{% block page_title %}{% if error %}{% trans "Error" %}: {% endif %}{% trans "Enter postcode" %}{% endblock %}
 
 {% block content %}
 <div id="global-breadcrumb" class="header-context">
