@@ -10,7 +10,7 @@ class Rules:
     by_proximity = ['Crime', 'Domestic violence', 'Forced marriage', 'Probate', 'Tax']
     by_local_authority = ['Adoption', 'Children', 'Divorce', 'Civil partnership']
     by_postcode = ['Bankruptcy', 'Housing possession', 'Money claims']
-    has_spoe = ['Children', 'Divorce', 'Money claims', 'Civil partnership']
+    has_spoe = ['Divorce', 'Money claims', 'Civil partnership']
 
 
     @staticmethod
