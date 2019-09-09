@@ -69,13 +69,6 @@ class SearchTestCase(TestCase):
         response = c.get('/search/aol')
         self.assertEqual(response.status_code, 200)
 
-    def test_spoe_page_with_has_spoe(self):
-        c = Client()
-        response = c.get('/search/spoe?aol=Divorce')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/spoe.jinja')
-        self.assertContains(response, '<h1>Divorce</h1>')
-
     def test_spoe_page_with_children_in_contact_search_courts(self):
         c = Client()
         response = c.get('/search/searchbyPostcodeOrCourtList?aol=Children&spoe=continue', follow=True)
