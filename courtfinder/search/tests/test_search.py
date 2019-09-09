@@ -479,12 +479,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertContains(response, 'https://www.gov.uk/guidance/employment-tribunal-offices-and-venues')
 
-    def test_child_support_venues_link_in_search_results(self):
-        c = Client()
-        response = c.get('/search/results?aol=Children&spoe=continue&postcode=SE15+4PE')
-        self.assertEqual(200, response.status_code)
-        self.assertContains(response, 'http://sscs.venues.tribunals.gov.uk/venues/venues.htm')
-
     def test_social_security_venues_link_in_search_results(self):
         c = Client()
         response = c.get('/search/results?aol=Social+security&postcode=SE15+4PE')
