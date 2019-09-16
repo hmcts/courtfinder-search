@@ -140,6 +140,7 @@ class CourtSearch:
         p = self.postcode.postcode.lower().replace(' ', '')
         results = CourtPostcode.objects \
                 .filter(court__areas_of_law=area_of_law) \
+                .filter(court__displayed=True) \
                 .extra(where=["%s LIKE lower(postcode) || '%%'"], params=[p]) \
                 .distinct('court')
 
