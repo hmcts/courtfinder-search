@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 14:09+0000\n"
+"POT-Creation-Date: 2019-09-25 13:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Welsh Language Unit <welsh.language.unit.manager@hmcts.gsi."
 "gov.uk>, 2018\n"
@@ -293,22 +293,25 @@ msgid "View complete list of all venues in English"
 msgstr "Rhestr lawn o'r holl leoliadau yn Saesneg"
 
 #: search/templates/search/address.jinja:3
-#: search/templates/search/address.jinja:14
-#: search/templates/search/results.jinja:15
-msgid "Search by name or address"
-msgstr "Chwilio yn ôl enw neu gyfeiriad"
-
 #: search/templates/search/address.jinja:19
 #: search/templates/search/address.jinja:24
 #: search/templates/search/aol.jinja:19
+#: search/templates/search/courtcode.jinja:3
 #: search/templates/search/courtcode.jinja:19
 #: search/templates/search/courtcode.jinja:24
+#: search/templates/search/postcode.jinja:4
 #: search/templates/search/postcode.jinja:37
 #: search/templates/search/postcode.jinja:43
 #: search/templates/search/postcode.jinja:48 templates/400.html:3
 #: templates/404.html:3 templates/500.html:3
 msgid "Error"
 msgstr "Gwall"
+
+#: search/templates/search/address.jinja:3
+#: search/templates/search/address.jinja:14
+#: search/templates/search/results.jinja:15
+msgid "Search by name or address"
+msgstr "Chwilio yn ôl enw neu gyfeiriad"
 
 #: search/templates/search/address.jinja:20
 #: search/templates/search/courtcode.jinja:20
@@ -850,6 +853,10 @@ msgid "Cookies"
 msgstr "Cwcis"
 
 #: templates/layout/base.jinja:36
+msgid "Privacy"
+msgstr "Preifatrwydd"
+
+#: templates/layout/base.jinja:37
 msgid "Contact"
 msgstr "Cysylltu"
 
