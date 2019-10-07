@@ -22,7 +22,7 @@ pr:
       - feature/*
 
 variables:
-  application.name: 'hwf-staff'
+  application.name: 'court-finder'
   azure.subscription.endpoint: 'hmcts-pet'
   manual.branch.prefix: 'master'
 
