@@ -28,8 +28,8 @@ variables:
 
 resources:
   containers:
-  - container: my_container
-    image: python:3.6
+  # - container: my_container
+  #   image: python:3.6
   - container: postgres
     image: postgres:9.4.3
     ports:
@@ -40,7 +40,7 @@ jobs:
 
     pool:
       name: hmcts-pet
-    container: my_container
+    # container: my_container
 
     services:
       postgres: postgres
