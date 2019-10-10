@@ -29,8 +29,9 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: python:3.6
-    options: --entrypoint "/bin/bash"
+    image: ubuntu:16.04
+    # image: python:3.6
+    # options: --entrypoint "/bin/ls"
   - container: postgres
     image: postgres:9.6
     ports:
