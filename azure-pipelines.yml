@@ -28,10 +28,10 @@ variables:
 
 resources:
   containers:
-  # - container: my_container
-  #   image: python:3.6
+  - container: my_container
+    image: python:3.6
   - container: postgres
-    image: postgres:9.4.3
+    image: postgres:9.6
     ports:
     - 5432:5432
 
@@ -40,18 +40,18 @@ jobs:
 
     pool:
       name: hmcts-pet
-    # container: my_container
+    container: my_container
 
     services:
       postgres: postgres
     
     variables:
-      aptDependencies: 'qtbase5-dev xvfb libqtwebkit-dev postgresql-client libpq-dev'
+      aptDependencies: 'test'
 
     steps:
-    # - template: ./pipeline-steps/add-dependencies.yaml
+    - template: ./pipeline-steps/add-dependencies.yaml
     # - template: ./pipeline-steps/test-application.yaml
-    - template: ./pipeline-steps/publish-tests.yaml
+    # - template: ./pipeline-steps/publish-tests.yaml
 
 
   - job: BuildAndPushImageCI
