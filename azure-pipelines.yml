@@ -28,9 +28,9 @@ variables:
 
 resources:
   containers:
-  - container: my_container
-    image: python:3.6
-    options: --entrypoint "/bin/ls"
+  # - container: my_container
+  #   image: python:3.6
+  #   options: --entrypoint "/bin/ls"
   - container: postgres
     image: postgres:9.6
     ports:
@@ -41,18 +41,18 @@ jobs:
 
     pool:
       name: hmcts-pet
-    container: my_container
+    # container: my_container
 
-    services:
-      postgres: postgres
+    # services:
+    #   postgres: postgres
     
     variables:
       aptDependencies: 'test'
 
     steps:
-    - template: ./pipeline-steps/add-dependencies.yaml
+    # - template: ./pipeline-steps/add-dependencies.yaml
     # - template: ./pipeline-steps/test-application.yaml
-    # - template: ./pipeline-steps/publish-tests.yaml
+    - template: ./pipeline-steps/publish-tests.yaml
 
 
   - job: BuildAndPushImageCI
