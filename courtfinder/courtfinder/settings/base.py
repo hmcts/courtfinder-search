@@ -13,13 +13,14 @@ import os
 from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from django.utils.translation import ugettext_lazy as _
+from . import secrets
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
 
 def is_enabled(name, default=False):
     default = 'yes' if default else 'no'
-    return os.getenv(name, default).lower() in ['enabled', 'yes', 'true', '1']
+    return secrets(name, default).lower() in ['enabled', 'yes', 'true', '1']
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -40,7 +41,6 @@ PROJECT_ROOT = dirname(SITE_ROOT)
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -127,7 +127,7 @@ DATABASES = {
         'NAME': 'courtfinder_search_tmp',
         'USER': 'courtfinder',
         'PASSWORD': 'C1cwG3P7n2',
-        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'HOST': secrets('DB_HOST', '127.0.0.1'),
         'PORT': '5432',
     }
 }
@@ -151,7 +151,7 @@ USE_TZ = True
 
 LANGUAGES = (
     ('en', _('English')),
-    # ('cy', _('Welsh')),
+    ('cy', _('Welsh')),
 )
 
 LOCALE_PATHS = (
@@ -171,26 +171,26 @@ STATICFILES_DIRS = (
 
 # Postcode lookup
 MAPIT_BASE_URL = 'https://mapit.mysociety.org/postcode/'
-MAPTI_API_KEY = os.environ.get('MAPIT_API_KEY', None)
+MAPTI_API_KEY = secrets('MAPIT_API_KEY', None)
 
 # Email for feedback
-FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
-FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
-WELSH_FEEDBACK_EMAIL_RECEIVER = os.environ.get('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
+FEEDBACK_EMAIL_SENDER = secrets('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
+FEEDBACK_EMAIL_RECEIVER = secrets('FEEDBACK_EMAIL_RECEIVER', None)
+WELSH_FEEDBACK_EMAIL_RECEIVER = secrets('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
 
-EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
-EMAIL_PORT = os.environ.get('SMTP_PORT', None)
-EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
-EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
+EMAIL_HOST = secrets('SMTP_HOSTNAME', None)
+EMAIL_PORT = secrets('SMTP_PORT', None)
+EMAIL_HOST_USER = secrets('SMTP_USERNAME', None)
+EMAIL_HOST_PASSWORD = secrets('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
-APP_S3_BUCKET = os.getenv('APP_S3_BUCKET', '')
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+APP_S3_BUCKET = secrets('APP_S3_BUCKET', '')
+AWS_ACCESS_KEY_ID = secrets('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = secrets('AWS_SECRET_ACCESS_KEY', '')
 
 # Set your DSN value
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_URL', None),
+    'dsn': secrets('SENTRY_URL', None),
 }
 
 # Add raven to the list of installed apps
@@ -252,7 +252,6 @@ COURT_IMAGE_BASE_URL = ''
 RATELIMIT_CACHE_BACKEND = 'courtfinder.brake_config.ELBBrake'
 
 FEATURE_LEAFLETS_ENABLED = False
-FEATURE_WELSH_ENABLED = False
 
 try:
     from .local import *
