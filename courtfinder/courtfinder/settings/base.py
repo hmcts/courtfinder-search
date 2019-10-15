@@ -20,7 +20,7 @@ from logentries import LogentriesHandler
 
 def is_enabled(name, default=False):
     default = 'yes' if default else 'no'
-    return secrets(name, default).lower() in ['enabled', 'yes', 'true', '1']
+    return os.getenv(name, default).lower() in ['enabled', 'yes', 'true', '1']
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -127,7 +127,7 @@ DATABASES = {
         'NAME': 'courtfinder_search_tmp',
         'USER': 'courtfinder',
         'PASSWORD': 'C1cwG3P7n2',
-        'HOST': secrets('DB_HOST', '127.0.0.1'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
         'PORT': '5432',
     }
 }
@@ -174,7 +174,7 @@ MAPIT_BASE_URL = 'https://mapit.mysociety.org/postcode/'
 MAPTI_API_KEY = secrets('MAPIT_API_KEY', None)
 
 # Email for feedback
-FEEDBACK_EMAIL_SENDER = secrets('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
+FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
 FEEDBACK_EMAIL_RECEIVER = secrets('FEEDBACK_EMAIL_RECEIVER', None)
 WELSH_FEEDBACK_EMAIL_RECEIVER = secrets('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
 
