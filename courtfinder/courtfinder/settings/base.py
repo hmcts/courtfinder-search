@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'courts',
     'healthcheck',
     'admin',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -162,7 +163,6 @@ LOCALE_PATHS = (
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Static files
 STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = (
