@@ -41,7 +41,7 @@ jobs:
   - job: TestApplication
 
     pool:
-      name: hmcts-pet
+      name: ubuntu-16.04
     container: my_container
 
     services:
