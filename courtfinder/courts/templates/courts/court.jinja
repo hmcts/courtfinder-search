@@ -113,13 +113,13 @@
     </div>
     {% if court.image_file %}
       <div id="photo">
-        <img property="image" src="{{ court.image_url }}" alt="{% trans "picture of the court or tribunal building" %}"/>
+        <img property="image" src="{{ MEDIA_URL }}{{ court.image_file }}" alt="{% trans "picture of the court or tribunal building" %}"/>
       </div>
     {% endif %}
     <div id="left">
       {% if court.alert %}
       <div class="alert">
-        <img class="alert-icon" src="/assets/images/icon-important.png" alt="{% trans "Important information" %}"/>
+        <img class="alert-icon" src="{% static 'images/icon-important.png' %}" alt="{% trans "Important information" %}"/>
         <p>{{ court.alert|striptags }}</p>
       </div>
       {% endif %}

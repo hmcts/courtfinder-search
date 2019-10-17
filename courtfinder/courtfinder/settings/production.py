@@ -27,7 +27,7 @@ FEATURE_WELSH_ENABLED = True
 DEFAULT_FILE_STORAGE = 'core.storage.AzureMediaStorage'
 STATICFILES_STORAGE = 'core.storage.AzureStaticStorage'
 
-STATIC_LOCATION = "static"
+STATIC_LOCATION = "assets"
 MEDIA_LOCATION = "media"
 
 AZURE_ACCOUNT_NAME = os.getenv('AZURE_STORAGE_ACCOUNT')

@@ -6,7 +6,7 @@
 {% if facility_type.image_file_path %}
     <h3>Existing icon</h3>
     <div id="photo">
-        <img property="image" src="{% static facility_type.image_file_path %}" alt="facility icon"/>
+        <img property="image" src="{{ MEDIA_URL }}{{ facility_type.image_file_path }}" alt="facility icon"/>
     </div>
 {% endif %}
     <h3>Upload new icon </h3>
