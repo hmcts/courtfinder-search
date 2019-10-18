@@ -4,3 +4,7 @@ data/postcodes/research/
 
 .sass-cache/
 courtfinder/assets/
+Dockerfile
+Dockerfile-postgres
+azure-pipelines.yml
+pipeline-steps/
