@@ -18,9 +18,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = '*'
 
-COURTS_DATA_S3_URL = 'https://s3-eu-west-1.amazonaws.com/courtfinder-json-production/courts.json'
-COURT_IMAGE_BASE_URL = os.getenv('COURT_IMAGE_BASE_URL', 'https://courtfinder-servicegovuk-production.s3.amazonaws.com/images/')
-
 FEATURE_LEAFLETS_ENABLED = is_enabled('FEATURE_LEAFLETS_ENABLED')
 FEATURE_WELSH_ENABLED = True
 
@@ -36,3 +33,5 @@ AZURE_STORAGE_KEY = secrets('AZURE_STORAGE_ACCESS_KEY')
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+COURT_IMAGE_BASE_URL = MEDIA_URL + 'images/'

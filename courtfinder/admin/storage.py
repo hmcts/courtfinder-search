@@ -18,13 +18,13 @@ class StorageException(Exception):
     pass
 
 
-def court_image_file(court):
+def court_image_file_key(court):
     filename = '%s.jpg' % slugify(court.name)
-    return 'court/%s' % filename
+    return filename, 'images/%s' % filename
 
 
 def upload_court_photo(court, image):
-    path = court_image_file(court)
+    filename, key = court_image_file_key(court)
 
     try:
         im = Image.open(image)
@@ -34,8 +34,10 @@ def upload_court_photo(court, image):
         im.save(io, format='JPEG')
         resized = ContentFile(io.getvalue())
 
-        default_storage.save(path, resized)
-        court.image_file = path
+        default_storage.delete(key)
+        default_storage.save(key, resized)
+
+        court.image_file = filename
         court.save()
     except Exception as e:
         logger.error(e)
@@ -43,9 +45,9 @@ def upload_court_photo(court, image):
 
 
 def delete_court_photo(court):
-    path = court_image_file(court)
+    _, key = court_image_file_key(court)
     try:
-        default_storage.delete(path)
+        default_storage.delete(key)
         court.image_file = None
         court.save()
     except Exception as e:
@@ -53,9 +55,15 @@ def delete_court_photo(court):
         raise StorageException('Failed to delete image from storage')
 
 
-def upload_facility_icon(facility_type, image):
+def facility_image_file_path(facility_type):
     filename = '%s.png' % slugify(facility_type.name)
-    path = 'facility/%s' % filename
+    if facility_type.image_file_path:
+        return facility_type.image_file_path
+    return 'uploads/facility/%s' % filename
+
+
+def upload_facility_icon(facility_type, image):
+    filename = facility_image_file_path(facility_type)
 
     try:
         im = Image.open(image)
@@ -65,9 +73,10 @@ def upload_facility_icon(facility_type, image):
         im.save(io, format='PNG')
         resized = ContentFile(io.getvalue())
 
-        default_storage.save(path, resized)
+        default_storage.delete(filename)
+        default_storage.save(filename, resized)
 
-        facility_type.image_file_path = path
+        facility_type.image_file_path = filename
         facility_type.save()
     except Exception as e:
         logger.error(e)

@@ -113,7 +113,7 @@
     </div>
     {% if court.image_file %}
       <div id="photo">
-        <img property="image" src="{{ MEDIA_URL }}{{ court.image_file }}" alt="{% trans "picture of the court or tribunal building" %}"/>
+        <img property="image" src="{{ court.image_url }}" alt="{% trans "picture of the court or tribunal building" %}"/>
       </div>
     {% endif %}
     <div id="left">
@@ -205,7 +205,7 @@
           <li>
             <span class="icon">
               {% if facility.image_src %}
-              <img src="{% static facility.image_src %}" class="{{ facility.image_class }}" alt="{{ facility.image_description }}">
+              <img src="{{ MEDIA_URL }}{{ facility.image_src }}" class="{{ facility.image_class }}" alt="{{ facility.image_description }}">
               {% endif %}
             </span>
             <span class="facility">{{ facility.description|default:""|safe }}</span>

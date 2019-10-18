@@ -4,7 +4,7 @@
     {% if court.image_file %}
     <h3>Existing photo</h3>
     <div id="photo">
-        <img property="image" src="{{ MEDIA_URL }}{{ court.image_file }}" alt="picture of the court or tribunal building"/>
+        <img property="image" src="{{ MEDIA_URL }}images/{{ court.image_file }}" alt="picture of the court or tribunal building"/>
     </div>
     <form class="court photo" method="post" action="{% url 'admin:photo_delete' court.id %}">
         {% csrf_token %}
