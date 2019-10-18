@@ -14,6 +14,9 @@ from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from django.utils.translation import ugettext_lazy as _
 from . import secrets
+import sentry_sdk
+
+sentry_sdk.init(secrets('SENTRY_URL', None))
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
@@ -188,61 +191,6 @@ APP_S3_BUCKET = secrets('APP_S3_BUCKET', '')
 AWS_ACCESS_KEY_ID = secrets('AWS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = secrets('AWS_SECRET_ACCESS_KEY', '')
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': secrets('SENTRY_URL', None),
-}
-
-# Add raven to the list of installed apps
-INSTALLED_APPS = INSTALLED_APPS + (
-    'raven.contrib.django.raven_compat',
-)
-
-# Logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'handlers': ['sentry', 'default'],
-        'level': 'DEBUG',
-    },
-    'formatters': {
-        'no-format': {
-            'format': '%(message)s'
-        },
-        'simple': {
-            'format': '%(asctime)s %(message)s'
-        },
-    },
-    'handlers': {
-        'json': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'no-format',
-        },
-        'default': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-    },
-    'loggers': {
-        'courtfinder.requests': {
-            'handlers': ['json'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'search.mapit.json': {
-            'handlers': ['json'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
-}
 
 AUTODISCOVER_HEALTHCHECKS = True
 COURTFINDER_ADMIN_HEALTHCHECK_URL = ''

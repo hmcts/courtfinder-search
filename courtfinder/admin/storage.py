@@ -35,7 +35,6 @@ def upload_court_photo(court, image):
         resized = ContentFile(io.getvalue())
 
         default_storage.save(path, resized)
-
         court.image_file = path
         court.save()
     except Exception as e:
