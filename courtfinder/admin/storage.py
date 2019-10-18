@@ -34,7 +34,6 @@ def upload_court_photo(court, image):
         im.save(io, format='JPEG')
         resized = ContentFile(io.getvalue())
 
-        default_storage.delete(key)
         default_storage.save(key, resized)
 
         court.image_file = filename
@@ -73,7 +72,6 @@ def upload_facility_icon(facility_type, image):
         im.save(io, format='PNG')
         resized = ContentFile(io.getvalue())
 
-        default_storage.delete(filename)
         default_storage.save(filename, resized)
 
         facility_type.image_file_path = filename
