@@ -19,7 +19,6 @@ DATABASES = {
 ALLOWED_HOSTS = '*'
 
 FEATURE_LEAFLETS_ENABLED = is_enabled('FEATURE_LEAFLETS_ENABLED')
-FEATURE_WELSH_ENABLED = True
 
 DEFAULT_FILE_STORAGE = 'core.storage.AzureMediaStorage'
 STATICFILES_STORAGE = 'core.storage.AzureStaticStorage'

@@ -27,8 +27,6 @@ DATABASES = {
 }
 
 
-FEATURE_WELSH_ENABLED = True
-
 LANGUAGES = (
     ('en', _('English')),
     ('cy', _('Welsh')),
