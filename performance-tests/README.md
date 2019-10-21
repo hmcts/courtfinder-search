@@ -16,7 +16,7 @@ Dependencies
 
 3. From the performance-tests directory, run gatling scripts against docker image
    ```
- docker run --rm -e APP_URL=https://staging.courttribunalfinder.service.gov.uk -e APP_NAME=alexa -e APP_PASSWORD=alexa-1983 -v `pwd`/src/test/resources:/opt/gatling/conf -v `pwd`/src/test/scala/simulations:/opt/gatling/user-files/simulations -v `pwd`/results:/opt/gatling/results -v `pwd`/data:/opt/gatling/data ctfgatling:local -s simulations.StaffPerformance
+ docker run --rm -e APP_URL=https://staging.courttribunalfinder.service.gov.uk -e APP_NAME=example_username -e APP_PASSWORD=example_password -v `pwd`/src/test/resources:/opt/gatling/conf -v `pwd`/src/test/scala/simulations:/opt/gatling/user-files/simulations -v `pwd`/results:/opt/gatling/results -v `pwd`/data:/opt/gatling/data ctfgatling:local -s simulations.StaffPerformance
    ```
 
 Note: if you are on os x you will need to include the following in the above command `--add-host localhost:<IP>`
