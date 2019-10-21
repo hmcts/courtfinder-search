@@ -64,6 +64,11 @@ with HttpConfiguration
         .formParam("form-0-hours", "Test opening times")
         .check(status.is(200)))
 
+    .exec(http("Add new court")
+        .get("/staff/court/new")
+        .formParam("name", "Test new court name")
+        .check(status.is(200)))
+
     .exec(http("Emergency message")
         .get("/staff/emergency")
         .check(status.is(200)))
