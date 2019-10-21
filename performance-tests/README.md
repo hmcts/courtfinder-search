@@ -19,7 +19,7 @@ Dependencies
  docker run --rm -e APP_URL=https://staging.courttribunalfinder.service.gov.uk -e APP_NAME=example_username -e APP_PASSWORD=example_password -v `pwd`/src/test/resources:/opt/gatling/conf -v `pwd`/src/test/scala/simulations:/opt/gatling/user-files/simulations -v `pwd`/results:/opt/gatling/results -v `pwd`/data:/opt/gatling/data ctfgatling:local -s simulations.StaffPerformance
    ```
 
-Note: if you are on os x you will need to include the following in the above command `--add-host localhost:<IP>`
+Note: Replace 'example_username' and 'example_password' with valid credentials for staff login. If running the public app, remove '-e APP_NAME=example_username -e APP_PASSWORD=example_password'.
 
     
 4. Reports folder will be created once tests successfully ran
