@@ -38,6 +38,32 @@ with HttpConfiguration
         .get("/search/results?aol=Adoption&postcode=SW1H%209AJ")
         .check(status.is(200)))
 
+    .exec(http("Search by the court address")
+        .get("/search/")
+        .formParam("searchby", "address")
+        .check(status.is(200)))
+
+    .exec(http("Search by city")
+        .get("/search/address")
+        .formParam("q", "Birmingham")
+        .check(status.is(200)))
+
+    .exec(http("Search results for Birmingham")
+        .get("/search/results?q=Birmingham")
+        .check(status.is(200)))
+
+    .exec(http("Search courts by A-Z")
+        .get("/courts/")
+        .check(status.is(200)))
+
+    .exec(http("Search courts by B")
+        .get("/courts/B")
+        .check(status.is(200)))
+
+    .exec(http("Search by court location code")
+        .get("/search/courtcode")
+        .check(status.is(200)))
+
   val userCount = conf.getInt("users")
   val durationInSeconds  = conf.getLong("duration")
 
