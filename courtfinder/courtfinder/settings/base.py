@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = (
     'admin.middleware.RequireLoginMiddleware',
     'admin.middleware.ForceAdminEnglishMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'opencensus.ext.django.middleware.OpencensusMiddleware',
 )
 
 ROOT_URLCONF = 'courtfinder.urls'
