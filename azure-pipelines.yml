@@ -29,13 +29,13 @@ variables:
 resources:
   containers:
   - container: my_container
-    image: ubuntu:16.04
+    image: alpine:latest
     # image: python:3.6
     # options: --entrypoint "/bin/ls"
-  - container: postgres
-    image: postgres:9.6
-    ports:
-    - 5432:5432
+  # - container: postgres
+  #   image: postgres:9.6
+  #   ports:
+  #   - 5432:5432
 
 jobs:
   - job: TestApplication
@@ -45,16 +45,21 @@ jobs:
       # vmImage: 'Ubuntu-16.04'
     container: my_container
 
-    services:
-      postgres: postgres
+    # services:
+    #   postgres: postgres
     
     variables:
       aptDependencies: 'test'
 
     steps:
-    - template: ./pipeline-steps/add-dependencies.yaml
+    - bash: |
+        env | print
+      displayName: 'test'
+      name: 'test'
+
+    # - template: ./pipeline-steps/add-dependencies.yaml
     # - template: ./pipeline-steps/test-application.yaml
-    - template: ./pipeline-steps/publish-tests.yaml
+    # - template: ./pipeline-steps/publish-tests.yaml
 
 
   # - job: BuildAndPushImageCI
