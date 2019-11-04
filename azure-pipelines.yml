@@ -30,6 +30,7 @@ resources:
   containers:
   - container: my_container
     image: ubuntu:16.04
+    endpoint: PET-ACR-ET
     # image: python:3.6
     # options: --entrypoint "/bin/ls"
   # - container: postgres
@@ -41,8 +42,8 @@ jobs:
   - job: TestApplication
 
     pool:
-      vmImage: 'Ubuntu-16.04'
-      # name: hmcts-pet
+      # vmImage: 'Ubuntu-16.04'
+      name: hmcts-pet
       # vmImage: 'Ubuntu-16.04'
     container: my_container
 
