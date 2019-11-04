@@ -41,7 +41,8 @@ jobs:
   - job: TestApplication
 
     pool:
-      name: hmcts-pet
+      vmImage: 'Ubuntu-16.04'
+      # name: hmcts-pet
       # vmImage: 'Ubuntu-16.04'
     container: my_container
 
