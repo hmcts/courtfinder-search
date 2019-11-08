@@ -46,11 +46,7 @@ PROJECT_ROOT = dirname(SITE_ROOT)
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i'
+SECRET_KEY = secrets('DJANGO_SECRET_KEY', '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
