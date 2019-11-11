@@ -139,6 +139,8 @@ SESSION_COOKIE_AGE = 60*60
 LOGIN_REDIRECT_URL = 'admin:courts'
 LOGIN_URL = 'admin:login'
 
+CSRF_COOKIE_HTTPONLY = True
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
