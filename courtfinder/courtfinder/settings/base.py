@@ -135,6 +135,7 @@ DATABASES = {
 }
 
 SESSION_COOKIE_PATH = '/staff'
+SESSION_COOKIE_AGE = 60*60
 LOGIN_REDIRECT_URL = 'admin:courts'
 LOGIN_URL = 'admin:login'
 
