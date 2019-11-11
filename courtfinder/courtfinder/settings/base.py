@@ -85,7 +85,10 @@ MIDDLEWARE_CLASSES = (
     'admin.middleware.ForceAdminEnglishMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'opencensus.ext.django.middleware.OpencensusMiddleware',
+    'ratelimit.middleware.RatelimitMiddleware',
 )
+
+RATELIMIT_VIEW = 'admin.auth.limited'
 
 ROOT_URLCONF = 'courtfinder.urls'
 
