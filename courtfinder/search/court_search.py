@@ -129,6 +129,7 @@ class CourtSearch:
                        (point(c.lon, c.lat) <@> point(%s, %s)) as distance
                   FROM search_court as c
                  WHERE id in %s
+                 AND displayed
                  ORDER BY distance
         """ % (lon, lat, court_ids))
 
