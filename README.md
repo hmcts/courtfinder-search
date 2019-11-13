@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_apis/build/status/courtfinder?branchName=master)](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_build/latest?definitionId=29&branchName=master)
+
 Court and Tribunal Finder search
 ==================
 
