@@ -846,8 +846,6 @@ def photo_upload(request, id):
     return render(request, 'court/photo.html', {
         'form': form,
         'court': court,
-        #todo for some reason court images aren't proxied trough nginx like other uploaded assets
-        's3': settings.COURT_IMAGE_BASE_URL
     })
 
 

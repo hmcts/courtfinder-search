@@ -1,0 +1,101 @@
+# Ruby
+# Package your Ruby project.
+# Add steps that install rails, analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/ruby
+
+name: '$(SourceBranchName)-$(Build.SourceVersion) Build-$(Build.BuildId)'
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  tags:
+    include:
+    - v*
+      
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+      - feature/*
+
+variables:
+  application.name: 'court-finder'
+  azure.subscription.endpoint: 'hmcts-pet'
+  manual.branch.prefix: 'master'
+
+resources:
+  containers:
+  # - container: my_container
+  #   image: python:3.6
+  #   options: --entrypoint "/bin/ls"
+  - container: postgres
+    image: postgres:9.6
+    ports:
+    - 5432:5432
+
+jobs:
+  - job: TestApplication
+
+    pool:
+      name: hmcts-pet
+    # container: my_container
+
+    # services:
+    #   postgres: postgres
+    
+    variables:
+      aptDependencies: 'test'
+
+    steps:
+    # - template: ./pipeline-steps/add-dependencies.yaml
+    # - template: ./pipeline-steps/test-application.yaml
+    - template: ./pipeline-steps/publish-tests.yaml
+
+
+  - job: BuildAndPushImageCI
+
+    dependsOn: TestApplication
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), ne(variables['Build.Reason'], 'Manual'))
+    pool:
+      name: hmcts-pet
+
+    steps:
+    - template: ./pipeline-steps/docker-build.yaml
+      parameters:
+        azureContainerRegistry: $(azure.container.registry)
+        azureSubscriptionEndpoint: $(azure.subscription.endpoint)
+        applicationName: $(application.name)
+
+
+  - job: BuildAndPushImageRelease
+
+    dependsOn: TestApplication
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+    pool:
+      name: hmcts-pet
+
+    steps:
+    - template: ./pipeline-steps/docker-build-release.yaml
+      parameters:
+        azureContainerRegistry: $(azure.container.registry)
+        azureSubscriptionEndpoint: $(azure.subscription.endpoint)
+        applicationName: $(application.name)
+
+
+  - job: BuildAndPushImageManual
+  
+    dependsOn: TestApplication
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'Manual'))
+    pool:
+      name: hmcts-pet
+
+    steps:
+    - template: ./pipeline-steps/docker-build-manual.yaml
+      parameters:
+        azureContainerRegistry: $(azure.container.registry)
+        azureSubscriptionEndpoint: $(azure.subscription.endpoint)
+        manualBranchPrefix: $(manual.branch.prefix)
+        applicationName: $(application.name)

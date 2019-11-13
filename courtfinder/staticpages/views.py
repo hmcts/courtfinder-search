@@ -1,15 +1,16 @@
 import json
 import smtplib
-
+import logging
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import Http404
 from django.utils.translation import get_language_from_request
-from raven.contrib.django.raven_compat.models import client
 from brake.decorators import ratelimit
 
 from .forms import FeedbackForm
+
+logger = logging.getLogger(__name__)
 
 
 EMAIL_MESSAGE = """
@@ -61,8 +62,8 @@ def feedback_submit(request):
                 send_mail('Feedback received for Court and Tribunal Finder',
                           message, from_address,
                           to_addresses, fail_silently=False)
-            except smtplib.SMTPException:
-                client.captureException()
+            except smtplib.SMTPException as e:
+                logger.error(e)
 
     return redirect('staticpages:feedback_sent')
 

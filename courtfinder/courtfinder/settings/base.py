@@ -13,6 +13,11 @@ import os
 from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from django.utils.translation import ugettext_lazy as _
+from . import secrets
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(secrets('SENTRY_URL', None), integrations=[DjangoIntegration()])
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
@@ -41,12 +46,7 @@ PROJECT_ROOT = dirname(SITE_ROOT)
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i'
+SECRET_KEY = secrets('DJANGO_SECRET_KEY', '99z2o2nkqlks_#wmbz(&+-_q)c@r_j*3#zeyn)s6pv3iyo_s6i')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'courts',
     'healthcheck',
     'admin',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,7 +84,11 @@ MIDDLEWARE_CLASSES = (
     'admin.middleware.RequireLoginMiddleware',
     'admin.middleware.ForceAdminEnglishMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'opencensus.ext.django.middleware.OpencensusMiddleware',
+    'ratelimit.middleware.RatelimitMiddleware',
 )
+
+RATELIMIT_VIEW = 'admin.auth.limited'
 
 ROOT_URLCONF = 'courtfinder.urls'
 
@@ -133,8 +138,13 @@ DATABASES = {
 }
 
 SESSION_COOKIE_PATH = '/staff'
+SESSION_COOKIE_AGE = 60*60
+SESSION_SAVE_EVERY_REQUEST = True
+
 LOGIN_REDIRECT_URL = 'admin:courts'
 LOGIN_URL = 'admin:login'
+
+CSRF_COOKIE_HTTPONLY = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -151,7 +161,7 @@ USE_TZ = True
 
 LANGUAGES = (
     ('en', _('English')),
-    # ('cy', _('Welsh')),
+    ('cy', _('Welsh')),
 )
 
 LOCALE_PATHS = (
@@ -162,7 +172,6 @@ LOCALE_PATHS = (
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Static files
 STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = (
@@ -171,78 +180,23 @@ STATICFILES_DIRS = (
 
 # Postcode lookup
 MAPIT_BASE_URL = 'https://mapit.mysociety.org/postcode/'
-MAPTI_API_KEY = os.environ.get('MAPIT_API_KEY', None)
+MAPTI_API_KEY = secrets('MAPIT_API_KEY', None)
 
 # Email for feedback
 FEEDBACK_EMAIL_SENDER = os.environ.get('FEEDBACK_EMAIL_SENDER', 'no-reply@courttribunalfinder.service.gov.uk')
-FEEDBACK_EMAIL_RECEIVER = os.environ.get('FEEDBACK_EMAIL_RECEIVER', None)
-WELSH_FEEDBACK_EMAIL_RECEIVER = os.environ.get('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
+FEEDBACK_EMAIL_RECEIVER = secrets('FEEDBACK_EMAIL_RECEIVER', None)
+WELSH_FEEDBACK_EMAIL_RECEIVER = secrets('WELSH_FEEDBACK_EMAIL_RECEIVER', None)
 
 EMAIL_HOST = os.environ.get('SMTP_HOSTNAME', None)
 EMAIL_PORT = os.environ.get('SMTP_PORT', None)
-EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME', None)
-EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD', None)
+EMAIL_HOST_USER = secrets('SMTP_USERNAME', None)
+EMAIL_HOST_PASSWORD = secrets('SMTP_PASSWORD', None)
 EMAIL_USE_TLS = False
 
-APP_S3_BUCKET = os.getenv('APP_S3_BUCKET', '')
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+APP_S3_BUCKET = secrets('APP_S3_BUCKET', '')
+AWS_ACCESS_KEY_ID = secrets('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = secrets('AWS_SECRET_ACCESS_KEY', '')
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_URL', None),
-}
-
-# Add raven to the list of installed apps
-INSTALLED_APPS = INSTALLED_APPS + (
-    'raven.contrib.django.raven_compat',
-)
-
-# Logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'handlers': ['sentry', 'default'],
-        'level': 'DEBUG',
-    },
-    'formatters': {
-        'no-format': {
-            'format': '%(message)s'
-        },
-        'simple': {
-            'format': '%(asctime)s %(message)s'
-        },
-    },
-    'handlers': {
-        'json': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'no-format',
-        },
-        'default': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-    },
-    'loggers': {
-        'courtfinder.requests': {
-            'handlers': ['json'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'search.mapit.json': {
-            'handlers': ['json'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
-}
 
 AUTODISCOVER_HEALTHCHECKS = True
 COURTFINDER_ADMIN_HEALTHCHECK_URL = ''
@@ -252,7 +206,6 @@ COURT_IMAGE_BASE_URL = ''
 RATELIMIT_CACHE_BACKEND = 'courtfinder.brake_config.ELBBrake'
 
 FEATURE_LEAFLETS_ENABLED = False
-FEATURE_WELSH_ENABLED = False
 
 try:
     from .local import *

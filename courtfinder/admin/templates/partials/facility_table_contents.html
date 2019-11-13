@@ -14,7 +14,7 @@
     <td>
         {% if fac.image_src %}
         <span class="icon">
-              <img src="{% static fac.image_src %}" class="{{ fac.image_class }}" alt="{{ fac.image_description }}">
+              <img src="{{ MEDIA_URL }}{{ fac.image_src }}" class="{{ fac.image_class }}" alt="{{ fac.image_description }}">
         </span>
         {% else %}
         <span>

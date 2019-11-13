@@ -7,7 +7,7 @@ def display_court_in_welsh(court_obj):
 
 
 def display_in_welsh():
-    return get_language() == 'cy' and settings.FEATURE_WELSH_ENABLED
+    return get_language() == 'cy'
 
 
 def translate_attribute(obj, attribute_name="", welsh=False):

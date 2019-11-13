@@ -1,5 +1,17 @@
 FROM python:3.6
 
+# Adding argument support for ping.json
+ARG APPVERSION=unknown
+ARG APP_BUILD_DATE=unknown
+ARG APP_GIT_COMMIT=unknown
+ARG APP_BUILD_TAG=unknown
+
+# Setting up ping.json variables
+ENV APPVERSION ${APPVERSION}
+ENV APP_BUILD_DATE ${APP_BUILD_DATE}
+ENV APP_GIT_COMMIT ${APP_GIT_COMMIT}
+ENV APP_BUILD_TAG ${APP_BUILD_TAG}
+
 RUN useradd -m -d /srv/search search
 WORKDIR /srv/search
 
@@ -22,10 +34,6 @@ COPY . .
 
 # Collect static assets
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
-RUN python courtfinder/manage.py collectstatic --noinput && \
-    mkdir -p /srv/logs && chown -R search:search /srv/logs && \
-    chown -R search: /srv/search
-
 RUN python courtfinder/manage.py compilemessages
 
 USER search

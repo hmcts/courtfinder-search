@@ -2,8 +2,10 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 from . import views
+from . import auth
 
 urlpatterns = [
+    url(r'^auth/login/$', auth.ThrottledLoginView.as_view(), name='login'),
     url(r'^auth/', include('django.contrib.auth.urls')),
     url(r'^courts$', views.courts, name='courts'),
     url(r'^courts_export$', views.courts_export, name='courts_export'),

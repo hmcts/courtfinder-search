@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="login-page" class="content inner cf">
+  <header class="page-header">
+    <h2>Rate limit reached</h2>
+  </header>
+  <div>
+      <p>You have tried too many times, please <a href="{% url 'admin:login' %}">try again later</a>.</p>
+  </div>
+</div>
+
+{% endblock %}

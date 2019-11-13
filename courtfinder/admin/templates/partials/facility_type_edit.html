@@ -6,7 +6,7 @@
 {{ form.as_p }}
 {% if type %}
 <p>
-{% if type.image_file_path %}<img src="{% static type.image_file_path %}"/>{% endif %}
+{% if type.image_file_path %}<img src="{{ MEDIA_URL }}{{ type.image_file_path }}"/>{% endif %}
 <a href="{% url 'admin:facility_icon_upload' type.id %}">
 {% if type.image_file_path %}Upload new icon{% else %}Upload icon{% endif %}
 </a>
