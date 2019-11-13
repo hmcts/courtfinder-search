@@ -29,10 +29,6 @@ def index(request):
         return redirect_old_id_to_slug(request.GET['court_id'])
 
 
-def api(request, extension=None):
-    return render(request, 'staticpages/api.jinja')
-
-
 def feedback(request):
     return render(request, 'staticpages/feedback.jinja')
 

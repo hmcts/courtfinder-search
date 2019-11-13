@@ -28,15 +28,6 @@ class SearchTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'staticpages/feedback.jinja')
 
-    def test_api_doc_returns_correct_content(self):
-        c = Client()
-        response = c.get('/api')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/api.jinja')
-        response = c.get('/api.html')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staticpages/api.jinja')
-
     def test_feedback_sent_page_returns_correct_content(self):
         with patch('django.core.mail.send_mail', Mock(return_value=2)):
             c = Client()
