@@ -35,3 +35,5 @@ LANGUAGES = (
 
 FEEDBACK_EMAIL_RECEIVER = 'eng_receive@a.com'
 WELSH_FEEDBACK_EMAIL_RECEIVER = 'welsh_receive@b.com'
+
+RATELIMIT_LOGIN = False
