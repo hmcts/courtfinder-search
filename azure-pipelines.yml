@@ -24,7 +24,7 @@ pr:
 variables:
   application.name: 'court-finder'
   azure.subscription.endpoint: 'hmcts-pet'
-  manual.branch.prefix: 'master'
+  manual.branch.prefix: 'dev'
 
 resources:
   containers:
@@ -55,19 +55,19 @@ jobs:
     - template: ./pipeline-steps/publish-tests.yaml
 
 
-  - job: BuildAndPushImageCI
+  # - job: BuildAndPushImageCI
 
-    dependsOn: TestApplication
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), ne(variables['Build.Reason'], 'Manual'))
-    pool:
-      name: hmcts-pet
+  #   dependsOn: TestApplication
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), ne(variables['Build.Reason'], 'Manual'))
+  #   pool:
+  #     name: hmcts-pet
 
-    steps:
-    - template: ./pipeline-steps/docker-build.yaml
-      parameters:
-        azureContainerRegistry: $(azure.container.registry)
-        azureSubscriptionEndpoint: $(azure.subscription.endpoint)
-        applicationName: $(application.name)
+  #   steps:
+  #   - template: ./pipeline-steps/docker-build.yaml
+  #     parameters:
+  #       azureContainerRegistry: $(azure.container.registry)
+  #       azureSubscriptionEndpoint: $(azure.subscription.endpoint)
+  #       applicationName: $(application.name)
 
 
   - job: BuildAndPushImageRelease
