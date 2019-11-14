@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_apis/build/status/courtfinder?branchName=master)](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_build/latest?definitionId=29&branchName=master)
+[![Build Status](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_apis/build/status/courtfinder?branchName=master)](https://dev.azure.com/HMCTS-PET/pet-azure-infrastructure/_build/latest?definitionId=31&branchName=master)
 
 Court and Tribunal Finder search
 ==================
@@ -9,7 +9,7 @@ Court and Tribunal Finder search
 
 Clone the repository:
 
-    git clone git@github.com:ministryofjustice/courtfinder-search.git
+    git clone git@github.com:hmcts/courtfinder-search.git
 
 Rename
 
@@ -53,7 +53,7 @@ This applies to OSX, but should be similar with any other Unix variant.
 
 Clone the repository:
 
-    git clone git@github.com:ministryofjustice/courtfinder-search.git
+    git clone git@github.com:hmcts/courtfinder-search.git
 
 Next, create the environment and start it up:
 
