@@ -29,7 +29,7 @@ steps:
   displayName: 'Build an image'
   inputs:
     imageName: '${{ parameters.azureContainerRegistry }}/${{ parameters.applicationName }}:$(Build.SourceBranchName)'
-    arguments: '--build-arg APPVERSION=$(Build.SourceBranchName) --build-arg "APP_BUILD_DATE=$(getBuildDateTime.Build_DT)" --build-arg APP_BUILD_TAG=$(Build.SourceBranchName)-$(Build.SourceVersion) --build-arg APP_GIT_COMMIT=$(Build.SourceVersion)'
+    arguments: '--build-arg APP_VERSION=$(Build.SourceBranchName) --build-arg "APP_BUILD_DATE=$(getBuildDateTime.Build_DT)" --build-arg APP_BUILD_TAG=$(Build.SourceBranchName)-$(Build.SourceVersion) --build-arg APP_GIT_COMMIT=$(Build.SourceVersion)'
       
 - task: Docker@1
   displayName: 'Push an image'

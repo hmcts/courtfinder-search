@@ -1,13 +1,13 @@
 FROM python:3.6
 
 # Adding argument support for ping.json
-ARG APPVERSION=unknown
+ARG APP_VERSION=unknown
 ARG APP_BUILD_DATE=unknown
 ARG APP_GIT_COMMIT=unknown
 ARG APP_BUILD_TAG=unknown
 
 # Setting up ping.json variables
-ENV APPVERSION ${APPVERSION}
+ENV APP_VERSION ${APP_VERSION}
 ENV APP_BUILD_DATE ${APP_BUILD_DATE}
 ENV APP_GIT_COMMIT ${APP_GIT_COMMIT}
 ENV APP_BUILD_TAG ${APP_BUILD_TAG}
