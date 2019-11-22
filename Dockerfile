@@ -25,6 +25,11 @@ RUN apt-get update && ./apt/production.sh \
       && apt-get purge -y --auto-remove ruby npm nodejs \
       && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update -q && \
+    apt-get install -qy vim seige curl sudo --no-install-recommends && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && rm -fr *Release* *Sources* *Packages* && \
+    truncate -s 0 /var/log/*log
+
 # Install python dependencies
 COPY requirements/ ./requirements
 COPY requirements.txt ./requirements.txt
@@ -36,7 +41,7 @@ COPY . .
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
 RUN python courtfinder/manage.py compilemessages
 
-USER search
+#USER search
 
 CMD ./run.sh
 
