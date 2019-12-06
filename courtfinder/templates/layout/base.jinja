@@ -19,6 +19,7 @@
     <!--[if IE 8]><link href="{% static 'stylesheets/govuk-template-ie8.css' %}" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
 
     <link href="{% static 'stylesheets/govuk-template-print.css' %}" media="print" rel="stylesheet" type="text/css" />
+    {% block stylesheets %}{% endblock %}
 
     <!--[if IE 8]>
     <script type="text/javascript">
