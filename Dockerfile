@@ -34,6 +34,8 @@ RUN apt-get update -q && \
 COPY requirements/ ./requirements
 COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install uwsgitop
+RUN echo 1024 > /proc/sys/net/core/somaxconn
 
 COPY . .
 
