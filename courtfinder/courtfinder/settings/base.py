@@ -62,7 +62,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'moj_template',
     'core',
     'search',
     'staticpages',

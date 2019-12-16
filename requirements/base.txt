@@ -1,7 +1,6 @@
 six==1.11
 Django==1.11.23
 MarkupSafe==1.0
-django-moj-template==0.23.1
 psycopg2==2.8.3
 requests[security]==2.20.0
 boto3==1.4.3
