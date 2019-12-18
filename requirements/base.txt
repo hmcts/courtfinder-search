@@ -1,12 +1,12 @@
 six==1.11
-Django==1.11.23
+Django==1.11.27
 MarkupSafe==1.0
 psycopg2==2.8.3
 requests[security]==2.20.0
 boto3==1.4.3
 python-dateutil==2.6
 LogentriesLogger==0.2.1
-uWSGI==2.0.15
+uWSGI==2.0.18
 git+https://github.com/ministryofjustice/django-moj-irat.git
 django-brake==1.5.2
 uk-postcode-utils==1.0
