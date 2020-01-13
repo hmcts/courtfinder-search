@@ -49,6 +49,11 @@
       <p>{% trans "Aside from immigration tribunals, this tool does not return results for Northern Ireland." %}</p>
     </section>
   </div>
+  {% elif error == 'postCodeOutsideJurisdiction' %}
+    <section class="validation-error">
+      <h2>{% trans "Error" %}</h2>
+      <p>{% trans "This child (or children) resides in Scotland and therefore outside our jurisdiction" %}</p>
+    </section>
   {% endif %}
   <form method="get" action="results">
     <input type="hidden" name="aol" value="{{ aol }}"/>
