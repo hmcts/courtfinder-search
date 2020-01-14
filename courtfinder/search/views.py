@@ -170,13 +170,6 @@ def results(request):
                 return bad_request(request, e)
 
             rules = Rules.for_view(postcode, aol)
-            try:
-                if rules["in_scotland"] and aol == "Children":
-                    return redirect(reverse('search:postcode') + '?postcode=' +
-                                    postcode + '&error=postCodeOutsideJurisdiction')
-            except:
-                pass
-
             view_obj = {
                 'aol': aol, 'spoe': spoe, 'postcode': postcode, 'search_results': __format_results(courts)
             }
@@ -187,7 +180,6 @@ def results(request):
                 elif rules['action'] == 'render':
                     if 'in_scotland' in rules:
                         view_obj['in_scotland'] = rules['in_scotland']
-
             return render(request, 'search/results.jinja', view_obj)
 
         else:

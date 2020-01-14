@@ -20,10 +20,17 @@ class Rules:
         irrespective of the search. Eg, warnings on some geographical areas
         """
         if Rules.__postcode_in_scotland(postcode):
-            return {
-                'action': 'render',
-                'in_scotland': True
-            }
+            if area_of_law == "Children":
+                return {
+                    'action': 'redirect',
+                    'target': 'search:postcode',
+                    'params': '?error=scotlandJurisdiction'
+                }
+            else:
+                return {
+                    'action': 'render',
+                    'in_scotland': True
+                }
 
         if Rules.__postcode_in_NI(postcode):
             if area_of_law == 'Immigration':
@@ -50,6 +57,9 @@ class Rules:
                 return Court.objects.filter(name__icontains='Glasgow Tribunal Hearing Centre')
             else:
                 return []
+
+        if Rules.__postcode_in_scotland(postcode) and area_of_law == "Children":
+            return []
 
         return None
 
