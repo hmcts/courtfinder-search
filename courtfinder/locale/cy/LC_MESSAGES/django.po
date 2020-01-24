@@ -455,6 +455,10 @@ msgid "You did not enter a valid postcode. Please try again."
 msgstr "Ni wnaethoch nodi cod post dilys. Rhowch gynnig arall arni."
 
 #: search/templates/search/postcode.jinja:49
+msgid "If the child (or children) resides in Scotland they will be outside the jurisdiction."
+msgstr "Os yw’r plentyn (neu’r plant) yn byw yn yr Alban, bydd y tu allan i’r awdurdodaeth."
+
+#: search/templates/search/postcode.jinja:54
 msgid ""
 "Aside from immigration tribunals, this tool does not return results for "
 "Northern Ireland."
