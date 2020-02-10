@@ -240,7 +240,7 @@
     <h2>{% trans "Useful links:" %}</h2>
       <a href="https://www.gov.uk/entering-court-or-tribunal-building">{% trans "Security when entering our buildings" %}</a>
       <br/>
-      <a href="https://www.gov.uk/guidance/what-to-expect-coming-to-a-court-or-tribunal.cy">{% trans "Coming to a court or tribunal" %}</a>
+      <a href="https://www.gov.uk/guidance/what-to-expect-coming-to-a-court-or-tribunal{% ifequal LANGUAGE_CODE "cy" %}.cy{% endifequal %}">{% trans "Coming to a court or tribunal" %}</a>
       <br/>
       <a href="https://www.gov.uk/government/collections/court-and-tribunal-forms"
          title="{% trans "Open the Formfinder tool to obtain the right form for your issue." %}">{% trans "Find a form" %}</a>
