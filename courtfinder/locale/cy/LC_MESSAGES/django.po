@@ -217,33 +217,37 @@ msgid "Useful links:"
 msgstr "Dolenni defnyddiol:"
 
 #: courts/templates/courts/court.jinja:241
-msgid "Entering our buildings"
-msgstr "Dod i mewn i'n hadeiladau"
+msgid "Security when entering our buildings"
+msgstr "Diogelwch wrth ddod i mewn i'n hadeiladau"
 
-#: courts/templates/courts/court.jinja:244
+#: courts/templates/courts/court.jinja:243
+msgid "Coming to a court or tribunal"
+msgstr "Dod i lys neu dribiwnlys"
+
+#: courts/templates/courts/court.jinja:246
 msgid "Open the Formfinder tool to obtain the right form for your issue."
 msgstr ""
 "Defnyddiwch gwasanaeth Formfinder i ddod o hyd i'r ffurflen gywir ar gyfer "
 "eich mater."
 
-#: courts/templates/courts/court.jinja:244
+#: courts/templates/courts/court.jinja:246
 msgid "Find a form"
 msgstr "Chwilio am ffurflen"
 
-#: courts/templates/courts/court.jinja:247
+#: courts/templates/courts/court.jinja:249
 msgid ""
 "Information on providing feedback about our services and making a complaint."
 msgstr "Gwybodaeth am roi adborth am ein gwasanaethau a gwneud cwyn. "
 
-#: courts/templates/courts/court.jinja:247
+#: courts/templates/courts/court.jinja:249
 msgid "Make a complaint"
 msgstr "Gwneud cwyn"
 
-#: courts/templates/courts/court.jinja:250
+#: courts/templates/courts/court.jinja:252
 msgid "Equality and diversity"
 msgstr "Cydraddoldeb ac amrywiaeth"
 
-#: courts/templates/courts/court.jinja:253
+#: courts/templates/courts/court.jinja:255
 msgid "About jury service"
 msgstr "Ynghylch gwasanaethu ar reithgor"
 
