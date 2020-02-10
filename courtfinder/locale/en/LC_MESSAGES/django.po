@@ -203,31 +203,35 @@ msgid "Useful links:"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:241
-msgid "Entering our buildings"
+msgid "Security when entering our buildings"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:244
+#: courts/templates/courts/court.jinja:243
+msgid "Coming to a court or tribunal"
+msgstr ""
+
+#: courts/templates/courts/court.jinja:246
 msgid "Open the Formfinder tool to obtain the right form for your issue."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:244
+#: courts/templates/courts/court.jinja:246
 msgid "Find a form"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:247
+#: courts/templates/courts/court.jinja:249
 msgid ""
 "Information on providing feedback about our services and making a complaint."
 msgstr ""
 
-#: courts/templates/courts/court.jinja:247
+#: courts/templates/courts/court.jinja:249
 msgid "Make a complaint"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:250
+#: courts/templates/courts/court.jinja:252
 msgid "Equality and diversity"
 msgstr ""
 
-#: courts/templates/courts/court.jinja:253
+#: courts/templates/courts/court.jinja:255
 msgid "About jury service"
 msgstr ""
 
