@@ -480,3 +480,17 @@ class AdminAOLForm(forms.ModelForm):
         if uncoded_url:
             clean_copy['external_link'] = urllib.parse.quote(uncoded_url)
         return clean_copy
+
+
+class BulkInfoForm(CourtNewForm, TranslatableCourtForm):
+
+    welsh_fields = ['info_cy']
+
+    class Meta:
+        model = models.Court
+        fields = ('info', 'info_cy')
+        labels = {'info': 'Additional information'}
+        widgets = {
+            'info': forms.Textarea(attrs={'rows': 6, 'class': 'rich-editor'})
+        }
+

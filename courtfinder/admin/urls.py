@@ -62,6 +62,7 @@ urlpatterns = [
     url(r'^edit_aol/$', views.EditAOL.as_view(), name='edit_aol'),
     url(r'^edit_aol/(?P<id>[0-9]+)$', views.EditAOL.as_view(), name='edit_aol'),
     url(r'^reorder_facility_types/$', views.ReorderingFacilityList.as_view(), name='reorder_facility_types'),
+    url(r'^bulk_info/$', views.bulk_info, name='bulk_info'),
     url(r'^$', RedirectView.as_view(pattern_name=settings.LOGIN_REDIRECT_URL))
 ]
 

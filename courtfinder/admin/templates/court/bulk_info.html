@@ -1,0 +1,33 @@
+{% extends "admin.html" %}
+
+{% block admin %}
+  <div id="admin-index-page" class="content inner cf">
+    <header class="page-header">
+      <h2>Bulk edit of additional information</h2>
+    </header>
+    <h3 style="color:red">Beware, this tool will overwrite the additional information field for selected courts</h3>
+
+    <form class="court basic" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button" value="Update selected courts, overwriting existing text" />
+
+      <table id="court-list">
+      <tr>
+        <th></th>
+        <th>name</th>
+        <th></th>
+      </tr>
+      {% for court in courts %}
+      <tr class="{% if not court.displayed %} closed-court hidden {% endif %}">
+        <td><input style="transform: scale(2)" type="checkbox" name="court_id" value="{{ court.id }}"/></td>
+        <td>{{ court.name }}</td>
+        <td><a target="_blank" href="{% url 'courts:court' court.slug %}">view</a></td>
+      </tr>
+      {% endfor %}
+      </table>
+      <br/>
+      <input type="submit" class="button" value="Update selected courts, overwriting existing text" />
+    </form>
+  </div>
+{% endblock %}
