@@ -307,6 +307,23 @@ def delete_address(request, id, address_id=None):
     return redirect('admin:address', id)
 
 
+@permission_required('bulk_edit')
+def bulk_info(request):
+    form = forms.BulkInfoForm(True)
+    if request.method == 'POST':
+        for id in request.POST.getlist('court_id'):
+            court = get_object_or_404(models.Court, pk=id)
+            court.info = request.POST.get('info')
+            if court.welsh_enabled:
+                court.info_cy = request.POST.get('info_cy')
+            court.save()
+        messages.success(request, 'Courts updated')
+    return render(request, 'court/bulk_info.html', {
+        'form': form,
+        'courts': models.Court.objects.filter(displayed=True).order_by('name').all()
+    })
+
+
 class BaseFormView(View):
     template = None
     return_url = None
