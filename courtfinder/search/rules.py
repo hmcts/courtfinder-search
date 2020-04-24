@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 class Rules:
 
     scottish_postcodes = ('AB', 'ZE', 'DD', 'KW', 'PH', 'HS', 'IV', 'PA', 'FK',
-                          'G', 'ML', 'EH', 'KA', 'KY', 'DG', 'TD')
+                          'G', 'ML', 'EH', 'KA', 'KY', 'DG')
 
     by_proximity = ['Crime', 'Domestic violence', 'Forced marriage', 'Probate', 'Tax']
     by_local_authority = ['Adoption', 'Children', 'Divorce', 'Civil partnership']
