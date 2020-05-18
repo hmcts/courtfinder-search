@@ -158,7 +158,7 @@ msgid "Important information"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:129
-msgid "Additional Information"
+msgid "Coronavirus (COVID-19) Update"
 msgstr ""
 
 #: courts/templates/courts/court.jinja:136
