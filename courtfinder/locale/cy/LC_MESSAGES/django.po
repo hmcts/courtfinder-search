@@ -168,8 +168,8 @@ msgid "Important information"
 msgstr "Gwybodaeth bwysig"
 
 #: courts/templates/courts/court.jinja:129
-msgid "Additional Information"
-msgstr "Gwybodaeth Ychwanegol"
+msgid "Coronavirus (COVID-19) Update"
+msgstr "Diweddariad Coronafeirws (COVID-19)"
 
 #: courts/templates/courts/court.jinja:136
 msgid "Opening hours"
