@@ -7,7 +7,7 @@
     width: 774,
     plugins : 'autolink link paste',
     menubar: '',
-    toolbar: 'link',
+    toolbar: 'link bold italic underline',
     paste_as_text: true,
     statusbar: false,
   });
