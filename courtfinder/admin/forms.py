@@ -422,6 +422,15 @@ class UploadImageForm(forms.Form):
     image = forms.ImageField()
 
 
+class CourtGBSForm(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ['gbs']
+        labels = {
+            'gbs': 'GBS',
+        }
+
+
 class AdminFacilityTypeForm(forms.ModelForm):
     class Meta:
         model = FacilityType
