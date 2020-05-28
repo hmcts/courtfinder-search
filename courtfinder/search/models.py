@@ -41,6 +41,7 @@ class Court(models.Model):
     prosecution_leaflet_cy = models.CharField(max_length=2500, null=True, default=None, blank=True)
     juror_leaflet = models.CharField(max_length=2500, null=True, default=None, blank=True)
     welsh_enabled = models.BooleanField(default=False)
+    gbs = models.TextField(null=True, blank=True)
 
     def postcodes_covered(self):
         return CourtPostcode.objects.filter(court=self)
