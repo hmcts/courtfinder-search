@@ -427,7 +427,7 @@ class CourtGBSForm(forms.ModelForm):
         model = models.Court
         fields = ['gbs']
         labels = {
-            'gbs': 'GBS',
+            'gbs': 'Government Banking Services',
         }
 
 

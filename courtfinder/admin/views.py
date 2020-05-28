@@ -861,16 +861,16 @@ def photo_delete(request, id):
     return redirect('admin:photo', court.id)
 
 
-def edit_gbs(request, id):
+def integrations(request, id):
     court = get_object_or_404(models.Court, pk=id)
     form = forms.CourtGBSForm(request.POST if request.POST else None, instance=court)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, 'GBS updated')
+        messages.success(request, 'Court types updated')
         court.update_timestamp()
-        return redirect('admin:gbs', court.id)
+        return redirect('admin:integrations', court.id)
 
-    return render(request, 'court/gbs.html', {
+    return render(request, 'court/integrations.html', {
         'form': form,
         'court': court,
     })
