@@ -866,7 +866,7 @@ def integrations(request, id):
     form = forms.CourtGBSForm(request.POST if request.POST else None, instance=court)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        messages.success(request, 'Court types updated')
+        messages.success(request, 'GBS updated')
         court.update_timestamp()
         return redirect('admin:integrations', court.id)
 
