@@ -427,7 +427,7 @@ class CourtGBSForm(forms.ModelForm):
         model = models.Court
         fields = ['gbs']
         widgets = {
-            'gbs': forms.Textarea(attrs={'rows': 1}),
+            'gbs': forms.TextInput(),
         }
         labels = {
             'gbs': 'Government Banking Services',
