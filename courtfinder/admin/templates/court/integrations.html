@@ -1,0 +1,10 @@
+{% extends "court/base.html" %}
+
+{% block details %}
+    <h3>Integrations</h3>
+    <form class="court types" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" class="button" value="Update" />
+    </form>
+{% endblock %}

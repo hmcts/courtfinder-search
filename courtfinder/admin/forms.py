@@ -422,6 +422,18 @@ class UploadImageForm(forms.Form):
     image = forms.ImageField()
 
 
+class CourtGBSForm(forms.ModelForm):
+    class Meta:
+        model = models.Court
+        fields = ['gbs']
+        widgets = {
+            'gbs': forms.TextInput(),
+        }
+        labels = {
+            'gbs': 'Government Banking Services',
+        }
+
+
 class AdminFacilityTypeForm(forms.ModelForm):
     class Meta:
         model = FacilityType

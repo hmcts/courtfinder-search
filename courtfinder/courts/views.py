@@ -195,6 +195,7 @@ def court_json(request, slug):
                    for x in court.facilities.all()]),
         ('addresses', [{'type': str(x.address_type), 'address': x.address, 'town': x.town_name, 'postcode': x.postcode}
                    for x in CourtAddress.objects.filter(court=court).all()]),
+        ('gbs', court.gbs),
     ])
 
     return HttpResponse(json.dumps(response),content_type="application/json")

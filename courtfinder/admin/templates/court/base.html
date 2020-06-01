@@ -18,6 +18,7 @@
       <li><a href="{% url 'admin:facility' court.id %}">facilities</a></li>
       <li><a href="{% url 'admin:aols' court.id %}">cases heard</a></li>
       <li><a href="{% url 'admin:photo' court.id %}">photo</a></li>
+      <li><a href="{% url 'admin:integrations' court.id %}">integrations</a></li>
       {% if perms.super %}
         <li><a href="{% url 'admin:leaflets' court.id %}">leaflets</a></li>
         <li><a href="{% url 'admin:family' court.id %}">family court</a></li>

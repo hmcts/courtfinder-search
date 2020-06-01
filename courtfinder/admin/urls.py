@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^court/(?P<id>[0-9]+)/family(?:/(?P<area_id>[0-9]+))?$', views.edit_family_court, name='family'),
     url(r'^court/(?P<id>[0-9]+)/photo$', views.photo_upload, name='photo'),
     url(r'^court/(?P<id>[0-9]+)/photo_delete$', views.photo_delete, name='photo_delete'),
+    url(r'^court/(?P<id>[0-9]+)/integrations', views.integrations, name='integrations'),
     url(r'^users$', views.users, name='users'),
     url(r'^users/new$', views.add_user, name='add_user'),
     url(r'^users/edit/(?P<username>\S+)$', views.edit_user, name='edit_user'),
