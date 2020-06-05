@@ -1,5 +1,5 @@
 six==1.11
-Django==1.11.28
+Django==1.11.29
 MarkupSafe==1.1.1
 psycopg2==2.8.3
 requests[security]==2.20.0
