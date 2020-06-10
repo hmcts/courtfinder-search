@@ -37,3 +37,12 @@ COURT_IMAGE_BASE_URL = MEDIA_URL + 'images/'
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+OPENCENSUS = {
+    'TRACE': {
+        'SAMPLER': 'opencensus.trace.samplers.ProbabilitySampler(rate=1)',
+        'EXPORTER': f'''opencensus.ext.azure.trace_exporter.AzureExporter(
+            connection_string="{secrets('APPINSIGHTS_CONNECTION_STRING')}"
+        )''',
+    }
+}
