@@ -54,23 +54,20 @@ def courts_export(request):
     response['Content-Disposition'] = 'attachment; filename="courts-%s.csv"' % datetime.datetime.now().date()
 
     writer = csv.writer(response)
-    writer.writerow(['name', 'open', 'updated', 'address', 'areas of law', 'court types', 'court number', 'cci code',
-                     'magistrates court code', 'facilities', 'url'])
+    writer.writerow(['name', 'open', 'updated', 'address', 'areas of law', 'court types', 'crown court code',
+                     'county court code', 'magistrates court code', 'facilities', 'url'])
     for c in models.Court.objects.order_by('name').all():
         aols = ', '.join(str(a) for a in c.areas_of_law.all())
         updated = c.updated_at.date() if c.updated_at else 'n/a'
         court_types = ', '.join(str(court_type.name) for court_type in c.court_types.all())
-        court_number = c.number
-        cci_code = c.cci_code
-        magistrate_code = c.magistrate_code
         facilities = ', '.join(str(facility.name) for facility in c.facilities.all())
         url = request.build_absolute_uri(reverse('courts:court', args=[c.slug]))
 
         a = c.courtaddress_set.first()
         address = a.line() if a else ''
 
-        row = [c.name, 'open' if c.displayed else 'closed', str(updated), address, aols, court_types, court_number,
-               cci_code, magistrate_code, facilities, url]
+        row = [c.name, 'open' if c.displayed else 'closed', str(updated), address, aols, court_types, c.number,
+               c.cci_code, c.magistrate_code, facilities, url]
         writer.writerow(row)
     return response
 
