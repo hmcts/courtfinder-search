@@ -56,10 +56,6 @@ class CourtNewForm(forms.ModelForm):
             raise forms.ValidationError('Court with this name already exists')
         return name
 
-    def save(self, commit=True):
-        self.instance.slug = slugify(self.instance.name)
-        return super(forms.ModelForm, self).save(self)
-
 
 class TranslatableCourtForm(forms.ModelForm):
 
