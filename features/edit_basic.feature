@@ -4,7 +4,7 @@ Feature: Edit basic court information
     Given "admin" as the persona
     And I log in to the admin interface
 
-  Scenario: Edit basic information, update slug with name
+  Scenario: Edit basic information
     When I visit "/staff/court/1"
     And I fill in "name" with "Testing court name"
     And I fill in "alert" with "Testing urgent notice!"
@@ -12,7 +12,7 @@ Feature: Edit basic court information
     And I press "Update"
     Then I should see "Editing - Testing court name"
     When I view court in the new window
-    Then the browser's URL should be "/courts/testing-court-name"
+    Then the browser's URL should be "/courts/gotham-crown-court"
     And I should see "Testing court name"
     And I should see "Testing urgent notice!"
     And I should see "Testing additional information"

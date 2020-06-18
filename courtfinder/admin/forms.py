@@ -84,7 +84,7 @@ class TranslatableCourtForm(forms.ModelForm):
                 self.fields[wf].widget = self.fields[old_field].widget
 
 
-class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
+class CourtBasicForm(TranslatableCourtForm):
 
     welsh_fields = ['name_cy', 'alert_cy', 'info_cy']
 
@@ -96,9 +96,6 @@ class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
             self.fields['welsh_enabled'].help_text = 'This field is disabled and can only be toggled by super admins'
             if welsh_enabled:
                 self.fields['info_cy'].disabled = True
-
-    def save(self, commit=True):
-        pass
 
     class Meta:
         model = models.Court
