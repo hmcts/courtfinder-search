@@ -56,6 +56,10 @@ class CourtNewForm(forms.ModelForm):
             raise forms.ValidationError('Court with this name already exists')
         return name
 
+    def save(self, commit=True):
+        self.instance.slug = slugify(self.instance.name)
+        return super(forms.ModelForm, self).save(self)
+
 
 class TranslatableCourtForm(forms.ModelForm):
 
@@ -92,6 +96,9 @@ class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
             self.fields['welsh_enabled'].help_text = 'This field is disabled and can only be toggled by super admins'
             if welsh_enabled:
                 self.fields['info_cy'].disabled = True
+
+    def save(self, commit=True):
+        pass
 
     class Meta:
         model = models.Court
