@@ -12,7 +12,7 @@ Feature: Edit basic court information
     And I press "Update"
     Then I should see "Editing - Testing court name"
     When I view court in the new window
-    Then the browser's URL should be "/courts/gotham-crown-court"
+    Then the browser's URL should be "/courts/reading-crown-court"
     And I should see "Testing court name"
     And I should see "Testing urgent notice!"
     And I should see "Testing additional information"
