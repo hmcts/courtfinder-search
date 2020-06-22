@@ -84,7 +84,7 @@ class TranslatableCourtForm(forms.ModelForm):
                 self.fields[wf].widget = self.fields[old_field].widget
 
 
-class CourtBasicForm(CourtNewForm, TranslatableCourtForm):
+class CourtBasicForm(TranslatableCourtForm):
 
     welsh_fields = ['name_cy', 'alert_cy', 'info_cy']
 
