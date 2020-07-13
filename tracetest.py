@@ -1,0 +1,43 @@
+import logging
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+
+import os
+
+
+SECRETS_PATH = os.environ.get('SECRETS_PATH', os.path.expanduser('~/kvmnt/ctf/'))
+
+
+def secrets(key, default=None):
+    """ Retrieve variables from mounted azure key value store """
+    azure_secret = os.getenv(key)
+    if not azure_secret:
+        return default
+
+    # <azure-secret:env-cf-key>
+    file_name = azure_secret[14:-1]
+
+    try:
+        with open(SECRETS_PATH + file_name, 'r') as file:
+            value = file.read().strip()
+        return value
+    except FileNotFoundError as e:
+        return default
+
+
+logger = logging.getLogger(__name__)
+
+logger.addHandler(AzureLogHandler(
+    connection_string=f"{secrets('APPINSIGHTS_CONNECTION_STRING')}")
+)
+
+
+def valuePrompt():
+    line = input("Enter a value: ")
+    logger.warning(line)
+
+def main():
+    while True:
+        valuePrompt()
+
+if __name__ == "__main__":
+    main()
