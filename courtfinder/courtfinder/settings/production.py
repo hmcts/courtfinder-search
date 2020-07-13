@@ -53,8 +53,12 @@ from opencensus.ext.azure.log_exporter import AzureLogHandler
 
 logger = logging.getLogger(__name__)
 
-logger.addHandler(AzureLogHandler(
-    connection_string=f"{secrets('APPINSIGHTS_CONNECTION_STRING')}")
-)
+try:
+    logger.addHandler(AzureLogHandler(
+        connection_string=f"{secrets('APPINSIGHTS_CONNECTION_STRING')}")
+    )
 
-logger.warning('startup')
+    logger.warning('startup')
+except ValueError as e:
+    raise Exception(f"connection string: {secrets('APPINSIGHTS_CONNECTION_STRING')}"
+)
