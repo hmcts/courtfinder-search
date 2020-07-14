@@ -32,10 +32,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN env
 # Collect static assets
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
-#RUN python courtfinder/manage.py compilemessages
+RUN python courtfinder/manage.py compilemessages
 
 USER search
 

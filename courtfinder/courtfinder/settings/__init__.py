@@ -6,9 +6,7 @@ SECRETS_PATH = os.environ.get('SECRETS_PATH', os.path.expanduser('~/kvmnt/ctf/')
 
 def secrets(key, default=None):
     """ Retrieve variables from mounted azure key value store """
-    print(f'key {key}')
     azure_secret = os.getenv(key)
-    print(f'azure_secret {azure_secret}')
     if not azure_secret:
         return default
 

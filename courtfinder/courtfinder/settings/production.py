@@ -60,5 +60,4 @@ try:
 
     logger.warning('startup')
 except ValueError as e:
-    raise Exception(f"connection string: {secrets('APPINSIGHTS_CONNECTION_STRING')}, env: {os.getenv('APPINSIGHTS_CONNECTION_STRING')}"
-)
+    print(f"connection string: {secrets('APPINSIGHTS_CONNECTION_STRING')}, env: {os.getenv('APPINSIGHTS_CONNECTION_STRING')}")
