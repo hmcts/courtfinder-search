@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
-import views
+from . import views
 
 urlpatterns = [
     url(r'^search/', include('search.urls', namespace='search')),

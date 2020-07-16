@@ -10,7 +10,7 @@ from django.contrib.auth.forms import PasswordChangeForm, AdminPasswordChangeFor
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.forms import modelformset_factory, ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404

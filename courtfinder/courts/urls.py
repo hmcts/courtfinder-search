@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from courts import views
 
+app_name='courts'
 urlpatterns = [
 	url(r'^(?P<slug>.+)/leaflet/(?P<leaflet_type>.+)$', views.leaflet, name='leaflet'),
     url(r'^(?P<first_letter>[A-Z])?$', views.list, name='list'),

@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from staticpages import views
 
+app_name='staticpages'
 urlpatterns = [
     url(r'^$', views.index, name='home'),
     url(r'^feedback$', views.feedback, name='feedback'),
