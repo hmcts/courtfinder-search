@@ -71,7 +71,7 @@ INSTALLED_APPS = (
     'storages',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -79,13 +79,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'core.middleware.RequestLoggingMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'admin.middleware.RequireLoginMiddleware',
     'admin.middleware.ForceAdminEnglishMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'opencensus.ext.django.middleware.OpencensusMiddleware',
     'ratelimit.middleware.RatelimitMiddleware',
-)
+]
 
 RATELIMIT_VIEW = 'admin.auth.limited'
 
