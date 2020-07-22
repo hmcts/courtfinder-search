@@ -14,10 +14,6 @@ from os.path import abspath, basename, dirname, join, normpath, exists
 from sys import path
 from django.utils.translation import ugettext_lazy as _
 from . import secrets
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-sentry_sdk.init(secrets('SENTRY_URL', None), integrations=[DjangoIntegration()])
 
 # Log handler for LogEntries
 from logentries import LogentriesHandler
