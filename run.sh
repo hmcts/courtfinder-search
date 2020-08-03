@@ -18,5 +18,5 @@ create)
 esac
 
 echo "Starting server..."
-docker run -ti --sysctl net.core.somaxconn=500
+sysctl -w net.core.somaxconn=500
 /usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf --listen 500
