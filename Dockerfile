@@ -36,9 +36,6 @@ COPY . .
 ENV DJANGO_SETTINGS_MODULE courtfinder.settings.production
 RUN python courtfinder/manage.py compilemessages
 
-# Set uWSGI queue size
-RUN -ti --sysctl net.core.somaxconn=500
-
 USER search
 
 CMD ./run.sh
