@@ -2,7 +2,7 @@ import json
 import re
 from urllib.parse import urlencode
 from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponseRedirect
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.defaults import bad_request

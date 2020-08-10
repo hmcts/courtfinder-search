@@ -4,6 +4,7 @@ from django.views.generic.base import RedirectView
 from . import views
 from . import auth
 
+app_name='admin'
 urlpatterns = [
     url(r'^auth/login/$', auth.ThrottledLoginView.as_view(), name='login'),
     url(r'^auth/', include('django.contrib.auth.urls')),

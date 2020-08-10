@@ -1,6 +1,5 @@
 import re
 from search.models import Court
-from django.core.urlresolvers import reverse
 
 class Rules:
 

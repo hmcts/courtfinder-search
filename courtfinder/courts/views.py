@@ -1,11 +1,9 @@
 import string
 import json
 from collections import OrderedDict
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
-from django.utils.html import strip_tags
 from search.models import Court, AreaOfLaw, Facility, CourtAddress, CourtOpeningTime
 from admin.models import FacilityType, ContactType, OpeningType
 from core.welsh_utils import display_court_in_welsh, translate_attribute, translate_type, display_in_welsh
@@ -136,7 +134,6 @@ def format_court(court):
         'contacts': contacts,
         'directions': translate_attribute(court, "directions", welsh) if court.directions else None,
         'alert': translate_attribute(court, "alert", welsh) if court.alert and court.alert.strip() != '' else None,
-        'parking': court.parking or None,
         'info': translate_attribute(court, "info", welsh),
         'hide_aols': court.hide_aols,
         'info_leaflet': translate_attribute(court, "info_leaflet", welsh),

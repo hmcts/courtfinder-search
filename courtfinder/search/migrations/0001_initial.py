@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
-                ('country', models.ForeignKey(to='search.Country')),
+                ('country', models.ForeignKey(to='search.Country', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -90,8 +90,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('address', models.TextField()),
                 ('postcode', models.CharField(max_length=255)),
-                ('address_type', models.ForeignKey(to='search.AddressType')),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('address_type', models.ForeignKey(to='search.AddressType', on_delete=models.CASCADE)),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -101,8 +101,8 @@ class Migration(migrations.Migration):
             name='CourtAreaOfLaw',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw')),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw', on_delete=models.CASCADE)),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -132,8 +132,8 @@ class Migration(migrations.Migration):
             name='CourtContact',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('contact', models.ForeignKey(to='search.Contact')),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('contact', models.ForeignKey(to='search.Contact', on_delete=models.CASCADE)),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -143,7 +143,7 @@ class Migration(migrations.Migration):
             name='CourtCourtType',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -153,7 +153,7 @@ class Migration(migrations.Migration):
             name='CourtEmail',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -163,7 +163,7 @@ class Migration(migrations.Migration):
             name='CourtFacility',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -173,8 +173,8 @@ class Migration(migrations.Migration):
             name='CourtLocalAuthorityAreaOfLaw',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw')),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('area_of_law', models.ForeignKey(to='search.AreaOfLaw', on_delete=models.CASCADE)),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -184,7 +184,7 @@ class Migration(migrations.Migration):
             name='CourtOpeningTime',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -195,7 +195,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('postcode', models.CharField(max_length=250)),
-                ('court', models.ForeignKey(to='search.Court')),
+                ('court', models.ForeignKey(to='search.Court', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -282,7 +282,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
-                ('county', models.ForeignKey(to='search.County')),
+                ('county', models.ForeignKey(to='search.County', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -291,49 +291,49 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='courtopeningtime',
             name='opening_time',
-            field=models.ForeignKey(to='search.OpeningTime'),
+            field=models.ForeignKey(to='search.OpeningTime', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtlocalauthorityareaoflaw',
             name='local_authority',
-            field=models.ForeignKey(to='search.LocalAuthority'),
+            field=models.ForeignKey(to='search.LocalAuthority', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtfacility',
             name='facility',
-            field=models.ForeignKey(to='search.Facility'),
+            field=models.ForeignKey(to='search.Facility', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtemail',
             name='email',
-            field=models.ForeignKey(to='search.Email'),
+            field=models.ForeignKey(to='search.Email', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtcourttype',
             name='court_type',
-            field=models.ForeignKey(to='search.CourtType'),
+            field=models.ForeignKey(to='search.CourtType', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtattribute',
             name='attribute_type',
-            field=models.ForeignKey(to='search.CourtAttributeType'),
+            field=models.ForeignKey(to='search.CourtAttributeType', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtattribute',
             name='court',
-            field=models.ForeignKey(to='search.Court'),
+            field=models.ForeignKey(to='search.Court', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='courtaddress',
             name='town',
-            field=models.ForeignKey(to='search.Town'),
+            field=models.ForeignKey(to='search.Town', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -387,7 +387,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='court',
             name='parking',
-            field=models.ForeignKey(default=None, to='search.ParkingInfo', null=True),
+            field=models.ForeignKey(default=None, to='search.ParkingInfo', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

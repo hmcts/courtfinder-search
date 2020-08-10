@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from moj_irat.views import HealthcheckView, PingJsonView
 
+app_name='healthcheck'
 urlpatterns = [
     url(r'^ping.json$', PingJsonView.as_view(
         build_date_key='APP_BUILD_DATE',

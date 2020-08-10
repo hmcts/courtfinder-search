@@ -12,7 +12,7 @@ class Court(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     number = models.IntegerField(null=True, blank=True) #Crown court location number
-    parking = models.ForeignKey('ParkingInfo', null=True, default=None)
+    parking = models.ForeignKey('ParkingInfo', models.CASCADE)
     alert = models.CharField(max_length=250, null=True, default=None, blank=True)
     alert_cy = models.CharField(max_length=250, null=True, default=None, blank=True)
     directions = models.CharField(max_length=4096, null=True, default=None, blank=True)
@@ -69,8 +69,8 @@ class CourtAttributeType(models.Model):
 
 
 class CourtAttribute(models.Model):
-    court = models.ForeignKey(Court)
-    attribute_type = models.ForeignKey(CourtAttributeType)
+    court = models.ForeignKey(Court, models.CASCADE)
+    attribute_type = models.ForeignKey(CourtAttributeType, models.CASCADE)
     value = models.TextField()
 
     def __str__(self):
@@ -78,7 +78,7 @@ class CourtAttribute(models.Model):
 
 
 class CourtPostcode(models.Model):
-    court = models.ForeignKey(Court)
+    court = models.ForeignKey(Court, models.CASCADE)
     postcode = models.CharField(max_length=250)
 
     def __str__(self):
@@ -146,9 +146,9 @@ class LocalAuthority(models.Model):
 
 
 class CourtLocalAuthorityAreaOfLaw(models.Model):
-    court = models.ForeignKey(Court)
-    area_of_law = models.ForeignKey(AreaOfLaw)
-    local_authority = models.ForeignKey(LocalAuthority)
+    court = models.ForeignKey(Court, models.CASCADE)
+    area_of_law = models.ForeignKey(AreaOfLaw, models.CASCADE)
+    local_authority = models.ForeignKey(LocalAuthority, models.CASCADE)
 
     def __str__(self):
         return "%s covers %s for %s" % (self.court.name,
@@ -157,16 +157,16 @@ class CourtLocalAuthorityAreaOfLaw(models.Model):
 
 
 class CourtFacility(models.Model):
-    court = models.ForeignKey(Court)
-    facility = models.ForeignKey(Facility)
+    court = models.ForeignKey(Court, models.CASCADE)
+    facility = models.ForeignKey(Facility, models.CASCADE)
 
     def __str__(self):
         return "%s has facility %s" % (self.court.name, self.facility)
 
 
 class CourtOpeningTime(models.Model):
-    court = models.ForeignKey(Court)
-    opening_time = models.ForeignKey(OpeningTime)
+    court = models.ForeignKey(Court, models.CASCADE)
+    opening_time = models.ForeignKey(OpeningTime, models.CASCADE)
     sort = models.IntegerField(default=0)
 
     def __str__(self):
@@ -174,8 +174,8 @@ class CourtOpeningTime(models.Model):
 
 
 class CourtAreaOfLaw(models.Model):
-    court = models.ForeignKey(Court)
-    area_of_law = models.ForeignKey(AreaOfLaw)
+    court = models.ForeignKey(Court, models.CASCADE)
+    area_of_law = models.ForeignKey(AreaOfLaw, models.CASCADE)
     single_point_of_entry = models.BooleanField(default=False)
 
     def local_authorities_covered(self):
@@ -198,8 +198,8 @@ class AddressType(models.Model):
 
 
 class CourtAddress(models.Model):
-    address_type = models.ForeignKey(AddressType)
-    court = models.ForeignKey(Court)
+    address_type = models.ForeignKey(AddressType, models.CASCADE)
+    court = models.ForeignKey(Court, models.CASCADE)
     address = models.TextField()
     address_cy = models.TextField(null=True, blank=True, default=None)
     postcode = models.CharField(max_length=255)
@@ -231,8 +231,8 @@ class Contact(models.Model):
 
 
 class CourtContact(models.Model):
-    contact = models.ForeignKey(Contact)
-    court = models.ForeignKey(Court)
+    contact = models.ForeignKey(Contact, models.CASCADE)
+    court = models.ForeignKey(Court, models.CASCADE)
 
     def __str__(self):
         return "%s for %s is %s" % (self.contact.name, self.court.name, self.contact.number)
@@ -253,8 +253,8 @@ class Email(models.Model):
 
 
 class CourtEmail(models.Model):
-    court = models.ForeignKey(Court)
-    email = models.ForeignKey(Email)
+    court = models.ForeignKey(Court, models.CASCADE)
+    email = models.ForeignKey(Email, models.CASCADE)
     order = models.IntegerField(null=False, default=0)
 
     def __str__(self):
@@ -269,8 +269,8 @@ class CourtType(models.Model):
 
 
 class CourtCourtType(models.Model):
-    court = models.ForeignKey(Court)
-    court_type = models.ForeignKey(CourtType)
+    court = models.ForeignKey(Court, models.CASCADE)
+    court_type = models.ForeignKey(CourtType, models.CASCADE)
 
     def __str__(self):
         return "Court type for %s is %s" % (self.court.name, self.court_type.name)
