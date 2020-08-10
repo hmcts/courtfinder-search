@@ -494,6 +494,15 @@ class AdminAOLForm(forms.ModelForm):
         return clean_copy
 
 
+class AdminLocalAuthorityForm(forms.ModelForm):
+    class Meta:
+        model = models.LocalAuthority
+        fields = ['name']
+        widgets = {
+            'name': forms.Textarea(attrs={'rows': 2})
+        }
+
+
 class BulkInfoForm(CourtNewForm, TranslatableCourtForm):
 
     welsh_fields = ['info_cy']

@@ -1,0 +1,17 @@
+{% load static %}
+<p>
+    Names of local authorities have to match those in <a href="https://mapit.mysociety.org/">mapit</a>
+</p>
+<table id="court-list">
+<tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  {% for la in objects %}
+  <tr>
+    <td>{{ la.name }}</td>
+    <td><a href="{% url 'admin:edit_local_authority' id=la.id %}">edit</a></td>
+
+  </tr>
+  {% endfor %}
+</table>

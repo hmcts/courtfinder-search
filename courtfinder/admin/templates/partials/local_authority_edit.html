@@ -1,0 +1,7 @@
+<h3>Local authority<a class="right-link" href="{{list_url}}">return to local authority list</a></h3>
+
+<form method="post" action="{{return_url}}">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" class="button" {% if existing %}name="Update" value="Update"{% else %}name="Add" value="Add" {% endif %} />
+</form>
