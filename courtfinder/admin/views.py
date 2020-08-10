@@ -1007,6 +1007,16 @@ class AreaOfLawList(AdminListView):
         self.hide_add_link = True
 
 
+class LocalAuthoritiesList(AdminListView):
+    def initialize(self, request):
+        self.partial = "partials/la_table_contents.html"
+        self.objects = models.LocalAuthority.objects.all().order_by('name')
+        self.heading = "Local Authorities"
+        self.list_add_url = reverse("admin:edit_local_authority")
+        self.type_name = "local authority"
+        self.hide_add_link = True
+
+
 class EditType(PermissionRequiredMixin, View):
     permission_required = 'type.manage'
     form_class = None
@@ -1131,6 +1141,17 @@ class EditAOL(EditType):
         self.partial = "partials/aol_edit.html"
         self.redirect_url = 'admin:aols'
         self.heading = "Edit area of law"
+
+
+class EditLocalAuthority(EditType):
+    def initialize(self, request):
+        self.type_model = models.LocalAuthority
+        self.rev_url = "admin:edit_local_authority"
+        self.update_msg = "Local Authority updated"
+        self.form_class = forms.AdminLocalAuthorityForm
+        self.partial = "partials/local_authority_edit.html"
+        self.redirect_url = 'admin:local_authorities'
+        self.heading = "Edit local authority"
 
 
 class DeleteType(View):
