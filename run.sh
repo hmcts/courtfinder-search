@@ -18,5 +18,4 @@ create)
 esac
 
 echo "Starting server..."
-sysctl -w net.core.somaxconn=500
-/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf --listen 500
+/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf
