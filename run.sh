@@ -18,4 +18,4 @@ create)
 esac
 
 echo "Starting server..."
-/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf --listen 1024
+/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf --enable-threads --listen 1024
