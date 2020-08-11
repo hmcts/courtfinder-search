@@ -18,4 +18,4 @@ create)
 esac
 
 echo "Starting server..."
-/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf
+/usr/local/bin/uwsgi --ini /srv/search/uwsgi.conf --listen 1024
