@@ -25,7 +25,7 @@ Message: {}
 
 def index(request):
     if "court_id" not in request.GET:
-        return redirect('search:search')
+        return redirect('https://www.gov.uk/find-court-tribunal')
     else:
         return redirect_old_id_to_slug(request.GET['court_id'])
 
