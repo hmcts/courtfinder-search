@@ -1,7 +1,7 @@
 Feature: Access the website in English and Welsh
 
   Background: Visit make a plea
-    When I visit "/"
+    When I visit "/search"
 
   Scenario: Switch between languages
     When I press "Cymraeg"
