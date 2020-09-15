@@ -16,12 +16,6 @@ class SearchTestCase(TestCase):
         test_data_dir = settings.PROJECT_ROOT +  '/data/test_data/'
         management.call_command('loaddata', test_data_dir + 'test_data.yaml', verbosity=0)
 
-    def test_top_page_returns_correct_content(self):
-        c = Client()
-        response = c.get('/', follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search/index.jinja')
-
     def test_feedback_page_returns_correct_content(self):
         c = Client()
         response = c.get('/feedback')
