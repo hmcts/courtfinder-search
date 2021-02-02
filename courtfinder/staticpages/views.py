@@ -4,7 +4,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.utils.translation import get_language_from_request
 from brake.decorators import ratelimit
 
@@ -79,3 +79,9 @@ def redirect_old_id_to_slug(old_id):
         return redirect('courts:court', slug=old_ids[old_id])
     except KeyError:
         raise Http404()
+
+
+def google_verification(request):
+    content = 'google-site-verification: google8011cb4e48a2df61.html'
+    return HttpResponse(content, content_type='text/plain')
+
