@@ -11,7 +11,8 @@ class RequireLoginMiddleware(MiddlewareMixin):
         Restrict every view in admin module, so they don't have to be
         wrapped in @login_required decorator
         """
-        if getmodule(view_func) is admin_views and not request.user.is_authenticated:
+        # if getmodule(view_func) is admin_views and not request.user.is_authenticated:
+        if getmodule(view_func) is admin_views:
             return redirect(settings.LOGIN_URL)
 
 
