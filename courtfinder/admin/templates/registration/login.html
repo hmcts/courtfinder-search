@@ -3,15 +3,23 @@
 {% block content %}
 <div id="login-page" class="content inner cf">
   <header class="page-header">
-    <h2>Log in to continue</h2>
+    <h2>Updating Find a Court or Tribunal (FaCT)</h2>
   </header>
-  <div class="group">
-      <form method="post" action="{% url 'admin:login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-      <input type="submit" class="button" value="Log in" />
-      </form>
-  </div>
+    <p>The FaCT Administration Tool is currently closed for maintenance while we work on some technical updates.
+        If you wish to make updates to the pages within the service, you can continue to do so by emailing your request to:</p>
+
+    <p><a href="mailto:hmctsfinderfeedback@justice.gov.uk">hmctsfinderfeedback@justice.gov.uk</a></p>
+
+    <p>If your request relates to an urgent closure of a building, please write URGENT to start the subject line.</p>
+
+    <p>Please ensure to include within your request:</p>
+    <ul>
+        <li>The existing message or content (if any)</li>
+        <li>The new message or content change needed</li>
+        <li>The date the message or content change will be in effect from</li>
+        <li>The date the message or content change will be in effect to (if known)</li>
+    </ul>
+    <p>Sorry for any inconvenience this may cause, but hopefully we’ll be back up and running soon with an improved system. </p>
 </div>
 
 {% endblock %}
