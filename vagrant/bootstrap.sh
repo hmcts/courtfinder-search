@@ -41,7 +41,7 @@ sudo mkdir -p /logs
 sudo chown vagrant /logs
 
 echo "Installing python dependencies"
-pip install setuptools==32
+pip install setuptools==46
 pip install -r requirements.txt
 pip install -r requirements/testing.txt
 
