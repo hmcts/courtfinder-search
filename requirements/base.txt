@@ -10,7 +10,7 @@ uWSGI==2.0.15
 git+https://github.com/ministryofjustice/django-moj-irat.git
 django-brake==1.5.2
 uk-postcode-utils==1.0
-Pillow==7.1.1
+Pillow==8.3.2
 pyyaml==4.2b1
 django-storages==1.7.2
 azure-common==1.1.23
